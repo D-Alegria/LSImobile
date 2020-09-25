@@ -7,6 +7,7 @@ abstract class ColorStyles {
   static const extraLight = const Color(0xFFF8F8FA);
   static const white = const Color(0xFFFFFFFF);
   static const orange = const Color(0xFFF2994A);
+  static const blue = const Color(0xFF2F80ED);
 // static final blueGradient = SweepGradient(colors: [
 //   Color(0x)
 // ]);
