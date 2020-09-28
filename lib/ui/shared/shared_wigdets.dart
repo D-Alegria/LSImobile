@@ -34,3 +34,72 @@ Widget sharedRaisedButton({
     ),
   );
 }
+
+class SharedTextFormField extends StatelessWidget {
+  // static final Key _k1 = new GlobalKey();
+  final String labelText;
+  final Function onChanged;
+  final Function validator;
+  final bool obscureText;
+
+  const SharedTextFormField({
+    Key key,
+    @required this.labelText,
+    this.onChanged,
+    this.validator, this.obscureText = false,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      obscureText: obscureText,
+      validator: validator,
+      onChanged: onChanged,
+      style: GoogleFonts.workSans(
+        fontSize: SizeConfig.textSize(context, 5),
+        fontWeight: FontWeight.w500,
+        color: const Color(0xFF18172B).withOpacity(0.6),
+      ),
+      cursorColor: ColorStyles.dark,
+      decoration: InputDecoration(
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        border: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: ColorStyles.black.withOpacity(0.2),
+            width: 1.0,
+          ),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: ColorStyles.black.withOpacity(0.0),
+            width: 1.0,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: ColorStyles.black.withOpacity(0.2),
+            width: 1.0,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: ColorStyles.black.withOpacity(0.2),
+            width: 1.0,
+          ),
+        ),
+        errorBorder: const OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: ColorStyles.black,
+            width: 1.0,
+          ),
+        ),
+        labelText: labelText,
+        labelStyle: GoogleFonts.workSans(
+          fontSize: SizeConfig.textSize(context, 5),
+          fontWeight: FontWeight.w500,
+          color: const Color(0xFF18172B).withOpacity(0.6),
+        ),
+      ),
+    );
+  }
+}

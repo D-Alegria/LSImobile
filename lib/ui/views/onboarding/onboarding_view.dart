@@ -73,7 +73,10 @@ class OnBoardingView extends StatelessWidget {
                         "Payment made easy through debit card, credit card",
                     buttonText: "Get started",
                     image: manCard,
-                    onPressed: () => context.navigator.pushLoginView(),
+                    onPressed: () => context.navigator.pushAndRemoveUntil(
+                      Routes.authWrapper,
+                      (route) => false,
+                    ),
                   ),
                 ],
                 controller: _pageController,

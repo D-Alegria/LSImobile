@@ -8,18 +8,24 @@
 
 import 'package:auto_route/auto_route.dart';
 
-import '../../../ui/views/authentication/login/login_view.dart';
+import '../../../ui/views/authentication/verification/verification_view.dart';
+import '../../../ui/views/authentication/widgets/auth_wrapper.dart';
+import '../../../ui/views/main/main/main_view.dart';
 import '../../../ui/views/onboarding/onboarding_view.dart';
 import '../../../ui/views/start_up/start_up_view.dart';
 
 class Routes {
   static const String startUpView = '/';
   static const String onBoardingView = '/on-boarding-view';
-  static const String loginView = '/login-view';
+  static const String authWrapper = '/auth-wrapper';
+  static const String verificationView = '/verification-view';
+  static const String mainView = '/main-view';
   static const all = <String>{
     startUpView,
     onBoardingView,
-    loginView,
+    authWrapper,
+    verificationView,
+    mainView,
   };
 }
 
@@ -29,7 +35,9 @@ class Router extends RouterBase {
   final _routes = <RouteDef>[
     RouteDef(Routes.startUpView, page: StartUpView),
     RouteDef(Routes.onBoardingView, page: OnBoardingView),
-    RouteDef(Routes.loginView, page: LoginView),
+    RouteDef(Routes.authWrapper, page: AuthWrapper),
+    RouteDef(Routes.verificationView, page: VerificationView),
+    RouteDef(Routes.mainView, page: MainView),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -46,9 +54,21 @@ class Router extends RouterBase {
         settings: data,
       );
     },
-    LoginView: (data) {
+    AuthWrapper: (data) {
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => LoginView(),
+        builder: (context) => AuthWrapper(),
+        settings: data,
+      );
+    },
+    VerificationView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => VerificationView(),
+        settings: data,
+      );
+    },
+    MainView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => MainView(),
         settings: data,
       );
     },
@@ -64,5 +84,10 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 
   Future<dynamic> pushOnBoardingView() => push<dynamic>(Routes.onBoardingView);
 
-  Future<dynamic> pushLoginView() => push<dynamic>(Routes.loginView);
+  Future<dynamic> pushAuthWrapper() => push<dynamic>(Routes.authWrapper);
+
+  Future<dynamic> pushVerificationView() =>
+      push<dynamic>(Routes.verificationView);
+
+  Future<dynamic> pushMainView() => push<dynamic>(Routes.mainView);
 }
