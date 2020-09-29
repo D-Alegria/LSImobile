@@ -40,7 +40,8 @@ class VerifyBVNForm extends StatelessWidget {
                   ),
                   children: [
                     TextSpan(
-                      text: "\nEnter OTP sent to the number registered to your BVN",
+                      text:
+                          "\nEnter OTP sent to the number registered to your BVN",
                       style: GoogleFonts.workSans(
                         fontWeight: FontWeight.w500,
                         color: Colors.black.withOpacity(0.5),
@@ -83,6 +84,7 @@ class VerifyBVNForm extends StatelessWidget {
               height: SizeConfig.yMargin(context, 1),
             ),
             sharedOptionFlatButton(
+              context: context,
               firstText: "Not your phone?",
               secondText: "Change phone number",
               action: () => null,

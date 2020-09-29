@@ -135,3 +135,23 @@ Widget sharedOptionFlatButton({
     ),
   );
 }
+
+Widget sharedOutlineContainer({
+  @required BuildContext context,
+  @required Color color,
+  @required Color borderColor,
+  double height,
+  Widget child,
+}) {
+  return Container(
+    height: height,
+    decoration: BoxDecoration(
+      color: color,
+      borderRadius: BorderRadius.all(
+        Radius.circular(10),
+      ),
+      border: Border.all(color: borderColor, width: 1),
+    ),
+    child: child,
+  );
+}

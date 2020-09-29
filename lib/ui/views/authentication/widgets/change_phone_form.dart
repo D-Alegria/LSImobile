@@ -69,6 +69,7 @@ class ChangePhoneForm extends StatelessWidget {
               height: SizeConfig.yMargin(context, 1),
             ),
             sharedOptionFlatButton(
+              context: context,
               firstText: "",
               secondText: "Cancel",
               action: () => null,
