@@ -8,7 +8,6 @@ import 'package:lsi_mobile/ui/shared/size_config.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/auth_view/auth_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/register/register_bloc.dart';
 import 'package:lsi_mobile/ui/views/authentication/widgets/auth_form.dart';
-import 'package:lsi_mobile/ui/views/authentication/widgets/option_flatbutton.dart';
 
 class RegisterView extends StatelessWidget {
   @override
@@ -66,7 +65,8 @@ class RegisterView extends StatelessWidget {
               SizedBox(
                 height: SizeConfig.yMargin(context, 2),
               ),
-              OptionFlatButton(
+              sharedOptionFlatButton(
+                context: context,
                 firstText: "Already have an account?",
                 secondText: "Login here",
                 action: () => context.bloc<AuthViewCubit>().toggleAuthView(),
@@ -79,7 +79,8 @@ class RegisterView extends StatelessWidget {
         () => null,
         (either) => either.fold(
           (failure) => null,
-          (success) => context.navigator.pushAndRemoveUntil(Routes.verificationView, (route) => false),
+          (success) => context.navigator
+              .pushAndRemoveUntil(Routes.verificationView, (route) => false),
         ),
       ),
     );

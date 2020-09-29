@@ -1,0 +1,73 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lsi_mobile/ui/shared/const_color.dart';
+import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
+import 'package:lsi_mobile/ui/shared/size_config.dart';
+
+class NoLoanView extends StatelessWidget {
+  const NoLoanView({
+    Key key,
+  }) : super(key: key);
+
+  final String wallet = "assets/svgs/wallet.svg";
+  final String optionsIcon = "assets/svgs/icons/options_icon.svg";
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: ColorStyles.white,
+        title: Text(
+          "Loans",
+          style: GoogleFonts.workSans(
+            fontWeight: FontWeight.w600,
+            fontSize: SizeConfig.textSize(context, 5),
+            color: ColorStyles.dark.withOpacity(0.8),
+          ),
+        ),
+        actions: [
+          ButtonTheme(
+            minWidth: SizeConfig.xMargin(context, 10),
+            child: IconButton(
+              onPressed: () {},
+              icon: SvgPicture.asset(
+                optionsIcon,
+              ),
+            ),
+          )
+        ],
+      ),
+      body: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: SizeConfig.xMargin(context, 18),
+          vertical: SizeConfig.yMargin(context, 8),
+        ),
+        width: SizeConfig.xMargin(context, 100),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            SvgPicture.asset(wallet),
+            Text(
+              "You currently have no loan",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.workSans(
+                fontWeight: FontWeight.w600,
+                fontSize: SizeConfig.textSize(context, 6),
+                color: ColorStyles.dark.withOpacity(0.8),
+              ),
+            ),
+            sharedRaisedButton(
+              context: context,
+              text: "Apply for a loan",
+              color: ColorStyles.orange,
+              onPressed: () {},
+              minWidth: SizeConfig.xMargin(context, 60),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

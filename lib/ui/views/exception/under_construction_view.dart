@@ -10,7 +10,6 @@ class UnderConstructionView extends StatelessWidget {
       margin: EdgeInsets.symmetric(
         horizontal: SizeConfig.xMargin(context, 5),
       ),
-      color: Colors.grey.shade100,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

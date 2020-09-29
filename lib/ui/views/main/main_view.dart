@@ -35,11 +35,12 @@ class _MainViewState extends State<MainView> {
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
+        statusBarColor: Colors.black,
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
+        backgroundColor: ColorStyles.white,
         bottomNavigationBar: BottomNavigationBar(
           selectedLabelStyle: GoogleFonts.workSans(
             fontSize: SizeConfig.textSize(context, 3.1),

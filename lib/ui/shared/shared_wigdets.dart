@@ -46,7 +46,8 @@ class SharedTextFormField extends StatelessWidget {
     Key key,
     @required this.labelText,
     this.onChanged,
-    this.validator, this.obscureText = false,
+    this.validator,
+    this.obscureText = false,
   }) : super(key: key);
 
   @override
@@ -102,4 +103,35 @@ class SharedTextFormField extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget sharedOptionFlatButton({
+  @required BuildContext context,
+  @required String firstText,
+  String secondText,
+  @required Function action,
+}) {
+  return FlatButton(
+    onPressed: action,
+    child: RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+        text: "$firstText  ",
+        style: GoogleFonts.workSans(
+          fontSize: SizeConfig.textSize(context, 4),
+          fontWeight: FontWeight.w400,
+          color: ColorStyles.light,
+        ),
+        children: <TextSpan>[
+          TextSpan(
+            text: secondText,
+            style: GoogleFonts.workSans(
+              fontWeight: FontWeight.w400,
+              color: ColorStyles.primary,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }

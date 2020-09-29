@@ -10,7 +10,7 @@ import 'package:auto_route/auto_route.dart';
 
 import '../../../ui/views/authentication/verification/verification_view.dart';
 import '../../../ui/views/authentication/widgets/auth_wrapper.dart';
-import '../../../ui/views/main/main/main_view.dart';
+import '../../../ui/views/main/main_view.dart';
 import '../../../ui/views/onboarding/onboarding_view.dart';
 import '../../../ui/views/start_up/start_up_view.dart';
 
