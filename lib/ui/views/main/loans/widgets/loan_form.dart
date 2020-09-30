@@ -16,32 +16,23 @@ class LoanForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorStyles.primaryBlue,
       appBar: AppBar(
         elevation: 0,
         brightness: Brightness.dark,
         backgroundColor: ColorStyles.primaryBlue,
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: ColorStyles.primaryGradient,
-          ),
-          height: SizeConfig.yMargin(context, 89),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Container(
-                  child: Stack(
-                    children: [
-                      header(context, title),
-                    ],
-                  ),
-                ),
-              ),
-              formContainer(context, form),
-            ],
-          ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: ColorStyles.primaryGradient,
+        ),
+        height: SizeConfig.yMargin(context, 100),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            header(context, title),
+            Expanded(child: formContainer(context, form)),
+          ],
         ),
       ),
     );
@@ -56,7 +47,7 @@ class LoanForm extends StatelessWidget {
           topRight: Radius.circular(20),
         ),
       ),
-      height: SizeConfig.yMargin(context, 75),
+      // height: SizeConfig.yMargin(context, 70),
       padding: EdgeInsets.symmetric(
         horizontal: SizeConfig.xMargin(context, 5),
       ),
@@ -65,10 +56,8 @@ class LoanForm extends StatelessWidget {
   }
 
   Widget header(BuildContext context, String title) {
-    return Positioned(
-      left: SizeConfig.xMargin(context, 5),
-      right: SizeConfig.xMargin(context, 0),
-      bottom: SizeConfig.yMargin(context, 5),
+    return Padding(
+      padding: EdgeInsets.all(SizeConfig.xMargin(context, 5)),
       child: Text(
         title,
         style: GoogleFonts.workSans(

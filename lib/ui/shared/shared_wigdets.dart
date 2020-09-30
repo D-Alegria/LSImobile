@@ -35,6 +35,41 @@ Widget sharedRaisedButton({
   );
 }
 
+Widget sharedOutlineRaisedButton({
+  @required BuildContext context,
+  @required Function onPressed,
+  @required Color color,
+  @required String text,
+  double minWidth = 0.0,
+}) {
+  return ButtonTheme(
+    minWidth: minWidth,
+    height: SizeConfig.yMargin(context, 6),
+    child: OutlineButton(
+      highlightedBorderColor: color,
+      borderSide: BorderSide(
+        color: color,
+        width: 2,
+      ),
+      onPressed: onPressed,
+      child: Text(
+        text,
+        style: GoogleFonts.workSans(
+          color: ColorStyles.white,
+          fontSize: SizeConfig.textSize(context, 5),
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(4),
+      ),
+      // elevation: 8,
+      splashColor: ColorStyles.blue.withOpacity(0.2),
+      // focusElevation: 4,
+    ),
+  );
+}
+
 class SharedTextFormField extends StatelessWidget {
   // static final Key _k1 = new GlobalKey();
   final String labelText;

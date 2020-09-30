@@ -18,7 +18,7 @@ class LoanProductView extends StatelessWidget {
         durationColor: ColorStyles.yellow,
         gradient: ColorStyles.greenGradient,
         borderBoxColor: ColorStyles.green3,
-        action: () => context.navigator.pushPersonalInfoFormView(),
+        action: () => context.navigator.pushProvideBVNView(),
       ),
       LoanProductBox(
         title: "I CONSUME MIDI",
@@ -45,6 +45,7 @@ class LoanProductView extends StatelessWidget {
         brightness: Brightness.light,
         iconTheme: IconThemeData(color: ColorStyles.dark),
         elevation: 0,
+        centerTitle: false,
         backgroundColor: ColorStyles.white,
         title: Text(
           "Loan Products",

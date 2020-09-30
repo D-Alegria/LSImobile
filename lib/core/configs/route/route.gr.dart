@@ -7,14 +7,15 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 
+import '../../../ui/shared/success_view.dart';
 import '../../../ui/views/authentication/verification/verification_view.dart';
 import '../../../ui/views/authentication/widgets/auth_wrapper.dart';
 import '../../../ui/views/main/loans/account_info/account_info_view.dart';
 import '../../../ui/views/main/loans/edu_and_employ/edu_and_employ_view.dart';
 import '../../../ui/views/main/loans/loan_details/loan_details_view.dart';
 import '../../../ui/views/main/loans/loan_product/loan_product_view.dart';
-import '../../../ui/views/main/loans/no_loan_view/no_loan_view.dart';
 import '../../../ui/views/main/loans/personal_info/personal_info_form_view.dart';
 import '../../../ui/views/main/loans/provide_bvn/provide_bvn_view.dart';
 import '../../../ui/views/main/loans/residence/residence_form_view.dart';
@@ -28,7 +29,6 @@ class Routes {
   static const String authWrapper = '/auth-wrapper';
   static const String verificationView = '/verification-view';
   static const String mainView = '/main-view';
-  static const String noLoanView = '/no-loan-view';
   static const String loanProductView = '/loan-product-view';
   static const String provideBVNView = '/provide-bv-nView';
   static const String personalInfoFormView = '/personal-info-form-view';
@@ -36,13 +36,13 @@ class Routes {
   static const String residenceFormView = '/residence-form-view';
   static const String loanDetailsView = '/loan-details-view';
   static const String accountInfoView = '/account-info-view';
+  static const String successView = '/success-view';
   static const all = <String>{
     startUpView,
     onBoardingView,
     authWrapper,
     verificationView,
     mainView,
-    noLoanView,
     loanProductView,
     provideBVNView,
     personalInfoFormView,
@@ -50,6 +50,7 @@ class Routes {
     residenceFormView,
     loanDetailsView,
     accountInfoView,
+    successView,
   };
 }
 
@@ -62,7 +63,6 @@ class Router extends RouterBase {
     RouteDef(Routes.authWrapper, page: AuthWrapper),
     RouteDef(Routes.verificationView, page: VerificationView),
     RouteDef(Routes.mainView, page: MainView),
-    RouteDef(Routes.noLoanView, page: NoLoanView),
     RouteDef(Routes.loanProductView, page: LoanProductView),
     RouteDef(Routes.provideBVNView, page: ProvideBVNView),
     RouteDef(Routes.personalInfoFormView, page: PersonalInfoFormView),
@@ -70,6 +70,7 @@ class Router extends RouterBase {
     RouteDef(Routes.residenceFormView, page: ResidenceFormView),
     RouteDef(Routes.loanDetailsView, page: LoanDetailsView),
     RouteDef(Routes.accountInfoView, page: AccountInfoView),
+    RouteDef(Routes.successView, page: SuccessView),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -99,14 +100,12 @@ class Router extends RouterBase {
       );
     },
     MainView: (data) {
+      final args = data.getArgs<MainViewArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => MainView(),
-        settings: data,
-      );
-    },
-    NoLoanView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const NoLoanView(),
+        builder: (context) => MainView(
+          key: args.key,
+          pageNumber: args.pageNumber,
+        ),
         settings: data,
       );
     },
@@ -152,6 +151,18 @@ class Router extends RouterBase {
         settings: data,
       );
     },
+    SuccessView: (data) {
+      final args = data.getArgs<SuccessViewArguments>(nullOk: false);
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => SuccessView(
+          key: args.key,
+          message: args.message,
+          buttonText: args.buttonText,
+          onTap: args.onTap,
+        ),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -169,9 +180,14 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
   Future<dynamic> pushVerificationView() =>
       push<dynamic>(Routes.verificationView);
 
-  Future<dynamic> pushMainView() => push<dynamic>(Routes.mainView);
-
-  Future<dynamic> pushNoLoanView() => push<dynamic>(Routes.noLoanView);
+  Future<dynamic> pushMainView({
+    Key key,
+    @required int pageNumber,
+  }) =>
+      push<dynamic>(
+        Routes.mainView,
+        arguments: MainViewArguments(key: key, pageNumber: pageNumber),
+      );
 
   Future<dynamic> pushLoanProductView() =>
       push<dynamic>(Routes.loanProductView);
@@ -192,4 +208,40 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 
   Future<dynamic> pushAccountInfoView() =>
       push<dynamic>(Routes.accountInfoView);
+
+  Future<dynamic> pushSuccessView({
+    Key key,
+    @required String message,
+    @required String buttonText,
+    @required Function onTap,
+  }) =>
+      push<dynamic>(
+        Routes.successView,
+        arguments: SuccessViewArguments(
+            key: key, message: message, buttonText: buttonText, onTap: onTap),
+      );
+}
+
+/// ************************************************************************
+/// Arguments holder classes
+/// *************************************************************************
+
+/// MainView arguments holder class
+class MainViewArguments {
+  final Key key;
+  final int pageNumber;
+  MainViewArguments({this.key, @required this.pageNumber});
+}
+
+/// SuccessView arguments holder class
+class SuccessViewArguments {
+  final Key key;
+  final String message;
+  final String buttonText;
+  final Function onTap;
+  SuccessViewArguments(
+      {this.key,
+      @required this.message,
+      @required this.buttonText,
+      @required this.onTap});
 }

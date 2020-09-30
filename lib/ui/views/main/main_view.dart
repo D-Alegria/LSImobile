@@ -8,11 +8,19 @@ import 'package:lsi_mobile/ui/shared/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/history/history_view.dart';
 import 'package:lsi_mobile/ui/views/main/home/home_view.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_view.dart';
-import 'package:lsi_mobile/ui/views/main/loans/loans_view.dart';
-import 'package:lsi_mobile/ui/views/main/loans/view_model/loan_view/loan_view_cubit.dart';
+import 'package:lsi_mobile/ui/views/main/loans/loans_view/view_model/loan_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/profile_view.dart';
 
+import 'loans/loans_view/loans_view.dart';
+
 class MainView extends StatefulWidget {
+  final int pageNumber;
+
+  const MainView({
+    Key key,
+    @required this.pageNumber,
+  }) : super(key: key);
+
   @override
   _MainViewState createState() => _MainViewState();
 }
@@ -24,17 +32,18 @@ class _MainViewState extends State<MainView> {
   final String history = "assets/svgs/icons/history_icon.svg";
   final String profile = "assets/svgs/icons/profile_icon.svg";
   int _currentIndex;
-  final PageController _pageController =
-      PageController(initialPage: 0, keepPage: true);
 
   @override
   void initState() {
-    _currentIndex = 0;
+    _currentIndex = widget.pageNumber;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final PageController _pageController =
+        PageController(initialPage: widget.pageNumber, keepPage: true);
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -44,7 +53,7 @@ class _MainViewState extends State<MainView> {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => LoanViewCubit(),
+            create: (context) => LoanViewCubit()..checkActiveLoans(),
           ),
         ],
         child: Scaffold(

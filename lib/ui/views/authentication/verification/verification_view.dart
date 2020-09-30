@@ -57,10 +57,11 @@ class VerificationView extends StatelessWidget {
                         ),
                         children: [
                           TextSpan(
-                              text: " 08028323223",
-                              style: GoogleFonts.workSans(
-                                fontWeight: FontWeight.w600,
-                              )),
+                            text: " 08028323223",
+                            style: GoogleFonts.workSans(
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                           TextSpan(
                             text:
                                 ", enter the code below to verify your phone number",
@@ -119,6 +120,7 @@ class VerificationView extends StatelessWidget {
               (success) => context.navigator.pushAndRemoveUntil(
                 Routes.mainView,
                 (route) => false,
+                arguments: MainViewArguments(pageNumber: 0),
               ),
             ),
           ),
