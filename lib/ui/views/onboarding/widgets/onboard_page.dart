@@ -30,7 +30,7 @@ class OnBoardPage extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: SizeConfig.yMargin(context, 17),
+            height: SizeConfig.yMargin(context, 7),
           ),
           SvgPicture.asset(image),
           SizedBox(

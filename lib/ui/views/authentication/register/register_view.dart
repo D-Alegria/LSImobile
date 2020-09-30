@@ -8,7 +8,6 @@ import 'package:lsi_mobile/ui/shared/size_config.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/auth_view/auth_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/register/register_bloc.dart';
 import 'package:lsi_mobile/ui/views/authentication/widgets/auth_form.dart';
-import 'package:lsi_mobile/ui/views/authentication/widgets/option_flatbutton.dart';
 
 class RegisterView extends StatelessWidget {
   @override
@@ -17,38 +16,34 @@ class RegisterView extends StatelessWidget {
       builder: (context, state) => AuthForm(
         title: "Register",
         subTitle: "Create a free account",
-        height: 80,
+        height: 85,
         form: Form(
           child: SingleChildScrollView(
-            child: Column(
+                      child: Column(
               children: <Widget>[
                 SizedBox(
                   height: SizeConfig.yMargin(context, 3),
                 ),
                 SharedTextFormField(
                   labelText: "First name",
-                  textInputAction: TextInputAction.next,
                 ),
                 SizedBox(
                   height: SizeConfig.yMargin(context, 3),
                 ),
                 SharedTextFormField(
                   labelText: "Last name",
-                  textInputAction: TextInputAction.next,
                 ),
                 SizedBox(
                   height: SizeConfig.yMargin(context, 3),
                 ),
                 SharedTextFormField(
                   labelText: "Phone number",
-                  textInputAction: TextInputAction.next,
                 ),
                 SizedBox(
                   height: SizeConfig.yMargin(context, 3),
                 ),
                 SharedTextFormField(
                   labelText: "Email address",
-                  textInputAction: TextInputAction.next,
                 ),
                 SizedBox(
                   height: SizeConfig.yMargin(context, 3),
@@ -56,7 +51,6 @@ class RegisterView extends StatelessWidget {
                 SharedTextFormField(
                   labelText: "Pin",
                   obscureText: true,
-                  textInputAction: TextInputAction.done,
                 ),
                 SizedBox(
                   height: SizeConfig.yMargin(context, 5),
@@ -72,7 +66,8 @@ class RegisterView extends StatelessWidget {
                 SizedBox(
                   height: SizeConfig.yMargin(context, 2),
                 ),
-                OptionFlatButton(
+                sharedOptionFlatButton(
+                  context: context,
                   firstText: "Already have an account?",
                   secondText: "Login here",
                   action: () => context.bloc<AuthViewCubit>().toggleAuthView(),

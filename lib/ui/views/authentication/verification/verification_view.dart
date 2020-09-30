@@ -9,7 +9,6 @@ import 'package:lsi_mobile/ui/shared/size_config.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/register/register_bloc.dart';
 import 'package:lsi_mobile/ui/views/authentication/widgets/auth_form.dart';
 import 'package:lsi_mobile/ui/views/authentication/widgets/change_phone_form.dart';
-import 'package:lsi_mobile/ui/views/authentication/widgets/option_flatbutton.dart';
 
 class VerificationView extends StatelessWidget {
   @override
@@ -103,7 +102,8 @@ class VerificationView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  OptionFlatButton(
+                  sharedOptionFlatButton(
+                    context: context,
                     firstText: "Not your phone?",
                     secondText: "Change phone number",
                     action: () => _showChangePhoneForm(),

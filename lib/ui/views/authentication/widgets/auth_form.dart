@@ -21,7 +21,7 @@ class AuthForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        gradient: ColorStyles.blueGradient,
+        gradient: ColorStyles.primaryGradient,
       ),
       height: SizeConfig.yMargin(context, 100),
       child: Column(
@@ -100,7 +100,7 @@ class AuthForm extends StatelessWidget {
         width: SizeConfig.xMargin(context, 100),
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
-          gradient: ColorStyles.blueGradient,
+          gradient: ColorStyles.primaryGradient,
           image: DecorationImage(
             colorFilter: ColorFilter.mode(
               Colors.white.withOpacity(0.1),

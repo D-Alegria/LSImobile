@@ -8,9 +8,9 @@ import 'package:lsi_mobile/ui/views/onboarding/view_model/onboard_page_cubit.dar
 import 'package:lsi_mobile/ui/views/onboarding/widgets/onboard_page.dart';
 
 class OnBoardingView extends StatelessWidget {
-  final String manCard = "assets/svgs/onboarding/man_card.svg";
-  final String manRelaxing = "assets/svgs/onboarding/man_relaxing.svg";
-  final String manStudying = "assets/svgs/onboarding/man_studying.svg";
+  final String manCard = "assets/svgs/man_card.svg";
+  final String manRelaxing = "assets/svgs/man_relaxing.svg";
+  final String manStudying = "assets/svgs/man_studying.svg";
   final PageController _pageController = new PageController(initialPage: 0);
 
   @override

@@ -5,7 +5,6 @@ import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/auth_view/auth_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/authentication/widgets/auth_form.dart';
-import 'package:lsi_mobile/ui/views/authentication/widgets/option_flatbutton.dart';
 
 class LoginView extends StatelessWidget {
   @override
@@ -39,11 +38,11 @@ class LoginView extends StatelessWidget {
             SizedBox(
               height: SizeConfig.yMargin(context, 2),
             ),
-            OptionFlatButton(
-                firstText: "Don’t have an account?",
-                secondText: "Register",
-                action: () =>
-                    context.bloc<AuthViewCubit>().toggleAuthView(),
+            sharedOptionFlatButton(
+              context: context,
+              firstText: "Don’t have an account?",
+              secondText: "Register",
+              action: () => context.bloc<AuthViewCubit>().toggleAuthView(),
             ),
           ],
         ),

@@ -107,3 +107,54 @@ class SharedTextFormField extends StatelessWidget {
     );
   }
 }
+
+Widget sharedOptionFlatButton({
+  @required BuildContext context,
+  @required String firstText,
+  String secondText,
+  @required Function action,
+}) {
+  return FlatButton(
+    onPressed: action,
+    child: RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+        text: "$firstText  ",
+        style: GoogleFonts.workSans(
+          fontSize: SizeConfig.textSize(context, 4),
+          fontWeight: FontWeight.w400,
+          color: ColorStyles.light,
+        ),
+        children: <TextSpan>[
+          TextSpan(
+            text: secondText,
+            style: GoogleFonts.workSans(
+              fontWeight: FontWeight.w400,
+              color: ColorStyles.primary,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget sharedOutlineContainer({
+  @required BuildContext context,
+  @required Color color,
+  @required Color borderColor,
+  double height,
+  Widget child,
+}) {
+  return Container(
+    height: height,
+    decoration: BoxDecoration(
+      color: color,
+      borderRadius: BorderRadius.all(
+        Radius.circular(10),
+      ),
+      border: Border.all(color: borderColor, width: 1),
+    ),
+    child: child,
+  );
+}
