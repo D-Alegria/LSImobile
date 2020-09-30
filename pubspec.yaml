@@ -39,6 +39,7 @@ dependencies:
   # Utilities
   dartz: ^0.9.1
   flutter_svg: ^0.19.0
+  device_preview: ^0.4.8
   json_annotation: ^3.0.0
   cupertino_icons: ^1.0.0
 

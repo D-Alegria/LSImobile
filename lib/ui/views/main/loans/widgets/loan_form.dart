@@ -5,42 +5,49 @@ import 'package:lsi_mobile/ui/shared/size_config.dart';
 
 class LoanForm extends StatelessWidget {
   final String title;
-  final double height;
   final Widget form;
 
   const LoanForm({
     Key key,
     @required this.title,
-    @required this.height,
     @required this.form,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: ColorStyles.primaryGradient,
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        brightness: Brightness.dark,
+        backgroundColor: ColorStyles.primaryBlue,
       ),
-      height: SizeConfig.yMargin(context, 100),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Container(
-              child: Stack(
-                children: [
-                  header(context, title),
-                ],
-              ),
-            ),
+      body: SingleChildScrollView(
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: ColorStyles.primaryGradient,
           ),
-          formContainer(context, height, form),
-        ],
+          height: SizeConfig.yMargin(context, 89),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Container(
+                  child: Stack(
+                    children: [
+                      header(context, title),
+                    ],
+                  ),
+                ),
+              ),
+              formContainer(context, form),
+            ],
+          ),
+        ),
       ),
     );
   }
 
-  Widget formContainer(BuildContext context, double height, Widget form) {
+  Widget formContainer(BuildContext context, Widget form) {
     return Container(
       decoration: BoxDecoration(
         color: ColorStyles.white,

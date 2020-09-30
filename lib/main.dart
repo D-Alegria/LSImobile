@@ -1,3 +1,5 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -9,5 +11,10 @@ import 'core/configs/logging/cubit_observer.dart';
 void main() {
   Bloc.observer = MainCubitObserver();
   configureInjection(Environment.dev);
-  runApp(LSIApp());
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => LSIApp(),
+    ),
+  );
 }

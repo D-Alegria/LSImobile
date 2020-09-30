@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
@@ -8,6 +9,7 @@ import 'package:lsi_mobile/ui/views/main/history/history_view.dart';
 import 'package:lsi_mobile/ui/views/main/home/home_view.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_view.dart';
 import 'package:lsi_mobile/ui/views/main/loans/loans_view.dart';
+import 'package:lsi_mobile/ui/views/main/loans/view_model/loan_view/loan_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/profile_view.dart';
 
 class MainView extends StatefulWidget {
@@ -39,170 +41,177 @@ class _MainViewState extends State<MainView> {
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.dark,
       ),
-      child: Scaffold(
-        backgroundColor: ColorStyles.white,
-        bottomNavigationBar: BottomNavigationBar(
-          selectedLabelStyle: GoogleFonts.workSans(
-            fontSize: SizeConfig.textSize(context, 3.1),
-            fontWeight: FontWeight.w500,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => LoanViewCubit(),
           ),
-          unselectedLabelStyle: GoogleFonts.workSans(
-            fontSize: SizeConfig.textSize(context, 3.1),
-            fontWeight: FontWeight.w500,
+        ],
+        child: Scaffold(
+          backgroundColor: ColorStyles.white,
+          bottomNavigationBar: BottomNavigationBar(
+            selectedLabelStyle: GoogleFonts.workSans(
+              fontSize: SizeConfig.textSize(context, 3.1),
+              fontWeight: FontWeight.w500,
+            ),
+            unselectedLabelStyle: GoogleFonts.workSans(
+              fontSize: SizeConfig.textSize(context, 3.1),
+              fontWeight: FontWeight.w500,
+            ),
+            selectedFontSize: SizeConfig.textSize(context, 3.1),
+            unselectedFontSize: SizeConfig.textSize(context, 3.1),
+            showUnselectedLabels: true,
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: ColorStyles.orange,
+            unselectedItemColor: ColorStyles.light,
+            currentIndex: _currentIndex,
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                title: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: SizeConfig.textSize(context, 1.3),
+                    ),
+                    Text(
+                      "Home",
+                    ),
+                  ],
+                ),
+                icon: SvgPicture.asset(
+                  home,
+                  height: SizeConfig.textSize(context, 5),
+                  color: ColorStyles.light,
+                  semanticsLabel: 'Home',
+                ),
+                activeIcon: SvgPicture.asset(
+                  home,
+                  height: SizeConfig.textSize(context, 5),
+                  color: ColorStyles.orange,
+                  semanticsLabel: 'Home Page',
+                ),
+              ),
+              BottomNavigationBarItem(
+                title: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: SizeConfig.textSize(context, 1.3),
+                    ),
+                    Text(
+                      "Loans",
+                    ),
+                  ],
+                ),
+                icon: SvgPicture.asset(
+                  loans,
+                  height: SizeConfig.textSize(context, 5),
+                  color: ColorStyles.light,
+                  semanticsLabel: 'Loans',
+                ),
+                activeIcon: SvgPicture.asset(
+                  loans,
+                  height: SizeConfig.textSize(context, 5),
+                  color: ColorStyles.orange,
+                  semanticsLabel: 'Loans Page',
+                ),
+              ),
+              BottomNavigationBarItem(
+                title: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: SizeConfig.textSize(context, 1.3),
+                    ),
+                    Text(
+                      "Investment",
+                    ),
+                  ],
+                ),
+                icon: SvgPicture.asset(
+                  invest,
+                  height: SizeConfig.textSize(context, 5),
+                  color: ColorStyles.light,
+                  semanticsLabel: 'Investment',
+                ),
+                activeIcon: SvgPicture.asset(
+                  invest,
+                  height: SizeConfig.textSize(context, 5),
+                  color: ColorStyles.orange,
+                  semanticsLabel: 'Investment Page',
+                ),
+              ),
+              BottomNavigationBarItem(
+                title: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: SizeConfig.textSize(context, 1.3),
+                    ),
+                    Text(
+                      "History",
+                    ),
+                  ],
+                ),
+                icon: SvgPicture.asset(
+                  history,
+                  height: SizeConfig.textSize(context, 5),
+                  color: ColorStyles.light,
+                  semanticsLabel: 'History',
+                ),
+                activeIcon: SvgPicture.asset(
+                  history,
+                  height: SizeConfig.textSize(context, 5),
+                  color: ColorStyles.orange,
+                  semanticsLabel: 'History Page',
+                ),
+              ),
+              BottomNavigationBarItem(
+                title: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: SizeConfig.textSize(context, 1.3),
+                    ),
+                    Text(
+                      "Profile",
+                    ),
+                  ],
+                ),
+                icon: SvgPicture.asset(
+                  profile,
+                  height: SizeConfig.textSize(context, 5),
+                  color: ColorStyles.light,
+                  semanticsLabel: 'Profile',
+                ),
+                activeIcon: SvgPicture.asset(
+                  profile,
+                  height: SizeConfig.textSize(context, 5),
+                  color: ColorStyles.orange,
+                  semanticsLabel: 'Profile Page',
+                ),
+              ),
+            ],
+            onTap: (index) {
+              setState(
+                () {
+                  _currentIndex = index;
+                  _pageController.animateToPage(
+                    index,
+                    duration: const Duration(milliseconds: 400),
+                    curve: Curves.easeInOut,
+                  );
+                },
+              );
+            },
+            // onTap: model.changeTab,
           ),
-          selectedFontSize: SizeConfig.textSize(context, 3.1),
-          unselectedFontSize: SizeConfig.textSize(context, 3.1),
-          showUnselectedLabels: true,
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: ColorStyles.orange,
-          unselectedItemColor: ColorStyles.light,
-          currentIndex: _currentIndex,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              title: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: SizeConfig.textSize(context, 1.3),
-                  ),
-                  Text(
-                    "Home",
-                  ),
-                ],
-              ),
-              icon: SvgPicture.asset(
-                home,
-                height: SizeConfig.textSize(context, 5),
-                color: ColorStyles.light,
-                semanticsLabel: 'Home',
-              ),
-              activeIcon: SvgPicture.asset(
-                home,
-                height: SizeConfig.textSize(context, 5),
-                color: ColorStyles.orange,
-                semanticsLabel: 'Home Page',
-              ),
-            ),
-            BottomNavigationBarItem(
-              title: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: SizeConfig.textSize(context, 1.3),
-                  ),
-                  Text(
-                    "Loans",
-                  ),
-                ],
-              ),
-              icon: SvgPicture.asset(
-                loans,
-                height: SizeConfig.textSize(context, 5),
-                color: ColorStyles.light,
-                semanticsLabel: 'Loans',
-              ),
-              activeIcon: SvgPicture.asset(
-                loans,
-                height: SizeConfig.textSize(context, 5),
-                color: ColorStyles.orange,
-                semanticsLabel: 'Loans Page',
-              ),
-            ),
-            BottomNavigationBarItem(
-              title: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: SizeConfig.textSize(context, 1.3),
-                  ),
-                  Text(
-                    "Investment",
-                  ),
-                ],
-              ),
-              icon: SvgPicture.asset(
-                invest,
-                height: SizeConfig.textSize(context, 5),
-                color: ColorStyles.light,
-                semanticsLabel: 'Investment',
-              ),
-              activeIcon: SvgPicture.asset(
-                invest,
-                height: SizeConfig.textSize(context, 5),
-                color: ColorStyles.orange,
-                semanticsLabel: 'Investment Page',
-              ),
-            ),
-            BottomNavigationBarItem(
-              title: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: SizeConfig.textSize(context, 1.3),
-                  ),
-                  Text(
-                    "History",
-                  ),
-                ],
-              ),
-              icon: SvgPicture.asset(
-                history,
-                height: SizeConfig.textSize(context, 5),
-                color: ColorStyles.light,
-                semanticsLabel: 'History',
-              ),
-              activeIcon: SvgPicture.asset(
-                history,
-                height: SizeConfig.textSize(context, 5),
-                color: ColorStyles.orange,
-                semanticsLabel: 'History Page',
-              ),
-            ),
-            BottomNavigationBarItem(
-              title: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: SizeConfig.textSize(context, 1.3),
-                  ),
-                  Text(
-                    "Profile",
-                  ),
-                ],
-              ),
-              icon: SvgPicture.asset(
-                profile,
-                height: SizeConfig.textSize(context, 5),
-                color: ColorStyles.light,
-                semanticsLabel: 'Profile',
-              ),
-              activeIcon: SvgPicture.asset(
-                profile,
-                height: SizeConfig.textSize(context, 5),
-                color: ColorStyles.orange,
-                semanticsLabel: 'Profile Page',
-              ),
-            ),
-          ],
-          onTap: (index) {
-            setState(
-              () {
-                _currentIndex = index;
-                _pageController.animateToPage(
-                  index,
-                  duration: const Duration(milliseconds: 400),
-                  curve: Curves.easeInOut,
-                );
-              },
-            );
-          },
-          // onTap: model.changeTab,
-        ),
-        body: PageView(
-          controller: _pageController,
-          physics: NeverScrollableScrollPhysics(),
-          children: [
-            HomeView(),
-            LoansView(),
-            InvestmentView(),
-            HistoryView(),
-            ProfileView(),
-          ],
+          body: PageView(
+            controller: _pageController,
+            physics: NeverScrollableScrollPhysics(),
+            children: [
+              HomeView(),
+              LoansView(),
+              InvestmentView(),
+              HistoryView(),
+              ProfileView(),
+            ],
+          ),
         ),
       ),
     );

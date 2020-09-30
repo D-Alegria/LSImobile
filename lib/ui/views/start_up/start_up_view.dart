@@ -24,7 +24,7 @@ class StartUpView extends StatelessWidget {
           state.map(
             initial: (_) => null,
             unauthenticated: (_) => context.navigator.pushOnBoardingView(),
-            authenticated: (_) => null,
+            authenticated: (_) => context.navigator.pushMainView(),
           );
         },
         child: Scaffold(
