@@ -12,7 +12,7 @@ class LoginView extends StatelessWidget {
     return AuthForm(
       title: "Login",
       subTitle: "Secure login to your account",
-      height: 45,
+      height: 55,
       form: Form(
         child: ListView(
           children: <Widget>[

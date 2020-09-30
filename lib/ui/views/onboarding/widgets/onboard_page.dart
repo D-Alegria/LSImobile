@@ -30,7 +30,7 @@ class OnBoardPage extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: SizeConfig.yMargin(context, 17),
+            height: SizeConfig.yMargin(context, 7),
           ),
           SvgPicture.asset(image),
           SizedBox(
@@ -57,7 +57,7 @@ class OnBoardPage extends StatelessWidget {
                 ]),
           ),
           SizedBox(
-            height: SizeConfig.yMargin(context, 20),
+            height: SizeConfig.yMargin(context, 15),
           ),
           sharedRaisedButton(
             context: context,

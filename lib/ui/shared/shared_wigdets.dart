@@ -76,6 +76,7 @@ class SharedTextFormField extends StatelessWidget {
   final Function onChanged;
   final Function validator;
   final bool obscureText;
+  final TextInputAction textInputAction;
 
   const SharedTextFormField({
     Key key,
@@ -83,11 +84,13 @@ class SharedTextFormField extends StatelessWidget {
     this.onChanged,
     this.validator,
     this.obscureText = false,
+    this.textInputAction
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      textInputAction: textInputAction,
       obscureText: obscureText,
       validator: validator,
       onChanged: onChanged,

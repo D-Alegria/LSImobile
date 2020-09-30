@@ -16,62 +16,64 @@ class RegisterView extends StatelessWidget {
       builder: (context, state) => AuthForm(
         title: "Register",
         subTitle: "Create a free account",
-        height: 80,
+        height: 85,
         form: Form(
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: SizeConfig.yMargin(context, 3),
-              ),
-              SharedTextFormField(
-                labelText: "First name",
-              ),
-              SizedBox(
-                height: SizeConfig.yMargin(context, 3),
-              ),
-              SharedTextFormField(
-                labelText: "Last name",
-              ),
-              SizedBox(
-                height: SizeConfig.yMargin(context, 3),
-              ),
-              SharedTextFormField(
-                labelText: "Phone number",
-              ),
-              SizedBox(
-                height: SizeConfig.yMargin(context, 3),
-              ),
-              SharedTextFormField(
-                labelText: "Email address",
-              ),
-              SizedBox(
-                height: SizeConfig.yMargin(context, 3),
-              ),
-              SharedTextFormField(
-                labelText: "Pin",
-                obscureText: true,
-              ),
-              SizedBox(
-                height: SizeConfig.yMargin(context, 5),
-              ),
-              sharedRaisedButton(
-                context: context,
-                onPressed: () =>
-                    context.bloc<RegisterBloc>()..add(RegisterUser()),
-                color: ColorStyles.blue,
-                text: "Register",
-                minWidth: SizeConfig.xMargin(context, 100),
-              ),
-              SizedBox(
-                height: SizeConfig.yMargin(context, 2),
-              ),
-              sharedOptionFlatButton(
-                context: context,
-                firstText: "Already have an account?",
-                secondText: "Login here",
-                action: () => context.bloc<AuthViewCubit>().toggleAuthView(),
-              ),
-            ],
+          child: SingleChildScrollView(
+                      child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: SizeConfig.yMargin(context, 3),
+                ),
+                SharedTextFormField(
+                  labelText: "First name",
+                ),
+                SizedBox(
+                  height: SizeConfig.yMargin(context, 3),
+                ),
+                SharedTextFormField(
+                  labelText: "Last name",
+                ),
+                SizedBox(
+                  height: SizeConfig.yMargin(context, 3),
+                ),
+                SharedTextFormField(
+                  labelText: "Phone number",
+                ),
+                SizedBox(
+                  height: SizeConfig.yMargin(context, 3),
+                ),
+                SharedTextFormField(
+                  labelText: "Email address",
+                ),
+                SizedBox(
+                  height: SizeConfig.yMargin(context, 3),
+                ),
+                SharedTextFormField(
+                  labelText: "Pin",
+                  obscureText: true,
+                ),
+                SizedBox(
+                  height: SizeConfig.yMargin(context, 5),
+                ),
+                sharedRaisedButton(
+                  context: context,
+                  onPressed: () =>
+                      context.bloc<RegisterBloc>()..add(RegisterUser()),
+                  color: ColorStyles.blue,
+                  text: "Register",
+                  minWidth: SizeConfig.xMargin(context, 100),
+                ),
+                SizedBox(
+                  height: SizeConfig.yMargin(context, 2),
+                ),
+                sharedOptionFlatButton(
+                  context: context,
+                  firstText: "Already have an account?",
+                  secondText: "Login here",
+                  action: () => context.bloc<AuthViewCubit>().toggleAuthView(),
+                ),
+              ],
+            ),
           ),
         ),
       ),
