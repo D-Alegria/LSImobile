@@ -57,7 +57,7 @@ class OnBoardPage extends StatelessWidget {
                 ]),
           ),
           SizedBox(
-            height: SizeConfig.yMargin(context, 20),
+            height: SizeConfig.yMargin(context, 15),
           ),
           sharedRaisedButton(
             context: context,

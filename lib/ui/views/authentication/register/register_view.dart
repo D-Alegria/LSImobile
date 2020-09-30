@@ -19,59 +19,66 @@ class RegisterView extends StatelessWidget {
         subTitle: "Create a free account",
         height: 80,
         form: Form(
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: SizeConfig.yMargin(context, 3),
-              ),
-              SharedTextFormField(
-                labelText: "First name",
-              ),
-              SizedBox(
-                height: SizeConfig.yMargin(context, 3),
-              ),
-              SharedTextFormField(
-                labelText: "Last name",
-              ),
-              SizedBox(
-                height: SizeConfig.yMargin(context, 3),
-              ),
-              SharedTextFormField(
-                labelText: "Phone number",
-              ),
-              SizedBox(
-                height: SizeConfig.yMargin(context, 3),
-              ),
-              SharedTextFormField(
-                labelText: "Email address",
-              ),
-              SizedBox(
-                height: SizeConfig.yMargin(context, 3),
-              ),
-              SharedTextFormField(
-                labelText: "Pin",
-                obscureText: true,
-              ),
-              SizedBox(
-                height: SizeConfig.yMargin(context, 5),
-              ),
-              sharedRaisedButton(
-                context: context,
-                onPressed: () =>
-                    context.bloc<RegisterBloc>()..add(RegisterUser()),
-                color: ColorStyles.blue,
-                text: "Register",
-                minWidth: SizeConfig.xMargin(context, 100),
-              ),
-              SizedBox(
-                height: SizeConfig.yMargin(context, 2),
-              ),
-              OptionFlatButton(
-                firstText: "Already have an account?",
-                secondText: "Login here",
-                action: () => context.bloc<AuthViewCubit>().toggleAuthView(),
-              ),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: SizeConfig.yMargin(context, 3),
+                ),
+                SharedTextFormField(
+                  labelText: "First name",
+                  textInputAction: TextInputAction.next,
+                ),
+                SizedBox(
+                  height: SizeConfig.yMargin(context, 3),
+                ),
+                SharedTextFormField(
+                  labelText: "Last name",
+                  textInputAction: TextInputAction.next,
+                ),
+                SizedBox(
+                  height: SizeConfig.yMargin(context, 3),
+                ),
+                SharedTextFormField(
+                  labelText: "Phone number",
+                  textInputAction: TextInputAction.next,
+                ),
+                SizedBox(
+                  height: SizeConfig.yMargin(context, 3),
+                ),
+                SharedTextFormField(
+                  labelText: "Email address",
+                  textInputAction: TextInputAction.next,
+                ),
+                SizedBox(
+                  height: SizeConfig.yMargin(context, 3),
+                ),
+                SharedTextFormField(
+                  labelText: "Pin",
+                  obscureText: true,
+                  textInputAction: TextInputAction.done,
+                ),
+                SizedBox(
+                  height: SizeConfig.yMargin(context, 5),
+                ),
+                sharedRaisedButton(
+                  context: context,
+                  onPressed: () =>
+                      context.bloc<RegisterBloc>()..add(RegisterUser()),
+                  color: ColorStyles.blue,
+                  text: "Register",
+                  minWidth: SizeConfig.xMargin(context, 100),
+                ),
+                SizedBox(
+                  height: SizeConfig.yMargin(context, 2),
+                ),
+                OptionFlatButton(
+                  firstText: "Already have an account?",
+                  secondText: "Login here",
+                  action: () => context.bloc<AuthViewCubit>().toggleAuthView(),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -79,7 +86,8 @@ class RegisterView extends StatelessWidget {
         () => null,
         (either) => either.fold(
           (failure) => null,
-          (success) => context.navigator.pushAndRemoveUntil(Routes.verificationView, (route) => false),
+          (success) => context.navigator
+              .pushAndRemoveUntil(Routes.verificationView, (route) => false),
         ),
       ),
     );
