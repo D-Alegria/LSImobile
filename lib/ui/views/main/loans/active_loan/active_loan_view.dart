@@ -22,6 +22,7 @@ class ActiveLoanView extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: ColorStyles.white,
+        centerTitle: false,
         title: Text(
           "Active Loan",
           style: GoogleFonts.workSans(
