@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 
 class LoanViewCubit extends Cubit<bool> {
-  LoanViewCubit() : super(true);
+  LoanViewCubit() : super(false);
 
   void checkActiveLoans() {
     emit(!state);

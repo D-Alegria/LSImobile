@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/loans/widgets/loan_card.dart';
-import 'package:lsi_mobile/ui/views/main/loans/widgets/loan_history_tile.dart';
+import 'package:lsi_mobile/ui/views/main/loans/widgets/loan_history_mini.dart';
 import 'package:lsi_mobile/ui/views/main/loans/widgets/mini_loan_card.dart';
 
 class ActiveLoanView extends StatelessWidget {

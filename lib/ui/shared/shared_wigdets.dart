@@ -4,6 +4,9 @@ import 'package:lsi_mobile/ui/shared/size_config.dart';
 
 import 'const_color.dart';
 
+/// ////////////////////////////////////////////////////////////////////////////
+/// [sharedRaisedButton]
+/// ////////////////////////////////////////////////////////////////////////////
 Widget sharedRaisedButton({
   @required BuildContext context,
   @required Function onPressed,
@@ -35,6 +38,9 @@ Widget sharedRaisedButton({
   );
 }
 
+/// ////////////////////////////////////////////////////////////////////////////
+/// [sharedOutlineRaisedButton]
+/// ////////////////////////////////////////////////////////////////////////////
 Widget sharedOutlineRaisedButton({
   @required BuildContext context,
   @required Function onPressed,
@@ -70,22 +76,24 @@ Widget sharedOutlineRaisedButton({
   );
 }
 
+/// ////////////////////////////////////////////////////////////////////////////
+/// [SharedTextFormField]
+/// ////////////////////////////////////////////////////////////////////////////
 class SharedTextFormField extends StatelessWidget {
-  // static final Key _k1 = new GlobalKey();
   final String labelText;
   final Function onChanged;
   final Function validator;
   final bool obscureText;
   final TextInputAction textInputAction;
 
-  const SharedTextFormField({
-    Key key,
-    @required this.labelText,
-    this.onChanged,
-    this.validator,
-    this.obscureText = false,
-    this.textInputAction
-  }) : super(key: key);
+  const SharedTextFormField(
+      {Key key,
+      @required this.labelText,
+      this.onChanged,
+      this.validator,
+      this.obscureText = false,
+      this.textInputAction})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -143,6 +151,10 @@ class SharedTextFormField extends StatelessWidget {
   }
 }
 
+/// ////////////////////////////////////////////////////////////////////////////
+/// [sharedOptionFlatButton]
+/// Example Change Password etc
+/// ////////////////////////////////////////////////////////////////////////////
 Widget sharedOptionFlatButton({
   @required BuildContext context,
   @required String firstText,
@@ -174,6 +186,10 @@ Widget sharedOptionFlatButton({
   );
 }
 
+/// ////////////////////////////////////////////////////////////////////////////
+/// [OutlineContainer]
+/// [sharedOutlineContainer]
+/// ////////////////////////////////////////////////////////////////////////////
 Widget sharedOutlineContainer({
   @required BuildContext context,
   @required Color color,
@@ -191,5 +207,61 @@ Widget sharedOutlineContainer({
       border: Border.all(color: borderColor, width: 1),
     ),
     child: child,
+  );
+}
+
+Widget sharedInfoListTile({
+  @required BuildContext context,
+  @required Widget icon,
+  String title,
+  String subTitle,
+  String trailingText,
+  String trailingSubText,
+  bool red = false,
+}) {
+  return ListTile(
+    contentPadding: EdgeInsets.symmetric(horizontal: 0),
+    leading: CircleAvatar(
+      backgroundColor: red
+          ? ColorStyles.red.withOpacity(0.2)
+          : ColorStyles.green2.withOpacity(0.2),
+      child: icon,
+    ),
+    title: Text(
+      title,
+      style: GoogleFonts.workSans(
+        fontWeight: FontWeight.w400,
+        color: ColorStyles.black,
+        fontSize: SizeConfig.textSize(context, 4.5),
+      ),
+    ),
+    subtitle: Text(
+      subTitle,
+      style: GoogleFonts.workSans(
+        fontWeight: FontWeight.w400,
+        color: red ? ColorStyles.red : ColorStyles.green2,
+        fontSize: SizeConfig.textSize(context, 3.5),
+      ),
+    ),
+    trailing: RichText(
+      textAlign: TextAlign.right,
+      text: TextSpan(
+        text: trailingText,
+        style: GoogleFonts.workSans(
+          fontWeight: FontWeight.w400,
+          color: ColorStyles.grey2,
+          fontSize: SizeConfig.textSize(context, 4.5),
+        ),
+        children: [
+          TextSpan(
+            text: "\n$trailingSubText",
+            style: GoogleFonts.workSans(
+              color: ColorStyles.black,
+              fontSize: SizeConfig.textSize(context, 3.5),
+            ),
+          ),
+        ],
+      ),
+    ),
   );
 }
