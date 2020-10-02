@@ -31,7 +31,12 @@ class LoanDetailsView extends StatelessWidget {
                 SizedBox(
                   height: SizeConfig.yMargin(context, 3),
                 ),
-                SharedTextFormField(labelText: "Reason for this loan"),
+                sharedDropDownFormField<String>(
+                  items: ["A", "B", "C"],
+                  context: context,
+                  labelText: "Reason for this loan",
+                  onChanged: (String value) {},
+                ),
                 SizedBox(
                   height: SizeConfig.yMargin(context, 2),
                 ),

@@ -108,38 +108,7 @@ class SharedTextFormField extends StatelessWidget {
         color: const Color(0xFF18172B).withOpacity(0.6),
       ),
       cursorColor: ColorStyles.dark,
-      decoration: InputDecoration(
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        border: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ColorStyles.black.withOpacity(0.2),
-            width: 1.0,
-          ),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ColorStyles.black.withOpacity(0.0),
-            width: 1.0,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ColorStyles.black.withOpacity(0.2),
-            width: 1.0,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: ColorStyles.black.withOpacity(0.2),
-            width: 1.0,
-          ),
-        ),
-        errorBorder: const OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: ColorStyles.black,
-            width: 1.0,
-          ),
-        ),
+      decoration: textFieldDecoration.copyWith(
         labelText: labelText,
         labelStyle: GoogleFonts.workSans(
           fontSize: SizeConfig.textSize(context, 5),
@@ -265,3 +234,68 @@ Widget sharedInfoListTile({
     ),
   );
 }
+
+Widget sharedDropDownFormField<T>({
+  @required BuildContext context,
+  @required String labelText,
+  @required Function onChanged,
+  Function validator,
+  @required List<T> items,
+}) {
+  return DropdownButtonFormField(
+    value: items.first,
+    items: items
+        .map(
+          (e) => DropdownMenuItem(
+            child: Text("$e"),
+            value: e,
+          ),
+        )
+        .toList(),
+    icon: Icon(Icons.keyboard_arrow_down),
+    validator: validator,
+    onChanged: onChanged,
+    decoration: textFieldDecoration.copyWith(
+      labelText: labelText,
+      labelStyle: GoogleFonts.workSans(
+        fontSize: SizeConfig.textSize(context, 5),
+        fontWeight: FontWeight.w500,
+        color: const Color(0xFF18172B).withOpacity(0.6),
+      ),
+    ),
+  );
+}
+
+final textFieldDecoration = InputDecoration(
+  floatingLabelBehavior: FloatingLabelBehavior.always,
+  border: OutlineInputBorder(
+    borderSide: BorderSide(
+      color: ColorStyles.black.withOpacity(0.2),
+      width: 1.0,
+    ),
+  ),
+  disabledBorder: OutlineInputBorder(
+    borderSide: BorderSide(
+      color: ColorStyles.black.withOpacity(0.0),
+      width: 1.0,
+    ),
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderSide: BorderSide(
+      color: ColorStyles.black.withOpacity(0.2),
+      width: 1.0,
+    ),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderSide: BorderSide(
+      color: ColorStyles.black.withOpacity(0.2),
+      width: 1.0,
+    ),
+  ),
+  errorBorder: const OutlineInputBorder(
+    borderSide: const BorderSide(
+      color: ColorStyles.black,
+      width: 1.0,
+    ),
+  ),
+);

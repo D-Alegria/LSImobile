@@ -31,7 +31,12 @@ class PersonalInfoFormView extends StatelessWidget {
                 SizedBox(
                   height: SizeConfig.yMargin(context, 2),
                 ),
-                SharedTextFormField(labelText: "Gender"),
+                sharedDropDownFormField<String>(
+                  items: ["Male", "Female", "Other"],
+                  context: context,
+                  labelText: "Gender",
+                  onChanged: (String value) {},
+                ),
                 SizedBox(
                   height: SizeConfig.yMargin(context, 2),
                 ),

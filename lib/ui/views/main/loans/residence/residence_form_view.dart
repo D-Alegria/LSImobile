@@ -23,7 +23,12 @@ class ResidenceFormView extends StatelessWidget {
                 SizedBox(
                   height: SizeConfig.yMargin(context, 2),
                 ),
-                SharedTextFormField(labelText: "Type of residence"),
+                sharedDropDownFormField<String>(
+                  items: ["A", "B", "C"],
+                  context: context,
+                  labelText: "Type of residence",
+                  onChanged: (String value) {},
+                ),
                 SizedBox(
                   height: SizeConfig.yMargin(context, 2),
                 ),
@@ -31,11 +36,21 @@ class ResidenceFormView extends StatelessWidget {
                 SizedBox(
                   height: SizeConfig.yMargin(context, 2),
                 ),
-                SharedTextFormField(labelText: "State"),
+                sharedDropDownFormField<String>(
+                  items: ["A", "B", "C"],
+                  context: context,
+                  labelText: "State",
+                  onChanged: (String value) {},
+                ),
                 SizedBox(
                   height: SizeConfig.yMargin(context, 2),
                 ),
-                SharedTextFormField(labelText: "Local government area"),
+                sharedDropDownFormField<String>(
+                  items: ["A", "B", "C"],
+                  context: context,
+                  labelText: "Local government area",
+                  onChanged: (String value) {},
+                ),
                 SizedBox(
                   height: SizeConfig.yMargin(context, 2),
                 ),
@@ -50,7 +65,8 @@ class ResidenceFormView extends StatelessWidget {
                 ),
                 sharedRaisedButton(
                   context: context,
-                  onPressed: () => context.bloc<ResidenceBloc>().add(SubmitResidenceForm()),
+                  onPressed: () =>
+                      context.bloc<ResidenceBloc>().add(SubmitResidenceForm()),
                   color: ColorStyles.blue,
                   text: "Submit",
                   minWidth: SizeConfig.xMargin(context, 90),
