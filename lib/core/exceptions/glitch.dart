@@ -1,5 +1,10 @@
-class Glitch implements Exception {
-  final String message;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  const Glitch(this.message);
+part 'glitch.freezed.dart';
+
+@freezed
+abstract class Glitch with _$Glitch {
+  const factory Glitch.networkGlitch({
+    @required String message,
+  }) = NetworkGlitch;
 }

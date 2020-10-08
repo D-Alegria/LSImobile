@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
+import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config.dart';
@@ -18,39 +20,75 @@ class RegisterView extends StatelessWidget {
         subTitle: "Create a free account",
         height: 85,
         form: Form(
+          autovalidate: state.showErrorMessages,
           child: SingleChildScrollView(
-                      child: Column(
+            child: Column(
               children: <Widget>[
                 SizedBox(
                   height: SizeConfig.yMargin(context, 3),
                 ),
                 SharedTextFormField(
                   labelText: "First name",
+                  onChanged: (value) =>
+                      context.bloc<RegisterBloc>().add(FirstNameChanged(value)),
+                  validator: (value) {
+                    if (state.firstName.isEmpty)
+                      return "Field name is required";
+                    return null;
+                  },
                 ),
                 SizedBox(
                   height: SizeConfig.yMargin(context, 3),
                 ),
                 SharedTextFormField(
                   labelText: "Last name",
+                  onChanged: (value) =>
+                      context.bloc<RegisterBloc>().add(LastNameChanged(value)),
+                  validator: (value) {
+                    if (state.lastName.isEmpty) return "Field is required";
+                    return null;
+                  },
                 ),
                 SizedBox(
                   height: SizeConfig.yMargin(context, 3),
                 ),
                 SharedTextFormField(
                   labelText: "Phone number",
+                  onChanged: (value) => context
+                      .bloc<RegisterBloc>()
+                      .add(PhoneNumberChanged(value)),
+                  validator: (value) {
+                    if (state.phoneNumber.isEmpty) return "Field is required";
+                    return null;
+                  },
+                  keyboardType: TextInputType.phone,
                 ),
                 SizedBox(
                   height: SizeConfig.yMargin(context, 3),
                 ),
                 SharedTextFormField(
                   labelText: "Email address",
+                  onChanged: (value) =>
+                      context.bloc<RegisterBloc>().add(EmailChanged(value)),
+                  validator: (value) {
+                    if (!state.emailAddress.isEmail) return "Invalid Email";
+                    return null;
+                  },
+                  keyboardType: TextInputType.emailAddress,
                 ),
                 SizedBox(
                   height: SizeConfig.yMargin(context, 3),
                 ),
                 SharedTextFormField(
-                  labelText: "Pin",
+                  labelText: "Password",
                   obscureText: true,
+                  onChanged: (value) =>
+                      context.bloc<RegisterBloc>().add(PasswordChanged(value)),
+                  validator: (value) {
+                    if (!state.password.isValidPassword)
+                      return "Password must be at least 5 characters";
+                    return null;
+                  },
                 ),
                 SizedBox(
                   height: SizeConfig.yMargin(context, 5),
@@ -80,7 +118,10 @@ class RegisterView extends StatelessWidget {
       listener: (context, state) => state.registerFailureOrSuccess.fold(
         () => null,
         (either) => either.fold(
-          (failure) => null,
+          (failure) => FlushbarHelper.createError(
+            message: failure.map(networkGlitch: (value) => value.message),
+            duration: new Duration(seconds: 3),
+          ).show(context),
           (success) => context.navigator
               .pushAndRemoveUntil(Routes.verificationView, (route) => false),
         ),

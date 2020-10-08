@@ -81,23 +81,26 @@ Widget sharedOutlineRaisedButton({
 /// ////////////////////////////////////////////////////////////////////////////
 class SharedTextFormField extends StatelessWidget {
   final String labelText;
-  final Function onChanged;
-  final Function validator;
+  final Function(String value) onChanged;
+  final Function(String value) validator;
   final bool obscureText;
   final TextInputAction textInputAction;
+  final TextInputType keyboardType;
 
-  const SharedTextFormField(
-      {Key key,
-      @required this.labelText,
-      this.onChanged,
-      this.validator,
-      this.obscureText = false,
-      this.textInputAction})
-      : super(key: key);
+  const SharedTextFormField({
+    Key key,
+    @required this.labelText,
+    this.onChanged,
+    this.validator,
+    this.obscureText = false,
+    this.textInputAction,
+    this.keyboardType,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: keyboardType,
       textInputAction: textInputAction,
       obscureText: obscureText,
       validator: validator,
