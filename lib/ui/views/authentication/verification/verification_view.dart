@@ -9,6 +9,8 @@ import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/auth_form/auth_form_bloc.dart';
+import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
+import 'package:lsi_mobile/ui/views/authentication/view_model/register/register_bloc.dart';
 import 'package:lsi_mobile/ui/views/authentication/widgets/auth_form.dart';
 import 'package:lsi_mobile/ui/views/authentication/widgets/change_phone_form.dart';
 

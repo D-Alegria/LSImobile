@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
-import 'package:lsi_mobile/ui/shared/size_config.dart';
+import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/loans/widgets/loan_card.dart';
 import 'package:lsi_mobile/ui/views/main/loans/widgets/loan_history_mini.dart';
 import 'package:lsi_mobile/ui/views/main/loans/widgets/mini_loan_card.dart';
@@ -25,7 +24,7 @@ class ActiveLoanView extends StatelessWidget {
         centerTitle: false,
         title: Text(
           "Active Loan",
-          style: GoogleFonts.workSans(
+          style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: SizeConfig.textSize(context, 5),
             color: ColorStyles.dark.withOpacity(0.8),

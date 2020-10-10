@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
-import 'package:lsi_mobile/ui/shared/size_config.dart';
+import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/loans/provide_bvn/view_model/provide_bvn_bloc.dart';
 
 class VerifyBVNForm extends StatelessWidget {
@@ -48,7 +48,7 @@ class VerifyBVNForm extends StatelessWidget {
                   child: RichText(
                     text: TextSpan(
                       text: "Verify BVN",
-                      style: GoogleFonts.workSans(
+                      style: TextStyle(
                         color: ColorStyles.dark,
                         fontWeight: FontWeight.w600,
                         fontSize: SizeConfig.textSize(context, 4),
@@ -58,7 +58,7 @@ class VerifyBVNForm extends StatelessWidget {
                         TextSpan(
                           text:
                               "\nEnter OTP sent to the number registered to your BVN",
-                          style: GoogleFonts.workSans(
+                          style: TextStyle(
                             fontWeight: FontWeight.w500,
                             color: ColorStyles.dark.withOpacity(0.5),
                           ),

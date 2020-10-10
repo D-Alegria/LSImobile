@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
-import 'package:lsi_mobile/ui/shared/size_config.dart';
+import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
 class SmallBadge extends StatelessWidget {
   final String text;
@@ -18,7 +17,7 @@ class SmallBadge extends StatelessWidget {
     return Container(
       child: Text(
         text,
-        style: GoogleFonts.workSans(
+        style: TextStyle(
           fontSize: SizeConfig.textSize(context, 3),
           color: ColorStyles.white,
           fontWeight: FontWeight.w500,
