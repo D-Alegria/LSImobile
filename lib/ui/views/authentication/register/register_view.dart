@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
-import 'package:lsi_mobile/ui/shared/size_config.dart';
+import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/auth_view/auth_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/register/register_bloc.dart';
 import 'package:lsi_mobile/ui/views/authentication/widgets/auth_form.dart';
@@ -19,7 +19,7 @@ class RegisterView extends StatelessWidget {
         height: 85,
         form: Form(
           child: SingleChildScrollView(
-                      child: Column(
+            child: Column(
               children: <Widget>[
                 SizedBox(
                   height: SizeConfig.yMargin(context, 3),

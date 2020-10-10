@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
-import 'package:lsi_mobile/ui/shared/size_config.dart';
+import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
 class LoanForm extends StatelessWidget {
   final String title;
@@ -60,7 +59,7 @@ class LoanForm extends StatelessWidget {
       padding: EdgeInsets.all(SizeConfig.xMargin(context, 5)),
       child: Text(
         title,
-        style: GoogleFonts.workSans(
+        style: TextStyle(
           fontWeight: FontWeight.w600,
           fontSize: SizeConfig.textSize(context, 8),
           color: ColorStyles.white,

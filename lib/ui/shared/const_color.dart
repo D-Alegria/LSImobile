@@ -21,6 +21,7 @@ abstract class ColorStyles {
   static const blue3 = const Color(0xFF56CCF2);
   static const grey = const Color(0xFF8F92A1);
   static const grey2 = const Color(0xFF4F4F4F);
+  static const grey3 = const Color(0xFFF8F8FA);
   static const primaryBlue = const Color(0xFF243C92);
   static const primaryGradient = const LinearGradient(
     colors: [

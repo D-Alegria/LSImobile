@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
-import 'package:lsi_mobile/ui/shared/size_config.dart';
+import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
 class OnBoardPage extends StatelessWidget {
   const OnBoardPage({
@@ -40,7 +39,7 @@ class OnBoardPage extends StatelessWidget {
             textAlign: TextAlign.center,
             text: TextSpan(
                 text: mainText,
-                style: GoogleFonts.workSans(
+                style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: SizeConfig.textSize(context, 6),
                   color: ColorStyles.dark,
@@ -48,7 +47,7 @@ class OnBoardPage extends StatelessWidget {
                 children: <TextSpan>[
                   TextSpan(
                     text: "\n\n$subText",
-                    style: GoogleFonts.workSans(
+                    style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: SizeConfig.textSize(context, 4),
                       color: ColorStyles.light,

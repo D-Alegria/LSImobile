@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
-import 'package:lsi_mobile/ui/shared/size_config.dart';
+import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/history/history_view.dart';
 import 'package:lsi_mobile/ui/views/main/home/home_view.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_view.dart';
@@ -59,11 +58,11 @@ class _MainViewState extends State<MainView> {
         child: Scaffold(
           backgroundColor: ColorStyles.white,
           bottomNavigationBar: BottomNavigationBar(
-            selectedLabelStyle: GoogleFonts.workSans(
+            selectedLabelStyle: TextStyle(
               fontSize: SizeConfig.textSize(context, 3.1),
               fontWeight: FontWeight.w500,
             ),
-            unselectedLabelStyle: GoogleFonts.workSans(
+            unselectedLabelStyle: TextStyle(
               fontSize: SizeConfig.textSize(context, 3.1),
               fontWeight: FontWeight.w500,
             ),

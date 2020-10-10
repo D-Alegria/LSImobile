@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
-import 'package:lsi_mobile/ui/shared/size_config.dart';
+import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
 class LoanHistory extends StatelessWidget {
   const LoanHistory({
@@ -19,7 +18,7 @@ class LoanHistory extends StatelessWidget {
             children: [
               Text(
                 "Loan History",
-                style: GoogleFonts.workSans(
+                style: TextStyle(
                   fontWeight: FontWeight.w600,
                   color: ColorStyles.dark,
                   fontSize: SizeConfig.textSize(context, 4.7),
@@ -27,7 +26,7 @@ class LoanHistory extends StatelessWidget {
               ),
               Text(
                 "See all",
-                style: GoogleFonts.workSans(
+                style: TextStyle(
                   fontWeight: FontWeight.w600,
                   color: ColorStyles.blue,
                   fontSize: SizeConfig.textSize(context, 4.7),

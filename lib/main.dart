@@ -14,7 +14,8 @@ void main() {
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,
-      builder: (context) => LSIApp(),
+      builder: (context) => 
+      LSIApp(),
     ),
   );
 }

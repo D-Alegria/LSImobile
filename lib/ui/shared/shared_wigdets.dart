@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:lsi_mobile/ui/shared/size_config.dart';
+import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
 import 'const_color.dart';
 
@@ -22,7 +21,7 @@ Widget sharedRaisedButton({
       color: color,
       child: Text(
         text,
-        style: GoogleFonts.workSans(
+        style: TextStyle(
           color: ColorStyles.white,
           fontSize: SizeConfig.textSize(context, 5),
           fontWeight: FontWeight.w500,
@@ -60,7 +59,7 @@ Widget sharedOutlineRaisedButton({
       onPressed: onPressed,
       child: Text(
         text,
-        style: GoogleFonts.workSans(
+        style: TextStyle(
           color: ColorStyles.white,
           fontSize: SizeConfig.textSize(context, 5),
           fontWeight: FontWeight.w500,
@@ -102,7 +101,8 @@ class SharedTextFormField extends StatelessWidget {
       obscureText: obscureText,
       validator: validator,
       onChanged: onChanged,
-      style: GoogleFonts.workSans(
+      style: TextStyle(
+        height: SizeConfig.yMargin(context, 0.17),
         fontSize: SizeConfig.textSize(context, 5),
         fontWeight: FontWeight.w500,
         color: const Color(0xFF18172B).withOpacity(0.6),
@@ -110,7 +110,7 @@ class SharedTextFormField extends StatelessWidget {
       cursorColor: ColorStyles.dark,
       decoration: textFieldDecoration.copyWith(
         labelText: labelText,
-        labelStyle: GoogleFonts.workSans(
+        labelStyle: TextStyle(
           fontSize: SizeConfig.textSize(context, 5),
           fontWeight: FontWeight.w500,
           color: const Color(0xFF18172B).withOpacity(0.6),
@@ -136,7 +136,7 @@ Widget sharedOptionFlatButton({
       textAlign: TextAlign.center,
       text: TextSpan(
         text: "$firstText  ",
-        style: GoogleFonts.workSans(
+        style: TextStyle(
           fontSize: SizeConfig.textSize(context, 4),
           fontWeight: FontWeight.w400,
           color: ColorStyles.light,
@@ -144,7 +144,7 @@ Widget sharedOptionFlatButton({
         children: <TextSpan>[
           TextSpan(
             text: secondText,
-            style: GoogleFonts.workSans(
+            style: TextStyle(
               fontWeight: FontWeight.w400,
               color: ColorStyles.primary,
             ),
@@ -160,15 +160,21 @@ Widget sharedOptionFlatButton({
 /// [sharedOutlineContainer]
 /// ////////////////////////////////////////////////////////////////////////////
 Widget sharedOutlineContainer({
-  @required BuildContext context,
-  @required Color color,
+  BuildContext context,
+  Color color,
   @required Color borderColor,
   double height,
+  double width,
   Widget child,
+  Gradient gradient,
+  BoxShadow boxShadow,
 }) {
   return Container(
+    width: width,
     height: height,
     decoration: BoxDecoration(
+      gradient: gradient,
+      boxShadow: [boxShadow],
       color: color,
       borderRadius: BorderRadius.all(
         Radius.circular(10),
@@ -198,7 +204,7 @@ Widget sharedInfoListTile({
     ),
     title: Text(
       title,
-      style: GoogleFonts.workSans(
+      style: TextStyle(
         fontWeight: FontWeight.w400,
         color: ColorStyles.black,
         fontSize: SizeConfig.textSize(context, 4.5),
@@ -206,7 +212,7 @@ Widget sharedInfoListTile({
     ),
     subtitle: Text(
       subTitle,
-      style: GoogleFonts.workSans(
+      style: TextStyle(
         fontWeight: FontWeight.w400,
         color: red ? ColorStyles.red : ColorStyles.green2,
         fontSize: SizeConfig.textSize(context, 3.5),
@@ -216,7 +222,7 @@ Widget sharedInfoListTile({
       textAlign: TextAlign.right,
       text: TextSpan(
         text: trailingText,
-        style: GoogleFonts.workSans(
+        style: TextStyle(
           fontWeight: FontWeight.w400,
           color: ColorStyles.grey2,
           fontSize: SizeConfig.textSize(context, 4.5),
@@ -224,7 +230,7 @@ Widget sharedInfoListTile({
         children: [
           TextSpan(
             text: "\n$trailingSubText",
-            style: GoogleFonts.workSans(
+            style: TextStyle(
               color: ColorStyles.black,
               fontSize: SizeConfig.textSize(context, 3.5),
             ),
@@ -257,7 +263,7 @@ Widget sharedDropDownFormField<T>({
     onChanged: onChanged,
     decoration: textFieldDecoration.copyWith(
       labelText: labelText,
-      labelStyle: GoogleFonts.workSans(
+      labelStyle: TextStyle(
         fontSize: SizeConfig.textSize(context, 5),
         fontWeight: FontWeight.w500,
         color: const Color(0xFF18172B).withOpacity(0.6),

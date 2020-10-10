@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
-import 'package:lsi_mobile/ui/shared/size_config.dart';
+import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
 class AuthForm extends StatelessWidget {
   final String title;
@@ -48,8 +47,8 @@ class AuthForm extends StatelessWidget {
       decoration: BoxDecoration(
         color: ColorStyles.white,
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
+          topLeft: Radius.circular(SizeConfig.yMargin(context, 5.5)),
+          topRight: Radius.circular(SizeConfig.yMargin(context, 5.5)),
         ),
       ),
       height: SizeConfig.yMargin(context, height),
@@ -69,7 +68,7 @@ class AuthForm extends StatelessWidget {
         textAlign: TextAlign.left,
         text: TextSpan(
           text: title,
-          style: GoogleFonts.workSans(
+          style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: SizeConfig.textSize(context, 8),
             color: ColorStyles.white,
@@ -77,7 +76,7 @@ class AuthForm extends StatelessWidget {
           children: <TextSpan>[
             TextSpan(
               text: "\n$subTitle",
-              style: GoogleFonts.workSans(
+              style: TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: SizeConfig.textSize(context, 4),
                 color: ColorStyles.extraLight,
