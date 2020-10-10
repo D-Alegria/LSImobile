@@ -7,10 +7,8 @@ import 'package:lsi_mobile/core/configs/dependency_injection/injection.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
-import 'package:lsi_mobile/ui/shared/size_config.dart';
-import 'package:lsi_mobile/ui/views/authentication/view_model/auth_form/auth_form_bloc.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:lsi_mobile/ui/views/authentication/view_model/register/register_bloc.dart';
+import 'package:lsi_mobile/ui/views/authentication/view_model/auth_form/auth_form_bloc.dart';
 import 'package:lsi_mobile/ui/views/authentication/widgets/auth_form.dart';
 import 'package:lsi_mobile/ui/views/authentication/widgets/change_phone_form.dart';
 
@@ -89,26 +87,6 @@ class VerificationView extends StatelessWidget {
                     },
                     keyboardType: TextInputType.phone,
                   ),
-                  SizedBox(
-                    height: SizeConfig.yMargin(context, 4),
-                  ),
-                  state.isSubmitting
-                      ? sharedLoadingRaisedButton(
-                          context: context,
-                          color: ColorStyles.grey2,
-                          text: "Verify",
-                          minWidth: SizeConfig.xMargin(context, 100),
-                        )
-                      : sharedRaisedButton(
-                          context: context,
-                          onPressed: () =>
-                              context.bloc<AuthFormBloc>()..add(VerifyUser()),
-                          color: ColorStyles.blue,
-                          text: "Verify",
-                        ),
-                  SizedBox(
-                    height: SizeConfig.yMargin(context, 1),
-                  ),
                   Align(
                     alignment: Alignment.topRight,
                     child: FlatButton(
@@ -124,6 +102,20 @@ class VerificationView extends StatelessWidget {
                       ),
                     ),
                   ),
+                  state.isSubmitting
+                      ? sharedLoadingRaisedButton(
+                          context: context,
+                          color: ColorStyles.grey2,
+                          text: "Verify",
+                          minWidth: SizeConfig.xMargin(context, 100),
+                        )
+                      : sharedRaisedButton(
+                          context: context,
+                          onPressed: () =>
+                              context.bloc<AuthFormBloc>()..add(VerifyUser()),
+                          color: ColorStyles.blue,
+                          text: "Verify",
+                        ),
                   sharedOptionFlatButton(
                     context: context,
                     firstText: "Not your phone?",

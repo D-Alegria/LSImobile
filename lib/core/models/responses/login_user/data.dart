@@ -2,10 +2,12 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'data.g.dart';
 
-@JsonSerializable(nullable: false)
+@JsonSerializable()
 class Data {
   final String email;
+  @JsonKey(name: "full_name")
   final String fullName;
+  @JsonKey(name: "profile_picture")
   final String profilePicture;
 
   Data({

@@ -9,13 +9,13 @@ part of 'data.dart';
 Data _$DataFromJson(Map<String, dynamic> json) {
   return Data(
     email: json['email'] as String,
-    fullName: json['fullName'] as String,
-    profilePicture: json['profilePicture'] as String,
+    fullName: json['full_name'] as String,
+    profilePicture: json['profile_picture'] as String,
   );
 }
 
 Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
       'email': instance.email,
-      'fullName': instance.fullName,
-      'profilePicture': instance.profilePicture,
+      'full_name': instance.fullName,
+      'profile_picture': instance.profilePicture,
     };

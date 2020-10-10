@@ -43,6 +43,7 @@ class AuthServiceImpl implements AuthService {
             email: result.data.email,
             fullName: result.data.fullName,
             isAuthenticated: true,
+            isVerified: true,
             password: request.password,
             token: result.token,
             profilePicture: result.data.profilePicture,

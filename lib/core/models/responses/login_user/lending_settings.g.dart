@@ -8,17 +8,17 @@ part of 'lending_settings.dart';
 
 LendingSettings _$LendingSettingsFromJson(Map<String, dynamic> json) {
   return LendingSettings(
-    defaultInterestRate: json['defaultInterestRate'] as String,
-    maximumRequestPrincipal: json['maximumRequestPrincipal'] as String,
-    preferredOccupationList: (json['preferredOccupationList'] as List)
-        .map((e) => e as String)
-        .toList(),
+    defaultInterestRate: json['DEFAULT_INTEREST_RATE'] as String,
+    maximumRequestPrincipal: json['MAXIMUM_REQUEST_PRINCIPAL'] as String,
+    preferredOccupationList: (json['PREFERRED_OCCUPATION_LIST'] as List)
+        ?.map((e) => e as String)
+        ?.toList(),
   );
 }
 
 Map<String, dynamic> _$LendingSettingsToJson(LendingSettings instance) =>
     <String, dynamic>{
-      'defaultInterestRate': instance.defaultInterestRate,
-      'maximumRequestPrincipal': instance.maximumRequestPrincipal,
-      'preferredOccupationList': instance.preferredOccupationList,
+      'DEFAULT_INTEREST_RATE': instance.defaultInterestRate,
+      'MAXIMUM_REQUEST_PRINCIPAL': instance.maximumRequestPrincipal,
+      'PREFERRED_OCCUPATION_LIST': instance.preferredOccupationList,
     };

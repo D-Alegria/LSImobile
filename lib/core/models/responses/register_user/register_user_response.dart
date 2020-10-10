@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'register_user_response.g.dart';
 
-@JsonSerializable(nullable: false)
+@JsonSerializable()
 class RegisterUserResponse {
   final bool status;
   final String message;

@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'validations.g.dart';
 
-@JsonSerializable(nullable: false)
+@JsonSerializable()
 class Validations {
   final bool bvn;
   final bool phone;

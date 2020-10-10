@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'send_otp_response.g.dart';
 
-@JsonSerializable(nullable: false)
+@JsonSerializable()
 class SendOTPResponse {
   final String status;
   final String message;

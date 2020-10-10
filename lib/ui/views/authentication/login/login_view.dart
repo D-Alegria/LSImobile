@@ -6,9 +6,8 @@ import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
-import 'package:lsi_mobile/ui/shared/size_config.dart';
-import 'package:lsi_mobile/ui/views/authentication/view_model/auth_form/auth_form_bloc.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
+import 'package:lsi_mobile/ui/views/authentication/view_model/auth_form/auth_form_bloc.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/auth_view/auth_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/authentication/widgets/auth_form.dart';
 
@@ -52,17 +51,18 @@ class LoginView extends StatelessWidget {
               ),
               state.isSubmitting
                   ? sharedLoadingRaisedButton(
-                context: context,
-                color: ColorStyles.grey2,
-                text: "Login",
-                minWidth: SizeConfig.xMargin(context, 100),
-              )
+                      context: context,
+                      color: ColorStyles.grey2,
+                      text: "Login",
+                      minWidth: SizeConfig.xMargin(context, 100),
+                    )
                   : sharedRaisedButton(
-                context: context,
-                onPressed: () => context.bloc<AuthFormBloc>()..add(LoginUser()),
-                color: ColorStyles.blue,
-                text: "Login",
-              ),
+                      context: context,
+                      onPressed: () =>
+                          context.bloc<AuthFormBloc>()..add(LoginUser()),
+                      color: ColorStyles.blue,
+                      text: "Login",
+                    ),
               SizedBox(
                 height: SizeConfig.yMargin(context, 2),
               ),
@@ -83,8 +83,11 @@ class LoginView extends StatelessWidget {
             message: failure.map(networkGlitch: (value) => value.message),
             duration: new Duration(seconds: 3),
           ).show(context),
-          (success) => context.navigator
-              .pushAndRemoveUntil(Routes.verificationView, (route) => false),
+          (success) => context.navigator.pushAndRemoveUntil(
+            Routes.mainView,
+            (route) => false,
+            arguments: MainViewArguments(pageNumber: 0),
+          ),
         ),
       ),
     );
