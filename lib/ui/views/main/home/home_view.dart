@@ -64,33 +64,29 @@ class HomeView extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: InkWell(
+                  child: RowCard(
+                    icon: 'assets/svgs/icons/loans_icon.svg',
+                    firstText: 'Apply for a loan',
+                    secondText:
+                        'Apply for a loan today with as low as 1% interest',
+                    containerColor: ColorStyles.blue3.withOpacity(0.1),
+                    borderColor: ColorStyles.blue3,
                     onTap: () {
                       model.navigateToLoanView(context);
                     },
-                    child: RowCard(
-                      icon: 'assets/svgs/icons/loans_icon.svg',
-                      firstText: 'Apply for a loan',
-                      secondText:
-                          'Apply for a loan today with as low as 1% interest',
-                      containerColor: ColorStyles.blue3.withOpacity(0.1),
-                      borderColor: ColorStyles.blue3,
-                    ),
                   ),
                 ),
                 Expanded(
-                  child: InkWell(
+                  child: RowCard(
+                    icon: 'assets/svgs/icons/invest_icon.svg',
+                    firstText: 'Start investing',
+                    secondText:
+                        'Explore our risk free investment options today',
+                    containerColor: ColorStyles.lightBlue.withOpacity(0.1),
+                    borderColor: ColorStyles.lightBlue,
                     onTap: () {
                       model.navigateToInvestmentView(context);
                     },
-                    child: RowCard(
-                      icon: 'assets/svgs/icons/invest_icon.svg',
-                      firstText: 'Start investing',
-                      secondText:
-                          'Explore our risk free investment options today',
-                      containerColor: ColorStyles.lightBlue.withOpacity(0.1),
-                      borderColor: ColorStyles.lightBlue,
-                    ),
                   ),
                 )
               ],
@@ -115,49 +111,44 @@ class HomeView extends StatelessWidget {
             ),
             Container(
               height: SizeConfig.yMargin(context, 20),
-              child: Stack(
-                alignment: Alignment.center,
+              child: PageView(
+                scrollDirection: Axis.horizontal,
+                controller: model.controller,
+                onPageChanged: (int index) {
+                  model.onChanged(index);
+                },
+                physics: ClampingScrollPhysics(),
                 children: [
-                  PageView(
-                    scrollDirection: Axis.horizontal,
-                    controller: model.controller,
-                    onPageChanged: (int index) {
-                      model.onChanged(index);
-                    },
-                    physics: ClampingScrollPhysics(),
-                    children: [
-                      OtherServices(
-                        containerColor: ColorStyles.red,
-                        image: 'assets/images/assets_financing.png',
-                        topText: 'Assets',
-                        bottomText: 'financing',
-                      ),
-                      OtherServices(
-                        containerColor: ColorStyles.blue,
-                        image: 'assets/images/assets_financing.png',
-                        topText: 'Assets',
-                        bottomText: 'financing',
-                      ),
-                      OtherServices(
-                        containerColor: ColorStyles.green,
-                        image: 'assets/images/assets_financing.png',
-                        topText: 'Assets',
-                        bottomText: 'financing',
-                      ),
-                      OtherServices(
-                        containerColor: ColorStyles.orange,
-                        image: 'assets/images/assets_financing.png',
-                        topText: 'Assets',
-                        bottomText: 'financing',
-                      ),
-                      OtherServices(
-                        containerColor: ColorStyles.black,
-                        image: 'assets/images/assets_financing.png',
-                        topText: 'Assets',
-                        bottomText: 'financing',
-                      )
-                    ],
+                  OtherServices(
+                    containerColor: ColorStyles.red,
+                    image: 'assets/images/assets_financing.png',
+                    topText: 'Assets',
+                    bottomText: 'financing',
                   ),
+                  OtherServices(
+                    containerColor: ColorStyles.blue,
+                    image: 'assets/images/assets_financing.png',
+                    topText: 'Assets',
+                    bottomText: 'financing',
+                  ),
+                  OtherServices(
+                    containerColor: ColorStyles.green,
+                    image: 'assets/images/assets_financing.png',
+                    topText: 'Assets',
+                    bottomText: 'financing',
+                  ),
+                  OtherServices(
+                    containerColor: ColorStyles.orange,
+                    image: 'assets/images/assets_financing.png',
+                    topText: 'Assets',
+                    bottomText: 'financing',
+                  ),
+                  OtherServices(
+                    containerColor: ColorStyles.black,
+                    image: 'assets/images/assets_financing.png',
+                    topText: 'Assets',
+                    bottomText: 'financing',
+                  )
                 ],
               ),
             ),
