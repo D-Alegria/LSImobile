@@ -18,6 +18,13 @@ class _$GlitchTearOff {
       message: message,
     );
   }
+
+// ignore: unused_element
+  ServerGlitch serverGlitch({@required String message}) {
+    return ServerGlitch(
+      message: message,
+    );
+  }
 }
 
 // ignore: unused_element
@@ -29,19 +36,23 @@ mixin _$Glitch {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result networkGlitch(String message),
+    @required Result serverGlitch(String message),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result networkGlitch(String message),
+    Result serverGlitch(String message),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result networkGlitch(NetworkGlitch value),
+    @required Result serverGlitch(ServerGlitch value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result networkGlitch(NetworkGlitch value),
+    Result serverGlitch(ServerGlitch value),
     @required Result orElse(),
   });
 
@@ -129,8 +140,10 @@ class _$NetworkGlitch implements NetworkGlitch {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result networkGlitch(String message),
+    @required Result serverGlitch(String message),
   }) {
     assert(networkGlitch != null);
+    assert(serverGlitch != null);
     return networkGlitch(message);
   }
 
@@ -138,6 +151,7 @@ class _$NetworkGlitch implements NetworkGlitch {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result networkGlitch(String message),
+    Result serverGlitch(String message),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -151,8 +165,10 @@ class _$NetworkGlitch implements NetworkGlitch {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result networkGlitch(NetworkGlitch value),
+    @required Result serverGlitch(ServerGlitch value),
   }) {
     assert(networkGlitch != null);
+    assert(serverGlitch != null);
     return networkGlitch(this);
   }
 
@@ -160,6 +176,7 @@ class _$NetworkGlitch implements NetworkGlitch {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result networkGlitch(NetworkGlitch value),
+    Result serverGlitch(ServerGlitch value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -177,4 +194,118 @@ abstract class NetworkGlitch implements Glitch {
   String get message;
   @override
   $NetworkGlitchCopyWith<NetworkGlitch> get copyWith;
+}
+
+abstract class $ServerGlitchCopyWith<$Res> implements $GlitchCopyWith<$Res> {
+  factory $ServerGlitchCopyWith(
+          ServerGlitch value, $Res Function(ServerGlitch) then) =
+      _$ServerGlitchCopyWithImpl<$Res>;
+  @override
+  $Res call({String message});
+}
+
+class _$ServerGlitchCopyWithImpl<$Res> extends _$GlitchCopyWithImpl<$Res>
+    implements $ServerGlitchCopyWith<$Res> {
+  _$ServerGlitchCopyWithImpl(
+      ServerGlitch _value, $Res Function(ServerGlitch) _then)
+      : super(_value, (v) => _then(v as ServerGlitch));
+
+  @override
+  ServerGlitch get _value => super._value as ServerGlitch;
+
+  @override
+  $Res call({
+    Object message = freezed,
+  }) {
+    return _then(ServerGlitch(
+      message: message == freezed ? _value.message : message as String,
+    ));
+  }
+}
+
+class _$ServerGlitch implements ServerGlitch {
+  const _$ServerGlitch({@required this.message}) : assert(message != null);
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'Glitch.serverGlitch(message: $message)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ServerGlitch &&
+            (identical(other.message, message) ||
+                const DeepCollectionEquality().equals(other.message, message)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(message);
+
+  @override
+  $ServerGlitchCopyWith<ServerGlitch> get copyWith =>
+      _$ServerGlitchCopyWithImpl<ServerGlitch>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result networkGlitch(String message),
+    @required Result serverGlitch(String message),
+  }) {
+    assert(networkGlitch != null);
+    assert(serverGlitch != null);
+    return serverGlitch(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result networkGlitch(String message),
+    Result serverGlitch(String message),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (serverGlitch != null) {
+      return serverGlitch(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result networkGlitch(NetworkGlitch value),
+    @required Result serverGlitch(ServerGlitch value),
+  }) {
+    assert(networkGlitch != null);
+    assert(serverGlitch != null);
+    return serverGlitch(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result networkGlitch(NetworkGlitch value),
+    Result serverGlitch(ServerGlitch value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (serverGlitch != null) {
+      return serverGlitch(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ServerGlitch implements Glitch {
+  const factory ServerGlitch({@required String message}) = _$ServerGlitch;
+
+  @override
+  String get message;
+  @override
+  $ServerGlitchCopyWith<ServerGlitch> get copyWith;
 }

@@ -1,28 +1,28 @@
-part of 'register_bloc.dart';
+part of 'auth_form_bloc.dart';
 
 @freezed
-abstract class RegisterState with _$RegisterState {
-  const factory RegisterState({
+abstract class AuthFormState with _$AuthFormState {
+  const factory AuthFormState({
     @required String firstName,
     @required String lastName,
     @required String phoneNumber,
     @required String emailAddress,
     @required String password,
+    @required String verificationCode,
     @required bool showErrorMessages,
     @required bool isSubmitting,
-    @required Option<Either<AuthGlitch, Unit>> registerFailureOrSuccess,
-    @required Option<Either<AuthGlitch, Unit>> verifyFailureOrSuccess,
-  }) = _RegisterState;
+    @required Option<Either<AuthGlitch, Unit>> authFailureOrSuccess,
+  }) = _AuthFormState;
 
-  factory RegisterState.initial() => RegisterState(
+  factory AuthFormState.initial() => AuthFormState(
         firstName: "",
         lastName: "",
         phoneNumber: "",
         emailAddress: "",
         password: "",
+        verificationCode: "",
         showErrorMessages: false,
         isSubmitting: false,
-        registerFailureOrSuccess: None(),
-        verifyFailureOrSuccess: None(),
+        authFailureOrSuccess: None(),
       );
 }

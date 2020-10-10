@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lsi_mobile/core/configs/dependency_injection/injection.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/ui/shared/unknown_route_view.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/authentication/authentication_bloc.dart';
@@ -15,7 +16,7 @@ class LSIAppProd extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (BuildContext context) =>
-                AuthenticationBloc()..add(CheckAuthenticated())),
+                getIt<AuthenticationBloc>()..add(CheckAuthenticated())),
         BlocProvider(create: (BuildContext context) => OnboardPageCubit()),
       ],
       child: MaterialApp(

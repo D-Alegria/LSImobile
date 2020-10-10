@@ -10,13 +10,17 @@ import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../utils/api_manager_util.dart';
+import '../../../ui/views/authentication/view_model/auth_form/auth_form_bloc.dart';
 import '../../services/auth_service/auth_service.dart';
 import '../../services/auth_service/auth_service_impl.dart';
+import '../../../ui/views/authentication/view_model/authentication/authentication_bloc.dart';
+import '../interceptor/dio_interceptor.dart';
 import '../../repositories/local_storage/local_data_repo.dart';
 import '../../repositories/local_storage/local_storage_repo_impl.dart';
 import '../../utils/network_util.dart';
-import '../../../ui/views/authentication/view_model/register/register_bloc.dart';
 import 'register_modules.dart';
+import '../../repositories/user/user_repo.dart';
+import '../../repositories/user/user_repo_impl.dart';
 
 /// adds generated dependencies
 /// to the provided [GetIt] instance
@@ -34,15 +38,19 @@ Future<GetIt> $initGetIt(
   gh.factory<String>(() => registerModule.baseUrl, instanceName: 'BaseUrl');
   gh.lazySingleton<Dio>(
       () => registerModule.dio(get<String>(instanceName: 'BaseUrl')));
+  gh.lazySingleton<DioInterceptor>(() => DioInterceptor(get<Dio>()));
   gh.lazySingleton<LocalStorageRepo>(
       () => LocalStorageRepoImpl(get<SharedPreferences>()));
-  gh.lazySingleton<ApiManager>(() => ApiManager(get<Dio>()));
+  gh.lazySingleton<UserRepo>(() => UserRepoImpl(get<LocalStorageRepo>()));
+  gh.lazySingleton<ApiManager>(
+      () => ApiManager(get<Dio>(), get<DioInterceptor>()));
   gh.lazySingleton<AuthService>(() => AuthServiceImpl(
         get<ApiManager>(),
         get<NetworkInfo>(),
-        get<LocalStorageRepo>(),
+        get<UserRepo>(),
       ));
-  gh.factory<RegisterBloc>(() => RegisterBloc(get<AuthService>()));
+  gh.factory<AuthenticationBloc>(() => AuthenticationBloc(get<AuthService>()));
+  gh.factory<AuthFormBloc>(() => AuthFormBloc(get<AuthService>()));
   return get;
 }
 

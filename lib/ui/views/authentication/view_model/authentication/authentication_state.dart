@@ -7,4 +7,6 @@ abstract class AuthenticationState with _$AuthenticationState {
   factory AuthenticationState.unauthenticated() = Unauthenticated;
 
   factory AuthenticationState.authenticated() = Authenticated;
+
+  factory AuthenticationState.unVerified() = Unverified;
 }

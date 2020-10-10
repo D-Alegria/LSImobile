@@ -9,13 +9,16 @@ abstract class RegisterModule {
   String get baseUrl => ConfigReader.getAppConfig().baseUrl;
 
   @lazySingleton
-  Dio dio(@Named('BaseUrl') String url) => Dio(
+  Dio dio(@Named('BaseUrl') String url) {
+    return Dio(
         BaseOptions(
           baseUrl: url,
           contentType: "application/json",
           headers: {"x-api-key": ConfigReader.getAppConfig().apiKey},
         ),
       );
+  }
+
 
   @preResolve
   Future<SharedPreferences> get prefs => SharedPreferences.getInstance();

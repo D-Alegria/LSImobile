@@ -7,4 +7,8 @@ abstract class Glitch with _$Glitch {
   const factory Glitch.networkGlitch({
     @required String message,
   }) = NetworkGlitch;
+
+  const factory Glitch.serverGlitch({
+    @required String message,
+  }) = ServerGlitch;
 }

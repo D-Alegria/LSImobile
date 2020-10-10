@@ -156,6 +156,11 @@ class _$AuthenticationStateTearOff {
   Authenticated authenticated() {
     return Authenticated();
   }
+
+// ignore: unused_element
+  Unverified unVerified() {
+    return Unverified();
+  }
 }
 
 // ignore: unused_element
@@ -167,12 +172,14 @@ mixin _$AuthenticationState {
     @required Result initial(),
     @required Result unauthenticated(),
     @required Result authenticated(),
+    @required Result unVerified(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result unauthenticated(),
     Result authenticated(),
+    Result unVerified(),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -180,12 +187,14 @@ mixin _$AuthenticationState {
     @required Result initial(Initial value),
     @required Result unauthenticated(Unauthenticated value),
     @required Result authenticated(Authenticated value),
+    @required Result unVerified(Unverified value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result initial(Initial value),
     Result unauthenticated(Unauthenticated value),
     Result authenticated(Authenticated value),
+    Result unVerified(Unverified value),
     @required Result orElse(),
   });
 }
@@ -242,10 +251,12 @@ class _$Initial implements Initial {
     @required Result initial(),
     @required Result unauthenticated(),
     @required Result authenticated(),
+    @required Result unVerified(),
   }) {
     assert(initial != null);
     assert(unauthenticated != null);
     assert(authenticated != null);
+    assert(unVerified != null);
     return initial();
   }
 
@@ -255,6 +266,7 @@ class _$Initial implements Initial {
     Result initial(),
     Result unauthenticated(),
     Result authenticated(),
+    Result unVerified(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -270,10 +282,12 @@ class _$Initial implements Initial {
     @required Result initial(Initial value),
     @required Result unauthenticated(Unauthenticated value),
     @required Result authenticated(Authenticated value),
+    @required Result unVerified(Unverified value),
   }) {
     assert(initial != null);
     assert(unauthenticated != null);
     assert(authenticated != null);
+    assert(unVerified != null);
     return initial(this);
   }
 
@@ -283,6 +297,7 @@ class _$Initial implements Initial {
     Result initial(Initial value),
     Result unauthenticated(Unauthenticated value),
     Result authenticated(Authenticated value),
+    Result unVerified(Unverified value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -336,10 +351,12 @@ class _$Unauthenticated implements Unauthenticated {
     @required Result initial(),
     @required Result unauthenticated(),
     @required Result authenticated(),
+    @required Result unVerified(),
   }) {
     assert(initial != null);
     assert(unauthenticated != null);
     assert(authenticated != null);
+    assert(unVerified != null);
     return unauthenticated();
   }
 
@@ -349,6 +366,7 @@ class _$Unauthenticated implements Unauthenticated {
     Result initial(),
     Result unauthenticated(),
     Result authenticated(),
+    Result unVerified(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -364,10 +382,12 @@ class _$Unauthenticated implements Unauthenticated {
     @required Result initial(Initial value),
     @required Result unauthenticated(Unauthenticated value),
     @required Result authenticated(Authenticated value),
+    @required Result unVerified(Unverified value),
   }) {
     assert(initial != null);
     assert(unauthenticated != null);
     assert(authenticated != null);
+    assert(unVerified != null);
     return unauthenticated(this);
   }
 
@@ -377,6 +397,7 @@ class _$Unauthenticated implements Unauthenticated {
     Result initial(Initial value),
     Result unauthenticated(Unauthenticated value),
     Result authenticated(Authenticated value),
+    Result unVerified(Unverified value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -430,10 +451,12 @@ class _$Authenticated implements Authenticated {
     @required Result initial(),
     @required Result unauthenticated(),
     @required Result authenticated(),
+    @required Result unVerified(),
   }) {
     assert(initial != null);
     assert(unauthenticated != null);
     assert(authenticated != null);
+    assert(unVerified != null);
     return authenticated();
   }
 
@@ -443,6 +466,7 @@ class _$Authenticated implements Authenticated {
     Result initial(),
     Result unauthenticated(),
     Result authenticated(),
+    Result unVerified(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -458,10 +482,12 @@ class _$Authenticated implements Authenticated {
     @required Result initial(Initial value),
     @required Result unauthenticated(Unauthenticated value),
     @required Result authenticated(Authenticated value),
+    @required Result unVerified(Unverified value),
   }) {
     assert(initial != null);
     assert(unauthenticated != null);
     assert(authenticated != null);
+    assert(unVerified != null);
     return authenticated(this);
   }
 
@@ -471,6 +497,7 @@ class _$Authenticated implements Authenticated {
     Result initial(Initial value),
     Result unauthenticated(Unauthenticated value),
     Result authenticated(Authenticated value),
+    Result unVerified(Unverified value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -483,4 +510,103 @@ class _$Authenticated implements Authenticated {
 
 abstract class Authenticated implements AuthenticationState {
   factory Authenticated() = _$Authenticated;
+}
+
+abstract class $UnverifiedCopyWith<$Res> {
+  factory $UnverifiedCopyWith(
+          Unverified value, $Res Function(Unverified) then) =
+      _$UnverifiedCopyWithImpl<$Res>;
+}
+
+class _$UnverifiedCopyWithImpl<$Res>
+    extends _$AuthenticationStateCopyWithImpl<$Res>
+    implements $UnverifiedCopyWith<$Res> {
+  _$UnverifiedCopyWithImpl(Unverified _value, $Res Function(Unverified) _then)
+      : super(_value, (v) => _then(v as Unverified));
+
+  @override
+  Unverified get _value => super._value as Unverified;
+}
+
+class _$Unverified implements Unverified {
+  _$Unverified();
+
+  @override
+  String toString() {
+    return 'AuthenticationState.unVerified()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is Unverified);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result initial(),
+    @required Result unauthenticated(),
+    @required Result authenticated(),
+    @required Result unVerified(),
+  }) {
+    assert(initial != null);
+    assert(unauthenticated != null);
+    assert(authenticated != null);
+    assert(unVerified != null);
+    return unVerified();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result initial(),
+    Result unauthenticated(),
+    Result authenticated(),
+    Result unVerified(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (unVerified != null) {
+      return unVerified();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result initial(Initial value),
+    @required Result unauthenticated(Unauthenticated value),
+    @required Result authenticated(Authenticated value),
+    @required Result unVerified(Unverified value),
+  }) {
+    assert(initial != null);
+    assert(unauthenticated != null);
+    assert(authenticated != null);
+    assert(unVerified != null);
+    return unVerified(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result initial(Initial value),
+    Result unauthenticated(Unauthenticated value),
+    Result authenticated(Authenticated value),
+    Result unVerified(Unverified value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (unVerified != null) {
+      return unVerified(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Unverified implements AuthenticationState {
+  factory Unverified() = _$Unverified;
 }

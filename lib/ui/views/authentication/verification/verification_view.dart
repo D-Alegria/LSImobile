@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,7 +8,7 @@ import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config.dart';
-import 'package:lsi_mobile/ui/views/authentication/view_model/register/register_bloc.dart';
+import 'package:lsi_mobile/ui/views/authentication/view_model/auth_form/auth_form_bloc.dart';
 import 'package:lsi_mobile/ui/views/authentication/widgets/auth_form.dart';
 import 'package:lsi_mobile/ui/views/authentication/widgets/change_phone_form.dart';
 
@@ -33,12 +34,12 @@ class VerificationView extends StatelessWidget {
     }
 
     return BlocProvider(
-      create: (context) => getIt<RegisterBloc>(),
+      create: (context) => getIt<AuthFormBloc>()..add(Init()),
       child: Scaffold(
-        body: BlocConsumer<RegisterBloc, RegisterState>(
+        body: BlocConsumer<AuthFormBloc, AuthFormState>(
           builder: (context, state) => AuthForm(
             title: "Verify phone",
-            subTitle: "Phone number verifcation required",
+            subTitle: "Phone number verification required",
             height: 50,
             form: Form(
               child: ListView(
@@ -58,7 +59,7 @@ class VerificationView extends StatelessWidget {
                         ),
                         children: [
                           TextSpan(
-                            text: " 08028323223",
+                            text: " ${state.phoneNumber}",
                             style: GoogleFonts.workSans(
                               fontWeight: FontWeight.w600,
                             ),
@@ -76,24 +77,41 @@ class VerificationView extends StatelessWidget {
                   ),
                   SharedTextFormField(
                     labelText: "Verification Code",
+                    onChanged: (value) => context
+                        .bloc<AuthFormBloc>()
+                        .add(VerificationCodeChanged(value)),
+                    validator: (value) {
+                      if (state.verificationCode.isEmpty)
+                        return "Field is required";
+                      return null;
+                    },
+                    keyboardType: TextInputType.phone,
                   ),
                   SizedBox(
                     height: SizeConfig.yMargin(context, 4),
                   ),
-                  sharedRaisedButton(
-                    context: context,
-                    onPressed: () =>
-                        context.bloc<RegisterBloc>()..add(VerifyUser()),
-                    color: ColorStyles.blue,
-                    text: "Verfiy",
-                  ),
+                  state.isSubmitting
+                      ? sharedLoadingRaisedButton(
+                          context: context,
+                          color: ColorStyles.grey2,
+                          text: "Verify",
+                          minWidth: SizeConfig.xMargin(context, 100),
+                        )
+                      : sharedRaisedButton(
+                          context: context,
+                          onPressed: () =>
+                              context.bloc<AuthFormBloc>()..add(VerifyUser()),
+                          color: ColorStyles.blue,
+                          text: "Verify",
+                        ),
                   SizedBox(
                     height: SizeConfig.yMargin(context, 1),
                   ),
                   Align(
                     alignment: Alignment.topRight,
                     child: FlatButton(
-                      onPressed: () {},
+                      onPressed: () =>
+                          context.bloc<AuthFormBloc>()..add(ResendOTP()),
                       child: Text(
                         "Resend OTP",
                         style: GoogleFonts.poppins(
@@ -114,10 +132,13 @@ class VerificationView extends StatelessWidget {
               ),
             ),
           ),
-          listener: (context, state) => state.verifyFailureOrSuccess.fold(
+          listener: (context, state) => state.authFailureOrSuccess.fold(
             () => null,
             (either) => either.fold(
-              (failure) => null,
+              (failure) => FlushbarHelper.createError(
+                message: failure.map(networkGlitch: (value) => value.message),
+                duration: new Duration(seconds: 3),
+              ).show(context),
               (success) => context.navigator.pushAndRemoveUntil(
                 Routes.mainView,
                 (route) => false,

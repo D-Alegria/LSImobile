@@ -91,19 +91,18 @@ class AuthForm extends StatelessWidget {
 
   Widget translucentImage(BuildContext context) {
     return Positioned(
-      bottom: SizeConfig.yMargin(context, -12),
-      left: SizeConfig.xMargin(context, 30),
-      right: SizeConfig.xMargin(context, -30),
+      bottom: SizeConfig.yMargin(context, -13),
+      left: SizeConfig.xMargin(context, 0),
+      right: SizeConfig.xMargin(context, 0),
       child: Container(
-        transform: Matrix4.rotationZ(-0.2),
-        height: SizeConfig.yMargin(context, 30),
+        height: SizeConfig.yMargin(context, 40),
         width: SizeConfig.xMargin(context, 100),
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
           gradient: ColorStyles.primaryGradient,
           image: DecorationImage(
             colorFilter: ColorFilter.mode(
-              Colors.white.withOpacity(0.1),
+              Colors.white.withOpacity(0.5),
               BlendMode.modulate,
             ),
             image: AssetImage("assets/images/logo.png"),

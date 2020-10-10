@@ -20,7 +20,6 @@ class StartUpView extends StatelessWidget {
       ),
       child: BlocListener<AuthenticationBloc, AuthenticationState>(
         listener: (context, state) {
-          print(state);
           state.map(
             initial: (_) => null,
             unauthenticated: (_) => context.navigator.pushAndRemoveUntil(
@@ -31,6 +30,10 @@ class StartUpView extends StatelessWidget {
               Routes.mainView,
               (route) => false,
               arguments: MainViewArguments(pageNumber: 0),
+            ),
+            unVerified: (_) => context.navigator.pushAndRemoveUntil(
+              Routes.verificationView,
+              (route) => false,
             ),
           );
         },
@@ -49,24 +52,22 @@ class StartUpView extends StatelessWidget {
                       SizedBox(
                         height: SizeConfig.yMargin(context, 10),
                       ),
-                      Text(
-                        "Initiative Moni",
-                        style: GoogleFonts.pacifico(
-                          fontSize: SizeConfig.textSize(context, 8),
-                          color: ColorStyles.orange,
-                        ),
-                      ),
-                      SizedBox(
-                        height: SizeConfig.yMargin(context, 10),
-                      ),
                       Container(
-                        height: SizeConfig.yMargin(context, 30),
+                        height: SizeConfig.yMargin(context, 50),
                         decoration: BoxDecoration(
                           shape: BoxShape.rectangle,
                           image: DecorationImage(
-                            image: AssetImage("assets/images/logo.png"),
+                            image: AssetImage("assets/images/start_logo.png"),
                             fit: BoxFit.fitHeight,
                           ),
+                        ),
+                      ),
+                      Text(
+                        "...a passion for wealth creation",
+                        style: GoogleFonts.varelaRound(
+                          fontWeight: FontWeight.w400,
+                          fontSize: SizeConfig.textSize(context, 5),
+                          color: ColorStyles.grey2,
                         ),
                       ),
                     ],
@@ -75,7 +76,7 @@ class StartUpView extends StatelessWidget {
                 Positioned(
                   left: SizeConfig.xMargin(context, -80),
                   right: SizeConfig.xMargin(context, 0),
-                  bottom: SizeConfig.yMargin(context, -30),
+                  bottom: SizeConfig.yMargin(context, -33),
                   child: Container(
                     height: SizeConfig.yMargin(context, 65),
                     decoration: BoxDecoration(
@@ -83,8 +84,7 @@ class StartUpView extends StatelessWidget {
                       image: DecorationImage(
                         colorFilter: ColorFilter.mode(
                             Colors.white.withOpacity(0.2), BlendMode.dstATop),
-                        image: AssetImage(
-                            "assets/images/onboarding/big_naira.png"),
+                        image: AssetImage("assets/images/big_naira.png"),
                         fit: BoxFit.fitHeight,
                       ),
                     ),

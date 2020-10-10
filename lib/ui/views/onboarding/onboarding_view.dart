@@ -8,9 +8,10 @@ import 'package:lsi_mobile/ui/views/onboarding/view_model/onboard_page_cubit.dar
 import 'package:lsi_mobile/ui/views/onboarding/widgets/onboard_page.dart';
 
 class OnBoardingView extends StatelessWidget {
-  final String manCard = "assets/svgs/man_card.svg";
-  final String manRelaxing = "assets/svgs/man_relaxing.svg";
-  final String manStudying = "assets/svgs/man_studying.svg";
+  final String invest = "assets/images/invest.png";
+  final String instantNaira = "assets/images/instant_naira.png";
+  final String easyPayment = "assets/images/easy_payment.png";
+  final String logo = "assets/images/logo.png";
   final PageController _pageController = new PageController(initialPage: 0);
 
   @override
@@ -56,7 +57,7 @@ class OnBoardingView extends StatelessWidget {
                     subText:
                         "Grow your wealth today by investing in our high-interest investment plans",
                     buttonText: "Next",
-                    image: manRelaxing,
+                    image: invest,
                     onPressed: () => changePage(context, 1),
                   ),
                   OnBoardPage(
@@ -64,15 +65,23 @@ class OnBoardingView extends StatelessWidget {
                     subText:
                         "Getting access to loans is simple with Initiative Moni. No collateral required. Instant funding on approval",
                     buttonText: "Next",
-                    image: manStudying,
+                    image: instantNaira,
                     onPressed: () => changePage(context, 2),
                   ),
                   OnBoardPage(
                     mainText: "Easy Payment",
                     subText:
                         "Payment made easy through debit card, credit card",
+                    buttonText: "Next",
+                    image: easyPayment,
+                    onPressed: () => changePage(context, 3),
+                  ),
+                  OnBoardPage(
+                    mainText:
+                        "Initiative Moni is brought to you by Intiative Finance",
+                    subText: "",
                     buttonText: "Get started",
-                    image: manCard,
+                    image: logo,
                     onPressed: () => context.navigator.pushAndRemoveUntil(
                       Routes.authWrapper,
                       (route) => false,
@@ -90,7 +99,7 @@ class OnBoardingView extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      for (var i = 0; i < 3; i++)
+                      for (var i = 0; i < 4; i++)
                         Container(
                           margin: EdgeInsets.symmetric(
                             horizontal: SizeConfig.xMargin(context, 1),

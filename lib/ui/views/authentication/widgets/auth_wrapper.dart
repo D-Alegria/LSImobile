@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/core/configs/dependency_injection/injection.dart';
 import 'package:lsi_mobile/ui/views/authentication/login/login_view.dart';
 import 'package:lsi_mobile/ui/views/authentication/register/register_view.dart';
+import 'package:lsi_mobile/ui/views/authentication/view_model/auth_form/auth_form_bloc.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/auth_view/auth_view_cubit.dart';
-import 'package:lsi_mobile/ui/views/authentication/view_model/register/register_bloc.dart';
 
 class AuthWrapper extends StatelessWidget {
   @override
@@ -16,7 +16,7 @@ class AuthWrapper extends StatelessWidget {
           create: (context) => AuthViewCubit(),
         ),
         BlocProvider(
-          create: (context) => getIt<RegisterBloc>(),
+          create: (context) => getIt<AuthFormBloc>(),
         ),
       ],
       child: AnnotatedRegion<SystemUiOverlayStyle>(

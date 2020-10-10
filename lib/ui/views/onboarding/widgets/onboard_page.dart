@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
@@ -30,9 +29,9 @@ class OnBoardPage extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: SizeConfig.yMargin(context, 10),
+            height: SizeConfig.yMargin(context, 3),
           ),
-          SvgPicture.asset(image),
+          Image.asset(image, fit: BoxFit.fitWidth),
           SizedBox(
             height: SizeConfig.yMargin(context, 5),
           ),

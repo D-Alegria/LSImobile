@@ -7,18 +7,18 @@ import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config.dart';
+import 'package:lsi_mobile/ui/views/authentication/view_model/auth_form/auth_form_bloc.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/auth_view/auth_view_cubit.dart';
-import 'package:lsi_mobile/ui/views/authentication/view_model/register/register_bloc.dart';
 import 'package:lsi_mobile/ui/views/authentication/widgets/auth_form.dart';
 
 class RegisterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<RegisterBloc, RegisterState>(
+    return BlocConsumer<AuthFormBloc, AuthFormState>(
       builder: (context, state) => AuthForm(
         title: "Register",
         subTitle: "Create a free account",
-        height: 85,
+        height: 70,
         form: Form(
           autovalidate: state.showErrorMessages,
           child: SingleChildScrollView(
@@ -30,7 +30,7 @@ class RegisterView extends StatelessWidget {
                 SharedTextFormField(
                   labelText: "First name",
                   onChanged: (value) =>
-                      context.bloc<RegisterBloc>().add(FirstNameChanged(value)),
+                      context.bloc<AuthFormBloc>().add(FirstNameChanged(value)),
                   validator: (value) {
                     if (state.firstName.isEmpty)
                       return "Field name is required";
@@ -43,7 +43,7 @@ class RegisterView extends StatelessWidget {
                 SharedTextFormField(
                   labelText: "Last name",
                   onChanged: (value) =>
-                      context.bloc<RegisterBloc>().add(LastNameChanged(value)),
+                      context.bloc<AuthFormBloc>().add(LastNameChanged(value)),
                   validator: (value) {
                     if (state.lastName.isEmpty) return "Field is required";
                     return null;
@@ -55,7 +55,7 @@ class RegisterView extends StatelessWidget {
                 SharedTextFormField(
                   labelText: "Phone number",
                   onChanged: (value) => context
-                      .bloc<RegisterBloc>()
+                      .bloc<AuthFormBloc>()
                       .add(PhoneNumberChanged(value)),
                   validator: (value) {
                     if (state.phoneNumber.isEmpty) return "Field is required";
@@ -69,7 +69,7 @@ class RegisterView extends StatelessWidget {
                 SharedTextFormField(
                   labelText: "Email address",
                   onChanged: (value) =>
-                      context.bloc<RegisterBloc>().add(EmailChanged(value)),
+                      context.bloc<AuthFormBloc>().add(EmailChanged(value)),
                   validator: (value) {
                     if (!state.emailAddress.isEmail) return "Invalid Email";
                     return null;
@@ -83,7 +83,7 @@ class RegisterView extends StatelessWidget {
                   labelText: "Password",
                   obscureText: true,
                   onChanged: (value) =>
-                      context.bloc<RegisterBloc>().add(PasswordChanged(value)),
+                      context.bloc<AuthFormBloc>().add(PasswordChanged(value)),
                   validator: (value) {
                     if (!state.password.isValidPassword)
                       return "Password must be at least 5 characters";
@@ -93,14 +93,21 @@ class RegisterView extends StatelessWidget {
                 SizedBox(
                   height: SizeConfig.yMargin(context, 5),
                 ),
-                sharedRaisedButton(
-                  context: context,
-                  onPressed: () =>
-                      context.bloc<RegisterBloc>()..add(RegisterUser()),
-                  color: ColorStyles.blue,
-                  text: "Register",
-                  minWidth: SizeConfig.xMargin(context, 100),
-                ),
+                state.isSubmitting
+                    ? sharedLoadingRaisedButton(
+                        context: context,
+                        color: ColorStyles.grey2,
+                        text: "Register",
+                        minWidth: SizeConfig.xMargin(context, 100),
+                      )
+                    : sharedRaisedButton(
+                        context: context,
+                        onPressed: () =>
+                            context.bloc<AuthFormBloc>()..add(RegisterUser()),
+                        color: ColorStyles.blue,
+                        text: "Register",
+                        minWidth: SizeConfig.xMargin(context, 100),
+                      ),
                 SizedBox(
                   height: SizeConfig.yMargin(context, 2),
                 ),
@@ -115,7 +122,7 @@ class RegisterView extends StatelessWidget {
           ),
         ),
       ),
-      listener: (context, state) => state.registerFailureOrSuccess.fold(
+      listener: (context, state) => state.authFailureOrSuccess.fold(
         () => null,
         (either) => either.fold(
           (failure) => FlushbarHelper.createError(
