@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/core/configs/dependency_injection/injection.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
+import 'package:lsi_mobile/core/providers/providers.dart';
 import 'package:lsi_mobile/ui/shared/unknown_route_view.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/authentication/authentication_bloc.dart';
 import 'package:lsi_mobile/ui/views/onboarding/view_model/onboard_page_cubit.dart';
+import 'package:provider/provider.dart';
 
 class LSIAppProd extends StatelessWidget {
   const LSIAppProd({Key key}) : super(key: key);
@@ -19,11 +21,14 @@ class LSIAppProd extends StatelessWidget {
                 getIt<AuthenticationBloc>()..add(CheckAuthenticated())),
         BlocProvider(create: (BuildContext context) => OnboardPageCubit()),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        builder: ExtendedNavigator.builder<Router>(
-          router: Router(),
-          onUnknownRoute: (settings) => unknownRouteView(settings.name),
+      child: MultiProvider(
+        providers: providers,
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          builder: ExtendedNavigator.builder<Router>(
+            router: Router(),
+            onUnknownRoute: (settings) => unknownRouteView(settings.name),
+          ),
         ),
       ),
     );
