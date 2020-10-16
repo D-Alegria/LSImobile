@@ -11,6 +11,7 @@ import 'package:lsi_mobile/core/models/requests/register_user/profile.dart';
 import 'package:lsi_mobile/core/models/requests/register_user/register_user_request.dart';
 import 'package:lsi_mobile/core/models/requests/send_otp/send_otp_request.dart';
 import 'package:lsi_mobile/core/models/requests/verify_otp/verify_otp_request.dart';
+import 'package:lsi_mobile/core/repositories/local_storage/local_data_repo.dart';
 import 'package:lsi_mobile/core/services/auth_service/auth_service.dart';
 import 'package:meta/meta.dart';
 
@@ -23,8 +24,10 @@ part 'auth_form_state.dart';
 @injectable
 class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
   final AuthService _authService;
+  final LocalStorageRepo _localStorageRepo;
 
-  AuthFormBloc(this._authService) : super(AuthFormState.initial());
+  AuthFormBloc(this._authService, this._localStorageRepo)
+      : super(AuthFormState.initial());
 
   @override
   Stream<AuthFormState> mapEventToState(
@@ -33,9 +36,10 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
     yield* event.map(
       init: (_) async* {
         final user = await _authService.currentUser;
-
+        final otp = _localStorageRepo.getString("OTP");
         yield state.copyWith(
           phoneNumber: user.phoneNumber,
+          verificationCode: otp ?? "",
           authFailureOrSuccess: None(),
         );
       },
@@ -149,7 +153,7 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
             ),
           );
 
-          failureOrSuccess.fold(
+          await failureOrSuccess.fold(
             (failure) => null,
             (success) async {
               await _authService.sendOTP(

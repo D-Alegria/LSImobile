@@ -76,6 +76,7 @@ class VerificationView extends StatelessWidget {
                     height: SizeConfig.yMargin(context, 3),
                   ),
                   SharedTextFormField(
+                    controller: new TextEditingController(text: state.verificationCode),
                     labelText: "Verification Code",
                     onChanged: (value) => context
                         .bloc<AuthFormBloc>()

@@ -8,7 +8,7 @@ part of 'send_otp_response.dart';
 
 SendOTPResponse _$SendOTPResponseFromJson(Map<String, dynamic> json) {
   return SendOTPResponse(
-    status: json['status'] as String,
+    status: json['status'] as bool,
     otp: json['otp'] as String,
     message: json['message'] as String,
   );

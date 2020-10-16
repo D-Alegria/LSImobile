@@ -132,6 +132,7 @@ class SharedTextFormField extends StatelessWidget {
   final bool obscureText;
   final TextInputAction textInputAction;
   final TextInputType keyboardType;
+  final TextEditingController controller;
 
   const SharedTextFormField({
     Key key,
@@ -141,11 +142,13 @@ class SharedTextFormField extends StatelessWidget {
     this.obscureText = false,
     this.textInputAction,
     this.keyboardType,
+    this.controller,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
       obscureText: obscureText,

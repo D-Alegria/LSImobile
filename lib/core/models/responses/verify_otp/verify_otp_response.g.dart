@@ -8,7 +8,7 @@ part of 'verify_otp_response.dart';
 
 VerifyOTPResponse _$VerifyOTPResponseFromJson(Map<String, dynamic> json) {
   return VerifyOTPResponse(
-    status: json['status'] as String,
+    status: json['status'] as bool,
     message: json['message'] as String,
   );
 }

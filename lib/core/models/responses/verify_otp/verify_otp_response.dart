@@ -5,7 +5,7 @@ part 'verify_otp_response.g.dart';
 
 @JsonSerializable()
 class VerifyOTPResponse {
-  final String status;
+  final bool status;
   final String message;
 
   VerifyOTPResponse({

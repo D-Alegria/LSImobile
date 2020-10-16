@@ -9,6 +9,9 @@ import 'package:lsi_mobile/core/models/requests/send_otp/send_otp_request.dart';
 import 'package:lsi_mobile/core/models/requests/verify_otp/verify_otp_request.dart';
 import 'package:lsi_mobile/core/models/responses/login_user/login_user_response.dart';
 import 'package:lsi_mobile/core/models/responses/register_user/register_user_response.dart';
+import 'package:lsi_mobile/core/models/responses/send_otp/send_otp_response.dart';
+import 'package:lsi_mobile/core/models/responses/verify_otp/verify_otp_response.dart';
+import 'package:lsi_mobile/core/repositories/local_storage/local_data_repo.dart';
 import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
 import 'package:lsi_mobile/core/services/auth_service/auth_service.dart';
 import 'package:lsi_mobile/core/utils/api_manager_util.dart';
@@ -19,15 +22,21 @@ class AuthServiceImpl implements AuthService {
   final ApiManager _apiManager;
   final NetworkInfo _networkInfo;
   final UserRepo _userRepo;
+  final LocalStorageRepo _localStorageRepo;
 
-  AuthServiceImpl(this._apiManager, this._networkInfo, this._userRepo);
+  AuthServiceImpl(
+    this._apiManager,
+    this._networkInfo,
+    this._userRepo,
+    this._localStorageRepo,
+  );
 
   @override
   Future<User> get currentUser async => await _userRepo.user;
 
   @override
   Future<Either<AuthGlitch, Unit>> login(LoginUserRequest request) async {
-    if (await _networkInfo.isConnected) {
+    return await checkNetwork(() async {
       final response = await _apiManager.post(
         url: ApiUrls.login,
         requestBody: request.toJson(),
@@ -51,15 +60,12 @@ class AuthServiceImpl implements AuthService {
           return right(unit);
         },
       );
-    } else {
-      return left(AuthNetworkGlitch(message: "No network Connection found"));
-    }
+    });
   }
 
   @override
   Future<Either<AuthGlitch, Unit>> register(RegisterUserRequest request) async {
-    print(await _networkInfo.isConnected);
-    if (await _networkInfo.isConnected) {
+    return await checkNetwork(() async {
       final response = await _apiManager.post(
         url: ApiUrls.register,
         requestBody: request.toJson(),
@@ -82,14 +88,12 @@ class AuthServiceImpl implements AuthService {
           return right(unit);
         },
       );
-    } else {
-      return left(AuthNetworkGlitch(message: "No network Connection found"));
-    }
+    });
   }
 
   @override
   Future<Either<AuthGlitch, Unit>> sendOTP(SendOTPRequest request) async {
-    if (await _networkInfo.isConnected) {
+    return await checkNetwork(() async {
       final response = await _apiManager.post(
         url: ApiUrls.validatePhoneNumber,
         requestBody: request.toJson(),
@@ -99,18 +103,17 @@ class AuthServiceImpl implements AuthService {
           return left(AuthNetworkGlitch(message: failure.message));
         },
         (success) async {
-          SendOTPRequest.fromJson(success);
+          final result = SendOTPResponse.fromJson(success);
+          await _localStorageRepo.saveString("OTP", result.otp);
           return right(unit);
         },
       );
-    } else {
-      return left(AuthNetworkGlitch(message: "No network Connection found"));
-    }
+    });
   }
 
   @override
   Future<Either<AuthGlitch, Unit>> verifyOTP(VerifyOTPRequest request) async {
-    if (await _networkInfo.isConnected) {
+    return await checkNetwork(() async {
       final response = await _apiManager.post(
         url: ApiUrls.validatePhoneNumberOTP,
         requestBody: request.toJson(),
@@ -120,13 +123,27 @@ class AuthServiceImpl implements AuthService {
           return left(AuthNetworkGlitch(message: failure.message));
         },
         (success) async {
-          VerifyOTPRequest.fromJson(success);
+          VerifyOTPResponse.fromJson(success);
           await _userRepo.saveUser(isVerified: true);
           return right(unit);
         },
       );
-    } else {
-      return left(AuthNetworkGlitch(message: "No network Connection found"));
+    });
+  }
+
+  Future<Either<AuthGlitch, Unit>> checkNetwork(
+    Future<Either<AuthGlitch, Unit>> Function() function,
+  ) async {
+    try {
+      if (await _networkInfo.isConnected) {
+        return await function();
+      } else {
+        return left(AuthNetworkGlitch(message: "No network Connection found"));
+      }
+    } on Exception catch (e) {
+      print(e);
+      return left(AuthNetworkGlitch(
+          message: "System Error Occurred please contact developer"));
     }
   }
 }

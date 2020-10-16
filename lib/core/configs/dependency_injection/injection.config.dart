@@ -48,9 +48,11 @@ Future<GetIt> $initGetIt(
         get<ApiManager>(),
         get<NetworkInfo>(),
         get<UserRepo>(),
+        get<LocalStorageRepo>(),
       ));
   gh.factory<AuthenticationBloc>(() => AuthenticationBloc(get<AuthService>()));
-  gh.factory<AuthFormBloc>(() => AuthFormBloc(get<AuthService>()));
+  gh.factory<AuthFormBloc>(
+      () => AuthFormBloc(get<AuthService>(), get<LocalStorageRepo>()));
   return get;
 }
 
