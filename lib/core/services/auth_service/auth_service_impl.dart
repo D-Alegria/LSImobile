@@ -5,6 +5,7 @@ import 'package:lsi_mobile/core/models/constants/api_urls.dart';
 import 'package:lsi_mobile/core/models/dto/user.dart';
 import 'package:lsi_mobile/core/models/requests/login_user/login_user_request.dart';
 import 'package:lsi_mobile/core/models/requests/register_user/register_user_request.dart';
+import 'package:lsi_mobile/core/models/requests/reset_password/reset_password_request.dart';
 import 'package:lsi_mobile/core/models/requests/send_otp/send_otp_request.dart';
 import 'package:lsi_mobile/core/models/requests/verify_otp/verify_otp_request.dart';
 import 'package:lsi_mobile/core/models/responses/login_user/login_user_response.dart';
@@ -145,5 +146,11 @@ class AuthServiceImpl implements AuthService {
       return left(AuthNetworkGlitch(
           message: "System Error Occurred please contact developer"));
     }
+  }
+
+  @override
+  Future<Either<AuthGlitch, Unit>> resetPassword(ResetPasswordRequest request) {
+    // TODO: implement resetPassword
+    throw UnimplementedError();
   }
 }
