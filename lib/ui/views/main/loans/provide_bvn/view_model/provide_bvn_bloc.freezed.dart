@@ -9,6 +9,7 @@ part of 'provide_bvn_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$ProvideBvnEventTearOff {
   const _$ProvideBvnEventTearOff();
 
@@ -23,9 +24,11 @@ class _$ProvideBvnEventTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $ProvideBvnEvent = _$ProvideBvnEventTearOff();
 
+/// @nodoc
 mixin _$ProvideBvnEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
@@ -51,12 +54,14 @@ mixin _$ProvideBvnEvent {
   });
 }
 
+/// @nodoc
 abstract class $ProvideBvnEventCopyWith<$Res> {
   factory $ProvideBvnEventCopyWith(
           ProvideBvnEvent value, $Res Function(ProvideBvnEvent) then) =
       _$ProvideBvnEventCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$ProvideBvnEventCopyWithImpl<$Res>
     implements $ProvideBvnEventCopyWith<$Res> {
   _$ProvideBvnEventCopyWithImpl(this._value, this._then);
@@ -66,11 +71,13 @@ class _$ProvideBvnEventCopyWithImpl<$Res>
   final $Res Function(ProvideBvnEvent) _then;
 }
 
+/// @nodoc
 abstract class $CheckBVNCopyWith<$Res> {
   factory $CheckBVNCopyWith(CheckBVN value, $Res Function(CheckBVN) then) =
       _$CheckBVNCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$CheckBVNCopyWithImpl<$Res> extends _$ProvideBvnEventCopyWithImpl<$Res>
     implements $CheckBVNCopyWith<$Res> {
   _$CheckBVNCopyWithImpl(CheckBVN _value, $Res Function(CheckBVN) _then)
@@ -80,6 +87,7 @@ class _$CheckBVNCopyWithImpl<$Res> extends _$ProvideBvnEventCopyWithImpl<$Res>
   CheckBVN get _value => super._value as CheckBVN;
 }
 
+/// @nodoc
 class _$CheckBVN implements CheckBVN {
   const _$CheckBVN();
 
@@ -151,11 +159,13 @@ abstract class CheckBVN implements ProvideBvnEvent {
   const factory CheckBVN() = _$CheckBVN;
 }
 
+/// @nodoc
 abstract class $VerifyBVNCopyWith<$Res> {
   factory $VerifyBVNCopyWith(VerifyBVN value, $Res Function(VerifyBVN) then) =
       _$VerifyBVNCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$VerifyBVNCopyWithImpl<$Res> extends _$ProvideBvnEventCopyWithImpl<$Res>
     implements $VerifyBVNCopyWith<$Res> {
   _$VerifyBVNCopyWithImpl(VerifyBVN _value, $Res Function(VerifyBVN) _then)
@@ -165,6 +175,7 @@ class _$VerifyBVNCopyWithImpl<$Res> extends _$ProvideBvnEventCopyWithImpl<$Res>
   VerifyBVN get _value => super._value as VerifyBVN;
 }
 
+/// @nodoc
 class _$VerifyBVN implements VerifyBVN {
   const _$VerifyBVN();
 
@@ -236,6 +247,7 @@ abstract class VerifyBVN implements ProvideBvnEvent {
   const factory VerifyBVN() = _$VerifyBVN;
 }
 
+/// @nodoc
 class _$ProvideBvnStateTearOff {
   const _$ProvideBvnStateTearOff();
 
@@ -254,9 +266,11 @@ class _$ProvideBvnStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $ProvideBvnState = _$ProvideBvnStateTearOff();
 
+/// @nodoc
 mixin _$ProvideBvnState {
   bool get showErrorMessages;
   bool get isSubmitting;
@@ -266,6 +280,7 @@ mixin _$ProvideBvnState {
   $ProvideBvnStateCopyWith<ProvideBvnState> get copyWith;
 }
 
+/// @nodoc
 abstract class $ProvideBvnStateCopyWith<$Res> {
   factory $ProvideBvnStateCopyWith(
           ProvideBvnState value, $Res Function(ProvideBvnState) then) =
@@ -277,6 +292,7 @@ abstract class $ProvideBvnStateCopyWith<$Res> {
       Option<Either<ValueFailure, Unit>> verifyBVNFailureOrSuccess});
 }
 
+/// @nodoc
 class _$ProvideBvnStateCopyWithImpl<$Res>
     implements $ProvideBvnStateCopyWith<$Res> {
   _$ProvideBvnStateCopyWithImpl(this._value, this._then);
@@ -308,6 +324,7 @@ class _$ProvideBvnStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$ProvideBvnStateCopyWith<$Res>
     implements $ProvideBvnStateCopyWith<$Res> {
   factory _$ProvideBvnStateCopyWith(
@@ -321,6 +338,7 @@ abstract class _$ProvideBvnStateCopyWith<$Res>
       Option<Either<ValueFailure, Unit>> verifyBVNFailureOrSuccess});
 }
 
+/// @nodoc
 class __$ProvideBvnStateCopyWithImpl<$Res>
     extends _$ProvideBvnStateCopyWithImpl<$Res>
     implements _$ProvideBvnStateCopyWith<$Res> {
@@ -354,6 +372,7 @@ class __$ProvideBvnStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_ProvideBvnState implements _ProvideBvnState {
   const _$_ProvideBvnState(
       {@required this.showErrorMessages,

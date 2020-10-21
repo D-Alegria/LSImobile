@@ -9,6 +9,7 @@ part of 'account_info_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$AccountInfoEventTearOff {
   const _$AccountInfoEventTearOff();
 
@@ -18,9 +19,11 @@ class _$AccountInfoEventTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $AccountInfoEvent = _$AccountInfoEventTearOff();
 
+/// @nodoc
 mixin _$AccountInfoEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
@@ -42,12 +45,14 @@ mixin _$AccountInfoEvent {
   });
 }
 
+/// @nodoc
 abstract class $AccountInfoEventCopyWith<$Res> {
   factory $AccountInfoEventCopyWith(
           AccountInfoEvent value, $Res Function(AccountInfoEvent) then) =
       _$AccountInfoEventCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$AccountInfoEventCopyWithImpl<$Res>
     implements $AccountInfoEventCopyWith<$Res> {
   _$AccountInfoEventCopyWithImpl(this._value, this._then);
@@ -57,12 +62,14 @@ class _$AccountInfoEventCopyWithImpl<$Res>
   final $Res Function(AccountInfoEvent) _then;
 }
 
+/// @nodoc
 abstract class $SubmitAccountInfoFormCopyWith<$Res> {
   factory $SubmitAccountInfoFormCopyWith(SubmitAccountInfoForm value,
           $Res Function(SubmitAccountInfoForm) then) =
       _$SubmitAccountInfoFormCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$SubmitAccountInfoFormCopyWithImpl<$Res>
     extends _$AccountInfoEventCopyWithImpl<$Res>
     implements $SubmitAccountInfoFormCopyWith<$Res> {
@@ -74,6 +81,7 @@ class _$SubmitAccountInfoFormCopyWithImpl<$Res>
   SubmitAccountInfoForm get _value => super._value as SubmitAccountInfoForm;
 }
 
+/// @nodoc
 class _$SubmitAccountInfoForm implements SubmitAccountInfoForm {
   const _$SubmitAccountInfoForm();
 
@@ -139,6 +147,7 @@ abstract class SubmitAccountInfoForm implements AccountInfoEvent {
   const factory SubmitAccountInfoForm() = _$SubmitAccountInfoForm;
 }
 
+/// @nodoc
 class _$AccountInfoStateTearOff {
   const _$AccountInfoStateTearOff();
 
@@ -159,9 +168,11 @@ class _$AccountInfoStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $AccountInfoState = _$AccountInfoStateTearOff();
 
+/// @nodoc
 mixin _$AccountInfoState {
   bool get showErrorMessages;
   bool get isSubmitting;
@@ -170,6 +181,7 @@ mixin _$AccountInfoState {
   $AccountInfoStateCopyWith<AccountInfoState> get copyWith;
 }
 
+/// @nodoc
 abstract class $AccountInfoStateCopyWith<$Res> {
   factory $AccountInfoStateCopyWith(
           AccountInfoState value, $Res Function(AccountInfoState) then) =
@@ -180,6 +192,7 @@ abstract class $AccountInfoStateCopyWith<$Res> {
       Option<Either<ValueFailure, Unit>> submitAccountInfoFailureOrSuccess});
 }
 
+/// @nodoc
 class _$AccountInfoStateCopyWithImpl<$Res>
     implements $AccountInfoStateCopyWith<$Res> {
   _$AccountInfoStateCopyWithImpl(this._value, this._then);
@@ -209,6 +222,7 @@ class _$AccountInfoStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$AccountInfoStateCopyWith<$Res>
     implements $AccountInfoStateCopyWith<$Res> {
   factory _$AccountInfoStateCopyWith(
@@ -221,6 +235,7 @@ abstract class _$AccountInfoStateCopyWith<$Res>
       Option<Either<ValueFailure, Unit>> submitAccountInfoFailureOrSuccess});
 }
 
+/// @nodoc
 class __$AccountInfoStateCopyWithImpl<$Res>
     extends _$AccountInfoStateCopyWithImpl<$Res>
     implements _$AccountInfoStateCopyWith<$Res> {
@@ -252,6 +267,7 @@ class __$AccountInfoStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_AccountInfoState implements _AccountInfoState {
   const _$_AccountInfoState(
       {@required this.showErrorMessages,

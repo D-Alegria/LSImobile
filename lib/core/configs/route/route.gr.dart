@@ -12,6 +12,9 @@ import 'package:flutter/material.dart';
 import '../../../ui/shared/success_view.dart';
 import '../../../ui/views/authentication/verification/verification_view.dart';
 import '../../../ui/views/authentication/widgets/auth_wrapper.dart';
+import '../../../ui/views/main/investment/fund_investment/fund_investment_view.dart';
+import '../../../ui/views/main/investment/new_investment/new_investment_view.dart';
+import '../../../ui/views/main/investment/no_investment/no_investment_view.dart';
 import '../../../ui/views/main/loans/account_info/account_info_view.dart';
 import '../../../ui/views/main/loans/edu_and_employ/edu_and_employ_view.dart';
 import '../../../ui/views/main/loans/loan_details/loan_details_view.dart';
@@ -20,6 +23,11 @@ import '../../../ui/views/main/loans/personal_info/personal_info_form_view.dart'
 import '../../../ui/views/main/loans/provide_bvn/provide_bvn_view.dart';
 import '../../../ui/views/main/loans/residence/residence_form_view.dart';
 import '../../../ui/views/main/main_view.dart';
+import '../../../ui/views/main/profile/accounts_cards/accounts_cards_view.dart';
+import '../../../ui/views/main/profile/contact_us/contact_us_view.dart';
+import '../../../ui/views/main/profile/edit_profile/edit_profile_view.dart';
+import '../../../ui/views/main/profile/faq/faq_view.dart';
+import '../../../ui/views/main/profile/profile_view.dart';
 import '../../../ui/views/onboarding/onboarding_view.dart';
 import '../../../ui/views/start_up/start_up_view.dart';
 
@@ -36,6 +44,14 @@ class Routes {
   static const String residenceFormView = '/residence-form-view';
   static const String loanDetailsView = '/loan-details-view';
   static const String accountInfoView = '/account-info-view';
+  static const String noInvestmentView = '/no-investment-view';
+  static const String newInvestmentView = '/new-investment-view';
+  static const String fundInvestmentView = '/fund-investment-view';
+  static const String profileView = '/profile-view';
+  static const String editProfileView = '/edit-profile-view';
+  static const String accountsCardsView = '/accounts-cards-view';
+  static const String contactUsView = '/contact-us-view';
+  static const String fAQView = '/f-aq-view';
   static const String successView = '/success-view';
   static const all = <String>{
     startUpView,
@@ -50,6 +66,14 @@ class Routes {
     residenceFormView,
     loanDetailsView,
     accountInfoView,
+    noInvestmentView,
+    newInvestmentView,
+    fundInvestmentView,
+    profileView,
+    editProfileView,
+    accountsCardsView,
+    contactUsView,
+    fAQView,
     successView,
   };
 }
@@ -70,6 +94,14 @@ class Router extends RouterBase {
     RouteDef(Routes.residenceFormView, page: ResidenceFormView),
     RouteDef(Routes.loanDetailsView, page: LoanDetailsView),
     RouteDef(Routes.accountInfoView, page: AccountInfoView),
+    RouteDef(Routes.noInvestmentView, page: NoInvestmentView),
+    RouteDef(Routes.newInvestmentView, page: NewInvestmentView),
+    RouteDef(Routes.fundInvestmentView, page: FundInvestmentView),
+    RouteDef(Routes.profileView, page: ProfileView),
+    RouteDef(Routes.editProfileView, page: EditProfileView),
+    RouteDef(Routes.accountsCardsView, page: AccountsCardsView),
+    RouteDef(Routes.contactUsView, page: ContactUsView),
+    RouteDef(Routes.fAQView, page: FAQView),
     RouteDef(Routes.successView, page: SuccessView),
   ];
   @override
@@ -151,6 +183,54 @@ class Router extends RouterBase {
         settings: data,
       );
     },
+    NoInvestmentView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => NoInvestmentView(),
+        settings: data,
+      );
+    },
+    NewInvestmentView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => NewInvestmentView(),
+        settings: data,
+      );
+    },
+    FundInvestmentView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => FundInvestmentView(),
+        settings: data,
+      );
+    },
+    ProfileView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => ProfileView(),
+        settings: data,
+      );
+    },
+    EditProfileView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => EditProfileView(),
+        settings: data,
+      );
+    },
+    AccountsCardsView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => AccountsCardsView(),
+        settings: data,
+      );
+    },
+    ContactUsView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => ContactUsView(),
+        settings: data,
+      );
+    },
+    FAQView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => FAQView(),
+        settings: data,
+      );
+    },
     SuccessView: (data) {
       final args = data.getArgs<SuccessViewArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
@@ -208,6 +288,27 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 
   Future<dynamic> pushAccountInfoView() =>
       push<dynamic>(Routes.accountInfoView);
+
+  Future<dynamic> pushNoInvestmentView() =>
+      push<dynamic>(Routes.noInvestmentView);
+
+  Future<dynamic> pushNewInvestmentView() =>
+      push<dynamic>(Routes.newInvestmentView);
+
+  Future<dynamic> pushFundInvestmentView() =>
+      push<dynamic>(Routes.fundInvestmentView);
+
+  Future<dynamic> pushProfileView() => push<dynamic>(Routes.profileView);
+
+  Future<dynamic> pushEditProfileView() =>
+      push<dynamic>(Routes.editProfileView);
+
+  Future<dynamic> pushAccountsCardsView() =>
+      push<dynamic>(Routes.accountsCardsView);
+
+  Future<dynamic> pushContactUsView() => push<dynamic>(Routes.contactUsView);
+
+  Future<dynamic> pushFAQView() => push<dynamic>(Routes.fAQView);
 
   Future<dynamic> pushSuccessView({
     Key key,

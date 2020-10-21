@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
+import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
 class LoanProductBox extends StatelessWidget {
@@ -27,69 +28,57 @@ class LoanProductBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: action,
-      child: Container(
-        height: SizeConfig.yMargin(context, 21),
-        decoration: BoxDecoration(
+        onTap: action,
+        child: sharedRaisedContainer(
+          height: SizeConfig.yMargin(context, 21),
           gradient: gradient,
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: ColorStyles.black.withOpacity(0.5),
-              offset: Offset(3, 3),
-              blurRadius: 15,
-              spreadRadius: 1,
-            ),
-          ],
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RichText(
-                  textAlign: TextAlign.left,
-                  text: TextSpan(
-                    text: title,
-                    style: TextStyle(
-                      height: 1.5,
-                      color: ColorStyles.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: SizeConfig.textSize(context, 4),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RichText(
+                    textAlign: TextAlign.left,
+                    text: TextSpan(
+                      text: title,
+                      style: TextStyle(
+                        height: 1.5,
+                        color: ColorStyles.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: SizeConfig.textSize(context, 4),
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: "\n$subText",
+                          style: TextStyle(
+                            fontSize: SizeConfig.textSize(context, 5.4),
+                          ),
+                        )
+                      ],
                     ),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: "\n$subText",
-                        style: TextStyle(
-                          fontSize: SizeConfig.textSize(context, 5.4),
-                        ),
-                      )
-                    ],
                   ),
-                ),
-                Text(
-                  "Max duration: $duration months",
-                  style: TextStyle(
-                    color: durationColor,
-                    fontWeight: FontWeight.w600,
-                    fontSize: SizeConfig.textSize(context, 3.5),
+                  Text(
+                    "Max duration: $duration months",
+                    style: TextStyle(
+                      color: durationColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: SizeConfig.textSize(context, 3.5),
+                    ),
                   ),
-                ),
-              ],
-            ),
-            SvgPicture.asset(
-              borderBox,
-              semanticsLabel: "Outline box",
-              width: SizeConfig.xMargin(context, 13),
-              fit: BoxFit.fitWidth,
-              color: borderBoxColor,
-            ),
-          ],
-        ),
-      ),
-    );
+                ],
+              ),
+              SvgPicture.asset(
+                borderBox,
+                semanticsLabel: "Outline box",
+                width: SizeConfig.xMargin(context, 13),
+                fit: BoxFit.fitWidth,
+                color: borderBoxColor,
+              ),
+            ],
+          ),
+        ));
   }
 }

@@ -9,6 +9,7 @@ part of 'residence_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$ResidenceEventTearOff {
   const _$ResidenceEventTearOff();
 
@@ -18,9 +19,11 @@ class _$ResidenceEventTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $ResidenceEvent = _$ResidenceEventTearOff();
 
+/// @nodoc
 mixin _$ResidenceEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
@@ -42,12 +45,14 @@ mixin _$ResidenceEvent {
   });
 }
 
+/// @nodoc
 abstract class $ResidenceEventCopyWith<$Res> {
   factory $ResidenceEventCopyWith(
           ResidenceEvent value, $Res Function(ResidenceEvent) then) =
       _$ResidenceEventCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$ResidenceEventCopyWithImpl<$Res>
     implements $ResidenceEventCopyWith<$Res> {
   _$ResidenceEventCopyWithImpl(this._value, this._then);
@@ -57,12 +62,14 @@ class _$ResidenceEventCopyWithImpl<$Res>
   final $Res Function(ResidenceEvent) _then;
 }
 
+/// @nodoc
 abstract class $SubmitResidenceFormCopyWith<$Res> {
   factory $SubmitResidenceFormCopyWith(
           SubmitResidenceForm value, $Res Function(SubmitResidenceForm) then) =
       _$SubmitResidenceFormCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$SubmitResidenceFormCopyWithImpl<$Res>
     extends _$ResidenceEventCopyWithImpl<$Res>
     implements $SubmitResidenceFormCopyWith<$Res> {
@@ -74,6 +81,7 @@ class _$SubmitResidenceFormCopyWithImpl<$Res>
   SubmitResidenceForm get _value => super._value as SubmitResidenceForm;
 }
 
+/// @nodoc
 class _$SubmitResidenceForm implements SubmitResidenceForm {
   const _$SubmitResidenceForm();
 
@@ -139,6 +147,7 @@ abstract class SubmitResidenceForm implements ResidenceEvent {
   const factory SubmitResidenceForm() = _$SubmitResidenceForm;
 }
 
+/// @nodoc
 class _$ResidenceStateTearOff {
   const _$ResidenceStateTearOff();
 
@@ -158,9 +167,11 @@ class _$ResidenceStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $ResidenceState = _$ResidenceStateTearOff();
 
+/// @nodoc
 mixin _$ResidenceState {
   bool get showErrorMessages;
   bool get isSubmitting;
@@ -169,6 +180,7 @@ mixin _$ResidenceState {
   $ResidenceStateCopyWith<ResidenceState> get copyWith;
 }
 
+/// @nodoc
 abstract class $ResidenceStateCopyWith<$Res> {
   factory $ResidenceStateCopyWith(
           ResidenceState value, $Res Function(ResidenceState) then) =
@@ -179,6 +191,7 @@ abstract class $ResidenceStateCopyWith<$Res> {
       Option<Either<ValueFailure, Unit>> submitResidenceFailureOrSuccess});
 }
 
+/// @nodoc
 class _$ResidenceStateCopyWithImpl<$Res>
     implements $ResidenceStateCopyWith<$Res> {
   _$ResidenceStateCopyWithImpl(this._value, this._then);
@@ -208,6 +221,7 @@ class _$ResidenceStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$ResidenceStateCopyWith<$Res>
     implements $ResidenceStateCopyWith<$Res> {
   factory _$ResidenceStateCopyWith(
@@ -220,6 +234,7 @@ abstract class _$ResidenceStateCopyWith<$Res>
       Option<Either<ValueFailure, Unit>> submitResidenceFailureOrSuccess});
 }
 
+/// @nodoc
 class __$ResidenceStateCopyWithImpl<$Res>
     extends _$ResidenceStateCopyWithImpl<$Res>
     implements _$ResidenceStateCopyWith<$Res> {
@@ -251,6 +266,7 @@ class __$ResidenceStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_ResidenceState implements _ResidenceState {
   const _$_ResidenceState(
       {@required this.showErrorMessages,

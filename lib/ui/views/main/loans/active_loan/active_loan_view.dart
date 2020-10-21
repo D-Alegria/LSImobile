@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
+import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/loans/widgets/loan_card.dart';
 import 'package:lsi_mobile/ui/views/main/loans/widgets/loan_history_mini.dart';
@@ -31,15 +32,11 @@ class ActiveLoanView extends StatelessWidget {
           ),
         ),
         actions: [
-          ButtonTheme(
-            minWidth: SizeConfig.xMargin(context, 10),
-            child: IconButton(
-              onPressed: () {},
-              icon: SvgPicture.asset(
-                optionsIcon,
-              ),
-            ),
-          )
+          sharedIconButton(
+            context: context,
+            onPressed: () {},
+            icon: SvgPicture.asset(optionsIcon),
+          ),
         ],
       ),
       body: Container(

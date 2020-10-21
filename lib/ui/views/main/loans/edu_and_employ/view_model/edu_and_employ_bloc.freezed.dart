@@ -9,6 +9,7 @@ part of 'edu_and_employ_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$EduAndEmployEventTearOff {
   const _$EduAndEmployEventTearOff();
 
@@ -18,9 +19,11 @@ class _$EduAndEmployEventTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $EduAndEmployEvent = _$EduAndEmployEventTearOff();
 
+/// @nodoc
 mixin _$EduAndEmployEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
@@ -42,12 +45,14 @@ mixin _$EduAndEmployEvent {
   });
 }
 
+/// @nodoc
 abstract class $EduAndEmployEventCopyWith<$Res> {
   factory $EduAndEmployEventCopyWith(
           EduAndEmployEvent value, $Res Function(EduAndEmployEvent) then) =
       _$EduAndEmployEventCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$EduAndEmployEventCopyWithImpl<$Res>
     implements $EduAndEmployEventCopyWith<$Res> {
   _$EduAndEmployEventCopyWithImpl(this._value, this._then);
@@ -57,12 +62,14 @@ class _$EduAndEmployEventCopyWithImpl<$Res>
   final $Res Function(EduAndEmployEvent) _then;
 }
 
+/// @nodoc
 abstract class $SubmitEduAndEmployCopyWith<$Res> {
   factory $SubmitEduAndEmployCopyWith(
           SubmitEduAndEmploy value, $Res Function(SubmitEduAndEmploy) then) =
       _$SubmitEduAndEmployCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$SubmitEduAndEmployCopyWithImpl<$Res>
     extends _$EduAndEmployEventCopyWithImpl<$Res>
     implements $SubmitEduAndEmployCopyWith<$Res> {
@@ -74,6 +81,7 @@ class _$SubmitEduAndEmployCopyWithImpl<$Res>
   SubmitEduAndEmploy get _value => super._value as SubmitEduAndEmploy;
 }
 
+/// @nodoc
 class _$SubmitEduAndEmploy implements SubmitEduAndEmploy {
   const _$SubmitEduAndEmploy();
 
@@ -139,6 +147,7 @@ abstract class SubmitEduAndEmploy implements EduAndEmployEvent {
   const factory SubmitEduAndEmploy() = _$SubmitEduAndEmploy;
 }
 
+/// @nodoc
 class _$EduAndEmployStateTearOff {
   const _$EduAndEmployStateTearOff();
 
@@ -155,9 +164,11 @@ class _$EduAndEmployStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $EduAndEmployState = _$EduAndEmployStateTearOff();
 
+/// @nodoc
 mixin _$EduAndEmployState {
   bool get showErrorMessages;
   bool get isSubmitting;
@@ -166,6 +177,7 @@ mixin _$EduAndEmployState {
   $EduAndEmployStateCopyWith<EduAndEmployState> get copyWith;
 }
 
+/// @nodoc
 abstract class $EduAndEmployStateCopyWith<$Res> {
   factory $EduAndEmployStateCopyWith(
           EduAndEmployState value, $Res Function(EduAndEmployState) then) =
@@ -176,6 +188,7 @@ abstract class $EduAndEmployStateCopyWith<$Res> {
       Option<Either<ValueFailure, Unit>> submitFailureOrSuccess});
 }
 
+/// @nodoc
 class _$EduAndEmployStateCopyWithImpl<$Res>
     implements $EduAndEmployStateCopyWith<$Res> {
   _$EduAndEmployStateCopyWithImpl(this._value, this._then);
@@ -203,6 +216,7 @@ class _$EduAndEmployStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$EduAndEmployStateCopyWith<$Res>
     implements $EduAndEmployStateCopyWith<$Res> {
   factory _$EduAndEmployStateCopyWith(
@@ -215,6 +229,7 @@ abstract class _$EduAndEmployStateCopyWith<$Res>
       Option<Either<ValueFailure, Unit>> submitFailureOrSuccess});
 }
 
+/// @nodoc
 class __$EduAndEmployStateCopyWithImpl<$Res>
     extends _$EduAndEmployStateCopyWithImpl<$Res>
     implements _$EduAndEmployStateCopyWith<$Res> {
@@ -244,6 +259,7 @@ class __$EduAndEmployStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_EduAndEmployState implements _EduAndEmployState {
   const _$_EduAndEmployState(
       {@required this.showErrorMessages,

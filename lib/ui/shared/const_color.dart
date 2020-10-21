@@ -18,10 +18,17 @@ abstract class ColorStyles {
   static const green1 = const Color(0xFF27AE60);
   static const green2 = const Color(0xFF57EB92);
   static const green3 = const Color(0xFF6FCF97);
+  static const green4 = const Color(0xFF15DD1D);
   static const blue3 = const Color(0xFF56CCF2);
+  static const blue2 = const Color(0xFF2D9CDB);
   static const grey = const Color(0xFF8F92A1);
   static const grey2 = const Color(0xFF4F4F4F);
-  static const grey3 = const Color(0xFFF8F8FA);
+  static const grey3 = const Color(0xFF828282);
+  static const grey6 = const Color(0xFFF2F2F2);
+  static const grey5 = const Color(0xFFE0E0E0);
+  static const lGrey = const Color(0xFFE4E4E7);
+  static const grey7 = const Color(0xFFDEDEDE);
+  static const grey8 = const Color(0xFFF9F9F9);
   static const primaryBlue = const Color(0xFF243C92);
   static const primaryGradient = const LinearGradient(
     colors: [
@@ -63,6 +70,15 @@ abstract class ColorStyles {
     colors: [
       Color(0xFFEEFBFF),
       Color(0xFFFFF8FA),
+    ],
+    stops: [0.09, 0.8],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+  static const lightBlueGradient = const LinearGradient(
+    colors: [
+      Color(0xFF3F66F1),
+      Color(0xFF1F6EE5),
     ],
     stops: [0.09, 0.8],
     begin: Alignment.topLeft,

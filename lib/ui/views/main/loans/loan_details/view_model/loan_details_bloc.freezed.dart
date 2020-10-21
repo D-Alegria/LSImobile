@@ -9,6 +9,7 @@ part of 'loan_details_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$LoanDetailsEventTearOff {
   const _$LoanDetailsEventTearOff();
 
@@ -18,9 +19,11 @@ class _$LoanDetailsEventTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $LoanDetailsEvent = _$LoanDetailsEventTearOff();
 
+/// @nodoc
 mixin _$LoanDetailsEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
@@ -42,12 +45,14 @@ mixin _$LoanDetailsEvent {
   });
 }
 
+/// @nodoc
 abstract class $LoanDetailsEventCopyWith<$Res> {
   factory $LoanDetailsEventCopyWith(
           LoanDetailsEvent value, $Res Function(LoanDetailsEvent) then) =
       _$LoanDetailsEventCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$LoanDetailsEventCopyWithImpl<$Res>
     implements $LoanDetailsEventCopyWith<$Res> {
   _$LoanDetailsEventCopyWithImpl(this._value, this._then);
@@ -57,12 +62,14 @@ class _$LoanDetailsEventCopyWithImpl<$Res>
   final $Res Function(LoanDetailsEvent) _then;
 }
 
+/// @nodoc
 abstract class $SubmitLoanDetailsFormCopyWith<$Res> {
   factory $SubmitLoanDetailsFormCopyWith(SubmitLoanDetailsForm value,
           $Res Function(SubmitLoanDetailsForm) then) =
       _$SubmitLoanDetailsFormCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$SubmitLoanDetailsFormCopyWithImpl<$Res>
     extends _$LoanDetailsEventCopyWithImpl<$Res>
     implements $SubmitLoanDetailsFormCopyWith<$Res> {
@@ -74,6 +81,7 @@ class _$SubmitLoanDetailsFormCopyWithImpl<$Res>
   SubmitLoanDetailsForm get _value => super._value as SubmitLoanDetailsForm;
 }
 
+/// @nodoc
 class _$SubmitLoanDetailsForm implements SubmitLoanDetailsForm {
   const _$SubmitLoanDetailsForm();
 
@@ -139,6 +147,7 @@ abstract class SubmitLoanDetailsForm implements LoanDetailsEvent {
   const factory SubmitLoanDetailsForm() = _$SubmitLoanDetailsForm;
 }
 
+/// @nodoc
 class _$LoanDetailsStateTearOff {
   const _$LoanDetailsStateTearOff();
 
@@ -159,9 +168,11 @@ class _$LoanDetailsStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $LoanDetailsState = _$LoanDetailsStateTearOff();
 
+/// @nodoc
 mixin _$LoanDetailsState {
   bool get showErrorMessages;
   bool get isSubmitting;
@@ -170,6 +181,7 @@ mixin _$LoanDetailsState {
   $LoanDetailsStateCopyWith<LoanDetailsState> get copyWith;
 }
 
+/// @nodoc
 abstract class $LoanDetailsStateCopyWith<$Res> {
   factory $LoanDetailsStateCopyWith(
           LoanDetailsState value, $Res Function(LoanDetailsState) then) =
@@ -180,6 +192,7 @@ abstract class $LoanDetailsStateCopyWith<$Res> {
       Option<Either<ValueFailure, Unit>> submitLoanDetailsFailureOrSuccess});
 }
 
+/// @nodoc
 class _$LoanDetailsStateCopyWithImpl<$Res>
     implements $LoanDetailsStateCopyWith<$Res> {
   _$LoanDetailsStateCopyWithImpl(this._value, this._then);
@@ -209,6 +222,7 @@ class _$LoanDetailsStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$LoanDetailsStateCopyWith<$Res>
     implements $LoanDetailsStateCopyWith<$Res> {
   factory _$LoanDetailsStateCopyWith(
@@ -221,6 +235,7 @@ abstract class _$LoanDetailsStateCopyWith<$Res>
       Option<Either<ValueFailure, Unit>> submitLoanDetailsFailureOrSuccess});
 }
 
+/// @nodoc
 class __$LoanDetailsStateCopyWithImpl<$Res>
     extends _$LoanDetailsStateCopyWithImpl<$Res>
     implements _$LoanDetailsStateCopyWith<$Res> {
@@ -252,6 +267,7 @@ class __$LoanDetailsStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_LoanDetailsState implements _LoanDetailsState {
   const _$_LoanDetailsState(
       {@required this.showErrorMessages,

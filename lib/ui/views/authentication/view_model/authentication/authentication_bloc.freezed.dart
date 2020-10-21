@@ -9,6 +9,7 @@ part of 'authentication_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$AuthenticationEventTearOff {
   const _$AuthenticationEventTearOff();
 
@@ -18,9 +19,11 @@ class _$AuthenticationEventTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $AuthenticationEvent = _$AuthenticationEventTearOff();
 
+/// @nodoc
 mixin _$AuthenticationEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
@@ -42,12 +45,14 @@ mixin _$AuthenticationEvent {
   });
 }
 
+/// @nodoc
 abstract class $AuthenticationEventCopyWith<$Res> {
   factory $AuthenticationEventCopyWith(
           AuthenticationEvent value, $Res Function(AuthenticationEvent) then) =
       _$AuthenticationEventCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$AuthenticationEventCopyWithImpl<$Res>
     implements $AuthenticationEventCopyWith<$Res> {
   _$AuthenticationEventCopyWithImpl(this._value, this._then);
@@ -57,12 +62,14 @@ class _$AuthenticationEventCopyWithImpl<$Res>
   final $Res Function(AuthenticationEvent) _then;
 }
 
+/// @nodoc
 abstract class $CheckAuthenticatedCopyWith<$Res> {
   factory $CheckAuthenticatedCopyWith(
           CheckAuthenticated value, $Res Function(CheckAuthenticated) then) =
       _$CheckAuthenticatedCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$CheckAuthenticatedCopyWithImpl<$Res>
     extends _$AuthenticationEventCopyWithImpl<$Res>
     implements $CheckAuthenticatedCopyWith<$Res> {
@@ -74,6 +81,7 @@ class _$CheckAuthenticatedCopyWithImpl<$Res>
   CheckAuthenticated get _value => super._value as CheckAuthenticated;
 }
 
+/// @nodoc
 class _$CheckAuthenticated implements CheckAuthenticated {
   _$CheckAuthenticated();
 
@@ -139,6 +147,7 @@ abstract class CheckAuthenticated implements AuthenticationEvent {
   factory CheckAuthenticated() = _$CheckAuthenticated;
 }
 
+/// @nodoc
 class _$AuthenticationStateTearOff {
   const _$AuthenticationStateTearOff();
 
@@ -163,9 +172,11 @@ class _$AuthenticationStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $AuthenticationState = _$AuthenticationStateTearOff();
 
+/// @nodoc
 mixin _$AuthenticationState {
   @optionalTypeArgs
   Result when<Result extends Object>({
@@ -199,12 +210,14 @@ mixin _$AuthenticationState {
   });
 }
 
+/// @nodoc
 abstract class $AuthenticationStateCopyWith<$Res> {
   factory $AuthenticationStateCopyWith(
           AuthenticationState value, $Res Function(AuthenticationState) then) =
       _$AuthenticationStateCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$AuthenticationStateCopyWithImpl<$Res>
     implements $AuthenticationStateCopyWith<$Res> {
   _$AuthenticationStateCopyWithImpl(this._value, this._then);
@@ -214,11 +227,13 @@ class _$AuthenticationStateCopyWithImpl<$Res>
   final $Res Function(AuthenticationState) _then;
 }
 
+/// @nodoc
 abstract class $InitialCopyWith<$Res> {
   factory $InitialCopyWith(Initial value, $Res Function(Initial) then) =
       _$InitialCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$InitialCopyWithImpl<$Res>
     extends _$AuthenticationStateCopyWithImpl<$Res>
     implements $InitialCopyWith<$Res> {
@@ -229,6 +244,7 @@ class _$InitialCopyWithImpl<$Res>
   Initial get _value => super._value as Initial;
 }
 
+/// @nodoc
 class _$Initial implements Initial {
   _$Initial();
 
@@ -312,12 +328,14 @@ abstract class Initial implements AuthenticationState {
   factory Initial() = _$Initial;
 }
 
+/// @nodoc
 abstract class $UnauthenticatedCopyWith<$Res> {
   factory $UnauthenticatedCopyWith(
           Unauthenticated value, $Res Function(Unauthenticated) then) =
       _$UnauthenticatedCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$UnauthenticatedCopyWithImpl<$Res>
     extends _$AuthenticationStateCopyWithImpl<$Res>
     implements $UnauthenticatedCopyWith<$Res> {
@@ -329,6 +347,7 @@ class _$UnauthenticatedCopyWithImpl<$Res>
   Unauthenticated get _value => super._value as Unauthenticated;
 }
 
+/// @nodoc
 class _$Unauthenticated implements Unauthenticated {
   _$Unauthenticated();
 
@@ -412,12 +431,14 @@ abstract class Unauthenticated implements AuthenticationState {
   factory Unauthenticated() = _$Unauthenticated;
 }
 
+/// @nodoc
 abstract class $AuthenticatedCopyWith<$Res> {
   factory $AuthenticatedCopyWith(
           Authenticated value, $Res Function(Authenticated) then) =
       _$AuthenticatedCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$AuthenticatedCopyWithImpl<$Res>
     extends _$AuthenticationStateCopyWithImpl<$Res>
     implements $AuthenticatedCopyWith<$Res> {
@@ -429,6 +450,7 @@ class _$AuthenticatedCopyWithImpl<$Res>
   Authenticated get _value => super._value as Authenticated;
 }
 
+/// @nodoc
 class _$Authenticated implements Authenticated {
   _$Authenticated();
 
@@ -512,12 +534,14 @@ abstract class Authenticated implements AuthenticationState {
   factory Authenticated() = _$Authenticated;
 }
 
+/// @nodoc
 abstract class $UnverifiedCopyWith<$Res> {
   factory $UnverifiedCopyWith(
           Unverified value, $Res Function(Unverified) then) =
       _$UnverifiedCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$UnverifiedCopyWithImpl<$Res>
     extends _$AuthenticationStateCopyWithImpl<$Res>
     implements $UnverifiedCopyWith<$Res> {
@@ -528,6 +552,7 @@ class _$UnverifiedCopyWithImpl<$Res>
   Unverified get _value => super._value as Unverified;
 }
 
+/// @nodoc
 class _$Unverified implements Unverified {
   _$Unverified();
 

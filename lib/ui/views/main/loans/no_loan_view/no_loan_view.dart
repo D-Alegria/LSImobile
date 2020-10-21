@@ -30,15 +30,11 @@ class NoLoanView extends StatelessWidget {
           ),
         ),
         actions: [
-          ButtonTheme(
-            minWidth: SizeConfig.xMargin(context, 10),
-            child: IconButton(
-              onPressed: () {},
-              icon: SvgPicture.asset(
-                optionsIcon,
-              ),
-            ),
-          )
+          sharedIconButton(
+            context: context,
+            onPressed: () {},
+            icon: SvgPicture.asset(optionsIcon),
+          ),
         ],
       ),
       body: Container(

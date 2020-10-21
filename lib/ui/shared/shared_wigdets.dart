@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -107,7 +108,7 @@ Widget sharedOutlineRaisedButton({
       child: Text(
         text,
         style: TextStyle(
-          color: ColorStyles.white,
+          color: color,
           fontSize: SizeConfig.textSize(context, 5),
           fontWeight: FontWeight.w500,
         ),
@@ -213,28 +214,133 @@ Widget sharedOptionFlatButton({
 /// [sharedOutlineContainer]
 /// ////////////////////////////////////////////////////////////////////////////
 Widget sharedOutlineContainer({
-  BuildContext context,
+  AlignmentGeometry alignment,
   Color color,
   @required Color borderColor,
   double height,
   double width,
   Widget child,
-  Gradient gradient,
-  BoxShadow boxShadow,
+  EdgeInsets padding,
+  Function onTap,
 }) {
-  return Container(
-    width: width,
-    height: height,
-    decoration: BoxDecoration(
-      gradient: gradient,
-      boxShadow: [boxShadow],
-      color: color,
-      borderRadius: BorderRadius.all(
-        Radius.circular(10),
+  return GestureDetector(
+    onTap: onTap,
+    child: Container(
+      alignment: alignment,
+      padding: padding,
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+        border: Border.all(color: borderColor, width: 1),
       ),
-      border: Border.all(color: borderColor, width: 1),
+      child: child,
     ),
-    child: child,
+  );
+}
+
+/// ////////////////////////////////////////////////////////////////////////////
+/// [OutlineContainer]
+/// [sharedOutlineContainer]
+/// ////////////////////////////////////////////////////////////////////////////
+Widget sharedRaisedContainer({
+  AlignmentGeometry alignment,
+  Color color,
+  double height,
+  double width,
+  Widget child,
+  EdgeInsets padding,
+  Function onTap,
+  Gradient gradient,
+}) {
+  return GestureDetector(
+    onTap: onTap,
+    child: Container(
+      alignment: alignment,
+      padding: padding,
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        gradient: gradient,
+        color: color,
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: ColorStyles.black.withOpacity(0.5),
+            offset: Offset(3, 3),
+            blurRadius: 15,
+            spreadRadius: 1,
+          ),
+        ],
+      ),
+      child: child,
+    ),
+  );
+}
+
+Widget sharedContainer({
+  AlignmentGeometry alignment,
+  Color color,
+  double height,
+  double width,
+  Widget child,
+  EdgeInsets padding,
+  Function onTap,
+  Gradient gradient,
+}) {
+  return GestureDetector(
+    onTap: onTap,
+    child: Container(
+      alignment: alignment,
+      padding: padding,
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        gradient: gradient,
+        color: color,
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      child: child,
+    ),
+  );
+}
+
+Widget sharedDottedContainer({
+  Alignment alignment,
+  EdgeInsets padding,
+  double width,
+  double height,
+  Gradient gradient,
+  Color color,
+  Color borderColor,
+  Widget child,
+  Function onTap,
+}) {
+  return GestureDetector(
+    onTap: onTap,
+    child: DottedBorder(
+      borderType: BorderType.RRect,
+      strokeCap: StrokeCap.round,
+      color: borderColor,
+      dashPattern: [8, 4],
+      strokeWidth: 2,
+      radius: Radius.circular(10),
+      padding: EdgeInsets.all(4),
+      child: Container(
+        alignment: alignment,
+        padding: padding,
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+        child: child,
+      ),
+    ),
   );
 }
 
@@ -294,6 +400,63 @@ Widget sharedInfoListTile({
   );
 }
 
+Widget sharedInfoButton({
+  @required BuildContext context,
+  @required Widget icon,
+  @required String text,
+  @required Color background,
+  Function onTap,
+  bool showArrow = false,
+  bool colorIcon = true,
+}) {
+  return InkWell(
+    onTap: onTap,
+    child: Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: SizeConfig.xMargin(context, 3),
+      ),
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: BorderRadius.circular(80),
+      ),
+      height: SizeConfig.yMargin(context, 8),
+      child: Row(
+        children: [
+          Container(
+            height: SizeConfig.yMargin(context, 5),
+            padding: EdgeInsets.symmetric(
+              horizontal: SizeConfig.xMargin(context, 2),
+            ),
+            child: icon,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: colorIcon ? ColorStyles.grey7 : Colors.transparent,
+            ),
+          ),
+          SizedBox(width: SizeConfig.xMargin(context, 1.5)),
+          Expanded(
+            child: Text(
+              text,
+              style: GoogleFonts.workSans(
+                fontWeight: FontWeight.w500,
+                color: ColorStyles.black,
+                fontSize: SizeConfig.textSize(context, 4.3),
+              ),
+            ),
+          ),
+          showArrow
+              ? Icon(
+                  Icons.arrow_forward_rounded,
+                  color: ColorStyles.light,
+                  size: SizeConfig.textSize(context, 8),
+                )
+              : Container(),
+        ],
+      ),
+    ),
+  );
+}
+
 Widget sharedDropDownFormField<T>({
   @required BuildContext context,
   @required String labelText,
@@ -320,6 +483,86 @@ Widget sharedDropDownFormField<T>({
         fontSize: SizeConfig.textSize(context, 5),
         fontWeight: FontWeight.w500,
         color: const Color(0xFF18172B).withOpacity(0.6),
+      ),
+    ),
+  );
+}
+
+Widget sharedIconButton({
+  @required BuildContext context,
+  @required Function onPressed,
+  @required Widget icon,
+}) {
+  return ButtonTheme(
+    minWidth: SizeConfig.xMargin(context, 10),
+    child: IconButton(
+      onPressed: onPressed,
+      icon: icon,
+    ),
+  );
+}
+
+Widget sharedTable({
+  @required BuildContext context,
+  @required List list,
+}) {
+  return Table(
+    children: List.generate(
+      list.length,
+      (index) => TableRow(
+        children: [
+          TableCell(
+            verticalAlignment: TableCellVerticalAlignment.middle,
+            child: Text(
+              list[index][0],
+              textAlign: TextAlign.left,
+              style: GoogleFonts.workSans(
+                fontWeight: FontWeight.w400,
+                fontSize: SizeConfig.textSize(context, 4.5),
+                height: SizeConfig.textSize(context, 0.5),
+              ),
+            ),
+          ),
+          TableCell(
+            verticalAlignment: TableCellVerticalAlignment.middle,
+            child: Text(
+              list[index][1],
+              textAlign: TextAlign.right,
+              style: GoogleFonts.workSans(
+                fontWeight: FontWeight.w600,
+                fontSize: SizeConfig.textSize(context, 5),
+                height: SizeConfig.textSize(context, 0.5),
+              ),
+            ),
+          )
+        ],
+      ),
+    ),
+  );
+}
+
+Widget sharedSmallBadge({
+  @required BuildContext context,
+  @required String text,
+  @required Color indicatorColor,
+}) {
+  return Container(
+    child: Text(
+      text,
+      style: TextStyle(
+        fontSize: SizeConfig.textSize(context, 3),
+        color: ColorStyles.white,
+        fontWeight: FontWeight.w500,
+      ),
+    ),
+    padding: EdgeInsets.symmetric(
+      horizontal: SizeConfig.xMargin(context, 3),
+      vertical: SizeConfig.yMargin(context, 1),
+    ),
+    decoration: BoxDecoration(
+      color: indicatorColor,
+      borderRadius: BorderRadius.all(
+        Radius.circular(20),
       ),
     ),
   );

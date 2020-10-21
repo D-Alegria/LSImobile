@@ -23,7 +23,6 @@ class MiniLoanCard extends StatelessWidget {
     return Expanded(
       child: sharedOutlineContainer(
         color: color,
-        context: context,
         borderColor: borderColor,
         height: SizeConfig.yMargin(context, 13),
         child: Column(

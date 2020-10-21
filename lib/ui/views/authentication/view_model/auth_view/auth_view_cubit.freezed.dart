@@ -9,6 +9,7 @@ part of 'auth_view_cubit.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$AuthViewStateTearOff {
   const _$AuthViewStateTearOff();
 
@@ -20,9 +21,11 @@ class _$AuthViewStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $AuthViewState = _$AuthViewStateTearOff();
 
+/// @nodoc
 mixin _$AuthViewState {
   bool get showLogin;
 
@@ -48,6 +51,7 @@ mixin _$AuthViewState {
   $AuthViewStateCopyWith<AuthViewState> get copyWith;
 }
 
+/// @nodoc
 abstract class $AuthViewStateCopyWith<$Res> {
   factory $AuthViewStateCopyWith(
           AuthViewState value, $Res Function(AuthViewState) then) =
@@ -55,6 +59,7 @@ abstract class $AuthViewStateCopyWith<$Res> {
   $Res call({bool showLogin});
 }
 
+/// @nodoc
 class _$AuthViewStateCopyWithImpl<$Res>
     implements $AuthViewStateCopyWith<$Res> {
   _$AuthViewStateCopyWithImpl(this._value, this._then);
@@ -73,6 +78,7 @@ class _$AuthViewStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class $ShowLoginViewCopyWith<$Res>
     implements $AuthViewStateCopyWith<$Res> {
   factory $ShowLoginViewCopyWith(
@@ -82,6 +88,7 @@ abstract class $ShowLoginViewCopyWith<$Res>
   $Res call({bool showLogin});
 }
 
+/// @nodoc
 class _$ShowLoginViewCopyWithImpl<$Res>
     extends _$AuthViewStateCopyWithImpl<$Res>
     implements $ShowLoginViewCopyWith<$Res> {
@@ -102,6 +109,7 @@ class _$ShowLoginViewCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$ShowLoginView implements ShowLoginView {
   _$ShowLoginView(this.showLogin) : assert(showLogin != null);
 

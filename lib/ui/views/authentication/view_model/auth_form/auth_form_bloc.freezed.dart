@@ -9,6 +9,7 @@ part of 'auth_form_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$AuthFormEventTearOff {
   const _$AuthFormEventTearOff();
 
@@ -80,9 +81,11 @@ class _$AuthFormEventTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $AuthFormEvent = _$AuthFormEventTearOff();
 
+/// @nodoc
 mixin _$AuthFormEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
@@ -144,12 +147,14 @@ mixin _$AuthFormEvent {
   });
 }
 
+/// @nodoc
 abstract class $AuthFormEventCopyWith<$Res> {
   factory $AuthFormEventCopyWith(
           AuthFormEvent value, $Res Function(AuthFormEvent) then) =
       _$AuthFormEventCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$AuthFormEventCopyWithImpl<$Res>
     implements $AuthFormEventCopyWith<$Res> {
   _$AuthFormEventCopyWithImpl(this._value, this._then);
@@ -159,11 +164,13 @@ class _$AuthFormEventCopyWithImpl<$Res>
   final $Res Function(AuthFormEvent) _then;
 }
 
+/// @nodoc
 abstract class $InitCopyWith<$Res> {
   factory $InitCopyWith(Init value, $Res Function(Init) then) =
       _$InitCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$InitCopyWithImpl<$Res> extends _$AuthFormEventCopyWithImpl<$Res>
     implements $InitCopyWith<$Res> {
   _$InitCopyWithImpl(Init _value, $Res Function(Init) _then)
@@ -173,6 +180,7 @@ class _$InitCopyWithImpl<$Res> extends _$AuthFormEventCopyWithImpl<$Res>
   Init get _value => super._value as Init;
 }
 
+/// @nodoc
 class _$Init implements Init {
   _$Init();
 
@@ -298,6 +306,7 @@ abstract class Init implements AuthFormEvent {
   factory Init() = _$Init;
 }
 
+/// @nodoc
 abstract class $EmailChangedCopyWith<$Res> {
   factory $EmailChangedCopyWith(
           EmailChanged value, $Res Function(EmailChanged) then) =
@@ -305,6 +314,7 @@ abstract class $EmailChangedCopyWith<$Res> {
   $Res call({String email});
 }
 
+/// @nodoc
 class _$EmailChangedCopyWithImpl<$Res> extends _$AuthFormEventCopyWithImpl<$Res>
     implements $EmailChangedCopyWith<$Res> {
   _$EmailChangedCopyWithImpl(
@@ -324,6 +334,7 @@ class _$EmailChangedCopyWithImpl<$Res> extends _$AuthFormEventCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$EmailChanged implements EmailChanged {
   _$EmailChanged(this.email) : assert(email != null);
 
@@ -463,6 +474,7 @@ abstract class EmailChanged implements AuthFormEvent {
   $EmailChangedCopyWith<EmailChanged> get copyWith;
 }
 
+/// @nodoc
 abstract class $FirstNameChangedCopyWith<$Res> {
   factory $FirstNameChangedCopyWith(
           FirstNameChanged value, $Res Function(FirstNameChanged) then) =
@@ -470,6 +482,7 @@ abstract class $FirstNameChangedCopyWith<$Res> {
   $Res call({String firstName});
 }
 
+/// @nodoc
 class _$FirstNameChangedCopyWithImpl<$Res>
     extends _$AuthFormEventCopyWithImpl<$Res>
     implements $FirstNameChangedCopyWith<$Res> {
@@ -490,6 +503,7 @@ class _$FirstNameChangedCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$FirstNameChanged implements FirstNameChanged {
   _$FirstNameChanged(this.firstName) : assert(firstName != null);
 
@@ -630,6 +644,7 @@ abstract class FirstNameChanged implements AuthFormEvent {
   $FirstNameChangedCopyWith<FirstNameChanged> get copyWith;
 }
 
+/// @nodoc
 abstract class $LastNameChangedCopyWith<$Res> {
   factory $LastNameChangedCopyWith(
           LastNameChanged value, $Res Function(LastNameChanged) then) =
@@ -637,6 +652,7 @@ abstract class $LastNameChangedCopyWith<$Res> {
   $Res call({String lastName});
 }
 
+/// @nodoc
 class _$LastNameChangedCopyWithImpl<$Res>
     extends _$AuthFormEventCopyWithImpl<$Res>
     implements $LastNameChangedCopyWith<$Res> {
@@ -657,6 +673,7 @@ class _$LastNameChangedCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$LastNameChanged implements LastNameChanged {
   _$LastNameChanged(this.lastName) : assert(lastName != null);
 
@@ -797,6 +814,7 @@ abstract class LastNameChanged implements AuthFormEvent {
   $LastNameChangedCopyWith<LastNameChanged> get copyWith;
 }
 
+/// @nodoc
 abstract class $PhoneNumberChangedCopyWith<$Res> {
   factory $PhoneNumberChangedCopyWith(
           PhoneNumberChanged value, $Res Function(PhoneNumberChanged) then) =
@@ -804,6 +822,7 @@ abstract class $PhoneNumberChangedCopyWith<$Res> {
   $Res call({String phoneNumber});
 }
 
+/// @nodoc
 class _$PhoneNumberChangedCopyWithImpl<$Res>
     extends _$AuthFormEventCopyWithImpl<$Res>
     implements $PhoneNumberChangedCopyWith<$Res> {
@@ -824,6 +843,7 @@ class _$PhoneNumberChangedCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$PhoneNumberChanged implements PhoneNumberChanged {
   _$PhoneNumberChanged(this.phoneNumber) : assert(phoneNumber != null);
 
@@ -964,6 +984,7 @@ abstract class PhoneNumberChanged implements AuthFormEvent {
   $PhoneNumberChangedCopyWith<PhoneNumberChanged> get copyWith;
 }
 
+/// @nodoc
 abstract class $PasswordChangedCopyWith<$Res> {
   factory $PasswordChangedCopyWith(
           PasswordChanged value, $Res Function(PasswordChanged) then) =
@@ -971,6 +992,7 @@ abstract class $PasswordChangedCopyWith<$Res> {
   $Res call({String password});
 }
 
+/// @nodoc
 class _$PasswordChangedCopyWithImpl<$Res>
     extends _$AuthFormEventCopyWithImpl<$Res>
     implements $PasswordChangedCopyWith<$Res> {
@@ -991,6 +1013,7 @@ class _$PasswordChangedCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$PasswordChanged implements PasswordChanged {
   _$PasswordChanged(this.password) : assert(password != null);
 
@@ -1131,6 +1154,7 @@ abstract class PasswordChanged implements AuthFormEvent {
   $PasswordChangedCopyWith<PasswordChanged> get copyWith;
 }
 
+/// @nodoc
 abstract class $VerificationCodeChangedCopyWith<$Res> {
   factory $VerificationCodeChangedCopyWith(VerificationCodeChanged value,
           $Res Function(VerificationCodeChanged) then) =
@@ -1138,6 +1162,7 @@ abstract class $VerificationCodeChangedCopyWith<$Res> {
   $Res call({String verificationCode});
 }
 
+/// @nodoc
 class _$VerificationCodeChangedCopyWithImpl<$Res>
     extends _$AuthFormEventCopyWithImpl<$Res>
     implements $VerificationCodeChangedCopyWith<$Res> {
@@ -1160,6 +1185,7 @@ class _$VerificationCodeChangedCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$VerificationCodeChanged implements VerificationCodeChanged {
   _$VerificationCodeChanged(this.verificationCode)
       : assert(verificationCode != null);
@@ -1304,11 +1330,13 @@ abstract class VerificationCodeChanged implements AuthFormEvent {
   $VerificationCodeChangedCopyWith<VerificationCodeChanged> get copyWith;
 }
 
+/// @nodoc
 abstract class $LoginUserCopyWith<$Res> {
   factory $LoginUserCopyWith(LoginUser value, $Res Function(LoginUser) then) =
       _$LoginUserCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$LoginUserCopyWithImpl<$Res> extends _$AuthFormEventCopyWithImpl<$Res>
     implements $LoginUserCopyWith<$Res> {
   _$LoginUserCopyWithImpl(LoginUser _value, $Res Function(LoginUser) _then)
@@ -1318,6 +1346,7 @@ class _$LoginUserCopyWithImpl<$Res> extends _$AuthFormEventCopyWithImpl<$Res>
   LoginUser get _value => super._value as LoginUser;
 }
 
+/// @nodoc
 class _$LoginUser implements LoginUser {
   _$LoginUser();
 
@@ -1443,12 +1472,14 @@ abstract class LoginUser implements AuthFormEvent {
   factory LoginUser() = _$LoginUser;
 }
 
+/// @nodoc
 abstract class $RegisterUserCopyWith<$Res> {
   factory $RegisterUserCopyWith(
           RegisterUser value, $Res Function(RegisterUser) then) =
       _$RegisterUserCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$RegisterUserCopyWithImpl<$Res> extends _$AuthFormEventCopyWithImpl<$Res>
     implements $RegisterUserCopyWith<$Res> {
   _$RegisterUserCopyWithImpl(
@@ -1459,6 +1490,7 @@ class _$RegisterUserCopyWithImpl<$Res> extends _$AuthFormEventCopyWithImpl<$Res>
   RegisterUser get _value => super._value as RegisterUser;
 }
 
+/// @nodoc
 class _$RegisterUser implements RegisterUser {
   _$RegisterUser();
 
@@ -1584,12 +1616,14 @@ abstract class RegisterUser implements AuthFormEvent {
   factory RegisterUser() = _$RegisterUser;
 }
 
+/// @nodoc
 abstract class $VerifyUserCopyWith<$Res> {
   factory $VerifyUserCopyWith(
           VerifyUser value, $Res Function(VerifyUser) then) =
       _$VerifyUserCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$VerifyUserCopyWithImpl<$Res> extends _$AuthFormEventCopyWithImpl<$Res>
     implements $VerifyUserCopyWith<$Res> {
   _$VerifyUserCopyWithImpl(VerifyUser _value, $Res Function(VerifyUser) _then)
@@ -1599,6 +1633,7 @@ class _$VerifyUserCopyWithImpl<$Res> extends _$AuthFormEventCopyWithImpl<$Res>
   VerifyUser get _value => super._value as VerifyUser;
 }
 
+/// @nodoc
 class _$VerifyUser implements VerifyUser {
   _$VerifyUser();
 
@@ -1724,11 +1759,13 @@ abstract class VerifyUser implements AuthFormEvent {
   factory VerifyUser() = _$VerifyUser;
 }
 
+/// @nodoc
 abstract class $ResendOTPCopyWith<$Res> {
   factory $ResendOTPCopyWith(ResendOTP value, $Res Function(ResendOTP) then) =
       _$ResendOTPCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$ResendOTPCopyWithImpl<$Res> extends _$AuthFormEventCopyWithImpl<$Res>
     implements $ResendOTPCopyWith<$Res> {
   _$ResendOTPCopyWithImpl(ResendOTP _value, $Res Function(ResendOTP) _then)
@@ -1738,6 +1775,7 @@ class _$ResendOTPCopyWithImpl<$Res> extends _$AuthFormEventCopyWithImpl<$Res>
   ResendOTP get _value => super._value as ResendOTP;
 }
 
+/// @nodoc
 class _$ResendOTP implements ResendOTP {
   _$ResendOTP();
 
@@ -1863,6 +1901,7 @@ abstract class ResendOTP implements AuthFormEvent {
   factory ResendOTP() = _$ResendOTP;
 }
 
+/// @nodoc
 class _$AuthFormStateTearOff {
   const _$AuthFormStateTearOff();
 
@@ -1891,9 +1930,11 @@ class _$AuthFormStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $AuthFormState = _$AuthFormStateTearOff();
 
+/// @nodoc
 mixin _$AuthFormState {
   String get firstName;
   String get lastName;
@@ -1908,6 +1949,7 @@ mixin _$AuthFormState {
   $AuthFormStateCopyWith<AuthFormState> get copyWith;
 }
 
+/// @nodoc
 abstract class $AuthFormStateCopyWith<$Res> {
   factory $AuthFormStateCopyWith(
           AuthFormState value, $Res Function(AuthFormState) then) =
@@ -1924,6 +1966,7 @@ abstract class $AuthFormStateCopyWith<$Res> {
       Option<Either<AuthGlitch, Unit>> authFailureOrSuccess});
 }
 
+/// @nodoc
 class _$AuthFormStateCopyWithImpl<$Res>
     implements $AuthFormStateCopyWith<$Res> {
   _$AuthFormStateCopyWithImpl(this._value, this._then);
@@ -1968,6 +2011,7 @@ class _$AuthFormStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$AuthFormStateCopyWith<$Res>
     implements $AuthFormStateCopyWith<$Res> {
   factory _$AuthFormStateCopyWith(
@@ -1986,6 +2030,7 @@ abstract class _$AuthFormStateCopyWith<$Res>
       Option<Either<AuthGlitch, Unit>> authFailureOrSuccess});
 }
 
+/// @nodoc
 class __$AuthFormStateCopyWithImpl<$Res>
     extends _$AuthFormStateCopyWithImpl<$Res>
     implements _$AuthFormStateCopyWith<$Res> {
@@ -2032,6 +2077,7 @@ class __$AuthFormStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_AuthFormState implements _AuthFormState {
   const _$_AuthFormState(
       {@required this.firstName,

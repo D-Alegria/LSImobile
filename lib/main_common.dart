@@ -13,7 +13,7 @@ import 'core/utils/config_reader_util.dart';
 Future<void> mainCommon(String env) async {
   WidgetsFlutterBinding.ensureInitialized();
   await ConfigReader.initialize();
-  configureInjection(env);
+  await configureInjection(env);
   Bloc.observer = MainCubitObserver();
 
   switch (env) {

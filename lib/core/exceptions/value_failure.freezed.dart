@@ -9,6 +9,7 @@ part of 'value_failure.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$ValueFailureTearOff {
   const _$ValueFailureTearOff();
 
@@ -34,9 +35,11 @@ class _$ValueFailureTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $ValueFailure = _$ValueFailureTearOff();
 
+/// @nodoc
 mixin _$ValueFailure<T> {
   T get failedValue;
 
@@ -70,6 +73,7 @@ mixin _$ValueFailure<T> {
   $ValueFailureCopyWith<T, ValueFailure<T>> get copyWith;
 }
 
+/// @nodoc
 abstract class $ValueFailureCopyWith<T, $Res> {
   factory $ValueFailureCopyWith(
           ValueFailure<T> value, $Res Function(ValueFailure<T>) then) =
@@ -77,6 +81,7 @@ abstract class $ValueFailureCopyWith<T, $Res> {
   $Res call({T failedValue});
 }
 
+/// @nodoc
 class _$ValueFailureCopyWithImpl<T, $Res>
     implements $ValueFailureCopyWith<T, $Res> {
   _$ValueFailureCopyWithImpl(this._value, this._then);
@@ -96,6 +101,7 @@ class _$ValueFailureCopyWithImpl<T, $Res>
   }
 }
 
+/// @nodoc
 abstract class $InvalidEmailCopyWith<T, $Res>
     implements $ValueFailureCopyWith<T, $Res> {
   factory $InvalidEmailCopyWith(
@@ -105,6 +111,7 @@ abstract class $InvalidEmailCopyWith<T, $Res>
   $Res call({T failedValue});
 }
 
+/// @nodoc
 class _$InvalidEmailCopyWithImpl<T, $Res>
     extends _$ValueFailureCopyWithImpl<T, $Res>
     implements $InvalidEmailCopyWith<T, $Res> {
@@ -126,6 +133,7 @@ class _$InvalidEmailCopyWithImpl<T, $Res>
   }
 }
 
+/// @nodoc
 class _$InvalidEmail<T> implements InvalidEmail<T> {
   const _$InvalidEmail({@required this.failedValue})
       : assert(failedValue != null);
@@ -221,6 +229,7 @@ abstract class InvalidEmail<T> implements ValueFailure<T> {
   $InvalidEmailCopyWith<T, InvalidEmail<T>> get copyWith;
 }
 
+/// @nodoc
 abstract class $ShortPasswordCopyWith<T, $Res>
     implements $ValueFailureCopyWith<T, $Res> {
   factory $ShortPasswordCopyWith(
@@ -230,6 +239,7 @@ abstract class $ShortPasswordCopyWith<T, $Res>
   $Res call({T failedValue});
 }
 
+/// @nodoc
 class _$ShortPasswordCopyWithImpl<T, $Res>
     extends _$ValueFailureCopyWithImpl<T, $Res>
     implements $ShortPasswordCopyWith<T, $Res> {
@@ -251,6 +261,7 @@ class _$ShortPasswordCopyWithImpl<T, $Res>
   }
 }
 
+/// @nodoc
 class _$ShortPassword<T> implements ShortPassword<T> {
   const _$ShortPassword({@required this.failedValue})
       : assert(failedValue != null);
@@ -346,6 +357,7 @@ abstract class ShortPassword<T> implements ValueFailure<T> {
   $ShortPasswordCopyWith<T, ShortPassword<T>> get copyWith;
 }
 
+/// @nodoc
 abstract class $EmptyStringCopyWith<T, $Res>
     implements $ValueFailureCopyWith<T, $Res> {
   factory $EmptyStringCopyWith(
@@ -355,6 +367,7 @@ abstract class $EmptyStringCopyWith<T, $Res>
   $Res call({T failedValue});
 }
 
+/// @nodoc
 class _$EmptyStringCopyWithImpl<T, $Res>
     extends _$ValueFailureCopyWithImpl<T, $Res>
     implements $EmptyStringCopyWith<T, $Res> {
@@ -376,6 +389,7 @@ class _$EmptyStringCopyWithImpl<T, $Res>
   }
 }
 
+/// @nodoc
 class _$EmptyString<T> implements EmptyString<T> {
   const _$EmptyString({@required this.failedValue})
       : assert(failedValue != null);

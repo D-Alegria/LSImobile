@@ -9,6 +9,7 @@ part of 'personal_info_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$PersonalInfoEventTearOff {
   const _$PersonalInfoEventTearOff();
 
@@ -18,9 +19,11 @@ class _$PersonalInfoEventTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $PersonalInfoEvent = _$PersonalInfoEventTearOff();
 
+/// @nodoc
 mixin _$PersonalInfoEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
@@ -42,12 +45,14 @@ mixin _$PersonalInfoEvent {
   });
 }
 
+/// @nodoc
 abstract class $PersonalInfoEventCopyWith<$Res> {
   factory $PersonalInfoEventCopyWith(
           PersonalInfoEvent value, $Res Function(PersonalInfoEvent) then) =
       _$PersonalInfoEventCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$PersonalInfoEventCopyWithImpl<$Res>
     implements $PersonalInfoEventCopyWith<$Res> {
   _$PersonalInfoEventCopyWithImpl(this._value, this._then);
@@ -57,12 +62,14 @@ class _$PersonalInfoEventCopyWithImpl<$Res>
   final $Res Function(PersonalInfoEvent) _then;
 }
 
+/// @nodoc
 abstract class $SubmitPersonalInfoCopyWith<$Res> {
   factory $SubmitPersonalInfoCopyWith(
           SubmitPersonalInfo value, $Res Function(SubmitPersonalInfo) then) =
       _$SubmitPersonalInfoCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$SubmitPersonalInfoCopyWithImpl<$Res>
     extends _$PersonalInfoEventCopyWithImpl<$Res>
     implements $SubmitPersonalInfoCopyWith<$Res> {
@@ -74,6 +81,7 @@ class _$SubmitPersonalInfoCopyWithImpl<$Res>
   SubmitPersonalInfo get _value => super._value as SubmitPersonalInfo;
 }
 
+/// @nodoc
 class _$SubmitPersonalInfo implements SubmitPersonalInfo {
   const _$SubmitPersonalInfo();
 
@@ -139,6 +147,7 @@ abstract class SubmitPersonalInfo implements PersonalInfoEvent {
   const factory SubmitPersonalInfo() = _$SubmitPersonalInfo;
 }
 
+/// @nodoc
 class _$PersonalInfoStateTearOff {
   const _$PersonalInfoStateTearOff();
 
@@ -155,9 +164,11 @@ class _$PersonalInfoStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $PersonalInfoState = _$PersonalInfoStateTearOff();
 
+/// @nodoc
 mixin _$PersonalInfoState {
   bool get showErrorMessages;
   bool get isSubmitting;
@@ -166,6 +177,7 @@ mixin _$PersonalInfoState {
   $PersonalInfoStateCopyWith<PersonalInfoState> get copyWith;
 }
 
+/// @nodoc
 abstract class $PersonalInfoStateCopyWith<$Res> {
   factory $PersonalInfoStateCopyWith(
           PersonalInfoState value, $Res Function(PersonalInfoState) then) =
@@ -176,6 +188,7 @@ abstract class $PersonalInfoStateCopyWith<$Res> {
       Option<Either<ValueFailure, Unit>> submitFailureOrSuccess});
 }
 
+/// @nodoc
 class _$PersonalInfoStateCopyWithImpl<$Res>
     implements $PersonalInfoStateCopyWith<$Res> {
   _$PersonalInfoStateCopyWithImpl(this._value, this._then);
@@ -203,6 +216,7 @@ class _$PersonalInfoStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$PersonalInfoStateCopyWith<$Res>
     implements $PersonalInfoStateCopyWith<$Res> {
   factory _$PersonalInfoStateCopyWith(
@@ -215,6 +229,7 @@ abstract class _$PersonalInfoStateCopyWith<$Res>
       Option<Either<ValueFailure, Unit>> submitFailureOrSuccess});
 }
 
+/// @nodoc
 class __$PersonalInfoStateCopyWithImpl<$Res>
     extends _$PersonalInfoStateCopyWithImpl<$Res>
     implements _$PersonalInfoStateCopyWith<$Res> {
@@ -244,6 +259,7 @@ class __$PersonalInfoStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_PersonalInfoState implements _PersonalInfoState {
   const _$_PersonalInfoState(
       {@required this.showErrorMessages,

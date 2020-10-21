@@ -28,7 +28,6 @@ class LSIAppDev extends StatelessWidget {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: themes,
-          locale: DevicePreview.of(context).locale,
           builder: ExtendedNavigator.builder<lsi_r.Router>(
             builder: DevicePreview.appBuilder,
             router: lsi_r.Router(),

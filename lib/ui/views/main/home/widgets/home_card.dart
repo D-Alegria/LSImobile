@@ -52,7 +52,7 @@ class HomeCard extends StatelessWidget {
             child: Container(
               height: SizeConfig.yMargin(context, 20),
               decoration: BoxDecoration(
-                color: ColorStyles.grey3.withOpacity(0.5),
+                color: ColorStyles.extraLight,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(8),
                   topRight: Radius.circular(8),

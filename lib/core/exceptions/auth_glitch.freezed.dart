@@ -9,6 +9,7 @@ part of 'auth_glitch.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$AuthGlitchTearOff {
   const _$AuthGlitchTearOff();
 
@@ -20,9 +21,11 @@ class _$AuthGlitchTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $AuthGlitch = _$AuthGlitchTearOff();
 
+/// @nodoc
 mixin _$AuthGlitch {
   String get message;
 
@@ -48,6 +51,7 @@ mixin _$AuthGlitch {
   $AuthGlitchCopyWith<AuthGlitch> get copyWith;
 }
 
+/// @nodoc
 abstract class $AuthGlitchCopyWith<$Res> {
   factory $AuthGlitchCopyWith(
           AuthGlitch value, $Res Function(AuthGlitch) then) =
@@ -55,6 +59,7 @@ abstract class $AuthGlitchCopyWith<$Res> {
   $Res call({String message});
 }
 
+/// @nodoc
 class _$AuthGlitchCopyWithImpl<$Res> implements $AuthGlitchCopyWith<$Res> {
   _$AuthGlitchCopyWithImpl(this._value, this._then);
 
@@ -72,6 +77,7 @@ class _$AuthGlitchCopyWithImpl<$Res> implements $AuthGlitchCopyWith<$Res> {
   }
 }
 
+/// @nodoc
 abstract class $AuthNetworkGlitchCopyWith<$Res>
     implements $AuthGlitchCopyWith<$Res> {
   factory $AuthNetworkGlitchCopyWith(
@@ -81,6 +87,7 @@ abstract class $AuthNetworkGlitchCopyWith<$Res>
   $Res call({String message});
 }
 
+/// @nodoc
 class _$AuthNetworkGlitchCopyWithImpl<$Res>
     extends _$AuthGlitchCopyWithImpl<$Res>
     implements $AuthNetworkGlitchCopyWith<$Res> {
@@ -101,6 +108,7 @@ class _$AuthNetworkGlitchCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$AuthNetworkGlitch implements AuthNetworkGlitch {
   const _$AuthNetworkGlitch({@required this.message}) : assert(message != null);
 

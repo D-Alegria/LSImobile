@@ -9,6 +9,7 @@ part of 'glitch.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$GlitchTearOff {
   const _$GlitchTearOff();
 
@@ -27,9 +28,11 @@ class _$GlitchTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $Glitch = _$GlitchTearOff();
 
+/// @nodoc
 mixin _$Glitch {
   String get message;
 
@@ -59,12 +62,14 @@ mixin _$Glitch {
   $GlitchCopyWith<Glitch> get copyWith;
 }
 
+/// @nodoc
 abstract class $GlitchCopyWith<$Res> {
   factory $GlitchCopyWith(Glitch value, $Res Function(Glitch) then) =
       _$GlitchCopyWithImpl<$Res>;
   $Res call({String message});
 }
 
+/// @nodoc
 class _$GlitchCopyWithImpl<$Res> implements $GlitchCopyWith<$Res> {
   _$GlitchCopyWithImpl(this._value, this._then);
 
@@ -82,6 +87,7 @@ class _$GlitchCopyWithImpl<$Res> implements $GlitchCopyWith<$Res> {
   }
 }
 
+/// @nodoc
 abstract class $NetworkGlitchCopyWith<$Res> implements $GlitchCopyWith<$Res> {
   factory $NetworkGlitchCopyWith(
           NetworkGlitch value, $Res Function(NetworkGlitch) then) =
@@ -90,6 +96,7 @@ abstract class $NetworkGlitchCopyWith<$Res> implements $GlitchCopyWith<$Res> {
   $Res call({String message});
 }
 
+/// @nodoc
 class _$NetworkGlitchCopyWithImpl<$Res> extends _$GlitchCopyWithImpl<$Res>
     implements $NetworkGlitchCopyWith<$Res> {
   _$NetworkGlitchCopyWithImpl(
@@ -109,6 +116,7 @@ class _$NetworkGlitchCopyWithImpl<$Res> extends _$GlitchCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$NetworkGlitch implements NetworkGlitch {
   const _$NetworkGlitch({@required this.message}) : assert(message != null);
 
@@ -196,6 +204,7 @@ abstract class NetworkGlitch implements Glitch {
   $NetworkGlitchCopyWith<NetworkGlitch> get copyWith;
 }
 
+/// @nodoc
 abstract class $ServerGlitchCopyWith<$Res> implements $GlitchCopyWith<$Res> {
   factory $ServerGlitchCopyWith(
           ServerGlitch value, $Res Function(ServerGlitch) then) =
@@ -204,6 +213,7 @@ abstract class $ServerGlitchCopyWith<$Res> implements $GlitchCopyWith<$Res> {
   $Res call({String message});
 }
 
+/// @nodoc
 class _$ServerGlitchCopyWithImpl<$Res> extends _$GlitchCopyWithImpl<$Res>
     implements $ServerGlitchCopyWith<$Res> {
   _$ServerGlitchCopyWithImpl(
@@ -223,6 +233,7 @@ class _$ServerGlitchCopyWithImpl<$Res> extends _$GlitchCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$ServerGlitch implements ServerGlitch {
   const _$ServerGlitch({@required this.message}) : assert(message != null);
 

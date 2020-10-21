@@ -41,11 +41,12 @@ class SuccessView extends StatelessWidget {
                 ),
               ),
               sharedOutlineRaisedButton(
-                  context: context,
-                  onPressed: onTap,
-                  color: ColorStyles.white,
-                  text: buttonText,
-                  minWidth: SizeConfig.xMargin(context, 80))
+                context: context,
+                onPressed: onTap,
+                color: ColorStyles.white,
+                text: buttonText,
+                minWidth: SizeConfig.xMargin(context, 80),
+              )
             ],
           ),
         ),

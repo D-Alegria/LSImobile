@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
+import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:lsi_mobile/ui/views/main/loans/widgets/small_badge.dart';
 
 class LoanCard extends StatelessWidget {
   const LoanCard({
@@ -29,11 +29,13 @@ class LoanCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SmallBadge(
+              sharedSmallBadge(
+                context: context,
                 text: "Processing",
                 indicatorColor: ColorStyles.orange,
               ),
-              SmallBadge(
+              sharedSmallBadge(
+                context: context,
                 text: "Due",
                 indicatorColor: ColorStyles.red,
               ),
