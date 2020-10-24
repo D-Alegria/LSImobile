@@ -16,7 +16,7 @@ abstract class ColorStyles {
   static const lightYellow = const Color(0xFFFFEAA8);
   static const green = const Color(0xFF25CE36);
   static const green1 = const Color(0xFF27AE60);
-  static const green2 = const Color(0xFF57EB92);
+  static const green2 = const Color(0xFF27AE60);
   static const green3 = const Color(0xFF6FCF97);
   static const green4 = const Color(0xFF15DD1D);
   static const blue3 = const Color(0xFF56CCF2);

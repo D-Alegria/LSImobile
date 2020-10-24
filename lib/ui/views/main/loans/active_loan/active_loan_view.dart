@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -59,6 +61,7 @@ class ActiveLoanView extends StatelessWidget {
                   borderColor: ColorStyles.lightBlue.withOpacity(0.3),
                   image: creditCard,
                   text: "Make Payment",
+                  onTap: () => context.navigator.pushMakePaymentView(),
                 ),
                 SizedBox(
                   width: SizeConfig.xMargin(context, 5),
@@ -68,6 +71,7 @@ class ActiveLoanView extends StatelessWidget {
                   borderColor: ColorStyles.orange.withOpacity(0.3),
                   image: book,
                   text: "View Schedule",
+                  onTap: () => context.navigator.pushLoanScheduleView(),
                 ),
               ],
             ),

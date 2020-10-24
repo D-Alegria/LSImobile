@@ -176,7 +176,6 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
 
         //TODO validate Verification Code
         final isVerificationCodeValid = state.verificationCode.isValidPassword;
-        print(isVerificationCodeValid);
 
         if (isVerificationCodeValid) {
           yield state.copyWith(

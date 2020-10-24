@@ -200,7 +200,7 @@ Widget sharedOptionFlatButton({
             text: secondText,
             style: TextStyle(
               fontWeight: FontWeight.w400,
-              color: ColorStyles.primary,
+              color: firstText.isEmpty ? ColorStyles.red : ColorStyles.primary,
             ),
           ),
         ],

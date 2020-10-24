@@ -40,49 +40,29 @@ class UserRepoImpl implements UserRepo {
     bool isVerified,
     String token,
   }) async {
-    if (id != null)
-      await _localStorageRepo.saveString(LocalStorageKeys.userId, id);
-    if (fullName != null)
-      await _localStorageRepo.saveString(
-          LocalStorageKeys.userFullName, fullName);
-    if (phoneNumber != null)
-      await _localStorageRepo.saveString(
-          LocalStorageKeys.userPhoneNo, phoneNumber);
-    if (email != null)
-      await _localStorageRepo.saveString(LocalStorageKeys.userEmail, email);
-    if (password != null)
-      await _localStorageRepo.saveString(
-          LocalStorageKeys.userPassword, password);
-    if (isAuthenticated != null)
-      await _localStorageRepo.saveBool(
-          LocalStorageKeys.userIsAuthenticated, isAuthenticated);
-    if (isVerified != null)
-      await _localStorageRepo.saveBool(
-          LocalStorageKeys.userIsVerified, isVerified);
-    if (token != null)
-      await _localStorageRepo.saveString(LocalStorageKeys.userToken, token);
-    if (profilePicture != null)
-      await _localStorageRepo.saveString(
-          LocalStorageKeys.userProfilePicture, profilePicture);
+    if (id != null) await _localStorageRepo.saveString(LocalStorageKeys.userId, id);
+    if (fullName != null) await _localStorageRepo.saveString(LocalStorageKeys.userFullName, fullName);
+    if (phoneNumber != null) await _localStorageRepo.saveString(LocalStorageKeys.userPhoneNo, phoneNumber);
+    if (email != null) await _localStorageRepo.saveString(LocalStorageKeys.userEmail, email);
+    if (password != null) await _localStorageRepo.saveString(LocalStorageKeys.userPassword, password);
+    if (isAuthenticated != null) await _localStorageRepo.saveBool(LocalStorageKeys.userIsAuthenticated, isAuthenticated);
+    if (isVerified != null) await _localStorageRepo.saveBool(LocalStorageKeys.userIsVerified, isVerified);
+    if (token != null) await _localStorageRepo.saveString(LocalStorageKeys.userToken, token);
+    if (profilePicture != null) await _localStorageRepo.saveString(LocalStorageKeys.userProfilePicture, profilePicture);
     return user;
   }
 
   @override
   Future<User> get user async {
     String id = _localStorageRepo.getString(LocalStorageKeys.userId);
-    String fullName =
-        _localStorageRepo.getString(LocalStorageKeys.userFullName);
-    String phoneNumber =
-        _localStorageRepo.getString(LocalStorageKeys.userPhoneNo);
+    String fullName = _localStorageRepo.getString(LocalStorageKeys.userFullName);
+    String phoneNumber = _localStorageRepo.getString(LocalStorageKeys.userPhoneNo);
     String email = _localStorageRepo.getString(LocalStorageKeys.userFullName);
-    String password =
-        _localStorageRepo.getString(LocalStorageKeys.userPassword);
-    bool isAuthenticated =
-        _localStorageRepo.getBool(LocalStorageKeys.userIsAuthenticated);
+    String password = _localStorageRepo.getString(LocalStorageKeys.userPassword);
+    bool isAuthenticated = _localStorageRepo.getBool(LocalStorageKeys.userIsAuthenticated);
     bool isVerified = _localStorageRepo.getBool(LocalStorageKeys.userIsVerified);
     String token = _localStorageRepo.getString(LocalStorageKeys.userToken);
-    String profilePicture =
-        _localStorageRepo.getString(LocalStorageKeys.userProfilePicture);
+    String profilePicture = _localStorageRepo.getString(LocalStorageKeys.userProfilePicture);
     return User(
       id: id,
       phoneNumber: phoneNumber,

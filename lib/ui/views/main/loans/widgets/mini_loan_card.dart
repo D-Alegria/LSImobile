@@ -10,18 +10,20 @@ class MiniLoanCard extends StatelessWidget {
     @required this.image,
     @required this.color,
     @required this.borderColor,
-    @required this.text,
+    @required this.text, this.onTap,
   }) : super(key: key);
 
   final String image;
   final String text;
   final Color color;
   final Color borderColor;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: sharedOutlineContainer(
+        onTap: onTap,
         color: color,
         borderColor: borderColor,
         height: SizeConfig.yMargin(context, 13),

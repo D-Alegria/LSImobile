@@ -37,7 +37,7 @@ class AccountInfoView extends StatelessWidget {
                 ),
                 SharedTextFormField(labelText: "Account number"),
                 SizedBox(
-                  height: SizeConfig.yMargin(context, 2),
+                  height: SizeConfig.yMargin(context, 40),
                 ),
                 sharedRaisedButton(
                   context: context,

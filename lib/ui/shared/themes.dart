@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lsi_mobile/ui/shared/const_color.dart';
 
 final themes = ThemeData(
+  scaffoldBackgroundColor: ColorStyles.white,
   textTheme: TextTheme(
       headline1: TextStyle().copyWith(fontFamily: 'WorkSans'),
       headline2: TextStyle().copyWith(fontFamily: 'WorkSans'),

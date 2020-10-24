@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
-import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:lsi_mobile/ui/views/main/investment/widgets/fund_length_options.dart';
+import 'package:lsi_mobile/ui/views/main/investment/widgets/investment_plan_card.dart';
 
 class NewInvestmentView extends StatelessWidget {
   @override
@@ -29,30 +28,9 @@ class NewInvestmentView extends StatelessWidget {
         child: ListView(
           children: [
             SizedBox(height: SizeConfig.yMargin(context, 2)),
-            SharedTextFormField(
-              labelText: "Investment name",
-            ),
-            SizedBox(height: SizeConfig.yMargin(context, 3)),
-            SharedTextFormField(
-              labelText: "How much do you want to invest?",
-            ),
-            SizedBox(height: SizeConfig.yMargin(context, 3)),
-            Text(
-              "For how long would you like to hold your investment",
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: SizeConfig.textSize(context, 4.3),
-                color: ColorStyles.black,
-              ),
-            ),
+            InvestmentPlanCard1(),
             SizedBox(height: SizeConfig.yMargin(context, 2)),
-            FundLengthOptions(),
-            sharedRaisedButton(
-              context: context,
-              onPressed: () {},
-              color: ColorStyles.blue,
-              text: "Proceed to funding",
-            )
+            InvestmentPlanCard1(),
           ],
         ),
       ),

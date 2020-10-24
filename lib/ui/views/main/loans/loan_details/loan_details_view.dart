@@ -38,7 +38,7 @@ class LoanDetailsView extends StatelessWidget {
                   onChanged: (String value) {},
                 ),
                 SizedBox(
-                  height: SizeConfig.yMargin(context, 2),
+                  height: SizeConfig.yMargin(context, 28),
                 ),
                 sharedRaisedButton(
                   context: context,

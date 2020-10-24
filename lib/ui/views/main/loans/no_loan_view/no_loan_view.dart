@@ -11,7 +11,7 @@ class NoLoanView extends StatelessWidget {
     Key key,
   }) : super(key: key);
 
-  final String wallet = "assets/svgs/wallet.svg";
+  final String instantMoney = "assets/images/instant_naira.png";
   final String optionsIcon = "assets/svgs/icons/options_icon.svg";
 
   @override
@@ -39,29 +39,23 @@ class NoLoanView extends StatelessWidget {
       ),
       body: Container(
         padding: EdgeInsets.symmetric(
-          horizontal: SizeConfig.xMargin(context, 18),
+          horizontal: SizeConfig.xMargin(context, 5),
           vertical: SizeConfig.yMargin(context, 8),
         ),
         width: SizeConfig.xMargin(context, 100),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SvgPicture.asset(wallet),
-            Text(
-              "You currently have no loan",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: SizeConfig.textSize(context, 6),
-                color: ColorStyles.dark.withOpacity(0.8),
-              ),
+            Image.asset(
+              instantMoney,
+              fit: BoxFit.fitHeight,
             ),
             sharedRaisedButton(
               context: context,
               text: "Apply for a loan",
               color: ColorStyles.orange,
               onPressed: () => context.navigator.pushLoanProductView(),
-              minWidth: SizeConfig.xMargin(context, 60),
+              minWidth: SizeConfig.xMargin(context, 70),
             ),
           ],
         ),

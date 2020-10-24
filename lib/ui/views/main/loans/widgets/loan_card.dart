@@ -13,9 +13,9 @@ class LoanCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: SizeConfig.xMargin(context, 3),
-        vertical: SizeConfig.yMargin(context, 2),
+        vertical: SizeConfig.yMargin(context, 3),
       ),
-      height: SizeConfig.yMargin(context, 23),
+      height: SizeConfig.yMargin(context, 24),
       decoration: BoxDecoration(
         gradient: ColorStyles.blueGradient,
         borderRadius: BorderRadius.all(

@@ -18,6 +18,7 @@ class HomeCard extends StatelessWidget {
     this.buttonText,
     this.onPressed,
   });
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,6 +51,34 @@ class HomeCard extends StatelessWidget {
             top: SizeConfig.yMargin(context, 2),
             width: SizeConfig.xMargin(context, 87),
             child: Container(
+              child: Stack(
+                children: [
+                  Positioned(
+                    top: SizeConfig.yMargin(context, -8),
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      height: SizeConfig.yMargin(context, 15),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: ColorStyles.blue.withOpacity(0.1)
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: SizeConfig.yMargin(context, 5),
+                    left: 0,
+                    right: SizeConfig.xMargin(context, -80),
+                    child: Container(
+                      height: SizeConfig.yMargin(context, 15),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: ColorStyles.blue.withOpacity(0.1)
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               height: SizeConfig.yMargin(context, 20),
               decoration: BoxDecoration(
                 color: ColorStyles.extraLight,

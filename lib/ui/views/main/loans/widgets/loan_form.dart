@@ -46,11 +46,68 @@ class LoanForm extends StatelessWidget {
           topRight: Radius.circular(20),
         ),
       ),
-      // height: SizeConfig.yMargin(context, 70),
-      padding: EdgeInsets.symmetric(
-        horizontal: SizeConfig.xMargin(context, 5),
+      child: Stack(
+        children: [
+          Positioned(
+            bottom: SizeConfig.yMargin(context, -23),
+            right: SizeConfig.xMargin(context, -50),
+            left: SizeConfig.xMargin(context, 0),
+            child: Container(
+              height: SizeConfig.yMargin(context, 40),
+              width: SizeConfig.xMargin(context, 40),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color.fromARGB(51, 255, 234, 164),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: SizeConfig.yMargin(context, -20),
+            right: SizeConfig.xMargin(context, 0),
+            left: SizeConfig.xMargin(context, -50),
+            child: Container(
+              height: SizeConfig.yMargin(context, 40),
+              width: SizeConfig.xMargin(context, 40),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color.fromARGB(15, 242, 74, 74),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: SizeConfig.yMargin(context, -31),
+            right: SizeConfig.xMargin(context, 0),
+            left: SizeConfig.xMargin(context, -50),
+            child: Container(
+              height: SizeConfig.yMargin(context, 40),
+              width: SizeConfig.xMargin(context, 40),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color.fromARGB(15, 242, 74, 74),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: SizeConfig.yMargin(context, -29),
+            right: SizeConfig.xMargin(context, -50),
+            left: SizeConfig.xMargin(context, 0),
+            child: Container(
+              height: SizeConfig.yMargin(context, 40),
+              width: SizeConfig.xMargin(context, 40),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color.fromARGB(51, 168, 213, 255),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: SizeConfig.xMargin(context, 5),
+            ),
+            child: form,
+          )
+        ],
       ),
-      child: form,
     );
   }
 
