@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
-import 'package:lsi_mobile/core/repositories/local_storage/local_data_repo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'local_data_repo.dart';
 
 @LazySingleton(as: LocalStorageRepo)
 class LocalStorageRepoImpl implements LocalStorageRepo {

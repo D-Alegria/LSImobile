@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:lsi_mobile/core/datasources/local_storage/local_data_repo.dart';
 import 'package:lsi_mobile/core/exceptions/auth_glitch.dart';
 import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/core/models/requests/login_user/login_user_request.dart';
@@ -11,7 +12,6 @@ import 'package:lsi_mobile/core/models/requests/register_user/profile.dart';
 import 'package:lsi_mobile/core/models/requests/register_user/register_user_request.dart';
 import 'package:lsi_mobile/core/models/requests/send_otp/send_otp_request.dart';
 import 'package:lsi_mobile/core/models/requests/verify_otp/verify_otp_request.dart';
-import 'package:lsi_mobile/core/repositories/local_storage/local_data_repo.dart';
 import 'package:lsi_mobile/core/services/auth_service/auth_service.dart';
 import 'package:meta/meta.dart';
 

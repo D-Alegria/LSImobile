@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:lsi_mobile/core/datasources/local_storage/local_data_repo.dart';
 import 'package:lsi_mobile/core/exceptions/auth_glitch.dart';
 import 'package:lsi_mobile/core/models/constants/api_urls.dart';
 import 'package:lsi_mobile/core/models/dto/user.dart';
@@ -12,7 +13,6 @@ import 'package:lsi_mobile/core/models/responses/login_user/login_user_response.
 import 'package:lsi_mobile/core/models/responses/register_user/register_user_response.dart';
 import 'package:lsi_mobile/core/models/responses/send_otp/send_otp_response.dart';
 import 'package:lsi_mobile/core/models/responses/verify_otp/verify_otp_response.dart';
-import 'package:lsi_mobile/core/repositories/local_storage/local_data_repo.dart';
 import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
 import 'package:lsi_mobile/core/services/auth_service/auth_service.dart';
 import 'package:lsi_mobile/core/utils/api_manager_util.dart';

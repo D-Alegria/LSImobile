@@ -15,10 +15,11 @@ import '../../services/auth_service/auth_service.dart';
 import '../../services/auth_service/auth_service_impl.dart';
 import '../../../ui/views/authentication/view_model/authentication/authentication_bloc.dart';
 import '../interceptor/dio_interceptor.dart';
-import '../../repositories/local_storage/local_data_repo.dart';
-import '../../repositories/local_storage/local_storage_repo_impl.dart';
+import '../../datasources/local_storage/local_data_repo.dart';
+import '../../datasources/local_storage/local_storage_repo_impl.dart';
 import '../../utils/network_util.dart';
 import 'register_modules.dart';
+import '../../datasources/user/user_local_datasource.dart';
 import '../../repositories/user/user_repo.dart';
 import '../../repositories/user/user_repo_impl.dart';
 
@@ -41,6 +42,8 @@ Future<GetIt> $initGetIt(
   gh.lazySingleton<DioInterceptor>(() => DioInterceptor(get<Dio>()));
   gh.lazySingleton<LocalStorageRepo>(
       () => LocalStorageRepoImpl(get<SharedPreferences>()));
+  gh.lazySingleton<UserLocalDataSource>(
+      () => UserLocalDataSourceImpl(get<LocalStorageRepo>()));
   gh.lazySingleton<UserRepo>(() => UserRepoImpl(get<LocalStorageRepo>()));
   gh.lazySingleton<ApiManager>(
       () => ApiManager(get<Dio>(), get<DioInterceptor>()));

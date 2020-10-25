@@ -2,13 +2,35 @@ import 'package:injectable/injectable.dart';
 import 'package:lsi_mobile/core/datasources/local_storage/local_data_repo.dart';
 import 'package:lsi_mobile/core/models/constants/local_storage_keys.dart';
 import 'package:lsi_mobile/core/models/dto/user.dart';
-import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
 
-@LazySingleton(as: UserRepo)
-class UserRepoImpl implements UserRepo {
+abstract class UserLocalDataSource {
+  Future<User> get user;
+
+  Future<User> saveUser({
+    String id,
+    String fullName,
+    String phoneNumber,
+    String email,
+    String profilePicture,
+    String password,
+    bool isAuthenticated,
+    bool isVerified,
+    String token,
+  });
+
+  Future<void> deleteUser();
+
+  Future<bool> get isUserAuthenticated;
+
+  Future<bool> get isUserVerified;
+}
+
+
+@LazySingleton(as: UserLocalDataSource)
+class UserLocalDataSourceImpl implements UserLocalDataSource {
   final LocalStorageRepo _localStorageRepo;
 
-  UserRepoImpl(this._localStorageRepo);
+  UserLocalDataSourceImpl(this._localStorageRepo);
 
   @override
   Future<void> deleteUser() async {
