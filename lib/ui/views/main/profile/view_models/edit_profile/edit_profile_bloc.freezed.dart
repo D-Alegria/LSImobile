@@ -24,6 +24,11 @@ class _$EditProfileEventTearOff {
   }
 
 // ignore: unused_element
+  SubmitEduAndEmpForm submitEduAndEmpForm() {
+    return const SubmitEduAndEmpForm();
+  }
+
+// ignore: unused_element
   EmailChanged emailChanged(String email) {
     return EmailChanged(
       email,
@@ -64,6 +69,48 @@ class _$EditProfileEventTearOff {
       dateOfBirth,
     );
   }
+
+// ignore: unused_element
+  LevelOfEducationChanged levelOfEducationChanged(String levelOfEducation) {
+    return LevelOfEducationChanged(
+      levelOfEducation,
+    );
+  }
+
+// ignore: unused_element
+  EmploymentStatusChanged employmentStatusChanged(String employmentStatus) {
+    return EmploymentStatusChanged(
+      employmentStatus,
+    );
+  }
+
+// ignore: unused_element
+  WorkSectorChanged workSectorChanged(String workSector) {
+    return WorkSectorChanged(
+      workSector,
+    );
+  }
+
+// ignore: unused_element
+  EmployerNameChanged employerNameChanged(String employerName) {
+    return EmployerNameChanged(
+      employerName,
+    );
+  }
+
+// ignore: unused_element
+  StartDateChanged startDateChanged(String startDate) {
+    return StartDateChanged(
+      startDate,
+    );
+  }
+
+// ignore: unused_element
+  MonthlyIncomeChanged monthlyIncomeChanged(String monthlyIncome) {
+    return MonthlyIncomeChanged(
+      monthlyIncome,
+    );
+  }
 }
 
 /// @nodoc
@@ -76,46 +123,74 @@ mixin _$EditProfileEvent {
   Result when<Result extends Object>({
     @required Result init(),
     @required Result submitEditProfileForm(),
+    @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
     @required Result firstNameChanged(String firstName),
     @required Result lastNameChanged(String lastName),
     @required Result phoneNumberChanged(String phoneNumber),
     @required Result genderChanged(String gender),
     @required Result dateOfBirthChanged(String dateOfBirth),
+    @required Result levelOfEducationChanged(String levelOfEducation),
+    @required Result employmentStatusChanged(String employmentStatus),
+    @required Result workSectorChanged(String workSector),
+    @required Result employerNameChanged(String employerName),
+    @required Result startDateChanged(String startDate),
+    @required Result monthlyIncomeChanged(String monthlyIncome),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result init(),
     Result submitEditProfileForm(),
+    Result submitEduAndEmpForm(),
     Result emailChanged(String email),
     Result firstNameChanged(String firstName),
     Result lastNameChanged(String lastName),
     Result phoneNumberChanged(String phoneNumber),
     Result genderChanged(String gender),
     Result dateOfBirthChanged(String dateOfBirth),
+    Result levelOfEducationChanged(String levelOfEducation),
+    Result employmentStatusChanged(String employmentStatus),
+    Result workSectorChanged(String workSector),
+    Result employerNameChanged(String employerName),
+    Result startDateChanged(String startDate),
+    Result monthlyIncomeChanged(String monthlyIncome),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result init(Init value),
     @required Result submitEditProfileForm(SubmitEditProfileForm value),
+    @required Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
     @required Result emailChanged(EmailChanged value),
     @required Result firstNameChanged(FirstNameChanged value),
     @required Result lastNameChanged(LastNameChanged value),
     @required Result phoneNumberChanged(PhoneNumberChanged value),
     @required Result genderChanged(GenderChanged value),
     @required Result dateOfBirthChanged(DateOfBirthChanged value),
+    @required Result levelOfEducationChanged(LevelOfEducationChanged value),
+    @required Result employmentStatusChanged(EmploymentStatusChanged value),
+    @required Result workSectorChanged(WorkSectorChanged value),
+    @required Result employerNameChanged(EmployerNameChanged value),
+    @required Result startDateChanged(StartDateChanged value),
+    @required Result monthlyIncomeChanged(MonthlyIncomeChanged value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result init(Init value),
     Result submitEditProfileForm(SubmitEditProfileForm value),
+    Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
     Result emailChanged(EmailChanged value),
     Result firstNameChanged(FirstNameChanged value),
     Result lastNameChanged(LastNameChanged value),
     Result phoneNumberChanged(PhoneNumberChanged value),
     Result genderChanged(GenderChanged value),
     Result dateOfBirthChanged(DateOfBirthChanged value),
+    Result levelOfEducationChanged(LevelOfEducationChanged value),
+    Result employmentStatusChanged(EmploymentStatusChanged value),
+    Result workSectorChanged(WorkSectorChanged value),
+    Result employerNameChanged(EmployerNameChanged value),
+    Result startDateChanged(StartDateChanged value),
+    Result monthlyIncomeChanged(MonthlyIncomeChanged value),
     @required Result orElse(),
   });
 }
@@ -175,21 +250,35 @@ class _$Init implements Init {
   Result when<Result extends Object>({
     @required Result init(),
     @required Result submitEditProfileForm(),
+    @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
     @required Result firstNameChanged(String firstName),
     @required Result lastNameChanged(String lastName),
     @required Result phoneNumberChanged(String phoneNumber),
     @required Result genderChanged(String gender),
     @required Result dateOfBirthChanged(String dateOfBirth),
+    @required Result levelOfEducationChanged(String levelOfEducation),
+    @required Result employmentStatusChanged(String employmentStatus),
+    @required Result workSectorChanged(String workSector),
+    @required Result employerNameChanged(String employerName),
+    @required Result startDateChanged(String startDate),
+    @required Result monthlyIncomeChanged(String monthlyIncome),
   }) {
     assert(init != null);
     assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
     assert(emailChanged != null);
     assert(firstNameChanged != null);
     assert(lastNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(genderChanged != null);
     assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
     return init();
   }
 
@@ -198,12 +287,19 @@ class _$Init implements Init {
   Result maybeWhen<Result extends Object>({
     Result init(),
     Result submitEditProfileForm(),
+    Result submitEduAndEmpForm(),
     Result emailChanged(String email),
     Result firstNameChanged(String firstName),
     Result lastNameChanged(String lastName),
     Result phoneNumberChanged(String phoneNumber),
     Result genderChanged(String gender),
     Result dateOfBirthChanged(String dateOfBirth),
+    Result levelOfEducationChanged(String levelOfEducation),
+    Result employmentStatusChanged(String employmentStatus),
+    Result workSectorChanged(String workSector),
+    Result employerNameChanged(String employerName),
+    Result startDateChanged(String startDate),
+    Result monthlyIncomeChanged(String monthlyIncome),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -218,21 +314,35 @@ class _$Init implements Init {
   Result map<Result extends Object>({
     @required Result init(Init value),
     @required Result submitEditProfileForm(SubmitEditProfileForm value),
+    @required Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
     @required Result emailChanged(EmailChanged value),
     @required Result firstNameChanged(FirstNameChanged value),
     @required Result lastNameChanged(LastNameChanged value),
     @required Result phoneNumberChanged(PhoneNumberChanged value),
     @required Result genderChanged(GenderChanged value),
     @required Result dateOfBirthChanged(DateOfBirthChanged value),
+    @required Result levelOfEducationChanged(LevelOfEducationChanged value),
+    @required Result employmentStatusChanged(EmploymentStatusChanged value),
+    @required Result workSectorChanged(WorkSectorChanged value),
+    @required Result employerNameChanged(EmployerNameChanged value),
+    @required Result startDateChanged(StartDateChanged value),
+    @required Result monthlyIncomeChanged(MonthlyIncomeChanged value),
   }) {
     assert(init != null);
     assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
     assert(emailChanged != null);
     assert(firstNameChanged != null);
     assert(lastNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(genderChanged != null);
     assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
     return init(this);
   }
 
@@ -241,12 +351,19 @@ class _$Init implements Init {
   Result maybeMap<Result extends Object>({
     Result init(Init value),
     Result submitEditProfileForm(SubmitEditProfileForm value),
+    Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
     Result emailChanged(EmailChanged value),
     Result firstNameChanged(FirstNameChanged value),
     Result lastNameChanged(LastNameChanged value),
     Result phoneNumberChanged(PhoneNumberChanged value),
     Result genderChanged(GenderChanged value),
     Result dateOfBirthChanged(DateOfBirthChanged value),
+    Result levelOfEducationChanged(LevelOfEducationChanged value),
+    Result employmentStatusChanged(EmploymentStatusChanged value),
+    Result workSectorChanged(WorkSectorChanged value),
+    Result employerNameChanged(EmployerNameChanged value),
+    Result startDateChanged(StartDateChanged value),
+    Result monthlyIncomeChanged(MonthlyIncomeChanged value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -302,21 +419,35 @@ class _$SubmitEditProfileForm implements SubmitEditProfileForm {
   Result when<Result extends Object>({
     @required Result init(),
     @required Result submitEditProfileForm(),
+    @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
     @required Result firstNameChanged(String firstName),
     @required Result lastNameChanged(String lastName),
     @required Result phoneNumberChanged(String phoneNumber),
     @required Result genderChanged(String gender),
     @required Result dateOfBirthChanged(String dateOfBirth),
+    @required Result levelOfEducationChanged(String levelOfEducation),
+    @required Result employmentStatusChanged(String employmentStatus),
+    @required Result workSectorChanged(String workSector),
+    @required Result employerNameChanged(String employerName),
+    @required Result startDateChanged(String startDate),
+    @required Result monthlyIncomeChanged(String monthlyIncome),
   }) {
     assert(init != null);
     assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
     assert(emailChanged != null);
     assert(firstNameChanged != null);
     assert(lastNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(genderChanged != null);
     assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
     return submitEditProfileForm();
   }
 
@@ -325,12 +456,19 @@ class _$SubmitEditProfileForm implements SubmitEditProfileForm {
   Result maybeWhen<Result extends Object>({
     Result init(),
     Result submitEditProfileForm(),
+    Result submitEduAndEmpForm(),
     Result emailChanged(String email),
     Result firstNameChanged(String firstName),
     Result lastNameChanged(String lastName),
     Result phoneNumberChanged(String phoneNumber),
     Result genderChanged(String gender),
     Result dateOfBirthChanged(String dateOfBirth),
+    Result levelOfEducationChanged(String levelOfEducation),
+    Result employmentStatusChanged(String employmentStatus),
+    Result workSectorChanged(String workSector),
+    Result employerNameChanged(String employerName),
+    Result startDateChanged(String startDate),
+    Result monthlyIncomeChanged(String monthlyIncome),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -345,21 +483,35 @@ class _$SubmitEditProfileForm implements SubmitEditProfileForm {
   Result map<Result extends Object>({
     @required Result init(Init value),
     @required Result submitEditProfileForm(SubmitEditProfileForm value),
+    @required Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
     @required Result emailChanged(EmailChanged value),
     @required Result firstNameChanged(FirstNameChanged value),
     @required Result lastNameChanged(LastNameChanged value),
     @required Result phoneNumberChanged(PhoneNumberChanged value),
     @required Result genderChanged(GenderChanged value),
     @required Result dateOfBirthChanged(DateOfBirthChanged value),
+    @required Result levelOfEducationChanged(LevelOfEducationChanged value),
+    @required Result employmentStatusChanged(EmploymentStatusChanged value),
+    @required Result workSectorChanged(WorkSectorChanged value),
+    @required Result employerNameChanged(EmployerNameChanged value),
+    @required Result startDateChanged(StartDateChanged value),
+    @required Result monthlyIncomeChanged(MonthlyIncomeChanged value),
   }) {
     assert(init != null);
     assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
     assert(emailChanged != null);
     assert(firstNameChanged != null);
     assert(lastNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(genderChanged != null);
     assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
     return submitEditProfileForm(this);
   }
 
@@ -368,12 +520,19 @@ class _$SubmitEditProfileForm implements SubmitEditProfileForm {
   Result maybeMap<Result extends Object>({
     Result init(Init value),
     Result submitEditProfileForm(SubmitEditProfileForm value),
+    Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
     Result emailChanged(EmailChanged value),
     Result firstNameChanged(FirstNameChanged value),
     Result lastNameChanged(LastNameChanged value),
     Result phoneNumberChanged(PhoneNumberChanged value),
     Result genderChanged(GenderChanged value),
     Result dateOfBirthChanged(DateOfBirthChanged value),
+    Result levelOfEducationChanged(LevelOfEducationChanged value),
+    Result employmentStatusChanged(EmploymentStatusChanged value),
+    Result workSectorChanged(WorkSectorChanged value),
+    Result employerNameChanged(EmployerNameChanged value),
+    Result startDateChanged(StartDateChanged value),
+    Result monthlyIncomeChanged(MonthlyIncomeChanged value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -386,6 +545,175 @@ class _$SubmitEditProfileForm implements SubmitEditProfileForm {
 
 abstract class SubmitEditProfileForm implements EditProfileEvent {
   const factory SubmitEditProfileForm() = _$SubmitEditProfileForm;
+}
+
+/// @nodoc
+abstract class $SubmitEduAndEmpFormCopyWith<$Res> {
+  factory $SubmitEduAndEmpFormCopyWith(
+          SubmitEduAndEmpForm value, $Res Function(SubmitEduAndEmpForm) then) =
+      _$SubmitEduAndEmpFormCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$SubmitEduAndEmpFormCopyWithImpl<$Res>
+    extends _$EditProfileEventCopyWithImpl<$Res>
+    implements $SubmitEduAndEmpFormCopyWith<$Res> {
+  _$SubmitEduAndEmpFormCopyWithImpl(
+      SubmitEduAndEmpForm _value, $Res Function(SubmitEduAndEmpForm) _then)
+      : super(_value, (v) => _then(v as SubmitEduAndEmpForm));
+
+  @override
+  SubmitEduAndEmpForm get _value => super._value as SubmitEduAndEmpForm;
+}
+
+/// @nodoc
+class _$SubmitEduAndEmpForm implements SubmitEduAndEmpForm {
+  const _$SubmitEduAndEmpForm();
+
+  @override
+  String toString() {
+    return 'EditProfileEvent.submitEduAndEmpForm()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is SubmitEduAndEmpForm);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result init(),
+    @required Result submitEditProfileForm(),
+    @required Result submitEduAndEmpForm(),
+    @required Result emailChanged(String email),
+    @required Result firstNameChanged(String firstName),
+    @required Result lastNameChanged(String lastName),
+    @required Result phoneNumberChanged(String phoneNumber),
+    @required Result genderChanged(String gender),
+    @required Result dateOfBirthChanged(String dateOfBirth),
+    @required Result levelOfEducationChanged(String levelOfEducation),
+    @required Result employmentStatusChanged(String employmentStatus),
+    @required Result workSectorChanged(String workSector),
+    @required Result employerNameChanged(String employerName),
+    @required Result startDateChanged(String startDate),
+    @required Result monthlyIncomeChanged(String monthlyIncome),
+  }) {
+    assert(init != null);
+    assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
+    assert(emailChanged != null);
+    assert(firstNameChanged != null);
+    assert(lastNameChanged != null);
+    assert(phoneNumberChanged != null);
+    assert(genderChanged != null);
+    assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
+    return submitEduAndEmpForm();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result init(),
+    Result submitEditProfileForm(),
+    Result submitEduAndEmpForm(),
+    Result emailChanged(String email),
+    Result firstNameChanged(String firstName),
+    Result lastNameChanged(String lastName),
+    Result phoneNumberChanged(String phoneNumber),
+    Result genderChanged(String gender),
+    Result dateOfBirthChanged(String dateOfBirth),
+    Result levelOfEducationChanged(String levelOfEducation),
+    Result employmentStatusChanged(String employmentStatus),
+    Result workSectorChanged(String workSector),
+    Result employerNameChanged(String employerName),
+    Result startDateChanged(String startDate),
+    Result monthlyIncomeChanged(String monthlyIncome),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (submitEduAndEmpForm != null) {
+      return submitEduAndEmpForm();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result init(Init value),
+    @required Result submitEditProfileForm(SubmitEditProfileForm value),
+    @required Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
+    @required Result emailChanged(EmailChanged value),
+    @required Result firstNameChanged(FirstNameChanged value),
+    @required Result lastNameChanged(LastNameChanged value),
+    @required Result phoneNumberChanged(PhoneNumberChanged value),
+    @required Result genderChanged(GenderChanged value),
+    @required Result dateOfBirthChanged(DateOfBirthChanged value),
+    @required Result levelOfEducationChanged(LevelOfEducationChanged value),
+    @required Result employmentStatusChanged(EmploymentStatusChanged value),
+    @required Result workSectorChanged(WorkSectorChanged value),
+    @required Result employerNameChanged(EmployerNameChanged value),
+    @required Result startDateChanged(StartDateChanged value),
+    @required Result monthlyIncomeChanged(MonthlyIncomeChanged value),
+  }) {
+    assert(init != null);
+    assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
+    assert(emailChanged != null);
+    assert(firstNameChanged != null);
+    assert(lastNameChanged != null);
+    assert(phoneNumberChanged != null);
+    assert(genderChanged != null);
+    assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
+    return submitEduAndEmpForm(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result init(Init value),
+    Result submitEditProfileForm(SubmitEditProfileForm value),
+    Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
+    Result emailChanged(EmailChanged value),
+    Result firstNameChanged(FirstNameChanged value),
+    Result lastNameChanged(LastNameChanged value),
+    Result phoneNumberChanged(PhoneNumberChanged value),
+    Result genderChanged(GenderChanged value),
+    Result dateOfBirthChanged(DateOfBirthChanged value),
+    Result levelOfEducationChanged(LevelOfEducationChanged value),
+    Result employmentStatusChanged(EmploymentStatusChanged value),
+    Result workSectorChanged(WorkSectorChanged value),
+    Result employerNameChanged(EmployerNameChanged value),
+    Result startDateChanged(StartDateChanged value),
+    Result monthlyIncomeChanged(MonthlyIncomeChanged value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (submitEduAndEmpForm != null) {
+      return submitEduAndEmpForm(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SubmitEduAndEmpForm implements EditProfileEvent {
+  const factory SubmitEduAndEmpForm() = _$SubmitEduAndEmpForm;
 }
 
 /// @nodoc
@@ -450,21 +778,35 @@ class _$EmailChanged implements EmailChanged {
   Result when<Result extends Object>({
     @required Result init(),
     @required Result submitEditProfileForm(),
+    @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
     @required Result firstNameChanged(String firstName),
     @required Result lastNameChanged(String lastName),
     @required Result phoneNumberChanged(String phoneNumber),
     @required Result genderChanged(String gender),
     @required Result dateOfBirthChanged(String dateOfBirth),
+    @required Result levelOfEducationChanged(String levelOfEducation),
+    @required Result employmentStatusChanged(String employmentStatus),
+    @required Result workSectorChanged(String workSector),
+    @required Result employerNameChanged(String employerName),
+    @required Result startDateChanged(String startDate),
+    @required Result monthlyIncomeChanged(String monthlyIncome),
   }) {
     assert(init != null);
     assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
     assert(emailChanged != null);
     assert(firstNameChanged != null);
     assert(lastNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(genderChanged != null);
     assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
     return emailChanged(email);
   }
 
@@ -473,12 +815,19 @@ class _$EmailChanged implements EmailChanged {
   Result maybeWhen<Result extends Object>({
     Result init(),
     Result submitEditProfileForm(),
+    Result submitEduAndEmpForm(),
     Result emailChanged(String email),
     Result firstNameChanged(String firstName),
     Result lastNameChanged(String lastName),
     Result phoneNumberChanged(String phoneNumber),
     Result genderChanged(String gender),
     Result dateOfBirthChanged(String dateOfBirth),
+    Result levelOfEducationChanged(String levelOfEducation),
+    Result employmentStatusChanged(String employmentStatus),
+    Result workSectorChanged(String workSector),
+    Result employerNameChanged(String employerName),
+    Result startDateChanged(String startDate),
+    Result monthlyIncomeChanged(String monthlyIncome),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -493,21 +842,35 @@ class _$EmailChanged implements EmailChanged {
   Result map<Result extends Object>({
     @required Result init(Init value),
     @required Result submitEditProfileForm(SubmitEditProfileForm value),
+    @required Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
     @required Result emailChanged(EmailChanged value),
     @required Result firstNameChanged(FirstNameChanged value),
     @required Result lastNameChanged(LastNameChanged value),
     @required Result phoneNumberChanged(PhoneNumberChanged value),
     @required Result genderChanged(GenderChanged value),
     @required Result dateOfBirthChanged(DateOfBirthChanged value),
+    @required Result levelOfEducationChanged(LevelOfEducationChanged value),
+    @required Result employmentStatusChanged(EmploymentStatusChanged value),
+    @required Result workSectorChanged(WorkSectorChanged value),
+    @required Result employerNameChanged(EmployerNameChanged value),
+    @required Result startDateChanged(StartDateChanged value),
+    @required Result monthlyIncomeChanged(MonthlyIncomeChanged value),
   }) {
     assert(init != null);
     assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
     assert(emailChanged != null);
     assert(firstNameChanged != null);
     assert(lastNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(genderChanged != null);
     assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
     return emailChanged(this);
   }
 
@@ -516,12 +879,19 @@ class _$EmailChanged implements EmailChanged {
   Result maybeMap<Result extends Object>({
     Result init(Init value),
     Result submitEditProfileForm(SubmitEditProfileForm value),
+    Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
     Result emailChanged(EmailChanged value),
     Result firstNameChanged(FirstNameChanged value),
     Result lastNameChanged(LastNameChanged value),
     Result phoneNumberChanged(PhoneNumberChanged value),
     Result genderChanged(GenderChanged value),
     Result dateOfBirthChanged(DateOfBirthChanged value),
+    Result levelOfEducationChanged(LevelOfEducationChanged value),
+    Result employmentStatusChanged(EmploymentStatusChanged value),
+    Result workSectorChanged(WorkSectorChanged value),
+    Result employerNameChanged(EmployerNameChanged value),
+    Result startDateChanged(StartDateChanged value),
+    Result monthlyIncomeChanged(MonthlyIncomeChanged value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -602,21 +972,35 @@ class _$FirstNameChanged implements FirstNameChanged {
   Result when<Result extends Object>({
     @required Result init(),
     @required Result submitEditProfileForm(),
+    @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
     @required Result firstNameChanged(String firstName),
     @required Result lastNameChanged(String lastName),
     @required Result phoneNumberChanged(String phoneNumber),
     @required Result genderChanged(String gender),
     @required Result dateOfBirthChanged(String dateOfBirth),
+    @required Result levelOfEducationChanged(String levelOfEducation),
+    @required Result employmentStatusChanged(String employmentStatus),
+    @required Result workSectorChanged(String workSector),
+    @required Result employerNameChanged(String employerName),
+    @required Result startDateChanged(String startDate),
+    @required Result monthlyIncomeChanged(String monthlyIncome),
   }) {
     assert(init != null);
     assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
     assert(emailChanged != null);
     assert(firstNameChanged != null);
     assert(lastNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(genderChanged != null);
     assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
     return firstNameChanged(firstName);
   }
 
@@ -625,12 +1009,19 @@ class _$FirstNameChanged implements FirstNameChanged {
   Result maybeWhen<Result extends Object>({
     Result init(),
     Result submitEditProfileForm(),
+    Result submitEduAndEmpForm(),
     Result emailChanged(String email),
     Result firstNameChanged(String firstName),
     Result lastNameChanged(String lastName),
     Result phoneNumberChanged(String phoneNumber),
     Result genderChanged(String gender),
     Result dateOfBirthChanged(String dateOfBirth),
+    Result levelOfEducationChanged(String levelOfEducation),
+    Result employmentStatusChanged(String employmentStatus),
+    Result workSectorChanged(String workSector),
+    Result employerNameChanged(String employerName),
+    Result startDateChanged(String startDate),
+    Result monthlyIncomeChanged(String monthlyIncome),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -645,21 +1036,35 @@ class _$FirstNameChanged implements FirstNameChanged {
   Result map<Result extends Object>({
     @required Result init(Init value),
     @required Result submitEditProfileForm(SubmitEditProfileForm value),
+    @required Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
     @required Result emailChanged(EmailChanged value),
     @required Result firstNameChanged(FirstNameChanged value),
     @required Result lastNameChanged(LastNameChanged value),
     @required Result phoneNumberChanged(PhoneNumberChanged value),
     @required Result genderChanged(GenderChanged value),
     @required Result dateOfBirthChanged(DateOfBirthChanged value),
+    @required Result levelOfEducationChanged(LevelOfEducationChanged value),
+    @required Result employmentStatusChanged(EmploymentStatusChanged value),
+    @required Result workSectorChanged(WorkSectorChanged value),
+    @required Result employerNameChanged(EmployerNameChanged value),
+    @required Result startDateChanged(StartDateChanged value),
+    @required Result monthlyIncomeChanged(MonthlyIncomeChanged value),
   }) {
     assert(init != null);
     assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
     assert(emailChanged != null);
     assert(firstNameChanged != null);
     assert(lastNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(genderChanged != null);
     assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
     return firstNameChanged(this);
   }
 
@@ -668,12 +1073,19 @@ class _$FirstNameChanged implements FirstNameChanged {
   Result maybeMap<Result extends Object>({
     Result init(Init value),
     Result submitEditProfileForm(SubmitEditProfileForm value),
+    Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
     Result emailChanged(EmailChanged value),
     Result firstNameChanged(FirstNameChanged value),
     Result lastNameChanged(LastNameChanged value),
     Result phoneNumberChanged(PhoneNumberChanged value),
     Result genderChanged(GenderChanged value),
     Result dateOfBirthChanged(DateOfBirthChanged value),
+    Result levelOfEducationChanged(LevelOfEducationChanged value),
+    Result employmentStatusChanged(EmploymentStatusChanged value),
+    Result workSectorChanged(WorkSectorChanged value),
+    Result employerNameChanged(EmployerNameChanged value),
+    Result startDateChanged(StartDateChanged value),
+    Result monthlyIncomeChanged(MonthlyIncomeChanged value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -754,21 +1166,35 @@ class _$LastNameChanged implements LastNameChanged {
   Result when<Result extends Object>({
     @required Result init(),
     @required Result submitEditProfileForm(),
+    @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
     @required Result firstNameChanged(String firstName),
     @required Result lastNameChanged(String lastName),
     @required Result phoneNumberChanged(String phoneNumber),
     @required Result genderChanged(String gender),
     @required Result dateOfBirthChanged(String dateOfBirth),
+    @required Result levelOfEducationChanged(String levelOfEducation),
+    @required Result employmentStatusChanged(String employmentStatus),
+    @required Result workSectorChanged(String workSector),
+    @required Result employerNameChanged(String employerName),
+    @required Result startDateChanged(String startDate),
+    @required Result monthlyIncomeChanged(String monthlyIncome),
   }) {
     assert(init != null);
     assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
     assert(emailChanged != null);
     assert(firstNameChanged != null);
     assert(lastNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(genderChanged != null);
     assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
     return lastNameChanged(lastName);
   }
 
@@ -777,12 +1203,19 @@ class _$LastNameChanged implements LastNameChanged {
   Result maybeWhen<Result extends Object>({
     Result init(),
     Result submitEditProfileForm(),
+    Result submitEduAndEmpForm(),
     Result emailChanged(String email),
     Result firstNameChanged(String firstName),
     Result lastNameChanged(String lastName),
     Result phoneNumberChanged(String phoneNumber),
     Result genderChanged(String gender),
     Result dateOfBirthChanged(String dateOfBirth),
+    Result levelOfEducationChanged(String levelOfEducation),
+    Result employmentStatusChanged(String employmentStatus),
+    Result workSectorChanged(String workSector),
+    Result employerNameChanged(String employerName),
+    Result startDateChanged(String startDate),
+    Result monthlyIncomeChanged(String monthlyIncome),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -797,21 +1230,35 @@ class _$LastNameChanged implements LastNameChanged {
   Result map<Result extends Object>({
     @required Result init(Init value),
     @required Result submitEditProfileForm(SubmitEditProfileForm value),
+    @required Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
     @required Result emailChanged(EmailChanged value),
     @required Result firstNameChanged(FirstNameChanged value),
     @required Result lastNameChanged(LastNameChanged value),
     @required Result phoneNumberChanged(PhoneNumberChanged value),
     @required Result genderChanged(GenderChanged value),
     @required Result dateOfBirthChanged(DateOfBirthChanged value),
+    @required Result levelOfEducationChanged(LevelOfEducationChanged value),
+    @required Result employmentStatusChanged(EmploymentStatusChanged value),
+    @required Result workSectorChanged(WorkSectorChanged value),
+    @required Result employerNameChanged(EmployerNameChanged value),
+    @required Result startDateChanged(StartDateChanged value),
+    @required Result monthlyIncomeChanged(MonthlyIncomeChanged value),
   }) {
     assert(init != null);
     assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
     assert(emailChanged != null);
     assert(firstNameChanged != null);
     assert(lastNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(genderChanged != null);
     assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
     return lastNameChanged(this);
   }
 
@@ -820,12 +1267,19 @@ class _$LastNameChanged implements LastNameChanged {
   Result maybeMap<Result extends Object>({
     Result init(Init value),
     Result submitEditProfileForm(SubmitEditProfileForm value),
+    Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
     Result emailChanged(EmailChanged value),
     Result firstNameChanged(FirstNameChanged value),
     Result lastNameChanged(LastNameChanged value),
     Result phoneNumberChanged(PhoneNumberChanged value),
     Result genderChanged(GenderChanged value),
     Result dateOfBirthChanged(DateOfBirthChanged value),
+    Result levelOfEducationChanged(LevelOfEducationChanged value),
+    Result employmentStatusChanged(EmploymentStatusChanged value),
+    Result workSectorChanged(WorkSectorChanged value),
+    Result employerNameChanged(EmployerNameChanged value),
+    Result startDateChanged(StartDateChanged value),
+    Result monthlyIncomeChanged(MonthlyIncomeChanged value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -906,21 +1360,35 @@ class _$PhoneNumberChanged implements PhoneNumberChanged {
   Result when<Result extends Object>({
     @required Result init(),
     @required Result submitEditProfileForm(),
+    @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
     @required Result firstNameChanged(String firstName),
     @required Result lastNameChanged(String lastName),
     @required Result phoneNumberChanged(String phoneNumber),
     @required Result genderChanged(String gender),
     @required Result dateOfBirthChanged(String dateOfBirth),
+    @required Result levelOfEducationChanged(String levelOfEducation),
+    @required Result employmentStatusChanged(String employmentStatus),
+    @required Result workSectorChanged(String workSector),
+    @required Result employerNameChanged(String employerName),
+    @required Result startDateChanged(String startDate),
+    @required Result monthlyIncomeChanged(String monthlyIncome),
   }) {
     assert(init != null);
     assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
     assert(emailChanged != null);
     assert(firstNameChanged != null);
     assert(lastNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(genderChanged != null);
     assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
     return phoneNumberChanged(phoneNumber);
   }
 
@@ -929,12 +1397,19 @@ class _$PhoneNumberChanged implements PhoneNumberChanged {
   Result maybeWhen<Result extends Object>({
     Result init(),
     Result submitEditProfileForm(),
+    Result submitEduAndEmpForm(),
     Result emailChanged(String email),
     Result firstNameChanged(String firstName),
     Result lastNameChanged(String lastName),
     Result phoneNumberChanged(String phoneNumber),
     Result genderChanged(String gender),
     Result dateOfBirthChanged(String dateOfBirth),
+    Result levelOfEducationChanged(String levelOfEducation),
+    Result employmentStatusChanged(String employmentStatus),
+    Result workSectorChanged(String workSector),
+    Result employerNameChanged(String employerName),
+    Result startDateChanged(String startDate),
+    Result monthlyIncomeChanged(String monthlyIncome),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -949,21 +1424,35 @@ class _$PhoneNumberChanged implements PhoneNumberChanged {
   Result map<Result extends Object>({
     @required Result init(Init value),
     @required Result submitEditProfileForm(SubmitEditProfileForm value),
+    @required Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
     @required Result emailChanged(EmailChanged value),
     @required Result firstNameChanged(FirstNameChanged value),
     @required Result lastNameChanged(LastNameChanged value),
     @required Result phoneNumberChanged(PhoneNumberChanged value),
     @required Result genderChanged(GenderChanged value),
     @required Result dateOfBirthChanged(DateOfBirthChanged value),
+    @required Result levelOfEducationChanged(LevelOfEducationChanged value),
+    @required Result employmentStatusChanged(EmploymentStatusChanged value),
+    @required Result workSectorChanged(WorkSectorChanged value),
+    @required Result employerNameChanged(EmployerNameChanged value),
+    @required Result startDateChanged(StartDateChanged value),
+    @required Result monthlyIncomeChanged(MonthlyIncomeChanged value),
   }) {
     assert(init != null);
     assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
     assert(emailChanged != null);
     assert(firstNameChanged != null);
     assert(lastNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(genderChanged != null);
     assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
     return phoneNumberChanged(this);
   }
 
@@ -972,12 +1461,19 @@ class _$PhoneNumberChanged implements PhoneNumberChanged {
   Result maybeMap<Result extends Object>({
     Result init(Init value),
     Result submitEditProfileForm(SubmitEditProfileForm value),
+    Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
     Result emailChanged(EmailChanged value),
     Result firstNameChanged(FirstNameChanged value),
     Result lastNameChanged(LastNameChanged value),
     Result phoneNumberChanged(PhoneNumberChanged value),
     Result genderChanged(GenderChanged value),
     Result dateOfBirthChanged(DateOfBirthChanged value),
+    Result levelOfEducationChanged(LevelOfEducationChanged value),
+    Result employmentStatusChanged(EmploymentStatusChanged value),
+    Result workSectorChanged(WorkSectorChanged value),
+    Result employerNameChanged(EmployerNameChanged value),
+    Result startDateChanged(StartDateChanged value),
+    Result monthlyIncomeChanged(MonthlyIncomeChanged value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -1057,21 +1553,35 @@ class _$GenderChanged implements GenderChanged {
   Result when<Result extends Object>({
     @required Result init(),
     @required Result submitEditProfileForm(),
+    @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
     @required Result firstNameChanged(String firstName),
     @required Result lastNameChanged(String lastName),
     @required Result phoneNumberChanged(String phoneNumber),
     @required Result genderChanged(String gender),
     @required Result dateOfBirthChanged(String dateOfBirth),
+    @required Result levelOfEducationChanged(String levelOfEducation),
+    @required Result employmentStatusChanged(String employmentStatus),
+    @required Result workSectorChanged(String workSector),
+    @required Result employerNameChanged(String employerName),
+    @required Result startDateChanged(String startDate),
+    @required Result monthlyIncomeChanged(String monthlyIncome),
   }) {
     assert(init != null);
     assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
     assert(emailChanged != null);
     assert(firstNameChanged != null);
     assert(lastNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(genderChanged != null);
     assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
     return genderChanged(gender);
   }
 
@@ -1080,12 +1590,19 @@ class _$GenderChanged implements GenderChanged {
   Result maybeWhen<Result extends Object>({
     Result init(),
     Result submitEditProfileForm(),
+    Result submitEduAndEmpForm(),
     Result emailChanged(String email),
     Result firstNameChanged(String firstName),
     Result lastNameChanged(String lastName),
     Result phoneNumberChanged(String phoneNumber),
     Result genderChanged(String gender),
     Result dateOfBirthChanged(String dateOfBirth),
+    Result levelOfEducationChanged(String levelOfEducation),
+    Result employmentStatusChanged(String employmentStatus),
+    Result workSectorChanged(String workSector),
+    Result employerNameChanged(String employerName),
+    Result startDateChanged(String startDate),
+    Result monthlyIncomeChanged(String monthlyIncome),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -1100,21 +1617,35 @@ class _$GenderChanged implements GenderChanged {
   Result map<Result extends Object>({
     @required Result init(Init value),
     @required Result submitEditProfileForm(SubmitEditProfileForm value),
+    @required Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
     @required Result emailChanged(EmailChanged value),
     @required Result firstNameChanged(FirstNameChanged value),
     @required Result lastNameChanged(LastNameChanged value),
     @required Result phoneNumberChanged(PhoneNumberChanged value),
     @required Result genderChanged(GenderChanged value),
     @required Result dateOfBirthChanged(DateOfBirthChanged value),
+    @required Result levelOfEducationChanged(LevelOfEducationChanged value),
+    @required Result employmentStatusChanged(EmploymentStatusChanged value),
+    @required Result workSectorChanged(WorkSectorChanged value),
+    @required Result employerNameChanged(EmployerNameChanged value),
+    @required Result startDateChanged(StartDateChanged value),
+    @required Result monthlyIncomeChanged(MonthlyIncomeChanged value),
   }) {
     assert(init != null);
     assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
     assert(emailChanged != null);
     assert(firstNameChanged != null);
     assert(lastNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(genderChanged != null);
     assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
     return genderChanged(this);
   }
 
@@ -1123,12 +1654,19 @@ class _$GenderChanged implements GenderChanged {
   Result maybeMap<Result extends Object>({
     Result init(Init value),
     Result submitEditProfileForm(SubmitEditProfileForm value),
+    Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
     Result emailChanged(EmailChanged value),
     Result firstNameChanged(FirstNameChanged value),
     Result lastNameChanged(LastNameChanged value),
     Result phoneNumberChanged(PhoneNumberChanged value),
     Result genderChanged(GenderChanged value),
     Result dateOfBirthChanged(DateOfBirthChanged value),
+    Result levelOfEducationChanged(LevelOfEducationChanged value),
+    Result employmentStatusChanged(EmploymentStatusChanged value),
+    Result workSectorChanged(WorkSectorChanged value),
+    Result employerNameChanged(EmployerNameChanged value),
+    Result startDateChanged(StartDateChanged value),
+    Result monthlyIncomeChanged(MonthlyIncomeChanged value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -1209,21 +1747,35 @@ class _$DateOfBirthChanged implements DateOfBirthChanged {
   Result when<Result extends Object>({
     @required Result init(),
     @required Result submitEditProfileForm(),
+    @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
     @required Result firstNameChanged(String firstName),
     @required Result lastNameChanged(String lastName),
     @required Result phoneNumberChanged(String phoneNumber),
     @required Result genderChanged(String gender),
     @required Result dateOfBirthChanged(String dateOfBirth),
+    @required Result levelOfEducationChanged(String levelOfEducation),
+    @required Result employmentStatusChanged(String employmentStatus),
+    @required Result workSectorChanged(String workSector),
+    @required Result employerNameChanged(String employerName),
+    @required Result startDateChanged(String startDate),
+    @required Result monthlyIncomeChanged(String monthlyIncome),
   }) {
     assert(init != null);
     assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
     assert(emailChanged != null);
     assert(firstNameChanged != null);
     assert(lastNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(genderChanged != null);
     assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
     return dateOfBirthChanged(dateOfBirth);
   }
 
@@ -1232,12 +1784,19 @@ class _$DateOfBirthChanged implements DateOfBirthChanged {
   Result maybeWhen<Result extends Object>({
     Result init(),
     Result submitEditProfileForm(),
+    Result submitEduAndEmpForm(),
     Result emailChanged(String email),
     Result firstNameChanged(String firstName),
     Result lastNameChanged(String lastName),
     Result phoneNumberChanged(String phoneNumber),
     Result genderChanged(String gender),
     Result dateOfBirthChanged(String dateOfBirth),
+    Result levelOfEducationChanged(String levelOfEducation),
+    Result employmentStatusChanged(String employmentStatus),
+    Result workSectorChanged(String workSector),
+    Result employerNameChanged(String employerName),
+    Result startDateChanged(String startDate),
+    Result monthlyIncomeChanged(String monthlyIncome),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -1252,21 +1811,35 @@ class _$DateOfBirthChanged implements DateOfBirthChanged {
   Result map<Result extends Object>({
     @required Result init(Init value),
     @required Result submitEditProfileForm(SubmitEditProfileForm value),
+    @required Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
     @required Result emailChanged(EmailChanged value),
     @required Result firstNameChanged(FirstNameChanged value),
     @required Result lastNameChanged(LastNameChanged value),
     @required Result phoneNumberChanged(PhoneNumberChanged value),
     @required Result genderChanged(GenderChanged value),
     @required Result dateOfBirthChanged(DateOfBirthChanged value),
+    @required Result levelOfEducationChanged(LevelOfEducationChanged value),
+    @required Result employmentStatusChanged(EmploymentStatusChanged value),
+    @required Result workSectorChanged(WorkSectorChanged value),
+    @required Result employerNameChanged(EmployerNameChanged value),
+    @required Result startDateChanged(StartDateChanged value),
+    @required Result monthlyIncomeChanged(MonthlyIncomeChanged value),
   }) {
     assert(init != null);
     assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
     assert(emailChanged != null);
     assert(firstNameChanged != null);
     assert(lastNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(genderChanged != null);
     assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
     return dateOfBirthChanged(this);
   }
 
@@ -1275,12 +1848,19 @@ class _$DateOfBirthChanged implements DateOfBirthChanged {
   Result maybeMap<Result extends Object>({
     Result init(Init value),
     Result submitEditProfileForm(SubmitEditProfileForm value),
+    Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
     Result emailChanged(EmailChanged value),
     Result firstNameChanged(FirstNameChanged value),
     Result lastNameChanged(LastNameChanged value),
     Result phoneNumberChanged(PhoneNumberChanged value),
     Result genderChanged(GenderChanged value),
     Result dateOfBirthChanged(DateOfBirthChanged value),
+    Result levelOfEducationChanged(LevelOfEducationChanged value),
+    Result employmentStatusChanged(EmploymentStatusChanged value),
+    Result workSectorChanged(WorkSectorChanged value),
+    Result employerNameChanged(EmployerNameChanged value),
+    Result startDateChanged(StartDateChanged value),
+    Result monthlyIncomeChanged(MonthlyIncomeChanged value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -1299,6 +1879,1186 @@ abstract class DateOfBirthChanged implements EditProfileEvent {
 }
 
 /// @nodoc
+abstract class $LevelOfEducationChangedCopyWith<$Res> {
+  factory $LevelOfEducationChangedCopyWith(LevelOfEducationChanged value,
+          $Res Function(LevelOfEducationChanged) then) =
+      _$LevelOfEducationChangedCopyWithImpl<$Res>;
+  $Res call({String levelOfEducation});
+}
+
+/// @nodoc
+class _$LevelOfEducationChangedCopyWithImpl<$Res>
+    extends _$EditProfileEventCopyWithImpl<$Res>
+    implements $LevelOfEducationChangedCopyWith<$Res> {
+  _$LevelOfEducationChangedCopyWithImpl(LevelOfEducationChanged _value,
+      $Res Function(LevelOfEducationChanged) _then)
+      : super(_value, (v) => _then(v as LevelOfEducationChanged));
+
+  @override
+  LevelOfEducationChanged get _value => super._value as LevelOfEducationChanged;
+
+  @override
+  $Res call({
+    Object levelOfEducation = freezed,
+  }) {
+    return _then(LevelOfEducationChanged(
+      levelOfEducation == freezed
+          ? _value.levelOfEducation
+          : levelOfEducation as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$LevelOfEducationChanged implements LevelOfEducationChanged {
+  const _$LevelOfEducationChanged(this.levelOfEducation)
+      : assert(levelOfEducation != null);
+
+  @override
+  final String levelOfEducation;
+
+  @override
+  String toString() {
+    return 'EditProfileEvent.levelOfEducationChanged(levelOfEducation: $levelOfEducation)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is LevelOfEducationChanged &&
+            (identical(other.levelOfEducation, levelOfEducation) ||
+                const DeepCollectionEquality()
+                    .equals(other.levelOfEducation, levelOfEducation)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(levelOfEducation);
+
+  @override
+  $LevelOfEducationChangedCopyWith<LevelOfEducationChanged> get copyWith =>
+      _$LevelOfEducationChangedCopyWithImpl<LevelOfEducationChanged>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result init(),
+    @required Result submitEditProfileForm(),
+    @required Result submitEduAndEmpForm(),
+    @required Result emailChanged(String email),
+    @required Result firstNameChanged(String firstName),
+    @required Result lastNameChanged(String lastName),
+    @required Result phoneNumberChanged(String phoneNumber),
+    @required Result genderChanged(String gender),
+    @required Result dateOfBirthChanged(String dateOfBirth),
+    @required Result levelOfEducationChanged(String levelOfEducation),
+    @required Result employmentStatusChanged(String employmentStatus),
+    @required Result workSectorChanged(String workSector),
+    @required Result employerNameChanged(String employerName),
+    @required Result startDateChanged(String startDate),
+    @required Result monthlyIncomeChanged(String monthlyIncome),
+  }) {
+    assert(init != null);
+    assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
+    assert(emailChanged != null);
+    assert(firstNameChanged != null);
+    assert(lastNameChanged != null);
+    assert(phoneNumberChanged != null);
+    assert(genderChanged != null);
+    assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
+    return levelOfEducationChanged(levelOfEducation);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result init(),
+    Result submitEditProfileForm(),
+    Result submitEduAndEmpForm(),
+    Result emailChanged(String email),
+    Result firstNameChanged(String firstName),
+    Result lastNameChanged(String lastName),
+    Result phoneNumberChanged(String phoneNumber),
+    Result genderChanged(String gender),
+    Result dateOfBirthChanged(String dateOfBirth),
+    Result levelOfEducationChanged(String levelOfEducation),
+    Result employmentStatusChanged(String employmentStatus),
+    Result workSectorChanged(String workSector),
+    Result employerNameChanged(String employerName),
+    Result startDateChanged(String startDate),
+    Result monthlyIncomeChanged(String monthlyIncome),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (levelOfEducationChanged != null) {
+      return levelOfEducationChanged(levelOfEducation);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result init(Init value),
+    @required Result submitEditProfileForm(SubmitEditProfileForm value),
+    @required Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
+    @required Result emailChanged(EmailChanged value),
+    @required Result firstNameChanged(FirstNameChanged value),
+    @required Result lastNameChanged(LastNameChanged value),
+    @required Result phoneNumberChanged(PhoneNumberChanged value),
+    @required Result genderChanged(GenderChanged value),
+    @required Result dateOfBirthChanged(DateOfBirthChanged value),
+    @required Result levelOfEducationChanged(LevelOfEducationChanged value),
+    @required Result employmentStatusChanged(EmploymentStatusChanged value),
+    @required Result workSectorChanged(WorkSectorChanged value),
+    @required Result employerNameChanged(EmployerNameChanged value),
+    @required Result startDateChanged(StartDateChanged value),
+    @required Result monthlyIncomeChanged(MonthlyIncomeChanged value),
+  }) {
+    assert(init != null);
+    assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
+    assert(emailChanged != null);
+    assert(firstNameChanged != null);
+    assert(lastNameChanged != null);
+    assert(phoneNumberChanged != null);
+    assert(genderChanged != null);
+    assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
+    return levelOfEducationChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result init(Init value),
+    Result submitEditProfileForm(SubmitEditProfileForm value),
+    Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
+    Result emailChanged(EmailChanged value),
+    Result firstNameChanged(FirstNameChanged value),
+    Result lastNameChanged(LastNameChanged value),
+    Result phoneNumberChanged(PhoneNumberChanged value),
+    Result genderChanged(GenderChanged value),
+    Result dateOfBirthChanged(DateOfBirthChanged value),
+    Result levelOfEducationChanged(LevelOfEducationChanged value),
+    Result employmentStatusChanged(EmploymentStatusChanged value),
+    Result workSectorChanged(WorkSectorChanged value),
+    Result employerNameChanged(EmployerNameChanged value),
+    Result startDateChanged(StartDateChanged value),
+    Result monthlyIncomeChanged(MonthlyIncomeChanged value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (levelOfEducationChanged != null) {
+      return levelOfEducationChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LevelOfEducationChanged implements EditProfileEvent {
+  const factory LevelOfEducationChanged(String levelOfEducation) =
+      _$LevelOfEducationChanged;
+
+  String get levelOfEducation;
+  $LevelOfEducationChangedCopyWith<LevelOfEducationChanged> get copyWith;
+}
+
+/// @nodoc
+abstract class $EmploymentStatusChangedCopyWith<$Res> {
+  factory $EmploymentStatusChangedCopyWith(EmploymentStatusChanged value,
+          $Res Function(EmploymentStatusChanged) then) =
+      _$EmploymentStatusChangedCopyWithImpl<$Res>;
+  $Res call({String employmentStatus});
+}
+
+/// @nodoc
+class _$EmploymentStatusChangedCopyWithImpl<$Res>
+    extends _$EditProfileEventCopyWithImpl<$Res>
+    implements $EmploymentStatusChangedCopyWith<$Res> {
+  _$EmploymentStatusChangedCopyWithImpl(EmploymentStatusChanged _value,
+      $Res Function(EmploymentStatusChanged) _then)
+      : super(_value, (v) => _then(v as EmploymentStatusChanged));
+
+  @override
+  EmploymentStatusChanged get _value => super._value as EmploymentStatusChanged;
+
+  @override
+  $Res call({
+    Object employmentStatus = freezed,
+  }) {
+    return _then(EmploymentStatusChanged(
+      employmentStatus == freezed
+          ? _value.employmentStatus
+          : employmentStatus as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$EmploymentStatusChanged implements EmploymentStatusChanged {
+  const _$EmploymentStatusChanged(this.employmentStatus)
+      : assert(employmentStatus != null);
+
+  @override
+  final String employmentStatus;
+
+  @override
+  String toString() {
+    return 'EditProfileEvent.employmentStatusChanged(employmentStatus: $employmentStatus)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is EmploymentStatusChanged &&
+            (identical(other.employmentStatus, employmentStatus) ||
+                const DeepCollectionEquality()
+                    .equals(other.employmentStatus, employmentStatus)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(employmentStatus);
+
+  @override
+  $EmploymentStatusChangedCopyWith<EmploymentStatusChanged> get copyWith =>
+      _$EmploymentStatusChangedCopyWithImpl<EmploymentStatusChanged>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result init(),
+    @required Result submitEditProfileForm(),
+    @required Result submitEduAndEmpForm(),
+    @required Result emailChanged(String email),
+    @required Result firstNameChanged(String firstName),
+    @required Result lastNameChanged(String lastName),
+    @required Result phoneNumberChanged(String phoneNumber),
+    @required Result genderChanged(String gender),
+    @required Result dateOfBirthChanged(String dateOfBirth),
+    @required Result levelOfEducationChanged(String levelOfEducation),
+    @required Result employmentStatusChanged(String employmentStatus),
+    @required Result workSectorChanged(String workSector),
+    @required Result employerNameChanged(String employerName),
+    @required Result startDateChanged(String startDate),
+    @required Result monthlyIncomeChanged(String monthlyIncome),
+  }) {
+    assert(init != null);
+    assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
+    assert(emailChanged != null);
+    assert(firstNameChanged != null);
+    assert(lastNameChanged != null);
+    assert(phoneNumberChanged != null);
+    assert(genderChanged != null);
+    assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
+    return employmentStatusChanged(employmentStatus);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result init(),
+    Result submitEditProfileForm(),
+    Result submitEduAndEmpForm(),
+    Result emailChanged(String email),
+    Result firstNameChanged(String firstName),
+    Result lastNameChanged(String lastName),
+    Result phoneNumberChanged(String phoneNumber),
+    Result genderChanged(String gender),
+    Result dateOfBirthChanged(String dateOfBirth),
+    Result levelOfEducationChanged(String levelOfEducation),
+    Result employmentStatusChanged(String employmentStatus),
+    Result workSectorChanged(String workSector),
+    Result employerNameChanged(String employerName),
+    Result startDateChanged(String startDate),
+    Result monthlyIncomeChanged(String monthlyIncome),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (employmentStatusChanged != null) {
+      return employmentStatusChanged(employmentStatus);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result init(Init value),
+    @required Result submitEditProfileForm(SubmitEditProfileForm value),
+    @required Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
+    @required Result emailChanged(EmailChanged value),
+    @required Result firstNameChanged(FirstNameChanged value),
+    @required Result lastNameChanged(LastNameChanged value),
+    @required Result phoneNumberChanged(PhoneNumberChanged value),
+    @required Result genderChanged(GenderChanged value),
+    @required Result dateOfBirthChanged(DateOfBirthChanged value),
+    @required Result levelOfEducationChanged(LevelOfEducationChanged value),
+    @required Result employmentStatusChanged(EmploymentStatusChanged value),
+    @required Result workSectorChanged(WorkSectorChanged value),
+    @required Result employerNameChanged(EmployerNameChanged value),
+    @required Result startDateChanged(StartDateChanged value),
+    @required Result monthlyIncomeChanged(MonthlyIncomeChanged value),
+  }) {
+    assert(init != null);
+    assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
+    assert(emailChanged != null);
+    assert(firstNameChanged != null);
+    assert(lastNameChanged != null);
+    assert(phoneNumberChanged != null);
+    assert(genderChanged != null);
+    assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
+    return employmentStatusChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result init(Init value),
+    Result submitEditProfileForm(SubmitEditProfileForm value),
+    Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
+    Result emailChanged(EmailChanged value),
+    Result firstNameChanged(FirstNameChanged value),
+    Result lastNameChanged(LastNameChanged value),
+    Result phoneNumberChanged(PhoneNumberChanged value),
+    Result genderChanged(GenderChanged value),
+    Result dateOfBirthChanged(DateOfBirthChanged value),
+    Result levelOfEducationChanged(LevelOfEducationChanged value),
+    Result employmentStatusChanged(EmploymentStatusChanged value),
+    Result workSectorChanged(WorkSectorChanged value),
+    Result employerNameChanged(EmployerNameChanged value),
+    Result startDateChanged(StartDateChanged value),
+    Result monthlyIncomeChanged(MonthlyIncomeChanged value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (employmentStatusChanged != null) {
+      return employmentStatusChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class EmploymentStatusChanged implements EditProfileEvent {
+  const factory EmploymentStatusChanged(String employmentStatus) =
+      _$EmploymentStatusChanged;
+
+  String get employmentStatus;
+  $EmploymentStatusChangedCopyWith<EmploymentStatusChanged> get copyWith;
+}
+
+/// @nodoc
+abstract class $WorkSectorChangedCopyWith<$Res> {
+  factory $WorkSectorChangedCopyWith(
+          WorkSectorChanged value, $Res Function(WorkSectorChanged) then) =
+      _$WorkSectorChangedCopyWithImpl<$Res>;
+  $Res call({String workSector});
+}
+
+/// @nodoc
+class _$WorkSectorChangedCopyWithImpl<$Res>
+    extends _$EditProfileEventCopyWithImpl<$Res>
+    implements $WorkSectorChangedCopyWith<$Res> {
+  _$WorkSectorChangedCopyWithImpl(
+      WorkSectorChanged _value, $Res Function(WorkSectorChanged) _then)
+      : super(_value, (v) => _then(v as WorkSectorChanged));
+
+  @override
+  WorkSectorChanged get _value => super._value as WorkSectorChanged;
+
+  @override
+  $Res call({
+    Object workSector = freezed,
+  }) {
+    return _then(WorkSectorChanged(
+      workSector == freezed ? _value.workSector : workSector as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$WorkSectorChanged implements WorkSectorChanged {
+  const _$WorkSectorChanged(this.workSector) : assert(workSector != null);
+
+  @override
+  final String workSector;
+
+  @override
+  String toString() {
+    return 'EditProfileEvent.workSectorChanged(workSector: $workSector)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is WorkSectorChanged &&
+            (identical(other.workSector, workSector) ||
+                const DeepCollectionEquality()
+                    .equals(other.workSector, workSector)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(workSector);
+
+  @override
+  $WorkSectorChangedCopyWith<WorkSectorChanged> get copyWith =>
+      _$WorkSectorChangedCopyWithImpl<WorkSectorChanged>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result init(),
+    @required Result submitEditProfileForm(),
+    @required Result submitEduAndEmpForm(),
+    @required Result emailChanged(String email),
+    @required Result firstNameChanged(String firstName),
+    @required Result lastNameChanged(String lastName),
+    @required Result phoneNumberChanged(String phoneNumber),
+    @required Result genderChanged(String gender),
+    @required Result dateOfBirthChanged(String dateOfBirth),
+    @required Result levelOfEducationChanged(String levelOfEducation),
+    @required Result employmentStatusChanged(String employmentStatus),
+    @required Result workSectorChanged(String workSector),
+    @required Result employerNameChanged(String employerName),
+    @required Result startDateChanged(String startDate),
+    @required Result monthlyIncomeChanged(String monthlyIncome),
+  }) {
+    assert(init != null);
+    assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
+    assert(emailChanged != null);
+    assert(firstNameChanged != null);
+    assert(lastNameChanged != null);
+    assert(phoneNumberChanged != null);
+    assert(genderChanged != null);
+    assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
+    return workSectorChanged(workSector);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result init(),
+    Result submitEditProfileForm(),
+    Result submitEduAndEmpForm(),
+    Result emailChanged(String email),
+    Result firstNameChanged(String firstName),
+    Result lastNameChanged(String lastName),
+    Result phoneNumberChanged(String phoneNumber),
+    Result genderChanged(String gender),
+    Result dateOfBirthChanged(String dateOfBirth),
+    Result levelOfEducationChanged(String levelOfEducation),
+    Result employmentStatusChanged(String employmentStatus),
+    Result workSectorChanged(String workSector),
+    Result employerNameChanged(String employerName),
+    Result startDateChanged(String startDate),
+    Result monthlyIncomeChanged(String monthlyIncome),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (workSectorChanged != null) {
+      return workSectorChanged(workSector);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result init(Init value),
+    @required Result submitEditProfileForm(SubmitEditProfileForm value),
+    @required Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
+    @required Result emailChanged(EmailChanged value),
+    @required Result firstNameChanged(FirstNameChanged value),
+    @required Result lastNameChanged(LastNameChanged value),
+    @required Result phoneNumberChanged(PhoneNumberChanged value),
+    @required Result genderChanged(GenderChanged value),
+    @required Result dateOfBirthChanged(DateOfBirthChanged value),
+    @required Result levelOfEducationChanged(LevelOfEducationChanged value),
+    @required Result employmentStatusChanged(EmploymentStatusChanged value),
+    @required Result workSectorChanged(WorkSectorChanged value),
+    @required Result employerNameChanged(EmployerNameChanged value),
+    @required Result startDateChanged(StartDateChanged value),
+    @required Result monthlyIncomeChanged(MonthlyIncomeChanged value),
+  }) {
+    assert(init != null);
+    assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
+    assert(emailChanged != null);
+    assert(firstNameChanged != null);
+    assert(lastNameChanged != null);
+    assert(phoneNumberChanged != null);
+    assert(genderChanged != null);
+    assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
+    return workSectorChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result init(Init value),
+    Result submitEditProfileForm(SubmitEditProfileForm value),
+    Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
+    Result emailChanged(EmailChanged value),
+    Result firstNameChanged(FirstNameChanged value),
+    Result lastNameChanged(LastNameChanged value),
+    Result phoneNumberChanged(PhoneNumberChanged value),
+    Result genderChanged(GenderChanged value),
+    Result dateOfBirthChanged(DateOfBirthChanged value),
+    Result levelOfEducationChanged(LevelOfEducationChanged value),
+    Result employmentStatusChanged(EmploymentStatusChanged value),
+    Result workSectorChanged(WorkSectorChanged value),
+    Result employerNameChanged(EmployerNameChanged value),
+    Result startDateChanged(StartDateChanged value),
+    Result monthlyIncomeChanged(MonthlyIncomeChanged value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (workSectorChanged != null) {
+      return workSectorChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class WorkSectorChanged implements EditProfileEvent {
+  const factory WorkSectorChanged(String workSector) = _$WorkSectorChanged;
+
+  String get workSector;
+  $WorkSectorChangedCopyWith<WorkSectorChanged> get copyWith;
+}
+
+/// @nodoc
+abstract class $EmployerNameChangedCopyWith<$Res> {
+  factory $EmployerNameChangedCopyWith(
+          EmployerNameChanged value, $Res Function(EmployerNameChanged) then) =
+      _$EmployerNameChangedCopyWithImpl<$Res>;
+  $Res call({String employerName});
+}
+
+/// @nodoc
+class _$EmployerNameChangedCopyWithImpl<$Res>
+    extends _$EditProfileEventCopyWithImpl<$Res>
+    implements $EmployerNameChangedCopyWith<$Res> {
+  _$EmployerNameChangedCopyWithImpl(
+      EmployerNameChanged _value, $Res Function(EmployerNameChanged) _then)
+      : super(_value, (v) => _then(v as EmployerNameChanged));
+
+  @override
+  EmployerNameChanged get _value => super._value as EmployerNameChanged;
+
+  @override
+  $Res call({
+    Object employerName = freezed,
+  }) {
+    return _then(EmployerNameChanged(
+      employerName == freezed ? _value.employerName : employerName as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$EmployerNameChanged implements EmployerNameChanged {
+  const _$EmployerNameChanged(this.employerName) : assert(employerName != null);
+
+  @override
+  final String employerName;
+
+  @override
+  String toString() {
+    return 'EditProfileEvent.employerNameChanged(employerName: $employerName)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is EmployerNameChanged &&
+            (identical(other.employerName, employerName) ||
+                const DeepCollectionEquality()
+                    .equals(other.employerName, employerName)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(employerName);
+
+  @override
+  $EmployerNameChangedCopyWith<EmployerNameChanged> get copyWith =>
+      _$EmployerNameChangedCopyWithImpl<EmployerNameChanged>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result init(),
+    @required Result submitEditProfileForm(),
+    @required Result submitEduAndEmpForm(),
+    @required Result emailChanged(String email),
+    @required Result firstNameChanged(String firstName),
+    @required Result lastNameChanged(String lastName),
+    @required Result phoneNumberChanged(String phoneNumber),
+    @required Result genderChanged(String gender),
+    @required Result dateOfBirthChanged(String dateOfBirth),
+    @required Result levelOfEducationChanged(String levelOfEducation),
+    @required Result employmentStatusChanged(String employmentStatus),
+    @required Result workSectorChanged(String workSector),
+    @required Result employerNameChanged(String employerName),
+    @required Result startDateChanged(String startDate),
+    @required Result monthlyIncomeChanged(String monthlyIncome),
+  }) {
+    assert(init != null);
+    assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
+    assert(emailChanged != null);
+    assert(firstNameChanged != null);
+    assert(lastNameChanged != null);
+    assert(phoneNumberChanged != null);
+    assert(genderChanged != null);
+    assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
+    return employerNameChanged(employerName);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result init(),
+    Result submitEditProfileForm(),
+    Result submitEduAndEmpForm(),
+    Result emailChanged(String email),
+    Result firstNameChanged(String firstName),
+    Result lastNameChanged(String lastName),
+    Result phoneNumberChanged(String phoneNumber),
+    Result genderChanged(String gender),
+    Result dateOfBirthChanged(String dateOfBirth),
+    Result levelOfEducationChanged(String levelOfEducation),
+    Result employmentStatusChanged(String employmentStatus),
+    Result workSectorChanged(String workSector),
+    Result employerNameChanged(String employerName),
+    Result startDateChanged(String startDate),
+    Result monthlyIncomeChanged(String monthlyIncome),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (employerNameChanged != null) {
+      return employerNameChanged(employerName);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result init(Init value),
+    @required Result submitEditProfileForm(SubmitEditProfileForm value),
+    @required Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
+    @required Result emailChanged(EmailChanged value),
+    @required Result firstNameChanged(FirstNameChanged value),
+    @required Result lastNameChanged(LastNameChanged value),
+    @required Result phoneNumberChanged(PhoneNumberChanged value),
+    @required Result genderChanged(GenderChanged value),
+    @required Result dateOfBirthChanged(DateOfBirthChanged value),
+    @required Result levelOfEducationChanged(LevelOfEducationChanged value),
+    @required Result employmentStatusChanged(EmploymentStatusChanged value),
+    @required Result workSectorChanged(WorkSectorChanged value),
+    @required Result employerNameChanged(EmployerNameChanged value),
+    @required Result startDateChanged(StartDateChanged value),
+    @required Result monthlyIncomeChanged(MonthlyIncomeChanged value),
+  }) {
+    assert(init != null);
+    assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
+    assert(emailChanged != null);
+    assert(firstNameChanged != null);
+    assert(lastNameChanged != null);
+    assert(phoneNumberChanged != null);
+    assert(genderChanged != null);
+    assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
+    return employerNameChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result init(Init value),
+    Result submitEditProfileForm(SubmitEditProfileForm value),
+    Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
+    Result emailChanged(EmailChanged value),
+    Result firstNameChanged(FirstNameChanged value),
+    Result lastNameChanged(LastNameChanged value),
+    Result phoneNumberChanged(PhoneNumberChanged value),
+    Result genderChanged(GenderChanged value),
+    Result dateOfBirthChanged(DateOfBirthChanged value),
+    Result levelOfEducationChanged(LevelOfEducationChanged value),
+    Result employmentStatusChanged(EmploymentStatusChanged value),
+    Result workSectorChanged(WorkSectorChanged value),
+    Result employerNameChanged(EmployerNameChanged value),
+    Result startDateChanged(StartDateChanged value),
+    Result monthlyIncomeChanged(MonthlyIncomeChanged value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (employerNameChanged != null) {
+      return employerNameChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class EmployerNameChanged implements EditProfileEvent {
+  const factory EmployerNameChanged(String employerName) =
+      _$EmployerNameChanged;
+
+  String get employerName;
+  $EmployerNameChangedCopyWith<EmployerNameChanged> get copyWith;
+}
+
+/// @nodoc
+abstract class $StartDateChangedCopyWith<$Res> {
+  factory $StartDateChangedCopyWith(
+          StartDateChanged value, $Res Function(StartDateChanged) then) =
+      _$StartDateChangedCopyWithImpl<$Res>;
+  $Res call({String startDate});
+}
+
+/// @nodoc
+class _$StartDateChangedCopyWithImpl<$Res>
+    extends _$EditProfileEventCopyWithImpl<$Res>
+    implements $StartDateChangedCopyWith<$Res> {
+  _$StartDateChangedCopyWithImpl(
+      StartDateChanged _value, $Res Function(StartDateChanged) _then)
+      : super(_value, (v) => _then(v as StartDateChanged));
+
+  @override
+  StartDateChanged get _value => super._value as StartDateChanged;
+
+  @override
+  $Res call({
+    Object startDate = freezed,
+  }) {
+    return _then(StartDateChanged(
+      startDate == freezed ? _value.startDate : startDate as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$StartDateChanged implements StartDateChanged {
+  const _$StartDateChanged(this.startDate) : assert(startDate != null);
+
+  @override
+  final String startDate;
+
+  @override
+  String toString() {
+    return 'EditProfileEvent.startDateChanged(startDate: $startDate)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is StartDateChanged &&
+            (identical(other.startDate, startDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.startDate, startDate)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(startDate);
+
+  @override
+  $StartDateChangedCopyWith<StartDateChanged> get copyWith =>
+      _$StartDateChangedCopyWithImpl<StartDateChanged>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result init(),
+    @required Result submitEditProfileForm(),
+    @required Result submitEduAndEmpForm(),
+    @required Result emailChanged(String email),
+    @required Result firstNameChanged(String firstName),
+    @required Result lastNameChanged(String lastName),
+    @required Result phoneNumberChanged(String phoneNumber),
+    @required Result genderChanged(String gender),
+    @required Result dateOfBirthChanged(String dateOfBirth),
+    @required Result levelOfEducationChanged(String levelOfEducation),
+    @required Result employmentStatusChanged(String employmentStatus),
+    @required Result workSectorChanged(String workSector),
+    @required Result employerNameChanged(String employerName),
+    @required Result startDateChanged(String startDate),
+    @required Result monthlyIncomeChanged(String monthlyIncome),
+  }) {
+    assert(init != null);
+    assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
+    assert(emailChanged != null);
+    assert(firstNameChanged != null);
+    assert(lastNameChanged != null);
+    assert(phoneNumberChanged != null);
+    assert(genderChanged != null);
+    assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
+    return startDateChanged(startDate);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result init(),
+    Result submitEditProfileForm(),
+    Result submitEduAndEmpForm(),
+    Result emailChanged(String email),
+    Result firstNameChanged(String firstName),
+    Result lastNameChanged(String lastName),
+    Result phoneNumberChanged(String phoneNumber),
+    Result genderChanged(String gender),
+    Result dateOfBirthChanged(String dateOfBirth),
+    Result levelOfEducationChanged(String levelOfEducation),
+    Result employmentStatusChanged(String employmentStatus),
+    Result workSectorChanged(String workSector),
+    Result employerNameChanged(String employerName),
+    Result startDateChanged(String startDate),
+    Result monthlyIncomeChanged(String monthlyIncome),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (startDateChanged != null) {
+      return startDateChanged(startDate);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result init(Init value),
+    @required Result submitEditProfileForm(SubmitEditProfileForm value),
+    @required Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
+    @required Result emailChanged(EmailChanged value),
+    @required Result firstNameChanged(FirstNameChanged value),
+    @required Result lastNameChanged(LastNameChanged value),
+    @required Result phoneNumberChanged(PhoneNumberChanged value),
+    @required Result genderChanged(GenderChanged value),
+    @required Result dateOfBirthChanged(DateOfBirthChanged value),
+    @required Result levelOfEducationChanged(LevelOfEducationChanged value),
+    @required Result employmentStatusChanged(EmploymentStatusChanged value),
+    @required Result workSectorChanged(WorkSectorChanged value),
+    @required Result employerNameChanged(EmployerNameChanged value),
+    @required Result startDateChanged(StartDateChanged value),
+    @required Result monthlyIncomeChanged(MonthlyIncomeChanged value),
+  }) {
+    assert(init != null);
+    assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
+    assert(emailChanged != null);
+    assert(firstNameChanged != null);
+    assert(lastNameChanged != null);
+    assert(phoneNumberChanged != null);
+    assert(genderChanged != null);
+    assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
+    return startDateChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result init(Init value),
+    Result submitEditProfileForm(SubmitEditProfileForm value),
+    Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
+    Result emailChanged(EmailChanged value),
+    Result firstNameChanged(FirstNameChanged value),
+    Result lastNameChanged(LastNameChanged value),
+    Result phoneNumberChanged(PhoneNumberChanged value),
+    Result genderChanged(GenderChanged value),
+    Result dateOfBirthChanged(DateOfBirthChanged value),
+    Result levelOfEducationChanged(LevelOfEducationChanged value),
+    Result employmentStatusChanged(EmploymentStatusChanged value),
+    Result workSectorChanged(WorkSectorChanged value),
+    Result employerNameChanged(EmployerNameChanged value),
+    Result startDateChanged(StartDateChanged value),
+    Result monthlyIncomeChanged(MonthlyIncomeChanged value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (startDateChanged != null) {
+      return startDateChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class StartDateChanged implements EditProfileEvent {
+  const factory StartDateChanged(String startDate) = _$StartDateChanged;
+
+  String get startDate;
+  $StartDateChangedCopyWith<StartDateChanged> get copyWith;
+}
+
+/// @nodoc
+abstract class $MonthlyIncomeChangedCopyWith<$Res> {
+  factory $MonthlyIncomeChangedCopyWith(MonthlyIncomeChanged value,
+          $Res Function(MonthlyIncomeChanged) then) =
+      _$MonthlyIncomeChangedCopyWithImpl<$Res>;
+  $Res call({String monthlyIncome});
+}
+
+/// @nodoc
+class _$MonthlyIncomeChangedCopyWithImpl<$Res>
+    extends _$EditProfileEventCopyWithImpl<$Res>
+    implements $MonthlyIncomeChangedCopyWith<$Res> {
+  _$MonthlyIncomeChangedCopyWithImpl(
+      MonthlyIncomeChanged _value, $Res Function(MonthlyIncomeChanged) _then)
+      : super(_value, (v) => _then(v as MonthlyIncomeChanged));
+
+  @override
+  MonthlyIncomeChanged get _value => super._value as MonthlyIncomeChanged;
+
+  @override
+  $Res call({
+    Object monthlyIncome = freezed,
+  }) {
+    return _then(MonthlyIncomeChanged(
+      monthlyIncome == freezed ? _value.monthlyIncome : monthlyIncome as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$MonthlyIncomeChanged implements MonthlyIncomeChanged {
+  const _$MonthlyIncomeChanged(this.monthlyIncome)
+      : assert(monthlyIncome != null);
+
+  @override
+  final String monthlyIncome;
+
+  @override
+  String toString() {
+    return 'EditProfileEvent.monthlyIncomeChanged(monthlyIncome: $monthlyIncome)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is MonthlyIncomeChanged &&
+            (identical(other.monthlyIncome, monthlyIncome) ||
+                const DeepCollectionEquality()
+                    .equals(other.monthlyIncome, monthlyIncome)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(monthlyIncome);
+
+  @override
+  $MonthlyIncomeChangedCopyWith<MonthlyIncomeChanged> get copyWith =>
+      _$MonthlyIncomeChangedCopyWithImpl<MonthlyIncomeChanged>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result init(),
+    @required Result submitEditProfileForm(),
+    @required Result submitEduAndEmpForm(),
+    @required Result emailChanged(String email),
+    @required Result firstNameChanged(String firstName),
+    @required Result lastNameChanged(String lastName),
+    @required Result phoneNumberChanged(String phoneNumber),
+    @required Result genderChanged(String gender),
+    @required Result dateOfBirthChanged(String dateOfBirth),
+    @required Result levelOfEducationChanged(String levelOfEducation),
+    @required Result employmentStatusChanged(String employmentStatus),
+    @required Result workSectorChanged(String workSector),
+    @required Result employerNameChanged(String employerName),
+    @required Result startDateChanged(String startDate),
+    @required Result monthlyIncomeChanged(String monthlyIncome),
+  }) {
+    assert(init != null);
+    assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
+    assert(emailChanged != null);
+    assert(firstNameChanged != null);
+    assert(lastNameChanged != null);
+    assert(phoneNumberChanged != null);
+    assert(genderChanged != null);
+    assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
+    return monthlyIncomeChanged(monthlyIncome);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result init(),
+    Result submitEditProfileForm(),
+    Result submitEduAndEmpForm(),
+    Result emailChanged(String email),
+    Result firstNameChanged(String firstName),
+    Result lastNameChanged(String lastName),
+    Result phoneNumberChanged(String phoneNumber),
+    Result genderChanged(String gender),
+    Result dateOfBirthChanged(String dateOfBirth),
+    Result levelOfEducationChanged(String levelOfEducation),
+    Result employmentStatusChanged(String employmentStatus),
+    Result workSectorChanged(String workSector),
+    Result employerNameChanged(String employerName),
+    Result startDateChanged(String startDate),
+    Result monthlyIncomeChanged(String monthlyIncome),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (monthlyIncomeChanged != null) {
+      return monthlyIncomeChanged(monthlyIncome);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result init(Init value),
+    @required Result submitEditProfileForm(SubmitEditProfileForm value),
+    @required Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
+    @required Result emailChanged(EmailChanged value),
+    @required Result firstNameChanged(FirstNameChanged value),
+    @required Result lastNameChanged(LastNameChanged value),
+    @required Result phoneNumberChanged(PhoneNumberChanged value),
+    @required Result genderChanged(GenderChanged value),
+    @required Result dateOfBirthChanged(DateOfBirthChanged value),
+    @required Result levelOfEducationChanged(LevelOfEducationChanged value),
+    @required Result employmentStatusChanged(EmploymentStatusChanged value),
+    @required Result workSectorChanged(WorkSectorChanged value),
+    @required Result employerNameChanged(EmployerNameChanged value),
+    @required Result startDateChanged(StartDateChanged value),
+    @required Result monthlyIncomeChanged(MonthlyIncomeChanged value),
+  }) {
+    assert(init != null);
+    assert(submitEditProfileForm != null);
+    assert(submitEduAndEmpForm != null);
+    assert(emailChanged != null);
+    assert(firstNameChanged != null);
+    assert(lastNameChanged != null);
+    assert(phoneNumberChanged != null);
+    assert(genderChanged != null);
+    assert(dateOfBirthChanged != null);
+    assert(levelOfEducationChanged != null);
+    assert(employmentStatusChanged != null);
+    assert(workSectorChanged != null);
+    assert(employerNameChanged != null);
+    assert(startDateChanged != null);
+    assert(monthlyIncomeChanged != null);
+    return monthlyIncomeChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result init(Init value),
+    Result submitEditProfileForm(SubmitEditProfileForm value),
+    Result submitEduAndEmpForm(SubmitEduAndEmpForm value),
+    Result emailChanged(EmailChanged value),
+    Result firstNameChanged(FirstNameChanged value),
+    Result lastNameChanged(LastNameChanged value),
+    Result phoneNumberChanged(PhoneNumberChanged value),
+    Result genderChanged(GenderChanged value),
+    Result dateOfBirthChanged(DateOfBirthChanged value),
+    Result levelOfEducationChanged(LevelOfEducationChanged value),
+    Result employmentStatusChanged(EmploymentStatusChanged value),
+    Result workSectorChanged(WorkSectorChanged value),
+    Result employerNameChanged(EmployerNameChanged value),
+    Result startDateChanged(StartDateChanged value),
+    Result monthlyIncomeChanged(MonthlyIncomeChanged value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (monthlyIncomeChanged != null) {
+      return monthlyIncomeChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MonthlyIncomeChanged implements EditProfileEvent {
+  const factory MonthlyIncomeChanged(String monthlyIncome) =
+      _$MonthlyIncomeChanged;
+
+  String get monthlyIncome;
+  $MonthlyIncomeChangedCopyWith<MonthlyIncomeChanged> get copyWith;
+}
+
+/// @nodoc
 class _$EditProfileStateTearOff {
   const _$EditProfileStateTearOff();
 
@@ -1306,12 +3066,21 @@ class _$EditProfileStateTearOff {
   _EditProfileState call(
       {UserDetailsRequest userDetails,
       @required List<Value> genders,
+      @required List<Value> levelsOfEducation,
+      @required List<Value> employmentStatuses,
+      @required List<Value> workSectors,
       @required String firstName,
       @required String lastName,
       @required String gender,
       @required String emailAddress,
       @required String phoneNumber,
       @required String dateOfBirth,
+      @required String levelOfEducation,
+      @required String employmentStatus,
+      @required String workSector,
+      @required String employerName,
+      @required String startDate,
+      @required String monthlyIncome,
       @required bool showErrorMessages,
       @required bool isSubmitting,
       @required bool isLoading,
@@ -1319,12 +3088,21 @@ class _$EditProfileStateTearOff {
     return _EditProfileState(
       userDetails: userDetails,
       genders: genders,
+      levelsOfEducation: levelsOfEducation,
+      employmentStatuses: employmentStatuses,
+      workSectors: workSectors,
       firstName: firstName,
       lastName: lastName,
       gender: gender,
       emailAddress: emailAddress,
       phoneNumber: phoneNumber,
       dateOfBirth: dateOfBirth,
+      levelOfEducation: levelOfEducation,
+      employmentStatus: employmentStatus,
+      workSector: workSector,
+      employerName: employerName,
+      startDate: startDate,
+      monthlyIncome: monthlyIncome,
       showErrorMessages: showErrorMessages,
       isSubmitting: isSubmitting,
       isLoading: isLoading,
@@ -1341,12 +3119,21 @@ const $EditProfileState = _$EditProfileStateTearOff();
 mixin _$EditProfileState {
   UserDetailsRequest get userDetails;
   List<Value> get genders;
+  List<Value> get levelsOfEducation;
+  List<Value> get employmentStatuses;
+  List<Value> get workSectors;
   String get firstName;
   String get lastName;
   String get gender;
   String get emailAddress;
   String get phoneNumber;
   String get dateOfBirth;
+  String get levelOfEducation;
+  String get employmentStatus;
+  String get workSector;
+  String get employerName;
+  String get startDate;
+  String get monthlyIncome;
   bool get showErrorMessages;
   bool get isSubmitting;
   bool get isLoading;
@@ -1363,12 +3150,21 @@ abstract class $EditProfileStateCopyWith<$Res> {
   $Res call(
       {UserDetailsRequest userDetails,
       List<Value> genders,
+      List<Value> levelsOfEducation,
+      List<Value> employmentStatuses,
+      List<Value> workSectors,
       String firstName,
       String lastName,
       String gender,
       String emailAddress,
       String phoneNumber,
       String dateOfBirth,
+      String levelOfEducation,
+      String employmentStatus,
+      String workSector,
+      String employerName,
+      String startDate,
+      String monthlyIncome,
       bool showErrorMessages,
       bool isSubmitting,
       bool isLoading,
@@ -1390,12 +3186,21 @@ class _$EditProfileStateCopyWithImpl<$Res>
   $Res call({
     Object userDetails = freezed,
     Object genders = freezed,
+    Object levelsOfEducation = freezed,
+    Object employmentStatuses = freezed,
+    Object workSectors = freezed,
     Object firstName = freezed,
     Object lastName = freezed,
     Object gender = freezed,
     Object emailAddress = freezed,
     Object phoneNumber = freezed,
     Object dateOfBirth = freezed,
+    Object levelOfEducation = freezed,
+    Object employmentStatus = freezed,
+    Object workSector = freezed,
+    Object employerName = freezed,
+    Object startDate = freezed,
+    Object monthlyIncome = freezed,
     Object showErrorMessages = freezed,
     Object isSubmitting = freezed,
     Object isLoading = freezed,
@@ -1406,6 +3211,15 @@ class _$EditProfileStateCopyWithImpl<$Res>
           ? _value.userDetails
           : userDetails as UserDetailsRequest,
       genders: genders == freezed ? _value.genders : genders as List<Value>,
+      levelsOfEducation: levelsOfEducation == freezed
+          ? _value.levelsOfEducation
+          : levelsOfEducation as List<Value>,
+      employmentStatuses: employmentStatuses == freezed
+          ? _value.employmentStatuses
+          : employmentStatuses as List<Value>,
+      workSectors: workSectors == freezed
+          ? _value.workSectors
+          : workSectors as List<Value>,
       firstName: firstName == freezed ? _value.firstName : firstName as String,
       lastName: lastName == freezed ? _value.lastName : lastName as String,
       gender: gender == freezed ? _value.gender : gender as String,
@@ -1416,6 +3230,21 @@ class _$EditProfileStateCopyWithImpl<$Res>
           phoneNumber == freezed ? _value.phoneNumber : phoneNumber as String,
       dateOfBirth:
           dateOfBirth == freezed ? _value.dateOfBirth : dateOfBirth as String,
+      levelOfEducation: levelOfEducation == freezed
+          ? _value.levelOfEducation
+          : levelOfEducation as String,
+      employmentStatus: employmentStatus == freezed
+          ? _value.employmentStatus
+          : employmentStatus as String,
+      workSector:
+          workSector == freezed ? _value.workSector : workSector as String,
+      employerName: employerName == freezed
+          ? _value.employerName
+          : employerName as String,
+      startDate: startDate == freezed ? _value.startDate : startDate as String,
+      monthlyIncome: monthlyIncome == freezed
+          ? _value.monthlyIncome
+          : monthlyIncome as String,
       showErrorMessages: showErrorMessages == freezed
           ? _value.showErrorMessages
           : showErrorMessages as bool,
@@ -1449,12 +3278,21 @@ abstract class _$EditProfileStateCopyWith<$Res>
   $Res call(
       {UserDetailsRequest userDetails,
       List<Value> genders,
+      List<Value> levelsOfEducation,
+      List<Value> employmentStatuses,
+      List<Value> workSectors,
       String firstName,
       String lastName,
       String gender,
       String emailAddress,
       String phoneNumber,
       String dateOfBirth,
+      String levelOfEducation,
+      String employmentStatus,
+      String workSector,
+      String employerName,
+      String startDate,
+      String monthlyIncome,
       bool showErrorMessages,
       bool isSubmitting,
       bool isLoading,
@@ -1479,12 +3317,21 @@ class __$EditProfileStateCopyWithImpl<$Res>
   $Res call({
     Object userDetails = freezed,
     Object genders = freezed,
+    Object levelsOfEducation = freezed,
+    Object employmentStatuses = freezed,
+    Object workSectors = freezed,
     Object firstName = freezed,
     Object lastName = freezed,
     Object gender = freezed,
     Object emailAddress = freezed,
     Object phoneNumber = freezed,
     Object dateOfBirth = freezed,
+    Object levelOfEducation = freezed,
+    Object employmentStatus = freezed,
+    Object workSector = freezed,
+    Object employerName = freezed,
+    Object startDate = freezed,
+    Object monthlyIncome = freezed,
     Object showErrorMessages = freezed,
     Object isSubmitting = freezed,
     Object isLoading = freezed,
@@ -1495,6 +3342,15 @@ class __$EditProfileStateCopyWithImpl<$Res>
           ? _value.userDetails
           : userDetails as UserDetailsRequest,
       genders: genders == freezed ? _value.genders : genders as List<Value>,
+      levelsOfEducation: levelsOfEducation == freezed
+          ? _value.levelsOfEducation
+          : levelsOfEducation as List<Value>,
+      employmentStatuses: employmentStatuses == freezed
+          ? _value.employmentStatuses
+          : employmentStatuses as List<Value>,
+      workSectors: workSectors == freezed
+          ? _value.workSectors
+          : workSectors as List<Value>,
       firstName: firstName == freezed ? _value.firstName : firstName as String,
       lastName: lastName == freezed ? _value.lastName : lastName as String,
       gender: gender == freezed ? _value.gender : gender as String,
@@ -1505,6 +3361,21 @@ class __$EditProfileStateCopyWithImpl<$Res>
           phoneNumber == freezed ? _value.phoneNumber : phoneNumber as String,
       dateOfBirth:
           dateOfBirth == freezed ? _value.dateOfBirth : dateOfBirth as String,
+      levelOfEducation: levelOfEducation == freezed
+          ? _value.levelOfEducation
+          : levelOfEducation as String,
+      employmentStatus: employmentStatus == freezed
+          ? _value.employmentStatus
+          : employmentStatus as String,
+      workSector:
+          workSector == freezed ? _value.workSector : workSector as String,
+      employerName: employerName == freezed
+          ? _value.employerName
+          : employerName as String,
+      startDate: startDate == freezed ? _value.startDate : startDate as String,
+      monthlyIncome: monthlyIncome == freezed
+          ? _value.monthlyIncome
+          : monthlyIncome as String,
       showErrorMessages: showErrorMessages == freezed
           ? _value.showErrorMessages
           : showErrorMessages as bool,
@@ -1523,23 +3394,41 @@ class _$_EditProfileState implements _EditProfileState {
   const _$_EditProfileState(
       {this.userDetails,
       @required this.genders,
+      @required this.levelsOfEducation,
+      @required this.employmentStatuses,
+      @required this.workSectors,
       @required this.firstName,
       @required this.lastName,
       @required this.gender,
       @required this.emailAddress,
       @required this.phoneNumber,
       @required this.dateOfBirth,
+      @required this.levelOfEducation,
+      @required this.employmentStatus,
+      @required this.workSector,
+      @required this.employerName,
+      @required this.startDate,
+      @required this.monthlyIncome,
       @required this.showErrorMessages,
       @required this.isSubmitting,
       @required this.isLoading,
       @required this.submitFailureOrSuccess})
       : assert(genders != null),
+        assert(levelsOfEducation != null),
+        assert(employmentStatuses != null),
+        assert(workSectors != null),
         assert(firstName != null),
         assert(lastName != null),
         assert(gender != null),
         assert(emailAddress != null),
         assert(phoneNumber != null),
         assert(dateOfBirth != null),
+        assert(levelOfEducation != null),
+        assert(employmentStatus != null),
+        assert(workSector != null),
+        assert(employerName != null),
+        assert(startDate != null),
+        assert(monthlyIncome != null),
         assert(showErrorMessages != null),
         assert(isSubmitting != null),
         assert(isLoading != null),
@@ -1549,6 +3438,12 @@ class _$_EditProfileState implements _EditProfileState {
   final UserDetailsRequest userDetails;
   @override
   final List<Value> genders;
+  @override
+  final List<Value> levelsOfEducation;
+  @override
+  final List<Value> employmentStatuses;
+  @override
+  final List<Value> workSectors;
   @override
   final String firstName;
   @override
@@ -1562,6 +3457,18 @@ class _$_EditProfileState implements _EditProfileState {
   @override
   final String dateOfBirth;
   @override
+  final String levelOfEducation;
+  @override
+  final String employmentStatus;
+  @override
+  final String workSector;
+  @override
+  final String employerName;
+  @override
+  final String startDate;
+  @override
+  final String monthlyIncome;
+  @override
   final bool showErrorMessages;
   @override
   final bool isSubmitting;
@@ -1572,7 +3479,7 @@ class _$_EditProfileState implements _EditProfileState {
 
   @override
   String toString() {
-    return 'EditProfileState(userDetails: $userDetails, genders: $genders, firstName: $firstName, lastName: $lastName, gender: $gender, emailAddress: $emailAddress, phoneNumber: $phoneNumber, dateOfBirth: $dateOfBirth, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, isLoading: $isLoading, submitFailureOrSuccess: $submitFailureOrSuccess)';
+    return 'EditProfileState(userDetails: $userDetails, genders: $genders, levelsOfEducation: $levelsOfEducation, employmentStatuses: $employmentStatuses, workSectors: $workSectors, firstName: $firstName, lastName: $lastName, gender: $gender, emailAddress: $emailAddress, phoneNumber: $phoneNumber, dateOfBirth: $dateOfBirth, levelOfEducation: $levelOfEducation, employmentStatus: $employmentStatus, workSector: $workSector, employerName: $employerName, startDate: $startDate, monthlyIncome: $monthlyIncome, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, isLoading: $isLoading, submitFailureOrSuccess: $submitFailureOrSuccess)';
   }
 
   @override
@@ -1585,6 +3492,15 @@ class _$_EditProfileState implements _EditProfileState {
             (identical(other.genders, genders) ||
                 const DeepCollectionEquality()
                     .equals(other.genders, genders)) &&
+            (identical(other.levelsOfEducation, levelsOfEducation) ||
+                const DeepCollectionEquality()
+                    .equals(other.levelsOfEducation, levelsOfEducation)) &&
+            (identical(other.employmentStatuses, employmentStatuses) ||
+                const DeepCollectionEquality()
+                    .equals(other.employmentStatuses, employmentStatuses)) &&
+            (identical(other.workSectors, workSectors) ||
+                const DeepCollectionEquality()
+                    .equals(other.workSectors, workSectors)) &&
             (identical(other.firstName, firstName) ||
                 const DeepCollectionEquality()
                     .equals(other.firstName, firstName)) &&
@@ -1602,6 +3518,24 @@ class _$_EditProfileState implements _EditProfileState {
             (identical(other.dateOfBirth, dateOfBirth) ||
                 const DeepCollectionEquality()
                     .equals(other.dateOfBirth, dateOfBirth)) &&
+            (identical(other.levelOfEducation, levelOfEducation) ||
+                const DeepCollectionEquality()
+                    .equals(other.levelOfEducation, levelOfEducation)) &&
+            (identical(other.employmentStatus, employmentStatus) ||
+                const DeepCollectionEquality()
+                    .equals(other.employmentStatus, employmentStatus)) &&
+            (identical(other.workSector, workSector) ||
+                const DeepCollectionEquality()
+                    .equals(other.workSector, workSector)) &&
+            (identical(other.employerName, employerName) ||
+                const DeepCollectionEquality()
+                    .equals(other.employerName, employerName)) &&
+            (identical(other.startDate, startDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.startDate, startDate)) &&
+            (identical(other.monthlyIncome, monthlyIncome) ||
+                const DeepCollectionEquality()
+                    .equals(other.monthlyIncome, monthlyIncome)) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
                 const DeepCollectionEquality()
                     .equals(other.showErrorMessages, showErrorMessages)) &&
@@ -1621,12 +3555,21 @@ class _$_EditProfileState implements _EditProfileState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(userDetails) ^
       const DeepCollectionEquality().hash(genders) ^
+      const DeepCollectionEquality().hash(levelsOfEducation) ^
+      const DeepCollectionEquality().hash(employmentStatuses) ^
+      const DeepCollectionEquality().hash(workSectors) ^
       const DeepCollectionEquality().hash(firstName) ^
       const DeepCollectionEquality().hash(lastName) ^
       const DeepCollectionEquality().hash(gender) ^
       const DeepCollectionEquality().hash(emailAddress) ^
       const DeepCollectionEquality().hash(phoneNumber) ^
       const DeepCollectionEquality().hash(dateOfBirth) ^
+      const DeepCollectionEquality().hash(levelOfEducation) ^
+      const DeepCollectionEquality().hash(employmentStatus) ^
+      const DeepCollectionEquality().hash(workSector) ^
+      const DeepCollectionEquality().hash(employerName) ^
+      const DeepCollectionEquality().hash(startDate) ^
+      const DeepCollectionEquality().hash(monthlyIncome) ^
       const DeepCollectionEquality().hash(showErrorMessages) ^
       const DeepCollectionEquality().hash(isSubmitting) ^
       const DeepCollectionEquality().hash(isLoading) ^
@@ -1641,12 +3584,21 @@ abstract class _EditProfileState implements EditProfileState {
   const factory _EditProfileState(
           {UserDetailsRequest userDetails,
           @required List<Value> genders,
+          @required List<Value> levelsOfEducation,
+          @required List<Value> employmentStatuses,
+          @required List<Value> workSectors,
           @required String firstName,
           @required String lastName,
           @required String gender,
           @required String emailAddress,
           @required String phoneNumber,
           @required String dateOfBirth,
+          @required String levelOfEducation,
+          @required String employmentStatus,
+          @required String workSector,
+          @required String employerName,
+          @required String startDate,
+          @required String monthlyIncome,
           @required bool showErrorMessages,
           @required bool isSubmitting,
           @required bool isLoading,
@@ -1657,6 +3609,12 @@ abstract class _EditProfileState implements EditProfileState {
   UserDetailsRequest get userDetails;
   @override
   List<Value> get genders;
+  @override
+  List<Value> get levelsOfEducation;
+  @override
+  List<Value> get employmentStatuses;
+  @override
+  List<Value> get workSectors;
   @override
   String get firstName;
   @override
@@ -1669,6 +3627,18 @@ abstract class _EditProfileState implements EditProfileState {
   String get phoneNumber;
   @override
   String get dateOfBirth;
+  @override
+  String get levelOfEducation;
+  @override
+  String get employmentStatus;
+  @override
+  String get workSector;
+  @override
+  String get employerName;
+  @override
+  String get startDate;
+  @override
+  String get monthlyIncome;
   @override
   bool get showErrorMessages;
   @override

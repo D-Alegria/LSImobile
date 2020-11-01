@@ -8,13 +8,29 @@ part 'education.g.dart';
 @freezed
 abstract class Education with _$Education {
   @JsonSerializable(nullable: true, explicitToJson: true)
-  factory Education(
-    @nullable @JsonKey(name: "educational_qualification") String educationalQualification,
-    @nullable @JsonKey(name: "educational_institution") String educationalInstitution,
+  factory Education({
+    @nullable
+    @JsonKey(name: "educational_qualification")
+        String educationalQualification,
+    @nullable
+    @JsonKey(name: "educational_institution")
+        String educationalInstitution,
     @nullable @JsonKey(name: "qualification_year") String qualificationYear,
-    @nullable @JsonKey(name: "specify_qualifications") String specifyQualifications,
-    @nullable @JsonKey(name: "has_other_qualifications") String hasOtherQualifications,
-  ) = _Education;
+    @nullable
+    @JsonKey(name: "specify_qualifications")
+        String specifyQualifications,
+    @nullable
+    @JsonKey(name: "has_other_qualifications")
+        String hasOtherQualifications,
+  }) = _Education;
+
+  factory Education.initial() => Education(
+        educationalQualification: '',
+        educationalInstitution: '',
+        qualificationYear: '',
+        specifyQualifications: '',
+        hasOtherQualifications: '',
+      );
 
   factory Education.fromJson(Map<String, dynamic> json) =>
       _$EducationFromJson(json);

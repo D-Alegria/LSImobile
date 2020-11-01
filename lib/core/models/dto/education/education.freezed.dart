@@ -18,7 +18,7 @@ class _$EducationTearOff {
 
 // ignore: unused_element
   _Education call(
-      @nullable
+      {@nullable
       @JsonKey(name: 'educational_qualification')
           String educationalQualification,
       @nullable
@@ -32,13 +32,13 @@ class _$EducationTearOff {
           String specifyQualifications,
       @nullable
       @JsonKey(name: 'has_other_qualifications')
-          String hasOtherQualifications) {
+          String hasOtherQualifications}) {
     return _Education(
-      educationalQualification,
-      educationalInstitution,
-      qualificationYear,
-      specifyQualifications,
-      hasOtherQualifications,
+      educationalQualification: educationalQualification,
+      educationalInstitution: educationalInstitution,
+      qualificationYear: qualificationYear,
+      specifyQualifications: specifyQualifications,
+      hasOtherQualifications: hasOtherQualifications,
     );
   }
 
@@ -174,19 +174,19 @@ class __$EducationCopyWithImpl<$Res> extends _$EducationCopyWithImpl<$Res>
     Object hasOtherQualifications = freezed,
   }) {
     return _then(_Education(
-      educationalQualification == freezed
+      educationalQualification: educationalQualification == freezed
           ? _value.educationalQualification
           : educationalQualification as String,
-      educationalInstitution == freezed
+      educationalInstitution: educationalInstitution == freezed
           ? _value.educationalInstitution
           : educationalInstitution as String,
-      qualificationYear == freezed
+      qualificationYear: qualificationYear == freezed
           ? _value.qualificationYear
           : qualificationYear as String,
-      specifyQualifications == freezed
+      specifyQualifications: specifyQualifications == freezed
           ? _value.specifyQualifications
           : specifyQualifications as String,
-      hasOtherQualifications == freezed
+      hasOtherQualifications: hasOtherQualifications == freezed
           ? _value.hasOtherQualifications
           : hasOtherQualifications as String,
     ));
@@ -198,7 +198,7 @@ class __$EducationCopyWithImpl<$Res> extends _$EducationCopyWithImpl<$Res>
 /// @nodoc
 class _$_Education implements _Education {
   _$_Education(
-      @nullable
+      {@nullable
       @JsonKey(name: 'educational_qualification')
           this.educationalQualification,
       @nullable
@@ -212,7 +212,7 @@ class _$_Education implements _Education {
           this.specifyQualifications,
       @nullable
       @JsonKey(name: 'has_other_qualifications')
-          this.hasOtherQualifications);
+          this.hasOtherQualifications});
 
   factory _$_Education.fromJson(Map<String, dynamic> json) =>
       _$_$_EducationFromJson(json);
@@ -287,7 +287,7 @@ class _$_Education implements _Education {
 
 abstract class _Education implements Education {
   factory _Education(
-      @nullable
+      {@nullable
       @JsonKey(name: 'educational_qualification')
           String educationalQualification,
       @nullable
@@ -301,7 +301,7 @@ abstract class _Education implements Education {
           String specifyQualifications,
       @nullable
       @JsonKey(name: 'has_other_qualifications')
-          String hasOtherQualifications) = _$_Education;
+          String hasOtherQualifications}) = _$_Education;
 
   factory _Education.fromJson(Map<String, dynamic> json) =
       _$_Education.fromJson;

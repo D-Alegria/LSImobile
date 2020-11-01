@@ -38,6 +38,12 @@ class EduAndEmployFormView extends StatelessWidget {
                   labelText: "Employment status",
                   onChanged: (String value) {},
                 ),
+                sharedDropDownFormField<String>(
+                  items: ["A", "B", "C"],
+                  context: context,
+                  labelText: "Work Sector",
+                  onChanged: (String value) {},
+                ),
                 SizedBox(
                   height: SizeConfig.yMargin(context, 2),
                 ),

@@ -8,11 +8,11 @@ part of 'education.dart';
 
 _$_Education _$_$_EducationFromJson(Map<String, dynamic> json) {
   return _$_Education(
-    json['educational_qualification'] as String,
-    json['educational_institution'] as String,
-    json['qualification_year'] as String,
-    json['specify_qualifications'] as String,
-    json['has_other_qualifications'] as String,
+    educationalQualification: json['educational_qualification'] as String,
+    educationalInstitution: json['educational_institution'] as String,
+    qualificationYear: json['qualification_year'] as String,
+    specifyQualifications: json['specify_qualifications'] as String,
+    hasOtherQualifications: json['has_other_qualifications'] as String,
   );
 }
 

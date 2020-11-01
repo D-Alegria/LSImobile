@@ -28,36 +28,65 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
       : super(EditProfileState.initial());
 
   @override
-  Stream<EditProfileState> mapEventToState(EditProfileEvent event,) async* {
+  Stream<EditProfileState> mapEventToState(
+    EditProfileEvent event,
+  ) async* {
     yield* event.map(
       init: (e) async* {
         yield state.copyWith(isLoading: true);
         final result = await _userRepo.userDataRemote;
         final genders = await _userRemoteDataSource.genders;
+        final levelsOfEducation = await _userRemoteDataSource.educationSectors;
+        final workSectors = await _userRemoteDataSource.workSectors;
 
         yield* result.fold(
-              (l) async* {
+          (l) async* {
             print(l.message);
           },
-              (r) async* {
+          (r) async* {
             yield state.copyWith(
               userDetails: r.userData.data,
-              firstName: r.userData.data.profile.legalName.split(' ')[0],
-              lastName: r.userData.data.profile.legalName.split(' ')[1],
+              firstName: r.userData.data.profile.legalName.split(' ')[0] ?? '',
+              lastName: r.userData.data.profile.legalName.split(' ')[1] ?? '',
               gender: r.userData.data.profile.gender ?? '0',
-              dateOfBirth: r.userData.data.profile.dateOfBirth,
-              phoneNumber: r.userData.data.profile.phone,
-              emailAddress: r.userData.data.profile.email,
+              dateOfBirth: r.userData.data.profile.dateOfBirth ?? '',
+              phoneNumber: r.userData.data.profile.phone ?? '',
+              emailAddress: r.userData.data.profile.email ?? '',
+              employerName: r.userData.data.work.employer ?? '',
+              // employmentStatus: r.userData.data.work. ?? '0',
+              levelOfEducation:
+                  r.userData.data.education.educationalQualification ?? '0',
+              startDate: r.userData.data.work.workStartDate ?? '',
+              monthlyIncome: r.userData.data.work.netMonthlyIncome ?? '',
+              workSector: r.userData.data.work.workSector ?? '0',
             );
           },
         );
 
         yield* genders.fold(
-              (l) async* {
+          (l) async* {
             print(l.message);
           },
-              (r) async* {
+          (r) async* {
             yield state.copyWith(genders: r);
+          },
+        );
+
+        yield* levelsOfEducation.fold(
+          (l) async* {
+            print(l.message);
+          },
+          (r) async* {
+            yield state.copyWith(levelsOfEducation: r);
+          },
+        );
+
+        yield* workSectors.fold(
+          (l) async* {
+            print(l.message);
+          },
+          (r) async* {
+            yield state.copyWith(workSectors: r);
           },
         );
 
@@ -99,11 +128,9 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
           );
           print('$request\n\n');
 
-
           print('sending');
 
-          failureOrSuccess =
-          await _userRepo.saveUserDataRemote(request);
+          failureOrSuccess = await _userRepo.saveUserDataRemote(request);
         }
 
         print('done');
@@ -149,6 +176,92 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
         yield state.copyWith(
           dateOfBirth: e.dateOfBirth,
           submitFailureOrSuccess: None(),
+        );
+      },
+      employerNameChanged: (e) async* {
+        yield state.copyWith(
+          employerName: e.employerName,
+          submitFailureOrSuccess: None(),
+        );
+      },
+      startDateChanged: (e) async* {
+        yield state.copyWith(
+          startDate: e.startDate,
+          submitFailureOrSuccess: None(),
+        );
+      },
+      levelOfEducationChanged: (e) async* {
+        yield state.copyWith(
+          levelOfEducation: e.levelOfEducation,
+          submitFailureOrSuccess: None(),
+        );
+      },
+      monthlyIncomeChanged: (e) async* {
+        yield state.copyWith(
+          monthlyIncome: e.monthlyIncome,
+          submitFailureOrSuccess: None(),
+        );
+      },
+      workSectorChanged: (e) async* {
+        yield state.copyWith(
+          workSector: e.workSector,
+          submitFailureOrSuccess: None(),
+        );
+      },
+      employmentStatusChanged: (e) async* {
+        yield state.copyWith(
+          employmentStatus: e.employmentStatus,
+          submitFailureOrSuccess: None(),
+        );
+      },
+      submitEduAndEmpForm: (e) async* {
+        print('begin');
+        final isLevelOfEducationValid = state.levelOfEducation.isNotEmpty;
+        final isEmploymentStatusValid = state.employmentStatus.isNotEmpty;
+        final isWorkSectorValid = state.workSector.isNotEmpty;
+        final isEmployerNameValid = state.employerName.isNotEmpty;
+        final isStartDateValid = state.startDate.isNotEmpty;
+        final isMonthlyIncomeValid = state.monthlyIncome.isNotEmpty;
+
+        Either<Glitch, Unit> failureOrSuccess;
+
+        if (isLevelOfEducationValid &&
+            isEmploymentStatusValid &&
+            isWorkSectorValid &&
+            isEmployerNameValid &&
+            isStartDateValid &&
+            isMonthlyIncomeValid) {
+          print('verified');
+          yield state.copyWith(
+            isLoading: true,
+            isSubmitting: true,
+            submitFailureOrSuccess: None(),
+          );
+          UserDetailsRequest request;
+          request = state.userDetails.copyWith.work(
+            netMonthlyIncome: state.monthlyIncome.trim(),
+            workSector: state.workSector.trim(),
+            workStartDate: state.startDate.trim(),
+            educationQualification: state.levelOfEducation.trim(),
+          );
+
+          request = state.userDetails.copyWith.education(
+            educationalQualification: state.levelOfEducation.trim(),
+          );
+          print('$request\n\n');
+
+          print('sending');
+
+          failureOrSuccess = await _userRepo.saveUserDataRemote(request);
+        }
+
+        print('done');
+
+        yield state.copyWith(
+          isSubmitting: false,
+          isLoading: false,
+          showErrorMessages: true,
+          submitFailureOrSuccess: optionOf(failureOrSuccess),
         );
       },
     );

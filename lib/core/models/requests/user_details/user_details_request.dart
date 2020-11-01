@@ -47,6 +47,8 @@ abstract class UserDetailsRequest with _$UserDetailsRequest {
 
   factory UserDetailsRequest.initial() => UserDetailsRequest(
     profile: Profile.initial(),
+    education: Education.initial(),
+    work: Work.initial(),
   );
 
 

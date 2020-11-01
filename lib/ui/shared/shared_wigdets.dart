@@ -457,6 +457,14 @@ Widget sharedInfoButton({
   );
 }
 
+Widget sharedLoader() {
+  return Container(
+    child: Center(
+      child: CircularProgressIndicator(),
+    ),
+  );
+}
+
 Widget sharedDropDownFormField<T>({
   @required BuildContext context,
   @required String labelText,
