@@ -5,8 +5,15 @@ import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
 class BankAccountCard extends StatelessWidget {
+  final String bankName;
+  final String accountNumber;
+  final String accountName;
+
   const BankAccountCard({
     Key key,
+    this.bankName,
+    this.accountNumber,
+    this.accountName,
   }) : super(key: key);
 
   @override
@@ -26,7 +33,7 @@ class BankAccountCard extends StatelessWidget {
           children: [
             RichText(
               text: TextSpan(
-                text: "First Bank",
+                text: bankName,
                 style: GoogleFonts.workSans(
                   fontSize: SizeConfig.textSize(context, 5),
                   fontWeight: FontWeight.w600,
@@ -35,14 +42,14 @@ class BankAccountCard extends StatelessWidget {
                 ),
                 children: [
                   TextSpan(
-                    text: "\n234353312123232",
+                    text: "\n$accountNumber",
                     style: GoogleFonts.workSans(
                       fontSize: SizeConfig.textSize(context, 6),
                       color: ColorStyles.grey2,
                     ),
                   ),
                   TextSpan(
-                    text: "\nMargaret Novakowska",
+                    text: "\n$accountName",
                     style: GoogleFonts.workSans(
                       fontSize: SizeConfig.textSize(context, 5),
                       fontWeight: FontWeight.w400,

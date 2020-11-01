@@ -1,4 +1,7 @@
 part of 'accounts_cards_bloc.dart';
 
-@immutable
-abstract class AccountsCardsEvent {}
+@freezed
+abstract class AccountsCardsEvent with _$AccountsCardsEvent {
+  const factory AccountsCardsEvent.getUserBankDetails() = GetUserBankDetails;
+
+}

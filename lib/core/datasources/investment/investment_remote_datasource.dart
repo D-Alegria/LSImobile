@@ -27,7 +27,7 @@ class InvestmentRemoteDataSourceImpl implements InvestmentRemoteDataSource {
         requestBody: request.toJson(),
       );
       return response.fold(
-        (failure) => null,
+        (failure) => left(RemoteGlitch(message: failure.message)),
         (success) {
           final result = InvestmentPortfolioResponse.fromJson(success);
           return right(result.data);

@@ -9,11 +9,15 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../ui/views/main/profile/view_models/accounts_cards/accounts_cards_bloc.dart';
 import '../../utils/api_manager_util.dart';
 import '../../../ui/views/authentication/view_model/auth_form/auth_form_bloc.dart';
 import '../../services/auth_service/auth_service.dart';
 import '../../services/auth_service/auth_service_impl.dart';
 import '../../../ui/views/authentication/view_model/authentication/authentication_bloc.dart';
+import '../../datasources/bank/bank_remote_datasource.dart';
+import '../../repositories/bank/bank_repo.dart';
+import '../../repositories/bank/bank_repo_impl.dart';
 import '../interceptor/dio_interceptor.dart';
 import '../../../ui/views/main/profile/view_models/edit_profile/edit_profile_bloc.dart';
 import '../../datasources/investment/investment_remote_datasource.dart';
@@ -44,24 +48,25 @@ Future<GetIt> $initGetIt(
   gh.factory<SharedPreferences>(() => sharedPreferences);
   gh.factory<String>(() => registerModule.baseUrl, instanceName: 'BaseUrl');
   gh.lazySingleton<UserLocalDataSource>(() => UserLocalDataSourceImpl());
+  gh.lazySingleton<ApiManager>(() => ApiManager(get<NetworkInfo>()));
+  gh.lazySingleton<BankRemoteDataSource>(
+      () => BankRemoteDataSourceImpl(get<ApiManager>()));
+  gh.lazySingleton<BankRepo>(() =>
+      BankRepoImpl(get<UserLocalDataSource>(), get<BankRemoteDataSource>()));
   gh.lazySingleton<Dio>(
       () => registerModule.dio(get<String>(instanceName: 'BaseUrl')));
   gh.lazySingleton<DioInterceptor>(() => DioInterceptor(get<Dio>()));
-  gh.lazySingleton<LocalStorageRepo>(
-      () => LocalStorageRepoImpl(get<SharedPreferences>()));
-  gh.lazySingleton<ApiManager>(() => ApiManager(
-        get<Dio>(),
-        get<DioInterceptor>(),
-        get<NetworkInfo>(),
-      ));
   gh.lazySingleton<InvestmentRemoteDataSource>(
       () => InvestmentRemoteDataSourceImpl(get<ApiManager>()));
   gh.lazySingleton<InvestmentRepo>(() => InvestmentRepoImpl(
       get<UserLocalDataSource>(), get<InvestmentRemoteDataSource>()));
+  gh.lazySingleton<LocalStorageRepo>(
+      () => LocalStorageRepoImpl(get<SharedPreferences>()));
   gh.lazySingleton<UserRemoteDataSource>(
       () => UserRemoteDataSourceImpl(get<ApiManager>()));
   gh.lazySingleton<UserRepo>(() =>
       UserRepoImpl(get<UserLocalDataSource>(), get<UserRemoteDataSource>()));
+  gh.lazySingleton<AccountsCardsBloc>(() => AccountsCardsBloc(get<BankRepo>()));
   gh.lazySingleton<AuthService>(() => AuthServiceImpl(
         get<ApiManager>(),
         get<UserRepo>(),
