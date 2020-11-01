@@ -28,64 +28,54 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
       : super(EditProfileState.initial());
 
   @override
-  Stream<EditProfileState> mapEventToState(
-    EditProfileEvent event,
-  ) async* {
+  Stream<EditProfileState> mapEventToState(EditProfileEvent event,) async* {
     yield* event.map(
       init: (e) async* {
         yield state.copyWith(isLoading: true);
-        final result = await _userRepo.userDataRemote;
         final genders = await _userRemoteDataSource.genders;
         final levelsOfEducation = await _userRemoteDataSource.educationSectors;
         final workSectors = await _userRemoteDataSource.workSectors;
 
-        yield* result.fold(
-          (l) async* {
-            print(l.message);
-          },
-          (r) async* {
-            yield state.copyWith(
-              userDetails: r.userData.data,
-              firstName: r.userData.data.profile.legalName.split(' ')[0] ?? '',
-              lastName: r.userData.data.profile.legalName.split(' ')[1] ?? '',
-              gender: r.userData.data.profile.gender ?? '0',
-              dateOfBirth: r.userData.data.profile.dateOfBirth ?? '',
-              phoneNumber: r.userData.data.profile.phone ?? '',
-              emailAddress: r.userData.data.profile.email ?? '',
-              employerName: r.userData.data.work.employer ?? '',
-              // employmentStatus: r.userData.data.work. ?? '0',
-              levelOfEducation:
-                  r.userData.data.education.educationalQualification ?? '0',
-              startDate: r.userData.data.work.workStartDate ?? '',
-              monthlyIncome: r.userData.data.work.netMonthlyIncome ?? '',
-              workSector: r.userData.data.work.workSector ?? '0',
-            );
-          },
+        yield state.copyWith(
+          userDetails: e.userDetails,
+          firstName: e.userDetails.profile.legalName.split(' ')[0] ?? '',
+          lastName: e.userDetails.profile.legalName.split(' ')[1] ?? '',
+          gender: e.userDetails.profile.gender ?? '0',
+          dateOfBirth: e.userDetails.profile.dateOfBirth ?? '',
+          phoneNumber: e.userDetails.profile.phone ?? '',
+          emailAddress: e.userDetails.profile.email ?? '',
+          employerName: e.userDetails.work.employer ?? '',
+          // employmentStatus: e.userDetails.work. ?? '0',
+          levelOfEducation:
+          e.userDetails.education.educationalQualification ?? '0',
+          startDate: e.userDetails.work.workStartDate ?? '',
+          monthlyIncome: e.userDetails.work.netMonthlyIncome ?? '',
+          workSector: e.userDetails.work.workSector ?? '0',
         );
 
         yield* genders.fold(
-          (l) async* {
+              (l) async* {
             print(l.message);
           },
-          (r) async* {
+              (r) async* {
             yield state.copyWith(genders: r);
           },
         );
 
         yield* levelsOfEducation.fold(
-          (l) async* {
+              (l) async* {
             print(l.message);
           },
-          (r) async* {
+              (r) async* {
             yield state.copyWith(levelsOfEducation: r);
           },
         );
 
         yield* workSectors.fold(
-          (l) async* {
+              (l) async* {
             print(l.message);
           },
-          (r) async* {
+              (r) async* {
             yield state.copyWith(workSectors: r);
           },
         );

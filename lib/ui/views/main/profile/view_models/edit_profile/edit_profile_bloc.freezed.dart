@@ -14,8 +14,10 @@ class _$EditProfileEventTearOff {
   const _$EditProfileEventTearOff();
 
 // ignore: unused_element
-  Init init() {
-    return const Init();
+  Init init(UserDetailsRequest userDetails) {
+    return Init(
+      userDetails,
+    );
   }
 
 // ignore: unused_element
@@ -121,7 +123,7 @@ const $EditProfileEvent = _$EditProfileEventTearOff();
 mixin _$EditProfileEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result init(),
+    @required Result init(UserDetailsRequest userDetails),
     @required Result submitEditProfileForm(),
     @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
@@ -139,7 +141,7 @@ mixin _$EditProfileEvent {
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result init(),
+    Result init(UserDetailsRequest userDetails),
     Result submitEditProfileForm(),
     Result submitEduAndEmpForm(),
     Result emailChanged(String email),
@@ -216,6 +218,9 @@ class _$EditProfileEventCopyWithImpl<$Res>
 abstract class $InitCopyWith<$Res> {
   factory $InitCopyWith(Init value, $Res Function(Init) then) =
       _$InitCopyWithImpl<$Res>;
+  $Res call({UserDetailsRequest userDetails});
+
+  $UserDetailsRequestCopyWith<$Res> get userDetails;
 }
 
 /// @nodoc
@@ -226,29 +231,62 @@ class _$InitCopyWithImpl<$Res> extends _$EditProfileEventCopyWithImpl<$Res>
 
   @override
   Init get _value => super._value as Init;
+
+  @override
+  $Res call({
+    Object userDetails = freezed,
+  }) {
+    return _then(Init(
+      userDetails == freezed
+          ? _value.userDetails
+          : userDetails as UserDetailsRequest,
+    ));
+  }
+
+  @override
+  $UserDetailsRequestCopyWith<$Res> get userDetails {
+    if (_value.userDetails == null) {
+      return null;
+    }
+    return $UserDetailsRequestCopyWith<$Res>(_value.userDetails, (value) {
+      return _then(_value.copyWith(userDetails: value));
+    });
+  }
 }
 
 /// @nodoc
 class _$Init implements Init {
-  const _$Init();
+  const _$Init(this.userDetails) : assert(userDetails != null);
+
+  @override
+  final UserDetailsRequest userDetails;
 
   @override
   String toString() {
-    return 'EditProfileEvent.init()';
+    return 'EditProfileEvent.init(userDetails: $userDetails)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is Init);
+    return identical(this, other) ||
+        (other is Init &&
+            (identical(other.userDetails, userDetails) ||
+                const DeepCollectionEquality()
+                    .equals(other.userDetails, userDetails)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(userDetails);
+
+  @override
+  $InitCopyWith<Init> get copyWith =>
+      _$InitCopyWithImpl<Init>(this, _$identity);
 
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result init(),
+    @required Result init(UserDetailsRequest userDetails),
     @required Result submitEditProfileForm(),
     @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
@@ -279,13 +317,13 @@ class _$Init implements Init {
     assert(employerNameChanged != null);
     assert(startDateChanged != null);
     assert(monthlyIncomeChanged != null);
-    return init();
+    return init(userDetails);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result init(),
+    Result init(UserDetailsRequest userDetails),
     Result submitEditProfileForm(),
     Result submitEduAndEmpForm(),
     Result emailChanged(String email),
@@ -304,7 +342,7 @@ class _$Init implements Init {
   }) {
     assert(orElse != null);
     if (init != null) {
-      return init();
+      return init(userDetails);
     }
     return orElse();
   }
@@ -375,7 +413,10 @@ class _$Init implements Init {
 }
 
 abstract class Init implements EditProfileEvent {
-  const factory Init() = _$Init;
+  const factory Init(UserDetailsRequest userDetails) = _$Init;
+
+  UserDetailsRequest get userDetails;
+  $InitCopyWith<Init> get copyWith;
 }
 
 /// @nodoc
@@ -417,7 +458,7 @@ class _$SubmitEditProfileForm implements SubmitEditProfileForm {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result init(),
+    @required Result init(UserDetailsRequest userDetails),
     @required Result submitEditProfileForm(),
     @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
@@ -454,7 +495,7 @@ class _$SubmitEditProfileForm implements SubmitEditProfileForm {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result init(),
+    Result init(UserDetailsRequest userDetails),
     Result submitEditProfileForm(),
     Result submitEduAndEmpForm(),
     Result emailChanged(String email),
@@ -586,7 +627,7 @@ class _$SubmitEduAndEmpForm implements SubmitEduAndEmpForm {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result init(),
+    @required Result init(UserDetailsRequest userDetails),
     @required Result submitEditProfileForm(),
     @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
@@ -623,7 +664,7 @@ class _$SubmitEduAndEmpForm implements SubmitEduAndEmpForm {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result init(),
+    Result init(UserDetailsRequest userDetails),
     Result submitEditProfileForm(),
     Result submitEduAndEmpForm(),
     Result emailChanged(String email),
@@ -776,7 +817,7 @@ class _$EmailChanged implements EmailChanged {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result init(),
+    @required Result init(UserDetailsRequest userDetails),
     @required Result submitEditProfileForm(),
     @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
@@ -813,7 +854,7 @@ class _$EmailChanged implements EmailChanged {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result init(),
+    Result init(UserDetailsRequest userDetails),
     Result submitEditProfileForm(),
     Result submitEduAndEmpForm(),
     Result emailChanged(String email),
@@ -970,7 +1011,7 @@ class _$FirstNameChanged implements FirstNameChanged {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result init(),
+    @required Result init(UserDetailsRequest userDetails),
     @required Result submitEditProfileForm(),
     @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
@@ -1007,7 +1048,7 @@ class _$FirstNameChanged implements FirstNameChanged {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result init(),
+    Result init(UserDetailsRequest userDetails),
     Result submitEditProfileForm(),
     Result submitEduAndEmpForm(),
     Result emailChanged(String email),
@@ -1164,7 +1205,7 @@ class _$LastNameChanged implements LastNameChanged {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result init(),
+    @required Result init(UserDetailsRequest userDetails),
     @required Result submitEditProfileForm(),
     @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
@@ -1201,7 +1242,7 @@ class _$LastNameChanged implements LastNameChanged {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result init(),
+    Result init(UserDetailsRequest userDetails),
     Result submitEditProfileForm(),
     Result submitEduAndEmpForm(),
     Result emailChanged(String email),
@@ -1358,7 +1399,7 @@ class _$PhoneNumberChanged implements PhoneNumberChanged {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result init(),
+    @required Result init(UserDetailsRequest userDetails),
     @required Result submitEditProfileForm(),
     @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
@@ -1395,7 +1436,7 @@ class _$PhoneNumberChanged implements PhoneNumberChanged {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result init(),
+    Result init(UserDetailsRequest userDetails),
     Result submitEditProfileForm(),
     Result submitEduAndEmpForm(),
     Result emailChanged(String email),
@@ -1551,7 +1592,7 @@ class _$GenderChanged implements GenderChanged {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result init(),
+    @required Result init(UserDetailsRequest userDetails),
     @required Result submitEditProfileForm(),
     @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
@@ -1588,7 +1629,7 @@ class _$GenderChanged implements GenderChanged {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result init(),
+    Result init(UserDetailsRequest userDetails),
     Result submitEditProfileForm(),
     Result submitEduAndEmpForm(),
     Result emailChanged(String email),
@@ -1745,7 +1786,7 @@ class _$DateOfBirthChanged implements DateOfBirthChanged {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result init(),
+    @required Result init(UserDetailsRequest userDetails),
     @required Result submitEditProfileForm(),
     @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
@@ -1782,7 +1823,7 @@ class _$DateOfBirthChanged implements DateOfBirthChanged {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result init(),
+    Result init(UserDetailsRequest userDetails),
     Result submitEditProfileForm(),
     Result submitEduAndEmpForm(),
     Result emailChanged(String email),
@@ -1944,7 +1985,7 @@ class _$LevelOfEducationChanged implements LevelOfEducationChanged {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result init(),
+    @required Result init(UserDetailsRequest userDetails),
     @required Result submitEditProfileForm(),
     @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
@@ -1981,7 +2022,7 @@ class _$LevelOfEducationChanged implements LevelOfEducationChanged {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result init(),
+    Result init(UserDetailsRequest userDetails),
     Result submitEditProfileForm(),
     Result submitEduAndEmpForm(),
     Result emailChanged(String email),
@@ -2144,7 +2185,7 @@ class _$EmploymentStatusChanged implements EmploymentStatusChanged {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result init(),
+    @required Result init(UserDetailsRequest userDetails),
     @required Result submitEditProfileForm(),
     @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
@@ -2181,7 +2222,7 @@ class _$EmploymentStatusChanged implements EmploymentStatusChanged {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result init(),
+    Result init(UserDetailsRequest userDetails),
     Result submitEditProfileForm(),
     Result submitEduAndEmpForm(),
     Result emailChanged(String email),
@@ -2339,7 +2380,7 @@ class _$WorkSectorChanged implements WorkSectorChanged {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result init(),
+    @required Result init(UserDetailsRequest userDetails),
     @required Result submitEditProfileForm(),
     @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
@@ -2376,7 +2417,7 @@ class _$WorkSectorChanged implements WorkSectorChanged {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result init(),
+    Result init(UserDetailsRequest userDetails),
     Result submitEditProfileForm(),
     Result submitEduAndEmpForm(),
     Result emailChanged(String email),
@@ -2533,7 +2574,7 @@ class _$EmployerNameChanged implements EmployerNameChanged {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result init(),
+    @required Result init(UserDetailsRequest userDetails),
     @required Result submitEditProfileForm(),
     @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
@@ -2570,7 +2611,7 @@ class _$EmployerNameChanged implements EmployerNameChanged {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result init(),
+    Result init(UserDetailsRequest userDetails),
     Result submitEditProfileForm(),
     Result submitEduAndEmpForm(),
     Result emailChanged(String email),
@@ -2728,7 +2769,7 @@ class _$StartDateChanged implements StartDateChanged {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result init(),
+    @required Result init(UserDetailsRequest userDetails),
     @required Result submitEditProfileForm(),
     @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
@@ -2765,7 +2806,7 @@ class _$StartDateChanged implements StartDateChanged {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result init(),
+    Result init(UserDetailsRequest userDetails),
     Result submitEditProfileForm(),
     Result submitEduAndEmpForm(),
     Result emailChanged(String email),
@@ -2924,7 +2965,7 @@ class _$MonthlyIncomeChanged implements MonthlyIncomeChanged {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result init(),
+    @required Result init(UserDetailsRequest userDetails),
     @required Result submitEditProfileForm(),
     @required Result submitEduAndEmpForm(),
     @required Result emailChanged(String email),
@@ -2961,7 +3002,7 @@ class _$MonthlyIncomeChanged implements MonthlyIncomeChanged {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result init(),
+    Result init(UserDetailsRequest userDetails),
     Result submitEditProfileForm(),
     Result submitEduAndEmpForm(),
     Result emailChanged(String email),

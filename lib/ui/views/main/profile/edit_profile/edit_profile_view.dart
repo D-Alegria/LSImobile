@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/core/configs/dependency_injection/injection.dart';
 import 'package:lsi_mobile/core/extensions/string_extension.dart';
+import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -9,6 +10,10 @@ import 'package:lsi_mobile/ui/views/main/profile/view_models/edit_profile/edit_p
 import 'package:lsi_mobile/ui/views/main/profile/widgets/profile_form.dart';
 
 class EditProfileView extends StatefulWidget {
+  final UserDetailsRequest userDetails;
+
+  const EditProfileView({Key key, this.userDetails}) : super(key: key);
+
   @override
   _EditProfileViewState createState() => _EditProfileViewState();
 }
@@ -25,8 +30,8 @@ class _EditProfileViewState extends State<EditProfileView>
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          getIt<EditProfileBloc>()..add(EditProfileEvent.init()),
+      create: (context) => getIt<EditProfileBloc>()
+        ..add(EditProfileEvent.init(widget.userDetails)),
       child: BlocConsumer<EditProfileBloc, EditProfileState>(
         builder: (context, state) => ProfileForm(
           tabController: _tabController,

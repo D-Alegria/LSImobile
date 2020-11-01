@@ -35,6 +35,7 @@ import '../../../ui/views/main/profile/faq/faq_view.dart';
 import '../../../ui/views/main/profile/profile_view.dart';
 import '../../../ui/views/onboarding/onboarding_view.dart';
 import '../../../ui/views/start_up/start_up_view.dart';
+import '../../models/requests/user_details/user_details_request.dart';
 
 class Routes {
   static const String startUpView = '/';
@@ -258,8 +259,14 @@ class Router extends RouterBase {
       );
     },
     EditProfileView: (data) {
+      final args = data.getArgs<EditProfileViewArguments>(
+        orElse: () => EditProfileViewArguments(),
+      );
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => EditProfileView(),
+        builder: (context) => EditProfileView(
+          key: args.key,
+          userDetails: args.userDetails,
+        ),
         settings: data,
       );
     },
@@ -365,8 +372,14 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 
   Future<dynamic> pushProfileView() => push<dynamic>(Routes.profileView);
 
-  Future<dynamic> pushEditProfileView() =>
-      push<dynamic>(Routes.editProfileView);
+  Future<dynamic> pushEditProfileView({
+    Key key,
+    UserDetailsRequest userDetails,
+  }) =>
+      push<dynamic>(
+        Routes.editProfileView,
+        arguments: EditProfileViewArguments(key: key, userDetails: userDetails),
+      );
 
   Future<dynamic> pushAccountsCardsView() =>
       push<dynamic>(Routes.accountsCardsView);
@@ -397,6 +410,13 @@ class MainViewArguments {
   final Key key;
   final int pageNumber;
   MainViewArguments({this.key, @required this.pageNumber});
+}
+
+/// EditProfileView arguments holder class
+class EditProfileViewArguments {
+  final Key key;
+  final UserDetailsRequest userDetails;
+  EditProfileViewArguments({this.key, this.userDetails});
 }
 
 /// SuccessView arguments holder class

@@ -2,7 +2,7 @@ part of 'edit_profile_bloc.dart';
 
 @freezed
 abstract class EditProfileEvent with _$EditProfileEvent {
-  const factory EditProfileEvent.init() = Init;
+  const factory EditProfileEvent.init(UserDetailsRequest userDetails) = Init;
 
   const factory EditProfileEvent.submitEditProfileForm() =
   SubmitEditProfileForm;

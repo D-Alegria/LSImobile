@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
 import 'package:lsi_mobile/core/models/responses/user_details/user_data.dart';
 import 'package:lsi_mobile/core/repositories/investment/investment_repo.dart';
 import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
@@ -52,6 +53,7 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
             (r) async* {
               investmentBalance = r;
               yield Loaded(
+                userDetailsRequest: userData.data,
                 fullName: userData.data.profile.legalName ?? "",
                 investmentBalance: investmentBalance,
                 profilePicture: userData.data.profile.fileName ?? "",
