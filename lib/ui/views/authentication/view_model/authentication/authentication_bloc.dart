@@ -32,6 +32,23 @@ class AuthenticationBloc
       } else {
         yield Authenticated();
       }
+    }, logoutRequest: (_) async* {
+      try {
+        final result = await _authService.logout();
+        print("logging out");
+        yield* result.fold(
+          (l) async* {
+            print(l.message);
+          },
+          (r) async* {
+            print('logout good');
+            yield Unauthenticated();
+          },
+        );
+        yield Initial();
+      } on Exception catch (e) {
+        print(e);
+      }
     });
   }
 }

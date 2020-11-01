@@ -133,7 +133,7 @@ class SharedTextFormField extends StatelessWidget {
   final bool obscureText;
   final TextInputAction textInputAction;
   final TextInputType keyboardType;
-  final TextEditingController controller;
+  final String initialValue;
 
   const SharedTextFormField({
     Key key,
@@ -143,13 +143,13 @@ class SharedTextFormField extends StatelessWidget {
     this.obscureText = false,
     this.textInputAction,
     this.keyboardType,
-    this.controller,
+    this.initialValue,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
+      initialValue: initialValue,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
       obscureText: obscureText,
@@ -463,9 +463,10 @@ Widget sharedDropDownFormField<T>({
   @required Function onChanged,
   Function validator,
   @required List<T> items,
+  @required T value,
 }) {
   return DropdownButtonFormField(
-    value: items.first,
+    value: value,
     items: items
         .map(
           (e) => DropdownMenuItem(

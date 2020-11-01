@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'initiate_bvn_validation_request.g.dart';
 
-@JsonSerializable(nullable: false)
+@JsonSerializable()
 class InitiateBVNValidationRequest {
   final String bvn;
   @JsonKey(name: "first_name")

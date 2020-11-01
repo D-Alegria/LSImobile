@@ -3,7 +3,7 @@ import 'package:lsi_mobile/core/models/requests/token_request/token_request.dart
 
 part 'investment_details.g.dart';
 
-@JsonSerializable(nullable: false)
+@JsonSerializable()
 class InvestmentDetailsRequest extends TokenRequest {
   @JsonKey(name: "request_id")
   final String requestId;

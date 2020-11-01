@@ -5,7 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:lsi_mobile/core/datasources/local_storage/local_data_repo.dart';
-import 'package:lsi_mobile/core/exceptions/auth_glitch.dart';
+import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/core/models/requests/login_user/login_user_request.dart';
 import 'package:lsi_mobile/core/models/requests/register_user/profile.dart';
@@ -97,10 +97,10 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
         );
       },
       loginUser: (value) async* {
-        final isEmailAddressValid = state.emailAddress.isNotEmpty;
+        final isEmailAddressValid = state.emailAddress.isEmail;
         final isPasswordValid = state.password.isValidPassword;
 
-        Either<AuthGlitch, Unit> failureOrSuccess;
+        Either<Glitch, Unit> failureOrSuccess;
 
         if (isEmailAddressValid && isPasswordValid) {
           yield state.copyWith(
@@ -126,10 +126,10 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
         final isFirstNameValid = state.firstName.isNotEmpty;
         final isLastNameValid = state.lastName.isNotEmpty;
         final isPhoneNumberValid = state.phoneNumber.isNotEmpty;
-        final isEmailAddressValid = state.emailAddress.isNotEmpty;
+        final isEmailAddressValid = state.emailAddress.isEmail;
         final isPasswordValid = state.password.isValidPassword;
 
-        Either<AuthGlitch, Unit> failureOrSuccess;
+        Either<Glitch, Unit> failureOrSuccess;
 
         if (isFirstNameValid &&
             isLastNameValid &&
@@ -172,7 +172,7 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
         );
       },
       verifyUser: (value) async* {
-        Either<AuthGlitch, Unit> failureOrSuccess;
+        Either<Glitch, Unit> failureOrSuccess;
 
         //TODO validate Verification Code
         final isVerificationCodeValid = state.verificationCode.isValidPassword;

@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'reset_password_request.g.dart';
 
-@JsonSerializable(nullable: false)
+@JsonSerializable()
 class ResetPasswordRequest {
   @JsonKey(name: "EMAIL")
   final String email;

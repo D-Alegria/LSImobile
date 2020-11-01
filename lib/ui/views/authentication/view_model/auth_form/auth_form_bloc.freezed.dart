@@ -1915,7 +1915,7 @@ class _$AuthFormStateTearOff {
       @required String verificationCode,
       @required bool showErrorMessages,
       @required bool isSubmitting,
-      @required Option<Either<AuthGlitch, Unit>> authFailureOrSuccess}) {
+      @required Option<Either<Glitch, Unit>> authFailureOrSuccess}) {
     return _AuthFormState(
       firstName: firstName,
       lastName: lastName,
@@ -1944,7 +1944,7 @@ mixin _$AuthFormState {
   String get verificationCode;
   bool get showErrorMessages;
   bool get isSubmitting;
-  Option<Either<AuthGlitch, Unit>> get authFailureOrSuccess;
+  Option<Either<Glitch, Unit>> get authFailureOrSuccess;
 
   $AuthFormStateCopyWith<AuthFormState> get copyWith;
 }
@@ -1963,7 +1963,7 @@ abstract class $AuthFormStateCopyWith<$Res> {
       String verificationCode,
       bool showErrorMessages,
       bool isSubmitting,
-      Option<Either<AuthGlitch, Unit>> authFailureOrSuccess});
+      Option<Either<Glitch, Unit>> authFailureOrSuccess});
 }
 
 /// @nodoc
@@ -2006,7 +2006,7 @@ class _$AuthFormStateCopyWithImpl<$Res>
           isSubmitting == freezed ? _value.isSubmitting : isSubmitting as bool,
       authFailureOrSuccess: authFailureOrSuccess == freezed
           ? _value.authFailureOrSuccess
-          : authFailureOrSuccess as Option<Either<AuthGlitch, Unit>>,
+          : authFailureOrSuccess as Option<Either<Glitch, Unit>>,
     ));
   }
 }
@@ -2027,7 +2027,7 @@ abstract class _$AuthFormStateCopyWith<$Res>
       String verificationCode,
       bool showErrorMessages,
       bool isSubmitting,
-      Option<Either<AuthGlitch, Unit>> authFailureOrSuccess});
+      Option<Either<Glitch, Unit>> authFailureOrSuccess});
 }
 
 /// @nodoc
@@ -2072,7 +2072,7 @@ class __$AuthFormStateCopyWithImpl<$Res>
           isSubmitting == freezed ? _value.isSubmitting : isSubmitting as bool,
       authFailureOrSuccess: authFailureOrSuccess == freezed
           ? _value.authFailureOrSuccess
-          : authFailureOrSuccess as Option<Either<AuthGlitch, Unit>>,
+          : authFailureOrSuccess as Option<Either<Glitch, Unit>>,
     ));
   }
 }
@@ -2116,7 +2116,7 @@ class _$_AuthFormState implements _AuthFormState {
   @override
   final bool isSubmitting;
   @override
-  final Option<Either<AuthGlitch, Unit>> authFailureOrSuccess;
+  final Option<Either<Glitch, Unit>> authFailureOrSuccess;
 
   @override
   String toString() {
@@ -2184,7 +2184,7 @@ abstract class _AuthFormState implements AuthFormState {
           @required String verificationCode,
           @required bool showErrorMessages,
           @required bool isSubmitting,
-          @required Option<Either<AuthGlitch, Unit>> authFailureOrSuccess}) =
+          @required Option<Either<Glitch, Unit>> authFailureOrSuccess}) =
       _$_AuthFormState;
 
   @override
@@ -2204,7 +2204,7 @@ abstract class _AuthFormState implements AuthFormState {
   @override
   bool get isSubmitting;
   @override
-  Option<Either<AuthGlitch, Unit>> get authFailureOrSuccess;
+  Option<Either<Glitch, Unit>> get authFailureOrSuccess;
   @override
   _$AuthFormStateCopyWith<_AuthFormState> get copyWith;
 }

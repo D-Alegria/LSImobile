@@ -80,7 +80,11 @@ class LoginView extends StatelessWidget {
         () => null,
         (either) => either.fold(
           (failure) => FlushbarHelper.createError(
-            message: failure.map(networkGlitch: (value) => value.message),
+            message: failure.maybeMap(
+              networkGlitch: (val) => val.message,
+              serverGlitch: (val) => val.message,
+              orElse: () => null,
+            ),
             duration: new Duration(seconds: 3),
           ).show(context),
           (success) => context.navigator.pushAndRemoveUntil(

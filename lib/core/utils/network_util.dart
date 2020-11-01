@@ -9,6 +9,6 @@ abstract class NetworkInfo {
 @LazySingleton(as: NetworkInfo)
 class NetworkInfoImpl implements NetworkInfo {
   @override
-  Future<bool> get isConnected async =>
-      await DataConnectionChecker().hasConnection;
+  Future<bool> get isConnected async => true;
+      // await DataConnectionChecker().hasConnection;
 }

@@ -8,12 +8,14 @@ part of 'register_user_request.dart';
 
 RegisterUserRequest _$RegisterUserRequestFromJson(Map<String, dynamic> json) {
   return RegisterUserRequest(
-    profile: Profile.fromJson(json['profile'] as Map<String, dynamic>),
+    profile: json['profile'] == null
+        ? null
+        : Profile.fromJson(json['profile'] as Map<String, dynamic>),
   );
 }
 
 Map<String, dynamic> _$RegisterUserRequestToJson(
         RegisterUserRequest instance) =>
     <String, dynamic>{
-      'profile': instance.profile.toJson(),
+      'profile': instance.profile?.toJson(),
     };

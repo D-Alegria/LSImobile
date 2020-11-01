@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'app_config.g.dart';
 
-@JsonSerializable(nullable: false)
+@JsonSerializable()
 class AppConfig {
   @JsonKey(name: "base_url")
   final String baseUrl;

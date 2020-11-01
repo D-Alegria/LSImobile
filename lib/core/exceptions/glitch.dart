@@ -11,4 +11,16 @@ abstract class Glitch with _$Glitch {
   const factory Glitch.serverGlitch({
     @required String message,
   }) = ServerGlitch;
+
+  const factory Glitch.remoteGlitch({
+    @required String message,
+  }) = RemoteGlitch;
+
+  const factory Glitch.unAuthenticatedGlitch({
+    @required String message,
+  }) = UnAuthenticatedGlitch;
+
+  const factory Glitch.localCacheGlitch({
+    @required String message,
+  }) = LocalCacheGlitch;
 }

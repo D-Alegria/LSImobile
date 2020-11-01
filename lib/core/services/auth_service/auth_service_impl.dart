@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:lsi_mobile/core/datasources/local_storage/local_data_repo.dart';
-import 'package:lsi_mobile/core/exceptions/auth_glitch.dart';
+import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/constants/api_urls.dart';
-import 'package:lsi_mobile/core/models/dto/user.dart';
+import 'package:lsi_mobile/core/models/dto/user/user.dart';
 import 'package:lsi_mobile/core/models/requests/login_user/login_user_request.dart';
 import 'package:lsi_mobile/core/models/requests/register_user/register_user_request.dart';
 import 'package:lsi_mobile/core/models/requests/reset_password/reset_password_request.dart';
@@ -16,18 +16,15 @@ import 'package:lsi_mobile/core/models/responses/verify_otp/verify_otp_response.
 import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
 import 'package:lsi_mobile/core/services/auth_service/auth_service.dart';
 import 'package:lsi_mobile/core/utils/api_manager_util.dart';
-import 'package:lsi_mobile/core/utils/network_util.dart';
 
 @LazySingleton(as: AuthService)
 class AuthServiceImpl implements AuthService {
   final ApiManager _apiManager;
-  final NetworkInfo _networkInfo;
   final UserRepo _userRepo;
   final LocalStorageRepo _localStorageRepo;
 
   AuthServiceImpl(
     this._apiManager,
-    this._networkInfo,
     this._userRepo,
     this._localStorageRepo,
   );
@@ -36,7 +33,7 @@ class AuthServiceImpl implements AuthService {
   Future<User> get currentUser async => await _userRepo.user;
 
   @override
-  Future<Either<AuthGlitch, Unit>> login(LoginUserRequest request) async {
+  Future<Either<Glitch, Unit>> login(LoginUserRequest request) async {
     return await checkNetwork(() async {
       final response = await _apiManager.post(
         url: ApiUrls.login,
@@ -44,11 +41,11 @@ class AuthServiceImpl implements AuthService {
       );
       return response.fold(
         (failure) {
-          return left(AuthNetworkGlitch(message: failure.message));
+          return left(failure);
         },
         (success) async {
           final result = LoginUserResponse.fromJson(success);
-          await _userRepo.saveUser(
+          await _userRepo.saveUserDataLocal(User(
             id: result.userId,
             email: result.data.email,
             fullName: result.data.fullName,
@@ -57,7 +54,7 @@ class AuthServiceImpl implements AuthService {
             password: request.password,
             token: result.token,
             profilePicture: result.data.profilePicture,
-          );
+          ));
           return right(unit);
         },
       );
@@ -65,7 +62,7 @@ class AuthServiceImpl implements AuthService {
   }
 
   @override
-  Future<Either<AuthGlitch, Unit>> register(RegisterUserRequest request) async {
+  Future<Either<Glitch, Unit>> register(RegisterUserRequest request) async {
     return await checkNetwork(() async {
       final response = await _apiManager.post(
         url: ApiUrls.register,
@@ -73,11 +70,11 @@ class AuthServiceImpl implements AuthService {
       );
       return response.fold(
         (failure) {
-          return left(AuthNetworkGlitch(message: failure.message));
+          return left(failure);
         },
         (success) async {
           final result = RegisterUserResponse.fromJson(success);
-          await _userRepo.saveUser(
+          await _userRepo.saveUserDataLocal(User(
             id: result.userId,
             email: request.profile.email,
             fullName: request.profile.fullName,
@@ -85,7 +82,7 @@ class AuthServiceImpl implements AuthService {
             isAuthenticated: true,
             password: request.profile.password,
             token: result.token,
-          );
+          ));
           return right(unit);
         },
       );
@@ -93,7 +90,7 @@ class AuthServiceImpl implements AuthService {
   }
 
   @override
-  Future<Either<AuthGlitch, Unit>> sendOTP(SendOTPRequest request) async {
+  Future<Either<Glitch, Unit>> sendOTP(SendOTPRequest request) async {
     return await checkNetwork(() async {
       final response = await _apiManager.post(
         url: ApiUrls.validatePhoneNumber,
@@ -101,7 +98,7 @@ class AuthServiceImpl implements AuthService {
       );
       return response.fold(
         (failure) {
-          return left(AuthNetworkGlitch(message: failure.message));
+          return left(failure);
         },
         (success) async {
           final result = SendOTPResponse.fromJson(success);
@@ -113,7 +110,7 @@ class AuthServiceImpl implements AuthService {
   }
 
   @override
-  Future<Either<AuthGlitch, Unit>> verifyOTP(VerifyOTPRequest request) async {
+  Future<Either<Glitch, Unit>> verifyOTP(VerifyOTPRequest request) async {
     return await checkNetwork(() async {
       final response = await _apiManager.post(
         url: ApiUrls.validatePhoneNumberOTP,
@@ -121,36 +118,65 @@ class AuthServiceImpl implements AuthService {
       );
       return response.fold(
         (failure) {
-          return left(AuthNetworkGlitch(message: failure.message));
+          return left(failure);
         },
         (success) async {
           VerifyOTPResponse.fromJson(success);
-          await _userRepo.saveUser(isVerified: true);
+          await _userRepo.updateUserDataLocal(isVerified: true);
           return right(unit);
         },
       );
     });
   }
 
-  Future<Either<AuthGlitch, Unit>> checkNetwork(
-    Future<Either<AuthGlitch, Unit>> Function() function,
+  Future<Either<Glitch, Unit>> checkNetwork(
+    Future<Either<Glitch, Unit>> Function() function,
   ) async {
     try {
-      if (await _networkInfo.isConnected) {
-        return await function();
-      } else {
-        return left(AuthNetworkGlitch(message: "No network Connection found"));
-      }
+      return await function();
     } on Exception catch (e) {
       print(e);
-      return left(AuthNetworkGlitch(
-          message: "System Error Occurred please contact developer"));
+      return left(
+        ServerGlitch(
+            message: "Internal System Error Occurred please contact developer"),
+      );
     }
   }
 
   @override
-  Future<Either<AuthGlitch, Unit>> resetPassword(ResetPasswordRequest request) {
-    // TODO: implement resetPassword
-    throw UnimplementedError();
+  Future<Either<Glitch, Unit>> resetPassword(
+      ResetPasswordRequest request) async {
+    return await checkNetwork(() async {
+      final response = await _apiManager.post(
+        url: ApiUrls.resetPassword,
+        requestBody: request.toJson(),
+      );
+      return response.fold(
+        (failure) {
+          return left(failure);
+        },
+        (success) async {
+          VerifyOTPResponse.fromJson(success);
+          return right(unit);
+        },
+      );
+    });
+  }
+
+  @override
+  Future<Either<Glitch, Unit>> logout() async {
+    try {
+      final result = await _userRepo.clearUserData;
+      return result.fold(
+        (l) => null,
+        (r) => right(unit),
+      );
+    } on Exception catch (e) {
+      print(e);
+      return left(
+        ServerGlitch(
+            message: "Internal System Error Occurred please contact developer"),
+      );
+    }
   }
 }

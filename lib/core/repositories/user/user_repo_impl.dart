@@ -1,35 +1,63 @@
+import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:lsi_mobile/core/datasources/local_storage/local_data_repo.dart';
-import 'package:lsi_mobile/core/models/constants/local_storage_keys.dart';
-import 'package:lsi_mobile/core/models/dto/user.dart';
+import 'package:lsi_mobile/core/datasources/user/user_local_datasource.dart';
+import 'package:lsi_mobile/core/datasources/user/user_remote_datasource.dart';
+import 'package:lsi_mobile/core/exceptions/glitch.dart';
+import 'package:lsi_mobile/core/models/dto/user/user.dart';
+import 'package:lsi_mobile/core/models/requests/token_request/token_request.dart';
+import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
+import 'package:lsi_mobile/core/models/responses/user_details/user_details_data.dart';
 import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
 
 @LazySingleton(as: UserRepo)
 class UserRepoImpl implements UserRepo {
-  final LocalStorageRepo _localStorageRepo;
+  final UserLocalDataSource _userLocalDataSource;
+  final UserRemoteDataSource _userRemoteDataSource;
 
-  UserRepoImpl(this._localStorageRepo);
+  UserRepoImpl(this._userLocalDataSource, this._userRemoteDataSource);
 
   @override
-  Future<void> deleteUser() async {
-    await _localStorageRepo.removeKey(LocalStorageKeys.userFullName);
-    await _localStorageRepo.removeKey(LocalStorageKeys.userId);
-    await _localStorageRepo.removeKey(LocalStorageKeys.userPhoneNo);
-    await _localStorageRepo.removeKey(LocalStorageKeys.userEmail);
-    await _localStorageRepo.removeKey(LocalStorageKeys.userPassword);
-    await _localStorageRepo.removeKey(LocalStorageKeys.userIsAuthenticated);
-    await _localStorageRepo.removeKey(LocalStorageKeys.userIsVerified);
-    await _localStorageRepo.removeKey(LocalStorageKeys.userToken);
+  Future<Either<Glitch, UserDetailsData>> get userDataRemote async {
+    try {
+      final user = await _userLocalDataSource.user;
+      final token = user.fold((l) => null, (r) => r.token);
+      final result = await _userRemoteDataSource.getUserDetails(
+        TokenRequest(token: token),
+      );
+      return result.fold((failure) {
+        return left(ServerGlitch(message: failure.message));
+      }, (success) {
+        return right(success);
+      });
+    } on Exception catch (e) {
+      print(e);
+      return left(ServerGlitch(message: "Happened in repo"));
+    }
   }
 
   @override
-  Future<bool> get isUserAuthenticated async =>await user.then((value) => value.isAuthenticated);
+  Future<Either<Glitch, Unit>> saveUserDataLocal(User user) async {
+    try {
+      final result = await _userLocalDataSource.saveUser(user: user);
+      return result.fold((failure) {
+        return left(ServerGlitch(message: failure.message));
+      }, (success) {
+        return right(success);
+      });
+    } on Exception catch (e) {
+      print(e);
+      return left(ServerGlitch(message: "Happened in user repo"));
+    }
+  }
 
   @override
-  Future<bool> get isUserVerified async => await user.then((value) => value.isVerified);
+  Future<User> get user async {
+    final result = await _userLocalDataSource.user;
+    return result.fold((l) => null, (r) => r);
+  }
 
   @override
-  Future<User> saveUser({
+  Future<Either<Glitch, Unit>> updateUserDataLocal({
     String id,
     String fullName,
     String phoneNumber,
@@ -40,39 +68,61 @@ class UserRepoImpl implements UserRepo {
     bool isVerified,
     String token,
   }) async {
-    if (id != null) await _localStorageRepo.saveString(LocalStorageKeys.userId, id);
-    if (fullName != null) await _localStorageRepo.saveString(LocalStorageKeys.userFullName, fullName);
-    if (phoneNumber != null) await _localStorageRepo.saveString(LocalStorageKeys.userPhoneNo, phoneNumber);
-    if (email != null) await _localStorageRepo.saveString(LocalStorageKeys.userEmail, email);
-    if (password != null) await _localStorageRepo.saveString(LocalStorageKeys.userPassword, password);
-    if (isAuthenticated != null) await _localStorageRepo.saveBool(LocalStorageKeys.userIsAuthenticated, isAuthenticated);
-    if (isVerified != null) await _localStorageRepo.saveBool(LocalStorageKeys.userIsVerified, isVerified);
-    if (token != null) await _localStorageRepo.saveString(LocalStorageKeys.userToken, token);
-    if (profilePicture != null) await _localStorageRepo.saveString(LocalStorageKeys.userProfilePicture, profilePicture);
-    return user;
+    try {
+      final result = await _userLocalDataSource.updateUser(
+        token: token,
+        profilePicture: profilePicture,
+        phoneNumber: phoneNumber,
+        password: password,
+        isVerified: isVerified,
+        isAuthenticated: isAuthenticated,
+        id: id,
+        email: email,
+        fullName: fullName,
+      );
+      return result.fold((failure) {
+        return left(ServerGlitch(message: failure.message));
+      }, (success) {
+        return right(unit);
+      });
+    } on Exception catch (e) {
+      print(e);
+      return left(ServerGlitch(message: "Happened in user repo"));
+    }
   }
 
   @override
-  Future<User> get user async {
-    String id = _localStorageRepo.getString(LocalStorageKeys.userId);
-    String fullName = _localStorageRepo.getString(LocalStorageKeys.userFullName);
-    String phoneNumber = _localStorageRepo.getString(LocalStorageKeys.userPhoneNo);
-    String email = _localStorageRepo.getString(LocalStorageKeys.userFullName);
-    String password = _localStorageRepo.getString(LocalStorageKeys.userPassword);
-    bool isAuthenticated = _localStorageRepo.getBool(LocalStorageKeys.userIsAuthenticated);
-    bool isVerified = _localStorageRepo.getBool(LocalStorageKeys.userIsVerified);
-    String token = _localStorageRepo.getString(LocalStorageKeys.userToken);
-    String profilePicture = _localStorageRepo.getString(LocalStorageKeys.userProfilePicture);
-    return User(
-      id: id,
-      phoneNumber: phoneNumber,
-      token: token,
-      password: password,
-      isVerified: isVerified ?? false,
-      isAuthenticated: isAuthenticated ?? false,
-      fullName: fullName,
-      email: email,
-      profilePicture: profilePicture,
-    );
+  Future<Either<Glitch, Unit>> get clearUserData async {
+    try {
+      final result = await _userLocalDataSource.deleteUser();
+      return result.fold((failure) {
+        return left(ServerGlitch(message: failure.message));
+      }, (success) {
+        return right(success);
+      });
+    } on Exception catch (e) {
+      print(e);
+      return left(ServerGlitch(message: "Happened in user repo"));
+    }
+  }
+
+  @override
+  Future<Either<Glitch, Unit>> saveUserDataRemote(
+      UserDetailsRequest request) async {
+    try {
+      final storedUser = await user;
+      print(storedUser.token);
+      var requestWithToken = request.copyWith(token: storedUser.token);
+      final result =
+          await _userRemoteDataSource.saveUserDetails(requestWithToken);
+      return result.fold((failure) {
+        return left(ServerGlitch(message: failure.message));
+      }, (success) {
+        return right(unit);
+      });
+    } on Exception catch (e) {
+      print(e);
+      return left(ServerGlitch(message: "Happened in user repo"));
+    }
   }
 }

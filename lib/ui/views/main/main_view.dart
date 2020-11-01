@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lsi_mobile/core/configs/dependency_injection/injection.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
+import 'package:lsi_mobile/ui/views/authentication/view_model/auth_form/auth_form_bloc.dart';
 import 'package:lsi_mobile/ui/views/main/history/history_view.dart';
 import 'package:lsi_mobile/ui/views/main/home/home_view.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_view.dart';
 import 'package:lsi_mobile/ui/views/main/loans/loans_view/view_model/loan_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/profile_view.dart';
+import 'package:lsi_mobile/ui/views/main/profile/view_models/edit_profile/edit_profile_bloc.dart';
+import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_bloc.dart';
 
 import 'loans/loans_view/loans_view.dart';
 
@@ -53,6 +57,10 @@ class _MainViewState extends State<MainView> {
         providers: [
           BlocProvider(
             create: (context) => LoanViewCubit()..checkActiveLoans(),
+          ),
+          BlocProvider(
+            create: (context) =>
+                getIt<UserProfileBloc>()..add(GetUserDetails()),
           ),
         ],
         child: Scaffold(

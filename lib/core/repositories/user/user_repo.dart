@@ -1,9 +1,17 @@
-import 'package:lsi_mobile/core/models/dto/user.dart';
+import 'package:dartz/dartz.dart';
+import 'package:lsi_mobile/core/exceptions/glitch.dart';
+import 'package:lsi_mobile/core/models/dto/user/user.dart';
+import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
+import 'package:lsi_mobile/core/models/responses/user_details/user_details_data.dart';
 
 abstract class UserRepo {
-  Future<User> get user;
+  Future<Either<Glitch, UserDetailsData>> get userDataRemote;
 
-  Future<User> saveUser({
+  Future<Either<Glitch, Unit>> saveUserDataLocal(User user);
+
+  Future<Either<Glitch, Unit>> saveUserDataRemote(UserDetailsRequest user);
+
+  Future<Either<Glitch, Unit>> updateUserDataLocal({
     String id,
     String fullName,
     String phoneNumber,
@@ -15,9 +23,7 @@ abstract class UserRepo {
     String token,
   });
 
-  Future<void> deleteUser();
+  Future<Either<Glitch, Unit>> get clearUserData;
 
-  Future<bool> get isUserAuthenticated;
-
-  Future<bool> get isUserVerified;
+  Future<User> get user;
 }

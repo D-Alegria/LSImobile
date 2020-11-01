@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lsi_mobile/core/view_models/home_viewmodel.dart';
-import 'package:provider/provider.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
+import 'package:provider/provider.dart';
 
 class ScreenHeader extends StatelessWidget {
   final String firstText;
@@ -43,9 +43,10 @@ class ScreenHeader extends StatelessWidget {
                 Text(
                   secondText,
                   style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: SizeConfig.textSize(context, 4.5),
-                      color: secondTextColor),
+                    fontWeight: FontWeight.w400,
+                    fontSize: SizeConfig.textSize(context, 4.5),
+                    color: secondTextColor,
+                  ),
                 ),
               ],
             ),
@@ -72,7 +73,12 @@ class ScreenHeader extends StatelessWidget {
                       color: ColorStyles.light,
                       size: SizeConfig.yMargin(context, 7),
                     )
-                  : Image.asset(image),
+                  : Image.network(
+                      image,
+                      errorBuilder: (context, error, stackTrace) => Container(
+                        color: ColorStyles.black,
+                      ),
+                    ),
             ),
           )
         ],

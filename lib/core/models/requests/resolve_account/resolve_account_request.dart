@@ -3,7 +3,7 @@ import 'package:lsi_mobile/core/models/requests/token_request/token_request.dart
 
 part 'resolve_account_request.g.dart';
 
-@JsonSerializable(nullable: false)
+@JsonSerializable()
 class ResolveAccountRequest extends TokenRequest {
   @JsonKey(name: "account_number")
   final String accountNumber;

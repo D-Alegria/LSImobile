@@ -17,6 +17,11 @@ class _$AuthenticationEventTearOff {
   CheckAuthenticated checkAuthenticated() {
     return CheckAuthenticated();
   }
+
+// ignore: unused_element
+  LogoutRequest logoutRequest() {
+    return LogoutRequest();
+  }
 }
 
 /// @nodoc
@@ -28,19 +33,23 @@ mixin _$AuthenticationEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result checkAuthenticated(),
+    @required Result logoutRequest(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result checkAuthenticated(),
+    Result logoutRequest(),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result checkAuthenticated(CheckAuthenticated value),
+    @required Result logoutRequest(LogoutRequest value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result checkAuthenticated(CheckAuthenticated value),
+    Result logoutRequest(LogoutRequest value),
     @required Result orElse(),
   });
 }
@@ -102,8 +111,10 @@ class _$CheckAuthenticated implements CheckAuthenticated {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result checkAuthenticated(),
+    @required Result logoutRequest(),
   }) {
     assert(checkAuthenticated != null);
+    assert(logoutRequest != null);
     return checkAuthenticated();
   }
 
@@ -111,6 +122,7 @@ class _$CheckAuthenticated implements CheckAuthenticated {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result checkAuthenticated(),
+    Result logoutRequest(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -124,8 +136,10 @@ class _$CheckAuthenticated implements CheckAuthenticated {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result checkAuthenticated(CheckAuthenticated value),
+    @required Result logoutRequest(LogoutRequest value),
   }) {
     assert(checkAuthenticated != null);
+    assert(logoutRequest != null);
     return checkAuthenticated(this);
   }
 
@@ -133,6 +147,7 @@ class _$CheckAuthenticated implements CheckAuthenticated {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result checkAuthenticated(CheckAuthenticated value),
+    Result logoutRequest(LogoutRequest value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -145,6 +160,97 @@ class _$CheckAuthenticated implements CheckAuthenticated {
 
 abstract class CheckAuthenticated implements AuthenticationEvent {
   factory CheckAuthenticated() = _$CheckAuthenticated;
+}
+
+/// @nodoc
+abstract class $LogoutRequestCopyWith<$Res> {
+  factory $LogoutRequestCopyWith(
+          LogoutRequest value, $Res Function(LogoutRequest) then) =
+      _$LogoutRequestCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$LogoutRequestCopyWithImpl<$Res>
+    extends _$AuthenticationEventCopyWithImpl<$Res>
+    implements $LogoutRequestCopyWith<$Res> {
+  _$LogoutRequestCopyWithImpl(
+      LogoutRequest _value, $Res Function(LogoutRequest) _then)
+      : super(_value, (v) => _then(v as LogoutRequest));
+
+  @override
+  LogoutRequest get _value => super._value as LogoutRequest;
+}
+
+/// @nodoc
+class _$LogoutRequest implements LogoutRequest {
+  _$LogoutRequest();
+
+  @override
+  String toString() {
+    return 'AuthenticationEvent.logoutRequest()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is LogoutRequest);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result checkAuthenticated(),
+    @required Result logoutRequest(),
+  }) {
+    assert(checkAuthenticated != null);
+    assert(logoutRequest != null);
+    return logoutRequest();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result checkAuthenticated(),
+    Result logoutRequest(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (logoutRequest != null) {
+      return logoutRequest();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result checkAuthenticated(CheckAuthenticated value),
+    @required Result logoutRequest(LogoutRequest value),
+  }) {
+    assert(checkAuthenticated != null);
+    assert(logoutRequest != null);
+    return logoutRequest(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result checkAuthenticated(CheckAuthenticated value),
+    Result logoutRequest(LogoutRequest value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (logoutRequest != null) {
+      return logoutRequest(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LogoutRequest implements AuthenticationEvent {
+  factory LogoutRequest() = _$LogoutRequest;
 }
 
 /// @nodoc

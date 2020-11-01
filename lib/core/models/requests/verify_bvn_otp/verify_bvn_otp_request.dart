@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'verify_bvn_otp_request.g.dart';
 
-@JsonSerializable(nullable: false)
+@JsonSerializable()
 class VerifyBVNOtpRequest {
   final String txn;
   final String otp;

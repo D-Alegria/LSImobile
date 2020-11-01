@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'verify_otp_request.g.dart';
 
-@JsonSerializable(nullable: false)
+@JsonSerializable()
 class VerifyOTPRequest {
   final String phone;
   final int otp;

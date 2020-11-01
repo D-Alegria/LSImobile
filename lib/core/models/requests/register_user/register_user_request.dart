@@ -4,7 +4,7 @@ import 'profile.dart';
 
 part 'register_user_request.g.dart';
 
-@JsonSerializable(nullable: false, explicitToJson: true)
+@JsonSerializable(explicitToJson: true)
 class RegisterUserRequest {
   final Profile profile;
 

@@ -1,71 +1,56 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:lsi_mobile/core/models/requests/token_request/token_request.dart';
-import 'package:lsi_mobile/core/models/requests/user_details/bvn.dart';
-import 'package:lsi_mobile/core/models/requests/user_details/company_profile.dart';
-import 'package:lsi_mobile/core/models/requests/user_details/facebook.dart';
-import 'package:lsi_mobile/core/models/requests/user_details/home_address.dart';
-import 'package:lsi_mobile/core/models/requests/user_details/id_card.dart';
-import 'package:lsi_mobile/core/models/requests/user_details/linkedin.dart';
-import 'package:lsi_mobile/core/models/requests/user_details/next_of_kin.dart';
-import 'package:lsi_mobile/core/models/requests/user_details/profile.dart';
-import 'package:lsi_mobile/core/models/requests/user_details/remita.dart';
-import 'package:lsi_mobile/core/models/requests/user_details/twitter.dart';
-import 'package:lsi_mobile/core/models/requests/user_details/work.dart';
+import 'package:lsi_mobile/core/models/dto/business_address/business_address.dart';
+import 'package:lsi_mobile/core/models/dto/business_income/business_income.dart';
+import 'package:lsi_mobile/core/models/dto/bvn/bvn.dart';
+import 'package:lsi_mobile/core/models/dto/company_profile/company_profile.dart';
+import 'package:lsi_mobile/core/models/dto/education/education.dart';
+import 'package:lsi_mobile/core/models/dto/expenses/expenses.dart';
+import 'package:lsi_mobile/core/models/dto/facebook/facebook.dart';
+import 'package:lsi_mobile/core/models/dto/home_address/home_address.dart';
+import 'package:lsi_mobile/core/models/dto/id_card/id_card.dart';
+import 'package:lsi_mobile/core/models/dto/linkedin/linkedin.dart';
+import 'package:lsi_mobile/core/models/dto/next_of_kin/next_of_kin.dart';
+import 'package:lsi_mobile/core/models/dto/operating_expenses/operating_expenses.dart';
+import 'package:lsi_mobile/core/models/dto/remita/remita.dart';
+import 'package:lsi_mobile/core/models/dto/twitter/twitter.dart';
+import 'package:lsi_mobile/core/models/dto/user_details_profile/profile.dart';
+import 'package:lsi_mobile/core/models/dto/work/work.dart';
 
-import 'education.dart';
-import 'expenses.dart';
+part 'user_details_request.freezed.dart';
 
 part 'user_details_request.g.dart';
 
-@JsonSerializable(nullable: false, explicitToJson: true)
-class UserDetailsRequest extends TokenRequest {
-  final Profile profile;
-  @JsonKey(name: "next_of_kin")
-  final NextOfKin nextOfKin;
-  final Education education;
-  @JsonKey(name: "home_address")
-  final HomeAddress homeAddress;
-  final Work work;
-  final Expenses expenses;
-  final Facebook facebook;
-  final Twitter twitter;
-  final Linkedin linkedin;
-  final BVN bvn;
-  final Remita remita;
-  @JsonKey(name: "company_profile")
-  final CompanyProfile companyProfile;
-  final List directors;
-  @JsonKey(name: "business_income")
-  final HomeAddress businessIncome;
-  @JsonKey(name: "operating_expenses")
-  final HomeAddress operatingExpenses;
-  @JsonKey(name: "business_address")
-  final HomeAddress businessAddress;
-  @JsonKey(name: "idcard")
-  final IdCard idCard;
+@freezed
+abstract class UserDetailsRequest with _$UserDetailsRequest {
+  @JsonSerializable(explicitToJson: true)
+  factory UserDetailsRequest({
+    @nullable String token,
+    @nullable Profile profile,
+    @nullable @JsonKey(name: "next_of_kin") NextOfKin nextOfKin,
+    @nullable Education education,
+    @nullable @JsonKey(name: "home_address") HomeAddress homeAddress,
+    @nullable Work work,
+    @nullable Expenses expenses,
+    @nullable Facebook facebook,
+    @nullable Twitter twitter,
+    @nullable Linkedin linkedin,
+    @nullable BVN bvn,
+    @nullable Remita remita,
+    @nullable @JsonKey(name: "company_profile") CompanyProfile companyProfile,
+    @nullable List directors,
+    @nullable @JsonKey(name: "business_income") BusinessIncome businessIncome,
+    @nullable @JsonKey(name: "operating_expenses") OperatingExpenses operatingExpenses,
+    @nullable @JsonKey(name: "business_address") BusinessAddress businessAddress,
+    @nullable @JsonKey(name: "idcard") IdCard idCard,
+  }) = _UserDetailsRequest;
 
-  UserDetailsRequest({
-    this.profile,
-    this.nextOfKin,
-    this.education,
-    this.homeAddress,
-    this.work,
-    this.expenses,
-    this.facebook,
-    this.twitter,
-    this.linkedin,
-    this.bvn,
-    this.remita,
-    this.companyProfile,
-    this.directors,
-    this.businessIncome,
-    this.operatingExpenses,
-    this.businessAddress,
-    this.idCard,
-  });
+  factory UserDetailsRequest.initial() => UserDetailsRequest(
+    profile: Profile.initial(),
+  );
+
+
 
   factory UserDetailsRequest.fromJson(Map<String, dynamic> json) =>
       _$UserDetailsRequestFromJson(json);
-
-  Map<String, dynamic> toJson() => _$UserDetailsRequestToJson(this);
 }
