@@ -15,7 +15,7 @@ class ProfileView extends StatelessWidget {
     return BlocConsumer<UserProfileBloc, UserProfileState>(
       builder: (context, state) => state.map(
         initial: (_) => Container(),
-        loading: (_) => Container(),
+        loading: (_) => sharedLoader(),
         loaded: (val) => Scaffold(
           body: Container(
             padding: EdgeInsets.symmetric(

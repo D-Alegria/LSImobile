@@ -60,13 +60,7 @@ class ScreenHeader extends StatelessWidget {
                   ? print('investment')
                   : model.navigateToProfileView(context);
             },
-            child: Container(
-              height: SizeConfig.yMargin(context, 7),
-              decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.white,
-                  ),
-                  shape: BoxShape.circle),
+            child: ClipOval(
               child: investment
                   ? Icon(
                       Icons.error_outline,
@@ -75,9 +69,11 @@ class ScreenHeader extends StatelessWidget {
                     )
                   : Image.network(
                       image,
+                      fit: BoxFit.fill,
                       errorBuilder: (context, error, stackTrace) => Container(
                         color: ColorStyles.black,
                       ),
+                      height: SizeConfig.yMargin(context, 7),
                     ),
             ),
           )

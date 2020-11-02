@@ -5,13 +5,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lsi_mobile/core/configs/dependency_injection/injection.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:lsi_mobile/ui/views/authentication/view_model/auth_form/auth_form_bloc.dart';
 import 'package:lsi_mobile/ui/views/main/history/history_view.dart';
 import 'package:lsi_mobile/ui/views/main/home/home_view.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_view.dart';
 import 'package:lsi_mobile/ui/views/main/loans/loans_view/view_model/loan_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/profile_view.dart';
-import 'package:lsi_mobile/ui/views/main/profile/view_models/edit_profile/edit_profile_bloc.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_bloc.dart';
 
 import 'loans/loans_view/loans_view.dart';
@@ -68,10 +66,12 @@ class _MainViewState extends State<MainView> {
           bottomNavigationBar: BottomNavigationBar(
             selectedLabelStyle: TextStyle(
               fontSize: SizeConfig.textSize(context, 3.1),
+              height: SizeConfig.textSize(context, 0.55),
               fontWeight: FontWeight.w500,
             ),
             unselectedLabelStyle: TextStyle(
               fontSize: SizeConfig.textSize(context, 3.1),
+              height: SizeConfig.textSize(context, 0.55),
               fontWeight: FontWeight.w500,
             ),
             selectedFontSize: SizeConfig.textSize(context, 3.1),
@@ -83,16 +83,7 @@ class _MainViewState extends State<MainView> {
             currentIndex: _currentIndex,
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                title: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: SizeConfig.textSize(context, 1.3),
-                    ),
-                    Text(
-                      "Home",
-                    ),
-                  ],
-                ),
+                label: "Home",
                 icon: SvgPicture.asset(
                   home,
                   height: SizeConfig.textSize(context, 5),
@@ -107,16 +98,7 @@ class _MainViewState extends State<MainView> {
                 ),
               ),
               BottomNavigationBarItem(
-                title: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: SizeConfig.textSize(context, 1.3),
-                    ),
-                    Text(
-                      "Loans",
-                    ),
-                  ],
-                ),
+                label: "Loans",
                 icon: SvgPicture.asset(
                   loans,
                   height: SizeConfig.textSize(context, 5),
@@ -131,16 +113,7 @@ class _MainViewState extends State<MainView> {
                 ),
               ),
               BottomNavigationBarItem(
-                title: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: SizeConfig.textSize(context, 1.3),
-                    ),
-                    Text(
-                      "Investment",
-                    ),
-                  ],
-                ),
+                label: 'Investment',
                 icon: SvgPicture.asset(
                   invest,
                   height: SizeConfig.textSize(context, 5),
@@ -155,16 +128,7 @@ class _MainViewState extends State<MainView> {
                 ),
               ),
               BottomNavigationBarItem(
-                title: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: SizeConfig.textSize(context, 1.3),
-                    ),
-                    Text(
-                      "History",
-                    ),
-                  ],
-                ),
+                label: "History",
                 icon: SvgPicture.asset(
                   history,
                   height: SizeConfig.textSize(context, 5),
@@ -179,16 +143,7 @@ class _MainViewState extends State<MainView> {
                 ),
               ),
               BottomNavigationBarItem(
-                title: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: SizeConfig.textSize(context, 1.3),
-                    ),
-                    Text(
-                      "Profile",
-                    ),
-                  ],
-                ),
+                label: 'Profile',
                 icon: SvgPicture.asset(
                   profile,
                   height: SizeConfig.textSize(context, 5),
@@ -215,7 +170,6 @@ class _MainViewState extends State<MainView> {
                 },
               );
             },
-            // onTap: model.changeTab,
           ),
           body: PageView(
             controller: _pageController,
