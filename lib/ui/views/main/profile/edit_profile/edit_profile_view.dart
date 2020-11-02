@@ -22,6 +22,7 @@ class _EditProfileViewState extends State<EditProfileView>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
 
+  @override
   void initState() {
     _tabController = new TabController(length: 2, vsync: this);
     super.initState();
@@ -64,8 +65,9 @@ class _EditProfileViewState extends State<EditProfileView>
           SizedBox(height: SizeConfig.yMargin(context, 6)),
           sharedDropDownFormField<String>(
             value: state.levelsOfEducation
-                .map((e) => e.name)
-                .toList()[int.parse(state.levelOfEducation)],
+                .where((element) => element.id == state.levelOfEducation)
+                .first
+                .name,
             items: state.levelsOfEducation.map((e) => e.name).toList(),
             context: context,
             labelText: "Level of education",
@@ -82,8 +84,9 @@ class _EditProfileViewState extends State<EditProfileView>
           SizedBox(height: SizeConfig.yMargin(context, 2)),
           sharedDropDownFormField<String>(
             value: state.employmentStatuses
-                .map((e) => e.name)
-                .toList()[int.parse(state.employmentStatus)],
+                .where((element) => element.id == state.employmentStatus)
+                .first
+                .name,
             items: state.employmentStatuses.map((e) => e.name).toList(),
             context: context,
             labelText: "Employment status",
@@ -100,8 +103,9 @@ class _EditProfileViewState extends State<EditProfileView>
           SizedBox(height: SizeConfig.yMargin(context, 2)),
           sharedDropDownFormField<String>(
             value: state.workSectors
-                .map((e) => e.name)
-                .toList()[int.parse(state.workSector)],
+                .where((element) => element.id == state.workSector)
+                .first
+                .name,
             items: state.workSectors.map((e) => e.name).toList(),
             context: context,
             labelText: "Work Sector",
@@ -199,8 +203,9 @@ class _EditProfileViewState extends State<EditProfileView>
           SizedBox(height: SizeConfig.yMargin(context, 2)),
           sharedDropDownFormField<String>(
             value: state.genders
-                .map((e) => e.name)
-                .toList()[int.parse(state.gender)],
+                .where((element) => element.id == state.gender)
+                .first
+                .name,
             items: state.genders.map((e) => e.name).toList(),
             context: context,
             labelText: "Gender",
