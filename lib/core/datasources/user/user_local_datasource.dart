@@ -137,7 +137,9 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   Future<List<int>> get encryptedKey async {
     var encryptionBox = await Hive.openBox(Constants.encryptionBox);
     var key;
-    if (!encryptionBox.containsKey(Constants.userEncryptionKey)) {
+    if (encryptionBox.containsKey(Constants.userEncryptionKey)) {
+      key = encryptionBox.get(Constants.userEncryptionKey);
+    } else {
       key = Hive.generateSecureKey();
       encryptionBox.put(Constants.userEncryptionKey, key);
     }
@@ -178,8 +180,8 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
           fullName: fullName,
           email: email,
           id: id,
-          isAuthenticated: isAuthenticated,
-          isVerified: isVerified,
+          isAuthenticated: isAuthenticated ?? false,
+          isVerified: isVerified ?? false,
           password: password,
           phoneNumber: phoneNumber,
           profilePicture: profilePicture,

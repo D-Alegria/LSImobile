@@ -3,7 +3,6 @@ import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lsi_mobile/core/configs/dependency_injection/injection.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
@@ -33,116 +32,108 @@ class VerificationView extends StatelessWidget {
       );
     }
 
-    return BlocProvider(
-      create: (context) => getIt<AuthFormBloc>()..add(Init()),
-      child: Scaffold(
-        body: BlocConsumer<AuthFormBloc, AuthFormState>(
-          builder: (context, state) => AuthForm(
+    return Scaffold(
+      body: BlocConsumer<AuthFormBloc, AuthFormState>(
+        builder: (context, state) {
+          return AuthForm(
             title: "Verify phone",
             subTitle: "Phone number verification required",
             height: 50,
-            form: Form(
-              child: ListView(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: SizeConfig.xMargin(context, 1),
-                    ),
-                    child: RichText(
-                      text: TextSpan(
-                        text: "An OTP code has been sent to",
-                        style: GoogleFonts.workSans(
-                          color: Colors.black.withOpacity(0.5),
-                          fontWeight: FontWeight.w400,
-                          fontSize: SizeConfig.textSize(context, 4),
-                          height: SizeConfig.textSize(context, 0.4),
-                        ),
-                        children: [
-                          TextSpan(
-                            text: " ${state.phoneNumber}",
-                            style: GoogleFonts.workSans(
-                              fontWeight: FontWeight.w600,
+            form: state.isSubmitting
+                ? sharedLoader()
+                : Form(
+                    child: ListView(
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: SizeConfig.xMargin(context, 1),
+                          ),
+                          child: RichText(
+                            text: TextSpan(
+                              text: "An OTP code has been sent to",
+                              style: GoogleFonts.workSans(
+                                color: Colors.black.withOpacity(0.5),
+                                fontWeight: FontWeight.w400,
+                                fontSize: SizeConfig.textSize(context, 4),
+                                height: SizeConfig.textSize(context, 0.4),
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: " ${state.phoneNumber}",
+                                  style: GoogleFonts.workSans(
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text:
+                                      ", enter the code below to verify your phone number",
+                                ),
+                              ],
                             ),
                           ),
-                          TextSpan(
-                            text:
-                                ", enter the code below to verify your phone number",
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: SizeConfig.yMargin(context, 3),
-                  ),
-                  SharedTextFormField(
-                    initialValue: state.verificationCode,
-                    labelText: "Verification Code",
-                    onChanged: (value) => context
-                        .bloc<AuthFormBloc>()
-                        .add(VerificationCodeChanged(value)),
-                    validator: (value) {
-                      if (state.verificationCode.isEmpty)
-                        return "Field is required";
-                      return null;
-                    },
-                    keyboardType: TextInputType.phone,
-                  ),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: FlatButton(
-                      onPressed: () =>
-                          context.bloc<AuthFormBloc>()..add(ResendOTP()),
-                      child: Text(
-                        "Resend OTP",
-                        style: GoogleFonts.poppins(
-                          fontSize: SizeConfig.textSize(context, 4.5),
-                          fontWeight: FontWeight.w400,
-                          color: ColorStyles.light,
                         ),
-                      ),
-                    ),
-                  ),
-                  state.isSubmitting
-                      ? sharedLoadingRaisedButton(
-                          context: context,
-                          color: ColorStyles.grey2,
-                          text: "Verify",
-                          minWidth: SizeConfig.xMargin(context, 100),
-                        )
-                      : sharedRaisedButton(
+                        SizedBox(height: SizeConfig.yMargin(context, 3)),
+                        SharedTextFormField(
+                          initialValue: state.verificationCode,
+                          labelText: "Verification Code",
+                          onChanged: (value) => context
+                              .bloc<AuthFormBloc>()
+                              .add(VerificationCodeChanged(value)),
+                          validator: (value) {
+                            if (state.verificationCode.isEmpty)
+                              return "Field is required";
+                            return null;
+                          },
+                          keyboardType: TextInputType.phone,
+                        ),
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: FlatButton(
+                            onPressed: () =>
+                                context.bloc<AuthFormBloc>().add(ResendOTP()),
+                            child: Text(
+                              "Resend OTP",
+                              style: GoogleFonts.poppins(
+                                fontSize: SizeConfig.textSize(context, 4.5),
+                                fontWeight: FontWeight.w400,
+                                color: ColorStyles.light,
+                              ),
+                            ),
+                          ),
+                        ),
+                        sharedRaisedButton(
                           context: context,
                           onPressed: () =>
-                              context.bloc<AuthFormBloc>()..add(VerifyUser()),
+                              context.bloc<AuthFormBloc>().add(VerifyUser()),
                           color: ColorStyles.blue,
                           text: "Verify",
                         ),
-                  sharedOptionFlatButton(
-                    context: context,
-                    firstText: "Not your phone?",
-                    secondText: "Change phone number",
-                    action: () => _showChangePhoneForm(),
+                        sharedOptionFlatButton(
+                          context: context,
+                          firstText: "Not your phone?",
+                          secondText: "Change phone number",
+                          action: () => _showChangePhoneForm(),
+                        ),
+                      ],
+                    ),
                   ),
-                ],
+          );
+        },
+        listener: (context, state) => state.authFailureOrSuccess.fold(
+          () => null,
+          (either) => either.fold(
+            (failure) => FlushbarHelper.createError(
+              message: failure.maybeMap(
+                networkGlitch: (val) => val.message,
+                serverGlitch: (val) => val.message,
+                orElse: () => null,
               ),
-            ),
-          ),
-          listener: (context, state) => state.authFailureOrSuccess.fold(
-            () => null,
-            (either) => either.fold(
-              (failure) => FlushbarHelper.createError(
-                message: failure.maybeMap(
-                  networkGlitch: (val) => val.message,
-                  serverGlitch: (val) => val.message,
-                  orElse: () => null,
-                ),
-                duration: new Duration(seconds: 3),
-              ).show(context),
-              (success) => context.navigator.pushAndRemoveUntil(
-                Routes.mainView,
-                (route) => false,
-                arguments: MainViewArguments(pageNumber: 0),
-              ),
+              duration: new Duration(seconds: 3),
+            ).show(context),
+            (success) => context.navigator.pushAndRemoveUntil(
+              Routes.mainView,
+              (route) => false,
+              arguments: MainViewArguments(pageNumber: 0),
             ),
           ),
         ),

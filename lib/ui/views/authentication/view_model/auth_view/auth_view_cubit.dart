@@ -11,8 +11,4 @@ class AuthViewCubit extends Cubit<AuthViewState> {
   void toggleAuthView() {
     emit(ShowLoginView(!state.showLogin));
   }
-
-  void showVerifyView() {
-    // emit(ShowVerifyView());
-  }
 }

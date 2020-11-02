@@ -80,6 +80,7 @@ class AuthServiceImpl implements AuthService {
             fullName: request.profile.fullName,
             phoneNumber: request.profile.phone,
             isAuthenticated: true,
+            isVerified: true,
             password: request.profile.password,
             token: result.token,
           ));
@@ -122,7 +123,6 @@ class AuthServiceImpl implements AuthService {
         },
         (success) async {
           VerifyOTPResponse.fromJson(success);
-          await _userRepo.updateUserDataLocal(isVerified: true);
           return right(unit);
         },
       );

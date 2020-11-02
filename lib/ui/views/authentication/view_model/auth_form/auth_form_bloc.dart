@@ -21,7 +21,7 @@ part 'auth_form_event.dart';
 
 part 'auth_form_state.dart';
 
-@injectable
+@lazySingleton
 class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
   final AuthService _authService;
   final LocalStorageRepo _localStorageRepo;
@@ -34,15 +34,6 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
     AuthFormEvent event,
   ) async* {
     yield* event.map(
-      init: (_) async* {
-        final user = await _authService.currentUser;
-        final otp = _localStorageRepo.getString("OTP");
-        yield state.copyWith(
-          phoneNumber: user.phoneNumber,
-          verificationCode: otp ?? "",
-          authFailureOrSuccess: None(),
-        );
-      },
       emailChanged: (EmailChanged value) async* {
         yield state.copyWith(
           emailAddress: value.email,
@@ -91,7 +82,10 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
           ),
         );
 
+        var v = _localStorageRepo.getString("OTP");
+
         yield state.copyWith(
+          verificationCode: v,
           isSubmitting: false,
           authFailureOrSuccess: None(),
         );
@@ -130,6 +124,7 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
         final isPasswordValid = state.password.isValidPassword;
 
         Either<Glitch, Unit> failureOrSuccess;
+        var v;
 
         if (isFirstNameValid &&
             isLastNameValid &&
@@ -141,31 +136,17 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
             authFailureOrSuccess: None(),
           );
 
-          failureOrSuccess = await _authService.register(
-            RegisterUserRequest(
-              profile: Profile(
-                password: state.password.trim(),
-                email: state.emailAddress.trim(),
-                fullName: state.firstName.trim() + " " + state.lastName.trim(),
-                isIndividual: "",
-                phone: state.phoneNumber.trim(),
-              ),
+          failureOrSuccess = await _authService.sendOTP(
+            SendOTPRequest(
+              phone: state.phoneNumber.trim(),
             ),
           );
 
-          await failureOrSuccess.fold(
-            (failure) => null,
-            (success) async {
-              await _authService.sendOTP(
-                SendOTPRequest(
-                  phone: state.phoneNumber.trim(),
-                ),
-              );
-            },
-          );
+          v = _localStorageRepo.getString("OTP");
         }
 
         yield state.copyWith(
+          verificationCode: v,
           isSubmitting: false,
           showErrorMessages: true,
           authFailureOrSuccess: optionOf(failureOrSuccess),
@@ -183,7 +164,7 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
             authFailureOrSuccess: None(),
           );
 
-          failureOrSuccess = await _authService.verifyOTP(
+          var result = await _authService.verifyOTP(
             VerifyOTPRequest(
               phone: state.phoneNumber.trim(),
               otp: int.parse(
@@ -191,6 +172,21 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
               ),
             ),
           );
+
+          await result.fold((l) => failureOrSuccess = result, (r) async {
+            failureOrSuccess = await _authService.register(
+              RegisterUserRequest(
+                profile: Profile(
+                  password: state.password.trim(),
+                  email: state.emailAddress.trim(),
+                  fullName:
+                      state.firstName.trim() + " " + state.lastName.trim(),
+                  isIndividual: "",
+                  phone: state.phoneNumber.trim(),
+                ),
+              ),
+            );
+          });
         }
 
         yield state.copyWith(

@@ -28,7 +28,7 @@ class AuthenticationBloc
       if (!user.isAuthenticated) {
         yield Unauthenticated();
       } else if (!user.isVerified) {
-        yield Unverified();
+        yield Unauthenticated();
       } else {
         yield Authenticated();
       }

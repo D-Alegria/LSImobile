@@ -19,62 +19,64 @@ class LoginView extends StatelessWidget {
         title: "Login",
         subTitle: "Secure login to your account",
         height: 55,
-        form: Form(
-          child: ListView(
-            children: <Widget>[
-              SharedTextFormField(
-                labelText: "Email address",
-                onChanged: (value) =>
-                    context.bloc<AuthFormBloc>().add(EmailChanged(value)),
-                validator: (value) {
-                  if (!state.emailAddress.isEmail) return "Invalid Email";
-                  return null;
-                },
-                keyboardType: TextInputType.emailAddress,
-              ),
-              SizedBox(
-                height: SizeConfig.yMargin(context, 3),
-              ),
-              SharedTextFormField(
-                labelText: "Password",
-                obscureText: true,
-                onChanged: (value) =>
-                    context.bloc<AuthFormBloc>().add(PasswordChanged(value)),
-                validator: (value) {
-                  if (!state.password.isValidPassword)
-                    return "Password must be at least 5 characters";
-                  return null;
-                },
-              ),
-              SizedBox(
-                height: SizeConfig.yMargin(context, 5),
-              ),
-              state.isSubmitting
-                  ? sharedLoadingRaisedButton(
-                      context: context,
-                      color: ColorStyles.grey2,
-                      text: "Login",
-                      minWidth: SizeConfig.xMargin(context, 100),
-                    )
-                  : sharedRaisedButton(
+        form: state.isSubmitting
+            ? sharedLoader()
+            : Form(
+                autovalidateMode: state.showErrorMessages
+                    ? AutovalidateMode.always
+                    : AutovalidateMode.disabled,
+                child: ListView(
+                  children: <Widget>[
+                    SharedTextFormField(
+                      labelText: "Email address",
+                      initialValue: state.emailAddress,
+                      onChanged: (value) =>
+                          context.bloc<AuthFormBloc>().add(EmailChanged(value)),
+                      validator: (value) {
+                        if (!state.emailAddress.isEmail) return "Invalid Email";
+                        return null;
+                      },
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    SizedBox(
+                      height: SizeConfig.yMargin(context, 3),
+                    ),
+                    SharedTextFormField(
+                      labelText: "Password",
+                      initialValue: state.password,
+                      obscureText: true,
+                      onChanged: (value) => context
+                          .bloc<AuthFormBloc>()
+                          .add(PasswordChanged(value)),
+                      validator: (value) {
+                        if (!state.password.isValidPassword)
+                          return "Password must be at least 5 characters";
+                        return null;
+                      },
+                    ),
+                    SizedBox(
+                      height: SizeConfig.yMargin(context, 5),
+                    ),
+                    sharedRaisedButton(
                       context: context,
                       onPressed: () =>
-                          context.bloc<AuthFormBloc>()..add(LoginUser()),
+                          context.bloc<AuthFormBloc>().add(LoginUser()),
                       color: ColorStyles.blue,
                       text: "Login",
                     ),
-              SizedBox(
-                height: SizeConfig.yMargin(context, 2),
+                    SizedBox(
+                      height: SizeConfig.yMargin(context, 2),
+                    ),
+                    sharedOptionFlatButton(
+                      context: context,
+                      firstText: "Don’t have an account?",
+                      secondText: "Register",
+                      action: () =>
+                          context.bloc<AuthViewCubit>().toggleAuthView(),
+                    ),
+                  ],
+                ),
               ),
-              sharedOptionFlatButton(
-                context: context,
-                firstText: "Don’t have an account?",
-                secondText: "Register",
-                action: () => context.bloc<AuthViewCubit>().toggleAuthView(),
-              ),
-            ],
-          ),
-        ),
       ),
       listener: (context, state) => state.authFailureOrSuccess.fold(
         () => null,

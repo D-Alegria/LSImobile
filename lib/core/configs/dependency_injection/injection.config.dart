@@ -77,7 +77,7 @@ Future<GetIt> $initGetIt(
       () => EditProfileBloc(get<UserRepo>(), get<UserRemoteDataSource>()));
   gh.lazySingleton<UserProfileBloc>(
       () => UserProfileBloc(get<UserRepo>(), get<InvestmentRepo>()));
-  gh.factory<AuthFormBloc>(
+  gh.lazySingleton<AuthFormBloc>(
       () => AuthFormBloc(get<AuthService>(), get<LocalStorageRepo>()));
   return get;
 }

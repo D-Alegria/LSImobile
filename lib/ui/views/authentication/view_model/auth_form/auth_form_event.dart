@@ -2,8 +2,6 @@ part of 'auth_form_bloc.dart';
 
 @freezed
 abstract class AuthFormEvent with _$AuthFormEvent {
-  factory AuthFormEvent.init() = Init;
-
   factory AuthFormEvent.emailChanged(String email) = EmailChanged;
 
   factory AuthFormEvent.firstNameChanged(String firstName) = FirstNameChanged;
