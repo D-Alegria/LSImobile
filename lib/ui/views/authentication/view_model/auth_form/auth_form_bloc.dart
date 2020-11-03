@@ -108,11 +108,18 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
               password: state.password.trim(),
             ),
           );
+
+          yield* failureOrSuccess.fold((l) async* {
+            yield state.copyWith(
+              showErrorMessages: true,
+            );
+          }, (r) async* {
+            yield AuthFormState.initial();
+          });
         }
 
         yield state.copyWith(
           isSubmitting: false,
-          showErrorMessages: true,
           authFailureOrSuccess: optionOf(failureOrSuccess),
         );
       },
@@ -187,11 +194,18 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
               ),
             );
           });
+
+          yield* failureOrSuccess.fold((l) async* {
+            yield state.copyWith(
+              showErrorMessages: true,
+            );
+          }, (r) async* {
+            yield AuthFormState.initial();
+          });
         }
 
         yield state.copyWith(
           isSubmitting: false,
-          showErrorMessages: true,
           authFailureOrSuccess: optionOf(failureOrSuccess),
         );
       },
