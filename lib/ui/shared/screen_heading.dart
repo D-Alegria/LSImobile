@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lsi_mobile/core/view_models/home_viewmodel.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:provider/provider.dart';
+import 'package:lsi_mobile/ui/views/main/view_model/main_view/main_view_cubit.dart';
 
 class ScreenHeader extends StatelessWidget {
   final String firstText;
@@ -21,7 +21,7 @@ class ScreenHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var model = Provider.of<HomeViewModel>(context);
+    var state = BlocProvider.of<MainViewCubit>(context);
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -55,11 +55,7 @@ class ScreenHeader extends StatelessWidget {
             width: SizeConfig.xMargin(context, 2),
           ),
           InkWell(
-            onTap: () {
-              investment
-                  ? print('investment')
-                  : model.navigateToProfileView(context);
-            },
+            onTap: () => investment ? print('investment') : state.changePage(4),
             child: ClipOval(
               child: investment
                   ? Icon(
