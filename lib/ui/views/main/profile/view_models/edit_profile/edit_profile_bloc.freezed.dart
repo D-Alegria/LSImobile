@@ -3123,7 +3123,8 @@ class _$EditProfileStateTearOff {
       @required String startDate,
       @required String monthlyIncome,
       @required bool showErrorMessages,
-      @required bool isSubmitting,
+      @required bool isEdited,
+      @required bool isSaved,
       @required bool isLoading,
       @required Option<Either<Glitch, Unit>> submitFailureOrSuccess}) {
     return _EditProfileState(
@@ -3145,7 +3146,8 @@ class _$EditProfileStateTearOff {
       startDate: startDate,
       monthlyIncome: monthlyIncome,
       showErrorMessages: showErrorMessages,
-      isSubmitting: isSubmitting,
+      isEdited: isEdited,
+      isSaved: isSaved,
       isLoading: isLoading,
       submitFailureOrSuccess: submitFailureOrSuccess,
     );
@@ -3176,7 +3178,8 @@ mixin _$EditProfileState {
   String get startDate;
   String get monthlyIncome;
   bool get showErrorMessages;
-  bool get isSubmitting;
+  bool get isEdited;
+  bool get isSaved;
   bool get isLoading;
   Option<Either<Glitch, Unit>> get submitFailureOrSuccess;
 
@@ -3207,7 +3210,8 @@ abstract class $EditProfileStateCopyWith<$Res> {
       String startDate,
       String monthlyIncome,
       bool showErrorMessages,
-      bool isSubmitting,
+      bool isEdited,
+      bool isSaved,
       bool isLoading,
       Option<Either<Glitch, Unit>> submitFailureOrSuccess});
 
@@ -3243,7 +3247,8 @@ class _$EditProfileStateCopyWithImpl<$Res>
     Object startDate = freezed,
     Object monthlyIncome = freezed,
     Object showErrorMessages = freezed,
-    Object isSubmitting = freezed,
+    Object isEdited = freezed,
+    Object isSaved = freezed,
     Object isLoading = freezed,
     Object submitFailureOrSuccess = freezed,
   }) {
@@ -3289,8 +3294,8 @@ class _$EditProfileStateCopyWithImpl<$Res>
       showErrorMessages: showErrorMessages == freezed
           ? _value.showErrorMessages
           : showErrorMessages as bool,
-      isSubmitting:
-          isSubmitting == freezed ? _value.isSubmitting : isSubmitting as bool,
+      isEdited: isEdited == freezed ? _value.isEdited : isEdited as bool,
+      isSaved: isSaved == freezed ? _value.isSaved : isSaved as bool,
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       submitFailureOrSuccess: submitFailureOrSuccess == freezed
           ? _value.submitFailureOrSuccess
@@ -3335,7 +3340,8 @@ abstract class _$EditProfileStateCopyWith<$Res>
       String startDate,
       String monthlyIncome,
       bool showErrorMessages,
-      bool isSubmitting,
+      bool isEdited,
+      bool isSaved,
       bool isLoading,
       Option<Either<Glitch, Unit>> submitFailureOrSuccess});
 
@@ -3374,7 +3380,8 @@ class __$EditProfileStateCopyWithImpl<$Res>
     Object startDate = freezed,
     Object monthlyIncome = freezed,
     Object showErrorMessages = freezed,
-    Object isSubmitting = freezed,
+    Object isEdited = freezed,
+    Object isSaved = freezed,
     Object isLoading = freezed,
     Object submitFailureOrSuccess = freezed,
   }) {
@@ -3420,8 +3427,8 @@ class __$EditProfileStateCopyWithImpl<$Res>
       showErrorMessages: showErrorMessages == freezed
           ? _value.showErrorMessages
           : showErrorMessages as bool,
-      isSubmitting:
-          isSubmitting == freezed ? _value.isSubmitting : isSubmitting as bool,
+      isEdited: isEdited == freezed ? _value.isEdited : isEdited as bool,
+      isSaved: isSaved == freezed ? _value.isSaved : isSaved as bool,
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       submitFailureOrSuccess: submitFailureOrSuccess == freezed
           ? _value.submitFailureOrSuccess
@@ -3451,7 +3458,8 @@ class _$_EditProfileState implements _EditProfileState {
       @required this.startDate,
       @required this.monthlyIncome,
       @required this.showErrorMessages,
-      @required this.isSubmitting,
+      @required this.isEdited,
+      @required this.isSaved,
       @required this.isLoading,
       @required this.submitFailureOrSuccess})
       : assert(genders != null),
@@ -3471,7 +3479,8 @@ class _$_EditProfileState implements _EditProfileState {
         assert(startDate != null),
         assert(monthlyIncome != null),
         assert(showErrorMessages != null),
-        assert(isSubmitting != null),
+        assert(isEdited != null),
+        assert(isSaved != null),
         assert(isLoading != null),
         assert(submitFailureOrSuccess != null);
 
@@ -3512,7 +3521,9 @@ class _$_EditProfileState implements _EditProfileState {
   @override
   final bool showErrorMessages;
   @override
-  final bool isSubmitting;
+  final bool isEdited;
+  @override
+  final bool isSaved;
   @override
   final bool isLoading;
   @override
@@ -3520,7 +3531,7 @@ class _$_EditProfileState implements _EditProfileState {
 
   @override
   String toString() {
-    return 'EditProfileState(userDetails: $userDetails, genders: $genders, levelsOfEducation: $levelsOfEducation, employmentStatuses: $employmentStatuses, workSectors: $workSectors, firstName: $firstName, lastName: $lastName, gender: $gender, emailAddress: $emailAddress, phoneNumber: $phoneNumber, dateOfBirth: $dateOfBirth, levelOfEducation: $levelOfEducation, employmentStatus: $employmentStatus, workSector: $workSector, employerName: $employerName, startDate: $startDate, monthlyIncome: $monthlyIncome, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, isLoading: $isLoading, submitFailureOrSuccess: $submitFailureOrSuccess)';
+    return 'EditProfileState(userDetails: $userDetails, genders: $genders, levelsOfEducation: $levelsOfEducation, employmentStatuses: $employmentStatuses, workSectors: $workSectors, firstName: $firstName, lastName: $lastName, gender: $gender, emailAddress: $emailAddress, phoneNumber: $phoneNumber, dateOfBirth: $dateOfBirth, levelOfEducation: $levelOfEducation, employmentStatus: $employmentStatus, workSector: $workSector, employerName: $employerName, startDate: $startDate, monthlyIncome: $monthlyIncome, showErrorMessages: $showErrorMessages, isEdited: $isEdited, isSaved: $isSaved, isLoading: $isLoading, submitFailureOrSuccess: $submitFailureOrSuccess)';
   }
 
   @override
@@ -3580,9 +3591,12 @@ class _$_EditProfileState implements _EditProfileState {
             (identical(other.showErrorMessages, showErrorMessages) ||
                 const DeepCollectionEquality()
                     .equals(other.showErrorMessages, showErrorMessages)) &&
-            (identical(other.isSubmitting, isSubmitting) ||
+            (identical(other.isEdited, isEdited) ||
                 const DeepCollectionEquality()
-                    .equals(other.isSubmitting, isSubmitting)) &&
+                    .equals(other.isEdited, isEdited)) &&
+            (identical(other.isSaved, isSaved) ||
+                const DeepCollectionEquality()
+                    .equals(other.isSaved, isSaved)) &&
             (identical(other.isLoading, isLoading) ||
                 const DeepCollectionEquality()
                     .equals(other.isLoading, isLoading)) &&
@@ -3612,7 +3626,8 @@ class _$_EditProfileState implements _EditProfileState {
       const DeepCollectionEquality().hash(startDate) ^
       const DeepCollectionEquality().hash(monthlyIncome) ^
       const DeepCollectionEquality().hash(showErrorMessages) ^
-      const DeepCollectionEquality().hash(isSubmitting) ^
+      const DeepCollectionEquality().hash(isEdited) ^
+      const DeepCollectionEquality().hash(isSaved) ^
       const DeepCollectionEquality().hash(isLoading) ^
       const DeepCollectionEquality().hash(submitFailureOrSuccess);
 
@@ -3641,7 +3656,8 @@ abstract class _EditProfileState implements EditProfileState {
           @required String startDate,
           @required String monthlyIncome,
           @required bool showErrorMessages,
-          @required bool isSubmitting,
+          @required bool isEdited,
+          @required bool isSaved,
           @required bool isLoading,
           @required Option<Either<Glitch, Unit>> submitFailureOrSuccess}) =
       _$_EditProfileState;
@@ -3683,7 +3699,9 @@ abstract class _EditProfileState implements EditProfileState {
   @override
   bool get showErrorMessages;
   @override
-  bool get isSubmitting;
+  bool get isEdited;
+  @override
+  bool get isSaved;
   @override
   bool get isLoading;
   @override

@@ -1,6 +1,9 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/core/configs/dependency_injection/injection.dart';
+import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
@@ -29,25 +32,49 @@ class _EditProfileViewState extends State<EditProfileView>
   }
 
   @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  Future<bool> _goBack(EditProfileState state, BuildContext context) {
+    if (state.isSaved) {
+      context.navigator.pushAndRemoveUntil(
+        Routes.mainView,
+        (route) => false,
+        arguments: MainViewArguments(
+          pageNumber: 4,
+        ),
+      );
+      return Future.value(false);
+    } else {
+      return Future.value(true);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<EditProfileBloc>()
         ..add(EditProfileEvent.init(widget.userDetails)),
       child: BlocConsumer<EditProfileBloc, EditProfileState>(
-        builder: (context, state) => ProfileForm(
-          tabController: _tabController,
-          title: "Edit Profile",
-          tabs: ["Personal Information", "Education and Employment"],
-          form: TabBarView(
-            children: [
-              state.isLoading
-                  ? sharedLoader()
-                  : buildPersonalInfoForm(state, context),
-              state.isLoading
-                  ? sharedLoader()
-                  : buildEduAndEmployForm(state, context),
-            ],
-            controller: _tabController,
+        builder: (context, state) => WillPopScope(
+          onWillPop: () => _goBack(state, context),
+          child: ProfileForm(
+            tabController: _tabController,
+            title: "Edit Profile",
+            tabs: ["Personal Information", "Education and Employment"],
+            form: TabBarView(
+              children: [
+                state.isLoading
+                    ? sharedLoader()
+                    : buildPersonalInfoForm(state, context),
+                state.isLoading
+                    ? sharedLoader()
+                    : buildEduAndEmployForm(state, context),
+              ],
+              controller: _tabController,
+            ),
           ),
         ),
         listener: (context, state) => null,
@@ -64,57 +91,36 @@ class _EditProfileViewState extends State<EditProfileView>
         children: [
           SizedBox(height: SizeConfig.yMargin(context, 6)),
           sharedDropDownFormField<String>(
-            value: state.levelsOfEducation
-                .where((element) => element.id == state.levelOfEducation)
-                .first
-                .name,
+            value: state.levelOfEducation,
             items: state.levelsOfEducation.map((e) => e.name).toList(),
             context: context,
             labelText: "Level of education",
             onChanged: (String value) {
-              var index;
-              state.levelsOfEducation.map((e) {
-                if (e.name == value) index = e.id;
-              }).toList();
               context
                   .bloc<EditProfileBloc>()
-                  .add(LevelOfEducationChanged(index));
+                  .add(LevelOfEducationChanged(value));
             },
           ),
           SizedBox(height: SizeConfig.yMargin(context, 2)),
           sharedDropDownFormField<String>(
-            value: state.employmentStatuses
-                .where((element) => element.id == state.employmentStatus)
-                .first
-                .name,
+            value: state.employmentStatus,
             items: state.employmentStatuses.map((e) => e.name).toList(),
             context: context,
             labelText: "Employment status",
             onChanged: (String value) {
-              var index;
-              state.employmentStatuses.map((e) {
-                if (e.name == value) index = e.id;
-              }).toList();
-              context
-                  .bloc<EditProfileBloc>()
-                  .add(EmploymentStatusChanged(index));
+              // context
+              //     .bloc<EditProfileBloc>()
+              //     .add(EmploymentStatusChanged(value));
             },
           ),
           SizedBox(height: SizeConfig.yMargin(context, 2)),
           sharedDropDownFormField<String>(
-            value: state.workSectors
-                .where((element) => element.id == state.workSector)
-                .first
-                .name,
+            value: state.workSector,
             items: state.workSectors.map((e) => e.name).toList(),
             context: context,
             labelText: "Work Sector",
             onChanged: (String value) {
-              var index;
-              state.workSectors.map((e) {
-                if (e.name == value) index = e.id;
-              }).toList();
-              context.bloc<EditProfileBloc>().add(WorkSectorChanged(index));
+              context.bloc<EditProfileBloc>().add(WorkSectorChanged(value));
             },
           ),
           SizedBox(height: SizeConfig.yMargin(context, 2)),
@@ -138,6 +144,7 @@ class _EditProfileViewState extends State<EditProfileView>
               if (state.startDate.isEmpty) return "Field name is required";
               return null;
             },
+            keyboardType: TextInputType.datetime,
           ),
           SizedBox(height: SizeConfig.yMargin(context, 2)),
           SharedTextFormField(
@@ -150,6 +157,7 @@ class _EditProfileViewState extends State<EditProfileView>
               if (state.monthlyIncome.isEmpty) return "Field name is required";
               return null;
             },
+            keyboardType: TextInputType.number,
           ),
           SizedBox(height: SizeConfig.yMargin(context, 2)),
           Padding(
@@ -158,8 +166,16 @@ class _EditProfileViewState extends State<EditProfileView>
             ),
             child: sharedOutlineRaisedButton(
               context: context,
-              onPressed: () =>
-                  context.bloc<EditProfileBloc>().add(SubmitEduAndEmpForm()),
+              onPressed: () {
+                if (state.isEdited) {
+                  context.bloc<EditProfileBloc>().add(SubmitEduAndEmpForm());
+                } else {
+                  FlushbarHelper.createInformation(
+                    message: "Edit a field",
+                    duration: new Duration(seconds: 3),
+                  ).show(context);
+                }
+              },
               color: ColorStyles.blue,
               text: "Save",
               minWidth: SizeConfig.xMargin(context, 30),
@@ -188,6 +204,7 @@ class _EditProfileViewState extends State<EditProfileView>
               if (state.firstName.isEmpty) return "Field name is required";
               return null;
             },
+            readOnly: true,
           ),
           SizedBox(height: SizeConfig.yMargin(context, 2)),
           SharedTextFormField(
@@ -199,22 +216,16 @@ class _EditProfileViewState extends State<EditProfileView>
               if (state.lastName.isEmpty) return "Field name is required";
               return null;
             },
+            readOnly: true,
           ),
           SizedBox(height: SizeConfig.yMargin(context, 2)),
           sharedDropDownFormField<String>(
-            value: state.genders
-                .where((element) => element.id == state.gender)
-                .first
-                .name,
+            value: state.gender,
             items: state.genders.map((e) => e.name).toList(),
             context: context,
             labelText: "Gender",
             onChanged: (value) {
-              var index;
-              state.genders.map((e) {
-                if (e.name == value) index = e.id;
-              }).toList();
-              context.bloc<EditProfileBloc>().add(GenderChanged(index));
+              context.bloc<EditProfileBloc>().add(GenderChanged(value));
             },
           ),
           SizedBox(height: SizeConfig.yMargin(context, 2)),
@@ -227,6 +238,8 @@ class _EditProfileViewState extends State<EditProfileView>
               if (!state.emailAddress.isEmail) return "Incorrect email";
               return null;
             },
+            readOnly: true,
+            keyboardType: TextInputType.emailAddress,
           ),
           SizedBox(height: SizeConfig.yMargin(context, 2)),
           SharedTextFormField(
@@ -238,6 +251,7 @@ class _EditProfileViewState extends State<EditProfileView>
               if (state.phoneNumber.isEmpty) return "Field name is required";
               return null;
             },
+            keyboardType: TextInputType.phone,
           ),
           SizedBox(height: SizeConfig.yMargin(context, 2)),
           SharedTextFormField(
@@ -257,8 +271,16 @@ class _EditProfileViewState extends State<EditProfileView>
             ),
             child: sharedOutlineRaisedButton(
               context: context,
-              onPressed: () =>
-                  context.bloc<EditProfileBloc>().add(SubmitEditProfileForm()),
+              onPressed: () {
+                if (state.isEdited) {
+                  context.bloc<EditProfileBloc>().add(SubmitEditProfileForm());
+                } else {
+                  FlushbarHelper.createInformation(
+                    message: "Edit a field",
+                    duration: new Duration(seconds: 3),
+                  ).show(context);
+                }
+              },
               color: ColorStyles.blue,
               text: "Save",
               minWidth: SizeConfig.xMargin(context, 30),

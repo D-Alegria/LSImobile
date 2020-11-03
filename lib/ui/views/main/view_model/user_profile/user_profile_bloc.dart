@@ -15,7 +15,7 @@ part 'user_profile_event.dart';
 
 part 'user_profile_state.dart';
 
-@lazySingleton
+@injectable
 class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
   final UserRepo _userRepo;
   final InvestmentRepo _investmentRepo;

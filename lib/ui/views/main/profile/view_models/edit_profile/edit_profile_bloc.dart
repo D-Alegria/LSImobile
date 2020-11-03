@@ -18,7 +18,7 @@ part 'edit_profile_event.dart';
 
 part 'edit_profile_state.dart';
 
-@lazySingleton
+@injectable
 class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
   final UserRepo _userRepo;
 
@@ -40,19 +40,14 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
           userDetails: e.userDetails,
           firstName: e.userDetails.profile.legalName.split(' ')[0] ?? '',
           lastName: e.userDetails.profile.legalName.split(' ')[1] ?? '',
-          gender: e.userDetails.profile.gender ?? '0',
           dateOfBirth: e.userDetails.profile.dateOfBirth ?? '',
           phoneNumber: e.userDetails.profile.phone ?? '',
           emailAddress: e.userDetails.profile.email ?? '',
           employerName: e.userDetails.work.employer ?? '',
           // employmentStatus: e.userDetails.work. ?? '0',
-          levelOfEducation:
-          e.userDetails.education.educationalQualification ?? '0',
           startDate: e.userDetails.work.workStartDate ?? '',
           monthlyIncome: e.userDetails.work.netMonthlyIncome ?? '',
-          workSector: e.userDetails.work.workSector ?? '0',
         );
-
         yield* genders.fold(
               (l) async* {
             print(l.message);
@@ -80,7 +75,17 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
           },
         );
 
-        yield state.copyWith(isLoading: false);
+        yield state.copyWith(
+          levelOfEducation:
+          nullCheck(e.userDetails.education.educationalQualification) ??
+              state.levelsOfEducation.first.name,
+
+          workSector: nullCheck(e.userDetails.work.workSector) ??
+              state.workSectors.first.name,
+          gender: nullCheck(e.userDetails.profile.gender) ??
+              state.genders.first.name,
+          isLoading: false,
+        );
       },
       submitEditProfileForm: (e) async* {
         print('begin');
@@ -102,7 +107,6 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
           print('verified');
           yield state.copyWith(
             isLoading: true,
-            isSubmitting: true,
             submitFailureOrSuccess: None(),
           );
 
@@ -126,8 +130,9 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
         print('done');
 
         yield state.copyWith(
-          isSubmitting: false,
           isLoading: false,
+          isEdited: false,
+          isSaved: true,
           showErrorMessages: true,
           submitFailureOrSuccess: optionOf(failureOrSuccess),
         );
@@ -135,72 +140,85 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
       emailChanged: (e) async* {
         yield state.copyWith(
           emailAddress: e.email,
+          isEdited: true,
           submitFailureOrSuccess: None(),
         );
       },
       firstNameChanged: (e) async* {
         yield state.copyWith(
           firstName: e.firstName,
+          isEdited: true,
           submitFailureOrSuccess: None(),
         );
       },
       lastNameChanged: (e) async* {
         yield state.copyWith(
           lastName: e.lastName,
+          isEdited: true,
           submitFailureOrSuccess: None(),
         );
       },
       phoneNumberChanged: (e) async* {
+        print(e.phoneNumber);
         yield state.copyWith(
           phoneNumber: e.phoneNumber,
+          isEdited: true,
           submitFailureOrSuccess: None(),
         );
       },
       genderChanged: (e) async* {
         yield state.copyWith(
           gender: e.gender,
+          isEdited: true,
           submitFailureOrSuccess: None(),
         );
       },
       dateOfBirthChanged: (e) async* {
         yield state.copyWith(
           dateOfBirth: e.dateOfBirth,
+          isEdited: true,
           submitFailureOrSuccess: None(),
         );
       },
       employerNameChanged: (e) async* {
         yield state.copyWith(
           employerName: e.employerName,
+          isEdited: true,
           submitFailureOrSuccess: None(),
         );
       },
       startDateChanged: (e) async* {
         yield state.copyWith(
           startDate: e.startDate,
+          isEdited: true,
           submitFailureOrSuccess: None(),
         );
       },
       levelOfEducationChanged: (e) async* {
         yield state.copyWith(
           levelOfEducation: e.levelOfEducation,
+          isEdited: true,
           submitFailureOrSuccess: None(),
         );
       },
       monthlyIncomeChanged: (e) async* {
         yield state.copyWith(
           monthlyIncome: e.monthlyIncome,
+          isEdited: true,
           submitFailureOrSuccess: None(),
         );
       },
       workSectorChanged: (e) async* {
         yield state.copyWith(
           workSector: e.workSector,
+          isEdited: true,
           submitFailureOrSuccess: None(),
         );
       },
       employmentStatusChanged: (e) async* {
         yield state.copyWith(
           employmentStatus: e.employmentStatus,
+          isEdited: true,
           submitFailureOrSuccess: None(),
         );
       },
@@ -224,20 +242,23 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
           print('verified');
           yield state.copyWith(
             isLoading: true,
-            isSubmitting: true,
             submitFailureOrSuccess: None(),
           );
           UserDetailsRequest request;
           request = state.userDetails.copyWith.work(
+            employer: state.employerName.trim(),
             netMonthlyIncome: state.monthlyIncome.trim(),
+            workSectorText: state.workSector.trim(),
             workSector: state.workSector.trim(),
             workStartDate: state.startDate.trim(),
             educationQualification: state.levelOfEducation.trim(),
           );
 
-          request = state.userDetails.copyWith.education(
+          print('$request\n\n');
+          request = request.copyWith.education(
             educationalQualification: state.levelOfEducation.trim(),
           );
+
           print('$request\n\n');
 
           print('sending');
@@ -248,12 +269,18 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
         print('done');
 
         yield state.copyWith(
-          isSubmitting: false,
           isLoading: false,
+          isEdited: false,
+          isSaved: true,
           showErrorMessages: true,
           submitFailureOrSuccess: optionOf(failureOrSuccess),
         );
       },
     );
   }
+}
+
+String nullCheck(String value) {
+  if (value == '0' || value == null) return null;
+  return value;
 }

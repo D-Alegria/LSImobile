@@ -134,6 +134,7 @@ class SharedTextFormField extends StatelessWidget {
   final TextInputAction textInputAction;
   final TextInputType keyboardType;
   final String initialValue;
+  final bool readOnly;
 
   const SharedTextFormField({
     Key key,
@@ -144,11 +145,13 @@ class SharedTextFormField extends StatelessWidget {
     this.textInputAction,
     this.keyboardType,
     this.initialValue,
+    this.readOnly = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: readOnly,
       initialValue: initialValue,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
