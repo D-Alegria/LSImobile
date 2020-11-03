@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
+import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_bloc.dart';
 
 class HistoryView extends StatelessWidget {
   final String optionsIcon = "assets/svgs/icons/options_icon.svg";
@@ -36,32 +40,60 @@ class HistoryView extends StatelessWidget {
           )
         ],
       ),
-      body: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: SizeConfig.xMargin(context, 5),
-        ),
-        child: ListView.builder(
-          itemBuilder: (context, index) {
-            return index % 2 == 0
-                ? sharedInfoListTile(
-                    icon: SvgPicture.asset(arrowDown),
-                    context: context,
-                    title: "Investment Plan",
-                    subTitle: "Deposit",
-                    trailingText: "N200,000",
-                    trailingSubText: "3 days ago",
+      body: BlocBuilder<UserProfileBloc, UserProfileState>(
+        builder: (context, state) => state.map(
+          initial: (e) => Container(),
+          loading: (e) => Container(),
+          loaded: (e) => Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: SizeConfig.xMargin(context, 5),
+            ),
+            child: e.recentTransactions.isEmpty
+                ? Container(
+                    child: Center(
+                      child: Text(
+                        "No Transactions Found",
+                        style: GoogleFonts.workSans(
+                          fontWeight: FontWeight.w500,
+                          color: ColorStyles.black,
+                          fontSize: SizeConfig.textSize(context, 4.3),
+                        ),
+                      ),
+                    ),
                   )
-                : sharedInfoListTile(
-                    icon: SvgPicture.asset(arrowUp),
-                    context: context,
-                    title: "Investment Plan",
-                    subTitle: "Deposit",
-                    trailingText: "N200,000",
-                    trailingSubText: "3 days ago",
-                    red: true,
-                  );
-          },
-          itemCount: 10,
+                : ListView.builder(
+                    itemBuilder: (context, index) {
+                      var transaction = e.recentTransactions[index];
+                      var time = Jiffy(transaction.transDate.substring(0, 19),
+                          "yyyy-MM-dd H:m:s")
+                        ..startOf(Units.DAY);
+
+                      if (transaction.transType == '1') {
+                        return sharedInfoListTile(
+                          icon: SvgPicture.asset(arrowUp),
+                          context: context,
+                          title: transaction.narrationCustomer,
+                          subTitle: "Debit",
+                          trailingText: "₦${transaction.transAmount}",
+                          trailingSubText: time.fromNow(),
+                          red: true,
+                        );
+                      } else {
+                        return sharedInfoListTile(
+                          icon: SvgPicture.asset(arrowDown),
+                          context: context,
+                          title: transaction.narrationCustomer,
+                          subTitle: "Credit",
+                          trailingText: "₦${transaction.transAmount}",
+                          trailingSubText: time.fromNow(),
+                          red: false,
+                        );
+                      }
+                    },
+                    itemCount: e.recentTransactions.length,
+                  ),
+          ),
+          error: (e) => Container(),
         ),
       ),
     );

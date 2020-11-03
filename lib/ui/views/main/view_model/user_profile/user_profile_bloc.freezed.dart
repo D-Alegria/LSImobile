@@ -163,11 +163,13 @@ class _$UserProfileStateTearOff {
 
 // ignore: unused_element
   Loaded loaded(
-      {@required UserDetailsRequest userDetailsRequest,
+      {@required List<RecentTransaction> recentTransactions,
+      @required UserDetailsRequest userDetailsRequest,
       @required String fullName,
       @required String investmentBalance,
       @required String profilePicture}) {
     return Loaded(
+      recentTransactions: recentTransactions,
       userDetailsRequest: userDetailsRequest,
       fullName: fullName,
       investmentBalance: investmentBalance,
@@ -194,16 +196,24 @@ mixin _$UserProfileState {
     @required Result initial(),
     @required Result loading(),
     @required
-        Result loaded(UserDetailsRequest userDetailsRequest, String fullName,
-            String investmentBalance, String profilePicture),
+        Result loaded(
+            List<RecentTransaction> recentTransactions,
+            UserDetailsRequest userDetailsRequest,
+            String fullName,
+            String investmentBalance,
+            String profilePicture),
     @required Result error(String message),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(UserDetailsRequest userDetailsRequest, String fullName,
-        String investmentBalance, String profilePicture),
+    Result loaded(
+        List<RecentTransaction> recentTransactions,
+        UserDetailsRequest userDetailsRequest,
+        String fullName,
+        String investmentBalance,
+        String profilePicture),
     Result error(String message),
     @required Result orElse(),
   });
@@ -280,8 +290,12 @@ class _$Initial implements Initial {
     @required Result initial(),
     @required Result loading(),
     @required
-        Result loaded(UserDetailsRequest userDetailsRequest, String fullName,
-            String investmentBalance, String profilePicture),
+        Result loaded(
+            List<RecentTransaction> recentTransactions,
+            UserDetailsRequest userDetailsRequest,
+            String fullName,
+            String investmentBalance,
+            String profilePicture),
     @required Result error(String message),
   }) {
     assert(initial != null);
@@ -296,8 +310,12 @@ class _$Initial implements Initial {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(UserDetailsRequest userDetailsRequest, String fullName,
-        String investmentBalance, String profilePicture),
+    Result loaded(
+        List<RecentTransaction> recentTransactions,
+        UserDetailsRequest userDetailsRequest,
+        String fullName,
+        String investmentBalance,
+        String profilePicture),
     Result error(String message),
     @required Result orElse(),
   }) {
@@ -383,8 +401,12 @@ class _$Loading implements Loading {
     @required Result initial(),
     @required Result loading(),
     @required
-        Result loaded(UserDetailsRequest userDetailsRequest, String fullName,
-            String investmentBalance, String profilePicture),
+        Result loaded(
+            List<RecentTransaction> recentTransactions,
+            UserDetailsRequest userDetailsRequest,
+            String fullName,
+            String investmentBalance,
+            String profilePicture),
     @required Result error(String message),
   }) {
     assert(initial != null);
@@ -399,8 +421,12 @@ class _$Loading implements Loading {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(UserDetailsRequest userDetailsRequest, String fullName,
-        String investmentBalance, String profilePicture),
+    Result loaded(
+        List<RecentTransaction> recentTransactions,
+        UserDetailsRequest userDetailsRequest,
+        String fullName,
+        String investmentBalance,
+        String profilePicture),
     Result error(String message),
     @required Result orElse(),
   }) {
@@ -452,7 +478,8 @@ abstract class $LoadedCopyWith<$Res> {
   factory $LoadedCopyWith(Loaded value, $Res Function(Loaded) then) =
       _$LoadedCopyWithImpl<$Res>;
   $Res call(
-      {UserDetailsRequest userDetailsRequest,
+      {List<RecentTransaction> recentTransactions,
+      UserDetailsRequest userDetailsRequest,
       String fullName,
       String investmentBalance,
       String profilePicture});
@@ -471,12 +498,16 @@ class _$LoadedCopyWithImpl<$Res> extends _$UserProfileStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object recentTransactions = freezed,
     Object userDetailsRequest = freezed,
     Object fullName = freezed,
     Object investmentBalance = freezed,
     Object profilePicture = freezed,
   }) {
     return _then(Loaded(
+      recentTransactions: recentTransactions == freezed
+          ? _value.recentTransactions
+          : recentTransactions as List<RecentTransaction>,
       userDetailsRequest: userDetailsRequest == freezed
           ? _value.userDetailsRequest
           : userDetailsRequest as UserDetailsRequest,
@@ -505,15 +536,19 @@ class _$LoadedCopyWithImpl<$Res> extends _$UserProfileStateCopyWithImpl<$Res>
 /// @nodoc
 class _$Loaded implements Loaded {
   _$Loaded(
-      {@required this.userDetailsRequest,
+      {@required this.recentTransactions,
+      @required this.userDetailsRequest,
       @required this.fullName,
       @required this.investmentBalance,
       @required this.profilePicture})
-      : assert(userDetailsRequest != null),
+      : assert(recentTransactions != null),
+        assert(userDetailsRequest != null),
         assert(fullName != null),
         assert(investmentBalance != null),
         assert(profilePicture != null);
 
+  @override
+  final List<RecentTransaction> recentTransactions;
   @override
   final UserDetailsRequest userDetailsRequest;
   @override
@@ -525,13 +560,16 @@ class _$Loaded implements Loaded {
 
   @override
   String toString() {
-    return 'UserProfileState.loaded(userDetailsRequest: $userDetailsRequest, fullName: $fullName, investmentBalance: $investmentBalance, profilePicture: $profilePicture)';
+    return 'UserProfileState.loaded(recentTransactions: $recentTransactions, userDetailsRequest: $userDetailsRequest, fullName: $fullName, investmentBalance: $investmentBalance, profilePicture: $profilePicture)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is Loaded &&
+            (identical(other.recentTransactions, recentTransactions) ||
+                const DeepCollectionEquality()
+                    .equals(other.recentTransactions, recentTransactions)) &&
             (identical(other.userDetailsRequest, userDetailsRequest) ||
                 const DeepCollectionEquality()
                     .equals(other.userDetailsRequest, userDetailsRequest)) &&
@@ -549,6 +587,7 @@ class _$Loaded implements Loaded {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(recentTransactions) ^
       const DeepCollectionEquality().hash(userDetailsRequest) ^
       const DeepCollectionEquality().hash(fullName) ^
       const DeepCollectionEquality().hash(investmentBalance) ^
@@ -564,16 +603,20 @@ class _$Loaded implements Loaded {
     @required Result initial(),
     @required Result loading(),
     @required
-        Result loaded(UserDetailsRequest userDetailsRequest, String fullName,
-            String investmentBalance, String profilePicture),
+        Result loaded(
+            List<RecentTransaction> recentTransactions,
+            UserDetailsRequest userDetailsRequest,
+            String fullName,
+            String investmentBalance,
+            String profilePicture),
     @required Result error(String message),
   }) {
     assert(initial != null);
     assert(loading != null);
     assert(loaded != null);
     assert(error != null);
-    return loaded(
-        userDetailsRequest, fullName, investmentBalance, profilePicture);
+    return loaded(recentTransactions, userDetailsRequest, fullName,
+        investmentBalance, profilePicture);
   }
 
   @override
@@ -581,15 +624,19 @@ class _$Loaded implements Loaded {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(UserDetailsRequest userDetailsRequest, String fullName,
-        String investmentBalance, String profilePicture),
+    Result loaded(
+        List<RecentTransaction> recentTransactions,
+        UserDetailsRequest userDetailsRequest,
+        String fullName,
+        String investmentBalance,
+        String profilePicture),
     Result error(String message),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (loaded != null) {
-      return loaded(
-          userDetailsRequest, fullName, investmentBalance, profilePicture);
+      return loaded(recentTransactions, userDetailsRequest, fullName,
+          investmentBalance, profilePicture);
     }
     return orElse();
   }
@@ -628,11 +675,13 @@ class _$Loaded implements Loaded {
 
 abstract class Loaded implements UserProfileState {
   factory Loaded(
-      {@required UserDetailsRequest userDetailsRequest,
+      {@required List<RecentTransaction> recentTransactions,
+      @required UserDetailsRequest userDetailsRequest,
       @required String fullName,
       @required String investmentBalance,
       @required String profilePicture}) = _$Loaded;
 
+  List<RecentTransaction> get recentTransactions;
   UserDetailsRequest get userDetailsRequest;
   String get fullName;
   String get investmentBalance;
@@ -700,8 +749,12 @@ class _$Error implements Error {
     @required Result initial(),
     @required Result loading(),
     @required
-        Result loaded(UserDetailsRequest userDetailsRequest, String fullName,
-            String investmentBalance, String profilePicture),
+        Result loaded(
+            List<RecentTransaction> recentTransactions,
+            UserDetailsRequest userDetailsRequest,
+            String fullName,
+            String investmentBalance,
+            String profilePicture),
     @required Result error(String message),
   }) {
     assert(initial != null);
@@ -716,8 +769,12 @@ class _$Error implements Error {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(UserDetailsRequest userDetailsRequest, String fullName,
-        String investmentBalance, String profilePicture),
+    Result loaded(
+        List<RecentTransaction> recentTransactions,
+        UserDetailsRequest userDetailsRequest,
+        String fullName,
+        String investmentBalance,
+        String profilePicture),
     Result error(String message),
     @required Result orElse(),
   }) {

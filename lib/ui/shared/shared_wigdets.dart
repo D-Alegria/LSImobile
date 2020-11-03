@@ -366,7 +366,9 @@ Widget sharedInfoListTile({
     ),
     title: Text(
       title,
-      style: TextStyle(
+      softWrap: true,
+      overflow: TextOverflow.ellipsis,
+      style: GoogleFonts.workSans(
         fontWeight: FontWeight.w400,
         color: ColorStyles.black,
         fontSize: SizeConfig.textSize(context, 4.5),

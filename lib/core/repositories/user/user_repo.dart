@@ -1,11 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
+import 'package:lsi_mobile/core/models/dto/recent_transaction/recent_transaction.dart';
 import 'package:lsi_mobile/core/models/dto/user/user.dart';
 import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
 import 'package:lsi_mobile/core/models/responses/user_details/user_details_data.dart';
 
 abstract class UserRepo {
   Future<Either<Glitch, UserDetailsData>> get userDataRemote;
+
+  Future<Either<Glitch, List<RecentTransaction>>> get recentTransactions;
 
   Future<Either<Glitch, Unit>> saveUserDataLocal(User user);
 

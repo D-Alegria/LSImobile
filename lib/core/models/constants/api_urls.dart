@@ -26,6 +26,7 @@ class ApiUrls {
   static final String validateCustomerBVNUsingOTP = "api/v3/customer/validate_customer_bvn_otp";
   static final String resolveBankAccount = "api/v3/user/account/resolve";
   static final String saveBankAccount = "api/v3/user/account/save";
+  static final String investmentProducts = "api/v3/investments/products";
   static final String getCountries = "webapi/v1/countries";
   static final String getStates = "webapi/v1/states";
   static final String getGender = "webapi/v1/genders";

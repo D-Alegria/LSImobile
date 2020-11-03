@@ -2,9 +2,11 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/constants/api_urls.dart';
+import 'package:lsi_mobile/core/models/dto/recent_transaction/recent_transaction.dart';
 import 'package:lsi_mobile/core/models/dto/value/value.dart';
 import 'package:lsi_mobile/core/models/requests/token_request/token_request.dart';
 import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
+import 'package:lsi_mobile/core/models/responses/get_recent_transaction/get_recent_transaction_response.dart';
 import 'package:lsi_mobile/core/models/responses/get_value/get_value_response.dart';
 import 'package:lsi_mobile/core/models/responses/user_details/user_details_data.dart';
 import 'package:lsi_mobile/core/models/responses/user_details/user_details_response.dart';
@@ -36,6 +38,9 @@ abstract class UserRemoteDataSource {
   Future<Either<Glitch, List<Value>>> getLGAS(String id);
 
   Future<Either<Glitch, UserDetailsData>> getUserDetails(TokenRequest request);
+
+  Future<Either<Glitch, List<RecentTransaction>>> getRecentTransactions(
+      TokenRequest request);
 
   Future<Either<Glitch, Unit>> saveUserDetails(
     UserDetailsRequest request,
@@ -113,6 +118,9 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       return left(
         RemoteGlitch(message: "System Error Occurred please contact developer"),
       );
+    } on Error catch (e) {
+      print(e);
+      return left(RemoteGlitch(message: "Opps an error get user r data"));
     }
   }
 
@@ -138,6 +146,9 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       return left(
         RemoteGlitch(message: "System Error Occurred please contact developer"),
       );
+    } on Error catch (e) {
+      print(e);
+      return left(RemoteGlitch(message: "Opps an error get user r data"));
     }
   }
 
@@ -160,6 +171,35 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       return left(
         RemoteGlitch(message: "System Error Occurred please contact developer"),
       );
+    } on Error catch (e) {
+      print(e);
+      return left(RemoteGlitch(message: "Opps an error get user r data"));
+    }
+  }
+
+  @override
+  Future<Either<Glitch, List<RecentTransaction>>> getRecentTransactions(
+      TokenRequest request) async {
+    try {
+      final response = await _apiManager.post(
+        url: ApiUrls.recentTransactions,
+        requestBody: request.toJson(),
+      );
+      return response.fold(
+        (failure) => left(RemoteGlitch(message: failure.message)),
+        (success) {
+          final result = GetRecentTransactionResponse.fromJson(success);
+          return right(result.recentTransactions ?? []);
+        },
+      );
+    } on Exception catch (e) {
+      print(e);
+      return left(
+        RemoteGlitch(message: "System Error Occurred please contact developer"),
+      );
+    } on Error catch (e) {
+      print(e);
+      return left(RemoteGlitch(message: "Opps an error get user r data"));
     }
   }
 }

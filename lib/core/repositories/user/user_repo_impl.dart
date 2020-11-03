@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:lsi_mobile/core/datasources/user/user_local_datasource.dart';
 import 'package:lsi_mobile/core/datasources/user/user_remote_datasource.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
+import 'package:lsi_mobile/core/models/dto/recent_transaction/recent_transaction.dart';
 import 'package:lsi_mobile/core/models/dto/user/user.dart';
 import 'package:lsi_mobile/core/models/requests/token_request/token_request.dart';
 import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
@@ -111,7 +112,6 @@ class UserRepoImpl implements UserRepo {
       UserDetailsRequest request) async {
     try {
       final storedUser = await user;
-      print(storedUser.token);
       var requestWithToken = request.copyWith(token: storedUser.token);
       final result =
           await _userRemoteDataSource.saveUserDetails(requestWithToken);
@@ -123,6 +123,25 @@ class UserRepoImpl implements UserRepo {
     } on Exception catch (e) {
       print(e);
       return left(ServerGlitch(message: "Happened in user repo"));
+    }
+  }
+
+  @override
+  Future<Either<Glitch, List<RecentTransaction>>> get recentTransactions async {
+    try {
+      final user = await _userLocalDataSource.user;
+      final token = user.fold((l) => null, (r) => r.token);
+      final result = await _userRemoteDataSource.getRecentTransactions(
+        TokenRequest(token: token),
+      );
+      return result.fold((failure) {
+        return left(ServerGlitch(message: failure.message));
+      }, (success) {
+        return right(success);
+      });
+    } on Exception catch (e) {
+      print(e);
+      return left(ServerGlitch(message: "Happened in repo"));
     }
   }
 }
