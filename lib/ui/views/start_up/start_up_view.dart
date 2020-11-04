@@ -12,6 +12,7 @@ import 'package:lsi_mobile/ui/views/authentication/view_model/authentication/aut
 class StartUpView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    context.bloc<AuthenticationBloc>()..add(CheckAuthenticated());
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -23,7 +24,7 @@ class StartUpView extends StatelessWidget {
           state.map(
             initial: (_) => null,
             unauthenticated: (_) => context.navigator.pushAndRemoveUntil(
-              Routes.authWrapper,
+              Routes.onBoardingView,
               (route) => false,
             ),
             authenticated: (_) => context.navigator.pushAndRemoveUntil(
