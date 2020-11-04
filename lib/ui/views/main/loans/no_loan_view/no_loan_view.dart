@@ -54,7 +54,7 @@ class NoLoanView extends StatelessWidget {
               context: context,
               text: "Apply for a loan",
               color: ColorStyles.orange,
-              onPressed: () => context.navigator.pushLoanProductView(),
+              onPressed: () => context.navigator.pushNoLoanViewRouter(),
               minWidth: SizeConfig.xMargin(context, 70),
             ),
           ],

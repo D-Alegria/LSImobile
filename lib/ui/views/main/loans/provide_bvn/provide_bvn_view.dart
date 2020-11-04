@@ -6,7 +6,7 @@ import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/loans/widgets/verify_bvn_form.dart';
 
 import '../widgets/loan_form.dart';
-import 'view_model/provide_bvn_bloc.dart';
+import '../view_model/provide_bvn/provide_bvn_bloc.dart';
 
 class ProvideBVNView extends StatelessWidget {
   @override

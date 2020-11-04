@@ -14,9 +14,11 @@ import 'package:lsi_mobile/ui/views/main/loans/loan_details/loan_details_view.da
 import 'package:lsi_mobile/ui/views/main/loans/loan_product/loan_product_view.dart';
 import 'package:lsi_mobile/ui/views/main/loans/loan_schedule/loan_schedule_view.dart';
 import 'package:lsi_mobile/ui/views/main/loans/make_payment/make_payment_view.dart';
+import 'package:lsi_mobile/ui/views/main/loans/no_loan_view/no_loan_view.dart';
 import 'package:lsi_mobile/ui/views/main/loans/personal_info/personal_info_form_view.dart';
 import 'package:lsi_mobile/ui/views/main/loans/provide_bvn/provide_bvn_view.dart';
 import 'package:lsi_mobile/ui/views/main/loans/residence/residence_form_view.dart';
+import 'package:lsi_mobile/ui/views/main/loans/widgets/no_loan_view_router.dart';
 import 'package:lsi_mobile/ui/views/main/main_view.dart';
 import 'package:lsi_mobile/ui/views/main/profile/accounts_cards/accounts_cards_view.dart';
 import 'package:lsi_mobile/ui/views/main/profile/contact_us/contact_us_view.dart';
@@ -34,14 +36,20 @@ import 'package:lsi_mobile/ui/views/start_up/start_up_view.dart';
     AdaptiveRoute(page: AuthWrapper),
     AdaptiveRoute(page: VerificationView),
     AdaptiveRoute(page: MainView),
-    AdaptiveRoute(page: LoanProductView),
-    AdaptiveRoute(page: ProvideBVNView),
-    AdaptiveRoute(page: PersonalInfoFormView),
-    AdaptiveRoute(page: EmergencyContactFormView),
-    AdaptiveRoute(page: EduAndEmployFormView),
-    AdaptiveRoute(page: ResidenceFormView),
-    AdaptiveRoute(page: LoanDetailsView),
-    AdaptiveRoute(page: AccountInfoView),
+    AdaptiveRoute(page: NoLoanView),
+    AdaptiveRoute(
+      page: NoLoanViewRouter,
+      children: [
+        AdaptiveRoute(page: LoanProductView, initial: true),
+        AdaptiveRoute(page: ProvideBVNView),
+        AdaptiveRoute(page: PersonalInfoFormView),
+        AdaptiveRoute(page: EmergencyContactFormView),
+        AdaptiveRoute(page: EduAndEmployFormView),
+        AdaptiveRoute(page: ResidenceFormView),
+        AdaptiveRoute(page: LoanDetailsView),
+        AdaptiveRoute(page: AccountInfoView),
+      ],
+    ),
     AdaptiveRoute(page: MakePaymentView),
     AdaptiveRoute(page: LoanScheduleView),
     AdaptiveRoute(page: NoInvestmentView),

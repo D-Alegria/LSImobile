@@ -67,6 +67,10 @@ class UserRepoImpl implements UserRepo {
     String password,
     bool isAuthenticated,
     bool isVerified,
+    bool isEduAndEmpInfoFilled,
+    bool isEmergenceContactFilled,
+    bool isPersonalInfoFilled,
+    bool isResidenceFilled,
     String token,
   }) async {
     try {
@@ -80,6 +84,10 @@ class UserRepoImpl implements UserRepo {
         id: id,
         email: email,
         fullName: fullName,
+        isEduAndEmpInfoFilled: isEduAndEmpInfoFilled,
+        isEmergenceContactFilled: isEmergenceContactFilled,
+        isPersonalInfoFilled: isPersonalInfoFilled,
+        isResidenceFilled: isResidenceFilled,
       );
       return result.fold((failure) {
         return left(ServerGlitch(message: failure.message));

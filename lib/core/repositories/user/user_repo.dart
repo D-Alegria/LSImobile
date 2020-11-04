@@ -23,6 +23,10 @@ abstract class UserRepo {
     String password,
     bool isAuthenticated,
     bool isVerified,
+    bool isEduAndEmpInfoFilled,
+    bool isEmergenceContactFilled,
+    bool isPersonalInfoFilled,
+    bool isResidenceFilled,
     String token,
   });
 

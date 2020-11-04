@@ -23,6 +23,11 @@ import '../../../ui/views/main/profile/view_models/edit_profile/edit_profile_blo
 import '../../datasources/investment/investment_remote_datasource.dart';
 import '../../repositories/investment/investment_repo.dart';
 import '../../repositories/investment/investment_repo_impl.dart';
+import '../../../ui/views/main/loans/view_model/loan_product/loan_product_cubit.dart';
+import '../../datasources/loan/loan_remote_datasource.dart';
+import '../../repositories/loan/loan_repo.dart';
+import '../../repositories/loan/loan_repo_impl.dart';
+import '../../../ui/views/main/loans/view_model/loan_view/loan_view_cubit.dart';
 import '../../datasources/local_storage/local_data_repo.dart';
 import '../../datasources/local_storage/local_storage_repo_impl.dart';
 import '../../utils/network_util.dart';
@@ -60,6 +65,11 @@ Future<GetIt> $initGetIt(
       () => InvestmentRemoteDataSourceImpl(get<ApiManager>()));
   gh.lazySingleton<InvestmentRepo>(() => InvestmentRepoImpl(
       get<UserLocalDataSource>(), get<InvestmentRemoteDataSource>()));
+  gh.lazySingleton<LoanRemoteDataSource>(
+      () => LoanRemoteDataSourceImpl(get<ApiManager>()));
+  gh.lazySingleton<LoanRepo>(() =>
+      LoanRepoImpl(get<UserLocalDataSource>(), get<LoanRemoteDataSource>()));
+  gh.factory<LoanViewCubit>(() => LoanViewCubit(get<LoanRepo>()));
   gh.lazySingleton<LocalStorageRepo>(
       () => LocalStorageRepoImpl(get<SharedPreferences>()));
   gh.lazySingleton<UserRemoteDataSource>(
@@ -73,9 +83,11 @@ Future<GetIt> $initGetIt(
         get<LocalStorageRepo>(),
       ));
   gh.factory<AuthenticationBloc>(() => AuthenticationBloc(get<AuthService>()));
-  gh.lazySingleton<EditProfileBloc>(
+  gh.factory<EditProfileBloc>(
       () => EditProfileBloc(get<UserRepo>(), get<UserRemoteDataSource>()));
-  gh.lazySingleton<UserProfileBloc>(
+  gh.lazySingleton<LoanProductCubit>(
+      () => LoanProductCubit(get<LoanRepo>(), get<UserRepo>()));
+  gh.factory<UserProfileBloc>(
       () => UserProfileBloc(get<UserRepo>(), get<InvestmentRepo>()));
   gh.lazySingleton<AuthFormBloc>(
       () => AuthFormBloc(get<AuthService>(), get<LocalStorageRepo>()));

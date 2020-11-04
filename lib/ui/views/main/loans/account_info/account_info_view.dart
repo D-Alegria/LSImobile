@@ -6,7 +6,7 @@ import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/loans/account_info/view_model/account_info_bloc.dart';
-import 'package:lsi_mobile/ui/views/main/loans/loans_view/view_model/loan_view_cubit.dart';
+// import 'package:lsi_mobile/ui/views/main/loans/loans_view/view_model/loan_view_cubit.dart';
 
 import '../widgets/loan_form.dart';
 
@@ -18,9 +18,9 @@ class AccountInfoView extends StatelessWidget {
         BlocProvider(
           create: (context) => AccountInfoBloc(),
         ),
-        BlocProvider(
-          create: (context) => LoanViewCubit(),
-        ),
+        // BlocProvider(
+        //   create: (context) => LoanViewCubit(),
+        // ),
       ],
       child: BlocConsumer<AccountInfoBloc, AccountInfoState>(
         builder: (context, state) => LoanForm(
@@ -61,7 +61,7 @@ class AccountInfoView extends StatelessWidget {
           (either) => either.fold(
             (l) => null,
             (r) {
-              context.bloc<LoanViewCubit>().checkActiveLoans();
+              // context.bloc<LoanViewCubit>().checkActiveLoans();
               return context.navigator.pushSuccessView(
                 message: "Your loan request has been sent successfully",
                 buttonText: "Back to loans",

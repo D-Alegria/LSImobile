@@ -12,10 +12,6 @@ abstract class UserLocalDataSource {
 
   Future<Either<CacheGlitch, List<Value>>> getValue(String key);
 
-  Future<Unit> saveOtp();
-
-  Future<String> get otp;
-
   Future<Either<CacheGlitch, Unit>> saveValue(String key, List<Value> values);
 
   Future<Either<Glitch, Unit>> saveUser({User user});
@@ -29,6 +25,10 @@ abstract class UserLocalDataSource {
     String password,
     bool isAuthenticated,
     bool isVerified,
+    bool isEduAndEmpInfoFilled,
+    bool isEmergenceContactFilled,
+    bool isPersonalInfoFilled,
+    bool isResidenceFilled,
     String token,
   });
 
@@ -94,6 +94,10 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
           id: "",
           isAuthenticated: false,
           isVerified: false,
+          isEduAndEmpInfoFilled: false,
+          isEmergenceContactFilled: false,
+          isPersonalInfoFilled: false,
+          isResidenceFilled: false,
           password: "",
           phoneNumber: "",
           profilePicture: "",
@@ -156,6 +160,10 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
     String password,
     bool isAuthenticated,
     bool isVerified,
+    bool isEduAndEmpInfoFilled,
+    bool isEmergenceContactFilled,
+    bool isPersonalInfoFilled,
+    bool isResidenceFilled,
     String token,
   }) async {
     try {
@@ -170,6 +178,13 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
           id: id ?? oldUser.id,
           isAuthenticated: isAuthenticated ?? oldUser.isAuthenticated,
           isVerified: isVerified ?? oldUser.isVerified,
+          isEduAndEmpInfoFilled:
+              isEduAndEmpInfoFilled ?? oldUser.isEduAndEmpInfoFilled,
+          isEmergenceContactFilled:
+              isEmergenceContactFilled ?? oldUser.isEmergenceContactFilled,
+          isPersonalInfoFilled:
+              isPersonalInfoFilled ?? oldUser.isPersonalInfoFilled,
+          isResidenceFilled: isResidenceFilled ?? oldUser.isResidenceFilled,
           password: password ?? oldUser.password,
           phoneNumber: phoneNumber ?? oldUser.phoneNumber,
           profilePicture: profilePicture ?? oldUser.profilePicture,
@@ -182,6 +197,10 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
           id: id,
           isAuthenticated: isAuthenticated ?? false,
           isVerified: isVerified ?? false,
+          isEduAndEmpInfoFilled: isEduAndEmpInfoFilled ?? false,
+          isEmergenceContactFilled: isEmergenceContactFilled ?? false,
+          isPersonalInfoFilled: isPersonalInfoFilled ?? false,
+          isResidenceFilled: isResidenceFilled ?? false,
           password: password,
           phoneNumber: phoneNumber,
           profilePicture: profilePicture,
@@ -194,15 +213,5 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
       print(e);
       return left(LocalCacheGlitch(message: "Cache Malfunction"));
     }
-  }
-
-  @override
-  // TODO: implement otp
-  Future<String> get otp => throw UnimplementedError();
-
-  @override
-  Future<Unit> saveOtp() {
-    // TODO: implement saveOtp
-    throw UnimplementedError();
   }
 }

@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 part 'user.g.dart';
 
 @HiveType(typeId: 1)
-class User extends HiveObject{
+class User extends HiveObject {
   @HiveField(0)
   final String id;
   @HiveField(1)
@@ -22,6 +22,14 @@ class User extends HiveObject{
   final bool isVerified;
   @HiveField(8)
   final String token;
+  @HiveField(9)
+  final bool isResidenceFilled;
+  @HiveField(10)
+  final bool isPersonalInfoFilled;
+  @HiveField(11)
+  final bool isEmergenceContactFilled;
+  @HiveField(12)
+  final bool isEduAndEmpInfoFilled;
 
   User({
     this.id,
@@ -33,5 +41,9 @@ class User extends HiveObject{
     this.isAuthenticated,
     this.isVerified,
     this.token,
+    this.isPersonalInfoFilled,
+    this.isEmergenceContactFilled,
+    this.isEduAndEmpInfoFilled,
+    this.isResidenceFilled,
   });
 }

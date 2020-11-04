@@ -8,7 +8,6 @@ import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/history/history_view.dart';
 import 'package:lsi_mobile/ui/views/main/home/home_view.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_view.dart';
-import 'package:lsi_mobile/ui/views/main/loans/loans_view/view_model/loan_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/profile_view.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/main_view/main_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_bloc.dart';
@@ -23,7 +22,7 @@ class MainView extends StatelessWidget {
   final String history = "assets/svgs/icons/history_icon.svg";
   final String profile = "assets/svgs/icons/profile_icon.svg";
 
-  const MainView({Key key,@required this.pageNumber}) : super(key: key);
+  const MainView({Key key, @required this.pageNumber}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +36,10 @@ class MainView extends StatelessWidget {
         providers: [
           BlocProvider(create: (context) => MainViewCubit(pageNumber)),
           BlocProvider(
-            create: (context) => LoanViewCubit()..checkActiveLoans(),
-          ),
-          BlocProvider(
-            create: (context) =>
-                getIt<UserProfileBloc>()..add(GetUserDetails(),),
+            create: (context) => getIt<UserProfileBloc>()
+              ..add(
+                GetUserDetails(),
+              ),
           ),
         ],
         child: BlocBuilder<MainViewCubit, MainViewState>(

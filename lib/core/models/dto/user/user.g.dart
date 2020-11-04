@@ -26,13 +26,17 @@ class UserAdapter extends TypeAdapter<User> {
       isAuthenticated: fields[6] as bool,
       isVerified: fields[7] as bool,
       token: fields[8] as String,
+      isPersonalInfoFilled: fields[10] as bool,
+      isEmergenceContactFilled: fields[11] as bool,
+      isEduAndEmpInfoFilled: fields[12] as bool,
+      isResidenceFilled: fields[9] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, User obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(13)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -50,7 +54,15 @@ class UserAdapter extends TypeAdapter<User> {
       ..writeByte(7)
       ..write(obj.isVerified)
       ..writeByte(8)
-      ..write(obj.token);
+      ..write(obj.token)
+      ..writeByte(9)
+      ..write(obj.isResidenceFilled)
+      ..writeByte(10)
+      ..write(obj.isPersonalInfoFilled)
+      ..writeByte(11)
+      ..write(obj.isEmergenceContactFilled)
+      ..writeByte(12)
+      ..write(obj.isEduAndEmpInfoFilled);
   }
 
   @override

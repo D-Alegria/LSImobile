@@ -66,9 +66,9 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
             yield Loaded(
               userDetailsRequest: userData.data,
               fullName: userData.data.profile.legalName ?? "",
-              investmentBalance: investmentBalance,
+              investmentBalance: investmentBalance ?? "",
               profilePicture: userData.data.profile.fileName ?? "",
-              recentTransactions: recentTransactions,
+              recentTransactions: recentTransactions ?? [],
             );
           });
         } on Exception catch (e) {
