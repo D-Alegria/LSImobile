@@ -140,6 +140,10 @@ class AuthServiceImpl implements AuthService {
         ServerGlitch(
             message: "Internal System Error Occurred please contact developer"),
       );
+    } on Error catch (e) {
+      print(e);
+      return left(
+          ServerGlitch(message: "Error occurred during authentication"));
     }
   }
 
