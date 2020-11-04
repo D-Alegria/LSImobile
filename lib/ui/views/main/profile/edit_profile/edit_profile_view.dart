@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lsi_mobile/core/configs/dependency_injection/injection.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
@@ -27,6 +26,9 @@ class _EditProfileViewState extends State<EditProfileView>
 
   @override
   void initState() {
+    context
+        .bloc<EditProfileBloc>()
+        .add(EditProfileEvent.init(widget.userDetails));
     _tabController = new TabController(length: 2, vsync: this);
     super.initState();
   }
@@ -54,31 +56,27 @@ class _EditProfileViewState extends State<EditProfileView>
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<EditProfileBloc>()
-        ..add(EditProfileEvent.init(widget.userDetails)),
-      child: BlocConsumer<EditProfileBloc, EditProfileState>(
-        builder: (context, state) => WillPopScope(
-          onWillPop: () => _goBack(state, context),
-          child: ProfileForm(
-            tabController: _tabController,
-            title: "Edit Profile",
-            tabs: ["Personal Information", "Education and Employment"],
-            form: TabBarView(
-              children: [
-                state.isLoading
-                    ? sharedLoader()
-                    : buildPersonalInfoForm(state, context),
-                state.isLoading
-                    ? sharedLoader()
-                    : buildEduAndEmployForm(state, context),
-              ],
-              controller: _tabController,
-            ),
+    return BlocConsumer<EditProfileBloc, EditProfileState>(
+      builder: (context, state) => WillPopScope(
+        onWillPop: () => _goBack(state, context),
+        child: ProfileForm(
+          tabController: _tabController,
+          title: "Edit Profile",
+          tabs: ["Personal Information", "Education and Employment"],
+          form: TabBarView(
+            children: [
+              state.isLoading
+                  ? sharedLoader()
+                  : buildPersonalInfoForm(state, context),
+              state.isLoading
+                  ? sharedLoader()
+                  : buildEduAndEmployForm(state, context),
+            ],
+            controller: _tabController,
           ),
         ),
-        listener: (context, state) => null,
       ),
+      listener: (context, state) => null,
     );
   }
 
@@ -91,36 +89,57 @@ class _EditProfileViewState extends State<EditProfileView>
         children: [
           SizedBox(height: SizeConfig.yMargin(context, 6)),
           sharedDropDownFormField<String>(
-            value: state.levelOfEducation,
+            value: state.levelsOfEducation
+                .where((element) => element.id == state.levelOfEducation)
+                .first
+                .name,
             items: state.levelsOfEducation.map((e) => e.name).toList(),
             context: context,
             labelText: "Level of education",
             onChanged: (String value) {
+              var index;
+              state.levelsOfEducation.map((e) {
+                if (e.name == value) index = e.id;
+              }).toList();
               context
                   .bloc<EditProfileBloc>()
-                  .add(LevelOfEducationChanged(value));
+                  .add(LevelOfEducationChanged(index));
             },
           ),
           SizedBox(height: SizeConfig.yMargin(context, 2)),
           sharedDropDownFormField<String>(
-            value: state.employmentStatus,
+            value: state.employmentStatuses
+                .where((element) => element.id == state.employmentStatus)
+                .first
+                .name,
             items: state.employmentStatuses.map((e) => e.name).toList(),
             context: context,
             labelText: "Employment status",
             onChanged: (String value) {
-              // context
-              //     .bloc<EditProfileBloc>()
-              //     .add(EmploymentStatusChanged(value));
+              var index;
+              state.employmentStatuses.map((e) {
+                if (e.name == value) index = e.id;
+              }).toList();
+              context
+                  .bloc<EditProfileBloc>()
+                  .add(EmploymentStatusChanged(index));
             },
           ),
           SizedBox(height: SizeConfig.yMargin(context, 2)),
           sharedDropDownFormField<String>(
-            value: state.workSector,
+            value: state.workSectors
+                .where((element) => element.id == state.workSector)
+                .first
+                .name,
             items: state.workSectors.map((e) => e.name).toList(),
             context: context,
             labelText: "Work Sector",
             onChanged: (String value) {
-              context.bloc<EditProfileBloc>().add(WorkSectorChanged(value));
+              var index;
+              state.workSectors.map((e) {
+                if (e.name == value) index = e.id;
+              }).toList();
+              context.bloc<EditProfileBloc>().add(WorkSectorChanged(index));
             },
           ),
           SizedBox(height: SizeConfig.yMargin(context, 2)),
@@ -220,12 +239,19 @@ class _EditProfileViewState extends State<EditProfileView>
           ),
           SizedBox(height: SizeConfig.yMargin(context, 2)),
           sharedDropDownFormField<String>(
-            value: state.gender,
+            value: state.genders
+                .where((element) => element.id == state.gender)
+                .first
+                .name,
             items: state.genders.map((e) => e.name).toList(),
             context: context,
             labelText: "Gender",
             onChanged: (value) {
-              context.bloc<EditProfileBloc>().add(GenderChanged(value));
+              var index;
+              state.genders.map((e) {
+                if (e.name == value) index = e.id;
+              }).toList();
+              context.bloc<EditProfileBloc>().add(GenderChanged(index));
             },
           ),
           SizedBox(height: SizeConfig.yMargin(context, 2)),

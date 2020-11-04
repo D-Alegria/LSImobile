@@ -28,13 +28,16 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
       : super(EditProfileState.initial());
 
   @override
-  Stream<EditProfileState> mapEventToState(EditProfileEvent event,) async* {
+  Stream<EditProfileState> mapEventToState(
+    EditProfileEvent event,
+  ) async* {
     yield* event.map(
       init: (e) async* {
         yield state.copyWith(isLoading: true);
         final genders = await _userRemoteDataSource.genders;
         final levelsOfEducation = await _userRemoteDataSource.educationSectors;
         final workSectors = await _userRemoteDataSource.workSectors;
+        final occupation = await _userRemoteDataSource.occupations;
 
         yield state.copyWith(
           userDetails: e.userDetails,
@@ -44,46 +47,58 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
           phoneNumber: e.userDetails.profile.phone ?? '',
           emailAddress: e.userDetails.profile.email ?? '',
           employerName: e.userDetails.work.employer ?? '',
-          // employmentStatus: e.userDetails.work. ?? '0',
           startDate: e.userDetails.work.workStartDate ?? '',
           monthlyIncome: e.userDetails.work.netMonthlyIncome ?? '',
         );
         yield* genders.fold(
-              (l) async* {
+          (l) async* {
             print(l.message);
           },
-              (r) async* {
+          (r) async* {
             yield state.copyWith(genders: r);
           },
         );
 
         yield* levelsOfEducation.fold(
-              (l) async* {
+          (l) async* {
             print(l.message);
           },
-              (r) async* {
+          (r) async* {
             yield state.copyWith(levelsOfEducation: r);
           },
         );
 
         yield* workSectors.fold(
-              (l) async* {
+          (l) async* {
             print(l.message);
           },
-              (r) async* {
+          (r) async* {
             yield state.copyWith(workSectors: r);
           },
         );
 
-        yield state.copyWith(
-          levelOfEducation:
-          nullCheck(e.userDetails.education.educationalQualification) ??
-              state.levelsOfEducation.first.name,
+        yield* occupation.fold(
+          (l) async* {
+            print(l.message);
+          },
+          (r) async* {
+            yield state.copyWith(employmentStatuses: r);
+          },
+        );
 
-          workSector: nullCheck(e.userDetails.work.workSector) ??
-              state.workSectors.first.name,
-          gender: nullCheck(e.userDetails.profile.gender) ??
-              state.genders.first.name,
+        yield state.copyWith(
+          levelOfEducation: nullCheck(
+                  e.userDetails.education.educationalQualification,
+                  state.levelsOfEducation) ??
+              state.levelsOfEducation.first.id,
+          workSector:
+              nullCheck(e.userDetails.work.workSector, state.workSectors) ??
+                  state.workSectors.first.id,
+          gender: nullCheck(e.userDetails.profile.gender, state.genders) ??
+              state.genders.first.id,
+          employmentStatus: nullCheck(
+                  e.userDetails.work.occupationId, state.employmentStatuses) ??
+              state.employmentStatuses.first.id,
           isLoading: false,
         );
       },
@@ -280,7 +295,8 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
   }
 }
 
-String nullCheck(String value) {
-  if (value == '0' || value == null) return null;
+String nullCheck(String value, List<Value> list) {
+  if (value == null) return null;
+  if (list.where((e) => e.id == value).isEmpty) return null;
   return value;
 }
