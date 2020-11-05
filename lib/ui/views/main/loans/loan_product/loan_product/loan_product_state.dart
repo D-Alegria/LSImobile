@@ -9,6 +9,7 @@ abstract class LoanProductState with _$LoanProductState {
   factory LoanProductState.loaded({
     @required List<LoanProduct> loanProducts,
     NextForm nextForm,
+    int selected,
   }) = Loaded;
 
   factory LoanProductState.error(String message) = Error;

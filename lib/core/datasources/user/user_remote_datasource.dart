@@ -83,7 +83,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<Either<Glitch, List<Value>>> get loanPurpose async =>
-      await getValueMethod(ApiUrls.getBanks);
+      await getValueMethod(ApiUrls.getLoanPurpose);
 
   @override
   Future<Either<Glitch, List<Value>>> get maritalStatus async =>

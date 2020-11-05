@@ -31,7 +31,9 @@ class _$ProfileTearOff {
       @nullable String nationality,
       @nullable @JsonKey(name: 'state_of_origin') String stateOfOrigin,
       @nullable String bvn,
-      @nullable @JsonKey(name: 'file_name') String fileName}) {
+      @nullable @JsonKey(name: 'file_name') String fileName,
+      @nullable @JsonKey(name: 'profile_image') String profileImage,
+      @nullable String token}) {
     return _Profile(
       legalName: legalName,
       email: email,
@@ -47,6 +49,8 @@ class _$ProfileTearOff {
       stateOfOrigin: stateOfOrigin,
       bvn: bvn,
       fileName: fileName,
+      profileImage: profileImage,
+      token: token,
     );
   }
 
@@ -98,6 +102,11 @@ mixin _$Profile {
   @nullable
   @JsonKey(name: 'file_name')
   String get fileName;
+  @nullable
+  @JsonKey(name: 'profile_image')
+  String get profileImage;
+  @nullable
+  String get token;
 
   Map<String, dynamic> toJson();
   $ProfileCopyWith<Profile> get copyWith;
@@ -121,7 +130,9 @@ abstract class $ProfileCopyWith<$Res> {
       @nullable String nationality,
       @nullable @JsonKey(name: 'state_of_origin') String stateOfOrigin,
       @nullable String bvn,
-      @nullable @JsonKey(name: 'file_name') String fileName});
+      @nullable @JsonKey(name: 'file_name') String fileName,
+      @nullable @JsonKey(name: 'profile_image') String profileImage,
+      @nullable String token});
 }
 
 /// @nodoc
@@ -148,6 +159,8 @@ class _$ProfileCopyWithImpl<$Res> implements $ProfileCopyWith<$Res> {
     Object stateOfOrigin = freezed,
     Object bvn = freezed,
     Object fileName = freezed,
+    Object profileImage = freezed,
+    Object token = freezed,
   }) {
     return _then(_value.copyWith(
       legalName: legalName == freezed ? _value.legalName : legalName as String,
@@ -171,6 +184,10 @@ class _$ProfileCopyWithImpl<$Res> implements $ProfileCopyWith<$Res> {
           : stateOfOrigin as String,
       bvn: bvn == freezed ? _value.bvn : bvn as String,
       fileName: fileName == freezed ? _value.fileName : fileName as String,
+      profileImage: profileImage == freezed
+          ? _value.profileImage
+          : profileImage as String,
+      token: token == freezed ? _value.token : token as String,
     ));
   }
 }
@@ -194,7 +211,9 @@ abstract class _$ProfileCopyWith<$Res> implements $ProfileCopyWith<$Res> {
       @nullable String nationality,
       @nullable @JsonKey(name: 'state_of_origin') String stateOfOrigin,
       @nullable String bvn,
-      @nullable @JsonKey(name: 'file_name') String fileName});
+      @nullable @JsonKey(name: 'file_name') String fileName,
+      @nullable @JsonKey(name: 'profile_image') String profileImage,
+      @nullable String token});
 }
 
 /// @nodoc
@@ -222,6 +241,8 @@ class __$ProfileCopyWithImpl<$Res> extends _$ProfileCopyWithImpl<$Res>
     Object stateOfOrigin = freezed,
     Object bvn = freezed,
     Object fileName = freezed,
+    Object profileImage = freezed,
+    Object token = freezed,
   }) {
     return _then(_Profile(
       legalName: legalName == freezed ? _value.legalName : legalName as String,
@@ -245,6 +266,10 @@ class __$ProfileCopyWithImpl<$Res> extends _$ProfileCopyWithImpl<$Res>
           : stateOfOrigin as String,
       bvn: bvn == freezed ? _value.bvn : bvn as String,
       fileName: fileName == freezed ? _value.fileName : fileName as String,
+      profileImage: profileImage == freezed
+          ? _value.profileImage
+          : profileImage as String,
+      token: token == freezed ? _value.token : token as String,
     ));
   }
 }
@@ -267,7 +292,9 @@ class _$_Profile implements _Profile {
       @nullable this.nationality,
       @nullable @JsonKey(name: 'state_of_origin') this.stateOfOrigin,
       @nullable this.bvn,
-      @nullable @JsonKey(name: 'file_name') this.fileName});
+      @nullable @JsonKey(name: 'file_name') this.fileName,
+      @nullable @JsonKey(name: 'profile_image') this.profileImage,
+      @nullable this.token});
 
   factory _$_Profile.fromJson(Map<String, dynamic> json) =>
       _$_$_ProfileFromJson(json);
@@ -322,10 +349,17 @@ class _$_Profile implements _Profile {
   @nullable
   @JsonKey(name: 'file_name')
   final String fileName;
+  @override
+  @nullable
+  @JsonKey(name: 'profile_image')
+  final String profileImage;
+  @override
+  @nullable
+  final String token;
 
   @override
   String toString() {
-    return 'Profile(legalName: $legalName, email: $email, phone: $phone, dateOfBirth: $dateOfBirth, birthYear: $birthYear, birthMonth: $birthMonth, birthDay: $birthDay, gender: $gender, maritalStatus: $maritalStatus, age: $age, nationality: $nationality, stateOfOrigin: $stateOfOrigin, bvn: $bvn, fileName: $fileName)';
+    return 'Profile(legalName: $legalName, email: $email, phone: $phone, dateOfBirth: $dateOfBirth, birthYear: $birthYear, birthMonth: $birthMonth, birthDay: $birthDay, gender: $gender, maritalStatus: $maritalStatus, age: $age, nationality: $nationality, stateOfOrigin: $stateOfOrigin, bvn: $bvn, fileName: $fileName, profileImage: $profileImage, token: $token)';
   }
 
   @override
@@ -368,7 +402,12 @@ class _$_Profile implements _Profile {
                 const DeepCollectionEquality().equals(other.bvn, bvn)) &&
             (identical(other.fileName, fileName) ||
                 const DeepCollectionEquality()
-                    .equals(other.fileName, fileName)));
+                    .equals(other.fileName, fileName)) &&
+            (identical(other.profileImage, profileImage) ||
+                const DeepCollectionEquality()
+                    .equals(other.profileImage, profileImage)) &&
+            (identical(other.token, token) ||
+                const DeepCollectionEquality().equals(other.token, token)));
   }
 
   @override
@@ -387,7 +426,9 @@ class _$_Profile implements _Profile {
       const DeepCollectionEquality().hash(nationality) ^
       const DeepCollectionEquality().hash(stateOfOrigin) ^
       const DeepCollectionEquality().hash(bvn) ^
-      const DeepCollectionEquality().hash(fileName);
+      const DeepCollectionEquality().hash(fileName) ^
+      const DeepCollectionEquality().hash(profileImage) ^
+      const DeepCollectionEquality().hash(token);
 
   @override
   _$ProfileCopyWith<_Profile> get copyWith =>
@@ -414,7 +455,9 @@ abstract class _Profile implements Profile {
       @nullable String nationality,
       @nullable @JsonKey(name: 'state_of_origin') String stateOfOrigin,
       @nullable String bvn,
-      @nullable @JsonKey(name: 'file_name') String fileName}) = _$_Profile;
+      @nullable @JsonKey(name: 'file_name') String fileName,
+      @nullable @JsonKey(name: 'profile_image') String profileImage,
+      @nullable String token}) = _$_Profile;
 
   factory _Profile.fromJson(Map<String, dynamic> json) = _$_Profile.fromJson;
 
@@ -468,6 +511,13 @@ abstract class _Profile implements Profile {
   @nullable
   @JsonKey(name: 'file_name')
   String get fileName;
+  @override
+  @nullable
+  @JsonKey(name: 'profile_image')
+  String get profileImage;
+  @override
+  @nullable
+  String get token;
   @override
   _$ProfileCopyWith<_Profile> get copyWith;
 }

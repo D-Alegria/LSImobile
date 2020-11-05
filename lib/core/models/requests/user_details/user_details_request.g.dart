@@ -47,7 +47,10 @@ _$_UserDetailsRequest _$_$_UserDetailsRequestFromJson(
         ? null
         : CompanyProfile.fromJson(
             json['company_profile'] as Map<String, dynamic>),
-    directors: json['directors'] as List,
+    directors: (json['directors'] as List)
+        ?.map((e) =>
+            e == null ? null : Director.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     businessIncome: json['business_income'] == null
         ? null
         : BusinessIncome.fromJson(
@@ -82,7 +85,7 @@ Map<String, dynamic> _$_$_UserDetailsRequestToJson(
       'bvn': instance.bvn?.toJson(),
       'remita': instance.remita?.toJson(),
       'company_profile': instance.companyProfile?.toJson(),
-      'directors': instance.directors,
+      'directors': instance.directors?.map((e) => e?.toJson())?.toList(),
       'business_income': instance.businessIncome?.toJson(),
       'operating_expenses': instance.operatingExpenses?.toJson(),
       'business_address': instance.businessAddress?.toJson(),

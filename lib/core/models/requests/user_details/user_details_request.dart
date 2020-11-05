@@ -4,6 +4,7 @@ import 'package:lsi_mobile/core/models/dto/business_address/business_address.dar
 import 'package:lsi_mobile/core/models/dto/business_income/business_income.dart';
 import 'package:lsi_mobile/core/models/dto/bvn/bvn.dart';
 import 'package:lsi_mobile/core/models/dto/company_profile/company_profile.dart';
+import 'package:lsi_mobile/core/models/dto/director/director.dart';
 import 'package:lsi_mobile/core/models/dto/education/education.dart';
 import 'package:lsi_mobile/core/models/dto/expenses/expenses.dart';
 import 'package:lsi_mobile/core/models/dto/facebook/facebook.dart';
@@ -38,7 +39,7 @@ abstract class UserDetailsRequest with _$UserDetailsRequest {
     @nullable BVN bvn,
     @nullable Remita remita,
     @nullable @JsonKey(name: "company_profile") CompanyProfile companyProfile,
-    @nullable List directors,
+    @nullable List<Director> directors,
     @nullable @JsonKey(name: "business_income") BusinessIncome businessIncome,
     @nullable @JsonKey(name: "operating_expenses") OperatingExpenses operatingExpenses,
     @nullable @JsonKey(name: "business_address") BusinessAddress businessAddress,

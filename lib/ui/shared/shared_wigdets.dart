@@ -483,12 +483,21 @@ Widget sharedDropDownFormField<T>({
     items: items
         .map(
           (e) => DropdownMenuItem(
-            child: Text("$e"),
+            child: Text(
+              "$e",
+              overflow: TextOverflow.visible,
+              style: TextStyle(
+                fontSize: SizeConfig.textSize(context, 5),
+                fontWeight: FontWeight.w500,
+                color: const Color(0xFF18172B).withOpacity(0.6),
+              ),
+            ),
             value: e,
           ),
         )
         .toList(),
     icon: Icon(Icons.keyboard_arrow_down),
+    isExpanded: true,
     validator: validator,
     onChanged: onChanged,
     decoration: textFieldDecoration.copyWith(

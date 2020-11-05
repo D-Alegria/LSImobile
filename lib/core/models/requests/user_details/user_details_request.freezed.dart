@@ -48,7 +48,7 @@ class _$UserDetailsRequestTearOff {
       @JsonKey(name: 'company_profile')
           CompanyProfile companyProfile,
       @nullable
-          List<dynamic> directors,
+          List<Director> directors,
       @nullable
       @JsonKey(name: 'business_income')
           BusinessIncome businessIncome,
@@ -125,7 +125,7 @@ mixin _$UserDetailsRequest {
   @JsonKey(name: 'company_profile')
   CompanyProfile get companyProfile;
   @nullable
-  List<dynamic> get directors;
+  List<Director> get directors;
   @nullable
   @JsonKey(name: 'business_income')
   BusinessIncome get businessIncome;
@@ -179,7 +179,7 @@ abstract class $UserDetailsRequestCopyWith<$Res> {
       @JsonKey(name: 'company_profile')
           CompanyProfile companyProfile,
       @nullable
-          List<dynamic> directors,
+          List<Director> directors,
       @nullable
       @JsonKey(name: 'business_income')
           BusinessIncome businessIncome,
@@ -262,7 +262,7 @@ class _$UserDetailsRequestCopyWithImpl<$Res>
           ? _value.companyProfile
           : companyProfile as CompanyProfile,
       directors:
-          directors == freezed ? _value.directors : directors as List<dynamic>,
+          directors == freezed ? _value.directors : directors as List<Director>,
       businessIncome: businessIncome == freezed
           ? _value.businessIncome
           : businessIncome as BusinessIncome,
@@ -475,7 +475,7 @@ abstract class _$UserDetailsRequestCopyWith<$Res>
       @JsonKey(name: 'company_profile')
           CompanyProfile companyProfile,
       @nullable
-          List<dynamic> directors,
+          List<Director> directors,
       @nullable
       @JsonKey(name: 'business_income')
           BusinessIncome businessIncome,
@@ -576,7 +576,7 @@ class __$UserDetailsRequestCopyWithImpl<$Res>
           ? _value.companyProfile
           : companyProfile as CompanyProfile,
       directors:
-          directors == freezed ? _value.directors : directors as List<dynamic>,
+          directors == freezed ? _value.directors : directors as List<Director>,
       businessIncome: businessIncome == freezed
           ? _value.businessIncome
           : businessIncome as BusinessIncome,
@@ -662,7 +662,7 @@ class _$_UserDetailsRequest implements _UserDetailsRequest {
   final CompanyProfile companyProfile;
   @override
   @nullable
-  final List<dynamic> directors;
+  final List<Director> directors;
   @override
   @nullable
   @JsonKey(name: 'business_income')
@@ -804,7 +804,7 @@ abstract class _UserDetailsRequest implements UserDetailsRequest {
       @JsonKey(name: 'company_profile')
           CompanyProfile companyProfile,
       @nullable
-          List<dynamic> directors,
+          List<Director> directors,
       @nullable
       @JsonKey(name: 'business_income')
           BusinessIncome businessIncome,
@@ -865,7 +865,7 @@ abstract class _UserDetailsRequest implements UserDetailsRequest {
   CompanyProfile get companyProfile;
   @override
   @nullable
-  List<dynamic> get directors;
+  List<Director> get directors;
   @override
   @nullable
   @JsonKey(name: 'business_income')

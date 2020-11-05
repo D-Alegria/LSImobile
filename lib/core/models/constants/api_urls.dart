@@ -28,6 +28,7 @@ class ApiUrls {
   static final String saveBankAccount = "api/v3/user/account/save";
   static final String investmentProducts = "api/v3/investments/products";
   static final String currentLoan = "api/v3/customer/current/loan";
+  static final String applyForLoan = "api/v3/loan/apply";
   static final String loanProducts = "webapi/v1/products";
   static final String getCountries = "webapi/v1/countries";
   static final String getStates = "webapi/v1/states";
@@ -40,5 +41,5 @@ class ApiUrls {
   static final String getOccupations = "webapi/v1/occupations";
   static final String getResidenceTypes = "webapi/v1/residence_types";
   static final String getWorkSectors = "webapi/v1/work_sectors";
-
+  static final String getLoanPurpose = "webapi/v1/loan_purpose";
 }

@@ -74,7 +74,6 @@ class _PersonalInfoFormViewState extends State<PersonalInfoFormView> {
                       readOnly: true,
                     ),
                     SizedBox(height: SizeConfig.yMargin(context, 2)),
-
                     SharedTextFormField(
                       labelText: "Email address",
                       initialValue: state.emailAddress,
@@ -115,7 +114,6 @@ class _PersonalInfoFormViewState extends State<PersonalInfoFormView> {
                           return "Field name is required";
                         return null;
                       },
-
                     ),
                     SizedBox(height: SizeConfig.yMargin(context, 2)),
                     sharedDropDownFormField<String>(

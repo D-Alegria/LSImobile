@@ -6,8 +6,11 @@ part 'docs.g.dart';
 class Doc {
   final String display;
   final String value;
+  final String filename;
+  final String name;
+  final bool uploaded;
 
-  Doc({this.display, this.value});
+  Doc({this.display, this.value, this.filename, this.name, this.uploaded});
 
   factory Doc.fromJson(Map<String, dynamic> json) => _$DocFromJson(json);
 

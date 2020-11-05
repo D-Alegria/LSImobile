@@ -22,6 +22,8 @@ _$_Profile _$_$_ProfileFromJson(Map<String, dynamic> json) {
     stateOfOrigin: json['state_of_origin'] as String,
     bvn: json['bvn'] as String,
     fileName: json['file_name'] as String,
+    profileImage: json['profile_image'] as String,
+    token: json['token'] as String,
   );
 }
 
@@ -41,4 +43,6 @@ Map<String, dynamic> _$_$_ProfileToJson(_$_Profile instance) =>
       'state_of_origin': instance.stateOfOrigin,
       'bvn': instance.bvn,
       'file_name': instance.fileName,
+      'profile_image': instance.profileImage,
+      'token': instance.token,
     };

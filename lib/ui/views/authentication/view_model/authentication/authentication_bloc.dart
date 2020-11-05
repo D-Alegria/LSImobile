@@ -33,6 +33,7 @@ class AuthenticationBloc
         yield Authenticated();
       }
     }, logoutRequest: (_) async* {
+      yield Initial();
       try {
         final result = await _authService.logout();
         print("logging out");
@@ -45,7 +46,7 @@ class AuthenticationBloc
             yield Unauthenticated();
           },
         );
-        yield Initial();
+
       } on Exception catch (e) {
         print(e);
       }

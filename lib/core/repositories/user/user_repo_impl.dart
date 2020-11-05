@@ -71,7 +71,9 @@ class UserRepoImpl implements UserRepo {
     bool isEmergenceContactFilled,
     bool isPersonalInfoFilled,
     bool isResidenceFilled,
+    bool isBvnVerified,
     String token,
+    String bvn,
   }) async {
     try {
       final result = await _userLocalDataSource.updateUser(
@@ -87,7 +89,9 @@ class UserRepoImpl implements UserRepo {
         isEduAndEmpInfoFilled: isEduAndEmpInfoFilled,
         isEmergenceContactFilled: isEmergenceContactFilled,
         isPersonalInfoFilled: isPersonalInfoFilled,
+        isBvnVerified: isBvnVerified,
         isResidenceFilled: isResidenceFilled,
+        bvn: bvn,
       );
       return result.fold((failure) {
         return left(ServerGlitch(message: failure.message));

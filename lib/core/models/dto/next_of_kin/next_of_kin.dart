@@ -10,6 +10,11 @@ abstract class NextOfKin with _$NextOfKin {
   @JsonSerializable(explicitToJson: true)
   factory NextOfKin({
     @nullable @JsonKey(name: "nok_name") String nokName,
+    @nullable @JsonKey(name: "full_name") String fullName,
+    @nullable String email,
+    @nullable String phone,
+    @nullable String address,
+    @nullable String relationship,
     @nullable @JsonKey(name: "nok_email") String nokEmail,
     @nullable @JsonKey(name: "nok_phone") String nokPhone,
     @nullable @JsonKey(name: "nok_address") String nokAddress,

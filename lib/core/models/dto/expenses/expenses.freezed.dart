@@ -26,11 +26,31 @@ class _$ExpensesTearOff {
           String monthlyTelInternet,
       @nullable
       @JsonKey(name: 'monthly_transport')
-          String monthlyTransport}) {
+          String monthlyTransport,
+      @nullable
+      @JsonKey(name: 'monthly_telephone_expense')
+          String monthlyTelephoneExpense,
+      @nullable
+      @JsonKey(name: 'monthly_transport_expense')
+          String monthlyTransportExpense,
+      @nullable
+      @JsonKey(name: 'number_of_dependants')
+          String numberOfDependants,
+      @nullable
+      @JsonKey(name: 'monthly_repayments')
+          String monthlyRepayments,
+      @nullable
+      @JsonKey(name: 'has_external_loan')
+          bool hasExternalLoan}) {
     return _Expenses(
       monthlyRentExpenses: monthlyRentExpenses,
       monthlyTelInternet: monthlyTelInternet,
       monthlyTransport: monthlyTransport,
+      monthlyTelephoneExpense: monthlyTelephoneExpense,
+      monthlyTransportExpense: monthlyTransportExpense,
+      numberOfDependants: numberOfDependants,
+      monthlyRepayments: monthlyRepayments,
+      hasExternalLoan: hasExternalLoan,
     );
   }
 
@@ -55,6 +75,21 @@ mixin _$Expenses {
   @nullable
   @JsonKey(name: 'monthly_transport')
   String get monthlyTransport;
+  @nullable
+  @JsonKey(name: 'monthly_telephone_expense')
+  String get monthlyTelephoneExpense;
+  @nullable
+  @JsonKey(name: 'monthly_transport_expense')
+  String get monthlyTransportExpense;
+  @nullable
+  @JsonKey(name: 'number_of_dependants')
+  String get numberOfDependants;
+  @nullable
+  @JsonKey(name: 'monthly_repayments')
+  String get monthlyRepayments;
+  @nullable
+  @JsonKey(name: 'has_external_loan')
+  bool get hasExternalLoan;
 
   Map<String, dynamic> toJson();
   $ExpensesCopyWith<Expenses> get copyWith;
@@ -73,7 +108,22 @@ abstract class $ExpensesCopyWith<$Res> {
           String monthlyTelInternet,
       @nullable
       @JsonKey(name: 'monthly_transport')
-          String monthlyTransport});
+          String monthlyTransport,
+      @nullable
+      @JsonKey(name: 'monthly_telephone_expense')
+          String monthlyTelephoneExpense,
+      @nullable
+      @JsonKey(name: 'monthly_transport_expense')
+          String monthlyTransportExpense,
+      @nullable
+      @JsonKey(name: 'number_of_dependants')
+          String numberOfDependants,
+      @nullable
+      @JsonKey(name: 'monthly_repayments')
+          String monthlyRepayments,
+      @nullable
+      @JsonKey(name: 'has_external_loan')
+          bool hasExternalLoan});
 }
 
 /// @nodoc
@@ -89,6 +139,11 @@ class _$ExpensesCopyWithImpl<$Res> implements $ExpensesCopyWith<$Res> {
     Object monthlyRentExpenses = freezed,
     Object monthlyTelInternet = freezed,
     Object monthlyTransport = freezed,
+    Object monthlyTelephoneExpense = freezed,
+    Object monthlyTransportExpense = freezed,
+    Object numberOfDependants = freezed,
+    Object monthlyRepayments = freezed,
+    Object hasExternalLoan = freezed,
   }) {
     return _then(_value.copyWith(
       monthlyRentExpenses: monthlyRentExpenses == freezed
@@ -100,6 +155,21 @@ class _$ExpensesCopyWithImpl<$Res> implements $ExpensesCopyWith<$Res> {
       monthlyTransport: monthlyTransport == freezed
           ? _value.monthlyTransport
           : monthlyTransport as String,
+      monthlyTelephoneExpense: monthlyTelephoneExpense == freezed
+          ? _value.monthlyTelephoneExpense
+          : monthlyTelephoneExpense as String,
+      monthlyTransportExpense: monthlyTransportExpense == freezed
+          ? _value.monthlyTransportExpense
+          : monthlyTransportExpense as String,
+      numberOfDependants: numberOfDependants == freezed
+          ? _value.numberOfDependants
+          : numberOfDependants as String,
+      monthlyRepayments: monthlyRepayments == freezed
+          ? _value.monthlyRepayments
+          : monthlyRepayments as String,
+      hasExternalLoan: hasExternalLoan == freezed
+          ? _value.hasExternalLoan
+          : hasExternalLoan as bool,
     ));
   }
 }
@@ -118,7 +188,22 @@ abstract class _$ExpensesCopyWith<$Res> implements $ExpensesCopyWith<$Res> {
           String monthlyTelInternet,
       @nullable
       @JsonKey(name: 'monthly_transport')
-          String monthlyTransport});
+          String monthlyTransport,
+      @nullable
+      @JsonKey(name: 'monthly_telephone_expense')
+          String monthlyTelephoneExpense,
+      @nullable
+      @JsonKey(name: 'monthly_transport_expense')
+          String monthlyTransportExpense,
+      @nullable
+      @JsonKey(name: 'number_of_dependants')
+          String numberOfDependants,
+      @nullable
+      @JsonKey(name: 'monthly_repayments')
+          String monthlyRepayments,
+      @nullable
+      @JsonKey(name: 'has_external_loan')
+          bool hasExternalLoan});
 }
 
 /// @nodoc
@@ -135,6 +220,11 @@ class __$ExpensesCopyWithImpl<$Res> extends _$ExpensesCopyWithImpl<$Res>
     Object monthlyRentExpenses = freezed,
     Object monthlyTelInternet = freezed,
     Object monthlyTransport = freezed,
+    Object monthlyTelephoneExpense = freezed,
+    Object monthlyTransportExpense = freezed,
+    Object numberOfDependants = freezed,
+    Object monthlyRepayments = freezed,
+    Object hasExternalLoan = freezed,
   }) {
     return _then(_Expenses(
       monthlyRentExpenses: monthlyRentExpenses == freezed
@@ -146,6 +236,21 @@ class __$ExpensesCopyWithImpl<$Res> extends _$ExpensesCopyWithImpl<$Res>
       monthlyTransport: monthlyTransport == freezed
           ? _value.monthlyTransport
           : monthlyTransport as String,
+      monthlyTelephoneExpense: monthlyTelephoneExpense == freezed
+          ? _value.monthlyTelephoneExpense
+          : monthlyTelephoneExpense as String,
+      monthlyTransportExpense: monthlyTransportExpense == freezed
+          ? _value.monthlyTransportExpense
+          : monthlyTransportExpense as String,
+      numberOfDependants: numberOfDependants == freezed
+          ? _value.numberOfDependants
+          : numberOfDependants as String,
+      monthlyRepayments: monthlyRepayments == freezed
+          ? _value.monthlyRepayments
+          : monthlyRepayments as String,
+      hasExternalLoan: hasExternalLoan == freezed
+          ? _value.hasExternalLoan
+          : hasExternalLoan as bool,
     ));
   }
 }
@@ -163,7 +268,22 @@ class _$_Expenses implements _Expenses {
           this.monthlyTelInternet,
       @nullable
       @JsonKey(name: 'monthly_transport')
-          this.monthlyTransport});
+          this.monthlyTransport,
+      @nullable
+      @JsonKey(name: 'monthly_telephone_expense')
+          this.monthlyTelephoneExpense,
+      @nullable
+      @JsonKey(name: 'monthly_transport_expense')
+          this.monthlyTransportExpense,
+      @nullable
+      @JsonKey(name: 'number_of_dependants')
+          this.numberOfDependants,
+      @nullable
+      @JsonKey(name: 'monthly_repayments')
+          this.monthlyRepayments,
+      @nullable
+      @JsonKey(name: 'has_external_loan')
+          this.hasExternalLoan});
 
   factory _$_Expenses.fromJson(Map<String, dynamic> json) =>
       _$_$_ExpensesFromJson(json);
@@ -180,10 +300,30 @@ class _$_Expenses implements _Expenses {
   @nullable
   @JsonKey(name: 'monthly_transport')
   final String monthlyTransport;
+  @override
+  @nullable
+  @JsonKey(name: 'monthly_telephone_expense')
+  final String monthlyTelephoneExpense;
+  @override
+  @nullable
+  @JsonKey(name: 'monthly_transport_expense')
+  final String monthlyTransportExpense;
+  @override
+  @nullable
+  @JsonKey(name: 'number_of_dependants')
+  final String numberOfDependants;
+  @override
+  @nullable
+  @JsonKey(name: 'monthly_repayments')
+  final String monthlyRepayments;
+  @override
+  @nullable
+  @JsonKey(name: 'has_external_loan')
+  final bool hasExternalLoan;
 
   @override
   String toString() {
-    return 'Expenses(monthlyRentExpenses: $monthlyRentExpenses, monthlyTelInternet: $monthlyTelInternet, monthlyTransport: $monthlyTransport)';
+    return 'Expenses(monthlyRentExpenses: $monthlyRentExpenses, monthlyTelInternet: $monthlyTelInternet, monthlyTransport: $monthlyTransport, monthlyTelephoneExpense: $monthlyTelephoneExpense, monthlyTransportExpense: $monthlyTransportExpense, numberOfDependants: $numberOfDependants, monthlyRepayments: $monthlyRepayments, hasExternalLoan: $hasExternalLoan)';
   }
 
   @override
@@ -198,7 +338,24 @@ class _$_Expenses implements _Expenses {
                     .equals(other.monthlyTelInternet, monthlyTelInternet)) &&
             (identical(other.monthlyTransport, monthlyTransport) ||
                 const DeepCollectionEquality()
-                    .equals(other.monthlyTransport, monthlyTransport)));
+                    .equals(other.monthlyTransport, monthlyTransport)) &&
+            (identical(
+                    other.monthlyTelephoneExpense, monthlyTelephoneExpense) ||
+                const DeepCollectionEquality().equals(
+                    other.monthlyTelephoneExpense, monthlyTelephoneExpense)) &&
+            (identical(
+                    other.monthlyTransportExpense, monthlyTransportExpense) ||
+                const DeepCollectionEquality().equals(
+                    other.monthlyTransportExpense, monthlyTransportExpense)) &&
+            (identical(other.numberOfDependants, numberOfDependants) ||
+                const DeepCollectionEquality()
+                    .equals(other.numberOfDependants, numberOfDependants)) &&
+            (identical(other.monthlyRepayments, monthlyRepayments) ||
+                const DeepCollectionEquality()
+                    .equals(other.monthlyRepayments, monthlyRepayments)) &&
+            (identical(other.hasExternalLoan, hasExternalLoan) ||
+                const DeepCollectionEquality()
+                    .equals(other.hasExternalLoan, hasExternalLoan)));
   }
 
   @override
@@ -206,7 +363,12 @@ class _$_Expenses implements _Expenses {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(monthlyRentExpenses) ^
       const DeepCollectionEquality().hash(monthlyTelInternet) ^
-      const DeepCollectionEquality().hash(monthlyTransport);
+      const DeepCollectionEquality().hash(monthlyTransport) ^
+      const DeepCollectionEquality().hash(monthlyTelephoneExpense) ^
+      const DeepCollectionEquality().hash(monthlyTransportExpense) ^
+      const DeepCollectionEquality().hash(numberOfDependants) ^
+      const DeepCollectionEquality().hash(monthlyRepayments) ^
+      const DeepCollectionEquality().hash(hasExternalLoan);
 
   @override
   _$ExpensesCopyWith<_Expenses> get copyWith =>
@@ -228,7 +390,22 @@ abstract class _Expenses implements Expenses {
           String monthlyTelInternet,
       @nullable
       @JsonKey(name: 'monthly_transport')
-          String monthlyTransport}) = _$_Expenses;
+          String monthlyTransport,
+      @nullable
+      @JsonKey(name: 'monthly_telephone_expense')
+          String monthlyTelephoneExpense,
+      @nullable
+      @JsonKey(name: 'monthly_transport_expense')
+          String monthlyTransportExpense,
+      @nullable
+      @JsonKey(name: 'number_of_dependants')
+          String numberOfDependants,
+      @nullable
+      @JsonKey(name: 'monthly_repayments')
+          String monthlyRepayments,
+      @nullable
+      @JsonKey(name: 'has_external_loan')
+          bool hasExternalLoan}) = _$_Expenses;
 
   factory _Expenses.fromJson(Map<String, dynamic> json) = _$_Expenses.fromJson;
 
@@ -244,6 +421,26 @@ abstract class _Expenses implements Expenses {
   @nullable
   @JsonKey(name: 'monthly_transport')
   String get monthlyTransport;
+  @override
+  @nullable
+  @JsonKey(name: 'monthly_telephone_expense')
+  String get monthlyTelephoneExpense;
+  @override
+  @nullable
+  @JsonKey(name: 'monthly_transport_expense')
+  String get monthlyTransportExpense;
+  @override
+  @nullable
+  @JsonKey(name: 'number_of_dependants')
+  String get numberOfDependants;
+  @override
+  @nullable
+  @JsonKey(name: 'monthly_repayments')
+  String get monthlyRepayments;
+  @override
+  @nullable
+  @JsonKey(name: 'has_external_loan')
+  bool get hasExternalLoan;
   @override
   _$ExpensesCopyWith<_Expenses> get copyWith;
 }

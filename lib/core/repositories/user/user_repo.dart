@@ -27,7 +27,9 @@ abstract class UserRepo {
     bool isEmergenceContactFilled,
     bool isPersonalInfoFilled,
     bool isResidenceFilled,
+    bool isBvnVerified,
     String token,
+    String bvn,
   });
 
   Future<Either<Glitch, Unit>> get clearUserData;

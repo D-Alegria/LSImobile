@@ -55,7 +55,8 @@ class ApiManager {
         print(response.body);
         var body = response.body.substring(start);
         var jsonResponse = convert.jsonDecode(body);
-        if (response.statusCode == 200 && (jsonResponse["status"] ?? true)) {
+        if ((response.statusCode == 200 || response.statusCode == 201) &&
+            (jsonResponse["status"] ?? true)) {
           return right(jsonResponse);
         } else if (response.statusCode == 400) {
           return left(

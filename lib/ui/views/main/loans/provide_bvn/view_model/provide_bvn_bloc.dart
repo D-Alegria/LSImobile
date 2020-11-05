@@ -8,7 +8,6 @@ import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/core/models/requests/initiate_bvn_validation/initiate_bvn_validation_request.dart';
 import 'package:lsi_mobile/core/models/requests/verify_bvn_otp/verify_bvn_otp_request.dart';
 import 'package:lsi_mobile/core/repositories/bank/bank_repo.dart';
-import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
 import 'package:meta/meta.dart';
 
 part 'provide_bvn_bloc.freezed.dart';

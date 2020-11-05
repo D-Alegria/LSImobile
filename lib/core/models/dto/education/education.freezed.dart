@@ -24,6 +24,9 @@ class _$EducationTearOff {
       @nullable
       @JsonKey(name: 'educational_institution')
           String educationalInstitution,
+      String institution,
+      String qualification,
+      String others,
       @nullable
       @JsonKey(name: 'qualification_year')
           String qualificationYear,
@@ -36,6 +39,9 @@ class _$EducationTearOff {
     return _Education(
       educationalQualification: educationalQualification,
       educationalInstitution: educationalInstitution,
+      institution: institution,
+      qualification: qualification,
+      others: others,
       qualificationYear: qualificationYear,
       specifyQualifications: specifyQualifications,
       hasOtherQualifications: hasOtherQualifications,
@@ -60,6 +66,9 @@ mixin _$Education {
   @nullable
   @JsonKey(name: 'educational_institution')
   String get educationalInstitution;
+  String get institution;
+  String get qualification;
+  String get others;
   @nullable
   @JsonKey(name: 'qualification_year')
   String get qualificationYear;
@@ -85,6 +94,9 @@ abstract class $EducationCopyWith<$Res> {
       @nullable
       @JsonKey(name: 'educational_institution')
           String educationalInstitution,
+      String institution,
+      String qualification,
+      String others,
       @nullable
       @JsonKey(name: 'qualification_year')
           String qualificationYear,
@@ -108,6 +120,9 @@ class _$EducationCopyWithImpl<$Res> implements $EducationCopyWith<$Res> {
   $Res call({
     Object educationalQualification = freezed,
     Object educationalInstitution = freezed,
+    Object institution = freezed,
+    Object qualification = freezed,
+    Object others = freezed,
     Object qualificationYear = freezed,
     Object specifyQualifications = freezed,
     Object hasOtherQualifications = freezed,
@@ -119,6 +134,12 @@ class _$EducationCopyWithImpl<$Res> implements $EducationCopyWith<$Res> {
       educationalInstitution: educationalInstitution == freezed
           ? _value.educationalInstitution
           : educationalInstitution as String,
+      institution:
+          institution == freezed ? _value.institution : institution as String,
+      qualification: qualification == freezed
+          ? _value.qualification
+          : qualification as String,
+      others: others == freezed ? _value.others : others as String,
       qualificationYear: qualificationYear == freezed
           ? _value.qualificationYear
           : qualificationYear as String,
@@ -145,6 +166,9 @@ abstract class _$EducationCopyWith<$Res> implements $EducationCopyWith<$Res> {
       @nullable
       @JsonKey(name: 'educational_institution')
           String educationalInstitution,
+      String institution,
+      String qualification,
+      String others,
       @nullable
       @JsonKey(name: 'qualification_year')
           String qualificationYear,
@@ -169,6 +193,9 @@ class __$EducationCopyWithImpl<$Res> extends _$EducationCopyWithImpl<$Res>
   $Res call({
     Object educationalQualification = freezed,
     Object educationalInstitution = freezed,
+    Object institution = freezed,
+    Object qualification = freezed,
+    Object others = freezed,
     Object qualificationYear = freezed,
     Object specifyQualifications = freezed,
     Object hasOtherQualifications = freezed,
@@ -180,6 +207,12 @@ class __$EducationCopyWithImpl<$Res> extends _$EducationCopyWithImpl<$Res>
       educationalInstitution: educationalInstitution == freezed
           ? _value.educationalInstitution
           : educationalInstitution as String,
+      institution:
+          institution == freezed ? _value.institution : institution as String,
+      qualification: qualification == freezed
+          ? _value.qualification
+          : qualification as String,
+      others: others == freezed ? _value.others : others as String,
       qualificationYear: qualificationYear == freezed
           ? _value.qualificationYear
           : qualificationYear as String,
@@ -204,6 +237,9 @@ class _$_Education implements _Education {
       @nullable
       @JsonKey(name: 'educational_institution')
           this.educationalInstitution,
+      this.institution,
+      this.qualification,
+      this.others,
       @nullable
       @JsonKey(name: 'qualification_year')
           this.qualificationYear,
@@ -226,6 +262,12 @@ class _$_Education implements _Education {
   @JsonKey(name: 'educational_institution')
   final String educationalInstitution;
   @override
+  final String institution;
+  @override
+  final String qualification;
+  @override
+  final String others;
+  @override
   @nullable
   @JsonKey(name: 'qualification_year')
   final String qualificationYear;
@@ -240,7 +282,7 @@ class _$_Education implements _Education {
 
   @override
   String toString() {
-    return 'Education(educationalQualification: $educationalQualification, educationalInstitution: $educationalInstitution, qualificationYear: $qualificationYear, specifyQualifications: $specifyQualifications, hasOtherQualifications: $hasOtherQualifications)';
+    return 'Education(educationalQualification: $educationalQualification, educationalInstitution: $educationalInstitution, institution: $institution, qualification: $qualification, others: $others, qualificationYear: $qualificationYear, specifyQualifications: $specifyQualifications, hasOtherQualifications: $hasOtherQualifications)';
   }
 
   @override
@@ -255,6 +297,14 @@ class _$_Education implements _Education {
             (identical(other.educationalInstitution, educationalInstitution) ||
                 const DeepCollectionEquality().equals(
                     other.educationalInstitution, educationalInstitution)) &&
+            (identical(other.institution, institution) ||
+                const DeepCollectionEquality()
+                    .equals(other.institution, institution)) &&
+            (identical(other.qualification, qualification) ||
+                const DeepCollectionEquality()
+                    .equals(other.qualification, qualification)) &&
+            (identical(other.others, others) ||
+                const DeepCollectionEquality().equals(other.others, others)) &&
             (identical(other.qualificationYear, qualificationYear) ||
                 const DeepCollectionEquality()
                     .equals(other.qualificationYear, qualificationYear)) &&
@@ -271,6 +321,9 @@ class _$_Education implements _Education {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(educationalQualification) ^
       const DeepCollectionEquality().hash(educationalInstitution) ^
+      const DeepCollectionEquality().hash(institution) ^
+      const DeepCollectionEquality().hash(qualification) ^
+      const DeepCollectionEquality().hash(others) ^
       const DeepCollectionEquality().hash(qualificationYear) ^
       const DeepCollectionEquality().hash(specifyQualifications) ^
       const DeepCollectionEquality().hash(hasOtherQualifications);
@@ -293,6 +346,9 @@ abstract class _Education implements Education {
       @nullable
       @JsonKey(name: 'educational_institution')
           String educationalInstitution,
+      String institution,
+      String qualification,
+      String others,
       @nullable
       @JsonKey(name: 'qualification_year')
           String qualificationYear,
@@ -314,6 +370,12 @@ abstract class _Education implements Education {
   @nullable
   @JsonKey(name: 'educational_institution')
   String get educationalInstitution;
+  @override
+  String get institution;
+  @override
+  String get qualification;
+  @override
+  String get others;
   @override
   @nullable
   @JsonKey(name: 'qualification_year')

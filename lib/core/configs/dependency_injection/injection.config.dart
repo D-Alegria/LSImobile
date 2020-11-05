@@ -9,6 +9,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../ui/views/main/loans/account_info/view_model/account_info_bloc.dart';
 import '../../../ui/views/main/profile/view_models/accounts_cards/accounts_cards_bloc.dart';
 import '../../utils/api_manager_util.dart';
 import '../../../ui/views/authentication/view_model/auth_form/auth_form_bloc.dart';
@@ -20,18 +21,24 @@ import '../../repositories/bank/bank_repo.dart';
 import '../../repositories/bank/bank_repo_impl.dart';
 import '../interceptor/dio_interceptor.dart';
 import '../../../ui/views/main/profile/view_models/edit_profile/edit_profile_bloc.dart';
+import '../../../ui/views/main/loans/edu_and_employ/view_model/edu_and_employ_bloc.dart';
+import '../../../ui/views/main/loans/emergency_contact/view_model/emergency_contact_bloc.dart';
 import '../../datasources/investment/investment_remote_datasource.dart';
 import '../../repositories/investment/investment_repo.dart';
 import '../../repositories/investment/investment_repo_impl.dart';
-import '../../../ui/views/main/loans/view_model/loan_product/loan_product_cubit.dart';
+import '../../../ui/views/main/loans/loan_details/view_model/loan_details_bloc.dart';
+import '../../../ui/views/main/loans/loan_product/loan_product/loan_product_cubit.dart';
 import '../../datasources/loan/loan_remote_datasource.dart';
 import '../../repositories/loan/loan_repo.dart';
 import '../../repositories/loan/loan_repo_impl.dart';
-import '../../../ui/views/main/loans/view_model/loan_view/loan_view_cubit.dart';
+import '../../../ui/views/main/loans/loans_view/view_model/loan_view_cubit.dart';
 import '../../datasources/local_storage/local_data_repo.dart';
 import '../../datasources/local_storage/local_storage_repo_impl.dart';
 import '../../utils/network_util.dart';
+import '../../../ui/views/main/loans/personal_info/view_model/personal_info_bloc.dart';
+import '../../../ui/views/main/loans/provide_bvn/view_model/provide_bvn_bloc.dart';
 import 'register_modules.dart';
+import '../../../ui/views/main/loans/residence/view_model/residence_bloc.dart';
 import '../../datasources/user/user_local_datasource.dart';
 import '../../../ui/views/main/view_model/user_profile/user_profile_bloc.dart';
 import '../../datasources/user/user_remote_datasource.dart';
@@ -56,8 +63,6 @@ Future<GetIt> $initGetIt(
   gh.lazySingleton<ApiManager>(() => ApiManager(get<NetworkInfo>()));
   gh.lazySingleton<BankRemoteDataSource>(
       () => BankRemoteDataSourceImpl(get<ApiManager>()));
-  gh.lazySingleton<BankRepo>(() =>
-      BankRepoImpl(get<UserLocalDataSource>(), get<BankRemoteDataSource>()));
   gh.lazySingleton<Dio>(
       () => registerModule.dio(get<String>(instanceName: 'BaseUrl')));
   gh.lazySingleton<DioInterceptor>(() => DioInterceptor(get<Dio>()));
@@ -76,19 +81,42 @@ Future<GetIt> $initGetIt(
       () => UserRemoteDataSourceImpl(get<ApiManager>()));
   gh.lazySingleton<UserRepo>(() =>
       UserRepoImpl(get<UserLocalDataSource>(), get<UserRemoteDataSource>()));
-  gh.lazySingleton<AccountsCardsBloc>(() => AccountsCardsBloc(get<BankRepo>()));
   gh.lazySingleton<AuthService>(() => AuthServiceImpl(
         get<ApiManager>(),
         get<UserRepo>(),
         get<LocalStorageRepo>(),
       ));
   gh.factory<AuthenticationBloc>(() => AuthenticationBloc(get<AuthService>()));
+  gh.lazySingleton<BankRepo>(() => BankRepoImpl(
+        get<UserRepo>(),
+        get<BankRemoteDataSource>(),
+        get<LocalStorageRepo>(),
+      ));
   gh.factory<EditProfileBloc>(
       () => EditProfileBloc(get<UserRepo>(), get<UserRemoteDataSource>()));
+  gh.lazySingleton<EduAndEmployBloc>(
+      () => EduAndEmployBloc(get<UserRepo>(), get<UserRemoteDataSource>()));
+  gh.lazySingleton<EmergencyContactBloc>(
+      () => EmergencyContactBloc(get<UserRepo>(), get<UserRemoteDataSource>()));
+  gh.lazySingleton<LoanDetailsBloc>(
+      () => LoanDetailsBloc(get<UserRemoteDataSource>()));
   gh.lazySingleton<LoanProductCubit>(
       () => LoanProductCubit(get<LoanRepo>(), get<UserRepo>()));
+  gh.lazySingleton<PersonalInfoBloc>(
+      () => PersonalInfoBloc(get<UserRepo>(), get<UserRemoteDataSource>()));
+  gh.lazySingleton<ProvideBvnBloc>(
+      () => ProvideBvnBloc(get<BankRepo>(), get<LocalStorageRepo>()));
+  gh.lazySingleton<ResidenceBloc>(
+      () => ResidenceBloc(get<UserRepo>(), get<UserRemoteDataSource>()));
   gh.factory<UserProfileBloc>(
       () => UserProfileBloc(get<UserRepo>(), get<InvestmentRepo>()));
+  gh.lazySingleton<AccountInfoBloc>(() => AccountInfoBloc(
+        get<UserRemoteDataSource>(),
+        get<BankRepo>(),
+        get<LoanRepo>(),
+        get<UserRepo>(),
+      ));
+  gh.lazySingleton<AccountsCardsBloc>(() => AccountsCardsBloc(get<BankRepo>()));
   gh.lazySingleton<AuthFormBloc>(
       () => AuthFormBloc(get<AuthService>(), get<LocalStorageRepo>()));
   return get;

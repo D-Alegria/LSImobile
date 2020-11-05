@@ -23,6 +23,8 @@ abstract class Profile with _$Profile {
     @nullable @JsonKey(name: "state_of_origin") String stateOfOrigin,
     @nullable String bvn,
     @nullable @JsonKey(name: "file_name") String fileName,
+    @nullable @JsonKey(name: "profile_image") String profileImage,
+    @nullable String token,
   }) = _Profile;
 
   factory Profile.initial() => Profile(
@@ -40,6 +42,8 @@ abstract class Profile with _$Profile {
         nationality: '',
         phone: '',
         stateOfOrigin: '',
+        token: '',
+        profileImage: '',
       );
 
   factory Profile.fromJson(Map<String, dynamic> json) =>

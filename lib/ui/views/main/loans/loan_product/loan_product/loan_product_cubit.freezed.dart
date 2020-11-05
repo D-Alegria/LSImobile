@@ -24,10 +24,14 @@ class _$LoanProductStateTearOff {
   }
 
 // ignore: unused_element
-  Loaded loaded({@required List<LoanProduct> loanProducts, NextForm nextForm}) {
+  Loaded loaded(
+      {@required List<LoanProduct> loanProducts,
+      NextForm nextForm,
+      int selected}) {
     return Loaded(
       loanProducts: loanProducts,
       nextForm: nextForm,
+      selected: selected,
     );
   }
 
@@ -49,14 +53,17 @@ mixin _$LoanProductState {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result loaded(List<LoanProduct> loanProducts, NextForm nextForm),
+    @required
+        Result loaded(
+            List<LoanProduct> loanProducts, NextForm nextForm, int selected),
     @required Result error(String message),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(List<LoanProduct> loanProducts, NextForm nextForm),
+    Result loaded(
+        List<LoanProduct> loanProducts, NextForm nextForm, int selected),
     Result error(String message),
     @required Result orElse(),
   });
@@ -132,7 +139,9 @@ class _$Initial implements Initial {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result loaded(List<LoanProduct> loanProducts, NextForm nextForm),
+    @required
+        Result loaded(
+            List<LoanProduct> loanProducts, NextForm nextForm, int selected),
     @required Result error(String message),
   }) {
     assert(initial != null);
@@ -147,7 +156,8 @@ class _$Initial implements Initial {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(List<LoanProduct> loanProducts, NextForm nextForm),
+    Result loaded(
+        List<LoanProduct> loanProducts, NextForm nextForm, int selected),
     Result error(String message),
     @required Result orElse(),
   }) {
@@ -232,7 +242,9 @@ class _$Loading implements Loading {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result loaded(List<LoanProduct> loanProducts, NextForm nextForm),
+    @required
+        Result loaded(
+            List<LoanProduct> loanProducts, NextForm nextForm, int selected),
     @required Result error(String message),
   }) {
     assert(initial != null);
@@ -247,7 +259,8 @@ class _$Loading implements Loading {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(List<LoanProduct> loanProducts, NextForm nextForm),
+    Result loaded(
+        List<LoanProduct> loanProducts, NextForm nextForm, int selected),
     Result error(String message),
     @required Result orElse(),
   }) {
@@ -298,7 +311,7 @@ abstract class Loading implements LoanProductState {
 abstract class $LoadedCopyWith<$Res> {
   factory $LoadedCopyWith(Loaded value, $Res Function(Loaded) then) =
       _$LoadedCopyWithImpl<$Res>;
-  $Res call({List<LoanProduct> loanProducts, NextForm nextForm});
+  $Res call({List<LoanProduct> loanProducts, NextForm nextForm, int selected});
 }
 
 /// @nodoc
@@ -314,29 +327,33 @@ class _$LoadedCopyWithImpl<$Res> extends _$LoanProductStateCopyWithImpl<$Res>
   $Res call({
     Object loanProducts = freezed,
     Object nextForm = freezed,
+    Object selected = freezed,
   }) {
     return _then(Loaded(
       loanProducts: loanProducts == freezed
           ? _value.loanProducts
           : loanProducts as List<LoanProduct>,
       nextForm: nextForm == freezed ? _value.nextForm : nextForm as NextForm,
+      selected: selected == freezed ? _value.selected : selected as int,
     ));
   }
 }
 
 /// @nodoc
 class _$Loaded implements Loaded {
-  _$Loaded({@required this.loanProducts, this.nextForm})
+  _$Loaded({@required this.loanProducts, this.nextForm, this.selected})
       : assert(loanProducts != null);
 
   @override
   final List<LoanProduct> loanProducts;
   @override
   final NextForm nextForm;
+  @override
+  final int selected;
 
   @override
   String toString() {
-    return 'LoanProductState.loaded(loanProducts: $loanProducts, nextForm: $nextForm)';
+    return 'LoanProductState.loaded(loanProducts: $loanProducts, nextForm: $nextForm, selected: $selected)';
   }
 
   @override
@@ -348,14 +365,18 @@ class _$Loaded implements Loaded {
                     .equals(other.loanProducts, loanProducts)) &&
             (identical(other.nextForm, nextForm) ||
                 const DeepCollectionEquality()
-                    .equals(other.nextForm, nextForm)));
+                    .equals(other.nextForm, nextForm)) &&
+            (identical(other.selected, selected) ||
+                const DeepCollectionEquality()
+                    .equals(other.selected, selected)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(loanProducts) ^
-      const DeepCollectionEquality().hash(nextForm);
+      const DeepCollectionEquality().hash(nextForm) ^
+      const DeepCollectionEquality().hash(selected);
 
   @override
   $LoadedCopyWith<Loaded> get copyWith =>
@@ -366,14 +387,16 @@ class _$Loaded implements Loaded {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result loaded(List<LoanProduct> loanProducts, NextForm nextForm),
+    @required
+        Result loaded(
+            List<LoanProduct> loanProducts, NextForm nextForm, int selected),
     @required Result error(String message),
   }) {
     assert(initial != null);
     assert(loading != null);
     assert(loaded != null);
     assert(error != null);
-    return loaded(loanProducts, nextForm);
+    return loaded(loanProducts, nextForm, selected);
   }
 
   @override
@@ -381,13 +404,14 @@ class _$Loaded implements Loaded {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(List<LoanProduct> loanProducts, NextForm nextForm),
+    Result loaded(
+        List<LoanProduct> loanProducts, NextForm nextForm, int selected),
     Result error(String message),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (loaded != null) {
-      return loaded(loanProducts, nextForm);
+      return loaded(loanProducts, nextForm, selected);
     }
     return orElse();
   }
@@ -426,10 +450,13 @@ class _$Loaded implements Loaded {
 
 abstract class Loaded implements LoanProductState {
   factory Loaded(
-      {@required List<LoanProduct> loanProducts, NextForm nextForm}) = _$Loaded;
+      {@required List<LoanProduct> loanProducts,
+      NextForm nextForm,
+      int selected}) = _$Loaded;
 
   List<LoanProduct> get loanProducts;
   NextForm get nextForm;
+  int get selected;
   $LoadedCopyWith<Loaded> get copyWith;
 }
 
@@ -492,7 +519,9 @@ class _$Error implements Error {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result loaded(List<LoanProduct> loanProducts, NextForm nextForm),
+    @required
+        Result loaded(
+            List<LoanProduct> loanProducts, NextForm nextForm, int selected),
     @required Result error(String message),
   }) {
     assert(initial != null);
@@ -507,7 +536,8 @@ class _$Error implements Error {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(List<LoanProduct> loanProducts, NextForm nextForm),
+    Result loaded(
+        List<LoanProduct> loanProducts, NextForm nextForm, int selected),
     Result error(String message),
     @required Result orElse(),
   }) {

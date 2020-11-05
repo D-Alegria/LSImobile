@@ -22,6 +22,17 @@ class _$NextOfKinTearOff {
       @JsonKey(name: 'nok_name')
           String nokName,
       @nullable
+      @JsonKey(name: 'full_name')
+          String fullName,
+      @nullable
+          String email,
+      @nullable
+          String phone,
+      @nullable
+          String address,
+      @nullable
+          String relationship,
+      @nullable
       @JsonKey(name: 'nok_email')
           String nokEmail,
       @nullable
@@ -41,6 +52,11 @@ class _$NextOfKinTearOff {
           String numberOfChildren}) {
     return _NextOfKin(
       nokName: nokName,
+      fullName: fullName,
+      email: email,
+      phone: phone,
+      address: address,
+      relationship: relationship,
       nokEmail: nokEmail,
       nokPhone: nokPhone,
       nokAddress: nokAddress,
@@ -65,6 +81,17 @@ mixin _$NextOfKin {
   @nullable
   @JsonKey(name: 'nok_name')
   String get nokName;
+  @nullable
+  @JsonKey(name: 'full_name')
+  String get fullName;
+  @nullable
+  String get email;
+  @nullable
+  String get phone;
+  @nullable
+  String get address;
+  @nullable
+  String get relationship;
   @nullable
   @JsonKey(name: 'nok_email')
   String get nokEmail;
@@ -97,6 +124,17 @@ abstract class $NextOfKinCopyWith<$Res> {
       @JsonKey(name: 'nok_name')
           String nokName,
       @nullable
+      @JsonKey(name: 'full_name')
+          String fullName,
+      @nullable
+          String email,
+      @nullable
+          String phone,
+      @nullable
+          String address,
+      @nullable
+          String relationship,
+      @nullable
       @JsonKey(name: 'nok_email')
           String nokEmail,
       @nullable
@@ -127,6 +165,11 @@ class _$NextOfKinCopyWithImpl<$Res> implements $NextOfKinCopyWith<$Res> {
   @override
   $Res call({
     Object nokName = freezed,
+    Object fullName = freezed,
+    Object email = freezed,
+    Object phone = freezed,
+    Object address = freezed,
+    Object relationship = freezed,
     Object nokEmail = freezed,
     Object nokPhone = freezed,
     Object nokAddress = freezed,
@@ -136,6 +179,13 @@ class _$NextOfKinCopyWithImpl<$Res> implements $NextOfKinCopyWith<$Res> {
   }) {
     return _then(_value.copyWith(
       nokName: nokName == freezed ? _value.nokName : nokName as String,
+      fullName: fullName == freezed ? _value.fullName : fullName as String,
+      email: email == freezed ? _value.email : email as String,
+      phone: phone == freezed ? _value.phone : phone as String,
+      address: address == freezed ? _value.address : address as String,
+      relationship: relationship == freezed
+          ? _value.relationship
+          : relationship as String,
       nokEmail: nokEmail == freezed ? _value.nokEmail : nokEmail as String,
       nokPhone: nokPhone == freezed ? _value.nokPhone : nokPhone as String,
       nokAddress:
@@ -163,6 +213,17 @@ abstract class _$NextOfKinCopyWith<$Res> implements $NextOfKinCopyWith<$Res> {
       {@nullable
       @JsonKey(name: 'nok_name')
           String nokName,
+      @nullable
+      @JsonKey(name: 'full_name')
+          String fullName,
+      @nullable
+          String email,
+      @nullable
+          String phone,
+      @nullable
+          String address,
+      @nullable
+          String relationship,
       @nullable
       @JsonKey(name: 'nok_email')
           String nokEmail,
@@ -195,6 +256,11 @@ class __$NextOfKinCopyWithImpl<$Res> extends _$NextOfKinCopyWithImpl<$Res>
   @override
   $Res call({
     Object nokName = freezed,
+    Object fullName = freezed,
+    Object email = freezed,
+    Object phone = freezed,
+    Object address = freezed,
+    Object relationship = freezed,
     Object nokEmail = freezed,
     Object nokPhone = freezed,
     Object nokAddress = freezed,
@@ -204,6 +270,13 @@ class __$NextOfKinCopyWithImpl<$Res> extends _$NextOfKinCopyWithImpl<$Res>
   }) {
     return _then(_NextOfKin(
       nokName: nokName == freezed ? _value.nokName : nokName as String,
+      fullName: fullName == freezed ? _value.fullName : fullName as String,
+      email: email == freezed ? _value.email : email as String,
+      phone: phone == freezed ? _value.phone : phone as String,
+      address: address == freezed ? _value.address : address as String,
+      relationship: relationship == freezed
+          ? _value.relationship
+          : relationship as String,
       nokEmail: nokEmail == freezed ? _value.nokEmail : nokEmail as String,
       nokPhone: nokPhone == freezed ? _value.nokPhone : nokPhone as String,
       nokAddress:
@@ -227,6 +300,11 @@ class __$NextOfKinCopyWithImpl<$Res> extends _$NextOfKinCopyWithImpl<$Res>
 class _$_NextOfKin implements _NextOfKin {
   _$_NextOfKin(
       {@nullable @JsonKey(name: 'nok_name') this.nokName,
+      @nullable @JsonKey(name: 'full_name') this.fullName,
+      @nullable this.email,
+      @nullable this.phone,
+      @nullable this.address,
+      @nullable this.relationship,
       @nullable @JsonKey(name: 'nok_email') this.nokEmail,
       @nullable @JsonKey(name: 'nok_phone') this.nokPhone,
       @nullable @JsonKey(name: 'nok_address') this.nokAddress,
@@ -241,6 +319,22 @@ class _$_NextOfKin implements _NextOfKin {
   @nullable
   @JsonKey(name: 'nok_name')
   final String nokName;
+  @override
+  @nullable
+  @JsonKey(name: 'full_name')
+  final String fullName;
+  @override
+  @nullable
+  final String email;
+  @override
+  @nullable
+  final String phone;
+  @override
+  @nullable
+  final String address;
+  @override
+  @nullable
+  final String relationship;
   @override
   @nullable
   @JsonKey(name: 'nok_email')
@@ -268,7 +362,7 @@ class _$_NextOfKin implements _NextOfKin {
 
   @override
   String toString() {
-    return 'NextOfKin(nokName: $nokName, nokEmail: $nokEmail, nokPhone: $nokPhone, nokAddress: $nokAddress, nokRelationship: $nokRelationship, numberOfDependants: $numberOfDependants, numberOfChildren: $numberOfChildren)';
+    return 'NextOfKin(nokName: $nokName, fullName: $fullName, email: $email, phone: $phone, address: $address, relationship: $relationship, nokEmail: $nokEmail, nokPhone: $nokPhone, nokAddress: $nokAddress, nokRelationship: $nokRelationship, numberOfDependants: $numberOfDependants, numberOfChildren: $numberOfChildren)';
   }
 
   @override
@@ -278,6 +372,19 @@ class _$_NextOfKin implements _NextOfKin {
             (identical(other.nokName, nokName) ||
                 const DeepCollectionEquality()
                     .equals(other.nokName, nokName)) &&
+            (identical(other.fullName, fullName) ||
+                const DeepCollectionEquality()
+                    .equals(other.fullName, fullName)) &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)) &&
+            (identical(other.phone, phone) ||
+                const DeepCollectionEquality().equals(other.phone, phone)) &&
+            (identical(other.address, address) ||
+                const DeepCollectionEquality()
+                    .equals(other.address, address)) &&
+            (identical(other.relationship, relationship) ||
+                const DeepCollectionEquality()
+                    .equals(other.relationship, relationship)) &&
             (identical(other.nokEmail, nokEmail) ||
                 const DeepCollectionEquality()
                     .equals(other.nokEmail, nokEmail)) &&
@@ -302,6 +409,11 @@ class _$_NextOfKin implements _NextOfKin {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(nokName) ^
+      const DeepCollectionEquality().hash(fullName) ^
+      const DeepCollectionEquality().hash(email) ^
+      const DeepCollectionEquality().hash(phone) ^
+      const DeepCollectionEquality().hash(address) ^
+      const DeepCollectionEquality().hash(relationship) ^
       const DeepCollectionEquality().hash(nokEmail) ^
       const DeepCollectionEquality().hash(nokPhone) ^
       const DeepCollectionEquality().hash(nokAddress) ^
@@ -324,6 +436,17 @@ abstract class _NextOfKin implements NextOfKin {
       {@nullable
       @JsonKey(name: 'nok_name')
           String nokName,
+      @nullable
+      @JsonKey(name: 'full_name')
+          String fullName,
+      @nullable
+          String email,
+      @nullable
+          String phone,
+      @nullable
+          String address,
+      @nullable
+          String relationship,
       @nullable
       @JsonKey(name: 'nok_email')
           String nokEmail,
@@ -350,6 +473,22 @@ abstract class _NextOfKin implements NextOfKin {
   @nullable
   @JsonKey(name: 'nok_name')
   String get nokName;
+  @override
+  @nullable
+  @JsonKey(name: 'full_name')
+  String get fullName;
+  @override
+  @nullable
+  String get email;
+  @override
+  @nullable
+  String get phone;
+  @override
+  @nullable
+  String get address;
+  @override
+  @nullable
+  String get relationship;
   @override
   @nullable
   @JsonKey(name: 'nok_email')

@@ -1,3 +1,4 @@
+
 extension StringExtension on String {
   String get capitalize {
     if (this == null || this.isEmpty) return this;
@@ -13,6 +14,11 @@ extension StringExtension on String {
 
   bool get isValidPassword {
     if (this.length > 5) return true;
+    return false;
+  }
+
+  bool get isBvn {
+    if (this.length == 11) return true;
     return false;
   }
 }

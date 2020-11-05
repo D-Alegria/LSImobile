@@ -15,6 +15,9 @@ abstract class Education with _$Education {
     @nullable
     @JsonKey(name: "educational_institution")
         String educationalInstitution,
+    String institution,
+    String qualification,
+    String others,
     @nullable @JsonKey(name: "qualification_year") String qualificationYear,
     @nullable
     @JsonKey(name: "specify_qualifications")

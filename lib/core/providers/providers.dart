@@ -7,6 +7,7 @@ import 'package:lsi_mobile/ui/views/authentication/view_model/authentication/aut
 import 'package:lsi_mobile/ui/views/main/loans/account_info/view_model/account_info_bloc.dart';
 import 'package:lsi_mobile/ui/views/main/loans/edu_and_employ/view_model/edu_and_employ_bloc.dart';
 import 'package:lsi_mobile/ui/views/main/loans/emergency_contact/view_model/emergency_contact_bloc.dart';
+import 'package:lsi_mobile/ui/views/main/loans/loan_details/view_model/loan_details_bloc.dart';
 import 'package:lsi_mobile/ui/views/main/loans/loan_product/loan_product/loan_product_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/loans/personal_info/view_model/personal_info_bloc.dart';
 import 'package:lsi_mobile/ui/views/main/loans/provide_bvn/view_model/provide_bvn_bloc.dart';
@@ -33,5 +34,6 @@ blocs(BuildContext context) => [
       BlocProvider(create: (context) => getIt<EmergencyContactBloc>()),
       BlocProvider(create: (context) => getIt<EduAndEmployBloc>()),
       BlocProvider(create: (context) => getIt<ResidenceBloc>()),
+      BlocProvider(create: (context) => getIt<LoanDetailsBloc>()),
       BlocProvider(create: (context) => getIt<AccountInfoBloc>()),
     ];
