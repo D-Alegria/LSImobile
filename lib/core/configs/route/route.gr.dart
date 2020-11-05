@@ -28,7 +28,6 @@ import '../../../ui/views/main/loans/no_loan_view/no_loan_view.dart';
 import '../../../ui/views/main/loans/personal_info/personal_info_form_view.dart';
 import '../../../ui/views/main/loans/provide_bvn/provide_bvn_view.dart';
 import '../../../ui/views/main/loans/residence/residence_form_view.dart';
-import '../../../ui/views/main/loans/widgets/no_loan_view_router.dart';
 import '../../../ui/views/main/main_view.dart';
 import '../../../ui/views/main/profile/accounts_cards/accounts_cards_view.dart';
 import '../../../ui/views/main/profile/contact_us/contact_us_view.dart';
@@ -46,7 +45,14 @@ class Routes {
   static const String verificationView = '/verification-view';
   static const String mainView = '/main-view';
   static const String noLoanView = '/no-loan-view';
-  static const String noLoanViewRouter = '/no-loan-view-router';
+  static const String loanProductView = '/loan-product-view';
+  static const String provideBVNView = '/provide-bv-nView';
+  static const String personalInfoFormView = '/personal-info-form-view';
+  static const String emergencyContactFormView = '/emergency-contact-form-view';
+  static const String eduAndEmployFormView = '/edu-and-employ-form-view';
+  static const String residenceFormView = '/residence-form-view';
+  static const String loanDetailsView = '/loan-details-view';
+  static const String accountInfoView = '/account-info-view';
   static const String makePaymentView = '/make-payment-view';
   static const String loanScheduleView = '/loan-schedule-view';
   static const String noInvestmentView = '/no-investment-view';
@@ -67,7 +73,14 @@ class Routes {
     verificationView,
     mainView,
     noLoanView,
-    noLoanViewRouter,
+    loanProductView,
+    provideBVNView,
+    personalInfoFormView,
+    emergencyContactFormView,
+    eduAndEmployFormView,
+    residenceFormView,
+    loanDetailsView,
+    accountInfoView,
     makePaymentView,
     loanScheduleView,
     noInvestmentView,
@@ -94,11 +107,14 @@ class Router extends RouterBase {
     RouteDef(Routes.verificationView, page: VerificationView),
     RouteDef(Routes.mainView, page: MainView),
     RouteDef(Routes.noLoanView, page: NoLoanView),
-    RouteDef(
-      Routes.noLoanViewRouter,
-      page: NoLoanViewRouter,
-      generator: NoLoanViewRouterRouter(),
-    ),
+    RouteDef(Routes.loanProductView, page: LoanProductView),
+    RouteDef(Routes.provideBVNView, page: ProvideBVNView),
+    RouteDef(Routes.personalInfoFormView, page: PersonalInfoFormView),
+    RouteDef(Routes.emergencyContactFormView, page: EmergencyContactFormView),
+    RouteDef(Routes.eduAndEmployFormView, page: EduAndEmployFormView),
+    RouteDef(Routes.residenceFormView, page: ResidenceFormView),
+    RouteDef(Routes.loanDetailsView, page: LoanDetailsView),
+    RouteDef(Routes.accountInfoView, page: AccountInfoView),
     RouteDef(Routes.makePaymentView, page: MakePaymentView),
     RouteDef(Routes.loanScheduleView, page: LoanScheduleView),
     RouteDef(Routes.noInvestmentView, page: NoInvestmentView),
@@ -156,9 +172,51 @@ class Router extends RouterBase {
         settings: data,
       );
     },
-    NoLoanViewRouter: (data) {
+    LoanProductView: (data) {
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => NoLoanViewRouter(),
+        builder: (context) => LoanProductView(),
+        settings: data,
+      );
+    },
+    ProvideBVNView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => ProvideBVNView(),
+        settings: data,
+      );
+    },
+    PersonalInfoFormView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => PersonalInfoFormView(),
+        settings: data,
+      );
+    },
+    EmergencyContactFormView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => EmergencyContactFormView(),
+        settings: data,
+      );
+    },
+    EduAndEmployFormView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => EduAndEmployFormView(),
+        settings: data,
+      );
+    },
+    ResidenceFormView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => ResidenceFormView(),
+        settings: data,
+      );
+    },
+    LoanDetailsView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => LoanDetailsView(),
+        settings: data,
+      );
+    },
+    AccountInfoView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => AccountInfoView(),
         settings: data,
       );
     },
@@ -280,8 +338,28 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 
   Future<dynamic> pushNoLoanView() => push<dynamic>(Routes.noLoanView);
 
-  Future<dynamic> pushNoLoanViewRouter() =>
-      push<dynamic>(Routes.noLoanViewRouter);
+  Future<dynamic> pushLoanProductView() =>
+      push<dynamic>(Routes.loanProductView);
+
+  Future<dynamic> pushProvideBVNView() => push<dynamic>(Routes.provideBVNView);
+
+  Future<dynamic> pushPersonalInfoFormView() =>
+      push<dynamic>(Routes.personalInfoFormView);
+
+  Future<dynamic> pushEmergencyContactFormView() =>
+      push<dynamic>(Routes.emergencyContactFormView);
+
+  Future<dynamic> pushEduAndEmployFormView() =>
+      push<dynamic>(Routes.eduAndEmployFormView);
+
+  Future<dynamic> pushResidenceFormView() =>
+      push<dynamic>(Routes.residenceFormView);
+
+  Future<dynamic> pushLoanDetailsView() =>
+      push<dynamic>(Routes.loanDetailsView);
+
+  Future<dynamic> pushAccountInfoView() =>
+      push<dynamic>(Routes.accountInfoView);
 
   Future<dynamic> pushMakePaymentView() =>
       push<dynamic>(Routes.makePaymentView);
@@ -333,128 +411,6 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
         arguments: SuccessViewArguments(
             key: key, message: message, buttonText: buttonText, onTap: onTap),
       );
-}
-
-class NoLoanViewRouterRoutes {
-  static const String loanProductView = '/';
-  static const String provideBVNView = '/provide-bv-nView';
-  static const String personalInfoFormView = '/personal-info-form-view';
-  static const String emergencyContactFormView = '/emergency-contact-form-view';
-  static const String eduAndEmployFormView = '/edu-and-employ-form-view';
-  static const String residenceFormView = '/residence-form-view';
-  static const String loanDetailsView = '/loan-details-view';
-  static const String accountInfoView = '/account-info-view';
-  static const all = <String>{
-    loanProductView,
-    provideBVNView,
-    personalInfoFormView,
-    emergencyContactFormView,
-    eduAndEmployFormView,
-    residenceFormView,
-    loanDetailsView,
-    accountInfoView,
-  };
-}
-
-class NoLoanViewRouterRouter extends RouterBase {
-  @override
-  List<RouteDef> get routes => _routes;
-  final _routes = <RouteDef>[
-    RouteDef(NoLoanViewRouterRoutes.loanProductView, page: LoanProductView),
-    RouteDef(NoLoanViewRouterRoutes.provideBVNView, page: ProvideBVNView),
-    RouteDef(NoLoanViewRouterRoutes.personalInfoFormView,
-        page: PersonalInfoFormView),
-    RouteDef(NoLoanViewRouterRoutes.emergencyContactFormView,
-        page: EmergencyContactFormView),
-    RouteDef(NoLoanViewRouterRoutes.eduAndEmployFormView,
-        page: EduAndEmployFormView),
-    RouteDef(NoLoanViewRouterRoutes.residenceFormView, page: ResidenceFormView),
-    RouteDef(NoLoanViewRouterRoutes.loanDetailsView, page: LoanDetailsView),
-    RouteDef(NoLoanViewRouterRoutes.accountInfoView, page: AccountInfoView),
-  ];
-  @override
-  Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
-  final _pagesMap = <Type, AutoRouteFactory>{
-    LoanProductView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => LoanProductView(),
-        settings: data,
-      );
-    },
-    ProvideBVNView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => ProvideBVNView(),
-        settings: data,
-      );
-    },
-    PersonalInfoFormView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => PersonalInfoFormView(),
-        settings: data,
-      );
-    },
-    EmergencyContactFormView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => EmergencyContactFormView(),
-        settings: data,
-      );
-    },
-    EduAndEmployFormView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => EduAndEmployFormView(),
-        settings: data,
-      );
-    },
-    ResidenceFormView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => ResidenceFormView(),
-        settings: data,
-      );
-    },
-    LoanDetailsView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => LoanDetailsView(),
-        settings: data,
-      );
-    },
-    AccountInfoView: (data) {
-      return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => AccountInfoView(),
-        settings: data,
-      );
-    },
-  };
-}
-
-/// ************************************************************************
-/// Navigation helper methods extension
-/// *************************************************************************
-
-extension NoLoanViewRouterRouterExtendedNavigatorStateX
-    on ExtendedNavigatorState {
-  Future<dynamic> pushLoanProductView() =>
-      push<dynamic>(NoLoanViewRouterRoutes.loanProductView);
-
-  Future<dynamic> pushProvideBVNView() =>
-      push<dynamic>(NoLoanViewRouterRoutes.provideBVNView);
-
-  Future<dynamic> pushPersonalInfoFormView() =>
-      push<dynamic>(NoLoanViewRouterRoutes.personalInfoFormView);
-
-  Future<dynamic> pushEmergencyContactFormView() =>
-      push<dynamic>(NoLoanViewRouterRoutes.emergencyContactFormView);
-
-  Future<dynamic> pushEduAndEmployFormView() =>
-      push<dynamic>(NoLoanViewRouterRoutes.eduAndEmployFormView);
-
-  Future<dynamic> pushResidenceFormView() =>
-      push<dynamic>(NoLoanViewRouterRoutes.residenceFormView);
-
-  Future<dynamic> pushLoanDetailsView() =>
-      push<dynamic>(NoLoanViewRouterRoutes.loanDetailsView);
-
-  Future<dynamic> pushAccountInfoView() =>
-      push<dynamic>(NoLoanViewRouterRoutes.accountInfoView);
 }
 
 /// ************************************************************************
