@@ -164,13 +164,13 @@ class _$UserProfileStateTearOff {
 // ignore: unused_element
   Loaded loaded(
       {@required List<RecentTransaction> recentTransactions,
-      @required UserDetailsRequest userDetailsRequest,
+      @required UserDetailsData userData,
       @required String fullName,
       @required String investmentBalance,
       @required String profilePicture}) {
     return Loaded(
       recentTransactions: recentTransactions,
-      userDetailsRequest: userDetailsRequest,
+      userData: userData,
       fullName: fullName,
       investmentBalance: investmentBalance,
       profilePicture: profilePicture,
@@ -198,7 +198,7 @@ mixin _$UserProfileState {
     @required
         Result loaded(
             List<RecentTransaction> recentTransactions,
-            UserDetailsRequest userDetailsRequest,
+            UserDetailsData userData,
             String fullName,
             String investmentBalance,
             String profilePicture),
@@ -210,7 +210,7 @@ mixin _$UserProfileState {
     Result loading(),
     Result loaded(
         List<RecentTransaction> recentTransactions,
-        UserDetailsRequest userDetailsRequest,
+        UserDetailsData userData,
         String fullName,
         String investmentBalance,
         String profilePicture),
@@ -292,7 +292,7 @@ class _$Initial implements Initial {
     @required
         Result loaded(
             List<RecentTransaction> recentTransactions,
-            UserDetailsRequest userDetailsRequest,
+            UserDetailsData userData,
             String fullName,
             String investmentBalance,
             String profilePicture),
@@ -312,7 +312,7 @@ class _$Initial implements Initial {
     Result loading(),
     Result loaded(
         List<RecentTransaction> recentTransactions,
-        UserDetailsRequest userDetailsRequest,
+        UserDetailsData userData,
         String fullName,
         String investmentBalance,
         String profilePicture),
@@ -403,7 +403,7 @@ class _$Loading implements Loading {
     @required
         Result loaded(
             List<RecentTransaction> recentTransactions,
-            UserDetailsRequest userDetailsRequest,
+            UserDetailsData userData,
             String fullName,
             String investmentBalance,
             String profilePicture),
@@ -423,7 +423,7 @@ class _$Loading implements Loading {
     Result loading(),
     Result loaded(
         List<RecentTransaction> recentTransactions,
-        UserDetailsRequest userDetailsRequest,
+        UserDetailsData userData,
         String fullName,
         String investmentBalance,
         String profilePicture),
@@ -479,12 +479,10 @@ abstract class $LoadedCopyWith<$Res> {
       _$LoadedCopyWithImpl<$Res>;
   $Res call(
       {List<RecentTransaction> recentTransactions,
-      UserDetailsRequest userDetailsRequest,
+      UserDetailsData userData,
       String fullName,
       String investmentBalance,
       String profilePicture});
-
-  $UserDetailsRequestCopyWith<$Res> get userDetailsRequest;
 }
 
 /// @nodoc
@@ -499,7 +497,7 @@ class _$LoadedCopyWithImpl<$Res> extends _$UserProfileStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object recentTransactions = freezed,
-    Object userDetailsRequest = freezed,
+    Object userData = freezed,
     Object fullName = freezed,
     Object investmentBalance = freezed,
     Object profilePicture = freezed,
@@ -508,9 +506,8 @@ class _$LoadedCopyWithImpl<$Res> extends _$UserProfileStateCopyWithImpl<$Res>
       recentTransactions: recentTransactions == freezed
           ? _value.recentTransactions
           : recentTransactions as List<RecentTransaction>,
-      userDetailsRequest: userDetailsRequest == freezed
-          ? _value.userDetailsRequest
-          : userDetailsRequest as UserDetailsRequest,
+      userData:
+          userData == freezed ? _value.userData : userData as UserDetailsData,
       fullName: fullName == freezed ? _value.fullName : fullName as String,
       investmentBalance: investmentBalance == freezed
           ? _value.investmentBalance
@@ -520,29 +517,18 @@ class _$LoadedCopyWithImpl<$Res> extends _$UserProfileStateCopyWithImpl<$Res>
           : profilePicture as String,
     ));
   }
-
-  @override
-  $UserDetailsRequestCopyWith<$Res> get userDetailsRequest {
-    if (_value.userDetailsRequest == null) {
-      return null;
-    }
-    return $UserDetailsRequestCopyWith<$Res>(_value.userDetailsRequest,
-        (value) {
-      return _then(_value.copyWith(userDetailsRequest: value));
-    });
-  }
 }
 
 /// @nodoc
 class _$Loaded implements Loaded {
   _$Loaded(
       {@required this.recentTransactions,
-      @required this.userDetailsRequest,
+      @required this.userData,
       @required this.fullName,
       @required this.investmentBalance,
       @required this.profilePicture})
       : assert(recentTransactions != null),
-        assert(userDetailsRequest != null),
+        assert(userData != null),
         assert(fullName != null),
         assert(investmentBalance != null),
         assert(profilePicture != null);
@@ -550,7 +536,7 @@ class _$Loaded implements Loaded {
   @override
   final List<RecentTransaction> recentTransactions;
   @override
-  final UserDetailsRequest userDetailsRequest;
+  final UserDetailsData userData;
   @override
   final String fullName;
   @override
@@ -560,7 +546,7 @@ class _$Loaded implements Loaded {
 
   @override
   String toString() {
-    return 'UserProfileState.loaded(recentTransactions: $recentTransactions, userDetailsRequest: $userDetailsRequest, fullName: $fullName, investmentBalance: $investmentBalance, profilePicture: $profilePicture)';
+    return 'UserProfileState.loaded(recentTransactions: $recentTransactions, userData: $userData, fullName: $fullName, investmentBalance: $investmentBalance, profilePicture: $profilePicture)';
   }
 
   @override
@@ -570,9 +556,9 @@ class _$Loaded implements Loaded {
             (identical(other.recentTransactions, recentTransactions) ||
                 const DeepCollectionEquality()
                     .equals(other.recentTransactions, recentTransactions)) &&
-            (identical(other.userDetailsRequest, userDetailsRequest) ||
+            (identical(other.userData, userData) ||
                 const DeepCollectionEquality()
-                    .equals(other.userDetailsRequest, userDetailsRequest)) &&
+                    .equals(other.userData, userData)) &&
             (identical(other.fullName, fullName) ||
                 const DeepCollectionEquality()
                     .equals(other.fullName, fullName)) &&
@@ -588,7 +574,7 @@ class _$Loaded implements Loaded {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(recentTransactions) ^
-      const DeepCollectionEquality().hash(userDetailsRequest) ^
+      const DeepCollectionEquality().hash(userData) ^
       const DeepCollectionEquality().hash(fullName) ^
       const DeepCollectionEquality().hash(investmentBalance) ^
       const DeepCollectionEquality().hash(profilePicture);
@@ -605,7 +591,7 @@ class _$Loaded implements Loaded {
     @required
         Result loaded(
             List<RecentTransaction> recentTransactions,
-            UserDetailsRequest userDetailsRequest,
+            UserDetailsData userData,
             String fullName,
             String investmentBalance,
             String profilePicture),
@@ -615,8 +601,8 @@ class _$Loaded implements Loaded {
     assert(loading != null);
     assert(loaded != null);
     assert(error != null);
-    return loaded(recentTransactions, userDetailsRequest, fullName,
-        investmentBalance, profilePicture);
+    return loaded(recentTransactions, userData, fullName, investmentBalance,
+        profilePicture);
   }
 
   @override
@@ -626,7 +612,7 @@ class _$Loaded implements Loaded {
     Result loading(),
     Result loaded(
         List<RecentTransaction> recentTransactions,
-        UserDetailsRequest userDetailsRequest,
+        UserDetailsData userData,
         String fullName,
         String investmentBalance,
         String profilePicture),
@@ -635,8 +621,8 @@ class _$Loaded implements Loaded {
   }) {
     assert(orElse != null);
     if (loaded != null) {
-      return loaded(recentTransactions, userDetailsRequest, fullName,
-          investmentBalance, profilePicture);
+      return loaded(recentTransactions, userData, fullName, investmentBalance,
+          profilePicture);
     }
     return orElse();
   }
@@ -676,13 +662,13 @@ class _$Loaded implements Loaded {
 abstract class Loaded implements UserProfileState {
   factory Loaded(
       {@required List<RecentTransaction> recentTransactions,
-      @required UserDetailsRequest userDetailsRequest,
+      @required UserDetailsData userData,
       @required String fullName,
       @required String investmentBalance,
       @required String profilePicture}) = _$Loaded;
 
   List<RecentTransaction> get recentTransactions;
-  UserDetailsRequest get userDetailsRequest;
+  UserDetailsData get userData;
   String get fullName;
   String get investmentBalance;
   String get profilePicture;
@@ -751,7 +737,7 @@ class _$Error implements Error {
     @required
         Result loaded(
             List<RecentTransaction> recentTransactions,
-            UserDetailsRequest userDetailsRequest,
+            UserDetailsData userData,
             String fullName,
             String investmentBalance,
             String profilePicture),
@@ -771,7 +757,7 @@ class _$Error implements Error {
     Result loading(),
     Result loaded(
         List<RecentTransaction> recentTransactions,
-        UserDetailsRequest userDetailsRequest,
+        UserDetailsData userData,
         String fullName,
         String investmentBalance,
         String profilePicture),
