@@ -55,8 +55,7 @@ class ApiManager {
         print(response.body);
         var body = response.body.substring(start);
         var jsonResponse = convert.jsonDecode(body);
-        if ((response.statusCode == 200 || response.statusCode == 201) &&
-            (jsonResponse["status"] ?? true)) {
+        if (response.statusCode == 200 || response.statusCode == 201) {
           return right(jsonResponse);
         } else if (response.statusCode == 400) {
           return left(
@@ -65,7 +64,8 @@ class ApiManager {
           return left(
               ServerGlitch(message: "Error 403. Please Contact Developer."));
         } else {
-          return left(ServerGlitch(message: jsonResponse["message"]));
+          return left(ServerGlitch(
+              message: jsonResponse["message"] ?? "Unknown error Message"));
         }
       } else {
         return left(NetworkGlitch(

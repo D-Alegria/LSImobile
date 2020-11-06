@@ -189,7 +189,11 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         (failure) => left(RemoteGlitch(message: failure.message)),
         (success) {
           final result = GetRecentTransactionResponse.fromJson(success);
-          return right(result.recentTransactions ?? []);
+          if (result.status) {
+            return right(result.recentTransactions ?? []);
+          } else {
+            return left(RemoteGlitch(message: "No transactions found"));
+          }
         },
       );
     } on Exception catch (e) {

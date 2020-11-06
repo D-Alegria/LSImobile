@@ -96,10 +96,16 @@ class BankRemoteDataSourceImpl implements BankRemoteDataSource {
         requestBody: request.toJson(),
       );
       return response.fold(
-        (failure) => left(RemoteGlitch(message: failure.message)),
+        (failure) {
+          return left(RemoteGlitch(message: failure.message));
+        },
         (success) {
           final result = InitiateBVNValidationResponse.fromJson(success);
-          return right(result);
+          if (result.status) {
+            return right(result);
+          } else {
+            return left(RemoteGlitch(message: result.data.message));
+          }
         },
       );
     } on Exception catch (e) {
@@ -109,8 +115,9 @@ class BankRemoteDataSourceImpl implements BankRemoteDataSource {
       );
     } on Error catch (e) {
       print(e);
-      return left(RemoteGlitch(
-          message: "Opps an error during initiating bvn validation"));
+      return left(
+        RemoteGlitch(message: "Opps an error during initiating bvn validation"),
+      );
     }
   }
 
@@ -126,7 +133,11 @@ class BankRemoteDataSourceImpl implements BankRemoteDataSource {
         (failure) => left(RemoteGlitch(message: failure.message)),
         (success) {
           final result = VerifyBVNOtpResponse.fromJson(success);
-          return right(result);
+          if (result.status) {
+            return right(result);
+          } else {
+            return left(RemoteGlitch(message: result.message));
+          }
         },
       );
     } on Exception catch (e) {
@@ -164,7 +175,8 @@ class BankRemoteDataSourceImpl implements BankRemoteDataSource {
     } on Error catch (e) {
       print(e);
       return left(
-          RemoteGlitch(message: "Opps an error during resolve account"));
+        RemoteGlitch(message: "Opps an error during resolve account"),
+      );
     }
   }
 }

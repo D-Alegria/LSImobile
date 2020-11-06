@@ -1,4 +1,5 @@
 import 'package:flushbar/flushbar_helper.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
@@ -6,6 +7,7 @@ import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/loans/widgets/verify_bvn_form.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_bloc.dart';
+import 'package:lsi_mobile/core/extensions/string_extension.dart';
 
 import '../widgets/loan_form.dart';
 import 'view_model/provide_bvn_bloc.dart';
@@ -86,10 +88,11 @@ class _ProvideBVNViewState extends State<ProvideBVNView> {
                             .bloc<ProvideBvnBloc>()
                             .add(BvnChanged(value)),
                         validator: (value) {
-                          if (state.bvn.isEmpty)
-                            return "Field name is required";
+                          if (!state.bvn.isBvn)
+                            return "BVN has 11 digits";
                           return null;
                         },
+                        keyboardType: TextInputType.number,
                       ),
                       Spacer(),
                       sharedRaisedButton(

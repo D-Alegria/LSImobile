@@ -16,7 +16,8 @@ abstract class LoanRemoteDataSource {
 
   Future<Either<Glitch, CurrentLoanData>> getCurrentLoan(TokenRequest request);
 
-  Future<Either<Glitch, LoanApplicationResponse>> applyForLoan(LoanRequest request);
+  Future<Either<Glitch, LoanApplicationResponse>> applyForLoan(
+      LoanRequest request);
 }
 
 @LazySingleton(as: LoanRemoteDataSource)
@@ -65,7 +66,11 @@ class LoanRemoteDataSourceImpl implements LoanRemoteDataSource {
         (failure) => left(RemoteGlitch(message: failure.message)),
         (success) {
           final result = CurrentLoanResponse.fromJson(success);
-          return right(result.data);
+          if (result.status) {
+            return right(result.data);
+          } else {
+            return left(RemoteGlitch(message: result.message));
+          }
         },
       );
     } on Exception catch (e) {
@@ -82,17 +87,22 @@ class LoanRemoteDataSourceImpl implements LoanRemoteDataSource {
   }
 
   @override
-  Future<Either<Glitch, LoanApplicationResponse>> applyForLoan(LoanRequest request) async {
+  Future<Either<Glitch, LoanApplicationResponse>> applyForLoan(
+      LoanRequest request) async {
     try {
       final response = await _apiManager.post(
         url: ApiUrls.applyForLoan,
         requestBody: request.toJson(),
       );
       return response.fold(
-            (failure) => left(RemoteGlitch(message: failure.message)),
-            (success) {
+        (failure) => left(RemoteGlitch(message: failure.message)),
+        (success) {
           final result = LoanApplicationResponse.fromJson(success);
-          return right(result);
+          if (result.status) {
+            return right(result);
+          } else {
+            return left(RemoteGlitch(message: result.message));
+          }
         },
       );
     } on Exception catch (e) {
