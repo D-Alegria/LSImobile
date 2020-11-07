@@ -76,7 +76,16 @@ class BankRepoImpl implements BankRepo {
   Future<Either<Glitch, Unit>> initiateBvnValidation(
       InitiateBVNValidationRequest request) async {
     try {
-      final result = await _bankRemoteDataSource.initiateBvnValidation(request);
+      final user = await _userRepo.user;
+      final token = user.token;
+      final result = await _bankRemoteDataSource.initiateBvnValidation(
+        InitiateBVNValidationRequest(
+          token: token,
+          bvn: request.bvn,
+          firstName: request.firstName,
+          lastName: request.lastName,
+        ),
+      );
       return result.fold((failure) {
         return left(ServerGlitch(message: failure.message));
       }, (success) async {

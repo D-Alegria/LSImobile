@@ -9,6 +9,7 @@ part of 'initiate_bvn_validation_request.dart';
 InitiateBVNValidationRequest _$InitiateBVNValidationRequestFromJson(
     Map<String, dynamic> json) {
   return InitiateBVNValidationRequest(
+    token: json['token'] as String,
     bvn: json['bvn'] as String,
     firstName: json['first_name'] as String,
     lastName: json['last_name'] as String,
@@ -18,6 +19,7 @@ InitiateBVNValidationRequest _$InitiateBVNValidationRequestFromJson(
 Map<String, dynamic> _$InitiateBVNValidationRequestToJson(
         InitiateBVNValidationRequest instance) =>
     <String, dynamic>{
+      'token': instance.token,
       'bvn': instance.bvn,
       'first_name': instance.firstName,
       'last_name': instance.lastName,

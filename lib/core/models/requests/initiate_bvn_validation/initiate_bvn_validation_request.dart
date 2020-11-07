@@ -4,6 +4,7 @@ part 'initiate_bvn_validation_request.g.dart';
 
 @JsonSerializable()
 class InitiateBVNValidationRequest {
+  final String token;
   final String bvn;
   @JsonKey(name: "first_name")
   final String firstName;
@@ -11,6 +12,7 @@ class InitiateBVNValidationRequest {
   final String lastName;
 
   InitiateBVNValidationRequest({
+    this.token,
     this.bvn,
     this.firstName,
     this.lastName,
