@@ -50,7 +50,7 @@ class LoginView extends StatelessWidget {
                           .add(PasswordChanged(value)),
                       validator: (value) {
                         if (!state.password.isValidPassword)
-                          return "Password must be at least 5 characters";
+                          return "Password must be at least 6 characters";
                         return null;
                       },
                     ),
