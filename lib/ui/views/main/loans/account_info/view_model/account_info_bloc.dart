@@ -39,9 +39,6 @@ class AccountInfoBloc extends Bloc<AccountInfoEvent, AccountInfoState> {
     yield* event.map(
       submitAccountInfoForm: (value) async* {
         print('begin');
-        state.banks.forEach((element) {
-          print("${element.id} | ${element.name}");
-        });
         final isBankNameValid = state.bankName.isNotEmpty;
         final isAccountNumberValid = state.accountNumber.isNotEmpty;
 
@@ -116,7 +113,7 @@ class AccountInfoBloc extends Bloc<AccountInfoEvent, AccountInfoState> {
         );
 
         yield state.copyWith(
-          bankName: state.banks.first.id,
+          bankName: state.banks.first.bankCode,
           isSubmitting: false,
         );
       },
@@ -156,8 +153,7 @@ class AccountInfoBloc extends Bloc<AccountInfoEvent, AccountInfoState> {
             request: r,
           );
 
-          failureOrSuccess =
-              (await _loanRepo.applyForLoan(request)) as Either<Glitch, Unit>;
+          failureOrSuccess = await _loanRepo.applyForLoan(request);
         }
 
         print('done');

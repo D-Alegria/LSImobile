@@ -4,7 +4,7 @@ part 'resolve_account_response.g.dart';
 
 @JsonSerializable()
 class ResolveAccountResponse {
-  final String status;
+  final dynamic status;
   final String message;
   final BankData data;
 
@@ -27,7 +27,7 @@ class BankData {
   @JsonKey(name: "account_name")
   final String accountName;
   @JsonKey(name: "bank_id")
-  final String bankId;
+  final int bankId;
 
   BankData({this.accountNumber, this.accountName, this.bankId});
 

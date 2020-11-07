@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:lsi_mobile/core/models/dto/loan/loan.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
 class LoanHistory extends StatelessWidget {
+  final List<Loan> loanHistory;
+
   const LoanHistory({
     Key key,
+    this.loanHistory,
   }) : super(key: key);
 
   @override
@@ -40,6 +44,10 @@ class LoanHistory extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               itemBuilder: (context, index) {
+                var loan = loanHistory[index];
+
+                // if(loan.)
+
                 return index % 2 == 0
                     ? sharedInfoListTile(
                         icon: Icon(
@@ -67,7 +75,7 @@ class LoanHistory extends StatelessWidget {
                         red: true,
                       );
               },
-              itemCount: 5,
+              itemCount: loanHistory.length,
             ),
           ),
         ],

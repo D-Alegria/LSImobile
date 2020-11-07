@@ -60,7 +60,7 @@ class LoanRepoImpl implements LoanRepo {
   }
 
   @override
-  Future<Either<Glitch, String>> applyForLoan(LoanRequest request) async {
+  Future<Either<Glitch, Unit>> applyForLoan(LoanRequest request) async {
     try {
       final user = await _userLocalDataSource.user;
       final token = user.fold((l) => null, (r) => r.token);
@@ -69,7 +69,7 @@ class LoanRepoImpl implements LoanRepo {
       return result.fold((failure) {
         return left(ServerGlitch(message: failure.message));
       }, (success) {
-        return right(success.dd);
+        return right(unit);
       });
     } on Exception catch (e) {
       print(e);

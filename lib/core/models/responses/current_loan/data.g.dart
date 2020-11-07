@@ -8,8 +8,14 @@ part of 'data.dart';
 
 CurrentLoanData _$CurrentLoanDataFromJson(Map<String, dynamic> json) {
   return CurrentLoanData(
-    loanHistory: json['loanHistory'] as List,
-    currentLoan: json['currentLoan'] as List,
+    loanHistory: (json['loanHistory'] as List)
+        ?.map(
+            (e) => e == null ? null : Loan.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    currentLoan: (json['currentLoan'] as List)
+        ?.map(
+            (e) => e == null ? null : Loan.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     recentPayment: json['recent_payment'] as List,
   );
 }

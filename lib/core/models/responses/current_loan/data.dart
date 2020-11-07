@@ -1,11 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:lsi_mobile/core/models/dto/loan/loan.dart';
 
 part 'data.g.dart';
 
 @JsonSerializable()
 class CurrentLoanData {
-  final List loanHistory;
-  final List currentLoan;
+  final List<Loan> loanHistory;
+  final List<Loan> currentLoan;
   @JsonKey(name: "recent_payment")
   final List recentPayment;
 

@@ -8,7 +8,7 @@ class LoanApplicationResponse {
   final bool eligible;
   final String message;
   final String responsecode;
-  final String dd;
+  final int dd;
 
   LoanApplicationResponse({
     this.status,

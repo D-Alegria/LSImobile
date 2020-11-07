@@ -13,7 +13,7 @@ LoanApplicationResponse _$LoanApplicationResponseFromJson(
     eligible: json['eligible'] as bool,
     message: json['message'] as String,
     responsecode: json['responsecode'] as String,
-    dd: json['dd'] as String,
+    dd: json['dd'] as int,
   );
 }
 

@@ -24,9 +24,14 @@ class _$LoanViewStateTearOff {
   }
 
 // ignore: unused_element
-  Loaded loaded({@required bool isLoanAvailable}) {
+  Loaded loaded(
+      {@required bool isLoanAvailable,
+      List<Loan> loanHistory,
+      List<Loan> currentLoans}) {
     return Loaded(
       isLoanAvailable: isLoanAvailable,
+      loanHistory: loanHistory,
+      currentLoans: currentLoans,
     );
   }
 
@@ -48,14 +53,17 @@ mixin _$LoanViewState {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result loaded(bool isLoanAvailable),
+    @required
+        Result loaded(bool isLoanAvailable, List<Loan> loanHistory,
+            List<Loan> currentLoans),
     @required Result error(String message),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(bool isLoanAvailable),
+    Result loaded(
+        bool isLoanAvailable, List<Loan> loanHistory, List<Loan> currentLoans),
     Result error(String message),
     @required Result orElse(),
   });
@@ -131,7 +139,9 @@ class _$Initial implements Initial {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result loaded(bool isLoanAvailable),
+    @required
+        Result loaded(bool isLoanAvailable, List<Loan> loanHistory,
+            List<Loan> currentLoans),
     @required Result error(String message),
   }) {
     assert(initial != null);
@@ -146,7 +156,8 @@ class _$Initial implements Initial {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(bool isLoanAvailable),
+    Result loaded(
+        bool isLoanAvailable, List<Loan> loanHistory, List<Loan> currentLoans),
     Result error(String message),
     @required Result orElse(),
   }) {
@@ -231,7 +242,9 @@ class _$Loading implements Loading {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result loaded(bool isLoanAvailable),
+    @required
+        Result loaded(bool isLoanAvailable, List<Loan> loanHistory,
+            List<Loan> currentLoans),
     @required Result error(String message),
   }) {
     assert(initial != null);
@@ -246,7 +259,8 @@ class _$Loading implements Loading {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(bool isLoanAvailable),
+    Result loaded(
+        bool isLoanAvailable, List<Loan> loanHistory, List<Loan> currentLoans),
     Result error(String message),
     @required Result orElse(),
   }) {
@@ -297,7 +311,8 @@ abstract class Loading implements LoanViewState {
 abstract class $LoadedCopyWith<$Res> {
   factory $LoadedCopyWith(Loaded value, $Res Function(Loaded) then) =
       _$LoadedCopyWithImpl<$Res>;
-  $Res call({bool isLoanAvailable});
+  $Res call(
+      {bool isLoanAvailable, List<Loan> loanHistory, List<Loan> currentLoans});
 }
 
 /// @nodoc
@@ -312,25 +327,39 @@ class _$LoadedCopyWithImpl<$Res> extends _$LoanViewStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object isLoanAvailable = freezed,
+    Object loanHistory = freezed,
+    Object currentLoans = freezed,
   }) {
     return _then(Loaded(
       isLoanAvailable: isLoanAvailable == freezed
           ? _value.isLoanAvailable
           : isLoanAvailable as bool,
+      loanHistory: loanHistory == freezed
+          ? _value.loanHistory
+          : loanHistory as List<Loan>,
+      currentLoans: currentLoans == freezed
+          ? _value.currentLoans
+          : currentLoans as List<Loan>,
     ));
   }
 }
 
 /// @nodoc
 class _$Loaded implements Loaded {
-  _$Loaded({@required this.isLoanAvailable}) : assert(isLoanAvailable != null);
+  _$Loaded(
+      {@required this.isLoanAvailable, this.loanHistory, this.currentLoans})
+      : assert(isLoanAvailable != null);
 
   @override
   final bool isLoanAvailable;
+  @override
+  final List<Loan> loanHistory;
+  @override
+  final List<Loan> currentLoans;
 
   @override
   String toString() {
-    return 'LoanViewState.loaded(isLoanAvailable: $isLoanAvailable)';
+    return 'LoanViewState.loaded(isLoanAvailable: $isLoanAvailable, loanHistory: $loanHistory, currentLoans: $currentLoans)';
   }
 
   @override
@@ -339,13 +368,21 @@ class _$Loaded implements Loaded {
         (other is Loaded &&
             (identical(other.isLoanAvailable, isLoanAvailable) ||
                 const DeepCollectionEquality()
-                    .equals(other.isLoanAvailable, isLoanAvailable)));
+                    .equals(other.isLoanAvailable, isLoanAvailable)) &&
+            (identical(other.loanHistory, loanHistory) ||
+                const DeepCollectionEquality()
+                    .equals(other.loanHistory, loanHistory)) &&
+            (identical(other.currentLoans, currentLoans) ||
+                const DeepCollectionEquality()
+                    .equals(other.currentLoans, currentLoans)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(isLoanAvailable);
+      const DeepCollectionEquality().hash(isLoanAvailable) ^
+      const DeepCollectionEquality().hash(loanHistory) ^
+      const DeepCollectionEquality().hash(currentLoans);
 
   @override
   $LoadedCopyWith<Loaded> get copyWith =>
@@ -356,14 +393,16 @@ class _$Loaded implements Loaded {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result loaded(bool isLoanAvailable),
+    @required
+        Result loaded(bool isLoanAvailable, List<Loan> loanHistory,
+            List<Loan> currentLoans),
     @required Result error(String message),
   }) {
     assert(initial != null);
     assert(loading != null);
     assert(loaded != null);
     assert(error != null);
-    return loaded(isLoanAvailable);
+    return loaded(isLoanAvailable, loanHistory, currentLoans);
   }
 
   @override
@@ -371,13 +410,14 @@ class _$Loaded implements Loaded {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(bool isLoanAvailable),
+    Result loaded(
+        bool isLoanAvailable, List<Loan> loanHistory, List<Loan> currentLoans),
     Result error(String message),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (loaded != null) {
-      return loaded(isLoanAvailable);
+      return loaded(isLoanAvailable, loanHistory, currentLoans);
     }
     return orElse();
   }
@@ -415,9 +455,14 @@ class _$Loaded implements Loaded {
 }
 
 abstract class Loaded implements LoanViewState {
-  factory Loaded({@required bool isLoanAvailable}) = _$Loaded;
+  factory Loaded(
+      {@required bool isLoanAvailable,
+      List<Loan> loanHistory,
+      List<Loan> currentLoans}) = _$Loaded;
 
   bool get isLoanAvailable;
+  List<Loan> get loanHistory;
+  List<Loan> get currentLoans;
   $LoadedCopyWith<Loaded> get copyWith;
 }
 
@@ -480,7 +525,9 @@ class _$Error implements Error {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required Result loaded(bool isLoanAvailable),
+    @required
+        Result loaded(bool isLoanAvailable, List<Loan> loanHistory,
+            List<Loan> currentLoans),
     @required Result error(String message),
   }) {
     assert(initial != null);
@@ -495,7 +542,8 @@ class _$Error implements Error {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(bool isLoanAvailable),
+    Result loaded(
+        bool isLoanAvailable, List<Loan> loanHistory, List<Loan> currentLoans),
     Result error(String message),
     @required Result orElse(),
   }) {

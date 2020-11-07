@@ -9,5 +9,5 @@ abstract class LoanRepo {
 
   Future<Either<Glitch, CurrentLoanData>> get currentLoans;
 
-  Future<Either<Glitch, String>> applyForLoan(LoanRequest request);
+  Future<Either<Glitch, Unit>> applyForLoan(LoanRequest request);
 }

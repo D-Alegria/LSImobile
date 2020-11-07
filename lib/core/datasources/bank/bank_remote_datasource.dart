@@ -164,7 +164,11 @@ class BankRemoteDataSourceImpl implements BankRemoteDataSource {
         (failure) => left(RemoteGlitch(message: failure.message)),
         (success) {
           final result = ResolveAccountResponse.fromJson(success);
-          return right(result);
+          if (result.status == "success") {
+            return right(result);
+          } else {
+            return left(RemoteGlitch(message: result.message));
+          }
         },
       );
     } on Exception catch (e) {

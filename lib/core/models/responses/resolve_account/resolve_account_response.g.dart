@@ -9,7 +9,7 @@ part of 'resolve_account_response.dart';
 ResolveAccountResponse _$ResolveAccountResponseFromJson(
     Map<String, dynamic> json) {
   return ResolveAccountResponse(
-    status: json['status'] as String,
+    status: json['status'],
     message: json['message'] as String,
     data: json['data'] == null
         ? null
@@ -29,7 +29,7 @@ BankData _$BankDataFromJson(Map<String, dynamic> json) {
   return BankData(
     accountNumber: json['account_number'] as String,
     accountName: json['account_name'] as String,
-    bankId: json['bank_id'] as String,
+    bankId: json['bank_id'] as int,
   );
 }
 

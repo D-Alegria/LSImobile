@@ -19,17 +19,20 @@ class ValueAdapter extends TypeAdapter<Value> {
     return Value(
       id: fields[0] as String,
       name: fields[1] as String,
+      bankCode: fields[2] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Value obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.name);
+      ..write(obj.name)
+      ..writeByte(2)
+      ..write(obj.bankCode);
   }
 
   @override
@@ -51,10 +54,12 @@ Value _$ValueFromJson(Map<String, dynamic> json) {
   return Value(
     id: json['id'] as String,
     name: json['name'] as String,
+    bankCode: json['bank_code'] as String,
   );
 }
 
 Map<String, dynamic> _$ValueToJson(Value instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'bank_code': instance.bankCode,
     };

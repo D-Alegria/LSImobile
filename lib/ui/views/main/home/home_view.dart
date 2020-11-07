@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lsi_mobile/core/view_models/home_viewmodel.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/screen_heading.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
+import 'package:lsi_mobile/ui/views/main/home/view_model/home_viewmodel.dart';
 import 'package:lsi_mobile/ui/views/main/home/widgets/bottom_cards.dart';
 import 'package:lsi_mobile/ui/views/main/home/widgets/home_card.dart';
 import 'package:lsi_mobile/ui/views/main/home/widgets/row_card.dart';

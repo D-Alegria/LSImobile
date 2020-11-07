@@ -130,7 +130,7 @@ class BankRepoImpl implements BankRepo {
           await _bankRemoteDataSource.resolveBankAccount(ResolveAccountRequest(
         bankCode: request.bankCode,
         accountNumber: request.accountNumber,
-        token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJQRU9QTEVfSUQiOiIxNzQ3NyIsIkVNQUlMIjoib2t1bnVnYS5vcml5b21pQGdtYW",
+        token: token,
       ));
       return result.fold((failure) {
         return left(ServerGlitch(message: failure.message));

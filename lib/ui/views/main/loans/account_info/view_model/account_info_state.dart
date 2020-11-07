@@ -23,6 +23,6 @@ abstract class AccountInfoState with _$AccountInfoState {
         accountNumber: "",
         bankName: "",
         accountName: "",
-        banks: [Value(name: "", id: "")],
+        banks: [Value(name: "", id: "", bankCode: "")],
       );
 }

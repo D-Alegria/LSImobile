@@ -38,6 +38,10 @@ class LoanDetailsBloc extends Bloc<LoanDetailsEvent, LoanDetailsState> {
         final isTimeValid = state.time.isNotEmpty;
         final isReasonValid = state.reason.isNotEmpty;
 
+        Either<Glitch, Unit> failureOrSuccess =
+            left(ServerGlitch(message: "Error validating details"));
+        LoanRequest request = LoanRequest();
+
         if (isAmountValid && isTimeValid && isReasonValid) {
           print('verified');
           yield state.copyWith(
@@ -46,8 +50,6 @@ class LoanDetailsBloc extends Bloc<LoanDetailsEvent, LoanDetailsState> {
           );
 
           print('sending');
-
-          LoanRequest request = LoanRequest();
 
           NextOfKin nextOfKin = state.data.nextOfKin.copyWith(
             fullName: state.data.nextOfKin.nokName,
@@ -87,15 +89,14 @@ class LoanDetailsBloc extends Bloc<LoanDetailsEvent, LoanDetailsState> {
             operatingExpenses: state.data.operatingExpenses,
           );
 
-          yield state.copyWith(
-            loanRequest: request,
-            submitLoanDetailsFailureOrSuccess: optionOf(right(unit)),
-          );
+          failureOrSuccess = right(unit);
         }
 
         yield state.copyWith(
           isSubmitting: false,
           showErrorMessages: true,
+          loanRequest: request,
+          submitLoanDetailsFailureOrSuccess: optionOf(failureOrSuccess),
         );
       },
       timeChanged: (e) async* {

@@ -49,7 +49,7 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                     SizedBox(height: SizeConfig.yMargin(context, 3)),
                     sharedDropDownFormField<String>(
                       value: state.banks
-                          .where((element) => element.id == state.bankName)
+                          .where((element) => element.bankCode == state.bankName)
                           .first
                           .name,
                       items: state.banks.map((e) => e.name).toList(),
@@ -58,7 +58,7 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                       onChanged: (value) {
                         var index;
                         state.banks.map((e) {
-                          if (e.name == value) index = e.id;
+                          if (e.name == value) index = e.bankCode;
                         }).toList();
                         context
                             .bloc<AccountInfoBloc>()
@@ -77,24 +77,22 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                           return "Field Required";
                         return null;
                       },
+                      keyboardType: TextInputType.number,
                     ),
-                    SizedBox(height: SizeConfig.yMargin(context, 30)),
+                    SizedBox(height: SizeConfig.yMargin(context, 3)),
                     state.accountName.isEmpty
                         ? Container()
                         : SharedTextFormField(
                             labelText: "Account name",
                             readOnly: true,
-                            initialValue: state.accountNumber,
-                            onChanged: (value) => context
-                                .bloc<AccountInfoBloc>()
-                                .add(AccountNumberChanged(value)),
+                            initialValue: state.accountName,
                             validator: (value) {
-                              if (state.accountNumber.isEmpty)
+                              if (state.accountName.isEmpty)
                                 return "Field Required";
                               return null;
                             },
                           ),
-                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    SizedBox(height: SizeConfig.yMargin(context, 20)),
                     sharedRaisedButton(
                       context: context,
                       onPressed: () => context
@@ -112,7 +110,7 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                                 .bloc<AccountInfoBloc>()
                                 .add(ApplyForLoan()),
                             color: ColorStyles.blue,
-                            text: "Submit",
+                            text: "Continue",
                             minWidth: SizeConfig.xMargin(context, 90),
                           ),
                     SizedBox(height: SizeConfig.yMargin(context, 2.5)),
