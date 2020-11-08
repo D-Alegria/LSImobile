@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
@@ -705,6 +706,7 @@ class _SharedDateTimeFieldState extends State<SharedDateTimeField> {
             },
           );
           if (picked != null) {
+            initializeDateFormatting();
             DateFormat dateFormat = DateFormat("yyyy-MM-dd", 'en');
             controller
               ..text = dateFormat.format(picked)
