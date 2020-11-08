@@ -103,17 +103,12 @@ class _PersonalInfoFormViewState extends State<PersonalInfoFormView> {
                       keyboardType: TextInputType.phone,
                     ),
                     SizedBox(height: SizeConfig.yMargin(context, 2)),
-                    SharedTextFormField(
-                      labelText: "Date of birth",
+                    SharedDateTimeField(
+                      label: "Date of birth",
                       initialValue: state.dateOfBirth,
-                      onChanged: (value) => context
+                      onChange: (value) => context
                           .bloc<PersonalInfoBloc>()
                           .add(DateOfBirthChanged(value)),
-                      validator: (value) {
-                        if (state.dateOfBirth.isEmpty)
-                          return "Field name is required";
-                        return null;
-                      },
                     ),
                     SizedBox(height: SizeConfig.yMargin(context, 2)),
                     sharedDropDownFormField<String>(

@@ -118,18 +118,12 @@ class _EduAndEmployFormViewState extends State<EduAndEmployFormView> {
                       },
                     ),
                     SizedBox(height: SizeConfig.yMargin(context, 2)),
-                    SharedTextFormField(
-                      labelText: "Start date",
+                    SharedDateTimeField(
+                      label: "Start date",
                       initialValue: state.startDate,
-                      onChanged: (value) => context
+                      onChange: (value) => context
                           .bloc<EduAndEmployBloc>()
                           .add(StartDateChanged(value)),
-                      validator: (value) {
-                        if (state.startDate.isEmpty)
-                          return "Field name is required";
-                        return null;
-                      },
-                      keyboardType: TextInputType.datetime,
                     ),
                     SizedBox(height: SizeConfig.yMargin(context, 2)),
                     SharedTextFormField(

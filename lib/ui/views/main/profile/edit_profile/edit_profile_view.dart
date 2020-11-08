@@ -154,16 +154,11 @@ class _EditProfileViewState extends State<EditProfileView>
             },
           ),
           SizedBox(height: SizeConfig.yMargin(context, 2)),
-          SharedTextFormField(
-            labelText: "Start date",
+          SharedDateTimeField(
+            label: "Start date",
             initialValue: state.startDate,
-            onChanged: (value) =>
+            onChange: (value) =>
                 context.bloc<EditProfileBloc>().add(StartDateChanged(value)),
-            validator: (value) {
-              if (state.startDate.isEmpty) return "Field name is required";
-              return null;
-            },
-            keyboardType: TextInputType.datetime,
           ),
           SizedBox(height: SizeConfig.yMargin(context, 2)),
           SharedTextFormField(
@@ -280,15 +275,11 @@ class _EditProfileViewState extends State<EditProfileView>
             keyboardType: TextInputType.phone,
           ),
           SizedBox(height: SizeConfig.yMargin(context, 2)),
-          SharedTextFormField(
-            labelText: "Date of birth",
+          SharedDateTimeField(
+            label: "Date of birth",
             initialValue: state.dateOfBirth,
-            onChanged: (value) =>
+            onChange: (value) =>
                 context.bloc<EditProfileBloc>().add(DateOfBirthChanged(value)),
-            validator: (value) {
-              if (state.dateOfBirth.isEmpty) return "Field name is required";
-              return null;
-            },
           ),
           SizedBox(height: SizeConfig.yMargin(context, 2)),
           Padding(

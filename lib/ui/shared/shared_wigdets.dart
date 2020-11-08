@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
 import 'const_color.dart';
@@ -639,3 +640,103 @@ final textFieldDecoration = InputDecoration(
     ),
   ),
 );
+
+class SharedDateTimeField extends StatefulWidget {
+  final Function(String value) onChange;
+  final String label;
+  final String initialValue;
+
+  SharedDateTimeField({
+    Key key,
+    this.onChange,
+    this.label,
+    this.initialValue,
+  }) : super(key: key);
+
+  @override
+  _SharedDateTimeFieldState createState() => _SharedDateTimeFieldState();
+}
+
+class _SharedDateTimeFieldState extends State<SharedDateTimeField> {
+  TextEditingController controller;
+
+  @override
+  void initState() {
+    controller = TextEditingController(text: widget.initialValue);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: TextField(
+        onTap: () async {
+          final DateTime picked = await showDatePicker(
+            context: context,
+            initialDate: widget.initialValue.isEmpty
+                ? DateTime.now()
+                : DateTime(
+                    int.parse(widget.initialValue.split('-')[0]),
+                    int.parse(widget.initialValue.split('-')[1]),
+                    int.parse(widget.initialValue.split('-')[2]),
+                  ),
+            firstDate: widget.initialValue.isEmpty
+                ? DateTime.now()
+                : DateTime(
+                    int.parse(widget.initialValue.split('-')[0]),
+                    int.parse(widget.initialValue.split('-')[1]),
+                    int.parse(widget.initialValue.split('-')[2]),
+                  ),
+            lastDate: DateTime(2300),
+            builder: (BuildContext context, Widget child) {
+              return Theme(
+                data: Theme.of(context).copyWith(
+                  primaryColor: ColorStyles.blue,
+                  accentColor: ColorStyles.blue,
+                  colorScheme: Theme.of(context).colorScheme.copyWith(
+                        primary: ColorStyles.blue,
+                      ),
+                  buttonTheme: ButtonThemeData(
+                    textTheme: ButtonTextTheme.primary,
+                  ),
+                ),
+                child: child,
+              );
+            },
+          );
+          if (picked != null) {
+            DateFormat dateFormat = DateFormat("yyyy-MM-dd", 'en');
+            controller
+              ..text = dateFormat.format(picked)
+              ..selection = TextSelection.fromPosition(TextPosition(
+                  offset: controller.text.length,
+                  affinity: TextAffinity.upstream));
+            widget.onChange(dateFormat.format(picked));
+          }
+        },
+        controller: controller,
+        focusNode: AlwaysDisabledFocusNode(),
+        style: TextStyle(
+          height: SizeConfig.yMargin(context, 0.17),
+          fontSize: SizeConfig.textSize(context, 5),
+          fontWeight: FontWeight.w500,
+          color: const Color(0xFF18172B).withOpacity(0.6),
+        ),
+        cursorColor: ColorStyles.dark,
+        decoration: textFieldDecoration.copyWith(
+          labelText: widget.label,
+          labelStyle: TextStyle(
+            fontSize: SizeConfig.textSize(context, 5),
+            fontWeight: FontWeight.w500,
+            color: const Color(0xFF18172B).withOpacity(0.6),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class AlwaysDisabledFocusNode extends FocusNode {
+  @override
+  bool get hasFocus => false;
+}
