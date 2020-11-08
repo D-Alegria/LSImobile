@@ -12,21 +12,26 @@ import 'package:lsi_mobile/core/models/responses/initiate_bvn_validation/initiat
 import 'package:lsi_mobile/core/models/responses/resolve_account/resolve_account_response.dart';
 import 'package:lsi_mobile/core/models/responses/verify_bvn_otp/verify_bvn_otp_response.dart';
 import 'package:lsi_mobile/core/utils/api_manager_util.dart';
+import 'package:lsi_mobile/core/utils/function_util.dart';
 
 abstract class BankRemoteDataSource {
   Future<Either<Glitch, BankAccountResponse>> getBankAccounts(
-      TokenRequest request);
+    TokenRequest request,
+  );
 
   Future<Either<Glitch, GetCardsResponse>> getUsersCards(TokenRequest request);
 
   Future<Either<Glitch, InitiateBVNValidationResponse>> initiateBvnValidation(
-      InitiateBVNValidationRequest request);
+    InitiateBVNValidationRequest request,
+  );
 
   Future<Either<Glitch, VerifyBVNOtpResponse>> verifyBvnWithOtp(
-      VerifyBVNOtpRequest request);
+    VerifyBVNOtpRequest request,
+  );
 
   Future<Either<Glitch, ResolveAccountResponse>> resolveBankAccount(
-      ResolveAccountRequest request);
+    ResolveAccountRequest request,
+  );
 }
 
 @LazySingleton(as: BankRemoteDataSource)
@@ -38,149 +43,119 @@ class BankRemoteDataSourceImpl implements BankRemoteDataSource {
   @override
   Future<Either<Glitch, BankAccountResponse>> getBankAccounts(
       TokenRequest request) async {
-    try {
-      final response = await _apiManager.post(
-        url: ApiUrls.bankAccounts,
-        requestBody: request.toJson(),
-      );
-      return response.fold(
-        (failure) => left(RemoteGlitch(message: failure.message)),
-        (success) {
-          final result = BankAccountResponse.fromJson(success);
-          return right(result);
-        },
-      );
-    } on Exception catch (e) {
-      print(e);
-      return left(
-        RemoteGlitch(message: "System Error Occurred please contact developer"),
-      );
-    } on Error catch (e) {
-      print(e);
-      return left(RemoteGlitch(message: "Opps an error get bank accounts"));
-    }
+    return await tryMethod<BankAccountResponse>(
+      function: () async {
+        final response = await _apiManager.post(
+          url: ApiUrls.bankAccounts,
+          requestBody: request.toJson(),
+        );
+        return response.fold(
+          (failure) => left(RemoteGlitch(message: failure.message)),
+          (success) {
+            final result = BankAccountResponse.fromJson(success);
+            return right(result);
+          },
+        );
+      },
+      errorMessage: "Internal System Error Occurred:BARD-GBA",
+    );
   }
 
   @override
   Future<Either<Glitch, GetCardsResponse>> getUsersCards(
       TokenRequest request) async {
-    try {
-      final response = await _apiManager.post(
-        url: ApiUrls.cards,
-        requestBody: request.toJson(),
-      );
-      return response.fold(
-        (failure) => left(RemoteGlitch(message: failure.message)),
-        (success) {
-          final result = GetCardsResponse.fromJson(success);
-          return right(result);
-        },
-      );
-    } on Exception catch (e) {
-      print(e);
-      return left(
-        RemoteGlitch(message: "System Error Occurred please contact developer"),
-      );
-    } on Error catch (e) {
-      print(e);
-      return left(RemoteGlitch(message: "Opps an error get bank cards"));
-    }
+    return await tryMethod<GetCardsResponse>(
+      function: () async {
+        final response = await _apiManager.post(
+          url: ApiUrls.cards,
+          requestBody: request.toJson(),
+        );
+        return response.fold(
+          (failure) => left(RemoteGlitch(message: failure.message)),
+          (success) {
+            final result = GetCardsResponse.fromJson(success);
+            return right(result);
+          },
+        );
+      },
+      errorMessage: "Internal System Error Occurred:BARD-GUC",
+    );
   }
 
   @override
   Future<Either<Glitch, InitiateBVNValidationResponse>> initiateBvnValidation(
       InitiateBVNValidationRequest request) async {
-    try {
-      final response = await _apiManager.post(
-        url: ApiUrls.initiateCustomerBVNValidation,
-        requestBody: request.toJson(),
-      );
-      return response.fold(
-        (failure) {
-          return left(RemoteGlitch(message: failure.message));
-        },
-        (success) {
-          final result = InitiateBVNValidationResponse.fromJson(success);
-          if (result.status) {
-            return right(result);
-          } else {
-            return left(RemoteGlitch(message: result.data.message));
-          }
-        },
-      );
-    } on Exception catch (e) {
-      print(e);
-      return left(
-        RemoteGlitch(message: "System Error Occurred please contact developer"),
-      );
-    } on Error catch (e) {
-      print(e);
-      return left(
-        RemoteGlitch(message: "Opps an error during initiating bvn validation"),
-      );
-    }
+    return await tryMethod<InitiateBVNValidationResponse>(
+      function: () async {
+        final response = await _apiManager.post(
+          url: ApiUrls.initiateCustomerBVNValidation,
+          requestBody: request.toJson(),
+        );
+        return response.fold(
+          (failure) {
+            return left(RemoteGlitch(message: failure.message));
+          },
+          (success) {
+            final result = InitiateBVNValidationResponse.fromJson(success);
+            if (result.status) {
+              return right(result);
+            } else {
+              return left(RemoteGlitch(message: result.data.message));
+            }
+          },
+        );
+      },
+      errorMessage: "Internal System Error Occurred:BARD-IBV",
+    );
   }
 
   @override
   Future<Either<Glitch, VerifyBVNOtpResponse>> verifyBvnWithOtp(
       VerifyBVNOtpRequest request) async {
-    try {
-      final response = await _apiManager.post(
-        url: ApiUrls.validateCustomerBVNUsingOTP,
-        requestBody: request.toJson(),
-      );
-      return response.fold(
-        (failure) => left(RemoteGlitch(message: failure.message)),
-        (success) {
-          final result = VerifyBVNOtpResponse.fromJson(success);
-          if (result.status) {
-            return right(result);
-          } else {
-            return left(RemoteGlitch(message: result.message));
-          }
-        },
-      );
-    } on Exception catch (e) {
-      print(e);
-      return left(
-        RemoteGlitch(message: "System Error Occurred please contact developer"),
-      );
-    } on Error catch (e) {
-      print(e);
-      return left(
-          RemoteGlitch(message: "Opps an error during verify bvn with otp"));
-    }
+    return await tryMethod<VerifyBVNOtpResponse>(
+      function: () async {
+        final response = await _apiManager.post(
+          url: ApiUrls.validateCustomerBVNUsingOTP,
+          requestBody: request.toJson(),
+        );
+        return response.fold(
+          (failure) => left(RemoteGlitch(message: failure.message)),
+          (success) {
+            final result = VerifyBVNOtpResponse.fromJson(success);
+            if (result.status) {
+              return right(result);
+            } else {
+              return left(RemoteGlitch(message: result.message));
+            }
+          },
+        );
+      },
+      errorMessage: "Internal System Error Occurred:BARD-VBWO",
+    );
   }
 
   @override
   Future<Either<Glitch, ResolveAccountResponse>> resolveBankAccount(
       ResolveAccountRequest request) async {
-    try {
-      final response = await _apiManager.post(
-        url: ApiUrls.resolveBankAccount,
-        requestBody: request.toJson(),
-      );
-      return response.fold(
-        (failure) => left(RemoteGlitch(message: failure.message)),
-        (success) {
-          final result = ResolveAccountResponse.fromJson(success);
-          if (result.status == "success") {
-            return right(result);
-          } else {
-            return left(RemoteGlitch(message: result.message));
-          }
-        },
-      );
-    } on Exception catch (e) {
-      print(e);
-      return left(
-        RemoteGlitch(message: "System Error Occurred please contact developer"),
-      );
-    } on Error catch (e) {
-      print(e);
-      return left(
-        RemoteGlitch(message: "Opps an error during resolve account"),
-      );
-    }
+    return await tryMethod<ResolveAccountResponse>(
+      function: () async {
+        final response = await _apiManager.post(
+          url: ApiUrls.resolveBankAccount,
+          requestBody: request.toJson(),
+        );
+        return response.fold(
+          (failure) => left(RemoteGlitch(message: failure.message)),
+          (success) {
+            final result = ResolveAccountResponse.fromJson(success);
+            if (result.status == "success") {
+              return right(result);
+            } else {
+              return left(RemoteGlitch(message: result.message));
+            }
+          },
+        );
+      },
+      errorMessage: "Internal System Error Occurred:BARD-RBA",
+    );
   }
 }

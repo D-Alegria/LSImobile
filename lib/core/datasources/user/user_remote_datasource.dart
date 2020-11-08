@@ -11,6 +11,7 @@ import 'package:lsi_mobile/core/models/responses/get_value/get_value_response.da
 import 'package:lsi_mobile/core/models/responses/user_details/user_details_data.dart';
 import 'package:lsi_mobile/core/models/responses/user_details/user_details_response.dart';
 import 'package:lsi_mobile/core/utils/api_manager_util.dart';
+import 'package:lsi_mobile/core/utils/function_util.dart';
 
 abstract class UserRemoteDataSource {
   Future<Either<Glitch, List<Value>>> get countries;
@@ -101,109 +102,87 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   Future<Either<Glitch, List<Value>>> get workSectors async =>
       await getValueMethod(ApiUrls.getWorkSectors);
 
-  Future<Either<Glitch, List<Value>>> getValueMethod(
-    String url,
-  ) async {
-    try {
-      final response = await _apiManager.get(url: url);
-      return response.fold(
-        (failure) => left(RemoteGlitch(message: failure.message)),
-        (success) {
-          final result = GetValueResponse.fromJson(success);
-          return right(result.data);
-        },
-      );
-    } on Exception catch (e) {
-      print(e);
-      return left(
-        RemoteGlitch(message: "System Error Occurred please contact developer"),
-      );
-    } on Error catch (e) {
-      print(e);
-      return left(RemoteGlitch(message: "Opps an error get user r data"));
-    }
+  Future<Either<Glitch, List<Value>>> getValueMethod(String url) async {
+    return await tryMethod<List<Value>>(
+      function: () async {
+        final response = await _apiManager.get(url: url);
+        return response.fold(
+          (failure) => left(RemoteGlitch(message: failure.message)),
+          (success) {
+            final result = GetValueResponse.fromJson(success);
+            return right(result.data);
+          },
+        );
+      },
+      errorMessage: "Internal System Error Occurred:USRD-GVM",
+    );
   }
 
   @override
   Future<Either<Glitch, UserDetailsData>> getUserDetails(
       TokenRequest request) async {
-    try {
-      final response = await _apiManager.post(
-        url: ApiUrls.userDetails,
-        requestBody: request.toJson(),
-      );
-      return response.fold(
-        (failure) => left(RemoteGlitch(message: failure.message)),
-        (success) {
-          final result = UserDetailsResponse.fromJson(success);
-          if (!result.data.userData.status)
-            return left(RemoteGlitch(message: result.data.userData.message));
-          return right(result.data);
-        },
-      );
-    } on Exception catch (e) {
-      print(e);
-      return left(
-        RemoteGlitch(message: "System Error Occurred please contact developer"),
-      );
-    } on Error catch (e) {
-      print(e);
-      return left(RemoteGlitch(message: "Opps an error get user r data"));
-    }
+    return await tryMethod<UserDetailsData>(
+      function: () async {
+        final response = await _apiManager.post(
+          url: ApiUrls.userDetails,
+          requestBody: request.toJson(),
+        );
+        return response.fold(
+          (failure) => left(RemoteGlitch(message: failure.message)),
+          (success) {
+            final result = UserDetailsResponse.fromJson(success);
+            if (!result.data.userData.status)
+              return left(RemoteGlitch(message: result.data.userData.message));
+            return right(result.data);
+          },
+        );
+      },
+      errorMessage: "Internal System Error Occurred:USRD-GIP",
+    );
   }
 
   @override
   Future<Either<Glitch, Unit>> saveUserDetails(
       UserDetailsRequest request) async {
-    try {
-      final response = await _apiManager.post(
-        url: ApiUrls.saveUserData,
-        requestBody: request.toJson(),
-      );
-      return response.fold(
-        (failure) => left(RemoteGlitch(message: failure.message)),
-        (success) {
-          return right(unit);
-        },
-      );
-    } on Exception catch (e) {
-      print(e);
-      return left(
-        RemoteGlitch(message: "System Error Occurred please contact developer"),
-      );
-    } on Error catch (e) {
-      print(e);
-      return left(RemoteGlitch(message: "Opps an error get user r data"));
-    }
+    return await tryMethod<Unit>(
+      function: () async {
+        final response = await _apiManager.post(
+          url: ApiUrls.saveUserData,
+          requestBody: request.toJson(),
+        );
+        return response.fold(
+          (failure) => left(RemoteGlitch(message: failure.message)),
+          (success) {
+            return right(unit);
+          },
+        );
+      },
+      errorMessage: "Internal System Error Occurred:USRD-SUD",
+    );
   }
 
   @override
   Future<Either<Glitch, List<RecentTransaction>>> getRecentTransactions(
       TokenRequest request) async {
-    try {
-      final response = await _apiManager.post(
-        url: ApiUrls.recentTransactions,
-        requestBody: request.toJson(),
-      );
-      return response.fold(
-        (failure) => left(RemoteGlitch(message: failure.message)),
-        (success) {
-          final result = GetRecentTransactionResponse.fromJson(success);
-          if (result.status) {
-            return right(result.recentTransactions ?? []);
-          } else {
-            return left(RemoteGlitch(message: "No transactions found"));
-          }
-        },
-      );
-    } on Exception catch (e) {
-      print(e);
-      return left(
-        RemoteGlitch(message: "System Error Occurred please contact developer"),
-      );
-    } on Error catch (e) {
-      print(e);
-      return left(RemoteGlitch(message: "Opps an error get user r data"));
-    }
+    return await tryMethod<List<RecentTransaction>>(
+      function: () async {
+        final response = await _apiManager.post(
+          url: ApiUrls.recentTransactions,
+          requestBody: request.toJson(),
+        );
+        return response.fold(
+          (failure) => left(RemoteGlitch(message: failure.message)),
+          (success) {
+            final result = GetRecentTransactionResponse.fromJson(success);
+            if (result.status) {
+              return right(result.recentTransactions ?? []);
+            } else {
+              return left(RemoteGlitch(message: "No transactions found"));
+            }
+          },
+        );
+      },
+      errorMessage: "Internal System Error Occurred:USRD-GRT",
+    );
   }
 }
