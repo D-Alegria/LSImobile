@@ -2,20 +2,23 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/constants/api_urls.dart';
-import 'package:lsi_mobile/core/models/dto/investment_product/investment_product.dart';
 import 'package:lsi_mobile/core/models/requests/token_request/token_request.dart';
 import 'package:lsi_mobile/core/models/responses/get_investment_product/get_investment_product_response.dart';
-import 'package:lsi_mobile/core/models/responses/investment_portfolio/data.dart';
 import 'package:lsi_mobile/core/models/responses/investment_portfolio/investment_portfolio_response.dart';
+import 'package:lsi_mobile/core/models/responses/investment_snapshot/investment_snapshot_response.dart';
 import 'package:lsi_mobile/core/utils/api_manager_util.dart';
 import 'package:lsi_mobile/core/utils/function_util.dart';
 
 abstract class InvestmentRemoteDataSource {
-  Future<Either<Glitch, InvestmentPortfolioData>> getInvestmentPortfolio(
+  Future<Either<Glitch, InvestmentSnapshotResponse>> getInvestmentSnapshot(
     TokenRequest request,
   );
 
-  Future<Either<Glitch, List<InvestmentProduct>>> getInvestmentProducts(
+  Future<Either<Glitch, InvestmentPortfolioResponse>> getInvestmentPortfolio(
+    TokenRequest request,
+  );
+
+  Future<Either<Glitch, GetInvestmentProductsResponse>> getInvestmentProducts(
     TokenRequest request,
   );
 }
@@ -27,9 +30,9 @@ class InvestmentRemoteDataSourceImpl implements InvestmentRemoteDataSource {
   InvestmentRemoteDataSourceImpl(this._apiManager);
 
   @override
-  Future<Either<Glitch, InvestmentPortfolioData>> getInvestmentPortfolio(
+  Future<Either<Glitch, InvestmentSnapshotResponse>> getInvestmentSnapshot(
       TokenRequest request) async {
-    return await tryMethod<InvestmentPortfolioData>(
+    return await tryMethod<InvestmentSnapshotResponse>(
       function: () async {
         final response = await _apiManager.post(
           url: ApiUrls.investmentSnapshot,
@@ -38,19 +41,19 @@ class InvestmentRemoteDataSourceImpl implements InvestmentRemoteDataSource {
         return response.fold(
           (failure) => left(RemoteGlitch(message: failure.message)),
           (success) {
-            final result = InvestmentPortfolioResponse.fromJson(success);
-            return right(result.data);
+            final result = InvestmentSnapshotResponse.fromJson(success);
+            return right(result);
           },
         );
       },
-      errorMessage: "Internal System Error Occurred:INRD-GIPO",
+      errorMessage: "Internal System Error Occurred:INRD-GISS",
     );
   }
 
   @override
-  Future<Either<Glitch, List<InvestmentProduct>>> getInvestmentProducts(
+  Future<Either<Glitch, GetInvestmentProductsResponse>> getInvestmentProducts(
       TokenRequest request) async {
-    return await tryMethod<List<InvestmentProduct>>(
+    return await tryMethod<GetInvestmentProductsResponse>(
       function: () async {
         final response = await _apiManager.post(
           url: ApiUrls.investmentProducts,
@@ -60,7 +63,28 @@ class InvestmentRemoteDataSourceImpl implements InvestmentRemoteDataSource {
           (failure) => left(RemoteGlitch(message: failure.message)),
           (success) {
             final result = GetInvestmentProductsResponse.fromJson(success);
-            return right(result.data);
+            return right(result);
+          },
+        );
+      },
+      errorMessage: "Internal System Error Occurred:INRD-GIPR",
+    );
+  }
+
+  @override
+  Future<Either<Glitch, InvestmentPortfolioResponse>> getInvestmentPortfolio(
+      TokenRequest request) async {
+    return await tryMethod<InvestmentPortfolioResponse>(
+      function: () async {
+        final response = await _apiManager.post(
+          url: ApiUrls.investmentPortfolio,
+          requestBody: request.toJson(),
+        );
+        return response.fold(
+          (failure) => left(RemoteGlitch(message: failure.message)),
+          (success) {
+            final result = InvestmentPortfolioResponse.fromJson(success);
+            return right(result);
           },
         );
       },

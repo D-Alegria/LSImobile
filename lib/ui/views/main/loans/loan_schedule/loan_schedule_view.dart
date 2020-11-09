@@ -1,11 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
+import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
+import 'package:lsi_mobile/ui/views/main/loans/loan_schedule/view_model/loan_schedule_cubit.dart';
 
-class LoanScheduleView extends StatelessWidget {
+class LoanScheduleView extends StatefulWidget {
+  final String requestId;
+
+  const LoanScheduleView({Key key, @required this.requestId}) : super(key: key);
+
+  @override
+  _LoanScheduleViewState createState() => _LoanScheduleViewState();
+}
+
+class _LoanScheduleViewState extends State<LoanScheduleView> {
   final String contactUsImg = "assets/images/contact_us.png";
+
   final String whatsappLogo = "assets/svgs/whatsapp_logo.svg";
+
+  @override
+  void initState() {
+    context.bloc<LoanScheduleCubit>().getLoanSchedule(widget.requestId);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,103 +43,113 @@ class LoanScheduleView extends StatelessWidget {
           ),
         ),
       ),
-      body: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: SizeConfig.xMargin(context, 5),
-        ),
-        child: Column(
-          children: [
-            Table(
-              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-              border: TableBorder(
-                bottom: BorderSide(
-                  color: ColorStyles.black.withOpacity(0.1),
-                  width: 1,
-                ),
-              ),
+      body: BlocBuilder<LoanScheduleCubit, LoanScheduleState>(
+        builder: (context, state) => state.map(
+          initial: (e) => Container(),
+          loading: (e) => sharedLoader(),
+          loaded: (e) => Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: SizeConfig.xMargin(context, 5),
+            ),
+            child: Column(
               children: [
-                TableRow(
+                Table(
+                  defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                  border: TableBorder(
+                    bottom: BorderSide(
+                      color: ColorStyles.black.withOpacity(0.1),
+                      width: 1,
+                    ),
+                  ),
                   children: [
-                    TableCell(
-                      child: Text(
-                        'S/N\n',
-                        textAlign: TextAlign.left,
-                        style: GoogleFonts.workSans(
-                          fontWeight: FontWeight.w500,
-                          fontSize: SizeConfig.textSize(context, 5),
-                          color: ColorStyles.blue,
-                          height: SizeConfig.textSize(context, 0.3),
+                    TableRow(
+                      children: [
+                        TableCell(
+                          child: Text(
+                            'S/N\n',
+                            textAlign: TextAlign.left,
+                            style: GoogleFonts.workSans(
+                              fontWeight: FontWeight.w500,
+                              fontSize: SizeConfig.textSize(context, 5),
+                              color: ColorStyles.blue,
+                              height: SizeConfig.textSize(context, 0.3),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    TableCell(
-                      child: Text(
-                        'Amount\n',
-                        textAlign: TextAlign.left,
-                        style: GoogleFonts.workSans(
-                          fontWeight: FontWeight.w500,
-                          fontSize: SizeConfig.textSize(context, 5),
-                          color: ColorStyles.blue,
-                          height: SizeConfig.textSize(context, 0.3),
+                        TableCell(
+                          child: Text(
+                            'Amount\n',
+                            textAlign: TextAlign.left,
+                            style: GoogleFonts.workSans(
+                              fontWeight: FontWeight.w500,
+                              fontSize: SizeConfig.textSize(context, 5),
+                              color: ColorStyles.blue,
+                              height: SizeConfig.textSize(context, 0.3),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    TableCell(
-                      child: Text(
-                        'Paid\n',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.workSans(
-                          fontWeight: FontWeight.w500,
-                          fontSize: SizeConfig.textSize(context, 5),
-                          color: ColorStyles.blue,
-                          height: SizeConfig.textSize(context, 0.3),
+                        TableCell(
+                          child: Text(
+                            'Paid\n',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.workSans(
+                              fontWeight: FontWeight.w500,
+                              fontSize: SizeConfig.textSize(context, 5),
+                              color: ColorStyles.blue,
+                              height: SizeConfig.textSize(context, 0.3),
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ],
                 ),
+                Expanded(
+                  child: ListView(
+                    children: [
+                      Table(
+                        border: TableBorder(
+                          bottom: BorderSide(
+                            color: ColorStyles.black.withOpacity(0.1),
+                            width: 1,
+                          ),
+                          horizontalInside: BorderSide(
+                            color: ColorStyles.black.withOpacity(0.1),
+                            width: 1,
+                          ),
+                        ),
+                        children: List.generate(
+                          e.schedule.length,
+                          (index) => _buildLoanScheduleItem(
+                            context,
+                            index,
+                            e.schedule.length.toString(),
+                            e.schedule[index].termRepayment,
+                            e.schedule[index].isPaid == "0"
+                                ? Paid.close
+                                : Paid.check,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
-            Expanded(
-              child: ListView(
-                children: [
-                  Table(
-                    border: TableBorder(
-                      bottom: BorderSide(
-                        color: ColorStyles.black.withOpacity(0.1),
-                        width: 1,
-                      ),
-                      horizontalInside: BorderSide(
-                        color: ColorStyles.black.withOpacity(0.1),
-                        width: 1,
-                      ),
-                    ),
-                    children: List.generate(
-                      10,
-                      (index) => _buildLoanScheduleItem(
-                        context,
-                        index,
-                        10000,
-                        index % 2 == 0 ? Paid.check : Paid.close,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+          ),
+          error: (e) => sharedErrorWidget(context, e.message),
         ),
       ),
     );
   }
 
   TableRow _buildLoanScheduleItem(
-      BuildContext context, int index, double amount, Paid paid) {
+      BuildContext context, int index, String total, String amount, Paid paid) {
     return TableRow(
       children: [
         TableCell(
           child: Text(
-            '\n${index + 1}/N\n',
+            '\n${index + 1}/$total\n',
             textAlign: TextAlign.left,
             style: GoogleFonts.workSans(
               fontWeight: FontWeight.w500,

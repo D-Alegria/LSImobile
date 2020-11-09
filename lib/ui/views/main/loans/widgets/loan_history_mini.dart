@@ -9,11 +9,25 @@ class LoanHistory extends StatelessWidget {
 
   const LoanHistory({
     Key key,
-    this.loanHistory,
+    @required this.loanHistory,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String getBadge(String val) {
+      int indicator = int.parse(val);
+      if (indicator < 1)
+        return "Rejected";
+      else if (indicator > 0 && indicator < 3)
+        return "Processing";
+      else if (indicator == 3)
+        return "Active";
+      else if (indicator == 5)
+        return "Closed";
+      else
+        return "";
+    }
+
     return Expanded(
       child: Column(
         children: [
@@ -38,42 +52,93 @@ class LoanHistory extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
-            height: SizeConfig.yMargin(context, 1),
-          ),
+          SizedBox(height: SizeConfig.yMargin(context, 1)),
           Expanded(
             child: ListView.builder(
               itemBuilder: (context, index) {
                 var loan = loanHistory[index];
-
-                // if(loan.)
-
-                return index % 2 == 0
-                    ? sharedInfoListTile(
-                        icon: Icon(
-                          Icons.check,
-                          size: SizeConfig.textSize(context, 7),
-                          color: ColorStyles.green1,
-                        ),
-                        context: context,
-                        title: "300,000",
-                        subTitle: "Completed",
-                        trailingText: "14%",
-                        trailingSubText: "3 months",
-                      )
-                    : sharedInfoListTile(
-                        icon: Icon(
-                          Icons.close,
-                          size: SizeConfig.textSize(context, 7),
-                          color: ColorStyles.red,
-                        ),
-                        context: context,
-                        title: "230,000",
-                        subTitle: "Withdrawal",
-                        trailingText: "18%",
-                        trailingSubText: "4 months",
-                        red: true,
-                      );
+                int indicator = int.parse(loan.loanStatus);
+                if (indicator < 1) {
+                  return sharedInfoListTile(
+                    icon: Icon(
+                      Icons.close,
+                      size: SizeConfig.textSize(context, 7),
+                      color: ColorStyles.red,
+                    ),
+                    context: context,
+                    title: loan.requestPrincipal,
+                    subTitle: getBadge(loan.loanStatus),
+                    trailingText: "",
+                    trailingSubText:
+                        "${loan.requestTenor} ${loan.loanDuration}",
+                    iconBackgroundColor: ColorStyles.red.withOpacity(0.2),
+                    textColor: ColorStyles.red,
+                  );
+                } else if (indicator > 0 && indicator < 3) {
+                  return sharedInfoListTile(
+                    icon: Icon(
+                      Icons.bar_chart_outlined,
+                      size: SizeConfig.textSize(context, 7),
+                      color: ColorStyles.orange,
+                    ),
+                    context: context,
+                    title: loan.requestPrincipal,
+                    subTitle: getBadge(loan.loanStatus),
+                    trailingText: "",
+                    trailingSubText:
+                        "${loan.requestTenor} ${loan.loanDuration}",
+                    iconBackgroundColor: ColorStyles.orange.withOpacity(0.2),
+                    textColor: ColorStyles.orange,
+                  );
+                } else if (loan.loanStatus == "3") {
+                  return sharedInfoListTile(
+                    icon: Icon(
+                      Icons.check,
+                      size: SizeConfig.textSize(context, 7),
+                      color: ColorStyles.green1,
+                    ),
+                    context: context,
+                    title: loan.requestPrincipal,
+                    subTitle: getBadge(loan.loanStatus),
+                    trailingText: "",
+                    trailingSubText:
+                        "${loan.requestTenor} ${loan.loanDuration}",
+                    iconBackgroundColor: ColorStyles.green1.withOpacity(0.2),
+                    textColor: ColorStyles.green1,
+                  );
+                } else if (loan.loanStatus == "5") {
+                  return sharedInfoListTile(
+                    icon: Icon(
+                      Icons.check,
+                      size: SizeConfig.textSize(context, 7),
+                      color: ColorStyles.blue,
+                    ),
+                    context: context,
+                    title: loan.requestPrincipal,
+                    subTitle: getBadge(loan.loanStatus),
+                    trailingText: "",
+                    trailingSubText:
+                        "${loan.requestTenor} ${loan.loanDuration}",
+                    iconBackgroundColor: ColorStyles.blue.withOpacity(0.2),
+                    textColor: ColorStyles.blue,
+                  );
+                } else {
+                  return sharedInfoListTile(
+                    icon: Icon(
+                      Icons.close,
+                      size: SizeConfig.textSize(context, 7),
+                      color: ColorStyles.black,
+                    ),
+                    context: context,
+                    title: loan.requestPrincipal,
+                    subTitle: getBadge(loan.loanStatus),
+                    trailingText: "",
+                    trailingSubText:
+                        "${loan.requestTenor} ${loan.loanDuration}",
+                    iconBackgroundColor: ColorStyles.black.withOpacity(0.2),
+                    textColor: ColorStyles.black,
+                  );
+                }
               },
               itemCount: loanHistory.length,
             ),

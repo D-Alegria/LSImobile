@@ -39,6 +39,8 @@ class InvestmentStatementView extends StatelessWidget {
                     subTitle: "Deposit",
                     trailingText: "N200,000",
                     trailingSubText: "3 days ago",
+                    iconBackgroundColor: ColorStyles.green1.withOpacity(0.2),
+                    textColor: ColorStyles.green1,
                   )
                 : sharedInfoListTile(
                     icon: SvgPicture.asset(arrowUp),
@@ -47,7 +49,8 @@ class InvestmentStatementView extends StatelessWidget {
                     subTitle: "Deposit",
                     trailingText: "N200,000",
                     trailingSubText: "3 days ago",
-                    red: true,
+                    iconBackgroundColor: ColorStyles.red.withOpacity(0.2),
+                    textColor: ColorStyles.red,
                   );
           },
           itemCount: 4,

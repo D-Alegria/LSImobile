@@ -8,7 +8,10 @@ part of 'loan_history.dart';
 
 LoanHistory _$LoanHistoryFromJson(Map<String, dynamic> json) {
   return LoanHistory(
-    result: json['result'] as List,
+    result: (json['result'] as List)
+        ?.map(
+            (e) => e == null ? null : Loan.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     size: json['size'] as int,
   );
 }

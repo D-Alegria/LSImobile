@@ -6,4 +6,6 @@ abstract class InvestmentRepo {
   Future<Either<Glitch, String>> get investmentBalance;
 
   Future<Either<Glitch, List<InvestmentProduct>>> get investmentProducts;
+
+  Future<Either<Glitch, List>> get investments;
 }

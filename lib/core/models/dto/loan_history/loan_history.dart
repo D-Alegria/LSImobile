@@ -1,10 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:lsi_mobile/core/models/dto/loan/loan.dart';
 
 part 'loan_history.g.dart';
 
 @JsonSerializable()
 class LoanHistory {
-  final List result;
+  final List<Loan> result;
   final int size;
 
   LoanHistory({this.result, this.size});

@@ -1,11 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:lsi_mobile/core/models/dto/schedule/schedule.dart';
 
 part 'loan.g.dart';
 
 @JsonSerializable()
 class Loan {
   @JsonKey(name: "LAST_ACTIVITY_DATE")
-  final dynamic lastActivityDate;
+  final DateTime lastActivityDate;
   @JsonKey(name: "REQUEST_ID")
   final String requestId;
   @JsonKey(name: "REQUEST_PRINCIPAL")
@@ -30,6 +31,10 @@ class Loan {
   final String requestTenor;
   @JsonKey(name: "LOAN_DURATION")
   final String loanDuration;
+  @JsonKey(name: "BID_RATE")
+  final String bidRate;
+  @JsonKey(name: "INTEREST_DURATION")
+  final String interestDuration;
   @JsonKey(name: "REQUEST_PERIOD_ID")
   final String requestPeriodId;
   @JsonKey(name: "offer_link")
@@ -44,6 +49,10 @@ class Loan {
   final String isEligible;
   @JsonKey(name: "LOAN_STATUS")
   final String loanStatus;
+  @JsonKey(name: "REQUEST_RATE_PERIOD_ID")
+  final String requestRatePeriodId;
+  @JsonKey(name: "REQUEST_RATE")
+  final String requestRate;
   @JsonKey(name: "IS_CLOSED")
   final String isClosed;
   @JsonKey(name: "REPAYMENT_STARTED_WHEN")
@@ -88,6 +97,8 @@ class Loan {
   final String totalFeesAndCharges;
   @JsonKey(name: "LOAN_REASON")
   final String loanReason;
+  @JsonKey(name: "REQUEST_STATUS")
+  final String requestStatus;
   @JsonKey(name: "TOTAL_REPAYMENT")
   final String totalRepayment;
   @JsonKey(name: "TFR")
@@ -110,7 +121,7 @@ class Loan {
   final String amountLeft;
   final List transactions;
   @JsonKey(name: "LENDERS")
-  final String lenders;
+  final int lenders;
   @JsonKey(name: "LENDERS_")
   final List lenders_;
   final Repayment repayment;
@@ -175,6 +186,11 @@ class Loan {
     this.lenders_,
     this.repayment,
     this.connectedCard,
+    this.bidRate,
+    this.interestDuration,
+    this.requestRatePeriodId,
+    this.requestRate,
+    this.requestStatus,
   });
 
   factory Loan.fromJson(Map<String, dynamic> json) => _$LoanFromJson(json);
@@ -184,10 +200,10 @@ class Loan {
 
 @JsonSerializable()
 class Repayment {
-  final List schedule;
-  final int debts;
-  final int paid;
-  final int balance;
+  final List<RepaymentSchedule> schedule;
+  final double debts;
+  final double paid;
+  final double balance;
 
   Repayment({this.schedule, this.debts, this.paid, this.balance});
 

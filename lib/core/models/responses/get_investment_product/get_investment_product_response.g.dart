@@ -9,6 +9,7 @@ part of 'get_investment_product_response.dart';
 GetInvestmentProductsResponse _$GetInvestmentProductsResponseFromJson(
     Map<String, dynamic> json) {
   return GetInvestmentProductsResponse(
+    message: json['message'] as String,
     count: json['count'] as int,
     status: json['status'] as bool,
     data: (json['data'] as List)
@@ -23,6 +24,7 @@ Map<String, dynamic> _$GetInvestmentProductsResponseToJson(
         GetInvestmentProductsResponse instance) =>
     <String, dynamic>{
       'status': instance.status,
+      'message': instance.message,
       'data': instance.data,
       'count': instance.count,
     };

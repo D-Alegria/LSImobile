@@ -9,7 +9,7 @@ part 'loan_view_cubit.freezed.dart';
 
 part 'loan_view_state.dart';
 
-@injectable
+@lazySingleton
 class LoanViewCubit extends Cubit<LoanViewState> {
   final LoanRepo _loanRepo;
 

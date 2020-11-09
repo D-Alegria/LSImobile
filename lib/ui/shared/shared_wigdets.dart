@@ -356,14 +356,13 @@ Widget sharedInfoListTile({
   String subTitle,
   String trailingText,
   String trailingSubText,
-  bool red = false,
+  Color iconBackgroundColor,
+  Color textColor,
 }) {
   return ListTile(
     contentPadding: EdgeInsets.symmetric(horizontal: 0),
     leading: CircleAvatar(
-      backgroundColor: red
-          ? ColorStyles.red.withOpacity(0.2)
-          : ColorStyles.green2.withOpacity(0.2),
+      backgroundColor: iconBackgroundColor,
       child: icon,
     ),
     title: Text(
@@ -380,7 +379,7 @@ Widget sharedInfoListTile({
       subTitle,
       style: TextStyle(
         fontWeight: FontWeight.w400,
-        color: red ? ColorStyles.red : ColorStyles.green2,
+        color: textColor,
         fontSize: SizeConfig.textSize(context, 3.5),
       ),
     ),
@@ -607,6 +606,36 @@ Widget sharedSmallBadge({
     ),
   );
 }
+
+Widget processingBadge(BuildContext context) => sharedSmallBadge(
+      context: context,
+      text: "Processing",
+      indicatorColor: ColorStyles.orange,
+    );
+
+Widget activeBadge(BuildContext context) => sharedSmallBadge(
+      context: context,
+      text: "Active",
+      indicatorColor: ColorStyles.green1,
+    );
+
+Widget rejectedBadge(BuildContext context) => sharedSmallBadge(
+      context: context,
+      text: "Rejected",
+      indicatorColor: ColorStyles.red,
+    );
+
+Widget closedBadge(BuildContext context) => sharedSmallBadge(
+      context: context,
+      text: "Closed",
+      indicatorColor: ColorStyles.blue,
+    );
+
+Widget dueBadge(BuildContext context, String amountDue) => sharedSmallBadge(
+      context: context,
+      text: "Due: $amountDue",
+      indicatorColor: ColorStyles.red,
+    );
 
 final textFieldDecoration = InputDecoration(
   floatingLabelBehavior: FloatingLabelBehavior.always,

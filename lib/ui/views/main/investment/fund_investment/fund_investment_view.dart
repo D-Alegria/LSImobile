@@ -163,8 +163,11 @@ class FundInvestmentView extends StatelessWidget {
                       onPressed: () => context.navigator.pushSuccessView(
                         message: "You have successfully funded your investment",
                         buttonText: "Back to Investment",
-                        onTap: () =>
-                            context.navigator.pushMainView(pageNumber: 2),
+                        onTap: () => context.navigator.pushAndRemoveUntil(
+                          Routes.mainView,
+                          (route) => false,
+                          arguments: MainViewArguments(pageNumber: 2),
+                        ),
                       ),
                       color: ColorStyles.blue,
                       text: "Finish",

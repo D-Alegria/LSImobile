@@ -27,33 +27,59 @@ class InvestmentRepoImpl implements InvestmentRepo {
           final user = await _userLocalDataSource.user;
           final token = user.fold((l) => null, (r) => r.token);
           final result =
-              await _investmentRemoteDataSource.getInvestmentPortfolio(
+              await _investmentRemoteDataSource.getInvestmentSnapshot(
             TokenRequest(token: token),
           );
-          return result.fold((failure) {
-            return left(ServerGlitch(message: failure.message));
-          }, (success) {
-            return right(success.investmentBalance.toString());
-          });
+          return result.fold(
+            (failure) => left(ServerGlitch(message: failure.message)),
+            (success) => right(success.data.investmentBalance.toString()),
+          );
         });
   }
 
   @override
   Future<Either<Glitch, List<InvestmentProduct>>> get investmentProducts async {
     return await tryMethod<List<InvestmentProduct>>(
-        errorMessage: "Internal System Error Occurred:INRP-ip",
-        function: () async {
-          final user = await _userLocalDataSource.user;
-          final token = user.fold((l) => null, (r) => r.token);
-          final result =
-              await _investmentRemoteDataSource.getInvestmentProducts(
-            TokenRequest(token: token),
-          );
-          return result.fold((failure) {
-            return left(ServerGlitch(message: failure.message));
-          }, (success) {
-            return right(success);
-          });
-        });
+      errorMessage: "Internal System Error Occurred:INRP-ip",
+      function: () async {
+        final user = await _userLocalDataSource.user;
+        final token = user.fold((l) => null, (r) => r.token);
+        final result = await _investmentRemoteDataSource.getInvestmentProducts(
+          TokenRequest(token: token),
+        );
+        return result.fold(
+          (failure) => left(ServerGlitch(message: failure.message)),
+          (success) {
+            if (success.status)
+              return right(success.data);
+            else
+              return left(ServerGlitch(message: success.message));
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  Future<Either<Glitch, List>> get investments async {
+    return await tryMethod<List>(
+      errorMessage: "Internal System Error Occurred:INRP-Is",
+      function: () async {
+        final user = await _userLocalDataSource.user;
+        final token = user.fold((l) => null, (r) => r.token);
+        final result = await _investmentRemoteDataSource.getInvestmentPortfolio(
+          TokenRequest(token: token),
+        );
+        return result.fold(
+          (failure) => left(ServerGlitch(message: failure.message)),
+          (success) {
+            if (success.status)
+              return right(success.loans);
+            else
+              return left(ServerGlitch(message: success.message));
+          },
+        );
+      },
+    );
   }
 }

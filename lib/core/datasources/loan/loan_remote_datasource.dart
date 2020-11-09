@@ -4,11 +4,14 @@ import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/constants/api_urls.dart';
 import 'package:lsi_mobile/core/models/dto/loan_product/loan_product.dart';
 import 'package:lsi_mobile/core/models/requests/loan_application/loan_request.dart';
+import 'package:lsi_mobile/core/models/requests/request_id_request/request_id_request.dart';
 import 'package:lsi_mobile/core/models/requests/token_request/token_request.dart';
 import 'package:lsi_mobile/core/models/responses/current_loan/current_loan_response.dart';
 import 'package:lsi_mobile/core/models/responses/current_loan/data.dart';
 import 'package:lsi_mobile/core/models/responses/get_loan_product/get_loan_product_response.dart';
 import 'package:lsi_mobile/core/models/responses/loan_application/loan_application_response.dart';
+import 'package:lsi_mobile/core/models/responses/loan_details/loan_details_response.dart';
+import 'package:lsi_mobile/core/models/responses/loan_schedule/loan_schedule_response.dart';
 import 'package:lsi_mobile/core/utils/api_manager_util.dart';
 import 'package:lsi_mobile/core/utils/function_util.dart';
 
@@ -19,6 +22,14 @@ abstract class LoanRemoteDataSource {
 
   Future<Either<Glitch, LoanApplicationResponse>> applyForLoan(
     LoanRequest request,
+  );
+
+  Future<Either<Glitch, LoanDetailsResponse>> getLoanDetails(
+    RequestIdRequest request,
+  );
+
+  Future<Either<Glitch, LoanScheduleResponse>> getLoanSchedule(
+    RequestIdRequest request,
   );
 }
 
@@ -97,6 +108,56 @@ class LoanRemoteDataSourceImpl implements LoanRemoteDataSource {
         );
       },
       errorMessage: "Internal System Error Occurred:LRD-AFL",
+    );
+  }
+
+  @override
+  Future<Either<Glitch, LoanDetailsResponse>> getLoanDetails(
+      RequestIdRequest request) async {
+    return await tryMethod<LoanDetailsResponse>(
+      function: () async {
+        final response = await _apiManager.post(
+          url: ApiUrls.loanDetails,
+          requestBody: request.toJson(),
+        );
+        return response.fold(
+          (failure) => left(RemoteGlitch(message: failure.message)),
+          (success) {
+            final result = LoanDetailsResponse.fromJson(success);
+            if (result.status) {
+              return right(result);
+            } else {
+              return left(RemoteGlitch(message: result.message));
+            }
+          },
+        );
+      },
+      errorMessage: "Internal System Error Occurred:LRD-GLDs",
+    );
+  }
+
+  @override
+  Future<Either<Glitch, LoanScheduleResponse>> getLoanSchedule(
+      RequestIdRequest request) async {
+    return await tryMethod<LoanScheduleResponse>(
+      function: () async {
+        final response = await _apiManager.post(
+          url: ApiUrls.loanSchedule,
+          requestBody: request.toJson(),
+        );
+        return response.fold(
+              (failure) => left(RemoteGlitch(message: failure.message)),
+              (success) {
+            final result = LoanScheduleResponse.fromJson(success);
+            if (result.status) {
+              return right(result);
+            } else {
+              return left(RemoteGlitch(message: result.message));
+            }
+          },
+        );
+      },
+      errorMessage: "Internal System Error Occurred:LRD-GLDs",
     );
   }
 }

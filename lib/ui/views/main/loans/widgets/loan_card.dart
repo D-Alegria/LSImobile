@@ -1,15 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:lsi_mobile/core/models/dto/loan/loan.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
 class LoanCard extends StatelessWidget {
+  final Loan currentLoan;
+
   const LoanCard({
     Key key,
+    @required this.currentLoan,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Widget getBadge(String val) {
+      int indicator = int.parse(val);
+      if (indicator < 1)
+        return rejectedBadge(context);
+      else if (indicator > 0 && indicator < 3)
+        return processingBadge(context);
+      else if (indicator == 3)
+        return activeBadge(context);
+      else if (indicator == 5)
+        return closedBadge(context);
+      else
+        return Container();
+    }
+
+    Widget checkIfDue(String val) {
+      if (val == "0")
+        return Container();
+      else
+        return dueBadge(context, val); // TODO Format to money
+    }
+
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: SizeConfig.xMargin(context, 3),
@@ -29,21 +54,13 @@ class LoanCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              sharedSmallBadge(
-                context: context,
-                text: "Processing",
-                indicatorColor: ColorStyles.orange,
-              ),
-              sharedSmallBadge(
-                context: context,
-                text: "Due",
-                indicatorColor: ColorStyles.red,
-              ),
+              getBadge(currentLoan.loanStatus),
+              checkIfDue(currentLoan.nextPaymentAmount),
             ],
           ),
           RichText(
             text: TextSpan(
-              text: "₦120,000",
+              text: "₦${currentLoan.requestPrincipal}",
               style: TextStyle(
                 fontWeight: FontWeight.w700,
                 color: ColorStyles.white,
@@ -51,7 +68,8 @@ class LoanCard extends StatelessWidget {
               ),
               children: [
                 TextSpan(
-                  text: " / 5 months",
+                  text:
+                      " / ${currentLoan.requestTenor} ${currentLoan.loanDuration}",
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     color: ColorStyles.grey,
@@ -65,7 +83,7 @@ class LoanCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "0/7 Paid",
+                "${currentLoan.hmp}/${currentLoan.hmr} Paid",
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
                   color: ColorStyles.yellow1,
@@ -73,7 +91,7 @@ class LoanCard extends StatelessWidget {
                 ),
               ),
               Text(
-                "02/05/2020",
+                currentLoan.nextPaymentDate,
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   color: ColorStyles.white,

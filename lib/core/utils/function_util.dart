@@ -12,6 +12,7 @@ Future<Either<Glitch, T>> tryMethod<T>({
     return left(ServerGlitch(message: errorMessage));
   } on Error catch (e) {
     print(e);
+    print(e.stackTrace);
     return left(ServerGlitch(message: errorMessage));
   }
 }

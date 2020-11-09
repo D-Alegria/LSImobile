@@ -6,9 +6,9 @@ part of 'data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-InvestmentPortfolioData _$InvestmentPortfolioDataFromJson(
+InvestmentSnapshotData _$InvestmentSnapshotDataFromJson(
     Map<String, dynamic> json) {
-  return InvestmentPortfolioData(
+  return InvestmentSnapshotData(
     today: json['today'] as String,
     savings: json['savings'] as String,
     investments: json['investments'] as String,
@@ -16,8 +16,8 @@ InvestmentPortfolioData _$InvestmentPortfolioDataFromJson(
   );
 }
 
-Map<String, dynamic> _$InvestmentPortfolioDataToJson(
-        InvestmentPortfolioData instance) =>
+Map<String, dynamic> _$InvestmentSnapshotDataToJson(
+        InvestmentSnapshotData instance) =>
     <String, dynamic>{
       'today': instance.today,
       'savings': instance.savings,

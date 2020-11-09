@@ -8,7 +8,9 @@ part of 'loan.dart';
 
 Loan _$LoanFromJson(Map<String, dynamic> json) {
   return Loan(
-    lastActivityDate: json['LAST_ACTIVITY_DATE'],
+    lastActivityDate: json['LAST_ACTIVITY_DATE'] == null
+        ? null
+        : DateTime.parse(json['LAST_ACTIVITY_DATE'] as String),
     requestId: json['REQUEST_ID'] as String,
     requestPrincipal: json['REQUEST_PRINCIPAL'] as String,
     isActive: json['IS_ACTIVE'] as String,
@@ -65,17 +67,22 @@ Loan _$LoanFromJson(Map<String, dynamic> json) {
     amountFunded: json['AMOUNT_FUNDED'] as String,
     amountLeft: json['AMOUNT_LEFT'] as String,
     transactions: json['transactions'] as List,
-    lenders: json['LENDERS'] as String,
+    lenders: json['LENDERS'] as int,
     lenders_: json['LENDERS_'] as List,
     repayment: json['repayment'] == null
         ? null
         : Repayment.fromJson(json['repayment'] as Map<String, dynamic>),
     connectedCard: json['connected_card'],
+    bidRate: json['BID_RATE'] as String,
+    interestDuration: json['INTEREST_DURATION'] as String,
+    requestRatePeriodId: json['REQUEST_RATE_PERIOD_ID'] as String,
+    requestRate: json['REQUEST_RATE'] as String,
+    requestStatus: json['REQUEST_STATUS'] as String,
   );
 }
 
 Map<String, dynamic> _$LoanToJson(Loan instance) => <String, dynamic>{
-      'LAST_ACTIVITY_DATE': instance.lastActivityDate,
+      'LAST_ACTIVITY_DATE': instance.lastActivityDate?.toIso8601String(),
       'REQUEST_ID': instance.requestId,
       'REQUEST_PRINCIPAL': instance.requestPrincipal,
       'IS_ACTIVE': instance.isActive,
@@ -88,6 +95,8 @@ Map<String, dynamic> _$LoanToJson(Loan instance) => <String, dynamic>{
       'DESCRIPTION': instance.description,
       'REQUEST_TENOR': instance.requestTenor,
       'LOAN_DURATION': instance.loanDuration,
+      'BID_RATE': instance.bidRate,
+      'INTEREST_DURATION': instance.interestDuration,
       'REQUEST_PERIOD_ID': instance.requestPeriodId,
       'offer_link': instance.offerLink,
       'STATUS': instance.status,
@@ -95,6 +104,8 @@ Map<String, dynamic> _$LoanToJson(Loan instance) => <String, dynamic>{
       'ONLY_ONE_LENDER': instance.onlyOneLender,
       'IS_ELIGIBLE': instance.isEligible,
       'LOAN_STATUS': instance.loanStatus,
+      'REQUEST_RATE_PERIOD_ID': instance.requestRatePeriodId,
+      'REQUEST_RATE': instance.requestRate,
       'IS_CLOSED': instance.isClosed,
       'REPAYMENT_STARTED_WHEN': instance.repaymentStartedWhen,
       'TITLE': instance.title,
@@ -117,6 +128,7 @@ Map<String, dynamic> _$LoanToJson(Loan instance) => <String, dynamic>{
       'FEE_TYPE': instance.feeType,
       'TOTAL_FEES_AND_CHARGES': instance.totalFeesAndCharges,
       'LOAN_REASON': instance.loanReason,
+      'REQUEST_STATUS': instance.requestStatus,
       'TOTAL_REPAYMENT': instance.totalRepayment,
       'TFR': instance.tfr,
       'HMP': instance.hmp,
@@ -136,10 +148,14 @@ Map<String, dynamic> _$LoanToJson(Loan instance) => <String, dynamic>{
 
 Repayment _$RepaymentFromJson(Map<String, dynamic> json) {
   return Repayment(
-    schedule: json['schedule'] as List,
-    debts: json['debts'] as int,
-    paid: json['paid'] as int,
-    balance: json['balance'] as int,
+    schedule: (json['schedule'] as List)
+        ?.map((e) => e == null
+            ? null
+            : RepaymentSchedule.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    debts: (json['debts'] as num)?.toDouble(),
+    paid: (json['paid'] as num)?.toDouble(),
+    balance: (json['balance'] as num)?.toDouble(),
   );
 }
 

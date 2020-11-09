@@ -9,15 +9,16 @@ part of 'investment_portfolio_response.dart';
 InvestmentPortfolioResponse _$InvestmentPortfolioResponseFromJson(
     Map<String, dynamic> json) {
   return InvestmentPortfolioResponse(
-    data: json['data'] == null
-        ? null
-        : InvestmentPortfolioData.fromJson(
-            json['data'] as Map<String, dynamic>),
+    message: json['message'] as String,
+    status: json['status'] as bool,
+    loans: json['loans'] as List,
   );
 }
 
 Map<String, dynamic> _$InvestmentPortfolioResponseToJson(
         InvestmentPortfolioResponse instance) =>
     <String, dynamic>{
-      'data': instance.data,
+      'status': instance.status,
+      'loans': instance.loans,
+      'message': instance.message,
     };

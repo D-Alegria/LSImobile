@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
+import 'package:lsi_mobile/core/models/dto/loan/loan.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -12,8 +13,13 @@ import 'package:lsi_mobile/ui/views/main/loans/widgets/loan_history_mini.dart';
 import 'package:lsi_mobile/ui/views/main/loans/widgets/mini_loan_card.dart';
 
 class ActiveLoanView extends StatelessWidget {
+  final Loan currentLoan;
+  final List<Loan> loanHistory;
+
   const ActiveLoanView({
     Key key,
+    @required this.currentLoan,
+    @required this.loanHistory,
   }) : super(key: key);
 
   final String optionsIcon = "assets/svgs/icons/options_icon.svg";
@@ -56,7 +62,7 @@ class ActiveLoanView extends StatelessWidget {
             width: SizeConfig.xMargin(context, 100),
             child: Column(
               children: [
-                LoanCard(),
+                LoanCard(currentLoan: currentLoan),
                 SizedBox(height: SizeConfig.yMargin(context, 2)),
                 Row(
                   children: [
@@ -73,12 +79,13 @@ class ActiveLoanView extends StatelessWidget {
                       borderColor: ColorStyles.orange.withOpacity(0.3),
                       image: book,
                       text: "View Schedule",
-                      onTap: () => context.navigator.pushLoanScheduleView(),
+                      onTap: () => context.navigator.pushLoanScheduleView(
+                          requestId: currentLoan.requestId),
                     ),
                   ],
                 ),
                 SizedBox(height: SizeConfig.yMargin(context, 3)),
-                LoanHistory(),
+                LoanHistory(loanHistory: loanHistory),
               ],
             ),
           ),

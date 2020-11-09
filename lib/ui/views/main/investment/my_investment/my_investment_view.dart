@@ -6,6 +6,18 @@ import 'package:lsi_mobile/ui/views/main/investment/widgets/investment_plan_card
 class NewInvestmentView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Widget add() {
+      return FloatingActionButton(
+        backgroundColor: ColorStyles.orange,
+        onPressed: () {},
+        tooltip: 'Add',
+        child: Icon(
+          Icons.add,
+          size: SizeConfig.textSize(context, 9),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -34,6 +46,8 @@ class NewInvestmentView extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: add(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

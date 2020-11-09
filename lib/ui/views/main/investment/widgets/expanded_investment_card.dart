@@ -13,6 +13,7 @@ class ExpandedInvestmentCard extends StatelessWidget {
   final String details;
   final double angle;
   final String circlePie = "assets/svgs/circle_pie.svg";
+  final Function onTap;
 
   const ExpandedInvestmentCard({
     Key key,
@@ -23,11 +24,13 @@ class ExpandedInvestmentCard extends StatelessWidget {
     this.textColor,
     this.details,
     this.angle,
+    this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return sharedOutlineContainer(
+      onTap: onTap,
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.symmetric(
         horizontal: SizeConfig.yMargin(context, 4),

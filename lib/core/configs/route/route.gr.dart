@@ -36,6 +36,7 @@ import '../../../ui/views/main/profile/faq/faq_view.dart';
 import '../../../ui/views/main/profile/profile_view.dart';
 import '../../../ui/views/onboarding/onboarding_view.dart';
 import '../../../ui/views/start_up/start_up_view.dart';
+import '../../models/dto/investment_product/investment_product.dart';
 import '../../models/requests/user_details/user_details_request.dart';
 
 class Routes {
@@ -227,8 +228,12 @@ class Router extends RouterBase {
       );
     },
     LoanScheduleView: (data) {
+      final args = data.getArgs<LoanScheduleViewArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => LoanScheduleView(),
+        builder: (context) => LoanScheduleView(
+          key: args.key,
+          requestId: args.requestId,
+        ),
         settings: data,
       );
     },
@@ -245,8 +250,12 @@ class Router extends RouterBase {
       );
     },
     NewInvestmentView: (data) {
+      final args = data.getArgs<NewInvestmentViewArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => NewInvestmentView(),
+        builder: (context) => NewInvestmentView(
+          key: args.key,
+          investmentProduct: args.investmentProduct,
+        ),
         settings: data,
       );
     },
@@ -364,8 +373,14 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
   Future<dynamic> pushMakePaymentView() =>
       push<dynamic>(Routes.makePaymentView);
 
-  Future<dynamic> pushLoanScheduleView() =>
-      push<dynamic>(Routes.loanScheduleView);
+  Future<dynamic> pushLoanScheduleView({
+    Key key,
+    @required String requestId,
+  }) =>
+      push<dynamic>(
+        Routes.loanScheduleView,
+        arguments: LoanScheduleViewArguments(key: key, requestId: requestId),
+      );
 
   Future<dynamic> pushNoInvestmentView() =>
       push<dynamic>(Routes.noInvestmentView);
@@ -373,8 +388,15 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
   Future<dynamic> pushFundInvestmentView() =>
       push<dynamic>(Routes.fundInvestmentView);
 
-  Future<dynamic> pushNewInvestmentView() =>
-      push<dynamic>(Routes.newInvestmentView);
+  Future<dynamic> pushNewInvestmentView({
+    Key key,
+    @required InvestmentProduct investmentProduct,
+  }) =>
+      push<dynamic>(
+        Routes.newInvestmentView,
+        arguments: NewInvestmentViewArguments(
+            key: key, investmentProduct: investmentProduct),
+      );
 
   Future<dynamic> pushInvestmentPlanView() =>
       push<dynamic>(Routes.investmentPlanView);
@@ -422,6 +444,20 @@ class MainViewArguments {
   final Key key;
   final int pageNumber;
   MainViewArguments({this.key, @required this.pageNumber});
+}
+
+/// LoanScheduleView arguments holder class
+class LoanScheduleViewArguments {
+  final Key key;
+  final String requestId;
+  LoanScheduleViewArguments({this.key, @required this.requestId});
+}
+
+/// NewInvestmentView arguments holder class
+class NewInvestmentViewArguments {
+  final Key key;
+  final InvestmentProduct investmentProduct;
+  NewInvestmentViewArguments({this.key, @required this.investmentProduct});
 }
 
 /// EditProfileView arguments holder class

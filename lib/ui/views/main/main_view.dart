@@ -4,14 +4,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:lsi_mobile/ui/views/main/history/history_view.dart';
-import 'package:lsi_mobile/ui/views/main/home/home_view.dart';
-import 'package:lsi_mobile/ui/views/main/investment/investment_view.dart';
-import 'package:lsi_mobile/ui/views/main/profile/profile_view.dart';
+import 'package:lsi_mobile/ui/views/main/investment/investment_view/view_model/investment_view_cubit.dart';
+import 'package:lsi_mobile/ui/views/main/loans/loans_view/view_model/loan_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/main_view/main_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_bloc.dart';
 
+import 'history/history_view.dart';
+import 'home/home_view.dart';
+import 'investment/investment_view/investment_view.dart';
 import 'loans/loans_view/loans_view.dart';
+import 'profile/profile_view.dart';
 
 class MainView extends StatefulWidget {
   final int pageNumber;
@@ -36,6 +38,8 @@ class _MainViewState extends State<MainView> {
   @override
   void initState() {
     context.bloc<UserProfileBloc>().add(GetUserDetails());
+    context.bloc<LoanViewCubit>().checkActiveLoans();
+    context.bloc<InvestmentViewCubit>().checkForInvestments();
     super.initState();
   }
 

@@ -76,7 +76,8 @@ class HistoryView extends StatelessWidget {
                           subTitle: "Debit",
                           trailingText: "₦${transaction.transAmount}",
                           trailingSubText: time.fromNow(),
-                          red: true,
+                          iconBackgroundColor: ColorStyles.red.withOpacity(0.2),
+                          textColor: ColorStyles.red,
                         );
                       } else {
                         return sharedInfoListTile(
@@ -86,7 +87,8 @@ class HistoryView extends StatelessWidget {
                           subTitle: "Credit",
                           trailingText: "₦${transaction.transAmount}",
                           trailingSubText: time.fromNow(),
-                          red: false,
+                          iconBackgroundColor: ColorStyles.green1.withOpacity(0.2),
+                          textColor: ColorStyles.green1,
                         );
                       }
                     },
