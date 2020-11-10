@@ -9,7 +9,9 @@ class LoansView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      body: RefreshIndicator(
+        onRefresh: () async =>
+            Future.value(context.bloc<LoanViewCubit>().checkActiveLoans()),
         child: BlocBuilder<LoanViewCubit, LoanViewState>(
           builder: (context, state) => state.map(
             initial: (e) => Container(),

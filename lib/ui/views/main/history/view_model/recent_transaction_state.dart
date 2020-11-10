@@ -1,6 +1,14 @@
 part of 'recent_transaction_cubit.dart';
 
-@immutable
-abstract class RecentTransactionState {}
+@freezed
+abstract class RecentTransactionState with _$RecentTransactionState {
+  factory RecentTransactionState.initial() = Initial;
 
-class RecentTransactionInitial extends RecentTransactionState {}
+  factory RecentTransactionState.loading() = Loading;
+
+  factory RecentTransactionState.loaded({
+    @required final List<RecentTransaction> recentTransactions,
+  }) = Loaded;
+
+  factory RecentTransactionState.error(String message) = Error;
+}

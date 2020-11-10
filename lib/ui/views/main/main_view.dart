@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
+import 'package:lsi_mobile/ui/shared/keep_alive_page.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
+import 'package:lsi_mobile/ui/views/main/history/view_model/recent_transaction_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_view/view_model/investment_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/loans/loans_view/view_model/loan_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/main_view/main_view_cubit.dart';
@@ -39,6 +41,7 @@ class _MainViewState extends State<MainView> {
   void initState() {
     context.bloc<UserProfileBloc>().add(GetUserDetails());
     context.bloc<LoanViewCubit>().checkActiveLoans();
+    context.bloc<RecentTransactionCubit>().getRecentTransactions();
     context.bloc<InvestmentViewCubit>().checkForInvestments();
     super.initState();
   }
@@ -67,6 +70,7 @@ class _MainViewState extends State<MainView> {
                 height: SizeConfig.textSize(context, 0.55),
                 fontWeight: FontWeight.w500,
               ),
+              backgroundColor: ColorStyles.white,
               selectedFontSize: SizeConfig.textSize(context, 3.1),
               unselectedFontSize: SizeConfig.textSize(context, 3.1),
               showUnselectedLabels: true,
@@ -157,11 +161,11 @@ class _MainViewState extends State<MainView> {
               controller: state.pageController,
               physics: NeverScrollableScrollPhysics(),
               children: [
-                HomeView(),
-                LoansView(),
-                InvestmentView(),
-                HistoryView(),
-                ProfileView(),
+                KeepAlivePage(child: HomeView()),
+                KeepAlivePage(child: LoansView()),
+                KeepAlivePage(child: InvestmentView()),
+                KeepAlivePage(child: HistoryView()),
+                KeepAlivePage(child: ProfileView()),
               ],
             ),
           ),

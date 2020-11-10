@@ -473,15 +473,23 @@ Widget sharedLoader() {
 
 Widget sharedErrorWidget(BuildContext context, String message) {
   return Container(
-    child: Center(
-      child: Text(
-        message,
-        style: TextStyle(
-          fontSize: SizeConfig.textSize(context, 5),
-          fontWeight: FontWeight.w500,
-          color: const Color(0xFF18172B).withOpacity(0.6),
+    height: SizeConfig.yMargin(context, 80),
+    child: ListView(
+      children: [
+        Container(
+          height: SizeConfig.yMargin(context, 80),
+          child: Center(
+            child: Text(
+              message,
+              style: TextStyle(
+                fontSize: SizeConfig.textSize(context, 5),
+                fontWeight: FontWeight.w500,
+                color: const Color(0xFF18172B).withOpacity(0.6),
+              ),
+            ),
+          ),
         ),
-      ),
+      ],
     ),
   );
 }

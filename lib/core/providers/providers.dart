@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/core/configs/dependency_injection/injection.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/auth_form/auth_form_bloc.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/authentication/authentication_bloc.dart';
+import 'package:lsi_mobile/ui/views/main/history/view_model/recent_transaction_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/home/view_model/home_viewmodel.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_products/view_model/investment_product_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_view/view_model/investment_view_cubit.dart';
@@ -32,6 +33,7 @@ blocs(BuildContext context) => [
       BlocProvider(create: (context) => OnboardPageCubit()),
       BlocProvider(create: (context) => getIt<AuthFormBloc>()),
       BlocProvider(create: (context) => getIt<UserProfileBloc>()),
+      BlocProvider(create: (context) => getIt<RecentTransactionCubit>()),
       BlocProvider(create: (context) => getIt<EditProfileBloc>()),
       BlocProvider(create: (context) => getIt<LoanViewCubit>()),
       BlocProvider(create: (context) => getIt<LoanProductCubit>()),

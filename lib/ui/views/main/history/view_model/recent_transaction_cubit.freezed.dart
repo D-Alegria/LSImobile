@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
-part of 'user_profile_bloc.dart';
+part of 'recent_transaction_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -10,146 +10,8 @@ part of 'user_profile_bloc.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-class _$UserProfileEventTearOff {
-  const _$UserProfileEventTearOff();
-
-// ignore: unused_element
-  GetUserDetails getUserDetails() {
-    return const GetUserDetails();
-  }
-}
-
-/// @nodoc
-// ignore: unused_element
-const $UserProfileEvent = _$UserProfileEventTearOff();
-
-/// @nodoc
-mixin _$UserProfileEvent {
-  @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result getUserDetails(),
-  });
-  @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result getUserDetails(),
-    @required Result orElse(),
-  });
-  @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result getUserDetails(GetUserDetails value),
-  });
-  @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result getUserDetails(GetUserDetails value),
-    @required Result orElse(),
-  });
-}
-
-/// @nodoc
-abstract class $UserProfileEventCopyWith<$Res> {
-  factory $UserProfileEventCopyWith(
-          UserProfileEvent value, $Res Function(UserProfileEvent) then) =
-      _$UserProfileEventCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$UserProfileEventCopyWithImpl<$Res>
-    implements $UserProfileEventCopyWith<$Res> {
-  _$UserProfileEventCopyWithImpl(this._value, this._then);
-
-  final UserProfileEvent _value;
-  // ignore: unused_field
-  final $Res Function(UserProfileEvent) _then;
-}
-
-/// @nodoc
-abstract class $GetUserDetailsCopyWith<$Res> {
-  factory $GetUserDetailsCopyWith(
-          GetUserDetails value, $Res Function(GetUserDetails) then) =
-      _$GetUserDetailsCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$GetUserDetailsCopyWithImpl<$Res>
-    extends _$UserProfileEventCopyWithImpl<$Res>
-    implements $GetUserDetailsCopyWith<$Res> {
-  _$GetUserDetailsCopyWithImpl(
-      GetUserDetails _value, $Res Function(GetUserDetails) _then)
-      : super(_value, (v) => _then(v as GetUserDetails));
-
-  @override
-  GetUserDetails get _value => super._value as GetUserDetails;
-}
-
-/// @nodoc
-class _$GetUserDetails implements GetUserDetails {
-  const _$GetUserDetails();
-
-  @override
-  String toString() {
-    return 'UserProfileEvent.getUserDetails()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is GetUserDetails);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result getUserDetails(),
-  }) {
-    assert(getUserDetails != null);
-    return getUserDetails();
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result getUserDetails(),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (getUserDetails != null) {
-      return getUserDetails();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result getUserDetails(GetUserDetails value),
-  }) {
-    assert(getUserDetails != null);
-    return getUserDetails(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result getUserDetails(GetUserDetails value),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (getUserDetails != null) {
-      return getUserDetails(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class GetUserDetails implements UserProfileEvent {
-  const factory GetUserDetails() = _$GetUserDetails;
-}
-
-/// @nodoc
-class _$UserProfileStateTearOff {
-  const _$UserProfileStateTearOff();
+class _$RecentTransactionStateTearOff {
+  const _$RecentTransactionStateTearOff();
 
 // ignore: unused_element
   Initial initial() {
@@ -162,16 +24,9 @@ class _$UserProfileStateTearOff {
   }
 
 // ignore: unused_element
-  Loaded loaded(
-      {@required UserDetailsData userData,
-      @required String fullName,
-      @required String investmentBalance,
-      @required String profilePicture}) {
+  Loaded loaded({@required List<RecentTransaction> recentTransactions}) {
     return Loaded(
-      userData: userData,
-      fullName: fullName,
-      investmentBalance: investmentBalance,
-      profilePicture: profilePicture,
+      recentTransactions: recentTransactions,
     );
   }
 
@@ -185,25 +40,22 @@ class _$UserProfileStateTearOff {
 
 /// @nodoc
 // ignore: unused_element
-const $UserProfileState = _$UserProfileStateTearOff();
+const $RecentTransactionState = _$RecentTransactionStateTearOff();
 
 /// @nodoc
-mixin _$UserProfileState {
+mixin _$RecentTransactionState {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required
-        Result loaded(UserDetailsData userData, String fullName,
-            String investmentBalance, String profilePicture),
+    @required Result loaded(List<RecentTransaction> recentTransactions),
     @required Result error(String message),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(UserDetailsData userData, String fullName,
-        String investmentBalance, String profilePicture),
+    Result loaded(List<RecentTransaction> recentTransactions),
     Result error(String message),
     @required Result orElse(),
   });
@@ -225,20 +77,20 @@ mixin _$UserProfileState {
 }
 
 /// @nodoc
-abstract class $UserProfileStateCopyWith<$Res> {
-  factory $UserProfileStateCopyWith(
-          UserProfileState value, $Res Function(UserProfileState) then) =
-      _$UserProfileStateCopyWithImpl<$Res>;
+abstract class $RecentTransactionStateCopyWith<$Res> {
+  factory $RecentTransactionStateCopyWith(RecentTransactionState value,
+          $Res Function(RecentTransactionState) then) =
+      _$RecentTransactionStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$UserProfileStateCopyWithImpl<$Res>
-    implements $UserProfileStateCopyWith<$Res> {
-  _$UserProfileStateCopyWithImpl(this._value, this._then);
+class _$RecentTransactionStateCopyWithImpl<$Res>
+    implements $RecentTransactionStateCopyWith<$Res> {
+  _$RecentTransactionStateCopyWithImpl(this._value, this._then);
 
-  final UserProfileState _value;
+  final RecentTransactionState _value;
   // ignore: unused_field
-  final $Res Function(UserProfileState) _then;
+  final $Res Function(RecentTransactionState) _then;
 }
 
 /// @nodoc
@@ -248,7 +100,8 @@ abstract class $InitialCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$InitialCopyWithImpl<$Res> extends _$UserProfileStateCopyWithImpl<$Res>
+class _$InitialCopyWithImpl<$Res>
+    extends _$RecentTransactionStateCopyWithImpl<$Res>
     implements $InitialCopyWith<$Res> {
   _$InitialCopyWithImpl(Initial _value, $Res Function(Initial) _then)
       : super(_value, (v) => _then(v as Initial));
@@ -263,7 +116,7 @@ class _$Initial implements Initial {
 
   @override
   String toString() {
-    return 'UserProfileState.initial()';
+    return 'RecentTransactionState.initial()';
   }
 
   @override
@@ -279,9 +132,7 @@ class _$Initial implements Initial {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required
-        Result loaded(UserDetailsData userData, String fullName,
-            String investmentBalance, String profilePicture),
+    @required Result loaded(List<RecentTransaction> recentTransactions),
     @required Result error(String message),
   }) {
     assert(initial != null);
@@ -296,8 +147,7 @@ class _$Initial implements Initial {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(UserDetailsData userData, String fullName,
-        String investmentBalance, String profilePicture),
+    Result loaded(List<RecentTransaction> recentTransactions),
     Result error(String message),
     @required Result orElse(),
   }) {
@@ -340,7 +190,7 @@ class _$Initial implements Initial {
   }
 }
 
-abstract class Initial implements UserProfileState {
+abstract class Initial implements RecentTransactionState {
   factory Initial() = _$Initial;
 }
 
@@ -351,7 +201,8 @@ abstract class $LoadingCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LoadingCopyWithImpl<$Res> extends _$UserProfileStateCopyWithImpl<$Res>
+class _$LoadingCopyWithImpl<$Res>
+    extends _$RecentTransactionStateCopyWithImpl<$Res>
     implements $LoadingCopyWith<$Res> {
   _$LoadingCopyWithImpl(Loading _value, $Res Function(Loading) _then)
       : super(_value, (v) => _then(v as Loading));
@@ -366,7 +217,7 @@ class _$Loading implements Loading {
 
   @override
   String toString() {
-    return 'UserProfileState.loading()';
+    return 'RecentTransactionState.loading()';
   }
 
   @override
@@ -382,9 +233,7 @@ class _$Loading implements Loading {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required
-        Result loaded(UserDetailsData userData, String fullName,
-            String investmentBalance, String profilePicture),
+    @required Result loaded(List<RecentTransaction> recentTransactions),
     @required Result error(String message),
   }) {
     assert(initial != null);
@@ -399,8 +248,7 @@ class _$Loading implements Loading {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(UserDetailsData userData, String fullName,
-        String investmentBalance, String profilePicture),
+    Result loaded(List<RecentTransaction> recentTransactions),
     Result error(String message),
     @required Result orElse(),
   }) {
@@ -443,7 +291,7 @@ class _$Loading implements Loading {
   }
 }
 
-abstract class Loading implements UserProfileState {
+abstract class Loading implements RecentTransactionState {
   factory Loading() = _$Loading;
 }
 
@@ -451,15 +299,12 @@ abstract class Loading implements UserProfileState {
 abstract class $LoadedCopyWith<$Res> {
   factory $LoadedCopyWith(Loaded value, $Res Function(Loaded) then) =
       _$LoadedCopyWithImpl<$Res>;
-  $Res call(
-      {UserDetailsData userData,
-      String fullName,
-      String investmentBalance,
-      String profilePicture});
+  $Res call({List<RecentTransaction> recentTransactions});
 }
 
 /// @nodoc
-class _$LoadedCopyWithImpl<$Res> extends _$UserProfileStateCopyWithImpl<$Res>
+class _$LoadedCopyWithImpl<$Res>
+    extends _$RecentTransactionStateCopyWithImpl<$Res>
     implements $LoadedCopyWith<$Res> {
   _$LoadedCopyWithImpl(Loaded _value, $Res Function(Loaded) _then)
       : super(_value, (v) => _then(v as Loaded));
@@ -469,76 +314,42 @@ class _$LoadedCopyWithImpl<$Res> extends _$UserProfileStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object userData = freezed,
-    Object fullName = freezed,
-    Object investmentBalance = freezed,
-    Object profilePicture = freezed,
+    Object recentTransactions = freezed,
   }) {
     return _then(Loaded(
-      userData:
-          userData == freezed ? _value.userData : userData as UserDetailsData,
-      fullName: fullName == freezed ? _value.fullName : fullName as String,
-      investmentBalance: investmentBalance == freezed
-          ? _value.investmentBalance
-          : investmentBalance as String,
-      profilePicture: profilePicture == freezed
-          ? _value.profilePicture
-          : profilePicture as String,
+      recentTransactions: recentTransactions == freezed
+          ? _value.recentTransactions
+          : recentTransactions as List<RecentTransaction>,
     ));
   }
 }
 
 /// @nodoc
 class _$Loaded implements Loaded {
-  _$Loaded(
-      {@required this.userData,
-      @required this.fullName,
-      @required this.investmentBalance,
-      @required this.profilePicture})
-      : assert(userData != null),
-        assert(fullName != null),
-        assert(investmentBalance != null),
-        assert(profilePicture != null);
+  _$Loaded({@required this.recentTransactions})
+      : assert(recentTransactions != null);
 
   @override
-  final UserDetailsData userData;
-  @override
-  final String fullName;
-  @override
-  final String investmentBalance;
-  @override
-  final String profilePicture;
+  final List<RecentTransaction> recentTransactions;
 
   @override
   String toString() {
-    return 'UserProfileState.loaded(userData: $userData, fullName: $fullName, investmentBalance: $investmentBalance, profilePicture: $profilePicture)';
+    return 'RecentTransactionState.loaded(recentTransactions: $recentTransactions)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is Loaded &&
-            (identical(other.userData, userData) ||
+            (identical(other.recentTransactions, recentTransactions) ||
                 const DeepCollectionEquality()
-                    .equals(other.userData, userData)) &&
-            (identical(other.fullName, fullName) ||
-                const DeepCollectionEquality()
-                    .equals(other.fullName, fullName)) &&
-            (identical(other.investmentBalance, investmentBalance) ||
-                const DeepCollectionEquality()
-                    .equals(other.investmentBalance, investmentBalance)) &&
-            (identical(other.profilePicture, profilePicture) ||
-                const DeepCollectionEquality()
-                    .equals(other.profilePicture, profilePicture)));
+                    .equals(other.recentTransactions, recentTransactions)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(userData) ^
-      const DeepCollectionEquality().hash(fullName) ^
-      const DeepCollectionEquality().hash(investmentBalance) ^
-      const DeepCollectionEquality().hash(profilePicture);
+      const DeepCollectionEquality().hash(recentTransactions);
 
   @override
   $LoadedCopyWith<Loaded> get copyWith =>
@@ -549,16 +360,14 @@ class _$Loaded implements Loaded {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required
-        Result loaded(UserDetailsData userData, String fullName,
-            String investmentBalance, String profilePicture),
+    @required Result loaded(List<RecentTransaction> recentTransactions),
     @required Result error(String message),
   }) {
     assert(initial != null);
     assert(loading != null);
     assert(loaded != null);
     assert(error != null);
-    return loaded(userData, fullName, investmentBalance, profilePicture);
+    return loaded(recentTransactions);
   }
 
   @override
@@ -566,14 +375,13 @@ class _$Loaded implements Loaded {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(UserDetailsData userData, String fullName,
-        String investmentBalance, String profilePicture),
+    Result loaded(List<RecentTransaction> recentTransactions),
     Result error(String message),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (loaded != null) {
-      return loaded(userData, fullName, investmentBalance, profilePicture);
+      return loaded(recentTransactions);
     }
     return orElse();
   }
@@ -610,17 +418,11 @@ class _$Loaded implements Loaded {
   }
 }
 
-abstract class Loaded implements UserProfileState {
-  factory Loaded(
-      {@required UserDetailsData userData,
-      @required String fullName,
-      @required String investmentBalance,
-      @required String profilePicture}) = _$Loaded;
+abstract class Loaded implements RecentTransactionState {
+  factory Loaded({@required List<RecentTransaction> recentTransactions}) =
+      _$Loaded;
 
-  UserDetailsData get userData;
-  String get fullName;
-  String get investmentBalance;
-  String get profilePicture;
+  List<RecentTransaction> get recentTransactions;
   $LoadedCopyWith<Loaded> get copyWith;
 }
 
@@ -632,7 +434,8 @@ abstract class $ErrorCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ErrorCopyWithImpl<$Res> extends _$UserProfileStateCopyWithImpl<$Res>
+class _$ErrorCopyWithImpl<$Res>
+    extends _$RecentTransactionStateCopyWithImpl<$Res>
     implements $ErrorCopyWith<$Res> {
   _$ErrorCopyWithImpl(Error _value, $Res Function(Error) _then)
       : super(_value, (v) => _then(v as Error));
@@ -659,7 +462,7 @@ class _$Error implements Error {
 
   @override
   String toString() {
-    return 'UserProfileState.error(message: $message)';
+    return 'RecentTransactionState.error(message: $message)';
   }
 
   @override
@@ -683,9 +486,7 @@ class _$Error implements Error {
   Result when<Result extends Object>({
     @required Result initial(),
     @required Result loading(),
-    @required
-        Result loaded(UserDetailsData userData, String fullName,
-            String investmentBalance, String profilePicture),
+    @required Result loaded(List<RecentTransaction> recentTransactions),
     @required Result error(String message),
   }) {
     assert(initial != null);
@@ -700,8 +501,7 @@ class _$Error implements Error {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(UserDetailsData userData, String fullName,
-        String investmentBalance, String profilePicture),
+    Result loaded(List<RecentTransaction> recentTransactions),
     Result error(String message),
     @required Result orElse(),
   }) {
@@ -744,7 +544,7 @@ class _$Error implements Error {
   }
 }
 
-abstract class Error implements UserProfileState {
+abstract class Error implements RecentTransactionState {
   factory Error(String message) = _$Error;
 
   String get message;

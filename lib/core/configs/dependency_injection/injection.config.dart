@@ -41,6 +41,7 @@ import '../../utils/network_util.dart';
 import '../../../ui/views/main/investment/new_investment/view_model/new_investment_bloc.dart';
 import '../../../ui/views/main/loans/personal_info/view_model/personal_info_bloc.dart';
 import '../../../ui/views/main/loans/provide_bvn/view_model/provide_bvn_bloc.dart';
+import '../../../ui/views/main/history/view_model/recent_transaction_cubit.dart';
 import 'register_modules.dart';
 import '../../../ui/views/main/loans/residence/view_model/residence_bloc.dart';
 import '../../datasources/user/user_local_datasource.dart';
@@ -116,6 +117,8 @@ Future<GetIt> $initGetIt(
       () => PersonalInfoBloc(get<UserRepo>(), get<UserRemoteDataSource>()));
   gh.lazySingleton<ProvideBvnBloc>(
       () => ProvideBvnBloc(get<BankRepo>(), get<LocalStorageRepo>()));
+  gh.lazySingleton<RecentTransactionCubit>(
+      () => RecentTransactionCubit(get<UserRepo>()));
   gh.lazySingleton<ResidenceBloc>(
       () => ResidenceBloc(get<UserRepo>(), get<UserRemoteDataSource>()));
   gh.factory<UserProfileBloc>(
