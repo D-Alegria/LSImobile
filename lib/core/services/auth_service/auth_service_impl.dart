@@ -46,17 +46,22 @@ class AuthServiceImpl implements AuthService {
           (failure) => left(failure),
           (success) async {
             final result = LoginUserResponse.fromJson(success);
-            await _userRepo.saveUserDataLocal(User(
-              id: result.userId,
-              email: result.data.email,
-              fullName: result.data.fullName,
-              isAuthenticated: true,
-              isVerified: true,
-              password: request.password,
-              token: result.token,
-              profilePicture: result.data.profilePicture,
-            ));
-            return right(unit);
+
+            if (result.status) {
+              await _userRepo.saveUserDataLocal(User(
+                id: result.userId,
+                email: result.data.email,
+                fullName: result.data.fullName,
+                isAuthenticated: true,
+                isVerified: true,
+                password: request.password,
+                token: result.token,
+                profilePicture: result.data.profilePicture,
+              ));
+              return right(unit);
+            } else {
+              return left(RemoteGlitch(message: result.message));
+            }
           },
         );
       },
@@ -76,8 +81,8 @@ class AuthServiceImpl implements AuthService {
           (failure) => left(failure),
           (success) async {
             final result = RegisterUserResponse.fromJson(success);
-            await _userRepo.saveUserDataLocal(
-              User(
+            if (result.status) {
+              await _userRepo.saveUserDataLocal(User(
                 id: result.userId,
                 email: request.profile.email,
                 fullName: request.profile.fullName,
@@ -86,9 +91,13 @@ class AuthServiceImpl implements AuthService {
                 isVerified: true,
                 password: request.profile.password,
                 token: result.token,
-              ),
-            );
-            return right(unit);
+              ));
+              return right(unit);
+            } else {
+              if (result.responseCode == "04")
+                return left(UnAuthenticatedGlitch(message: result.message));
+              return left(RemoteGlitch(message: result.message));
+            }
           },
         );
       },
@@ -108,8 +117,12 @@ class AuthServiceImpl implements AuthService {
           (failure) => left(failure),
           (success) async {
             final result = SendOTPResponse.fromJson(success);
-            await _localStorageRepo.saveString("OTP", result.otp);
-            return right(unit);
+            if (result.status) {
+              await _localStorageRepo.saveString("OTP", result.otp);
+              return right(unit);
+            } else {
+              return left(RemoteGlitch(message: result.message));
+            }
           },
         );
       },
@@ -128,8 +141,11 @@ class AuthServiceImpl implements AuthService {
         return response.fold(
           (failure) => left(failure),
           (success) async {
-            VerifyOTPResponse.fromJson(success);
-            return right(unit);
+            final result = VerifyOTPResponse.fromJson(success);
+            if (result.status)
+              return right(unit);
+            else
+              return left(RemoteGlitch(message: result.message));
           },
         );
       },
@@ -149,8 +165,12 @@ class AuthServiceImpl implements AuthService {
         return response.fold(
           (failure) => left(failure),
           (success) async {
-            VerifyOTPResponse.fromJson(success);
-            return right(unit);
+            // TODO fix Reset password Response
+            final result = VerifyOTPResponse.fromJson(success);
+            if (result.status)
+              return right(unit);
+            else
+              return left(RemoteGlitch(message: result.message));
           },
         );
       },

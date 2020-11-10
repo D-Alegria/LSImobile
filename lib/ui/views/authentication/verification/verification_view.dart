@@ -122,14 +122,17 @@ class VerificationView extends StatelessWidget {
         listener: (context, state) => state.authFailureOrSuccess.fold(
           () => null,
           (either) => either.fold(
-            (failure) => FlushbarHelper.createError(
-              message: failure.maybeMap(
-                networkGlitch: (val) => val.message,
-                serverGlitch: (val) => val.message,
-                orElse: () => null,
+            (failure) => failure.maybeMap(
+              orElse: () => FlushbarHelper.createError(
+                message: failure.message,
+                duration: new Duration(seconds: 3),
+              ).show(context),
+              unAuthenticatedGlitch: (_) =>
+                  context.navigator.pushAndRemoveUntil(
+                Routes.authWrapper,
+                (route) => false,
               ),
-              duration: new Duration(seconds: 3),
-            ).show(context),
+            ),
             (success) => context.navigator.pushAndRemoveUntil(
               Routes.mainView,
               (route) => false,
