@@ -35,6 +35,7 @@ class _NoInvestmentViewState extends State<NoInvestmentView> {
         elevation: 0,
         backgroundColor: ColorStyles.white,
         centerTitle: false,
+        brightness: Brightness.light,
         actions: [
           sharedIconButton(
             context: context,

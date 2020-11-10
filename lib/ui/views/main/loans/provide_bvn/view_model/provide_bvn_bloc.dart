@@ -91,7 +91,9 @@ class ProvideBvnBloc extends Bloc<ProvideBvnEvent, ProvideBvnState> {
           submitFailureOrSuccess: None(),
         );
       },
-      resendOtp: (ResendOtp value) async* {},
+      resendOtp: (ResendOtp value) async* {
+
+      },
       otpChanged: (OtpChanged value) async* {
         yield state.copyWith(
           otp: value.otp,

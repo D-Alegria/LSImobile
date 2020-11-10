@@ -27,6 +27,7 @@ class _InvestmentProductsViewState extends State<InvestmentProductsView> {
         elevation: 0,
         backgroundColor: ColorStyles.white,
         centerTitle: false,
+        brightness: Brightness.light,
         title: Text(
           "Investment Products",
           style: TextStyle(

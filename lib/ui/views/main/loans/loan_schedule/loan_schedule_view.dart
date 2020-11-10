@@ -105,34 +105,47 @@ class _LoanScheduleViewState extends State<LoanScheduleView> {
                   ],
                 ),
                 Expanded(
-                  child: ListView(
-                    children: [
-                      Table(
-                        border: TableBorder(
-                          bottom: BorderSide(
-                            color: ColorStyles.black.withOpacity(0.1),
-                            width: 1,
+                  child: e.schedule.length == 0
+                      ? Container(
+                          child: Center(
+                            child: Text(
+                              "Schedule will be available once loan is Active",
+                              style: GoogleFonts.workSans(
+                                fontWeight: FontWeight.w500,
+                                color: ColorStyles.black,
+                                fontSize: SizeConfig.textSize(context, 4.3),
+                              ),
+                            ),
                           ),
-                          horizontalInside: BorderSide(
-                            color: ColorStyles.black.withOpacity(0.1),
-                            width: 1,
-                          ),
+                        )
+                      : ListView(
+                          children: [
+                            Table(
+                              border: TableBorder(
+                                bottom: BorderSide(
+                                  color: ColorStyles.black.withOpacity(0.1),
+                                  width: 1,
+                                ),
+                                horizontalInside: BorderSide(
+                                  color: ColorStyles.black.withOpacity(0.1),
+                                  width: 1,
+                                ),
+                              ),
+                              children: List.generate(
+                                e.schedule.length,
+                                (index) => _buildLoanScheduleItem(
+                                  context,
+                                  index,
+                                  e.schedule.length.toString(),
+                                  e.schedule[index].termRepayment,
+                                  e.schedule[index].isPaid == "0"
+                                      ? Paid.close
+                                      : Paid.check,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        children: List.generate(
-                          e.schedule.length,
-                          (index) => _buildLoanScheduleItem(
-                            context,
-                            index,
-                            e.schedule.length.toString(),
-                            e.schedule[index].termRepayment,
-                            e.schedule[index].isPaid == "0"
-                                ? Paid.close
-                                : Paid.check,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
               ],
             ),

@@ -710,13 +710,7 @@ class _SharedDateTimeFieldState extends State<SharedDateTimeField> {
                     int.parse(widget.initialValue.split('-')[1]),
                     int.parse(widget.initialValue.split('-')[2]),
                   ),
-            firstDate: widget.initialValue.isEmpty
-                ? DateTime.now()
-                : DateTime(
-                    int.parse(widget.initialValue.split('-')[0]),
-                    int.parse(widget.initialValue.split('-')[1]),
-                    int.parse(widget.initialValue.split('-')[2]),
-                  ),
+            firstDate: DateTime(1970),
             lastDate: DateTime(2300),
             builder: (BuildContext context, Widget child) {
               return Theme(

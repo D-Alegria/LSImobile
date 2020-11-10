@@ -23,6 +23,7 @@ class NewInvestmentView extends StatelessWidget {
         elevation: 0,
         backgroundColor: ColorStyles.white,
         centerTitle: false,
+        brightness: Brightness.light,
         iconTheme: IconThemeData(color: ColorStyles.black),
         title: Text(
           "New Investment",

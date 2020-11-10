@@ -49,7 +49,8 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                     SizedBox(height: SizeConfig.yMargin(context, 3)),
                     sharedDropDownFormField<String>(
                       value: state.banks
-                          .where((element) => element.bankCode == state.bankName)
+                          .where(
+                              (element) => element.bankCode == state.bankName)
                           .first
                           .name,
                       items: state.banks.map((e) => e.name).toList(),
@@ -102,6 +103,7 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                       text: "Submit",
                       minWidth: SizeConfig.xMargin(context, 90),
                     ),
+                    SizedBox(height: SizeConfig.yMargin(context, 3)),
                     state.accountName.isEmpty
                         ? Container()
                         : sharedRaisedButton(

@@ -14,6 +14,7 @@ class InvestmentStatementView extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: ColorStyles.white,
+        brightness: Brightness.light,
         iconTheme: IconThemeData(color: ColorStyles.black),
         centerTitle: false,
         title: Text(

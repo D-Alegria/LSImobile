@@ -40,6 +40,7 @@ class InvestmentPlanView extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: ColorStyles.white,
+        brightness: Brightness.light,
         centerTitle: false,
         iconTheme: IconThemeData(color: ColorStyles.black),
       ),

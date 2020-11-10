@@ -11,6 +11,7 @@ class FundInvestmentView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        brightness: Brightness.light,
         backgroundColor: ColorStyles.grey6,
         iconTheme: IconThemeData(color: ColorStyles.black),
         centerTitle: false,

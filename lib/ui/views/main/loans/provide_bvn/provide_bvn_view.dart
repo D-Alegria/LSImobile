@@ -41,7 +41,7 @@ class _ProvideBVNViewState extends State<ProvideBVNView> {
             child: Container(
               padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: VerifyBVNForm(),
+              child: VerifyBVNForm(fullName: fullName),
             ),
           );
         },

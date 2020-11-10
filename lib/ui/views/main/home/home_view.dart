@@ -28,9 +28,7 @@ class HomeView extends StatelessWidget {
             ),
             child: ListView(
               children: [
-                SizedBox(
-                  height: SizeConfig.yMargin(context, 5),
-                ),
+                SizedBox(height: SizeConfig.yMargin(context, 5)),
                 Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: SizeConfig.xMargin(context, 1.5),
