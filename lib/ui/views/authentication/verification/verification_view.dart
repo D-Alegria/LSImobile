@@ -127,11 +127,17 @@ class VerificationView extends StatelessWidget {
                 message: failure.message,
                 duration: new Duration(seconds: 3),
               ).show(context),
-              unAuthenticatedGlitch: (_) =>
-                  context.navigator.pushAndRemoveUntil(
-                Routes.authWrapper,
-                (route) => false,
-              ),
+              unAuthenticatedGlitch: (e) async {
+                FlushbarHelper.createError(
+                  message: failure.message,
+                  duration: Duration(seconds: 3),
+                ).show(context);
+                await Future.delayed(Duration(seconds: 3));
+                return context.navigator.pushAndRemoveUntil(
+                  Routes.authWrapper,
+                  (route) => false,
+                );
+              },
             ),
             (success) => context.navigator.pushAndRemoveUntil(
               Routes.mainView,
