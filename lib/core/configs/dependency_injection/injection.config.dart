@@ -127,7 +127,6 @@ Future<GetIt> $initGetIt(
         get<UserRemoteDataSource>(),
         get<BankRepo>(),
         get<LoanRepo>(),
-        get<UserRepo>(),
       ));
   gh.lazySingleton<AccountsCardsBloc>(() => AccountsCardsBloc(get<BankRepo>()));
   gh.lazySingleton<AuthFormBloc>(

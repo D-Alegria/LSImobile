@@ -11,7 +11,7 @@ abstract class AccountInfoEvent with _$AccountInfoEvent {
   const factory AccountInfoEvent.submitAccountInfoForm() =
       SubmitAccountInfoForm;
 
-  const factory AccountInfoEvent.applyForLoan() = ApplyForLoan;
+  const factory AccountInfoEvent.applyForLoan(String bvn) = ApplyForLoan;
 
   const factory AccountInfoEvent.init(
       {LoanRequest request, LoanProduct loanProduct}) = Init;

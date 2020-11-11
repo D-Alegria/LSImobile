@@ -12,7 +12,6 @@ import 'package:lsi_mobile/core/models/requests/loan_application/loan_request.da
 import 'package:lsi_mobile/core/models/requests/resolve_account/resolve_account_request.dart';
 import 'package:lsi_mobile/core/repositories/bank/bank_repo.dart';
 import 'package:lsi_mobile/core/repositories/loan/loan_repo.dart';
-import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
 import 'package:meta/meta.dart';
 
 part 'account_info_bloc.freezed.dart';
@@ -26,10 +25,8 @@ class AccountInfoBloc extends Bloc<AccountInfoEvent, AccountInfoState> {
   final UserRemoteDataSource _userRemoteDataSource;
   final BankRepo _bankRepo;
   final LoanRepo _loanRepo;
-  final UserRepo _userRepo;
 
-  AccountInfoBloc(this._userRemoteDataSource, this._bankRepo, this._loanRepo,
-      this._userRepo)
+  AccountInfoBloc(this._userRemoteDataSource, this._bankRepo, this._loanRepo)
       : super(AccountInfoState.initial());
 
   @override
@@ -67,7 +64,8 @@ class AccountInfoBloc extends Bloc<AccountInfoEvent, AccountInfoState> {
             },
             (r) async* {
               yield state.copyWith(
-                accountName: r,
+                accountName: r.data.accountName,
+                bankId: r.data.bankId.toString(),
               );
             },
           );
@@ -133,18 +131,15 @@ class AccountInfoBloc extends Bloc<AccountInfoEvent, AccountInfoState> {
           );
 
           print('sending');
-          final user = await _userRepo.user;
 
           Account account = Account(
-            id: "",
+            id: state.bankId,
             accountNo: state.accountNumber,
             accountName: state.accountName,
-            bvn: user.bvn,
+            bvn: e.bvn,
           );
 
-          Request r = Request(
-            amount: "",
-            tenor: "",
+          Request r = state.loanRequest.request.copyWith(
             productId: state.loanProduct.loanProductId,
           );
 
@@ -167,10 +162,4 @@ class AccountInfoBloc extends Bloc<AccountInfoEvent, AccountInfoState> {
       },
     );
   }
-}
-
-String nullCheck(String value, List<Value> list) {
-  if (value == null) return null;
-  if (list.where((e) => e.id == value).isEmpty) return null;
-  return value;
 }

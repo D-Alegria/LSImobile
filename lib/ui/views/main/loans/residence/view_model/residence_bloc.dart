@@ -9,6 +9,7 @@ import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/dto/value/value.dart';
 import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
 import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
+import 'package:lsi_mobile/core/utils/function_util.dart';
 import 'package:meta/meta.dart';
 
 part 'residence_bloc.freezed.dart';
@@ -163,6 +164,22 @@ class ResidenceBloc extends Bloc<ResidenceEvent, ResidenceState> {
           },
         );
 
+        final lga = nullCheck(e.data.homeAddress.homeState, state.states);
+        if (lga != null) {
+          final lgas = await _userRemoteDataSource.getLGAS(lga);
+          yield* lgas.fold(
+            (l) async* {
+              print(l.message);
+            },
+            (r) async* {
+              yield state.copyWith(
+                lgas: r,
+                lga: nullCheck(e.data.homeAddress.homeLga, r) ?? "",
+              );
+            },
+          );
+        }
+
         yield state.copyWith(
           typeOfResidence: nullCheck(
                   e.data.homeAddress.natureOfAccommodation, state.residences) ??
@@ -174,10 +191,4 @@ class ResidenceBloc extends Bloc<ResidenceEvent, ResidenceState> {
       },
     );
   }
-}
-
-String nullCheck(String value, List<Value> list) {
-  if (value == null) return null;
-  if (list.where((e) => e.id == value).isEmpty) return null;
-  return value;
 }

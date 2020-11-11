@@ -8,7 +8,7 @@ abstract class LoanProductState with _$LoanProductState {
 
   factory LoanProductState.loaded({
     @required List<LoanProduct> loanProducts,
-    NextForm nextForm,
+    @nullable NextForm nextForm,
     int selected,
   }) = Loaded;
 

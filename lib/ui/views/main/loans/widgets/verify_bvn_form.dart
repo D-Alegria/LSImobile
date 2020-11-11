@@ -7,7 +7,6 @@ import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/loans/provide_bvn/view_model/provide_bvn_bloc.dart';
-import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_bloc.dart';
 
 class VerifyBVNForm extends StatelessWidget {
   final String fullName;
@@ -22,10 +21,7 @@ class VerifyBVNForm extends StatelessWidget {
           () => null,
           (either) => either.fold(
             (l) => null,
-            (r) {
-              context.bloc<UserProfileBloc>().add(GetUserDetails());
-              return context.navigator.pushPersonalInfoFormView();
-            },
+            (r) => context.navigator.pushPersonalInfoFormView(),
           ),
         );
       },

@@ -30,12 +30,6 @@ class _LoanProductViewState extends State<LoanProductView> {
   }
 
   @override
-  void dispose() {
-    context.bloc<LoanProductCubit>().close();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -54,7 +48,7 @@ class _LoanProductViewState extends State<LoanProductView> {
         ),
       ),
       body: BlocConsumer<LoanProductCubit, LoanProductState>(
-        builder: (context, state) => state.maybeMap(
+        builder: (context, state) => state.map(
           initial: (e) => Container(),
           loading: (e) => sharedLoader(),
           loaded: (e) => Container(
@@ -71,7 +65,8 @@ class _LoanProductViewState extends State<LoanProductView> {
                 if (index % 3 == 0) {
                   return LoanProductBox(
                     title: loan.loanTitle,
-                    subText: "₦${loan.minimumAmount} - ₦${loan.maximumAmount}",
+                    subText:
+                        "₦${loan.minimumAmount} - ₦${loan.maximumAmount}",
                     duration: loan.maxLoanDuration,
                     durationColor: ColorStyles.yellow,
                     gradient: ColorStyles.greenGradient,
@@ -83,7 +78,8 @@ class _LoanProductViewState extends State<LoanProductView> {
                 } else if (index % 3 == 1) {
                   return LoanProductBox(
                     title: loan.loanTitle,
-                    subText: "₦${loan.minimumAmount} - ₦${loan.maximumAmount}",
+                    subText:
+                        "₦${loan.minimumAmount} - ₦${loan.maximumAmount}",
                     duration: loan.maxLoanDuration,
                     durationColor: ColorStyles.yellow,
                     gradient: ColorStyles.primaryGradient,
@@ -95,7 +91,8 @@ class _LoanProductViewState extends State<LoanProductView> {
                 } else {
                   return LoanProductBox(
                     title: loan.loanTitle,
-                    subText: "₦${loan.minimumAmount} - ₦${loan.maximumAmount}",
+                    subText:
+                        "₦${loan.minimumAmount} - ₦${loan.maximumAmount}",
                     duration: loan.maxLoanDuration,
                     durationColor: ColorStyles.white,
                     gradient: ColorStyles.yellowGradient,
@@ -109,12 +106,7 @@ class _LoanProductViewState extends State<LoanProductView> {
               itemCount: e.loanProducts.length,
             ),
           ),
-          error: (e) => Container(
-            child: Center(
-              child: Text(e.message),
-            ),
-          ),
-          orElse: () => Container(),
+          error: (e) => sharedErrorWidget(context, e.message),
         ),
         listener: (context, state) => state.map(
           initial: (e) => null,

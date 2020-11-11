@@ -33,7 +33,6 @@ class _PersonalInfoFormViewState extends State<PersonalInfoFormView> {
 
   @override
   Widget build(BuildContext context) {
-    print(_userDetailsRequest);
     return BlocConsumer<PersonalInfoBloc, PersonalInfoState>(
       builder: (context, state) => LoanForm(
         title: "Personal Information",

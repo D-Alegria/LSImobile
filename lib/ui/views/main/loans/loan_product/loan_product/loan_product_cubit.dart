@@ -28,7 +28,7 @@ class LoanProductCubit extends Cubit<LoanProductState> {
     var result = await _loanRepo.loanProducts;
     result.fold((l) => emit(Error(l.message)), (r) {
       loanProducts = r;
-      emit(Loaded(loanProducts: r));
+      emit(Loaded(loanProducts: r, nextForm: null));
     });
   }
 
@@ -39,37 +39,37 @@ class LoanProductCubit extends Cubit<LoanProductState> {
     var user = await _userRepo.user;
 
     if (!data.validations.bvn) {
-      emit(Loaded(
+      return emit(Loaded(
         loanProducts: loanProducts,
         nextForm: NextForm.bvn,
         selected: selected,
       ));
     } else if (!(user.isPersonalInfoFilled ?? false)) {
-      emit(Loaded(
+      return emit(Loaded(
         loanProducts: loanProducts,
         nextForm: NextForm.personalInfo,
         selected: selected,
       ));
     } else if (!(user.isEmergenceContactFilled ?? false)) {
-      emit(Loaded(
+      return emit(Loaded(
         loanProducts: loanProducts,
         nextForm: NextForm.emergencyContact,
         selected: selected,
       ));
     } else if (!(user.isEduAndEmpInfoFilled ?? false)) {
-      emit(Loaded(
+      return emit(Loaded(
         loanProducts: loanProducts,
         nextForm: NextForm.eduAndEmploy,
         selected: selected,
       ));
     } else if (!(user.isResidenceFilled ?? false)) {
-      emit(Loaded(
+      return emit(Loaded(
         loanProducts: loanProducts,
         nextForm: NextForm.residence,
         selected: selected,
       ));
     } else {
-      emit(Loaded(
+      return emit(Loaded(
         loanProducts: loanProducts,
         nextForm: NextForm.loanDetails,
         selected: selected,

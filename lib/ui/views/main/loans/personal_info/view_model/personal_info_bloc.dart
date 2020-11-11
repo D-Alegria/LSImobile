@@ -10,6 +10,7 @@ import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/core/models/dto/value/value.dart';
 import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
 import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
+import 'package:lsi_mobile/core/utils/function_util.dart';
 import 'package:meta/meta.dart';
 
 part 'personal_info_bloc.freezed.dart';
@@ -173,10 +174,4 @@ class PersonalInfoBloc extends Bloc<PersonalInfoEvent, PersonalInfoState> {
       },
     );
   }
-}
-
-String nullCheck(String value, List<Value> list) {
-  if (value == null) return null;
-  if (list.where((e) => e.id == value).isEmpty) return null;
-  return value;
 }

@@ -22,9 +22,7 @@ class LoanForm extends StatelessWidget {
         backgroundColor: ColorStyles.primaryBlue,
       ),
       body: Container(
-        decoration: BoxDecoration(
-          gradient: ColorStyles.primaryGradient,
-        ),
+        decoration: BoxDecoration(gradient: ColorStyles.primaryGradient),
         height: SizeConfig.yMargin(context, 100),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

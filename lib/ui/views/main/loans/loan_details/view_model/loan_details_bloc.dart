@@ -9,6 +9,7 @@ import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/dto/education/education.dart';
 import 'package:lsi_mobile/core/models/dto/home_address/home_address.dart';
 import 'package:lsi_mobile/core/models/dto/next_of_kin/next_of_kin.dart';
+import 'package:lsi_mobile/core/models/dto/user_details_profile/profile.dart';
 import 'package:lsi_mobile/core/models/dto/value/value.dart';
 import 'package:lsi_mobile/core/models/requests/loan_application/loan_request.dart';
 import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
@@ -51,6 +52,10 @@ class LoanDetailsBloc extends Bloc<LoanDetailsEvent, LoanDetailsState> {
 
           print('sending');
 
+          Profile profile = state.data.profile.copyWith(
+            profileImage: state.data.profile.fileName,
+          );
+
           NextOfKin nextOfKin = state.data.nextOfKin.copyWith(
             fullName: state.data.nextOfKin.nokName,
             email: state.data.nextOfKin.nokEmail,
@@ -74,8 +79,10 @@ class LoanDetailsBloc extends Bloc<LoanDetailsEvent, LoanDetailsState> {
             others: state.data.education.hasOtherQualifications,
           );
 
+          Request r = Request(amount: state.amount, tenor: state.time);
+
           request = request.copyWith(
-            profile: state.data.profile,
+            profile: profile,
             nextOfKin: nextOfKin,
             homeAddress: address,
             education: education,
@@ -87,6 +94,7 @@ class LoanDetailsBloc extends Bloc<LoanDetailsEvent, LoanDetailsState> {
             businessAddress: state.data.businessAddress,
             businessIncome: state.data.businessIncome,
             operatingExpenses: state.data.operatingExpenses,
+            request: r,
           );
 
           failureOrSuccess = right(unit);
@@ -138,10 +146,4 @@ class LoanDetailsBloc extends Bloc<LoanDetailsEvent, LoanDetailsState> {
       },
     );
   }
-}
-
-String nullCheck(String value, List<Value> list) {
-  if (value == null) return null;
-  if (list.where((e) => e.id == value).isEmpty) return null;
-  return value;
 }

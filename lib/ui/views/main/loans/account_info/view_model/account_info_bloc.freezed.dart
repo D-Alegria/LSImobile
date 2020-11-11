@@ -33,8 +33,10 @@ class _$AccountInfoEventTearOff {
   }
 
 // ignore: unused_element
-  ApplyForLoan applyForLoan() {
-    return const ApplyForLoan();
+  ApplyForLoan applyForLoan(String bvn) {
+    return ApplyForLoan(
+      bvn,
+    );
   }
 
 // ignore: unused_element
@@ -57,7 +59,7 @@ mixin _$AccountInfoEvent {
     @required Result bankNameChanged(String bankName),
     @required Result accountNumberChanged(String accountNumber),
     @required Result submitAccountInfoForm(),
-    @required Result applyForLoan(),
+    @required Result applyForLoan(String bvn),
     @required Result init(LoanRequest request, LoanProduct loanProduct),
   });
   @optionalTypeArgs
@@ -65,7 +67,7 @@ mixin _$AccountInfoEvent {
     Result bankNameChanged(String bankName),
     Result accountNumberChanged(String accountNumber),
     Result submitAccountInfoForm(),
-    Result applyForLoan(),
+    Result applyForLoan(String bvn),
     Result init(LoanRequest request, LoanProduct loanProduct),
     @required Result orElse(),
   });
@@ -169,7 +171,7 @@ class _$BankNameChanged implements BankNameChanged {
     @required Result bankNameChanged(String bankName),
     @required Result accountNumberChanged(String accountNumber),
     @required Result submitAccountInfoForm(),
-    @required Result applyForLoan(),
+    @required Result applyForLoan(String bvn),
     @required Result init(LoanRequest request, LoanProduct loanProduct),
   }) {
     assert(bankNameChanged != null);
@@ -186,7 +188,7 @@ class _$BankNameChanged implements BankNameChanged {
     Result bankNameChanged(String bankName),
     Result accountNumberChanged(String accountNumber),
     Result submitAccountInfoForm(),
-    Result applyForLoan(),
+    Result applyForLoan(String bvn),
     Result init(LoanRequest request, LoanProduct loanProduct),
     @required Result orElse(),
   }) {
@@ -305,7 +307,7 @@ class _$AccountNumberChanged implements AccountNumberChanged {
     @required Result bankNameChanged(String bankName),
     @required Result accountNumberChanged(String accountNumber),
     @required Result submitAccountInfoForm(),
-    @required Result applyForLoan(),
+    @required Result applyForLoan(String bvn),
     @required Result init(LoanRequest request, LoanProduct loanProduct),
   }) {
     assert(bankNameChanged != null);
@@ -322,7 +324,7 @@ class _$AccountNumberChanged implements AccountNumberChanged {
     Result bankNameChanged(String bankName),
     Result accountNumberChanged(String accountNumber),
     Result submitAccountInfoForm(),
-    Result applyForLoan(),
+    Result applyForLoan(String bvn),
     Result init(LoanRequest request, LoanProduct loanProduct),
     @required Result orElse(),
   }) {
@@ -418,7 +420,7 @@ class _$SubmitAccountInfoForm implements SubmitAccountInfoForm {
     @required Result bankNameChanged(String bankName),
     @required Result accountNumberChanged(String accountNumber),
     @required Result submitAccountInfoForm(),
-    @required Result applyForLoan(),
+    @required Result applyForLoan(String bvn),
     @required Result init(LoanRequest request, LoanProduct loanProduct),
   }) {
     assert(bankNameChanged != null);
@@ -435,7 +437,7 @@ class _$SubmitAccountInfoForm implements SubmitAccountInfoForm {
     Result bankNameChanged(String bankName),
     Result accountNumberChanged(String accountNumber),
     Result submitAccountInfoForm(),
-    Result applyForLoan(),
+    Result applyForLoan(String bvn),
     Result init(LoanRequest request, LoanProduct loanProduct),
     @required Result orElse(),
   }) {
@@ -490,6 +492,7 @@ abstract class $ApplyForLoanCopyWith<$Res> {
   factory $ApplyForLoanCopyWith(
           ApplyForLoan value, $Res Function(ApplyForLoan) then) =
       _$ApplyForLoanCopyWithImpl<$Res>;
+  $Res call({String bvn});
 }
 
 /// @nodoc
@@ -502,24 +505,44 @@ class _$ApplyForLoanCopyWithImpl<$Res>
 
   @override
   ApplyForLoan get _value => super._value as ApplyForLoan;
+
+  @override
+  $Res call({
+    Object bvn = freezed,
+  }) {
+    return _then(ApplyForLoan(
+      bvn == freezed ? _value.bvn : bvn as String,
+    ));
+  }
 }
 
 /// @nodoc
 class _$ApplyForLoan implements ApplyForLoan {
-  const _$ApplyForLoan();
+  const _$ApplyForLoan(this.bvn) : assert(bvn != null);
+
+  @override
+  final String bvn;
 
   @override
   String toString() {
-    return 'AccountInfoEvent.applyForLoan()';
+    return 'AccountInfoEvent.applyForLoan(bvn: $bvn)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is ApplyForLoan);
+    return identical(this, other) ||
+        (other is ApplyForLoan &&
+            (identical(other.bvn, bvn) ||
+                const DeepCollectionEquality().equals(other.bvn, bvn)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(bvn);
+
+  @override
+  $ApplyForLoanCopyWith<ApplyForLoan> get copyWith =>
+      _$ApplyForLoanCopyWithImpl<ApplyForLoan>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -527,7 +550,7 @@ class _$ApplyForLoan implements ApplyForLoan {
     @required Result bankNameChanged(String bankName),
     @required Result accountNumberChanged(String accountNumber),
     @required Result submitAccountInfoForm(),
-    @required Result applyForLoan(),
+    @required Result applyForLoan(String bvn),
     @required Result init(LoanRequest request, LoanProduct loanProduct),
   }) {
     assert(bankNameChanged != null);
@@ -535,7 +558,7 @@ class _$ApplyForLoan implements ApplyForLoan {
     assert(submitAccountInfoForm != null);
     assert(applyForLoan != null);
     assert(init != null);
-    return applyForLoan();
+    return applyForLoan(bvn);
   }
 
   @override
@@ -544,13 +567,13 @@ class _$ApplyForLoan implements ApplyForLoan {
     Result bankNameChanged(String bankName),
     Result accountNumberChanged(String accountNumber),
     Result submitAccountInfoForm(),
-    Result applyForLoan(),
+    Result applyForLoan(String bvn),
     Result init(LoanRequest request, LoanProduct loanProduct),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (applyForLoan != null) {
-      return applyForLoan();
+      return applyForLoan(bvn);
     }
     return orElse();
   }
@@ -591,7 +614,10 @@ class _$ApplyForLoan implements ApplyForLoan {
 }
 
 abstract class ApplyForLoan implements AccountInfoEvent {
-  const factory ApplyForLoan() = _$ApplyForLoan;
+  const factory ApplyForLoan(String bvn) = _$ApplyForLoan;
+
+  String get bvn;
+  $ApplyForLoanCopyWith<ApplyForLoan> get copyWith;
 }
 
 /// @nodoc
@@ -678,7 +704,7 @@ class _$Init implements Init {
     @required Result bankNameChanged(String bankName),
     @required Result accountNumberChanged(String accountNumber),
     @required Result submitAccountInfoForm(),
-    @required Result applyForLoan(),
+    @required Result applyForLoan(String bvn),
     @required Result init(LoanRequest request, LoanProduct loanProduct),
   }) {
     assert(bankNameChanged != null);
@@ -695,7 +721,7 @@ class _$Init implements Init {
     Result bankNameChanged(String bankName),
     Result accountNumberChanged(String accountNumber),
     Result submitAccountInfoForm(),
-    Result applyForLoan(),
+    Result applyForLoan(String bvn),
     Result init(LoanRequest request, LoanProduct loanProduct),
     @required Result orElse(),
   }) {
@@ -757,6 +783,7 @@ class _$AccountInfoStateTearOff {
   _AccountInfoState call(
       {LoanRequest loanRequest,
       LoanProduct loanProduct,
+      @required String bankId,
       @required String bankName,
       @required List<Value> banks,
       @required String accountNumber,
@@ -768,6 +795,7 @@ class _$AccountInfoStateTearOff {
     return _AccountInfoState(
       loanRequest: loanRequest,
       loanProduct: loanProduct,
+      bankId: bankId,
       bankName: bankName,
       banks: banks,
       accountNumber: accountNumber,
@@ -788,6 +816,7 @@ const $AccountInfoState = _$AccountInfoStateTearOff();
 mixin _$AccountInfoState {
   LoanRequest get loanRequest;
   LoanProduct get loanProduct;
+  String get bankId;
   String get bankName;
   List<Value> get banks;
   String get accountNumber;
@@ -808,6 +837,7 @@ abstract class $AccountInfoStateCopyWith<$Res> {
   $Res call(
       {LoanRequest loanRequest,
       LoanProduct loanProduct,
+      String bankId,
       String bankName,
       List<Value> banks,
       String accountNumber,
@@ -833,6 +863,7 @@ class _$AccountInfoStateCopyWithImpl<$Res>
   $Res call({
     Object loanRequest = freezed,
     Object loanProduct = freezed,
+    Object bankId = freezed,
     Object bankName = freezed,
     Object banks = freezed,
     Object accountNumber = freezed,
@@ -849,6 +880,7 @@ class _$AccountInfoStateCopyWithImpl<$Res>
       loanProduct: loanProduct == freezed
           ? _value.loanProduct
           : loanProduct as LoanProduct,
+      bankId: bankId == freezed ? _value.bankId : bankId as String,
       bankName: bankName == freezed ? _value.bankName : bankName as String,
       banks: banks == freezed ? _value.banks : banks as List<Value>,
       accountNumber: accountNumber == freezed
@@ -892,6 +924,7 @@ abstract class _$AccountInfoStateCopyWith<$Res>
   $Res call(
       {LoanRequest loanRequest,
       LoanProduct loanProduct,
+      String bankId,
       String bankName,
       List<Value> banks,
       String accountNumber,
@@ -920,6 +953,7 @@ class __$AccountInfoStateCopyWithImpl<$Res>
   $Res call({
     Object loanRequest = freezed,
     Object loanProduct = freezed,
+    Object bankId = freezed,
     Object bankName = freezed,
     Object banks = freezed,
     Object accountNumber = freezed,
@@ -936,6 +970,7 @@ class __$AccountInfoStateCopyWithImpl<$Res>
       loanProduct: loanProduct == freezed
           ? _value.loanProduct
           : loanProduct as LoanProduct,
+      bankId: bankId == freezed ? _value.bankId : bankId as String,
       bankName: bankName == freezed ? _value.bankName : bankName as String,
       banks: banks == freezed ? _value.banks : banks as List<Value>,
       accountNumber: accountNumber == freezed
@@ -964,6 +999,7 @@ class _$_AccountInfoState implements _AccountInfoState {
   const _$_AccountInfoState(
       {this.loanRequest,
       this.loanProduct,
+      @required this.bankId,
       @required this.bankName,
       @required this.banks,
       @required this.accountNumber,
@@ -972,7 +1008,8 @@ class _$_AccountInfoState implements _AccountInfoState {
       @required this.isSubmitting,
       @required this.submitAccountInfoFailureOrSuccess,
       @required this.applyForLoanFailureOrSuccess})
-      : assert(bankName != null),
+      : assert(bankId != null),
+        assert(bankName != null),
         assert(banks != null),
         assert(accountNumber != null),
         assert(accountName != null),
@@ -985,6 +1022,8 @@ class _$_AccountInfoState implements _AccountInfoState {
   final LoanRequest loanRequest;
   @override
   final LoanProduct loanProduct;
+  @override
+  final String bankId;
   @override
   final String bankName;
   @override
@@ -1004,7 +1043,7 @@ class _$_AccountInfoState implements _AccountInfoState {
 
   @override
   String toString() {
-    return 'AccountInfoState(loanRequest: $loanRequest, loanProduct: $loanProduct, bankName: $bankName, banks: $banks, accountNumber: $accountNumber, accountName: $accountName, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, submitAccountInfoFailureOrSuccess: $submitAccountInfoFailureOrSuccess, applyForLoanFailureOrSuccess: $applyForLoanFailureOrSuccess)';
+    return 'AccountInfoState(loanRequest: $loanRequest, loanProduct: $loanProduct, bankId: $bankId, bankName: $bankName, banks: $banks, accountNumber: $accountNumber, accountName: $accountName, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, submitAccountInfoFailureOrSuccess: $submitAccountInfoFailureOrSuccess, applyForLoanFailureOrSuccess: $applyForLoanFailureOrSuccess)';
   }
 
   @override
@@ -1017,6 +1056,8 @@ class _$_AccountInfoState implements _AccountInfoState {
             (identical(other.loanProduct, loanProduct) ||
                 const DeepCollectionEquality()
                     .equals(other.loanProduct, loanProduct)) &&
+            (identical(other.bankId, bankId) ||
+                const DeepCollectionEquality().equals(other.bankId, bankId)) &&
             (identical(other.bankName, bankName) ||
                 const DeepCollectionEquality()
                     .equals(other.bankName, bankName)) &&
@@ -1051,6 +1092,7 @@ class _$_AccountInfoState implements _AccountInfoState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(loanRequest) ^
       const DeepCollectionEquality().hash(loanProduct) ^
+      const DeepCollectionEquality().hash(bankId) ^
       const DeepCollectionEquality().hash(bankName) ^
       const DeepCollectionEquality().hash(banks) ^
       const DeepCollectionEquality().hash(accountNumber) ^
@@ -1069,6 +1111,8 @@ abstract class _AccountInfoState implements AccountInfoState {
   const factory _AccountInfoState(
           {LoanRequest loanRequest,
           LoanProduct loanProduct,
+          @required
+              String bankId,
           @required
               String bankName,
           @required
@@ -1091,6 +1135,8 @@ abstract class _AccountInfoState implements AccountInfoState {
   LoanRequest get loanRequest;
   @override
   LoanProduct get loanProduct;
+  @override
+  String get bankId;
   @override
   String get bankName;
   @override

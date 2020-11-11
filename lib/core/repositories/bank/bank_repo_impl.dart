@@ -9,6 +9,7 @@ import 'package:lsi_mobile/core/models/requests/resolve_account/resolve_account_
 import 'package:lsi_mobile/core/models/requests/token_request/token_request.dart';
 import 'package:lsi_mobile/core/models/requests/verify_bvn_otp/verify_bvn_otp_request.dart';
 import 'package:lsi_mobile/core/models/responses/bank_account/bank_account_response.dart';
+import 'package:lsi_mobile/core/models/responses/resolve_account/resolve_account_response.dart';
 import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
 import 'package:lsi_mobile/core/utils/function_util.dart';
 
@@ -113,9 +114,9 @@ class BankRepoImpl implements BankRepo {
   }
 
   @override
-  Future<Either<Glitch, String>> resolveBankAccount(
+  Future<Either<Glitch, ResolveAccountResponse>> resolveBankAccount(
       ResolveAccountRequest request) async {
-    return await tryMethod<String>(
+    return await tryMethod<ResolveAccountResponse>(
         errorMessage: "Internal System Error Occurred:BARP-RBA",
         function: () async {
           final user = await _userRepo.user;
@@ -129,7 +130,7 @@ class BankRepoImpl implements BankRepo {
           );
           return result.fold(
             (failure) => left(ServerGlitch(message: failure.message)),
-            (success) => right(success.data.accountName),
+            (success) => right(success),
           );
         });
   }

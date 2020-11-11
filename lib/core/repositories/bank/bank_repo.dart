@@ -5,6 +5,7 @@ import 'package:lsi_mobile/core/models/requests/initiate_bvn_validation/initiate
 import 'package:lsi_mobile/core/models/requests/resolve_account/resolve_account_request.dart';
 import 'package:lsi_mobile/core/models/requests/verify_bvn_otp/verify_bvn_otp_request.dart';
 import 'package:lsi_mobile/core/models/responses/bank_account/bank_account_response.dart';
+import 'package:lsi_mobile/core/models/responses/resolve_account/resolve_account_response.dart';
 
 abstract class BankRepo {
   Future<Either<Glitch, BankAccountResponse>> get bankAccounts;
@@ -16,6 +17,6 @@ abstract class BankRepo {
 
   Future<Either<Glitch, Unit>> verifyBvnWithOTP(VerifyBVNOtpRequest request);
 
-  Future<Either<Glitch, String>> resolveBankAccount(
+  Future<Either<Glitch, ResolveAccountResponse>> resolveBankAccount(
       ResolveAccountRequest request);
 }

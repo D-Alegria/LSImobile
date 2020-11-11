@@ -113,8 +113,9 @@ class EmergencyContactBloc
         );
       },
       init: (e) async* {
-        // yield state.copyWith(isSubmitting: true);
+        yield state.copyWith(isSubmitting: true);
         // final relationShips = await _userRemoteDataSource.;
+        await Future.delayed(Duration(seconds: 1));
 
         yield state.copyWith(
           userDetails: e.data,
@@ -133,7 +134,7 @@ class EmergencyContactBloc
             Value(id: "5", name: "Nephew"),
             Value(id: "6", name: "Niece"),
           ],
-        // );
+        );
 
         // yield* relationShips.fold(
         //       (l) async* {
@@ -143,8 +144,9 @@ class EmergencyContactBloc
         //     yield state.copyWith(relationShips: r);
         //   },
         // );
+        await Future.delayed(Duration(seconds: 1));
 
-        // yield state.copyWith(
+        yield state.copyWith(
           relationShip: nullCheck(
                   e.data.nextOfKin.nokRelationship, state.relationShips) ??
               state.relationShips.first.id,

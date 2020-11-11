@@ -38,6 +38,9 @@ class _LoanDetailsViewState extends State<LoanDetailsView> {
         form: state.isSubmitting
             ? sharedLoader()
             : Form(
+                autovalidateMode: state.showErrorMessages
+                    ? AutovalidateMode.always
+                    : AutovalidateMode.disabled,
                 child: ListView(
                   children: [
                     SizedBox(height: SizeConfig.yMargin(context, 3)),
