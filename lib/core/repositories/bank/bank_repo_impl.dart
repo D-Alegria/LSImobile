@@ -68,11 +68,8 @@ class BankRepoImpl implements BankRepo {
     return await tryMethod<Unit>(
         errorMessage: "Internal System Error Occurred:BARP-IBV",
         function: () async {
-          final user = await _userRepo.user;
-          final token = user.token;
           final result = await _bankRemoteDataSource.initiateBvnValidation(
             InitiateBVNValidationRequest(
-              token: token,
               bvn: request.bvn,
               firstName: request.firstName,
               lastName: request.lastName,
@@ -85,7 +82,6 @@ class BankRepoImpl implements BankRepo {
               await _localStorageRepo.saveString(
                   "OTP", success.data.otp.toString());
               await _localStorageRepo.saveString("TNX", success.data.txnRef);
-              await _userRepo.updateUserDataLocal(bvn: request.bvn);
               return right(unit);
             } else {
               return left(ServerGlitch(message: success.data.message));
@@ -98,16 +94,22 @@ class BankRepoImpl implements BankRepo {
   Future<Either<Glitch, Unit>> verifyBvnWithOTP(
       VerifyBVNOtpRequest request) async {
     return await tryMethod<Unit>(
-        errorMessage: "Internal System Error Occurred:BARP-VBWO",
-        function: () async {
-          final result = await _bankRemoteDataSource.verifyBvnWithOtp(request);
-          return result.fold((failure) {
-            return left(ServerGlitch(message: failure.message));
-          }, (success) async {
-            await _userRepo.updateUserDataLocal(isBvnVerified: true);
-            return right(unit);
-          });
-        });
+      errorMessage: "Internal System Error Occurred:BARP-VBWO",
+      function: () async {
+        final user = await _userRepo.user;
+        final result = await _bankRemoteDataSource.verifyBvnWithOtp(
+          VerifyBVNOtpRequest(
+            token: user.token,
+            otp: request.otp,
+            txn: request.txn,
+          ),
+        );
+        return result.fold(
+          (failure) => left(ServerGlitch(message: failure.message)),
+          (success) => right(unit),
+        );
+      },
+    );
   }
 
   @override
@@ -126,8 +128,9 @@ class BankRepoImpl implements BankRepo {
             ),
           );
           return result.fold(
-              (failure) => left(ServerGlitch(message: failure.message)),
-              (success) async => right(success.data.accountName));
+            (failure) => left(ServerGlitch(message: failure.message)),
+            (success) => right(success.data.accountName),
+          );
         });
   }
 }

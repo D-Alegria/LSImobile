@@ -1,9 +1,11 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
+import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_bloc.dart';
 
 import 'const_color.dart';
 
@@ -30,52 +32,6 @@ Widget sharedRaisedButton({
           fontSize: SizeConfig.textSize(context, 5),
           fontWeight: FontWeight.w500,
         ),
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4),
-      ),
-      elevation: 8,
-      splashColor: ColorStyles.blue.withOpacity(0.2),
-      focusElevation: 4,
-    ),
-  );
-}
-
-/// ////////////////////////////////////////////////////////////////////////////
-/// [sharedLoadingRaisedButton]
-/// ////////////////////////////////////////////////////////////////////////////
-Widget sharedLoadingRaisedButton({
-  @required BuildContext context,
-  @required Color color,
-  @required String text,
-  double minWidth = 0.0,
-}) {
-  return ButtonTheme(
-    minWidth: minWidth,
-    height: SizeConfig.yMargin(context, 6),
-    child: RaisedButton(
-      onPressed: null,
-      padding: EdgeInsets.symmetric(
-        vertical: SizeConfig.yMargin(context, 2),
-      ),
-      color: color,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          CircularProgressIndicator(
-            strokeWidth: 3,
-            backgroundColor: ColorStyles.white,
-          ),
-          Text(
-            text,
-            style: GoogleFonts.workSans(
-              color: ColorStyles.white,
-              fontSize: SizeConfig.textSize(context, 5),
-              fontWeight: FontWeight.w500,
-            ),
-          )
-        ],
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(4),
@@ -772,4 +728,23 @@ class _SharedDateTimeFieldState extends State<SharedDateTimeField> {
 class AlwaysDisabledFocusNode extends FocusNode {
   @override
   bool get hasFocus => false;
+}
+
+class UserDetailsWrapper extends StatelessWidget {
+  final Widget Function(Loaded userData) loaded;
+
+  const UserDetailsWrapper({Key key, this.loaded}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<UserProfileBloc, UserProfileState>(
+      builder: (context, state) => state.map(
+        initial: (e) => Container(),
+        loading: (e) => sharedLoader(),
+        loaded: (e) => loaded(e),
+        error: (e) => sharedErrorWidget(context, e.message),
+      ),
+      listener: (context, state) => null,
+    );
+  }
 }

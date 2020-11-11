@@ -17,7 +17,6 @@ class UserAdapter extends TypeAdapter<User> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return User(
-      bvn: fields[14] as String,
       id: fields[0] as String,
       fullName: fields[1] as String,
       phoneNumber: fields[2] as String,
@@ -27,7 +26,6 @@ class UserAdapter extends TypeAdapter<User> {
       isAuthenticated: fields[6] as bool,
       isVerified: fields[7] as bool,
       token: fields[8] as String,
-      isBvnVerified: fields[13] as bool,
       isPersonalInfoFilled: fields[10] as bool,
       isEmergenceContactFilled: fields[11] as bool,
       isEduAndEmpInfoFilled: fields[12] as bool,
@@ -38,7 +36,7 @@ class UserAdapter extends TypeAdapter<User> {
   @override
   void write(BinaryWriter writer, User obj) {
     writer
-      ..writeByte(15)
+      ..writeByte(13)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -64,11 +62,7 @@ class UserAdapter extends TypeAdapter<User> {
       ..writeByte(11)
       ..write(obj.isEmergenceContactFilled)
       ..writeByte(12)
-      ..write(obj.isEduAndEmpInfoFilled)
-      ..writeByte(13)
-      ..write(obj.isBvnVerified)
-      ..writeByte(14)
-      ..write(obj.bvn);
+      ..write(obj.isEduAndEmpInfoFilled);
   }
 
   @override

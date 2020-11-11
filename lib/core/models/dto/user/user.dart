@@ -30,13 +30,8 @@ class User extends HiveObject {
   final bool isEmergenceContactFilled;
   @HiveField(12)
   final bool isEduAndEmpInfoFilled;
-  @HiveField(13)
-  final bool isBvnVerified;
-  @HiveField(14)
-  final String bvn;
 
   User({
-    this.bvn,
     this.id,
     this.fullName,
     this.phoneNumber,
@@ -46,7 +41,6 @@ class User extends HiveObject {
     this.isAuthenticated,
     this.isVerified,
     this.token,
-    this.isBvnVerified,
     this.isPersonalInfoFilled,
     this.isEmergenceContactFilled,
     this.isEduAndEmpInfoFilled,

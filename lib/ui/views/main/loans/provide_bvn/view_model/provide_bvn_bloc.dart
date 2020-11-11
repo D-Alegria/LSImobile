@@ -70,13 +70,16 @@ class ProvideBvnBloc extends Bloc<ProvideBvnEvent, ProvideBvnState> {
             submitFailureOrSuccess: None(),
           );
           var tnx = await _localStorageRepo.getString("TNX");
+          failureOrSuccess = await _bankRepo
+              .verifyBvnWithOTP(VerifyBVNOtpRequest(otp: state.otp, txn: tnx));
 
-          failureOrSuccess = await _bankRepo.verifyBvnWithOTP(
-            VerifyBVNOtpRequest(
-              otp: state.otp,
-              txn: tnx,
-            ),
-          );
+          yield* failureOrSuccess.fold((l) async* {
+            yield state.copyWith(
+              showErrorMessages: true,
+            );
+          }, (r) async* {
+            yield ProvideBvnState.initial();
+          });
         }
 
         yield state.copyWith(
@@ -91,9 +94,7 @@ class ProvideBvnBloc extends Bloc<ProvideBvnEvent, ProvideBvnState> {
           submitFailureOrSuccess: None(),
         );
       },
-      resendOtp: (ResendOtp value) async* {
-
-      },
+      resendOtp: (ResendOtp value) async* {},
       otpChanged: (OtpChanged value) async* {
         yield state.copyWith(
           otp: value.otp,

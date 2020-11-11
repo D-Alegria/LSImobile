@@ -29,9 +29,7 @@ abstract class UserLocalDataSource {
     bool isEmergenceContactFilled,
     bool isPersonalInfoFilled,
     bool isResidenceFilled,
-    bool isBvnVerified,
     String token,
-    String bvn,
   });
 
   Future<Either<Glitch, Unit>> deleteUser();
@@ -166,9 +164,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
     bool isEmergenceContactFilled,
     bool isPersonalInfoFilled,
     bool isResidenceFilled,
-    bool isBvnVerified,
     String token,
-    String bvn,
   }) async {
     try {
       var key = await encryptedKey;
@@ -192,9 +188,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
           password: password ?? oldUser.password,
           phoneNumber: phoneNumber ?? oldUser.phoneNumber,
           profilePicture: profilePicture ?? oldUser.profilePicture,
-          isBvnVerified: isBvnVerified ?? oldUser.isBvnVerified,
           token: token ?? oldUser.token,
-          bvn: bvn ?? oldUser.bvn,
         );
       } else {
         newUser = User(
@@ -208,11 +202,9 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
           isPersonalInfoFilled: isPersonalInfoFilled ?? false,
           isResidenceFilled: isResidenceFilled ?? false,
           password: password,
-          isBvnVerified: false,
           phoneNumber: phoneNumber,
           profilePicture: profilePicture,
           token: token,
-          bvn: bvn,
         );
       }
       userBox.put(Constants.userKey, newUser);

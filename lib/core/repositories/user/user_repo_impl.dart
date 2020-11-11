@@ -68,9 +68,7 @@ class UserRepoImpl implements UserRepo {
     bool isEmergenceContactFilled,
     bool isPersonalInfoFilled,
     bool isResidenceFilled,
-    bool isBvnVerified,
     String token,
-    String bvn,
   }) async {
     return await tryMethod<Unit>(
         errorMessage: "Internal System Error Occurred:URP-UUDL",
@@ -88,9 +86,7 @@ class UserRepoImpl implements UserRepo {
             isEduAndEmpInfoFilled: isEduAndEmpInfoFilled,
             isEmergenceContactFilled: isEmergenceContactFilled,
             isPersonalInfoFilled: isPersonalInfoFilled,
-            isBvnVerified: isBvnVerified,
             isResidenceFilled: isResidenceFilled,
-            bvn: bvn,
           );
           return result.fold(
             (failure) => left(ServerGlitch(message: failure.message)),
