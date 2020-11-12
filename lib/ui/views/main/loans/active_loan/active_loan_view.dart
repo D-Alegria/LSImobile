@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -11,6 +12,7 @@ import 'package:lsi_mobile/ui/views/main/loans/loans_view/view_model/loan_view_c
 import 'package:lsi_mobile/ui/views/main/loans/widgets/loan_card.dart';
 import 'package:lsi_mobile/ui/views/main/loans/widgets/loan_history_mini.dart';
 import 'package:lsi_mobile/ui/views/main/loans/widgets/mini_loan_card.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ActiveLoanView extends StatelessWidget {
   final Loan currentLoan;
@@ -24,6 +26,7 @@ class ActiveLoanView extends StatelessWidget {
 
   final String optionsIcon = "assets/svgs/icons/options_icon.svg";
   final String book = "assets/svgs/icons/book.svg";
+  final String download = "assets/svgs/download.svg";
   final String creditCard = "assets/svgs/icons/credit_card.svg";
 
   @override
@@ -84,7 +87,32 @@ class ActiveLoanView extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: SizeConfig.yMargin(context, 3)),
+                SizedBox(height: SizeConfig.yMargin(context, 2)),
+                SharedWideButton(
+                  onTap: () async {
+                    if (await canLaunch(currentLoan.offerLink)) {
+                      await launch(
+                        currentLoan.offerLink,
+                        forceSafariVC: true,
+                        forceWebView: true,
+                        enableJavaScript: true,
+                      );
+                    } else {
+                      FlushbarHelper.createError(
+                        message: "Could not launch ${currentLoan.offerLink}",
+                        duration: Duration(seconds: 3),
+                      ).show(context);
+                    }
+                  },
+                  backgroundColor: ColorStyles.green2,
+                  text: "View Contract",
+                  image: Icon(
+                    Icons.last_page,
+                    size: SizeConfig.textSize(context, 8),
+                    color: ColorStyles.green2,
+                  ),
+                ),
+                SizedBox(height: SizeConfig.yMargin(context, 2)),
                 LoanHistory(loanHistory: loanHistory),
               ],
             ),

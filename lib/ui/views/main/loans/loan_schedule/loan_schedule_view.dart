@@ -100,6 +100,18 @@ class _LoanScheduleViewState extends State<LoanScheduleView> {
                             ),
                           ),
                         ),
+                        TableCell(
+                          child: Text(
+                            'Due Date\n',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.workSans(
+                              fontWeight: FontWeight.w500,
+                              fontSize: SizeConfig.textSize(context, 5),
+                              color: ColorStyles.blue,
+                              height: SizeConfig.textSize(context, 0.3),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -133,15 +145,36 @@ class _LoanScheduleViewState extends State<LoanScheduleView> {
                               ),
                               children: List.generate(
                                 e.schedule.length,
-                                (index) => _buildLoanScheduleItem(
-                                  context,
-                                  index,
-                                  e.schedule.length.toString(),
-                                  e.schedule[index].termRepayment,
-                                  e.schedule[index].isPaid == "0"
-                                      ? Paid.close
-                                      : Paid.check,
-                                ),
+                                (index) {
+                                  var schedule = e.schedule[index];
+                                  var paid;
+                                  var repaymentDate =
+                                      schedule.repaymentDate.split('-');
+                                  DateTime date = DateTime(
+                                    int.parse(repaymentDate[0]),
+                                    int.parse(repaymentDate[1]),
+                                    int.parse(repaymentDate[2]),
+                                  );
+
+                                  if (schedule.isPaid != "0") {
+                                    paid = Paid.check;
+                                  } else {
+                                    if (DateTime.now().isAfter(date)) {
+                                      paid = Paid.close;
+                                    } else {
+                                      paid = null;
+                                    }
+                                  }
+
+                                  return _buildLoanScheduleItem(
+                                    context,
+                                    index,
+                                    e.schedule.length.toString(),
+                                    schedule.termRepayment,
+                                    paid,
+                                    schedule.repaymentDate,
+                                  );
+                                },
                               ),
                             ),
                           ],
@@ -156,8 +189,8 @@ class _LoanScheduleViewState extends State<LoanScheduleView> {
     );
   }
 
-  TableRow _buildLoanScheduleItem(
-      BuildContext context, int index, String total, String amount, Paid paid) {
+  TableRow _buildLoanScheduleItem(BuildContext context, int index, String total,
+      String amount, Paid paid, String date) {
     return TableRow(
       children: [
         TableCell(
@@ -188,6 +221,18 @@ class _LoanScheduleViewState extends State<LoanScheduleView> {
           verticalAlignment: TableCellVerticalAlignment.middle,
           child: getPaid(paid),
         ),
+        TableCell(
+          child: Text(
+            '\n$date\n',
+            textAlign: TextAlign.left,
+            style: GoogleFonts.workSans(
+              fontWeight: FontWeight.w500,
+              fontSize: SizeConfig.textSize(context, 5),
+              color: ColorStyles.black,
+              height: SizeConfig.textSize(context, 0.4),
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -208,15 +253,9 @@ Widget getPaid(Paid paid) {
       );
       break;
     default:
-      return Text(
-        '\n--\n',
-        textAlign: TextAlign.left,
-        style: GoogleFonts.workSans(
-          fontWeight: FontWeight.w500,
-          // fontSize: SizeConfig.textSize(context, 5),
-          color: ColorStyles.black,
-          // height: SizeConfig.textSize(context, 0.4),
-        ),
+      return Icon(
+        Icons.remove,
+        color: ColorStyles.grey,
       );
   }
 }

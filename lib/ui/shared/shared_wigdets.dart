@@ -411,10 +411,10 @@ Widget sharedInfoButton({
           ),
           showArrow
               ? Icon(
-            Icons.arrow_forward_rounded,
-            color: ColorStyles.light,
-            size: SizeConfig.textSize(context, 8),
-          )
+                  Icons.arrow_forward_rounded,
+                  color: ColorStyles.light,
+                  size: SizeConfig.textSize(context, 8),
+                )
               : Container(),
         ],
       ),
@@ -465,8 +465,7 @@ Widget sharedDropDownFormField<T>({
     value: value,
     items: items
         .map(
-          (e) =>
-          DropdownMenuItem(
+          (e) => DropdownMenuItem(
             child: Text(
               "$e",
               overflow: TextOverflow.visible,
@@ -478,7 +477,7 @@ Widget sharedDropDownFormField<T>({
             ),
             value: e,
           ),
-    )
+        )
         .toList(),
     icon: Icon(Icons.keyboard_arrow_down),
     isExpanded: true,
@@ -516,35 +515,34 @@ Widget sharedTable({
   return Table(
     children: List.generate(
       list.length,
-          (index) =>
-          TableRow(
-            children: [
-              TableCell(
-                verticalAlignment: TableCellVerticalAlignment.middle,
-                child: Text(
-                  list[index][0],
-                  textAlign: TextAlign.left,
-                  style: GoogleFonts.workSans(
-                    fontWeight: FontWeight.w400,
-                    fontSize: SizeConfig.textSize(context, 4.5),
-                    height: SizeConfig.textSize(context, 0.5),
-                  ),
-                ),
+      (index) => TableRow(
+        children: [
+          TableCell(
+            verticalAlignment: TableCellVerticalAlignment.middle,
+            child: Text(
+              list[index][0],
+              textAlign: TextAlign.left,
+              style: GoogleFonts.workSans(
+                fontWeight: FontWeight.w400,
+                fontSize: SizeConfig.textSize(context, 4.5),
+                height: SizeConfig.textSize(context, 0.5),
               ),
-              TableCell(
-                verticalAlignment: TableCellVerticalAlignment.middle,
-                child: Text(
-                  list[index][1],
-                  textAlign: TextAlign.right,
-                  style: GoogleFonts.workSans(
-                    fontWeight: FontWeight.w600,
-                    fontSize: SizeConfig.textSize(context, 5),
-                    height: SizeConfig.textSize(context, 0.5),
-                  ),
-                ),
-              )
-            ],
+            ),
           ),
+          TableCell(
+            verticalAlignment: TableCellVerticalAlignment.middle,
+            child: Text(
+              list[index][1],
+              textAlign: TextAlign.right,
+              style: GoogleFonts.workSans(
+                fontWeight: FontWeight.w600,
+                fontSize: SizeConfig.textSize(context, 5),
+                height: SizeConfig.textSize(context, 0.5),
+              ),
+            ),
+          )
+        ],
+      ),
     ),
   );
 }
@@ -576,36 +574,31 @@ Widget sharedSmallBadge({
   );
 }
 
-Widget processingBadge(BuildContext context) =>
-    sharedSmallBadge(
+Widget processingBadge(BuildContext context) => sharedSmallBadge(
       context: context,
       text: "Processing",
       indicatorColor: ColorStyles.orange,
     );
 
-Widget activeBadge(BuildContext context) =>
-    sharedSmallBadge(
+Widget activeBadge(BuildContext context) => sharedSmallBadge(
       context: context,
       text: "Active",
       indicatorColor: ColorStyles.green1,
     );
 
-Widget rejectedBadge(BuildContext context) =>
-    sharedSmallBadge(
+Widget rejectedBadge(BuildContext context) => sharedSmallBadge(
       context: context,
       text: "Rejected",
       indicatorColor: ColorStyles.red,
     );
 
-Widget closedBadge(BuildContext context) =>
-    sharedSmallBadge(
+Widget closedBadge(BuildContext context) => sharedSmallBadge(
       context: context,
       text: "Closed",
       indicatorColor: ColorStyles.blue,
     );
 
-Widget dueBadge(BuildContext context, String amountDue) =>
-    sharedSmallBadge(
+Widget dueBadge(BuildContext context, String amountDue) => sharedSmallBadge(
       context: context,
       text: "Due: $amountDue",
       indicatorColor: ColorStyles.red,
@@ -680,10 +673,10 @@ class _SharedDateTimeFieldState extends State<SharedDateTimeField> {
             initialDate: widget.initialValue.isEmpty
                 ? DateTime.now()
                 : DateTime(
-              int.parse(widget.initialValue.split('-')[0]),
-              int.parse(widget.initialValue.split('-')[1]),
-              int.parse(widget.initialValue.split('-')[2]),
-            ),
+                    int.parse(widget.initialValue.split('-')[0]),
+                    int.parse(widget.initialValue.split('-')[1]),
+                    int.parse(widget.initialValue.split('-')[2]),
+                  ),
             firstDate: DateTime(1970),
             lastDate: DateTime(2300),
             builder: (BuildContext context, Widget child) {
@@ -691,12 +684,9 @@ class _SharedDateTimeFieldState extends State<SharedDateTimeField> {
                 data: Theme.of(context).copyWith(
                   primaryColor: ColorStyles.blue,
                   accentColor: ColorStyles.blue,
-                  colorScheme: Theme
-                      .of(context)
-                      .colorScheme
-                      .copyWith(
-                    primary: ColorStyles.blue,
-                  ),
+                  colorScheme: Theme.of(context).colorScheme.copyWith(
+                        primary: ColorStyles.blue,
+                      ),
                   buttonTheme: ButtonThemeData(
                     textTheme: ButtonTextTheme.primary,
                   ),
@@ -751,28 +741,70 @@ class UserDetailsWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserProfileBloc, UserProfileState>(
-      builder: (context, state) =>
-          state.map(
-            initial: (e) => Container(),
-            loading: (e) => sharedLoader(),
-            loaded: (e) => loaded(e),
-            error: (e) => sharedErrorWidget(context, e.glitch.message),
-          ),
-      listener: (context, state) =>
-          state.maybeMap(
-            error: (value) =>
-                value.glitch.maybeMap(
-                  orElse: () => null,
-                  unAuthenticatedGlitch: (e) {
-                    context.bloc<AuthenticationBloc>().add(LogoutRequest());
-                    return context.navigator.pushAndRemoveUntil(
-                      Routes.authWrapper,
-                          (route) => false,
-                    );
-                  },
-                ),
-            orElse: () => null,
-          ),
+      builder: (context, state) => state.map(
+        initial: (e) => Container(),
+        loading: (e) => sharedLoader(),
+        loaded: (e) => loaded(e),
+        error: (e) => sharedErrorWidget(context, e.glitch.message),
+      ),
+      listener: (context, state) => state.maybeMap(
+        error: (value) => value.glitch.maybeMap(
+          orElse: () => null,
+          unAuthenticatedGlitch: (e) {
+            context.bloc<AuthenticationBloc>().add(LogoutRequest());
+            return context.navigator.pushAndRemoveUntil(
+              Routes.authWrapper,
+              (route) => false,
+            );
+          },
+        ),
+        orElse: () => null,
+      ),
+    );
+  }
+}
+
+class SharedWideButton extends StatelessWidget {
+  final Widget image;
+  final Color backgroundColor;
+  final String text;
+  final Function onTap;
+
+  const SharedWideButton({
+    Key key,
+    this.image,
+    this.backgroundColor,
+    this.text,
+    this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        height: SizeConfig.yMargin(context, 10),
+        decoration: BoxDecoration(
+          color: backgroundColor.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(width: SizeConfig.xMargin(context, 5)),
+            image,
+            SizedBox(width: SizeConfig.xMargin(context, 5)),
+            Text(
+              text,
+              style: GoogleFonts.workSans(
+                color: backgroundColor,
+                fontSize: SizeConfig.textSize(context, 5),
+                fontWeight: FontWeight.w600,
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
