@@ -54,6 +54,12 @@ class _LoanScheduleViewState extends State<LoanScheduleView> {
             child: Column(
               children: [
                 Table(
+                  columnWidths: {
+                    0: FlexColumnWidth(2),
+                    1: FlexColumnWidth(3),
+                    2: FlexColumnWidth(2),
+                    3: FlexColumnWidth(3),
+                  },
                   defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                   border: TableBorder(
                     bottom: BorderSide(
@@ -65,50 +71,58 @@ class _LoanScheduleViewState extends State<LoanScheduleView> {
                     TableRow(
                       children: [
                         TableCell(
-                          child: Text(
-                            'S/N\n',
-                            textAlign: TextAlign.left,
-                            style: GoogleFonts.workSans(
-                              fontWeight: FontWeight.w500,
-                              fontSize: SizeConfig.textSize(context, 5),
-                              color: ColorStyles.blue,
-                              height: SizeConfig.textSize(context, 0.3),
+                          child: SizedBox(
+                            height: SizeConfig.yMargin(context, 4),
+                            child: Text(
+                              'S/N',
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.workSans(
+                                fontWeight: FontWeight.w500,
+                                fontSize: SizeConfig.textSize(context, 4.5),
+                                color: ColorStyles.blue,
+                              ),
                             ),
                           ),
                         ),
                         TableCell(
-                          child: Text(
-                            'Amount\n',
-                            textAlign: TextAlign.left,
-                            style: GoogleFonts.workSans(
-                              fontWeight: FontWeight.w500,
-                              fontSize: SizeConfig.textSize(context, 5),
-                              color: ColorStyles.blue,
-                              height: SizeConfig.textSize(context, 0.3),
+                          child: SizedBox(
+                            height: SizeConfig.yMargin(context, 4),
+                            child: Text(
+                              'Amount',
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.workSans(
+                                fontWeight: FontWeight.w500,
+                                fontSize: SizeConfig.textSize(context, 4.5),
+                                color: ColorStyles.blue,
+                              ),
                             ),
                           ),
                         ),
                         TableCell(
-                          child: Text(
-                            'Paid\n',
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.workSans(
-                              fontWeight: FontWeight.w500,
-                              fontSize: SizeConfig.textSize(context, 5),
-                              color: ColorStyles.blue,
-                              height: SizeConfig.textSize(context, 0.3),
+                          child: SizedBox(
+                            height: SizeConfig.yMargin(context, 4),
+                            child: Text(
+                              'Paid',
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.workSans(
+                                fontWeight: FontWeight.w500,
+                                fontSize: SizeConfig.textSize(context, 4.5),
+                                color: ColorStyles.blue,
+                              ),
                             ),
                           ),
                         ),
                         TableCell(
-                          child: Text(
-                            'Due Date\n',
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.workSans(
-                              fontWeight: FontWeight.w500,
-                              fontSize: SizeConfig.textSize(context, 5),
-                              color: ColorStyles.blue,
-                              height: SizeConfig.textSize(context, 0.3),
+                          child: SizedBox(
+                            height: SizeConfig.yMargin(context, 4),
+                            child: Text(
+                              'Due Date',
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.workSans(
+                                fontWeight: FontWeight.w500,
+                                fontSize: SizeConfig.textSize(context, 4.5),
+                                color: ColorStyles.blue,
+                              ),
                             ),
                           ),
                         ),
@@ -133,6 +147,12 @@ class _LoanScheduleViewState extends State<LoanScheduleView> {
                       : ListView(
                           children: [
                             Table(
+                              columnWidths: {
+                                0: FlexColumnWidth(2),
+                                1: FlexColumnWidth(3),
+                                2: FlexColumnWidth(2),
+                                3: FlexColumnWidth(3),
+                              },
                               border: TableBorder(
                                 bottom: BorderSide(
                                   color: ColorStyles.black.withOpacity(0.1),
@@ -194,42 +214,61 @@ class _LoanScheduleViewState extends State<LoanScheduleView> {
     return TableRow(
       children: [
         TableCell(
-          child: Text(
-            '\n${index + 1}/$total\n',
-            textAlign: TextAlign.left,
-            style: GoogleFonts.workSans(
-              fontWeight: FontWeight.w500,
-              fontSize: SizeConfig.textSize(context, 5),
-              color: ColorStyles.black,
-              height: SizeConfig.textSize(context, 0.4),
+          child: SizedBox(
+            height: SizeConfig.yMargin(context, 6),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                '${index + 1}/$total',
+                textAlign: TextAlign.left,
+                style: GoogleFonts.workSans(
+                  fontWeight: FontWeight.w500,
+                  fontSize: SizeConfig.textSize(context, 4.5),
+                  color: ColorStyles.black,
+                ),
+              ),
             ),
           ),
         ),
         TableCell(
-          child: Text(
-            '\n$amount\n',
-            textAlign: TextAlign.left,
-            style: GoogleFonts.workSans(
-              fontWeight: FontWeight.w500,
-              fontSize: SizeConfig.textSize(context, 5),
-              color: ColorStyles.black,
-              height: SizeConfig.textSize(context, 0.4),
+          child: SizedBox(
+            height: SizeConfig.yMargin(context, 6),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "₦$amount",
+                textAlign: TextAlign.left,
+                style: GoogleFonts.workSans(
+                  textBaseline: TextBaseline.ideographic,
+                  fontWeight: FontWeight.w500,
+                  fontSize: SizeConfig.textSize(context, 4.5),
+                  color: ColorStyles.black,
+                ),
+              ),
             ),
           ),
         ),
         TableCell(
           verticalAlignment: TableCellVerticalAlignment.middle,
-          child: getPaid(paid),
+          child: SizedBox(
+            height: SizeConfig.yMargin(context, 6),
+            child: getPaid(paid),
+          ),
         ),
         TableCell(
-          child: Text(
-            '\n$date\n',
-            textAlign: TextAlign.left,
-            style: GoogleFonts.workSans(
-              fontWeight: FontWeight.w500,
-              fontSize: SizeConfig.textSize(context, 5),
-              color: ColorStyles.black,
-              height: SizeConfig.textSize(context, 0.4),
+          child: SizedBox(
+            height: SizeConfig.yMargin(context, 6),
+            child: Align(
+              alignment: Alignment.center,
+              child: Text(
+                date,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.workSans(
+                  fontWeight: FontWeight.w500,
+                  fontSize: SizeConfig.textSize(context, 4.5),
+                  color: ColorStyles.black,
+                ),
+              ),
             ),
           ),
         ),
