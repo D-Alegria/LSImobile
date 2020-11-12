@@ -60,7 +60,7 @@ class RepaymentSchedule {
   final String isPaid;
   @JsonKey(name: "HOW_MUCH_REMAINING")
   final String howMuchRemaining;
-  final String overdue;
+  final bool overdue;
 
   RepaymentSchedule({
     this.period,

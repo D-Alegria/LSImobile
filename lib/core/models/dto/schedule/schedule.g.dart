@@ -44,7 +44,7 @@ RepaymentSchedule _$RepaymentScheduleFromJson(Map<String, dynamic> json) {
     howMuchRemaining: json['HOW_MUCH_REMAINING'] as String,
     repaymentScheduleId: json['REPAYMENT_SCHEDULE_ID'] as String,
     isPaid: json['IS_PAID'] as String,
-    overdue: json['overdue'] as String,
+    overdue: json['overdue'] as bool,
   );
 }
 
