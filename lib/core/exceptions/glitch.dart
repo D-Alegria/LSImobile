@@ -12,9 +12,9 @@ abstract class Glitch with _$Glitch {
     @required String message,
   }) = ServerGlitch;
 
-  const factory Glitch.remoteGlitch({
+  const factory Glitch.systemGlitch({
     @required String message,
-  }) = RemoteGlitch;
+  }) = SystemGlitch;
 
   const factory Glitch.unAuthenticatedGlitch({
     @required String message,

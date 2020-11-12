@@ -10,11 +10,11 @@ Future<Either<Glitch, T>> tryMethod<T>({
     return await function();
   } on Exception catch (e) {
     print(e);
-    return left(ServerGlitch(message: errorMessage));
+    return left(SystemGlitch(message: errorMessage));
   } on Error catch (e) {
     print(e);
     print(e.stackTrace);
-    return left(ServerGlitch(message: errorMessage));
+    return left(SystemGlitch(message: errorMessage));
   }
 }
 

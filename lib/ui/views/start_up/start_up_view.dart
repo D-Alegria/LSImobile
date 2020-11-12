@@ -32,10 +32,7 @@ class StartUpView extends StatelessWidget {
               (route) => false,
               arguments: MainViewArguments(pageNumber: 0),
             ),
-            unVerified: (_) => context.navigator.pushAndRemoveUntil(
-              Routes.authWrapper,
-              (route) => false,
-            ),
+            error: (value) => null,
           );
         },
         child: Scaffold(

@@ -28,8 +28,8 @@ class _$GlitchTearOff {
   }
 
 // ignore: unused_element
-  RemoteGlitch remoteGlitch({@required String message}) {
-    return RemoteGlitch(
+  SystemGlitch systemGlitch({@required String message}) {
+    return SystemGlitch(
       message: message,
     );
   }
@@ -61,7 +61,7 @@ mixin _$Glitch {
   Result when<Result extends Object>({
     @required Result networkGlitch(String message),
     @required Result serverGlitch(String message),
-    @required Result remoteGlitch(String message),
+    @required Result systemGlitch(String message),
     @required Result unAuthenticatedGlitch(String message),
     @required Result localCacheGlitch(String message),
   });
@@ -69,7 +69,7 @@ mixin _$Glitch {
   Result maybeWhen<Result extends Object>({
     Result networkGlitch(String message),
     Result serverGlitch(String message),
-    Result remoteGlitch(String message),
+    Result systemGlitch(String message),
     Result unAuthenticatedGlitch(String message),
     Result localCacheGlitch(String message),
     @required Result orElse(),
@@ -78,7 +78,7 @@ mixin _$Glitch {
   Result map<Result extends Object>({
     @required Result networkGlitch(NetworkGlitch value),
     @required Result serverGlitch(ServerGlitch value),
-    @required Result remoteGlitch(RemoteGlitch value),
+    @required Result systemGlitch(SystemGlitch value),
     @required Result unAuthenticatedGlitch(UnAuthenticatedGlitch value),
     @required Result localCacheGlitch(LocalCacheGlitch value),
   });
@@ -86,7 +86,7 @@ mixin _$Glitch {
   Result maybeMap<Result extends Object>({
     Result networkGlitch(NetworkGlitch value),
     Result serverGlitch(ServerGlitch value),
-    Result remoteGlitch(RemoteGlitch value),
+    Result systemGlitch(SystemGlitch value),
     Result unAuthenticatedGlitch(UnAuthenticatedGlitch value),
     Result localCacheGlitch(LocalCacheGlitch value),
     @required Result orElse(),
@@ -182,13 +182,13 @@ class _$NetworkGlitch implements NetworkGlitch {
   Result when<Result extends Object>({
     @required Result networkGlitch(String message),
     @required Result serverGlitch(String message),
-    @required Result remoteGlitch(String message),
+    @required Result systemGlitch(String message),
     @required Result unAuthenticatedGlitch(String message),
     @required Result localCacheGlitch(String message),
   }) {
     assert(networkGlitch != null);
     assert(serverGlitch != null);
-    assert(remoteGlitch != null);
+    assert(systemGlitch != null);
     assert(unAuthenticatedGlitch != null);
     assert(localCacheGlitch != null);
     return networkGlitch(message);
@@ -199,7 +199,7 @@ class _$NetworkGlitch implements NetworkGlitch {
   Result maybeWhen<Result extends Object>({
     Result networkGlitch(String message),
     Result serverGlitch(String message),
-    Result remoteGlitch(String message),
+    Result systemGlitch(String message),
     Result unAuthenticatedGlitch(String message),
     Result localCacheGlitch(String message),
     @required Result orElse(),
@@ -216,13 +216,13 @@ class _$NetworkGlitch implements NetworkGlitch {
   Result map<Result extends Object>({
     @required Result networkGlitch(NetworkGlitch value),
     @required Result serverGlitch(ServerGlitch value),
-    @required Result remoteGlitch(RemoteGlitch value),
+    @required Result systemGlitch(SystemGlitch value),
     @required Result unAuthenticatedGlitch(UnAuthenticatedGlitch value),
     @required Result localCacheGlitch(LocalCacheGlitch value),
   }) {
     assert(networkGlitch != null);
     assert(serverGlitch != null);
-    assert(remoteGlitch != null);
+    assert(systemGlitch != null);
     assert(unAuthenticatedGlitch != null);
     assert(localCacheGlitch != null);
     return networkGlitch(this);
@@ -233,7 +233,7 @@ class _$NetworkGlitch implements NetworkGlitch {
   Result maybeMap<Result extends Object>({
     Result networkGlitch(NetworkGlitch value),
     Result serverGlitch(ServerGlitch value),
-    Result remoteGlitch(RemoteGlitch value),
+    Result systemGlitch(SystemGlitch value),
     Result unAuthenticatedGlitch(UnAuthenticatedGlitch value),
     Result localCacheGlitch(LocalCacheGlitch value),
     @required Result orElse(),
@@ -317,13 +317,13 @@ class _$ServerGlitch implements ServerGlitch {
   Result when<Result extends Object>({
     @required Result networkGlitch(String message),
     @required Result serverGlitch(String message),
-    @required Result remoteGlitch(String message),
+    @required Result systemGlitch(String message),
     @required Result unAuthenticatedGlitch(String message),
     @required Result localCacheGlitch(String message),
   }) {
     assert(networkGlitch != null);
     assert(serverGlitch != null);
-    assert(remoteGlitch != null);
+    assert(systemGlitch != null);
     assert(unAuthenticatedGlitch != null);
     assert(localCacheGlitch != null);
     return serverGlitch(message);
@@ -334,7 +334,7 @@ class _$ServerGlitch implements ServerGlitch {
   Result maybeWhen<Result extends Object>({
     Result networkGlitch(String message),
     Result serverGlitch(String message),
-    Result remoteGlitch(String message),
+    Result systemGlitch(String message),
     Result unAuthenticatedGlitch(String message),
     Result localCacheGlitch(String message),
     @required Result orElse(),
@@ -351,13 +351,13 @@ class _$ServerGlitch implements ServerGlitch {
   Result map<Result extends Object>({
     @required Result networkGlitch(NetworkGlitch value),
     @required Result serverGlitch(ServerGlitch value),
-    @required Result remoteGlitch(RemoteGlitch value),
+    @required Result systemGlitch(SystemGlitch value),
     @required Result unAuthenticatedGlitch(UnAuthenticatedGlitch value),
     @required Result localCacheGlitch(LocalCacheGlitch value),
   }) {
     assert(networkGlitch != null);
     assert(serverGlitch != null);
-    assert(remoteGlitch != null);
+    assert(systemGlitch != null);
     assert(unAuthenticatedGlitch != null);
     assert(localCacheGlitch != null);
     return serverGlitch(this);
@@ -368,7 +368,7 @@ class _$ServerGlitch implements ServerGlitch {
   Result maybeMap<Result extends Object>({
     Result networkGlitch(NetworkGlitch value),
     Result serverGlitch(ServerGlitch value),
-    Result remoteGlitch(RemoteGlitch value),
+    Result systemGlitch(SystemGlitch value),
     Result unAuthenticatedGlitch(UnAuthenticatedGlitch value),
     Result localCacheGlitch(LocalCacheGlitch value),
     @required Result orElse(),
@@ -391,50 +391,50 @@ abstract class ServerGlitch implements Glitch {
 }
 
 /// @nodoc
-abstract class $RemoteGlitchCopyWith<$Res> implements $GlitchCopyWith<$Res> {
-  factory $RemoteGlitchCopyWith(
-          RemoteGlitch value, $Res Function(RemoteGlitch) then) =
-      _$RemoteGlitchCopyWithImpl<$Res>;
+abstract class $SystemGlitchCopyWith<$Res> implements $GlitchCopyWith<$Res> {
+  factory $SystemGlitchCopyWith(
+          SystemGlitch value, $Res Function(SystemGlitch) then) =
+      _$SystemGlitchCopyWithImpl<$Res>;
   @override
   $Res call({String message});
 }
 
 /// @nodoc
-class _$RemoteGlitchCopyWithImpl<$Res> extends _$GlitchCopyWithImpl<$Res>
-    implements $RemoteGlitchCopyWith<$Res> {
-  _$RemoteGlitchCopyWithImpl(
-      RemoteGlitch _value, $Res Function(RemoteGlitch) _then)
-      : super(_value, (v) => _then(v as RemoteGlitch));
+class _$SystemGlitchCopyWithImpl<$Res> extends _$GlitchCopyWithImpl<$Res>
+    implements $SystemGlitchCopyWith<$Res> {
+  _$SystemGlitchCopyWithImpl(
+      SystemGlitch _value, $Res Function(SystemGlitch) _then)
+      : super(_value, (v) => _then(v as SystemGlitch));
 
   @override
-  RemoteGlitch get _value => super._value as RemoteGlitch;
+  SystemGlitch get _value => super._value as SystemGlitch;
 
   @override
   $Res call({
     Object message = freezed,
   }) {
-    return _then(RemoteGlitch(
+    return _then(SystemGlitch(
       message: message == freezed ? _value.message : message as String,
     ));
   }
 }
 
 /// @nodoc
-class _$RemoteGlitch implements RemoteGlitch {
-  const _$RemoteGlitch({@required this.message}) : assert(message != null);
+class _$SystemGlitch implements SystemGlitch {
+  const _$SystemGlitch({@required this.message}) : assert(message != null);
 
   @override
   final String message;
 
   @override
   String toString() {
-    return 'Glitch.remoteGlitch(message: $message)';
+    return 'Glitch.systemGlitch(message: $message)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is RemoteGlitch &&
+        (other is SystemGlitch &&
             (identical(other.message, message) ||
                 const DeepCollectionEquality().equals(other.message, message)));
   }
@@ -444,24 +444,24 @@ class _$RemoteGlitch implements RemoteGlitch {
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(message);
 
   @override
-  $RemoteGlitchCopyWith<RemoteGlitch> get copyWith =>
-      _$RemoteGlitchCopyWithImpl<RemoteGlitch>(this, _$identity);
+  $SystemGlitchCopyWith<SystemGlitch> get copyWith =>
+      _$SystemGlitchCopyWithImpl<SystemGlitch>(this, _$identity);
 
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result networkGlitch(String message),
     @required Result serverGlitch(String message),
-    @required Result remoteGlitch(String message),
+    @required Result systemGlitch(String message),
     @required Result unAuthenticatedGlitch(String message),
     @required Result localCacheGlitch(String message),
   }) {
     assert(networkGlitch != null);
     assert(serverGlitch != null);
-    assert(remoteGlitch != null);
+    assert(systemGlitch != null);
     assert(unAuthenticatedGlitch != null);
     assert(localCacheGlitch != null);
-    return remoteGlitch(message);
+    return systemGlitch(message);
   }
 
   @override
@@ -469,14 +469,14 @@ class _$RemoteGlitch implements RemoteGlitch {
   Result maybeWhen<Result extends Object>({
     Result networkGlitch(String message),
     Result serverGlitch(String message),
-    Result remoteGlitch(String message),
+    Result systemGlitch(String message),
     Result unAuthenticatedGlitch(String message),
     Result localCacheGlitch(String message),
     @required Result orElse(),
   }) {
     assert(orElse != null);
-    if (remoteGlitch != null) {
-      return remoteGlitch(message);
+    if (systemGlitch != null) {
+      return systemGlitch(message);
     }
     return orElse();
   }
@@ -486,16 +486,16 @@ class _$RemoteGlitch implements RemoteGlitch {
   Result map<Result extends Object>({
     @required Result networkGlitch(NetworkGlitch value),
     @required Result serverGlitch(ServerGlitch value),
-    @required Result remoteGlitch(RemoteGlitch value),
+    @required Result systemGlitch(SystemGlitch value),
     @required Result unAuthenticatedGlitch(UnAuthenticatedGlitch value),
     @required Result localCacheGlitch(LocalCacheGlitch value),
   }) {
     assert(networkGlitch != null);
     assert(serverGlitch != null);
-    assert(remoteGlitch != null);
+    assert(systemGlitch != null);
     assert(unAuthenticatedGlitch != null);
     assert(localCacheGlitch != null);
-    return remoteGlitch(this);
+    return systemGlitch(this);
   }
 
   @override
@@ -503,26 +503,26 @@ class _$RemoteGlitch implements RemoteGlitch {
   Result maybeMap<Result extends Object>({
     Result networkGlitch(NetworkGlitch value),
     Result serverGlitch(ServerGlitch value),
-    Result remoteGlitch(RemoteGlitch value),
+    Result systemGlitch(SystemGlitch value),
     Result unAuthenticatedGlitch(UnAuthenticatedGlitch value),
     Result localCacheGlitch(LocalCacheGlitch value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
-    if (remoteGlitch != null) {
-      return remoteGlitch(this);
+    if (systemGlitch != null) {
+      return systemGlitch(this);
     }
     return orElse();
   }
 }
 
-abstract class RemoteGlitch implements Glitch {
-  const factory RemoteGlitch({@required String message}) = _$RemoteGlitch;
+abstract class SystemGlitch implements Glitch {
+  const factory SystemGlitch({@required String message}) = _$SystemGlitch;
 
   @override
   String get message;
   @override
-  $RemoteGlitchCopyWith<RemoteGlitch> get copyWith;
+  $SystemGlitchCopyWith<SystemGlitch> get copyWith;
 }
 
 /// @nodoc
@@ -591,13 +591,13 @@ class _$UnAuthenticatedGlitch implements UnAuthenticatedGlitch {
   Result when<Result extends Object>({
     @required Result networkGlitch(String message),
     @required Result serverGlitch(String message),
-    @required Result remoteGlitch(String message),
+    @required Result systemGlitch(String message),
     @required Result unAuthenticatedGlitch(String message),
     @required Result localCacheGlitch(String message),
   }) {
     assert(networkGlitch != null);
     assert(serverGlitch != null);
-    assert(remoteGlitch != null);
+    assert(systemGlitch != null);
     assert(unAuthenticatedGlitch != null);
     assert(localCacheGlitch != null);
     return unAuthenticatedGlitch(message);
@@ -608,7 +608,7 @@ class _$UnAuthenticatedGlitch implements UnAuthenticatedGlitch {
   Result maybeWhen<Result extends Object>({
     Result networkGlitch(String message),
     Result serverGlitch(String message),
-    Result remoteGlitch(String message),
+    Result systemGlitch(String message),
     Result unAuthenticatedGlitch(String message),
     Result localCacheGlitch(String message),
     @required Result orElse(),
@@ -625,13 +625,13 @@ class _$UnAuthenticatedGlitch implements UnAuthenticatedGlitch {
   Result map<Result extends Object>({
     @required Result networkGlitch(NetworkGlitch value),
     @required Result serverGlitch(ServerGlitch value),
-    @required Result remoteGlitch(RemoteGlitch value),
+    @required Result systemGlitch(SystemGlitch value),
     @required Result unAuthenticatedGlitch(UnAuthenticatedGlitch value),
     @required Result localCacheGlitch(LocalCacheGlitch value),
   }) {
     assert(networkGlitch != null);
     assert(serverGlitch != null);
-    assert(remoteGlitch != null);
+    assert(systemGlitch != null);
     assert(unAuthenticatedGlitch != null);
     assert(localCacheGlitch != null);
     return unAuthenticatedGlitch(this);
@@ -642,7 +642,7 @@ class _$UnAuthenticatedGlitch implements UnAuthenticatedGlitch {
   Result maybeMap<Result extends Object>({
     Result networkGlitch(NetworkGlitch value),
     Result serverGlitch(ServerGlitch value),
-    Result remoteGlitch(RemoteGlitch value),
+    Result systemGlitch(SystemGlitch value),
     Result unAuthenticatedGlitch(UnAuthenticatedGlitch value),
     Result localCacheGlitch(LocalCacheGlitch value),
     @required Result orElse(),
@@ -728,13 +728,13 @@ class _$LocalCacheGlitch implements LocalCacheGlitch {
   Result when<Result extends Object>({
     @required Result networkGlitch(String message),
     @required Result serverGlitch(String message),
-    @required Result remoteGlitch(String message),
+    @required Result systemGlitch(String message),
     @required Result unAuthenticatedGlitch(String message),
     @required Result localCacheGlitch(String message),
   }) {
     assert(networkGlitch != null);
     assert(serverGlitch != null);
-    assert(remoteGlitch != null);
+    assert(systemGlitch != null);
     assert(unAuthenticatedGlitch != null);
     assert(localCacheGlitch != null);
     return localCacheGlitch(message);
@@ -745,7 +745,7 @@ class _$LocalCacheGlitch implements LocalCacheGlitch {
   Result maybeWhen<Result extends Object>({
     Result networkGlitch(String message),
     Result serverGlitch(String message),
-    Result remoteGlitch(String message),
+    Result systemGlitch(String message),
     Result unAuthenticatedGlitch(String message),
     Result localCacheGlitch(String message),
     @required Result orElse(),
@@ -762,13 +762,13 @@ class _$LocalCacheGlitch implements LocalCacheGlitch {
   Result map<Result extends Object>({
     @required Result networkGlitch(NetworkGlitch value),
     @required Result serverGlitch(ServerGlitch value),
-    @required Result remoteGlitch(RemoteGlitch value),
+    @required Result systemGlitch(SystemGlitch value),
     @required Result unAuthenticatedGlitch(UnAuthenticatedGlitch value),
     @required Result localCacheGlitch(LocalCacheGlitch value),
   }) {
     assert(networkGlitch != null);
     assert(serverGlitch != null);
-    assert(remoteGlitch != null);
+    assert(systemGlitch != null);
     assert(unAuthenticatedGlitch != null);
     assert(localCacheGlitch != null);
     return localCacheGlitch(this);
@@ -779,7 +779,7 @@ class _$LocalCacheGlitch implements LocalCacheGlitch {
   Result maybeMap<Result extends Object>({
     Result networkGlitch(NetworkGlitch value),
     Result serverGlitch(ServerGlitch value),
-    Result remoteGlitch(RemoteGlitch value),
+    Result systemGlitch(SystemGlitch value),
     Result unAuthenticatedGlitch(UnAuthenticatedGlitch value),
     Result localCacheGlitch(LocalCacheGlitch value),
     @required Result orElse(),

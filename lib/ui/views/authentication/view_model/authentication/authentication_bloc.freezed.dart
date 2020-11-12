@@ -273,8 +273,10 @@ class _$AuthenticationStateTearOff {
   }
 
 // ignore: unused_element
-  Unverified unVerified() {
-    return Unverified();
+  Error error(String message) {
+    return Error(
+      message,
+    );
   }
 }
 
@@ -289,14 +291,14 @@ mixin _$AuthenticationState {
     @required Result initial(),
     @required Result unauthenticated(),
     @required Result authenticated(),
-    @required Result unVerified(),
+    @required Result error(String message),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result unauthenticated(),
     Result authenticated(),
-    Result unVerified(),
+    Result error(String message),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -304,14 +306,14 @@ mixin _$AuthenticationState {
     @required Result initial(Initial value),
     @required Result unauthenticated(Unauthenticated value),
     @required Result authenticated(Authenticated value),
-    @required Result unVerified(Unverified value),
+    @required Result error(Error value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result initial(Initial value),
     Result unauthenticated(Unauthenticated value),
     Result authenticated(Authenticated value),
-    Result unVerified(Unverified value),
+    Result error(Error value),
     @required Result orElse(),
   });
 }
@@ -373,12 +375,12 @@ class _$Initial implements Initial {
     @required Result initial(),
     @required Result unauthenticated(),
     @required Result authenticated(),
-    @required Result unVerified(),
+    @required Result error(String message),
   }) {
     assert(initial != null);
     assert(unauthenticated != null);
     assert(authenticated != null);
-    assert(unVerified != null);
+    assert(error != null);
     return initial();
   }
 
@@ -388,7 +390,7 @@ class _$Initial implements Initial {
     Result initial(),
     Result unauthenticated(),
     Result authenticated(),
-    Result unVerified(),
+    Result error(String message),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -404,12 +406,12 @@ class _$Initial implements Initial {
     @required Result initial(Initial value),
     @required Result unauthenticated(Unauthenticated value),
     @required Result authenticated(Authenticated value),
-    @required Result unVerified(Unverified value),
+    @required Result error(Error value),
   }) {
     assert(initial != null);
     assert(unauthenticated != null);
     assert(authenticated != null);
-    assert(unVerified != null);
+    assert(error != null);
     return initial(this);
   }
 
@@ -419,7 +421,7 @@ class _$Initial implements Initial {
     Result initial(Initial value),
     Result unauthenticated(Unauthenticated value),
     Result authenticated(Authenticated value),
-    Result unVerified(Unverified value),
+    Result error(Error value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -476,12 +478,12 @@ class _$Unauthenticated implements Unauthenticated {
     @required Result initial(),
     @required Result unauthenticated(),
     @required Result authenticated(),
-    @required Result unVerified(),
+    @required Result error(String message),
   }) {
     assert(initial != null);
     assert(unauthenticated != null);
     assert(authenticated != null);
-    assert(unVerified != null);
+    assert(error != null);
     return unauthenticated();
   }
 
@@ -491,7 +493,7 @@ class _$Unauthenticated implements Unauthenticated {
     Result initial(),
     Result unauthenticated(),
     Result authenticated(),
-    Result unVerified(),
+    Result error(String message),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -507,12 +509,12 @@ class _$Unauthenticated implements Unauthenticated {
     @required Result initial(Initial value),
     @required Result unauthenticated(Unauthenticated value),
     @required Result authenticated(Authenticated value),
-    @required Result unVerified(Unverified value),
+    @required Result error(Error value),
   }) {
     assert(initial != null);
     assert(unauthenticated != null);
     assert(authenticated != null);
-    assert(unVerified != null);
+    assert(error != null);
     return unauthenticated(this);
   }
 
@@ -522,7 +524,7 @@ class _$Unauthenticated implements Unauthenticated {
     Result initial(Initial value),
     Result unauthenticated(Unauthenticated value),
     Result authenticated(Authenticated value),
-    Result unVerified(Unverified value),
+    Result error(Error value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -579,12 +581,12 @@ class _$Authenticated implements Authenticated {
     @required Result initial(),
     @required Result unauthenticated(),
     @required Result authenticated(),
-    @required Result unVerified(),
+    @required Result error(String message),
   }) {
     assert(initial != null);
     assert(unauthenticated != null);
     assert(authenticated != null);
-    assert(unVerified != null);
+    assert(error != null);
     return authenticated();
   }
 
@@ -594,7 +596,7 @@ class _$Authenticated implements Authenticated {
     Result initial(),
     Result unauthenticated(),
     Result authenticated(),
-    Result unVerified(),
+    Result error(String message),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -610,12 +612,12 @@ class _$Authenticated implements Authenticated {
     @required Result initial(Initial value),
     @required Result unauthenticated(Unauthenticated value),
     @required Result authenticated(Authenticated value),
-    @required Result unVerified(Unverified value),
+    @required Result error(Error value),
   }) {
     assert(initial != null);
     assert(unauthenticated != null);
     assert(authenticated != null);
-    assert(unVerified != null);
+    assert(error != null);
     return authenticated(this);
   }
 
@@ -625,7 +627,7 @@ class _$Authenticated implements Authenticated {
     Result initial(Initial value),
     Result unauthenticated(Unauthenticated value),
     Result authenticated(Authenticated value),
-    Result unVerified(Unverified value),
+    Result error(Error value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -641,39 +643,58 @@ abstract class Authenticated implements AuthenticationState {
 }
 
 /// @nodoc
-abstract class $UnverifiedCopyWith<$Res> {
-  factory $UnverifiedCopyWith(
-          Unverified value, $Res Function(Unverified) then) =
-      _$UnverifiedCopyWithImpl<$Res>;
+abstract class $ErrorCopyWith<$Res> {
+  factory $ErrorCopyWith(Error value, $Res Function(Error) then) =
+      _$ErrorCopyWithImpl<$Res>;
+  $Res call({String message});
 }
 
 /// @nodoc
-class _$UnverifiedCopyWithImpl<$Res>
-    extends _$AuthenticationStateCopyWithImpl<$Res>
-    implements $UnverifiedCopyWith<$Res> {
-  _$UnverifiedCopyWithImpl(Unverified _value, $Res Function(Unverified) _then)
-      : super(_value, (v) => _then(v as Unverified));
+class _$ErrorCopyWithImpl<$Res> extends _$AuthenticationStateCopyWithImpl<$Res>
+    implements $ErrorCopyWith<$Res> {
+  _$ErrorCopyWithImpl(Error _value, $Res Function(Error) _then)
+      : super(_value, (v) => _then(v as Error));
 
   @override
-  Unverified get _value => super._value as Unverified;
+  Error get _value => super._value as Error;
+
+  @override
+  $Res call({
+    Object message = freezed,
+  }) {
+    return _then(Error(
+      message == freezed ? _value.message : message as String,
+    ));
+  }
 }
 
 /// @nodoc
-class _$Unverified implements Unverified {
-  _$Unverified();
+class _$Error implements Error {
+  _$Error(this.message) : assert(message != null);
+
+  @override
+  final String message;
 
   @override
   String toString() {
-    return 'AuthenticationState.unVerified()';
+    return 'AuthenticationState.error(message: $message)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is Unverified);
+    return identical(this, other) ||
+        (other is Error &&
+            (identical(other.message, message) ||
+                const DeepCollectionEquality().equals(other.message, message)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(message);
+
+  @override
+  $ErrorCopyWith<Error> get copyWith =>
+      _$ErrorCopyWithImpl<Error>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -681,13 +702,13 @@ class _$Unverified implements Unverified {
     @required Result initial(),
     @required Result unauthenticated(),
     @required Result authenticated(),
-    @required Result unVerified(),
+    @required Result error(String message),
   }) {
     assert(initial != null);
     assert(unauthenticated != null);
     assert(authenticated != null);
-    assert(unVerified != null);
-    return unVerified();
+    assert(error != null);
+    return error(message);
   }
 
   @override
@@ -696,12 +717,12 @@ class _$Unverified implements Unverified {
     Result initial(),
     Result unauthenticated(),
     Result authenticated(),
-    Result unVerified(),
+    Result error(String message),
     @required Result orElse(),
   }) {
     assert(orElse != null);
-    if (unVerified != null) {
-      return unVerified();
+    if (error != null) {
+      return error(message);
     }
     return orElse();
   }
@@ -712,13 +733,13 @@ class _$Unverified implements Unverified {
     @required Result initial(Initial value),
     @required Result unauthenticated(Unauthenticated value),
     @required Result authenticated(Authenticated value),
-    @required Result unVerified(Unverified value),
+    @required Result error(Error value),
   }) {
     assert(initial != null);
     assert(unauthenticated != null);
     assert(authenticated != null);
-    assert(unVerified != null);
-    return unVerified(this);
+    assert(error != null);
+    return error(this);
   }
 
   @override
@@ -727,17 +748,20 @@ class _$Unverified implements Unverified {
     Result initial(Initial value),
     Result unauthenticated(Unauthenticated value),
     Result authenticated(Authenticated value),
-    Result unVerified(Unverified value),
+    Result error(Error value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
-    if (unVerified != null) {
-      return unVerified(this);
+    if (error != null) {
+      return error(this);
     }
     return orElse();
   }
 }
 
-abstract class Unverified implements AuthenticationState {
-  factory Unverified() = _$Unverified;
+abstract class Error implements AuthenticationState {
+  factory Error(String message) = _$Error;
+
+  String get message;
+  $ErrorCopyWith<Error> get copyWith;
 }

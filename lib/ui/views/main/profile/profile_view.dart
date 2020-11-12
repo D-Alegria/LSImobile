@@ -15,17 +15,8 @@ class ProfileView extends StatelessWidget {
     return RefreshIndicator(
       onRefresh: () async =>
           Future.value(context.bloc<UserProfileBloc>()..add(GetUserDetails())),
-      child: BlocConsumer<UserProfileBloc, UserProfileState>(
-        builder: (context, state) => state.map(
-          initial: (_) => Container(),
-          loading: (_) => sharedLoader(),
-          loaded: (val) => _buildProfileView(context, val),
-          error: (val) => sharedErrorWidget(context, val.message),
-        ),
-        listener: (context, state) => state.maybeMap(
-          error: (_) => null,
-          orElse: () => null,
-        ),
+      child: UserDetailsWrapper(
+        loaded: (userData) => _buildProfileView(context, userData),
       ),
     );
   }
@@ -108,14 +99,12 @@ class ProfileView extends StatelessWidget {
             ),
             SizedBox(height: SizeConfig.yMargin(context, 3)),
             BlocListener<AuthenticationBloc, AuthenticationState>(
-              listener: (BuildContext context, state) => state.map(
-                initial: (_) => null,
+              listener: (BuildContext context, state) => state.maybeMap(
                 unauthenticated: (_) => context.navigator.pushAndRemoveUntil(
                   Routes.authWrapper,
                   (route) => false,
                 ),
-                authenticated: (_) => null,
-                unVerified: (_) => null,
+                orElse: () => null,
               ),
               child: sharedInfoButton(
                 context: context,
@@ -124,9 +113,8 @@ class ProfileView extends StatelessWidget {
                   size: SizeConfig.textSize(context, 8),
                   color: ColorStyles.red,
                 ),
-                onTap: () {
-                  context.bloc<AuthenticationBloc>().add(LogoutRequest());
-                },
+                onTap: () =>
+                    context.bloc<AuthenticationBloc>().add(LogoutRequest()),
                 text: "Logout",
                 background: ColorStyles.red.withOpacity(0.22),
               ),

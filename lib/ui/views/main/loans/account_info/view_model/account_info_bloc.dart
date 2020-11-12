@@ -60,7 +60,7 @@ class AccountInfoBloc extends Bloc<AccountInfoEvent, AccountInfoState> {
 
           yield* result.fold(
             (l) async* {
-              failureOrSuccess = left(RemoteGlitch(message: l.message));
+              failureOrSuccess = left(SystemGlitch(message: l.message));
             },
             (r) async* {
               yield state.copyWith(

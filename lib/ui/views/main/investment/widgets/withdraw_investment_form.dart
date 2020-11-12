@@ -22,7 +22,7 @@ class VerifyBVNForm extends StatelessWidget {
             () => null,
             (either) => either.fold(
               (l) => null,
-              (r) => context.navigator.pushPersonalInfoFormView(),
+              (success) => context.navigator.pushPersonalInfoFormView(),
             ),
           );
         },

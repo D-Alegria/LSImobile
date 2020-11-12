@@ -13,5 +13,5 @@ abstract class UserProfileState with _$UserProfileState {
     @required final String profilePicture,
   }) = Loaded;
 
-  factory UserProfileState.error(String message) = Error;
+  factory UserProfileState.error(Glitch glitch) = Error;
 }

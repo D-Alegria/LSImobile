@@ -36,44 +36,49 @@ class LoanProductCubit extends Cubit<LoanProductState> {
       BuildContext context, UserDetailsData data, int selected) async {
     emit(Loading());
 
-    var user = await _userRepo.user;
+    final result = await _userRepo.user;
 
-    if (!data.validations.bvn) {
-      return emit(Loaded(
-        loanProducts: loanProducts,
-        nextForm: NextForm.bvn,
-        selected: selected,
-      ));
-    } else if (!(user.isPersonalInfoFilled ?? false)) {
-      return emit(Loaded(
-        loanProducts: loanProducts,
-        nextForm: NextForm.personalInfo,
-        selected: selected,
-      ));
-    } else if (!(user.isEmergenceContactFilled ?? false)) {
-      return emit(Loaded(
-        loanProducts: loanProducts,
-        nextForm: NextForm.emergencyContact,
-        selected: selected,
-      ));
-    } else if (!(user.isEduAndEmpInfoFilled ?? false)) {
-      return emit(Loaded(
-        loanProducts: loanProducts,
-        nextForm: NextForm.eduAndEmploy,
-        selected: selected,
-      ));
-    } else if (!(user.isResidenceFilled ?? false)) {
-      return emit(Loaded(
-        loanProducts: loanProducts,
-        nextForm: NextForm.residence,
-        selected: selected,
-      ));
-    } else {
-      return emit(Loaded(
-        loanProducts: loanProducts,
-        nextForm: NextForm.loanDetails,
-        selected: selected,
-      ));
-    }
+    return result.fold(
+      (l) => emit(Error(l.message)),
+      (user) {
+        if (!data.validations.bvn) {
+          return emit(Loaded(
+            loanProducts: loanProducts,
+            nextForm: NextForm.bvn,
+            selected: selected,
+          ));
+        } else if (!(user.isPersonalInfoFilled ?? false)) {
+          return emit(Loaded(
+            loanProducts: loanProducts,
+            nextForm: NextForm.personalInfo,
+            selected: selected,
+          ));
+        } else if (!(user.isEmergenceContactFilled ?? false)) {
+          return emit(Loaded(
+            loanProducts: loanProducts,
+            nextForm: NextForm.emergencyContact,
+            selected: selected,
+          ));
+        } else if (!(user.isEduAndEmpInfoFilled ?? false)) {
+          return emit(Loaded(
+            loanProducts: loanProducts,
+            nextForm: NextForm.eduAndEmploy,
+            selected: selected,
+          ));
+        } else if (!(user.isResidenceFilled ?? false)) {
+          return emit(Loaded(
+            loanProducts: loanProducts,
+            nextForm: NextForm.residence,
+            selected: selected,
+          ));
+        } else {
+          return emit(Loaded(
+            loanProducts: loanProducts,
+            nextForm: NextForm.loanDetails,
+            selected: selected,
+          ));
+        }
+      },
+    );
   }
 }

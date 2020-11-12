@@ -21,13 +21,9 @@ class HomeView extends StatelessWidget {
       body: RefreshIndicator(
         onRefresh: () async => Future.value(
             context.bloc<UserProfileBloc>()..add(GetUserDetails())),
-        child: BlocBuilder<UserProfileBloc, UserProfileState>(
-          builder: (context, state) => state.map(
-            initial: (_) => Container(),
-            loading: (_) => sharedLoader(),
-            loaded: (val) => _buildHomeView(context, val, model, mainView),
-            error: (val) => sharedErrorWidget(context, val.message),
-          ),
+        child: UserDetailsWrapper(
+          loaded: (userData) =>
+              _buildHomeView(context, userData, model, mainView),
         ),
       ),
     );

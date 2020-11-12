@@ -176,9 +176,9 @@ class _$UserProfileStateTearOff {
   }
 
 // ignore: unused_element
-  Error error(String message) {
+  Error error(Glitch glitch) {
     return Error(
-      message,
+      glitch,
     );
   }
 }
@@ -196,7 +196,7 @@ mixin _$UserProfileState {
     @required
         Result loaded(UserDetailsData userData, String fullName,
             String investmentBalance, String profilePicture),
-    @required Result error(String message),
+    @required Result error(Glitch glitch),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
@@ -204,7 +204,7 @@ mixin _$UserProfileState {
     Result loading(),
     Result loaded(UserDetailsData userData, String fullName,
         String investmentBalance, String profilePicture),
-    Result error(String message),
+    Result error(Glitch glitch),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -282,7 +282,7 @@ class _$Initial implements Initial {
     @required
         Result loaded(UserDetailsData userData, String fullName,
             String investmentBalance, String profilePicture),
-    @required Result error(String message),
+    @required Result error(Glitch glitch),
   }) {
     assert(initial != null);
     assert(loading != null);
@@ -298,7 +298,7 @@ class _$Initial implements Initial {
     Result loading(),
     Result loaded(UserDetailsData userData, String fullName,
         String investmentBalance, String profilePicture),
-    Result error(String message),
+    Result error(Glitch glitch),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -385,7 +385,7 @@ class _$Loading implements Loading {
     @required
         Result loaded(UserDetailsData userData, String fullName,
             String investmentBalance, String profilePicture),
-    @required Result error(String message),
+    @required Result error(Glitch glitch),
   }) {
     assert(initial != null);
     assert(loading != null);
@@ -401,7 +401,7 @@ class _$Loading implements Loading {
     Result loading(),
     Result loaded(UserDetailsData userData, String fullName,
         String investmentBalance, String profilePicture),
-    Result error(String message),
+    Result error(Glitch glitch),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -552,7 +552,7 @@ class _$Loaded implements Loaded {
     @required
         Result loaded(UserDetailsData userData, String fullName,
             String investmentBalance, String profilePicture),
-    @required Result error(String message),
+    @required Result error(Glitch glitch),
   }) {
     assert(initial != null);
     assert(loading != null);
@@ -568,7 +568,7 @@ class _$Loaded implements Loaded {
     Result loading(),
     Result loaded(UserDetailsData userData, String fullName,
         String investmentBalance, String profilePicture),
-    Result error(String message),
+    Result error(Glitch glitch),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -628,7 +628,9 @@ abstract class Loaded implements UserProfileState {
 abstract class $ErrorCopyWith<$Res> {
   factory $ErrorCopyWith(Error value, $Res Function(Error) then) =
       _$ErrorCopyWithImpl<$Res>;
-  $Res call({String message});
+  $Res call({Glitch glitch});
+
+  $GlitchCopyWith<$Res> get glitch;
 }
 
 /// @nodoc
@@ -642,37 +644,47 @@ class _$ErrorCopyWithImpl<$Res> extends _$UserProfileStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object message = freezed,
+    Object glitch = freezed,
   }) {
     return _then(Error(
-      message == freezed ? _value.message : message as String,
+      glitch == freezed ? _value.glitch : glitch as Glitch,
     ));
+  }
+
+  @override
+  $GlitchCopyWith<$Res> get glitch {
+    if (_value.glitch == null) {
+      return null;
+    }
+    return $GlitchCopyWith<$Res>(_value.glitch, (value) {
+      return _then(_value.copyWith(glitch: value));
+    });
   }
 }
 
 /// @nodoc
 class _$Error implements Error {
-  _$Error(this.message) : assert(message != null);
+  _$Error(this.glitch) : assert(glitch != null);
 
   @override
-  final String message;
+  final Glitch glitch;
 
   @override
   String toString() {
-    return 'UserProfileState.error(message: $message)';
+    return 'UserProfileState.error(glitch: $glitch)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is Error &&
-            (identical(other.message, message) ||
-                const DeepCollectionEquality().equals(other.message, message)));
+            (identical(other.glitch, glitch) ||
+                const DeepCollectionEquality().equals(other.glitch, glitch)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(message);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(glitch);
 
   @override
   $ErrorCopyWith<Error> get copyWith =>
@@ -686,13 +698,13 @@ class _$Error implements Error {
     @required
         Result loaded(UserDetailsData userData, String fullName,
             String investmentBalance, String profilePicture),
-    @required Result error(String message),
+    @required Result error(Glitch glitch),
   }) {
     assert(initial != null);
     assert(loading != null);
     assert(loaded != null);
     assert(error != null);
-    return error(message);
+    return error(glitch);
   }
 
   @override
@@ -702,12 +714,12 @@ class _$Error implements Error {
     Result loading(),
     Result loaded(UserDetailsData userData, String fullName,
         String investmentBalance, String profilePicture),
-    Result error(String message),
+    Result error(Glitch glitch),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (error != null) {
-      return error(message);
+      return error(glitch);
     }
     return orElse();
   }
@@ -745,8 +757,8 @@ class _$Error implements Error {
 }
 
 abstract class Error implements UserProfileState {
-  factory Error(String message) = _$Error;
+  factory Error(Glitch glitch) = _$Error;
 
-  String get message;
+  Glitch get glitch;
   $ErrorCopyWith<Error> get copyWith;
 }

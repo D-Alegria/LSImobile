@@ -32,5 +32,11 @@ abstract class UserRepo {
 
   Future<Either<Glitch, Unit>> get clearUserData;
 
-  Future<User> get user;
+  Future<Either<Glitch, User>> get user;
+
+  Future<Either<Glitch, String>> get userToken;
+
+  Future<Either<Glitch, Unit>> saveObject(String key, dynamic value);
+
+  Future<Either<Glitch, dynamic>> getObject(String key);
 }

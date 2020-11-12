@@ -20,5 +20,5 @@ abstract class AuthService {
 
   Future<Either<Glitch, Unit>> logout();
 
-  Future<User> get currentUser;
+  Future<Either<Glitch, User>> get currentUser;
 }

@@ -107,7 +107,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       function: () async {
         final response = await _apiManager.get(url: url);
         return response.fold(
-          (failure) => left(RemoteGlitch(message: failure.message)),
+          (failure) => left(SystemGlitch(message: failure.message)),
           (success) {
             final result = GetValueResponse.fromJson(success);
             return right(result.data);
@@ -128,11 +128,11 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
           requestBody: request.toJson(),
         );
         return response.fold(
-          (failure) => left(RemoteGlitch(message: failure.message)),
+          (failure) => left(failure),
           (success) {
             final result = UserDetailsResponse.fromJson(success);
             if (!result.data.userData.status)
-              return left(RemoteGlitch(message: result.data.userData.message));
+              return left(SystemGlitch(message: result.data.userData.message));
             return right(result.data);
           },
         );
@@ -151,10 +151,8 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
           requestBody: request.toJson(),
         );
         return response.fold(
-          (failure) => left(RemoteGlitch(message: failure.message)),
-          (success) {
-            return right(unit);
-          },
+          (failure) => left(failure),
+          (success) => right(unit),
         );
       },
       errorMessage: "Internal System Error Occurred:USRD-SUD",
@@ -171,13 +169,13 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
           requestBody: request.toJson(),
         );
         return response.fold(
-          (failure) => left(RemoteGlitch(message: failure.message)),
+          (failure) => left(failure),
           (success) {
             final result = GetRecentTransactionResponse.fromJson(success);
             if (result.status) {
               return right(result.recentTransactions ?? []);
             } else {
-              return left(RemoteGlitch(message: "No transactions found"));
+              return left(SystemGlitch(message: "No transactions found"));
             }
           },
         );

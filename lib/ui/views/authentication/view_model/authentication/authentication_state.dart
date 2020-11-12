@@ -8,5 +8,5 @@ abstract class AuthenticationState with _$AuthenticationState {
 
   factory AuthenticationState.authenticated() = Authenticated;
 
-  factory AuthenticationState.unVerified() = Unverified;
+  factory AuthenticationState.error(String message) = Error;
 }

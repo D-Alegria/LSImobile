@@ -2,12 +2,12 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:lsi_mobile/core/datasources/local_storage/local_data_repo.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/core/models/requests/initiate_bvn_validation/initiate_bvn_validation_request.dart';
 import 'package:lsi_mobile/core/models/requests/verify_bvn_otp/verify_bvn_otp_request.dart';
 import 'package:lsi_mobile/core/repositories/bank/bank_repo.dart';
+import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
 import 'package:meta/meta.dart';
 
 part 'provide_bvn_bloc.freezed.dart';
@@ -19,9 +19,9 @@ part 'provide_bvn_state.dart';
 @lazySingleton
 class ProvideBvnBloc extends Bloc<ProvideBvnEvent, ProvideBvnState> {
   final BankRepo _bankRepo;
-  final LocalStorageRepo _localStorageRepo;
+  final UserRepo _userRepo;
 
-  ProvideBvnBloc(this._bankRepo, this._localStorageRepo)
+  ProvideBvnBloc(this._bankRepo, this._userRepo)
       : super(ProvideBvnState.initial());
 
   @override
@@ -49,7 +49,8 @@ class ProvideBvnBloc extends Bloc<ProvideBvnEvent, ProvideBvnState> {
             ),
           );
 
-          otp = await _localStorageRepo.getString("OTP");
+          final local = await _userRepo.getObject("OTP");
+          local.fold((l) => otp = "", (r) => otp = r);
         }
 
         yield state.copyWith(
@@ -69,7 +70,9 @@ class ProvideBvnBloc extends Bloc<ProvideBvnEvent, ProvideBvnState> {
             isSubmitting: true,
             submitFailureOrSuccess: None(),
           );
-          var tnx = await _localStorageRepo.getString("TNX");
+          var tnx;
+          final local = await _userRepo.getObject("TNX");
+          local.fold((l) => tnx = "", (r) => tnx = r);
           failureOrSuccess = await _bankRepo
               .verifyBvnWithOTP(VerifyBVNOtpRequest(otp: state.otp, txn: tnx));
 

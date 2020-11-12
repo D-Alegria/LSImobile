@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:lsi_mobile/core/datasources/local_storage/local_data_repo.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/constants/api_urls.dart';
 import 'package:lsi_mobile/core/models/dto/user/user.dart';
@@ -22,16 +21,14 @@ import 'package:lsi_mobile/core/utils/function_util.dart';
 class AuthServiceImpl implements AuthService {
   final ApiManager _apiManager;
   final UserRepo _userRepo;
-  final LocalStorageRepo _localStorageRepo;
 
   AuthServiceImpl(
     this._apiManager,
     this._userRepo,
-    this._localStorageRepo,
   );
 
   @override
-  Future<User> get currentUser async => await _userRepo.user;
+  Future<Either<Glitch, User>> get currentUser async => await _userRepo.user;
 
   @override
   Future<Either<Glitch, Unit>> login(LoginUserRequest request) async {
@@ -60,7 +57,7 @@ class AuthServiceImpl implements AuthService {
               ));
               return right(unit);
             } else {
-              return left(RemoteGlitch(message: result.message));
+              return left(SystemGlitch(message: result.message));
             }
           },
         );
@@ -96,7 +93,7 @@ class AuthServiceImpl implements AuthService {
             } else {
               if (result.responseCode == "04")
                 return left(UnAuthenticatedGlitch(message: result.message));
-              return left(RemoteGlitch(message: result.message));
+              return left(SystemGlitch(message: result.message));
             }
           },
         );
@@ -118,10 +115,10 @@ class AuthServiceImpl implements AuthService {
           (success) async {
             final result = SendOTPResponse.fromJson(success);
             if (result.status) {
-              await _localStorageRepo.saveString("OTP", result.otp);
+              await _userRepo.saveObject("OTP", result.otp);
               return right(unit);
             } else {
-              return left(RemoteGlitch(message: result.message));
+              return left(SystemGlitch(message: result.message));
             }
           },
         );
@@ -142,10 +139,8 @@ class AuthServiceImpl implements AuthService {
           (failure) => left(failure),
           (success) async {
             final result = VerifyOTPResponse.fromJson(success);
-            if (result.status)
-              return right(unit);
-            else
-              return left(RemoteGlitch(message: result.message));
+            if (result.status) return right(unit);
+            return left(SystemGlitch(message: result.message));
           },
         );
       },
@@ -167,10 +162,8 @@ class AuthServiceImpl implements AuthService {
           (success) async {
             // TODO fix Reset password Response
             final result = VerifyOTPResponse.fromJson(success);
-            if (result.status)
-              return right(unit);
-            else
-              return left(RemoteGlitch(message: result.message));
+            if (result.status) return right(unit);
+            return left(SystemGlitch(message: result.message));
           },
         );
       },
@@ -183,7 +176,7 @@ class AuthServiceImpl implements AuthService {
       errorMessage: "Internal System Error Occurred:AuSe-LO",
       function: () async {
         final result = await _userRepo.clearUserData;
-        return result.fold((l) => null, (r) => right(unit));
+        return result.fold((l) => left(l), (r) => right(unit));
       },
     );
   }

@@ -35,8 +35,6 @@ import '../../repositories/loan/loan_repo.dart';
 import '../../repositories/loan/loan_repo_impl.dart';
 import '../../../ui/views/main/loans/loan_schedule/view_model/loan_schedule_cubit.dart';
 import '../../../ui/views/main/loans/loans_view/view_model/loan_view_cubit.dart';
-import '../../datasources/local_storage/local_data_repo.dart';
-import '../../datasources/local_storage/local_storage_repo_impl.dart';
 import '../../utils/network_util.dart';
 import '../../../ui/views/main/investment/new_investment/view_model/new_investment_bloc.dart';
 import '../../../ui/views/main/loans/personal_info/view_model/personal_info_bloc.dart';
@@ -74,49 +72,37 @@ Future<GetIt> $initGetIt(
   gh.lazySingleton<DioInterceptor>(() => DioInterceptor(get<Dio>()));
   gh.lazySingleton<InvestmentRemoteDataSource>(
       () => InvestmentRemoteDataSourceImpl(get<ApiManager>()));
-  gh.lazySingleton<InvestmentRepo>(() => InvestmentRepoImpl(
-      get<UserLocalDataSource>(), get<InvestmentRemoteDataSource>()));
-  gh.lazySingleton<InvestmentViewCubit>(
-      () => InvestmentViewCubit(get<InvestmentRepo>()));
   gh.lazySingleton<LoanRemoteDataSource>(
       () => LoanRemoteDataSourceImpl(get<ApiManager>()));
-  gh.lazySingleton<LoanRepo>(() =>
-      LoanRepoImpl(get<UserLocalDataSource>(), get<LoanRemoteDataSource>()));
-  gh.lazySingleton<LoanScheduleCubit>(() => LoanScheduleCubit(get<LoanRepo>()));
-  gh.lazySingleton<LoanViewCubit>(() => LoanViewCubit(get<LoanRepo>()));
-  gh.lazySingleton<LocalStorageRepo>(
-      () => LocalStorageRepoImpl(get<SharedPreferences>()));
   gh.lazySingleton<UserRemoteDataSource>(
       () => UserRemoteDataSourceImpl(get<ApiManager>()));
   gh.lazySingleton<UserRepo>(() =>
       UserRepoImpl(get<UserLocalDataSource>(), get<UserRemoteDataSource>()));
-  gh.lazySingleton<AuthService>(() => AuthServiceImpl(
-        get<ApiManager>(),
-        get<UserRepo>(),
-        get<LocalStorageRepo>(),
-      ));
+  gh.lazySingleton<AuthService>(
+      () => AuthServiceImpl(get<ApiManager>(), get<UserRepo>()));
   gh.factory<AuthenticationBloc>(() => AuthenticationBloc(get<AuthService>()));
-  gh.lazySingleton<BankRepo>(() => BankRepoImpl(
-        get<UserRepo>(),
-        get<BankRemoteDataSource>(),
-        get<LocalStorageRepo>(),
-      ));
+  gh.lazySingleton<BankRepo>(
+      () => BankRepoImpl(get<UserRepo>(), get<BankRemoteDataSource>()));
   gh.factory<EditProfileBloc>(
       () => EditProfileBloc(get<UserRepo>(), get<UserRemoteDataSource>()));
   gh.lazySingleton<EduAndEmployBloc>(
       () => EduAndEmployBloc(get<UserRepo>(), get<UserRemoteDataSource>()));
   gh.lazySingleton<EmergencyContactBloc>(
       () => EmergencyContactBloc(get<UserRepo>(), get<UserRemoteDataSource>()));
-  gh.lazySingleton<InvestmentProductCubit>(
-      () => InvestmentProductCubit(get<InvestmentRepo>()));
+  gh.lazySingleton<InvestmentRepo>(() =>
+      InvestmentRepoImpl(get<UserRepo>(), get<InvestmentRemoteDataSource>()));
+  gh.lazySingleton<InvestmentViewCubit>(
+      () => InvestmentViewCubit(get<InvestmentRepo>()));
   gh.lazySingleton<LoanDetailsBloc>(
       () => LoanDetailsBloc(get<UserRemoteDataSource>()));
-  gh.lazySingleton<LoanProductCubit>(
-      () => LoanProductCubit(get<LoanRepo>(), get<UserRepo>()));
+  gh.lazySingleton<LoanRepo>(
+      () => LoanRepoImpl(get<UserRepo>(), get<LoanRemoteDataSource>()));
+  gh.lazySingleton<LoanScheduleCubit>(() => LoanScheduleCubit(get<LoanRepo>()));
+  gh.lazySingleton<LoanViewCubit>(() => LoanViewCubit(get<LoanRepo>()));
   gh.lazySingleton<PersonalInfoBloc>(
       () => PersonalInfoBloc(get<UserRepo>(), get<UserRemoteDataSource>()));
   gh.lazySingleton<ProvideBvnBloc>(
-      () => ProvideBvnBloc(get<BankRepo>(), get<LocalStorageRepo>()));
+      () => ProvideBvnBloc(get<BankRepo>(), get<UserRepo>()));
   gh.lazySingleton<RecentTransactionCubit>(
       () => RecentTransactionCubit(get<UserRepo>()));
   gh.lazySingleton<ResidenceBloc>(
@@ -130,7 +116,11 @@ Future<GetIt> $initGetIt(
       ));
   gh.lazySingleton<AccountsCardsBloc>(() => AccountsCardsBloc(get<BankRepo>()));
   gh.lazySingleton<AuthFormBloc>(
-      () => AuthFormBloc(get<AuthService>(), get<LocalStorageRepo>()));
+      () => AuthFormBloc(get<AuthService>(), get<UserRepo>()));
+  gh.lazySingleton<InvestmentProductCubit>(
+      () => InvestmentProductCubit(get<InvestmentRepo>()));
+  gh.lazySingleton<LoanProductCubit>(
+      () => LoanProductCubit(get<LoanRepo>(), get<UserRepo>()));
   return get;
 }
 

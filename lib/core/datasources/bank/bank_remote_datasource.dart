@@ -50,7 +50,7 @@ class BankRemoteDataSourceImpl implements BankRemoteDataSource {
           requestBody: request.toJson(),
         );
         return response.fold(
-          (failure) => left(RemoteGlitch(message: failure.message)),
+          (failure) => left(failure),
           (success) {
             final result = BankAccountResponse.fromJson(success);
             return right(result);
@@ -71,7 +71,7 @@ class BankRemoteDataSourceImpl implements BankRemoteDataSource {
           requestBody: request.toJson(),
         );
         return response.fold(
-          (failure) => left(RemoteGlitch(message: failure.message)),
+          (failure) => left(failure),
           (success) {
             final result = GetCardsResponse.fromJson(success);
             return right(result);
@@ -93,15 +93,14 @@ class BankRemoteDataSourceImpl implements BankRemoteDataSource {
         );
         return response.fold(
           (failure) {
-            return left(RemoteGlitch(message: failure.message));
+            return left(failure);
           },
           (success) {
             final result = InitiateBVNValidationResponse.fromJson(success);
-            if (result.status) {
+            if (result.status)
               return right(result);
-            } else {
-              return left(RemoteGlitch(message: result.data.message));
-            }
+            else
+              return left(SystemGlitch(message: result.data.message));
           },
         );
       },
@@ -119,14 +118,13 @@ class BankRemoteDataSourceImpl implements BankRemoteDataSource {
           requestBody: request.toJson(),
         );
         return response.fold(
-          (failure) => left(RemoteGlitch(message: failure.message)),
+          (failure) => left(failure),
           (success) {
             final result = VerifyBVNOtpResponse.fromJson(success);
-            if (result.status) {
+            if (result.status)
               return right(result);
-            } else {
-              return left(RemoteGlitch(message: result.message));
-            }
+            else
+              return left(SystemGlitch(message: result.message));
           },
         );
       },
@@ -144,14 +142,13 @@ class BankRemoteDataSourceImpl implements BankRemoteDataSource {
           requestBody: request.toJson(),
         );
         return response.fold(
-          (failure) => left(RemoteGlitch(message: failure.message)),
+          (failure) => left(failure),
           (success) {
             final result = ResolveAccountResponse.fromJson(success);
-            if (result.status == "success") {
+            if (result.status == "success")
               return right(result);
-            } else {
-              return left(RemoteGlitch(message: result.message));
-            }
+            else
+              return left(SystemGlitch(message: result.message));
           },
         );
       },

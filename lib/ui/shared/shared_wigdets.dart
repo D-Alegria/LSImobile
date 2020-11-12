@@ -1,10 +1,13 @@
+import "package:auto_route/auto_route.dart";
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
+import 'package:lsi_mobile/ui/views/authentication/view_model/authentication/authentication_bloc.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_bloc.dart';
 
 import 'const_color.dart';
@@ -408,10 +411,10 @@ Widget sharedInfoButton({
           ),
           showArrow
               ? Icon(
-                  Icons.arrow_forward_rounded,
-                  color: ColorStyles.light,
-                  size: SizeConfig.textSize(context, 8),
-                )
+            Icons.arrow_forward_rounded,
+            color: ColorStyles.light,
+            size: SizeConfig.textSize(context, 8),
+          )
               : Container(),
         ],
       ),
@@ -462,7 +465,8 @@ Widget sharedDropDownFormField<T>({
     value: value,
     items: items
         .map(
-          (e) => DropdownMenuItem(
+          (e) =>
+          DropdownMenuItem(
             child: Text(
               "$e",
               overflow: TextOverflow.visible,
@@ -474,7 +478,7 @@ Widget sharedDropDownFormField<T>({
             ),
             value: e,
           ),
-        )
+    )
         .toList(),
     icon: Icon(Icons.keyboard_arrow_down),
     isExpanded: true,
@@ -512,34 +516,35 @@ Widget sharedTable({
   return Table(
     children: List.generate(
       list.length,
-      (index) => TableRow(
-        children: [
-          TableCell(
-            verticalAlignment: TableCellVerticalAlignment.middle,
-            child: Text(
-              list[index][0],
-              textAlign: TextAlign.left,
-              style: GoogleFonts.workSans(
-                fontWeight: FontWeight.w400,
-                fontSize: SizeConfig.textSize(context, 4.5),
-                height: SizeConfig.textSize(context, 0.5),
+          (index) =>
+          TableRow(
+            children: [
+              TableCell(
+                verticalAlignment: TableCellVerticalAlignment.middle,
+                child: Text(
+                  list[index][0],
+                  textAlign: TextAlign.left,
+                  style: GoogleFonts.workSans(
+                    fontWeight: FontWeight.w400,
+                    fontSize: SizeConfig.textSize(context, 4.5),
+                    height: SizeConfig.textSize(context, 0.5),
+                  ),
+                ),
               ),
-            ),
+              TableCell(
+                verticalAlignment: TableCellVerticalAlignment.middle,
+                child: Text(
+                  list[index][1],
+                  textAlign: TextAlign.right,
+                  style: GoogleFonts.workSans(
+                    fontWeight: FontWeight.w600,
+                    fontSize: SizeConfig.textSize(context, 5),
+                    height: SizeConfig.textSize(context, 0.5),
+                  ),
+                ),
+              )
+            ],
           ),
-          TableCell(
-            verticalAlignment: TableCellVerticalAlignment.middle,
-            child: Text(
-              list[index][1],
-              textAlign: TextAlign.right,
-              style: GoogleFonts.workSans(
-                fontWeight: FontWeight.w600,
-                fontSize: SizeConfig.textSize(context, 5),
-                height: SizeConfig.textSize(context, 0.5),
-              ),
-            ),
-          )
-        ],
-      ),
     ),
   );
 }
@@ -571,31 +576,36 @@ Widget sharedSmallBadge({
   );
 }
 
-Widget processingBadge(BuildContext context) => sharedSmallBadge(
+Widget processingBadge(BuildContext context) =>
+    sharedSmallBadge(
       context: context,
       text: "Processing",
       indicatorColor: ColorStyles.orange,
     );
 
-Widget activeBadge(BuildContext context) => sharedSmallBadge(
+Widget activeBadge(BuildContext context) =>
+    sharedSmallBadge(
       context: context,
       text: "Active",
       indicatorColor: ColorStyles.green1,
     );
 
-Widget rejectedBadge(BuildContext context) => sharedSmallBadge(
+Widget rejectedBadge(BuildContext context) =>
+    sharedSmallBadge(
       context: context,
       text: "Rejected",
       indicatorColor: ColorStyles.red,
     );
 
-Widget closedBadge(BuildContext context) => sharedSmallBadge(
+Widget closedBadge(BuildContext context) =>
+    sharedSmallBadge(
       context: context,
       text: "Closed",
       indicatorColor: ColorStyles.blue,
     );
 
-Widget dueBadge(BuildContext context, String amountDue) => sharedSmallBadge(
+Widget dueBadge(BuildContext context, String amountDue) =>
+    sharedSmallBadge(
       context: context,
       text: "Due: $amountDue",
       indicatorColor: ColorStyles.red,
@@ -670,10 +680,10 @@ class _SharedDateTimeFieldState extends State<SharedDateTimeField> {
             initialDate: widget.initialValue.isEmpty
                 ? DateTime.now()
                 : DateTime(
-                    int.parse(widget.initialValue.split('-')[0]),
-                    int.parse(widget.initialValue.split('-')[1]),
-                    int.parse(widget.initialValue.split('-')[2]),
-                  ),
+              int.parse(widget.initialValue.split('-')[0]),
+              int.parse(widget.initialValue.split('-')[1]),
+              int.parse(widget.initialValue.split('-')[2]),
+            ),
             firstDate: DateTime(1970),
             lastDate: DateTime(2300),
             builder: (BuildContext context, Widget child) {
@@ -681,9 +691,12 @@ class _SharedDateTimeFieldState extends State<SharedDateTimeField> {
                 data: Theme.of(context).copyWith(
                   primaryColor: ColorStyles.blue,
                   accentColor: ColorStyles.blue,
-                  colorScheme: Theme.of(context).colorScheme.copyWith(
-                        primary: ColorStyles.blue,
-                      ),
+                  colorScheme: Theme
+                      .of(context)
+                      .colorScheme
+                      .copyWith(
+                    primary: ColorStyles.blue,
+                  ),
                   buttonTheme: ButtonThemeData(
                     textTheme: ButtonTextTheme.primary,
                   ),
@@ -738,13 +751,28 @@ class UserDetailsWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserProfileBloc, UserProfileState>(
-      builder: (context, state) => state.map(
-        initial: (e) => Container(),
-        loading: (e) => sharedLoader(),
-        loaded: (e) => loaded(e),
-        error: (e) => sharedErrorWidget(context, e.message),
-      ),
-      listener: (context, state) => null,
+      builder: (context, state) =>
+          state.map(
+            initial: (e) => Container(),
+            loading: (e) => sharedLoader(),
+            loaded: (e) => loaded(e),
+            error: (e) => sharedErrorWidget(context, e.glitch.message),
+          ),
+      listener: (context, state) =>
+          state.maybeMap(
+            error: (value) =>
+                value.glitch.maybeMap(
+                  orElse: () => null,
+                  unAuthenticatedGlitch: (e) {
+                    context.bloc<AuthenticationBloc>().add(LogoutRequest());
+                    return context.navigator.pushAndRemoveUntil(
+                      Routes.authWrapper,
+                          (route) => false,
+                    );
+                  },
+                ),
+            orElse: () => null,
+          ),
     );
   }
 }

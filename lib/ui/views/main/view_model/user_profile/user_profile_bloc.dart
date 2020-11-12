@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/responses/user_details/user_details_data.dart';
 import 'package:lsi_mobile/core/repositories/investment/investment_repo.dart';
 import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
@@ -37,7 +38,7 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
           yield* result.fold(
             (l) async* {
               print(l.message);
-              yield Error(l.message);
+              yield Error(l);
             },
             (r) async* {
               userData = r;
@@ -47,7 +48,7 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
           yield* investResult.fold(
             (l) async* {
               print(l.message);
-              yield Error(l.message);
+              yield Error(l);
             },
             (r) async* {
               investmentBalance = r;
@@ -61,7 +62,7 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
           );
         } on Exception catch (e) {
           print(e);
-          yield Error("An error occurred");
+          yield Error(SystemGlitch(message: "Error occurred in Bloc"));
         }
       },
     );

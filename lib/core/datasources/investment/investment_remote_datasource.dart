@@ -39,7 +39,7 @@ class InvestmentRemoteDataSourceImpl implements InvestmentRemoteDataSource {
           requestBody: request.toJson(),
         );
         return response.fold(
-          (failure) => left(RemoteGlitch(message: failure.message)),
+          (failure) => left(failure),
           (success) {
             final result = InvestmentSnapshotResponse.fromJson(success);
             return right(result);
@@ -60,7 +60,7 @@ class InvestmentRemoteDataSourceImpl implements InvestmentRemoteDataSource {
           requestBody: request.toJson(),
         );
         return response.fold(
-          (failure) => left(RemoteGlitch(message: failure.message)),
+          (failure) => left(failure),
           (success) {
             final result = GetInvestmentProductsResponse.fromJson(success);
             return right(result);
@@ -81,7 +81,7 @@ class InvestmentRemoteDataSourceImpl implements InvestmentRemoteDataSource {
           requestBody: request.toJson(),
         );
         return response.fold(
-          (failure) => left(RemoteGlitch(message: failure.message)),
+          (failure) => left(failure),
           (success) {
             final result = InvestmentPortfolioResponse.fromJson(success);
             return right(result);

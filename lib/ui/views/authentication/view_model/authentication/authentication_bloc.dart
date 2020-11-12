@@ -23,33 +23,39 @@ class AuthenticationBloc
   Stream<AuthenticationState> mapEventToState(
     AuthenticationEvent event,
   ) async* {
-    yield* event.map(checkAuthenticated: (_) async* {
-      final user = await _authService.currentUser;
-      if (!user.isAuthenticated) {
-        yield Unauthenticated();
-      } else if (!user.isVerified) {
-        yield Unauthenticated();
-      } else {
-        yield Authenticated();
-      }
-    }, logoutRequest: (_) async* {
-      yield Initial();
-      try {
-        final result = await _authService.logout();
-        print("logging out");
+    yield* event.map(
+      checkAuthenticated: (_) async* {
+        final result = await _authService.currentUser;
         yield* result.fold(
           (l) async* {
-            print(l.message);
+            yield Error(l.message);
           },
           (r) async* {
-            print('logout good');
-            yield Unauthenticated();
+            if (!r.isAuthenticated) {
+              yield Unauthenticated();
+            } else {
+              yield Authenticated();
+            }
           },
         );
-
-      } on Exception catch (e) {
-        print(e);
-      }
-    });
+      },
+      logoutRequest: (_) async* {
+        yield Initial();
+        try {
+          final result = await _authService.logout();
+          yield* result.fold(
+            (l) async* {
+              yield Error(l.message);
+            },
+            (r) async* {
+              yield Unauthenticated();
+            },
+          );
+        } on Error catch (e) {
+          print(e);
+          yield Error("Error Occurred: BloC");
+        }
+      },
+    );
   }
 }

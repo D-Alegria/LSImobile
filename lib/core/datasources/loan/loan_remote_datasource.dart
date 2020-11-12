@@ -47,12 +47,12 @@ class LoanRemoteDataSourceImpl implements LoanRemoteDataSource {
           url: ApiUrls.loanProducts,
         );
         return response.fold(
-          (failure) => left(RemoteGlitch(message: failure.message)),
+          (failure) => left(failure),
           (success) {
             final result = GetLoanProductsResponse.fromJson(success);
             if (!result.data.status)
               return left(
-                  RemoteGlitch(message: 'Error getting Loans Products'));
+                  SystemGlitch(message: 'Error getting Loans Products'));
             return right(result.data.products);
           },
         );
@@ -71,14 +71,11 @@ class LoanRemoteDataSourceImpl implements LoanRemoteDataSource {
           requestBody: request.toJson(),
         );
         return response.fold(
-          (failure) => left(RemoteGlitch(message: failure.message)),
+          (failure) => left(failure),
           (success) {
             final result = CurrentLoanResponse.fromJson(success);
-            if (result.status) {
-              return right(result.data);
-            } else {
-              return left(RemoteGlitch(message: result.message));
-            }
+            if (result.status) return right(result.data);
+            return left(SystemGlitch(message: result.message));
           },
         );
       },
@@ -96,14 +93,11 @@ class LoanRemoteDataSourceImpl implements LoanRemoteDataSource {
           requestBody: request.toJson(),
         );
         return response.fold(
-          (failure) => left(RemoteGlitch(message: failure.message)),
+          (failure) => left(failure),
           (success) {
             final result = LoanApplicationResponse.fromJson(success);
-            if (result.status) {
-              return right(result);
-            } else {
-              return left(RemoteGlitch(message: result.message));
-            }
+            if (result.status) return right(result);
+            return left(SystemGlitch(message: result.message));
           },
         );
       },
@@ -121,14 +115,11 @@ class LoanRemoteDataSourceImpl implements LoanRemoteDataSource {
           requestBody: request.toJson(),
         );
         return response.fold(
-          (failure) => left(RemoteGlitch(message: failure.message)),
+          (failure) => left(failure),
           (success) {
             final result = LoanDetailsResponse.fromJson(success);
-            if (result.status) {
-              return right(result);
-            } else {
-              return left(RemoteGlitch(message: result.message));
-            }
+            if (result.status) return right(result);
+            return left(SystemGlitch(message: result.message));
           },
         );
       },
@@ -146,14 +137,11 @@ class LoanRemoteDataSourceImpl implements LoanRemoteDataSource {
           requestBody: request.toJson(),
         );
         return response.fold(
-              (failure) => left(RemoteGlitch(message: failure.message)),
-              (success) {
+          (failure) => left(failure),
+          (success) {
             final result = LoanScheduleResponse.fromJson(success);
-            if (result.status) {
-              return right(result);
-            } else {
-              return left(RemoteGlitch(message: result.message));
-            }
+            if (result.status) return right(result);
+            return left(SystemGlitch(message: result.message));
           },
         );
       },

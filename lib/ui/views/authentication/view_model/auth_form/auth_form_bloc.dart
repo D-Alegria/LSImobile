@@ -4,7 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:lsi_mobile/core/datasources/local_storage/local_data_repo.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/core/models/requests/login_user/login_user_request.dart';
@@ -12,6 +11,7 @@ import 'package:lsi_mobile/core/models/requests/register_user/profile.dart';
 import 'package:lsi_mobile/core/models/requests/register_user/register_user_request.dart';
 import 'package:lsi_mobile/core/models/requests/send_otp/send_otp_request.dart';
 import 'package:lsi_mobile/core/models/requests/verify_otp/verify_otp_request.dart';
+import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
 import 'package:lsi_mobile/core/services/auth_service/auth_service.dart';
 import 'package:meta/meta.dart';
 
@@ -24,9 +24,9 @@ part 'auth_form_state.dart';
 @lazySingleton
 class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
   final AuthService _authService;
-  final LocalStorageRepo _localStorageRepo;
+  final UserRepo _userRepo;
 
-  AuthFormBloc(this._authService, this._localStorageRepo)
+  AuthFormBloc(this._authService, this._userRepo)
       : super(AuthFormState.initial());
 
   @override
@@ -82,10 +82,12 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
           ),
         );
 
-        var v = _localStorageRepo.getString("OTP");
+        final v = await _userRepo.getObject("OTP");
+        var verificationCode;
+        v.fold((l) => verificationCode = "", (r) => verificationCode = r);
 
         yield state.copyWith(
-          verificationCode: v,
+          verificationCode: verificationCode,
           isSubmitting: false,
           authFailureOrSuccess: None(),
         );
@@ -149,7 +151,8 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
             ),
           );
 
-          v = _localStorageRepo.getString("OTP");
+          final local = await _userRepo.getObject("OTP");
+          local.fold((l) => v = "", (r) => v = r);
         }
 
         yield state.copyWith(
