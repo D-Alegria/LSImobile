@@ -137,7 +137,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
           },
         );
       },
-      errorMessage: "Internal System Error Occurred:USRD-GIP",
+      errorMessage: "Internal System Error Occurred:USRD-GUD",
     );
   }
 

@@ -63,7 +63,7 @@ class ActiveLoanView extends StatelessWidget {
               top: SizeConfig.yMargin(context, 2),
             ),
             width: SizeConfig.xMargin(context, 100),
-            child: Column(
+            child: ListView(
               children: [
                 LoanCard(currentLoan: currentLoan),
                 SizedBox(height: SizeConfig.yMargin(context, 2)),
@@ -113,7 +113,10 @@ class ActiveLoanView extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: SizeConfig.yMargin(context, 2)),
-                LoanHistory(loanHistory: loanHistory),
+                SizedBox(
+                  height: SizeConfig.yMargin(context, 35),
+                  child: LoanHistory(loanHistory: loanHistory),
+                ),
               ],
             ),
           ),

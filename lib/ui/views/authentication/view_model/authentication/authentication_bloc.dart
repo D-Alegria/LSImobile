@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/services/auth_service/auth_service.dart';
 import 'package:meta/meta.dart';
 
@@ -28,6 +29,7 @@ class AuthenticationBloc
         final result = await _authService.currentUser;
         yield* result.fold(
           (l) async* {
+            if (l is UnAuthenticatedGlitch) yield Unauthenticated();
             yield Error(l.message);
           },
           (r) async* {

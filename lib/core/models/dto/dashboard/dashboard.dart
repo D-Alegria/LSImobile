@@ -9,7 +9,7 @@ class Dashboard {
   @JsonKey(name: "active_loans")
   final String activeLoans;
   @JsonKey(name: "pending_payments")
-  final int pendingPayments;
+  final String pendingPayments;
 
   Dashboard({this.totalLoans, this.activeLoans, this.pendingPayments});
 
