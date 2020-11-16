@@ -10,7 +10,7 @@ Dashboard _$DashboardFromJson(Map<String, dynamic> json) {
   return Dashboard(
     totalLoans: json['total_loans'] as String,
     activeLoans: json['active_loans'] as String,
-    pendingPayments: json['pending_payments'] as int,
+    pendingPayments: json['pending_payments'] as String,
   );
 }
 
