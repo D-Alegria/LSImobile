@@ -46,104 +46,113 @@ class _AccountInfoViewState extends State<AccountInfoView> {
             child: state.isSubmitting
                 ? sharedLoader()
                 : ListView(
-              children: [
-                SizedBox(height: SizeConfig.yMargin(context, 3)),
-                sharedDropDownFormField<String>(
-                  value: state.banks
-                      .where(
-                          (element) => element.bankCode == state.bankName)
-                      .first
-                      .name,
-                  items: state.banks.map((e) => e.name).toList(),
-                  context: context,
-                  labelText: "Bank name",
-                  onChanged: (value) {
-                    var index;
-                    state.banks.map((e) {
-                      if (e.name == value) index = e.bankCode;
-                    }).toList();
-                    context
-                        .bloc<AccountInfoBloc>()
-                        .add(BankNameChanged(index));
-                  },
-                ),
-                SizedBox(height: SizeConfig.yMargin(context, 3)),
-                SharedTextFormField(
-                  labelText: "Account number",
-                  initialValue: state.accountNumber,
-                  onChanged: (value) => context
-                      .bloc<AccountInfoBloc>()
-                      .add(AccountNumberChanged(value)),
-                  validator: (value) {
-                    if (state.accountNumber.isEmpty)
-                      return "Field Required";
-                    return null;
-                  },
-                  keyboardType: TextInputType.number,
-                ),
-                SizedBox(height: SizeConfig.yMargin(context, 3)),
-                state.accountName.isEmpty
-                    ? Container()
-                    : SharedTextFormField(
-                  labelText: "Account name",
-                  readOnly: true,
-                  initialValue: state.accountName,
-                  validator: (value) {
-                    if (state.accountName.isEmpty)
-                      return "Field Required";
-                    return null;
-                  },
-                ),
-                SizedBox(height: SizeConfig.yMargin(context, 20)),
-                sharedRaisedButton(
-                  context: context,
-                  onPressed: () => context
-                      .bloc<AccountInfoBloc>()
-                      .add(SubmitAccountInfoForm()),
-                  color: ColorStyles.blue,
-                  text: "Submit",
-                  minWidth: SizeConfig.xMargin(context, 90),
-                ),
-                SizedBox(height: SizeConfig.yMargin(context, 3)),
-                state.accountName.isEmpty
-                    ? Container()
-                    : sharedRaisedButton(
-                  context: context,
-                  onPressed: () => context
-                      .bloc<AccountInfoBloc>()
-                      .add(ApplyForLoan(userData.userData.userData.data.bvn.bvn)),
-                  color: ColorStyles.blue,
-                  text: "Continue",
-                  minWidth: SizeConfig.xMargin(context, 90),
-                ),
-                SizedBox(height: SizeConfig.yMargin(context, 2.5)),
-              ],
-            ),
+                    children: [
+                      SizedBox(height: SizeConfig.yMargin(context, 3)),
+                      sharedDropDownFormField<String>(
+                        value: state.banks
+                            .where(
+                                (element) => element.bankCode == state.bankName)
+                            .first
+                            .name,
+                        items: state.banks.map((e) => e.name).toList(),
+                        context: context,
+                        labelText: "Bank name",
+                        onChanged: (value) {
+                          var index;
+                          state.banks.map((e) {
+                            if (e.name == value) index = e.bankCode;
+                          }).toList();
+                          context
+                              .bloc<AccountInfoBloc>()
+                              .add(BankNameChanged(index));
+                        },
+                      ),
+                      SizedBox(height: SizeConfig.yMargin(context, 3)),
+                      SharedTextFormField(
+                        labelText: "Account number",
+                        initialValue: state.accountNumber,
+                        onChanged: (value) => context
+                            .bloc<AccountInfoBloc>()
+                            .add(AccountNumberChanged(value)),
+                        validator: (value) {
+                          if (state.accountNumber.isEmpty)
+                            return "Field Required";
+                          return null;
+                        },
+                        keyboardType: TextInputType.number,
+                      ),
+                      SizedBox(height: SizeConfig.yMargin(context, 3)),
+                      state.accountName.isEmpty
+                          ? Container()
+                          : SharedTextFormField(
+                              labelText: "Account name",
+                              readOnly: true,
+                              initialValue: state.accountName,
+                              validator: (value) {
+                                if (state.accountName.isEmpty)
+                                  return "Field Required";
+                                return null;
+                              },
+                            ),
+                      SizedBox(height: SizeConfig.yMargin(context, 20)),
+                      sharedRaisedButton(
+                        context: context,
+                        onPressed: () => context
+                            .bloc<AccountInfoBloc>()
+                            .add(SubmitAccountInfoForm()),
+                        color: ColorStyles.blue,
+                        text: "Submit",
+                        minWidth: SizeConfig.xMargin(context, 90),
+                      ),
+                      SizedBox(height: SizeConfig.yMargin(context, 3)),
+                      state.accountName.isEmpty
+                          ? Container()
+                          : sharedRaisedButton(
+                              context: context,
+                              onPressed: () => context
+                                  .bloc<AccountInfoBloc>()
+                                  .add(ApplyForLoan(
+                                      userData.userData.userData.data.bvn.bvn)),
+                              color: ColorStyles.blue,
+                              text: "Continue",
+                              minWidth: SizeConfig.xMargin(context, 90),
+                            ),
+                      SizedBox(height: SizeConfig.yMargin(context, 2.5)),
+                    ],
+                  ),
           ),
         ),
         listener: (context, state) {
           state.submitAccountInfoFailureOrSuccess.fold(
-                () => null,
-                (either) => either.fold(
-                  (l) => FlushbarHelper.createError(
-                  message: l.message, duration: new Duration(seconds: 3))
+            () => null,
+            (either) => either.fold(
+              (l) => FlushbarHelper.createError(
+                      message: l.message, duration: new Duration(seconds: 3))
                   .show(context),
-                  (r) => null,
+              (r) => null,
             ),
           );
           state.applyForLoanFailureOrSuccess.fold(
-                () => null,
-                (either) => either.fold(
-                  (l) => FlushbarHelper.createError(
-                  message: l.message, duration: new Duration(seconds: 3))
+            () => null,
+            (either) => either.fold(
+              (l) => FlushbarHelper.createError(
+                      message: l.message, duration: new Duration(seconds: 3))
                   .show(context),
-                  (r) {
-                return context.navigator.pushSuccessView(
-                  message: "Your loan request has been sent successfully",
-                  buttonText: "Back to loans",
-                  onTap: () => context.navigator.pushAndRemoveUntil(
-                      Routes.mainView, (route) => false,
-                      arguments: MainViewArguments(pageNumber: 1)),
+              (r) {
+                return context.navigator.pushAndRemoveUntil(
+                  Routes.successView,
+                  (routes) => false,
+                  arguments: SuccessViewArguments(
+                    message: "Your loan request has been sent successfully",
+                    buttonText: "Back to loans",
+                    onTap: () {
+                      return ExtendedNavigator.root.pushAndRemoveUntil(
+                        Routes.mainView,
+                        (route) => false,
+                        arguments: MainViewArguments(pageNumber: 1),
+                      );
+                    },
+                  ),
                 );
               },
             ),
