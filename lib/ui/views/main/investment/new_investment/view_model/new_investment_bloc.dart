@@ -25,15 +25,11 @@ class NewInvestmentBloc extends Bloc<NewInvestmentEvent, NewInvestmentState> {
   NewInvestmentBloc(this._investmentRepo) : super(NewInvestmentState.initial());
 
   @override
-  Stream<NewInvestmentState> mapEventToState(NewInvestmentEvent event,) async* {
+  Stream<NewInvestmentState> mapEventToState(NewInvestmentEvent event) async* {
     yield* event.map(
       init: (e) async* {
         yield state.copyWith(
           investmentProduct: e.product,
-          investmentRate: e.product.interest,
-          durations: [
-            InvestmentDuration(int.parse(e.product.tenor),double.parse(e.product.interest)),
-          ]
         );
         yield* updateForm();
       },
@@ -78,17 +74,16 @@ class NewInvestmentBloc extends Bloc<NewInvestmentEvent, NewInvestmentState> {
     var maturityDate = Jiffy()
       ..add(months: state.durations[state.duration].noOfMonth);
     double totalInterest = state.durations[state.duration].interestRate / 12;
-    print(totalInterest);
     double accruedInterest = (totalInterest / 100) *
         state.amount *
         state.durations[state.duration].noOfMonth;
-    print("accruedInterest$accruedInterest");
 
     yield state.copyWith(
       investmentDate: investmentDate,
       maturityDate: maturityDate.yMMMd,
       tenure: state.durations[state.duration].noOfMonth.toString(),
       withholdingTax: '0',
+      investmentRate: state.durations[state.duration].interestRate.toString(),
       accruedInterest: accruedInterest.moneyFormat,
       maturityValue: (state.amount + accruedInterest).moneyFormat,
     );

@@ -21,8 +21,12 @@ abstract class NewInvestmentState with _$NewInvestmentState {
 
   factory NewInvestmentState.initial() => NewInvestmentState(
         amount: 0,
-        duration: 0,
-        durations: [],
+        duration: 1,
+        durations: [
+          InvestmentDuration(3, 14),
+          InvestmentDuration(6, 15),
+          InvestmentDuration(9, 16),
+        ],
         isSubmitting: false,
         showErrorMessages: false,
         submitFailureOrSuccess: None(),
