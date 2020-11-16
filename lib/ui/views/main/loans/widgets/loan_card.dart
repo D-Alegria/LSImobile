@@ -3,6 +3,7 @@ import 'package:lsi_mobile/core/models/dto/loan/loan.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
+import 'package:lsi_mobile/core/extensions/double_extension.dart';
 
 class LoanCard extends StatelessWidget {
   final Loan currentLoan;
@@ -32,12 +33,12 @@ class LoanCard extends StatelessWidget {
       if (val == "0")
         return Container();
       else
-        return dueBadge(context, val); // TODO Format to money
+        return dueBadge(context, double.parse(val).moneyFormat); // TODO Format to money
     }
 
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: SizeConfig.xMargin(context, 3),
+        horizontal: SizeConfig.xMargin(context, 4),
         vertical: SizeConfig.yMargin(context, 3),
       ),
       height: SizeConfig.yMargin(context, 24),
@@ -60,11 +61,11 @@ class LoanCard extends StatelessWidget {
           ),
           RichText(
             text: TextSpan(
-              text: "₦${currentLoan.requestPrincipal}",
+              text: "${double.parse(currentLoan.requestPrincipal).moneyFormat}",
               style: TextStyle(
                 fontWeight: FontWeight.w700,
                 color: ColorStyles.white,
-                fontSize: SizeConfig.textSize(context, 9),
+                fontSize: SizeConfig.textSize(context, 8),
               ),
               children: [
                 TextSpan(

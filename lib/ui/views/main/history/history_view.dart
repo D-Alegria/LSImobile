@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jiffy/jiffy.dart';
+import 'package:lsi_mobile/core/extensions/double_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -73,7 +74,8 @@ class HistoryView extends StatelessWidget {
                     context: context,
                     title: transaction.narrationCustomer,
                     subTitle: "Debit",
-                    trailingText: "₦${transaction.transAmount}",
+                    trailingText:
+                        "${double.parse(transaction.transAmount).moneyFormat}",
                     trailingSubText: time.fromNow(),
                     iconBackgroundColor: ColorStyles.red.withOpacity(0.2),
                     textColor: ColorStyles.red,
@@ -84,7 +86,8 @@ class HistoryView extends StatelessWidget {
                     context: context,
                     title: transaction.narrationCustomer,
                     subTitle: "Credit",
-                    trailingText: "₦${transaction.transAmount}",
+                    trailingText:
+                        "₦${double.parse(transaction.transAmount).moneyFormat}",
                     trailingSubText: time.fromNow(),
                     iconBackgroundColor: ColorStyles.green1.withOpacity(0.2),
                     textColor: ColorStyles.green1,

@@ -3,6 +3,7 @@ import 'package:lsi_mobile/core/models/dto/loan/loan.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
+import 'package:lsi_mobile/core/extensions/double_extension.dart';
 
 class LoanHistory extends StatelessWidget {
   final List<Loan> loanHistory;
@@ -65,7 +66,7 @@ class LoanHistory extends StatelessWidget {
                     color: ColorStyles.red,
                   ),
                   context: context,
-                  title: loan.requestPrincipal,
+                  title: double.parse(loan.requestPrincipal).moneyFormat,
                   subTitle: getBadge(loan.loanStatus),
                   trailingText: "",
                   trailingSubText:
@@ -81,7 +82,7 @@ class LoanHistory extends StatelessWidget {
                     color: ColorStyles.orange,
                   ),
                   context: context,
-                  title: loan.requestPrincipal,
+                  title: double.parse(loan.requestPrincipal).moneyFormat,
                   subTitle: getBadge(loan.loanStatus),
                   trailingText: "",
                   trailingSubText:
@@ -97,7 +98,7 @@ class LoanHistory extends StatelessWidget {
                     color: ColorStyles.green1,
                   ),
                   context: context,
-                  title: loan.requestPrincipal,
+                  title: double.parse(loan.requestPrincipal).moneyFormat,
                   subTitle: getBadge(loan.loanStatus),
                   trailingText: "",
                   trailingSubText:
@@ -113,7 +114,7 @@ class LoanHistory extends StatelessWidget {
                     color: ColorStyles.blue,
                   ),
                   context: context,
-                  title: loan.requestPrincipal,
+                  title: double.parse(loan.requestPrincipal).moneyFormat,
                   subTitle: getBadge(loan.loanStatus),
                   trailingText: "",
                   trailingSubText:
@@ -129,7 +130,7 @@ class LoanHistory extends StatelessWidget {
                     color: ColorStyles.black,
                   ),
                   context: context,
-                  title: loan.requestPrincipal,
+                  title: double.parse(loan.requestPrincipal).moneyFormat,
                   subTitle: getBadge(loan.loanStatus),
                   trailingText: "",
                   trailingSubText:

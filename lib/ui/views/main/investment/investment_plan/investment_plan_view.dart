@@ -118,7 +118,7 @@ class InvestmentPlanView extends StatelessWidget {
               text: "My statement",
               onTap: () => FlushbarHelper.createInformation(
                 message:
-                    "The statement has been successfully sent their registered email",
+                    "The statement has been sent successfully to your email",
                 duration: new Duration(seconds: 5),
               ).show(context),
               image: SvgPicture.asset(book),
