@@ -165,12 +165,10 @@ class _$UserProfileStateTearOff {
   Loaded loaded(
       {@required UserDetailsData userData,
       @required String fullName,
-      @required String investmentBalance,
       @required String profilePicture}) {
     return Loaded(
       userData: userData,
       fullName: fullName,
-      investmentBalance: investmentBalance,
       profilePicture: profilePicture,
     );
   }
@@ -194,16 +192,16 @@ mixin _$UserProfileState {
     @required Result initial(),
     @required Result loading(),
     @required
-        Result loaded(UserDetailsData userData, String fullName,
-            String investmentBalance, String profilePicture),
+        Result loaded(
+            UserDetailsData userData, String fullName, String profilePicture),
     @required Result error(Glitch glitch),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(UserDetailsData userData, String fullName,
-        String investmentBalance, String profilePicture),
+    Result loaded(
+        UserDetailsData userData, String fullName, String profilePicture),
     Result error(Glitch glitch),
     @required Result orElse(),
   });
@@ -280,8 +278,8 @@ class _$Initial implements Initial {
     @required Result initial(),
     @required Result loading(),
     @required
-        Result loaded(UserDetailsData userData, String fullName,
-            String investmentBalance, String profilePicture),
+        Result loaded(
+            UserDetailsData userData, String fullName, String profilePicture),
     @required Result error(Glitch glitch),
   }) {
     assert(initial != null);
@@ -296,8 +294,8 @@ class _$Initial implements Initial {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(UserDetailsData userData, String fullName,
-        String investmentBalance, String profilePicture),
+    Result loaded(
+        UserDetailsData userData, String fullName, String profilePicture),
     Result error(Glitch glitch),
     @required Result orElse(),
   }) {
@@ -383,8 +381,8 @@ class _$Loading implements Loading {
     @required Result initial(),
     @required Result loading(),
     @required
-        Result loaded(UserDetailsData userData, String fullName,
-            String investmentBalance, String profilePicture),
+        Result loaded(
+            UserDetailsData userData, String fullName, String profilePicture),
     @required Result error(Glitch glitch),
   }) {
     assert(initial != null);
@@ -399,8 +397,8 @@ class _$Loading implements Loading {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(UserDetailsData userData, String fullName,
-        String investmentBalance, String profilePicture),
+    Result loaded(
+        UserDetailsData userData, String fullName, String profilePicture),
     Result error(Glitch glitch),
     @required Result orElse(),
   }) {
@@ -451,11 +449,7 @@ abstract class Loading implements UserProfileState {
 abstract class $LoadedCopyWith<$Res> {
   factory $LoadedCopyWith(Loaded value, $Res Function(Loaded) then) =
       _$LoadedCopyWithImpl<$Res>;
-  $Res call(
-      {UserDetailsData userData,
-      String fullName,
-      String investmentBalance,
-      String profilePicture});
+  $Res call({UserDetailsData userData, String fullName, String profilePicture});
 }
 
 /// @nodoc
@@ -471,16 +465,12 @@ class _$LoadedCopyWithImpl<$Res> extends _$UserProfileStateCopyWithImpl<$Res>
   $Res call({
     Object userData = freezed,
     Object fullName = freezed,
-    Object investmentBalance = freezed,
     Object profilePicture = freezed,
   }) {
     return _then(Loaded(
       userData:
           userData == freezed ? _value.userData : userData as UserDetailsData,
       fullName: fullName == freezed ? _value.fullName : fullName as String,
-      investmentBalance: investmentBalance == freezed
-          ? _value.investmentBalance
-          : investmentBalance as String,
       profilePicture: profilePicture == freezed
           ? _value.profilePicture
           : profilePicture as String,
@@ -493,11 +483,9 @@ class _$Loaded implements Loaded {
   _$Loaded(
       {@required this.userData,
       @required this.fullName,
-      @required this.investmentBalance,
       @required this.profilePicture})
       : assert(userData != null),
         assert(fullName != null),
-        assert(investmentBalance != null),
         assert(profilePicture != null);
 
   @override
@@ -505,13 +493,11 @@ class _$Loaded implements Loaded {
   @override
   final String fullName;
   @override
-  final String investmentBalance;
-  @override
   final String profilePicture;
 
   @override
   String toString() {
-    return 'UserProfileState.loaded(userData: $userData, fullName: $fullName, investmentBalance: $investmentBalance, profilePicture: $profilePicture)';
+    return 'UserProfileState.loaded(userData: $userData, fullName: $fullName, profilePicture: $profilePicture)';
   }
 
   @override
@@ -524,9 +510,6 @@ class _$Loaded implements Loaded {
             (identical(other.fullName, fullName) ||
                 const DeepCollectionEquality()
                     .equals(other.fullName, fullName)) &&
-            (identical(other.investmentBalance, investmentBalance) ||
-                const DeepCollectionEquality()
-                    .equals(other.investmentBalance, investmentBalance)) &&
             (identical(other.profilePicture, profilePicture) ||
                 const DeepCollectionEquality()
                     .equals(other.profilePicture, profilePicture)));
@@ -537,7 +520,6 @@ class _$Loaded implements Loaded {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(userData) ^
       const DeepCollectionEquality().hash(fullName) ^
-      const DeepCollectionEquality().hash(investmentBalance) ^
       const DeepCollectionEquality().hash(profilePicture);
 
   @override
@@ -550,15 +532,15 @@ class _$Loaded implements Loaded {
     @required Result initial(),
     @required Result loading(),
     @required
-        Result loaded(UserDetailsData userData, String fullName,
-            String investmentBalance, String profilePicture),
+        Result loaded(
+            UserDetailsData userData, String fullName, String profilePicture),
     @required Result error(Glitch glitch),
   }) {
     assert(initial != null);
     assert(loading != null);
     assert(loaded != null);
     assert(error != null);
-    return loaded(userData, fullName, investmentBalance, profilePicture);
+    return loaded(userData, fullName, profilePicture);
   }
 
   @override
@@ -566,14 +548,14 @@ class _$Loaded implements Loaded {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(UserDetailsData userData, String fullName,
-        String investmentBalance, String profilePicture),
+    Result loaded(
+        UserDetailsData userData, String fullName, String profilePicture),
     Result error(Glitch glitch),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (loaded != null) {
-      return loaded(userData, fullName, investmentBalance, profilePicture);
+      return loaded(userData, fullName, profilePicture);
     }
     return orElse();
   }
@@ -614,12 +596,10 @@ abstract class Loaded implements UserProfileState {
   factory Loaded(
       {@required UserDetailsData userData,
       @required String fullName,
-      @required String investmentBalance,
       @required String profilePicture}) = _$Loaded;
 
   UserDetailsData get userData;
   String get fullName;
-  String get investmentBalance;
   String get profilePicture;
   $LoadedCopyWith<Loaded> get copyWith;
 }
@@ -696,8 +676,8 @@ class _$Error implements Error {
     @required Result initial(),
     @required Result loading(),
     @required
-        Result loaded(UserDetailsData userData, String fullName,
-            String investmentBalance, String profilePicture),
+        Result loaded(
+            UserDetailsData userData, String fullName, String profilePicture),
     @required Result error(Glitch glitch),
   }) {
     assert(initial != null);
@@ -712,8 +692,8 @@ class _$Error implements Error {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(UserDetailsData userData, String fullName,
-        String investmentBalance, String profilePicture),
+    Result loaded(
+        UserDetailsData userData, String fullName, String profilePicture),
     Result error(Glitch glitch),
     @required Result orElse(),
   }) {

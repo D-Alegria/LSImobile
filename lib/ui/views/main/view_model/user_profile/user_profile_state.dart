@@ -9,7 +9,6 @@ abstract class UserProfileState with _$UserProfileState {
   factory UserProfileState.loaded({
     @required final UserDetailsData userData,
     @required final String fullName,
-    @required final String investmentBalance,
     @required final String profilePicture,
   }) = Loaded;
 
