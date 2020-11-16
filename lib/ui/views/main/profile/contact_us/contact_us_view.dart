@@ -1,9 +1,12 @@
+import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lsi_mobile/core/utils/config_reader_util.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactUsView extends StatelessWidget {
   final String contactUsImg = "assets/images/contact_us.png";
@@ -53,6 +56,17 @@ class ContactUsView extends StatelessWidget {
               text: "Call us",
               background: ColorStyles.lGrey.withOpacity(0.4),
               colorIcon: false,
+              onTap: () async {
+                String link = "tel: ${ConfigReader.getAppConfig().phone}";
+                if (await canLaunch(link)) {
+                  await launch(link);
+                } else {
+                  FlushbarHelper.createError(
+                    message: "Could not launch $link",
+                    duration: Duration(seconds: 3),
+                  ).show(context);
+                }
+              },
             ),
             SizedBox(height: SizeConfig.yMargin(context, 3)),
             sharedInfoButton(
@@ -65,6 +79,17 @@ class ContactUsView extends StatelessWidget {
               text: "Email us",
               background: ColorStyles.blue.withOpacity(0.08),
               colorIcon: false,
+              onTap: () async {
+                String link = "mailto:${ConfigReader.getAppConfig().email}";
+                if (await canLaunch(link)) {
+                  await launch(link);
+                } else {
+                  FlushbarHelper.createError(
+                    message: "Could not launch $link",
+                    duration: Duration(seconds: 3),
+                  ).show(context);
+                }
+              },
             ),
             SizedBox(height: SizeConfig.yMargin(context, 3)),
             sharedInfoButton(
@@ -76,6 +101,23 @@ class ContactUsView extends StatelessWidget {
               text: "Chat with us",
               background: ColorStyles.green4.withOpacity(0.1),
               colorIcon: false,
+              onTap: () async {
+                String link =
+                    "https://wa.me/${ConfigReader.getAppConfig().whatsApp}?text=Hello \nGood morning, my name is ";
+                if (await canLaunch(link)) {
+                  await launch(
+                    link,
+                    forceSafariVC: false,
+                    forceWebView: false,
+                    enableJavaScript: true,
+                  );
+                } else {
+                  FlushbarHelper.createError(
+                    message: "Could not launch $link",
+                    duration: Duration(seconds: 3),
+                  ).show(context);
+                }
+              },
             ),
           ],
         ),

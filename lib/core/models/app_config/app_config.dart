@@ -8,8 +8,12 @@ class AppConfig {
   final String baseUrl;
   @JsonKey(name: "api_key")
   final String apiKey;
+  final String email;
+  final String phone;
+  @JsonKey(name: "whats_app")
+  final String whatsApp;
 
-  AppConfig(this.baseUrl, this.apiKey);
+  AppConfig(this.baseUrl, this.apiKey, this.email, this.phone, this.whatsApp);
 
   factory AppConfig.fromJson(Map<String, dynamic> json) =>
       _$AppConfigFromJson(json);
