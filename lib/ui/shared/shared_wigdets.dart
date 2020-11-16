@@ -8,6 +8,8 @@ import 'package:intl/intl.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/authentication/authentication_bloc.dart';
+import 'package:lsi_mobile/ui/views/main/investment/investment_view/view_model/investment_view_cubit.dart'
+    as ivc;
 import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_bloc.dart';
 
 import 'const_color.dart';
@@ -580,6 +582,12 @@ Widget processingBadge(BuildContext context) => sharedSmallBadge(
       indicatorColor: ColorStyles.orange,
     );
 
+Widget pendingBadge(BuildContext context) => sharedSmallBadge(
+      context: context,
+      text: "Pending",
+      indicatorColor: ColorStyles.red,
+    );
+
 Widget activeBadge(BuildContext context) => sharedSmallBadge(
       context: context,
       text: "Active",
@@ -764,6 +772,24 @@ class UserDetailsWrapper extends StatelessWidget {
   }
 }
 
+class InvestmentWrapper extends StatelessWidget {
+  final Widget Function(ivc.Loaded loaded) loaded;
+
+  const InvestmentWrapper({Key key, this.loaded}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ivc.InvestmentViewCubit, ivc.InvestmentViewState>(
+      builder: (context, state) => state.map(
+        initial: (e) => Container(),
+        loading: (e) => sharedLoader(),
+        loaded: (e) => loaded(e),
+        error: (e) => sharedErrorWidget(context, e.message),
+      ),
+    );
+  }
+}
+
 class SharedWideButton extends StatelessWidget {
   final Widget image;
   final Color backgroundColor;
@@ -783,17 +809,17 @@ class SharedWideButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: SizeConfig.yMargin(context, 10),
+        height: SizeConfig.yMargin(context, 9),
         decoration: BoxDecoration(
           color: backgroundColor.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(width: SizeConfig.xMargin(context, 5)),
             image,
-            SizedBox(width: SizeConfig.xMargin(context, 5)),
+            SizedBox(width: SizeConfig.xMargin(context, 3)),
             Text(
               text,
               style: GoogleFonts.workSans(

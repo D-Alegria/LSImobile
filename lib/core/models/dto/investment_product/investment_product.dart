@@ -443,6 +443,12 @@ class InvestmentProduct {
     this.abbr,
   });
 
+  factory InvestmentProduct.initial() => InvestmentProduct(
+        investmentTitle: "",
+        investmentAmount: "0",
+        investmentMaxAmount: "0",
+      );
+
   factory InvestmentProduct.fromJson(Map<String, dynamic> json) =>
       _$InvestmentProductFromJson(json);
 

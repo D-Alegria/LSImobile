@@ -14,6 +14,7 @@ import '../../../ui/views/authentication/verification/verification_view.dart';
 import '../../../ui/views/authentication/widgets/auth_wrapper.dart';
 import '../../../ui/views/main/investment/fund_investment/fund_investment_view.dart';
 import '../../../ui/views/main/investment/investment_plan/investment_plan_view.dart';
+import '../../../ui/views/main/investment/investment_products/investment_products_view.dart';
 import '../../../ui/views/main/investment/investment_statement/investment_statement_view.dart';
 import '../../../ui/views/main/investment/new_investment/new_investment_view.dart';
 import '../../../ui/views/main/investment/no_investment/no_investment_view.dart';
@@ -36,7 +37,7 @@ import '../../../ui/views/main/profile/faq/faq_view.dart';
 import '../../../ui/views/main/profile/profile_view.dart';
 import '../../../ui/views/onboarding/onboarding_view.dart';
 import '../../../ui/views/start_up/start_up_view.dart';
-import '../../models/dto/investment_product/investment_product.dart';
+import '../../models/dto/investment/investment.dart';
 import '../../models/requests/user_details/user_details_request.dart';
 
 class Routes {
@@ -57,6 +58,7 @@ class Routes {
   static const String makePaymentView = '/make-payment-view';
   static const String loanScheduleView = '/loan-schedule-view';
   static const String noInvestmentView = '/no-investment-view';
+  static const String investmentProductsView = '/investment-products-view';
   static const String fundInvestmentView = '/fund-investment-view';
   static const String newInvestmentView = '/new-investment-view';
   static const String investmentPlanView = '/investment-plan-view';
@@ -85,6 +87,7 @@ class Routes {
     makePaymentView,
     loanScheduleView,
     noInvestmentView,
+    investmentProductsView,
     fundInvestmentView,
     newInvestmentView,
     investmentPlanView,
@@ -119,6 +122,7 @@ class Router extends RouterBase {
     RouteDef(Routes.makePaymentView, page: MakePaymentView),
     RouteDef(Routes.loanScheduleView, page: LoanScheduleView),
     RouteDef(Routes.noInvestmentView, page: NoInvestmentView),
+    RouteDef(Routes.investmentProductsView, page: InvestmentProductsView),
     RouteDef(Routes.fundInvestmentView, page: FundInvestmentView),
     RouteDef(Routes.newInvestmentView, page: NewInvestmentView),
     RouteDef(Routes.investmentPlanView, page: InvestmentPlanView),
@@ -243,6 +247,12 @@ class Router extends RouterBase {
         settings: data,
       );
     },
+    InvestmentProductsView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => InvestmentProductsView(),
+        settings: data,
+      );
+    },
     FundInvestmentView: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => FundInvestmentView(),
@@ -250,18 +260,21 @@ class Router extends RouterBase {
       );
     },
     NewInvestmentView: (data) {
-      final args = data.getArgs<NewInvestmentViewArguments>(nullOk: false);
+      final args = data.getArgs<NewInvestmentViewArguments>(
+        orElse: () => NewInvestmentViewArguments(),
+      );
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => NewInvestmentView(
-          key: args.key,
-          investmentProduct: args.investmentProduct,
-        ),
+        builder: (context) => NewInvestmentView(key: args.key),
         settings: data,
       );
     },
     InvestmentPlanView: (data) {
+      final args = data.getArgs<InvestmentPlanViewArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => InvestmentPlanView(),
+        builder: (context) => InvestmentPlanView(
+          key: args.key,
+          investment: args.investment,
+        ),
         settings: data,
       );
     },
@@ -385,21 +398,29 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
   Future<dynamic> pushNoInvestmentView() =>
       push<dynamic>(Routes.noInvestmentView);
 
+  Future<dynamic> pushInvestmentProductsView() =>
+      push<dynamic>(Routes.investmentProductsView);
+
   Future<dynamic> pushFundInvestmentView() =>
       push<dynamic>(Routes.fundInvestmentView);
 
   Future<dynamic> pushNewInvestmentView({
     Key key,
-    @required InvestmentProduct investmentProduct,
   }) =>
       push<dynamic>(
         Routes.newInvestmentView,
-        arguments: NewInvestmentViewArguments(
-            key: key, investmentProduct: investmentProduct),
+        arguments: NewInvestmentViewArguments(key: key),
       );
 
-  Future<dynamic> pushInvestmentPlanView() =>
-      push<dynamic>(Routes.investmentPlanView);
+  Future<dynamic> pushInvestmentPlanView({
+    Key key,
+    @required Investment investment,
+  }) =>
+      push<dynamic>(
+        Routes.investmentPlanView,
+        arguments:
+            InvestmentPlanViewArguments(key: key, investment: investment),
+      );
 
   Future<dynamic> pushInvestmentStatementView() =>
       push<dynamic>(Routes.investmentStatementView);
@@ -456,8 +477,14 @@ class LoanScheduleViewArguments {
 /// NewInvestmentView arguments holder class
 class NewInvestmentViewArguments {
   final Key key;
-  final InvestmentProduct investmentProduct;
-  NewInvestmentViewArguments({this.key, @required this.investmentProduct});
+  NewInvestmentViewArguments({this.key});
+}
+
+/// InvestmentPlanView arguments holder class
+class InvestmentPlanViewArguments {
+  final Key key;
+  final Investment investment;
+  InvestmentPlanViewArguments({this.key, @required this.investment});
 }
 
 /// EditProfileView arguments holder class

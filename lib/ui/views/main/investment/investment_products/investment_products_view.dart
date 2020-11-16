@@ -6,6 +6,7 @@ import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_products/view_model/investment_product_cubit.dart';
+import 'package:lsi_mobile/ui/views/main/investment/new_investment/view_model/new_investment_bloc.dart';
 import 'package:lsi_mobile/ui/views/main/investment/widgets/expanded_investment_card.dart';
 
 class InvestmentProductsView extends StatefulWidget {
@@ -28,6 +29,7 @@ class _InvestmentProductsViewState extends State<InvestmentProductsView> {
         backgroundColor: ColorStyles.white,
         centerTitle: false,
         brightness: Brightness.light,
+        iconTheme: IconThemeData(color: ColorStyles.dark),
         title: Text(
           "Investment Products",
           style: TextStyle(
@@ -41,6 +43,7 @@ class _InvestmentProductsViewState extends State<InvestmentProductsView> {
         padding: EdgeInsets.symmetric(
           horizontal: SizeConfig.xMargin(context, 5),
         ),
+        margin: EdgeInsets.only(top: SizeConfig.yMargin(context, 5)),
         child: BlocBuilder<InvestmentProductCubit, InvestmentProductState>(
           builder: (context, state) => state.map(
             initial: (e) => Container(),
@@ -48,50 +51,42 @@ class _InvestmentProductsViewState extends State<InvestmentProductsView> {
             loaded: (e) => ListView.separated(
               itemBuilder: (context, index) {
                 var investment = e.investmentProducts[index];
+                void navigateToCreateInvestment() {
+                  context.bloc<NewInvestmentBloc>().add(Init(investment));
+                  context.navigator.pushNewInvestmentView();
+                }
 
                 if (index % 3 == 0) {
                   return ExpandedInvestmentCard(
                     angle: 0,
-                    title: investment.investmentTitle,
-                    value:
-                        "N${investment.investmentAmount} - N${investment.investmentMaxAmount}",
-                    details: investment.investmentDescription,
+                    investment: investment,
                     borderColor: ColorStyles.red.withOpacity(0.6),
                     color: ColorStyles.red.withOpacity(0.1),
                     textColor: ColorStyles.red,
-                    onTap: () => context.navigator
-                        .pushNewInvestmentView(investmentProduct: investment),
+                    onTap: navigateToCreateInvestment,
                   );
                 } else if (index % 3 == 1) {
                   return ExpandedInvestmentCard(
                     angle: 51,
-                    title: investment.investmentTitle,
-                    value:
-                        "N${investment.investmentAmount} - N${investment.investmentMaxAmount}",
-                    details: investment.investmentDescription,
+                    investment: investment,
                     borderColor: ColorStyles.primary.withOpacity(0.6),
                     color: ColorStyles.primary.withOpacity(0.1),
                     textColor: ColorStyles.primary,
-                    onTap: () => context.navigator
-                        .pushNewInvestmentView(investmentProduct: investment),
+                    onTap: navigateToCreateInvestment,
                   );
                 } else {
                   return ExpandedInvestmentCard(
                     angle: -16,
-                    title: investment.investmentTitle,
-                    value:
-                        "N${investment.investmentAmount} - N${investment.investmentMaxAmount}",
-                    details: investment.investmentDescription,
+                    investment: investment,
                     borderColor: ColorStyles.blue2.withOpacity(0.6),
                     color: ColorStyles.blue2.withOpacity(0.1),
                     textColor: ColorStyles.blue2,
-                    onTap: () => context.navigator
-                        .pushNewInvestmentView(investmentProduct: investment),
+                    onTap: navigateToCreateInvestment,
                   );
                 }
               },
               separatorBuilder: (context, index) =>
-                  SizedBox(height: SizeConfig.yMargin(context, 4)),
+                  SizedBox(height: SizeConfig.yMargin(context, 3)),
               itemCount: e.investmentProducts.length,
             ),
             error: (e) => sharedErrorWidget(context, e.message),

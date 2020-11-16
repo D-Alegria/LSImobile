@@ -59,12 +59,14 @@ class HomeView extends StatelessWidget {
             onPressed: () => mainView.changePage(1),
           ),
           SizedBox(height: SizeConfig.yMargin(context, 1)),
-          HomeCard(
-            firstText: 'Your Investment',
-            secondText: 'N ${val.investmentBalance}',
-            thirdText: 'Investment balance',
-            buttonText: 'Book investment',
-            onPressed: () => mainView.changePage(2),
+          InvestmentWrapper(
+            loaded: (loaded) => HomeCard(
+              firstText: 'Your Investment',
+              secondText: 'N ${loaded.investmentBalance}',
+              thirdText: 'Investment balance',
+              buttonText: 'Book investment',
+              onPressed: () => mainView.changePage(2),
+            ),
           ),
           SizedBox(height: SizeConfig.yMargin(context, 5)),
           Row(

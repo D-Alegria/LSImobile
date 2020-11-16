@@ -2,7 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:lsi_mobile/core/datasources/investment/investment_remote_datasource.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
+import 'package:lsi_mobile/core/models/dto/investment/investment.dart';
 import 'package:lsi_mobile/core/models/dto/investment_product/investment_product.dart';
+import 'package:lsi_mobile/core/models/requests/create_investment/create_investment_request.dart';
 import 'package:lsi_mobile/core/models/requests/token_request/token_request.dart';
 import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
 import 'package:lsi_mobile/core/utils/function_util.dart';
@@ -61,7 +63,7 @@ class InvestmentRepoImpl implements InvestmentRepo {
                 if (success.status)
                   return right(success.data);
                 else
-                  return left(ServerGlitch(message: success.message));
+                  return left(SystemGlitch(message: success.message));
               },
             );
           },
@@ -71,16 +73,16 @@ class InvestmentRepoImpl implements InvestmentRepo {
   }
 
   @override
-  Future<Either<Glitch, List>> get investments async {
-    return await tryMethod<List>(
-      errorMessage: "Internal System Error Occurred:INRP-Is",
+  Future<Either<Glitch, List<Investment>>> get activeInvestments async {
+    return await tryMethod<List<Investment>>(
+      errorMessage: "Internal System Error Occurred:INRP-AcIs",
       function: () async {
         final token = await _userRepo.userToken;
         return token.fold(
           (l) => left(l),
           (success) async {
             final result =
-                await _investmentRemoteDataSource.getInvestmentPortfolio(
+                await _investmentRemoteDataSource.getActiveInvestments(
               TokenRequest(token: success),
             );
             return result.fold(
@@ -89,7 +91,67 @@ class InvestmentRepoImpl implements InvestmentRepo {
                 if (success.status)
                   return right(success.loans);
                 else
-                  return left(ServerGlitch(message: success.message));
+                  return left(SystemGlitch(message: success.message));
+              },
+            );
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  Future<Either<Glitch, Unit>> createInvestment(
+      CreateInvestmentRequest request) async {
+    return await tryMethod<Unit>(
+      errorMessage: "Internal System Error Occurred:INRP-CI",
+      function: () async {
+        final token = await _userRepo.userToken;
+        return token.fold(
+          (l) => left(l),
+          (success) async {
+            final result = await _investmentRemoteDataSource.createInvestment(
+              CreateInvestmentRequest(
+                token: success,
+                card: request.card,
+                paystack: request.paystack,
+                plan: request.plan,
+              ),
+            );
+            return result.fold(
+              (failure) => left(failure),
+              (success) {
+                if (success.status)
+                  return right(unit);
+                else
+                  return left(SystemGlitch(message: success.message));
+              },
+            );
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  Future<Either<Glitch, List<Investment>>> get allInvestments async {
+    return await tryMethod<List<Investment>>(
+      errorMessage: "Internal System Error Occurred:INRP-AIs",
+      function: () async {
+        final token = await _userRepo.userToken;
+        return token.fold(
+          (l) => left(l),
+          (success) async {
+            final result = await _investmentRemoteDataSource.getAllInvestments(
+              TokenRequest(token: success),
+            );
+            return result.fold(
+              (failure) => left(failure),
+              (success) {
+                if (success.status)
+                  return right(success.loans);
+                else
+                  return left(SystemGlitch(message: success.message));
               },
             );
           },

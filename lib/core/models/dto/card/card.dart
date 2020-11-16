@@ -4,7 +4,10 @@ part 'card.g.dart';
 
 @JsonSerializable()
 class Card {
-  Card();
+  @JsonKey(name: "connected_card_id")
+  final String connectedCardId;
+
+  Card(this.connectedCardId);
 
   factory Card.fromJson(Map<String, dynamic> json) => _$CardFromJson(json);
 

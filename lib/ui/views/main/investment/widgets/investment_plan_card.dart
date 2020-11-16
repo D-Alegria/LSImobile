@@ -1,21 +1,41 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
+import 'package:lsi_mobile/core/extensions/double_extension.dart';
+import 'package:lsi_mobile/core/models/dto/investment/investment.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
-class InvestmentPlanCard1 extends StatelessWidget {
-  const InvestmentPlanCard1({
+class InvestmentCard extends StatelessWidget {
+  final Investment investment;
+
+  const InvestmentCard({
     Key key,
+    @required this.investment,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var date = Jiffy(investment.maturityDate).format("dd/MM/yyyy");
+
+    Widget getBadge() {
+      if (investment.isClosed == "1")
+        return closedBadge(context);
+      else {
+        if (investment.isActive == "0")
+          return pendingBadge(context);
+        else
+          return activeBadge(context);
+      }
+    }
+
     return Container(
       child: sharedContainer(
-        onTap: () => context.navigator.pushInvestmentPlanView(),
+        onTap: () =>
+            context.navigator.pushInvestmentPlanView(investment: investment),
         padding: EdgeInsets.symmetric(
           vertical: SizeConfig.yMargin(context, 3),
           horizontal: SizeConfig.xMargin(context, 5),
@@ -29,7 +49,7 @@ class InvestmentPlanCard1 extends StatelessWidget {
           children: [
             RichText(
               text: TextSpan(
-                text: "Investment plan name",
+                text: investment.investmentTitle,
                 style: GoogleFonts.workSans(
                   fontSize: SizeConfig.textSize(context, 4.5),
                   fontWeight: FontWeight.w600,
@@ -38,14 +58,16 @@ class InvestmentPlanCard1 extends StatelessWidget {
                 ),
                 children: [
                   TextSpan(
-                    text: "\n₦200,000",
+                    text:
+                        "\n${double.parse(investment.requestPrincipal).moneyFormat}",
                     style: GoogleFonts.workSans(
                       fontSize: SizeConfig.textSize(context, 6),
                       color: ColorStyles.primaryBlue,
                     ),
                   ),
                   TextSpan(
-                    text: "/ 5 months",
+                    text:
+                        "/ ${investment.requestTenor} ${investment.loanDuration}",
                     style: GoogleFonts.workSans(
                       fontSize: SizeConfig.textSize(context, 5),
                       fontWeight: FontWeight.w400,
@@ -58,13 +80,9 @@ class InvestmentPlanCard1 extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                sharedSmallBadge(
-                  context: context,
-                  text: "Active",
-                  indicatorColor: ColorStyles.green1,
-                ),
+                getBadge(),
                 Text(
-                  "02/05/2020",
+                  date,
                   style: GoogleFonts.workSans(
                     fontSize: SizeConfig.textSize(context, 5),
                     fontWeight: FontWeight.w600,
@@ -80,22 +98,35 @@ class InvestmentPlanCard1 extends StatelessWidget {
   }
 }
 
-class InvestmentPlanCard2 extends StatelessWidget {
-  const InvestmentPlanCard2({
+class InvestmentPlanCard extends StatelessWidget {
+  final Investment investment;
+
+  const InvestmentPlanCard({
     Key key,
+    @required this.investment,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Widget getBadge() {
+      if (investment.isClosed == "1")
+        return closedBadge(context);
+      else {
+        if (investment.isActive == "0")
+          return pendingBadge(context);
+        else
+          return activeBadge(context);
+      }
+    }
+
     return Container(
       child: sharedContainer(
-        onTap: () => context.navigator.pushInvestmentPlanView(),
         padding: EdgeInsets.symmetric(
           vertical: SizeConfig.yMargin(context, 3),
           horizontal: SizeConfig.xMargin(context, 5),
         ),
         gradient: ColorStyles.primaryGradient,
-        height: SizeConfig.yMargin(context, 24),
+        height: SizeConfig.yMargin(context, 23),
         alignment: Alignment.centerLeft,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,7 +147,8 @@ class InvestmentPlanCard2 extends StatelessWidget {
                     ),
                     children: [
                       TextSpan(
-                        text: "\n₦200,000",
+                        text:
+                            "\n${double.parse(investment.requestPrincipal).moneyFormat}",
                         style: GoogleFonts.workSans(
                           fontSize: SizeConfig.textSize(context, 6),
                           color: ColorStyles.grey6,
@@ -125,18 +157,24 @@ class InvestmentPlanCard2 extends StatelessWidget {
                     ],
                   ),
                 ),
-                sharedSmallBadge(
-                  context: context,
-                  text: "Active",
-                  indicatorColor: ColorStyles.green1,
-                ),
+                getBadge(),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                buildRichText(context, "Rate", "14%", TextAlign.left),
-                buildRichText(context, "Duration", "5 months", TextAlign.right),
+                buildRichText(
+                  context,
+                  "Rate",
+                  "${investment.requestRate} ${investment.interestDuration}",
+                  TextAlign.left,
+                ),
+                buildRichText(
+                  context,
+                  "Duration",
+                  "${investment.requestTenor} ${investment.loanDuration}",
+                  TextAlign.right,
+                ),
               ],
             ),
           ],

@@ -4,6 +4,7 @@ import 'package:lsi_mobile/ui/views/authentication/verification/verification_vie
 import 'package:lsi_mobile/ui/views/authentication/widgets/auth_wrapper.dart';
 import 'package:lsi_mobile/ui/views/main/investment/fund_investment/fund_investment_view.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_plan/investment_plan_view.dart';
+import 'package:lsi_mobile/ui/views/main/investment/investment_products/investment_products_view.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_statement/investment_statement_view.dart';
 import 'package:lsi_mobile/ui/views/main/investment/new_investment/new_investment_view.dart';
 import 'package:lsi_mobile/ui/views/main/investment/no_investment/no_investment_view.dart';
@@ -47,6 +48,7 @@ import 'package:lsi_mobile/ui/views/start_up/start_up_view.dart';
     AdaptiveRoute(page: MakePaymentView),
     AdaptiveRoute(page: LoanScheduleView),
     AdaptiveRoute(page: NoInvestmentView),
+    AdaptiveRoute(page: InvestmentProductsView),
     AdaptiveRoute(page: FundInvestmentView),
     AdaptiveRoute(page: NewInvestmentView),
     AdaptiveRoute(page: InvestmentPlanView),

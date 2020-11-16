@@ -8,7 +8,8 @@ abstract class InvestmentViewState with _$InvestmentViewState {
 
   factory InvestmentViewState.loaded({
     @required bool isInvestmentAvailable,
-    @required List investments,
+    @required List<Investment> investments,
+    @required String investmentBalance,
   }) = Loaded;
 
   factory InvestmentViewState.error(String message) = Error;

@@ -65,9 +65,7 @@ class HistoryView extends StatelessWidget {
           : ListView.builder(
               itemBuilder: (context, index) {
                 var transaction = e.recentTransactions[index];
-                var time = Jiffy(
-                    transaction.transDate.substring(0, 19), "yyyy-MM-dd H:m:s")
-                  ..startOf(Units.HOUR);
+                var time = Jiffy(transaction.transDate);
 
                 if (transaction.transType == '1') {
                   return sharedInfoListTile(

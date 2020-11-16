@@ -2,7 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/constants/api_urls.dart';
+import 'package:lsi_mobile/core/models/requests/create_investment/create_investment_request.dart';
+import 'package:lsi_mobile/core/models/requests/request_id_request/request_id_request.dart';
 import 'package:lsi_mobile/core/models/requests/token_request/token_request.dart';
+import 'package:lsi_mobile/core/models/responses/create_investment/create_investment_response.dart';
 import 'package:lsi_mobile/core/models/responses/get_investment_product/get_investment_product_response.dart';
 import 'package:lsi_mobile/core/models/responses/investment_portfolio/investment_portfolio_response.dart';
 import 'package:lsi_mobile/core/models/responses/investment_snapshot/investment_snapshot_response.dart';
@@ -14,12 +17,24 @@ abstract class InvestmentRemoteDataSource {
     TokenRequest request,
   );
 
-  Future<Either<Glitch, InvestmentPortfolioResponse>> getInvestmentPortfolio(
+  Future<Either<Glitch, InvestmentResponse>> getActiveInvestments(
+    TokenRequest request,
+  );
+
+  Future<Either<Glitch, InvestmentResponse>> getAllInvestments(
     TokenRequest request,
   );
 
   Future<Either<Glitch, GetInvestmentProductsResponse>> getInvestmentProducts(
     TokenRequest request,
+  );
+
+  Future<Either<Glitch, InvestmentResponse>> getInvestmentStatement(
+    RequestIdRequest request,
+  );
+
+  Future<Either<Glitch, CreateInvestmentResponse>> createInvestment(
+    CreateInvestmentRequest request,
   );
 }
 
@@ -72,9 +87,9 @@ class InvestmentRemoteDataSourceImpl implements InvestmentRemoteDataSource {
   }
 
   @override
-  Future<Either<Glitch, InvestmentPortfolioResponse>> getInvestmentPortfolio(
+  Future<Either<Glitch, InvestmentResponse>> getActiveInvestments(
       TokenRequest request) async {
-    return await tryMethod<InvestmentPortfolioResponse>(
+    return await tryMethod<InvestmentResponse>(
       function: () async {
         final response = await _apiManager.post(
           url: ApiUrls.investmentPortfolio,
@@ -83,12 +98,75 @@ class InvestmentRemoteDataSourceImpl implements InvestmentRemoteDataSource {
         return response.fold(
           (failure) => left(failure),
           (success) {
-            final result = InvestmentPortfolioResponse.fromJson(success);
+            final result = InvestmentResponse.fromJson(success);
             return right(result);
           },
         );
       },
-      errorMessage: "Internal System Error Occurred:INRD-GIPR",
+      errorMessage: "Internal System Error Occurred:INRD-GAcIs",
+    );
+  }
+
+  @override
+  Future<Either<Glitch, CreateInvestmentResponse>> createInvestment(
+      CreateInvestmentRequest request) async {
+    return await tryMethod<CreateInvestmentResponse>(
+      function: () async {
+        final response = await _apiManager.post(
+          url: ApiUrls.createInvestment,
+          requestBody: request.toJson(),
+        );
+        return response.fold(
+          (failure) => left(failure),
+          (success) {
+            final result = CreateInvestmentResponse.fromJson(success);
+            return right(result);
+          },
+        );
+      },
+      errorMessage: "Internal System Error Occurred:INRD-CI",
+    );
+  }
+
+  @override
+  Future<Either<Glitch, InvestmentResponse>> getAllInvestments(
+      TokenRequest request) async {
+    return await tryMethod<InvestmentResponse>(
+      function: () async {
+        final response = await _apiManager.post(
+          url: ApiUrls.customersInvestment,
+          requestBody: request.toJson(),
+        );
+        return response.fold(
+          (failure) => left(failure),
+          (success) {
+            final result = InvestmentResponse.fromJson(success);
+            return right(result);
+          },
+        );
+      },
+      errorMessage: "Internal System Error Occurred:INRD-GAIs",
+    );
+  }
+
+  @override
+  Future<Either<Glitch, InvestmentResponse>> getInvestmentStatement(
+      RequestIdRequest request) async {
+    return await tryMethod<InvestmentResponse>(
+      function: () async {
+        final response = await _apiManager.post(
+          url: ApiUrls.investmentStatement,
+          requestBody: request.toJson(),
+        );
+        return response.fold(
+          (failure) => left(failure),
+          (success) {
+            final result = InvestmentResponse.fromJson(success);
+            return right(result);
+          },
+        );
+      },
+      errorMessage: "Internal System Error Occurred:INRD-GIS",
     );
   }
 }

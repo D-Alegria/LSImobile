@@ -4,10 +4,9 @@
 // InjectableConfigGenerator
 // **************************************************************************
 
-import 'package:dio/dio.dart';
+import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../ui/views/main/loans/account_info/view_model/account_info_bloc.dart';
 import '../../../ui/views/main/profile/view_models/accounts_cards/accounts_cards_bloc.dart';
@@ -19,7 +18,6 @@ import '../../../ui/views/authentication/view_model/authentication/authenticatio
 import '../../datasources/bank/bank_remote_datasource.dart';
 import '../../repositories/bank/bank_repo.dart';
 import '../../repositories/bank/bank_repo_impl.dart';
-import '../interceptor/dio_interceptor.dart';
 import '../../../ui/views/main/profile/view_models/edit_profile/edit_profile_bloc.dart';
 import '../../../ui/views/main/loans/edu_and_employ/view_model/edu_and_employ_bloc.dart';
 import '../../../ui/views/main/loans/emergency_contact/view_model/emergency_contact_bloc.dart';
@@ -51,25 +49,21 @@ import '../../repositories/user/user_repo_impl.dart';
 /// adds generated dependencies
 /// to the provided [GetIt] instance
 
-Future<GetIt> $initGetIt(
+GetIt $initGetIt(
   GetIt get, {
   String environment,
   EnvironmentFilter environmentFilter,
-}) async {
+}) {
   final gh = GetItHelper(get, environment, environmentFilter);
   final registerModule = _$RegisterModule();
-  gh.lazySingleton<NetworkInfo>(() => NetworkInfoImpl());
-  gh.lazySingleton<NewInvestmentBloc>(() => NewInvestmentBloc());
-  final sharedPreferences = await registerModule.prefs;
-  gh.factory<SharedPreferences>(() => sharedPreferences);
-  gh.factory<String>(() => registerModule.baseUrl, instanceName: 'BaseUrl');
+  gh.lazySingleton<DataConnectionChecker>(
+      () => registerModule.dataConnectionChecker());
+  gh.lazySingleton<NetworkInfo>(
+      () => NetworkInfoImpl(get<DataConnectionChecker>()));
   gh.lazySingleton<UserLocalDataSource>(() => UserLocalDataSourceImpl());
   gh.lazySingleton<ApiManager>(() => ApiManager(get<NetworkInfo>()));
   gh.lazySingleton<BankRemoteDataSource>(
       () => BankRemoteDataSourceImpl(get<ApiManager>()));
-  gh.lazySingleton<Dio>(
-      () => registerModule.dio(get<String>(instanceName: 'BaseUrl')));
-  gh.lazySingleton<DioInterceptor>(() => DioInterceptor(get<Dio>()));
   gh.lazySingleton<InvestmentRemoteDataSource>(
       () => InvestmentRemoteDataSourceImpl(get<ApiManager>()));
   gh.lazySingleton<LoanRemoteDataSource>(
@@ -99,6 +93,7 @@ Future<GetIt> $initGetIt(
       () => LoanRepoImpl(get<UserRepo>(), get<LoanRemoteDataSource>()));
   gh.lazySingleton<LoanScheduleCubit>(() => LoanScheduleCubit(get<LoanRepo>()));
   gh.lazySingleton<LoanViewCubit>(() => LoanViewCubit(get<LoanRepo>()));
+  gh.factory<NewInvestmentBloc>(() => NewInvestmentBloc(get<InvestmentRepo>()));
   gh.lazySingleton<PersonalInfoBloc>(
       () => PersonalInfoBloc(get<UserRepo>(), get<UserRemoteDataSource>()));
   gh.lazySingleton<ProvideBvnBloc>(
@@ -107,8 +102,7 @@ Future<GetIt> $initGetIt(
       () => RecentTransactionCubit(get<UserRepo>()));
   gh.lazySingleton<ResidenceBloc>(
       () => ResidenceBloc(get<UserRepo>(), get<UserRemoteDataSource>()));
-  gh.factory<UserProfileBloc>(
-      () => UserProfileBloc(get<UserRepo>(), get<InvestmentRepo>()));
+  gh.factory<UserProfileBloc>(() => UserProfileBloc(get<UserRepo>()));
   gh.lazySingleton<AccountInfoBloc>(() => AccountInfoBloc(
         get<UserRemoteDataSource>(),
         get<BankRepo>(),

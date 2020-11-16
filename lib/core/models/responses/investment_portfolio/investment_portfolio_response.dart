@@ -1,17 +1,18 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:lsi_mobile/core/models/dto/investment/investment.dart';
 
 part 'investment_portfolio_response.g.dart';
 
 @JsonSerializable()
-class InvestmentPortfolioResponse {
+class InvestmentResponse {
   final bool status;
-  final List loans;
+  final List<Investment> loans;
   final String message;
 
-  InvestmentPortfolioResponse({this.message, this.status, this.loans});
+  InvestmentResponse({this.message, this.status, this.loans});
 
-  factory InvestmentPortfolioResponse.fromJson(Map<String, dynamic> json) =>
-      _$InvestmentPortfolioResponseFromJson(json);
+  factory InvestmentResponse.fromJson(Map<String, dynamic> json) =>
+      _$InvestmentResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$InvestmentPortfolioResponseToJson(this);
+  Map<String, dynamic> toJson() => _$InvestmentResponseToJson(this);
 }

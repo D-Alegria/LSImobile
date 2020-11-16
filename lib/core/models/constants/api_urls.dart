@@ -44,4 +44,7 @@ class ApiUrls {
   static final String getLoanPurpose = "webapi/v1/loan_purpose";
   static final String loanSchedule = "api/v3/loan/schedule";
   static final String loanDetails = "api/v3/loan/details";
+  static final String createInvestment = "api/v3/investment/create";
+  static final String customersInvestment = "api/v3/customer/investments";
+  static final String investmentStatement = "api/v3/customer/investment/statement";
 }

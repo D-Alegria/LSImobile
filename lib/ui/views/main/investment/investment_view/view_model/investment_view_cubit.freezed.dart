@@ -26,10 +26,12 @@ class _$InvestmentViewStateTearOff {
 // ignore: unused_element
   Loaded loaded(
       {@required bool isInvestmentAvailable,
-      @required List<dynamic> investments}) {
+      @required List<Investment> investments,
+      @required String investmentBalance}) {
     return Loaded(
       isInvestmentAvailable: isInvestmentAvailable,
       investments: investments,
+      investmentBalance: investmentBalance,
     );
   }
 
@@ -52,14 +54,16 @@ mixin _$InvestmentViewState {
     @required Result initial(),
     @required Result loading(),
     @required
-        Result loaded(bool isInvestmentAvailable, List<dynamic> investments),
+        Result loaded(bool isInvestmentAvailable, List<Investment> investments,
+            String investmentBalance),
     @required Result error(String message),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(bool isInvestmentAvailable, List<dynamic> investments),
+    Result loaded(bool isInvestmentAvailable, List<Investment> investments,
+        String investmentBalance),
     Result error(String message),
     @required Result orElse(),
   });
@@ -137,7 +141,8 @@ class _$Initial implements Initial {
     @required Result initial(),
     @required Result loading(),
     @required
-        Result loaded(bool isInvestmentAvailable, List<dynamic> investments),
+        Result loaded(bool isInvestmentAvailable, List<Investment> investments,
+            String investmentBalance),
     @required Result error(String message),
   }) {
     assert(initial != null);
@@ -152,7 +157,8 @@ class _$Initial implements Initial {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(bool isInvestmentAvailable, List<dynamic> investments),
+    Result loaded(bool isInvestmentAvailable, List<Investment> investments,
+        String investmentBalance),
     Result error(String message),
     @required Result orElse(),
   }) {
@@ -239,7 +245,8 @@ class _$Loading implements Loading {
     @required Result initial(),
     @required Result loading(),
     @required
-        Result loaded(bool isInvestmentAvailable, List<dynamic> investments),
+        Result loaded(bool isInvestmentAvailable, List<Investment> investments,
+            String investmentBalance),
     @required Result error(String message),
   }) {
     assert(initial != null);
@@ -254,7 +261,8 @@ class _$Loading implements Loading {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(bool isInvestmentAvailable, List<dynamic> investments),
+    Result loaded(bool isInvestmentAvailable, List<Investment> investments,
+        String investmentBalance),
     Result error(String message),
     @required Result orElse(),
   }) {
@@ -305,7 +313,10 @@ abstract class Loading implements InvestmentViewState {
 abstract class $LoadedCopyWith<$Res> {
   factory $LoadedCopyWith(Loaded value, $Res Function(Loaded) then) =
       _$LoadedCopyWithImpl<$Res>;
-  $Res call({bool isInvestmentAvailable, List<dynamic> investments});
+  $Res call(
+      {bool isInvestmentAvailable,
+      List<Investment> investments,
+      String investmentBalance});
 }
 
 /// @nodoc
@@ -321,6 +332,7 @@ class _$LoadedCopyWithImpl<$Res> extends _$InvestmentViewStateCopyWithImpl<$Res>
   $Res call({
     Object isInvestmentAvailable = freezed,
     Object investments = freezed,
+    Object investmentBalance = freezed,
   }) {
     return _then(Loaded(
       isInvestmentAvailable: isInvestmentAvailable == freezed
@@ -328,25 +340,34 @@ class _$LoadedCopyWithImpl<$Res> extends _$InvestmentViewStateCopyWithImpl<$Res>
           : isInvestmentAvailable as bool,
       investments: investments == freezed
           ? _value.investments
-          : investments as List<dynamic>,
+          : investments as List<Investment>,
+      investmentBalance: investmentBalance == freezed
+          ? _value.investmentBalance
+          : investmentBalance as String,
     ));
   }
 }
 
 /// @nodoc
 class _$Loaded implements Loaded {
-  _$Loaded({@required this.isInvestmentAvailable, @required this.investments})
+  _$Loaded(
+      {@required this.isInvestmentAvailable,
+      @required this.investments,
+      @required this.investmentBalance})
       : assert(isInvestmentAvailable != null),
-        assert(investments != null);
+        assert(investments != null),
+        assert(investmentBalance != null);
 
   @override
   final bool isInvestmentAvailable;
   @override
-  final List<dynamic> investments;
+  final List<Investment> investments;
+  @override
+  final String investmentBalance;
 
   @override
   String toString() {
-    return 'InvestmentViewState.loaded(isInvestmentAvailable: $isInvestmentAvailable, investments: $investments)';
+    return 'InvestmentViewState.loaded(isInvestmentAvailable: $isInvestmentAvailable, investments: $investments, investmentBalance: $investmentBalance)';
   }
 
   @override
@@ -358,14 +379,18 @@ class _$Loaded implements Loaded {
                     other.isInvestmentAvailable, isInvestmentAvailable)) &&
             (identical(other.investments, investments) ||
                 const DeepCollectionEquality()
-                    .equals(other.investments, investments)));
+                    .equals(other.investments, investments)) &&
+            (identical(other.investmentBalance, investmentBalance) ||
+                const DeepCollectionEquality()
+                    .equals(other.investmentBalance, investmentBalance)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(isInvestmentAvailable) ^
-      const DeepCollectionEquality().hash(investments);
+      const DeepCollectionEquality().hash(investments) ^
+      const DeepCollectionEquality().hash(investmentBalance);
 
   @override
   $LoadedCopyWith<Loaded> get copyWith =>
@@ -377,14 +402,15 @@ class _$Loaded implements Loaded {
     @required Result initial(),
     @required Result loading(),
     @required
-        Result loaded(bool isInvestmentAvailable, List<dynamic> investments),
+        Result loaded(bool isInvestmentAvailable, List<Investment> investments,
+            String investmentBalance),
     @required Result error(String message),
   }) {
     assert(initial != null);
     assert(loading != null);
     assert(loaded != null);
     assert(error != null);
-    return loaded(isInvestmentAvailable, investments);
+    return loaded(isInvestmentAvailable, investments, investmentBalance);
   }
 
   @override
@@ -392,13 +418,14 @@ class _$Loaded implements Loaded {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(bool isInvestmentAvailable, List<dynamic> investments),
+    Result loaded(bool isInvestmentAvailable, List<Investment> investments,
+        String investmentBalance),
     Result error(String message),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (loaded != null) {
-      return loaded(isInvestmentAvailable, investments);
+      return loaded(isInvestmentAvailable, investments, investmentBalance);
     }
     return orElse();
   }
@@ -438,10 +465,12 @@ class _$Loaded implements Loaded {
 abstract class Loaded implements InvestmentViewState {
   factory Loaded(
       {@required bool isInvestmentAvailable,
-      @required List<dynamic> investments}) = _$Loaded;
+      @required List<Investment> investments,
+      @required String investmentBalance}) = _$Loaded;
 
   bool get isInvestmentAvailable;
-  List<dynamic> get investments;
+  List<Investment> get investments;
+  String get investmentBalance;
   $LoadedCopyWith<Loaded> get copyWith;
 }
 
@@ -505,7 +534,8 @@ class _$Error implements Error {
     @required Result initial(),
     @required Result loading(),
     @required
-        Result loaded(bool isInvestmentAvailable, List<dynamic> investments),
+        Result loaded(bool isInvestmentAvailable, List<Investment> investments,
+            String investmentBalance),
     @required Result error(String message),
   }) {
     assert(initial != null);
@@ -520,7 +550,8 @@ class _$Error implements Error {
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result loading(),
-    Result loaded(bool isInvestmentAvailable, List<dynamic> investments),
+    Result loaded(bool isInvestmentAvailable, List<Investment> investments,
+        String investmentBalance),
     Result error(String message),
     @required Result orElse(),
   }) {
