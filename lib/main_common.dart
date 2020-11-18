@@ -1,3 +1,4 @@
+import 'package:catcher/catcher.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:lsi_mobile/ui/lsi_app_dev.dart';
 import 'package:lsi_mobile/ui/lsi_app_prod.dart';
 
 import 'core/configs/dependency_injection/injection.dart';
+import 'core/configs/logging/catcher.dart';
 import 'core/configs/logging/cubit_observer.dart';
 import 'core/utils/config_reader_util.dart';
 
@@ -18,13 +20,21 @@ Future<void> mainCommon(String env) async {
 
   switch (env) {
     case Environment.dev:
-      runApp(DevicePreview(
-        enabled: !kReleaseMode,
-        builder: (context) => LSIAppDev(),
-      ));
+      Catcher(
+        DevicePreview(
+          enabled: !kReleaseMode,
+          builder: (context) => LSIAppDev(),
+        ),
+        debugConfig: CatcherConfig.debugOptions,
+        releaseConfig: CatcherConfig.releaseOptions,
+      );
       break;
     case Environment.prod:
-      runApp(LSIAppProd());
+      Catcher(
+        LSIAppProd(),
+        debugConfig: CatcherConfig.debugOptions,
+        releaseConfig: CatcherConfig.releaseOptions,
+      );
       break;
   }
 }

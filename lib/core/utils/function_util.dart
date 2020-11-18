@@ -1,3 +1,4 @@
+import 'package:catcher/catcher.dart';
 import 'package:dartz/dartz.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/dto/value/value.dart';
@@ -8,12 +9,15 @@ Future<Either<Glitch, T>> tryMethod<T>({
 }) async {
   try {
     return await function();
-  } on Exception catch (e) {
-    print(e);
+  } on Exception catch (error, stackTrace) {
+    print(error);
+    print(stackTrace);
+    Catcher.reportCheckedError(error, stackTrace);
     return left(SystemGlitch(message: errorMessage));
-  } on Error catch (e) {
-    print(e);
-    print(e.stackTrace);
+  } on Error catch (error, stackTrace) {
+    print(error);
+    print(stackTrace);
+    Catcher.reportCheckedError(error, stackTrace);
     return left(SystemGlitch(message: errorMessage));
   }
 }

@@ -18,6 +18,7 @@ import '../../../ui/views/authentication/view_model/authentication/authenticatio
 import '../../datasources/bank/bank_remote_datasource.dart';
 import '../../repositories/bank/bank_repo.dart';
 import '../../repositories/bank/bank_repo_impl.dart';
+import '../logging/catcher.dart';
 import '../../../ui/views/main/profile/view_models/edit_profile/edit_profile_bloc.dart';
 import '../../../ui/views/main/loans/edu_and_employ/view_model/edu_and_employ_bloc.dart';
 import '../../../ui/views/main/loans/emergency_contact/view_model/emergency_contact_bloc.dart';
@@ -56,6 +57,7 @@ GetIt $initGetIt(
 }) {
   final gh = GetItHelper(get, environment, environmentFilter);
   final registerModule = _$RegisterModule();
+  gh.lazySingleton<CatcherConfig>(() => CatcherConfig());
   gh.lazySingleton<DataConnectionChecker>(
       () => registerModule.dataConnectionChecker());
   gh.lazySingleton<NetworkInfo>(

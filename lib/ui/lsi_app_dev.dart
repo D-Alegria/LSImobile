@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:catcher/catcher.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +22,7 @@ class LSIAppDev extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: themes,
           builder: ExtendedNavigator.builder<lsi_r.Router>(
+            navigatorKey: Catcher.navigatorKey,
             builder: DevicePreview.appBuilder,
             router: lsi_r.Router(),
             onUnknownRoute: (settings) => unknownRouteView(settings.name),

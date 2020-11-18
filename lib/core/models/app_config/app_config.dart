@@ -12,8 +12,29 @@ class AppConfig {
   final String phone;
   @JsonKey(name: "whats_app")
   final String whatsApp;
+  @JsonKey(name: "developer_account_password")
+  final String developerAccountPassword;
+  @JsonKey(name: "developer_account")
+  final String developerAccount;
+  @JsonKey(name: "developer_account_name")
+  final String developerAccountName;
+  @JsonKey(name: "bug_recipients")
+  final List<String> bugRecipients;
+  @JsonKey(name: "sentry_dsn")
+  final String sentryDSN;
 
-  AppConfig(this.baseUrl, this.apiKey, this.email, this.phone, this.whatsApp);
+  AppConfig(
+    this.baseUrl,
+    this.apiKey,
+    this.email,
+    this.phone,
+    this.whatsApp,
+    this.developerAccountPassword,
+    this.developerAccount,
+    this.bugRecipients,
+    this.developerAccountName,
+    this.sentryDSN,
+  );
 
   factory AppConfig.fromJson(Map<String, dynamic> json) =>
       _$AppConfigFromJson(json);
