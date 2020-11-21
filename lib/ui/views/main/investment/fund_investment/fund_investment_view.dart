@@ -151,7 +151,7 @@ class FundInvestmentView extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   var card = loaded.cards[index];
                                   return investmentCard(context, card,
-                                      '0.01' //state.amount.toString(),
+                                      '0.01' // todo state.amount.toString(),
                                       );
                                 },
                                 separatorBuilder: (context, index) => SizedBox(

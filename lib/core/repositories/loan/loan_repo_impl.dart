@@ -5,12 +5,11 @@ import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/dto/loan_product/loan_product.dart';
 import 'package:lsi_mobile/core/models/dto/schedule/schedule.dart';
 import 'package:lsi_mobile/core/models/requests/loan_application/loan_request.dart';
-import 'package:lsi_mobile/core/models/requests/reference_id_request/reference_id_request.dart';
+import 'package:lsi_mobile/core/models/requests/make_loan_payment/make_loan_payment_request.dart';
 import 'package:lsi_mobile/core/models/requests/request_id_request/request_id_request.dart';
 import 'package:lsi_mobile/core/models/requests/token_request/token_request.dart';
 import 'package:lsi_mobile/core/models/responses/current_loan/data.dart';
 import 'package:lsi_mobile/core/models/responses/loan_details/loan_details_response.dart';
-import 'package:lsi_mobile/core/models/responses/loan_schedule/loan_schedule_response.dart';
 import 'package:lsi_mobile/core/repositories/loan/loan_repo.dart';
 import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
 import 'package:lsi_mobile/core/utils/function_util.dart';
@@ -129,21 +128,25 @@ class LoanRepoImpl implements LoanRepo {
   }
 
   @override
-  Future<Either<Glitch, LoanScheduleResponse>> makeLoanPayment(
-      String reference) async {
-    return await tryMethod<LoanScheduleResponse>(
-      errorMessage: "Internal System Error Occurred:LRP-GLSs",
+  Future<Either<Glitch, Unit>> makeLoanPayment(
+      String reference, String requestId) async {
+    return await tryMethod<Unit>(
+      errorMessage: "Internal System Error Occurred:LRP-MLP",
       function: () async {
         final token = await _userRepo.userToken;
         return token.fold(
           (l) => left(l),
           (success) async {
             final result = await _loanRemoteDataSource.makeLoanPayment(
-              ReferenceIdRequest(token: success, reference: reference),
+              MakeLoanPaymentRequest(
+                token: success,
+                reference: reference,
+                requestId: requestId,
+              ),
             );
             return result.fold(
               (failure) => left(failure),
-              (success) => right(success),
+              (success) => right(unit),
             );
           },
         );

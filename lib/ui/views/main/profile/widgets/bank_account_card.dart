@@ -32,34 +32,38 @@ class BankAccountCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Flexible(
-              child: RichText(
-                overflow: TextOverflow.ellipsis,
-                text: TextSpan(
-                  text: bankName,
-                  style: GoogleFonts.workSans(
-                    fontSize: SizeConfig.textSize(context, 5),
-                    fontWeight: FontWeight.w600,
-                    color: ColorStyles.blue2,
-                    height: SizeConfig.textSize(context, 0.7),
-                  ),
-                  children: [
-                    TextSpan(
-                      text: "\n$accountNumber",
-                      style: GoogleFonts.workSans(
-                        fontSize: SizeConfig.textSize(context, 6),
-                        color: ColorStyles.grey2,
-                      ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    bankName,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.workSans(
+                      fontSize: SizeConfig.textSize(context, 5),
+                      fontWeight: FontWeight.w600,
+                      color: ColorStyles.blue2,
+                      height: SizeConfig.textSize(context, 0.7),
                     ),
-                    TextSpan(
-                      text: "\n$accountName",
-                      style: GoogleFonts.workSans(
-                        fontSize: SizeConfig.textSize(context, 5),
-                        fontWeight: FontWeight.w400,
-                        color: ColorStyles.grey3,
-                      ),
-                    )
-                  ],
-                ),
+                  ),
+                  Text(
+                    accountNumber,
+                    style: GoogleFonts.workSans(
+                      fontSize: SizeConfig.textSize(context, 6),
+                      color: ColorStyles.grey2,
+                      height: SizeConfig.textSize(context, 0.7),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Text(
+                    accountName,
+                    style: GoogleFonts.workSans(
+                      height: SizeConfig.textSize(context, 0.7),
+                      fontSize: SizeConfig.textSize(context, 5),
+                      fontWeight: FontWeight.w400,
+                      color: ColorStyles.grey3,
+                    ),
+                  ),
+                ],
               ),
             ),
             sharedIconButton(

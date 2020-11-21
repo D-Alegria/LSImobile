@@ -9,6 +9,7 @@ import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/loans/loans_view/view_model/loan_view_cubit.dart';
+import 'package:lsi_mobile/ui/views/main/loans/make_payment/view_model/make_payment_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/loans/widgets/loan_card.dart';
 import 'package:lsi_mobile/ui/views/main/loans/widgets/loan_history_mini.dart';
 import 'package:lsi_mobile/ui/views/main/loans/widgets/mini_loan_card.dart';
@@ -74,7 +75,16 @@ class ActiveLoanView extends StatelessWidget {
                       borderColor: ColorStyles.lightBlue.withOpacity(0.3),
                       image: creditCard,
                       text: "Make Payment",
-                      onTap: () => context.navigator.pushMakePaymentView(),
+                      onTap: () {
+                        if (currentLoan.loanStatus != '3')
+                          return showInfoSnackBar(
+                              context, 'Loan isn\'t active');
+                        context.bloc<MakePaymentCubit>().init(
+                            currentLoan.nextPaymentAmount,
+                            currentLoan.requestId);
+                        return context.navigator.pushMakePaymentView(
+                            amount: currentLoan.nextPaymentAmount);
+                      },
                     ),
                     SizedBox(width: SizeConfig.xMargin(context, 5)),
                     MiniLoanCard(

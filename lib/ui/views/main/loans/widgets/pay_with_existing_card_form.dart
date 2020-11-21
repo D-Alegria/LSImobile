@@ -1,26 +1,36 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lsi_mobile/core/configs/route/route.gr.dart';
+import 'package:lsi_mobile/core/models/enums/card_transaction.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:lsi_mobile/ui/views/main/loans/provide_bvn/view_model/provide_bvn_bloc.dart';
+import 'package:lsi_mobile/ui/views/main/loans/make_payment/view_model/make_payment_cubit.dart';
+import 'package:lsi_mobile/ui/views/main/profile/widgets/add_card_form.dart';
 import 'package:lsi_mobile/ui/views/main/profile/widgets/atm_card.dart';
 
-class PayWithExistingCardForm extends StatelessWidget {
+class PayWithCardForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ProvideBvnBloc, ProvideBvnState>(
-      listener: (context, state) {
-        state.submitFailureOrSuccess.fold(
-          () => null,
-          (either) => either.fold(
-            (l) => null,
-            (r) => context.navigator.pushPersonalInfoFormView(),
-          ),
-        );
-      },
+    void _showForm(Widget form) {
+      showModalBottomSheet(
+        isScrollControlled: true,
+        backgroundColor: ColorStyles.black.withOpacity(0.2),
+        context: context,
+        builder: (context) {
+          return SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+              ),
+              child: form,
+            ),
+          );
+        },
+      );
+    }
+
+    return BlocBuilder<MakePaymentCubit, MakePaymentState>(
       builder: (context, state) => Container(
         decoration: BoxDecoration(
           color: ColorStyles.white,
@@ -41,7 +51,7 @@ class PayWithExistingCardForm extends StatelessWidget {
               RichText(
                 textAlign: TextAlign.left,
                 text: TextSpan(
-                  text: "Pay with existing card",
+                  text: "Pay with card",
                   style: TextStyle(
                     color: ColorStyles.dark,
                     fontWeight: FontWeight.w600,
@@ -60,15 +70,24 @@ class PayWithExistingCardForm extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                height: SizeConfig.yMargin(context, 22),
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => ATMCard(),
-                  separatorBuilder: (context, index) => SizedBox(
-                    width: SizeConfig.xMargin(context, 5),
+              AccountsCardsWrapper(
+                loaded: (loaded) => Container(
+                  height: SizeConfig.yMargin(context, 22),
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) => InkWell(
+                      child: ATMCard(card: loaded.cards[index]),
+                      onTap: () => _showForm(AddCardForm(
+                        amount: '0.01',
+                        // todo state.amount.toString(),
+                        transaction: CardTransaction.LoanPayment,
+                      )),
+                    ),
+                    separatorBuilder: (context, index) => SizedBox(
+                      width: SizeConfig.xMargin(context, 5),
+                    ),
+                    itemCount: loaded.cards.length,
                   ),
-                  itemCount: 3,
                 ),
               ),
               Center(

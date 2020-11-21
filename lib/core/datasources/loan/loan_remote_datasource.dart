@@ -4,7 +4,7 @@ import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/constants/api_urls.dart';
 import 'package:lsi_mobile/core/models/dto/loan_product/loan_product.dart';
 import 'package:lsi_mobile/core/models/requests/loan_application/loan_request.dart';
-import 'package:lsi_mobile/core/models/requests/reference_id_request/reference_id_request.dart';
+import 'package:lsi_mobile/core/models/requests/make_loan_payment/make_loan_payment_request.dart';
 import 'package:lsi_mobile/core/models/requests/request_id_request/request_id_request.dart';
 import 'package:lsi_mobile/core/models/requests/token_request/token_request.dart';
 import 'package:lsi_mobile/core/models/responses/current_loan/current_loan_response.dart';
@@ -13,6 +13,7 @@ import 'package:lsi_mobile/core/models/responses/get_loan_product/get_loan_produ
 import 'package:lsi_mobile/core/models/responses/loan_application/loan_application_response.dart';
 import 'package:lsi_mobile/core/models/responses/loan_details/loan_details_response.dart';
 import 'package:lsi_mobile/core/models/responses/loan_schedule/loan_schedule_response.dart';
+import 'package:lsi_mobile/core/models/responses/response/response.dart';
 import 'package:lsi_mobile/core/utils/api_manager_util.dart';
 import 'package:lsi_mobile/core/utils/function_util.dart';
 
@@ -33,8 +34,8 @@ abstract class LoanRemoteDataSource {
     RequestIdRequest request,
   );
 
-  Future<Either<Glitch, LoanScheduleResponse>> makeLoanPayment(
-    ReferenceIdRequest request,
+  Future<Either<Glitch, Response>> makeLoanPayment(
+    MakeLoanPaymentRequest request,
   );
 }
 
@@ -155,9 +156,9 @@ class LoanRemoteDataSourceImpl implements LoanRemoteDataSource {
   }
 
   @override
-  Future<Either<Glitch, LoanScheduleResponse>> makeLoanPayment(
-      ReferenceIdRequest request) async {
-    return await tryMethod<LoanScheduleResponse>(
+  Future<Either<Glitch, Response>> makeLoanPayment(
+      MakeLoanPaymentRequest request) async {
+    return await tryMethod<Response>(
       function: () async {
         final response = await _apiManager.post(
           url: ApiUrls.makeLoanPayment,
@@ -166,8 +167,7 @@ class LoanRemoteDataSourceImpl implements LoanRemoteDataSource {
         return response.fold(
           (failure) => left(failure),
           (success) {
-            //todo fix response
-            final result = LoanScheduleResponse.fromJson(success);
+            final result = Response.fromJson(success);
             if (result.status) return right(result);
             return left(SystemGlitch(message: result.message));
           },

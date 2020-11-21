@@ -36,6 +36,7 @@ import '../../repositories/loan/loan_repo.dart';
 import '../../repositories/loan/loan_repo_impl.dart';
 import '../../../ui/views/main/loans/loan_schedule/view_model/loan_schedule_cubit.dart';
 import '../../../ui/views/main/loans/loans_view/view_model/loan_view_cubit.dart';
+import '../../../ui/views/main/loans/make_payment/view_model/make_payment_cubit.dart';
 import '../../utils/network_util.dart';
 import '../../../ui/views/main/investment/new_investment/view_model/new_investment_cubit.dart';
 import '../../../ui/views/main/loans/personal_info/view_model/personal_info_bloc.dart';
@@ -97,6 +98,7 @@ GetIt $initGetIt(
       () => LoanRepoImpl(get<UserRepo>(), get<LoanRemoteDataSource>()));
   gh.lazySingleton<LoanScheduleCubit>(() => LoanScheduleCubit(get<LoanRepo>()));
   gh.lazySingleton<LoanViewCubit>(() => LoanViewCubit(get<LoanRepo>()));
+  gh.lazySingleton<MakePaymentCubit>(() => MakePaymentCubit(get<LoanRepo>()));
   gh.factory<NewInvestmentCubit>(
       () => NewInvestmentCubit(get<InvestmentRepo>()));
   gh.lazySingleton<PersonalInfoBloc>(

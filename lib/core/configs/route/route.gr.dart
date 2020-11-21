@@ -231,8 +231,12 @@ class Router extends RouterBase {
       );
     },
     MakePaymentView: (data) {
+      final args = data.getArgs<MakePaymentViewArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => MakePaymentView(),
+        builder: (context) => MakePaymentView(
+          key: args.key,
+          amount: args.amount,
+        ),
         settings: data,
       );
     },
@@ -401,8 +405,14 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
   Future<dynamic> pushAccountInfoView() =>
       push<dynamic>(Routes.accountInfoView);
 
-  Future<dynamic> pushMakePaymentView() =>
-      push<dynamic>(Routes.makePaymentView);
+  Future<dynamic> pushMakePaymentView({
+    Key key,
+    @required String amount,
+  }) =>
+      push<dynamic>(
+        Routes.makePaymentView,
+        arguments: MakePaymentViewArguments(key: key, amount: amount),
+      );
 
   Future<dynamic> pushLoanScheduleView({
     Key key,
@@ -494,6 +504,13 @@ class MainViewArguments {
   final Key key;
   final int pageNumber;
   MainViewArguments({this.key, @required this.pageNumber});
+}
+
+/// MakePaymentView arguments holder class
+class MakePaymentViewArguments {
+  final Key key;
+  final String amount;
+  MakePaymentViewArguments({this.key, @required this.amount});
 }
 
 /// LoanScheduleView arguments holder class

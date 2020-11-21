@@ -559,6 +559,13 @@ Future<dynamic> showErrorSnackBar(BuildContext context, String message) {
   ).show(context);
 }
 
+Future<dynamic> showInfoSnackBar(BuildContext context, String message) {
+  return FlushbarHelper.createInformation(
+    message: message,
+    duration: new Duration(seconds: 3),
+  ).show(context);
+}
+
 Widget sharedSmallBadge({
   @required BuildContext context,
   @required String text,
