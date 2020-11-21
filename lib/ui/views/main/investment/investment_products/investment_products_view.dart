@@ -6,7 +6,7 @@ import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_products/view_model/investment_product_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/investment/new_investment/view_model/new_investment_bloc.dart';
+import 'package:lsi_mobile/ui/views/main/investment/new_investment/view_model/new_investment_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/investment/widgets/expanded_investment_card.dart';
 
 class InvestmentProductsView extends StatefulWidget {
@@ -52,7 +52,7 @@ class _InvestmentProductsViewState extends State<InvestmentProductsView> {
               itemBuilder: (context, index) {
                 var investment = e.investmentProducts[index];
                 void navigateToCreateInvestment() {
-                  context.bloc<NewInvestmentBloc>().add(Init(investment));
+                  context.bloc<NewInvestmentCubit>().init(investment);
                   context.navigator.pushNewInvestmentView();
                 }
 

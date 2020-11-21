@@ -10,6 +10,13 @@ import 'package:lsi_mobile/ui/views/main/profile/view_models/accounts_cards/acco
 import 'package:lsi_mobile/ui/views/main/profile/view_models/add_card_form/add_card_form_cubit.dart';
 
 class AddCardForm extends StatefulWidget {
+  final CardTransaction transaction;
+  final String amount;
+
+  const AddCardForm(
+      {Key key, @required this.transaction, @required this.amount})
+      : super(key: key);
+
   @override
   _AddCardFormState createState() => _AddCardFormState();
 }
@@ -17,7 +24,7 @@ class AddCardForm extends StatefulWidget {
 class _AddCardFormState extends State<AddCardForm> {
   @override
   void initState() {
-    context.bloc<AddCardFormCubit>().initCardTransaction();
+    context.bloc<AddCardFormCubit>().initCardTransaction(widget.amount);
     super.initState();
   }
 
@@ -49,7 +56,7 @@ class _AddCardFormState extends State<AddCardForm> {
           if (state.checkOutUrl.isNotEmpty) {
             context.navigator.pushCardPaymentWebView(
               url: state.checkOutUrl,
-              transaction: CardTransaction.AddNewCard,
+              transaction: widget.transaction,
             );
           }
         },

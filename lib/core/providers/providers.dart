@@ -7,7 +7,7 @@ import 'package:lsi_mobile/ui/views/main/history/view_model/recent_transaction_c
 import 'package:lsi_mobile/ui/views/main/home/view_model/home_viewmodel.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_products/view_model/investment_product_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_view/view_model/investment_view_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/investment/new_investment/view_model/new_investment_bloc.dart';
+import 'package:lsi_mobile/ui/views/main/investment/new_investment/view_model/new_investment_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/loans/account_info/view_model/account_info_bloc.dart';
 import 'package:lsi_mobile/ui/views/main/loans/edu_and_employ/view_model/edu_and_employ_bloc.dart';
 import 'package:lsi_mobile/ui/views/main/loans/emergency_contact/view_model/emergency_contact_bloc.dart';
@@ -50,7 +50,7 @@ blocs(BuildContext context) => [
       BlocProvider(create: (context) => getIt<LoanScheduleCubit>()),
       BlocProvider(create: (context) => getIt<InvestmentViewCubit>()),
       BlocProvider(create: (context) => getIt<InvestmentProductCubit>()),
-      BlocProvider(create: (context) => getIt<NewInvestmentBloc>()),
+      BlocProvider(create: (context) => getIt<NewInvestmentCubit>()),
       BlocProvider(create: (context) => getIt<AddCardFormCubit>()),
       BlocProvider(create: (context) => getIt<AddAccountFormCubit>()),
       BlocProvider(create: (context) => getIt<AccountsCardsBloc>()),

@@ -1,4 +1,4 @@
-part of 'new_investment_bloc.dart';
+part of 'new_investment_cubit.dart';
 
 @freezed
 abstract class NewInvestmentState with _$NewInvestmentState {
@@ -7,6 +7,8 @@ abstract class NewInvestmentState with _$NewInvestmentState {
     @required double amount,
     @required int duration,
     @required String tenure,
+    @required String paystackReference,
+    @required String connectedCardId,
     @required String investmentDate,
     @required String maturityDate,
     @required String investmentRate,
@@ -38,5 +40,7 @@ abstract class NewInvestmentState with _$NewInvestmentState {
         tenure: '',
         withholdingTax: '',
         investmentProduct: InvestmentProduct.initial(),
+        paystackReference: '',
+        connectedCardId: '',
       );
 }

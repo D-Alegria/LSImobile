@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/core/models/dto/investment_duration/investment_duration.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:lsi_mobile/ui/views/main/investment/new_investment/view_model/new_investment_bloc.dart';
+import 'package:lsi_mobile/ui/views/main/investment/new_investment/view_model/new_investment_cubit.dart';
 
 class FundLengthOptions extends StatelessWidget {
   final List<InvestmentDuration> durations;
@@ -26,8 +26,8 @@ class FundLengthOptions extends StatelessWidget {
           var duration = durations[index];
           bool selected = index == select;
           return InkWell(
-            onTap: () => BlocProvider.of<NewInvestmentBloc>(context)
-                .add(DurationChanged(index)),
+            onTap: () => BlocProvider.of<NewInvestmentCubit>(context)
+                .durationChanged(index),
             child: _buildDurationBox(
               context,
               duration.noOfMonth.toString(),

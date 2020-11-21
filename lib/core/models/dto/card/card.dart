@@ -85,7 +85,7 @@ class Card {
   @JsonKey(name: "card_id")
   final String cardId;
 
-  Card(
+  Card({
     this.connectedCardId,
     this.accountCardId,
     this.cardType,
@@ -128,7 +128,7 @@ class Card {
     this.brand,
     this.bank,
     this.cardId,
-  );
+  });
 
   factory Card.fromJson(Map<String, dynamic> json) => _$CardFromJson(json);
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/core/configs/dependency_injection/injection.dart';
+import 'package:lsi_mobile/core/models/enums/card_transaction.dart';
+import 'package:lsi_mobile/core/utils/config_reader_util.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -92,7 +94,10 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
         ),
         buildEmptyContainer(
           context: context,
-          onTap: () => _showForm(AddCardForm()),
+          onTap: () => _showForm(AddCardForm(
+            amount: ConfigReader.getAppConfig().paystackTestAmount,
+            transaction: CardTransaction.AddNewCard,
+          )),
         ),
       ],
     );

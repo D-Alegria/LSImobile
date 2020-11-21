@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,8 +7,9 @@ import 'package:lsi_mobile/core/extensions/double_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:lsi_mobile/ui/views/main/investment/new_investment/view_model/new_investment_bloc.dart';
+import 'package:lsi_mobile/ui/views/main/investment/new_investment/view_model/new_investment_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/investment/widgets/fund_length_options.dart';
+import 'package:lsi_mobile/ui/views/main/profile/view_models/accounts_cards/accounts_cards_bloc.dart';
 
 class NewInvestmentView extends StatelessWidget {
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -19,7 +19,7 @@ class NewInvestmentView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<bool> _pop() {
-      context.bloc<NewInvestmentBloc>().add(Restart());
+      context.bloc<NewInvestmentCubit>().reset();
       return Future.value(true);
     }
 
@@ -41,7 +41,7 @@ class NewInvestmentView extends StatelessWidget {
             ),
           ),
         ),
-        body: BlocConsumer<NewInvestmentBloc, NewInvestmentState>(
+        body: BlocBuilder<NewInvestmentCubit, NewInvestmentState>(
           builder: (context, state) => state.isSubmitting
               ? sharedLoader()
               : Container(
@@ -65,8 +65,8 @@ class NewInvestmentView extends StatelessWidget {
                           initialValue:
                               state.amount == 0 ? "" : state.amount.toString(),
                           onChanged: (value) => context
-                              .bloc<NewInvestmentBloc>()
-                              .add(AmountChanged(double.parse(value))),
+                              .bloc<NewInvestmentCubit>()
+                              .amountChanged(double.parse(value)),
                           validator: (value) {
                             double minAmount = double.parse(
                                 state.investmentProduct.investmentAmount);
@@ -119,9 +119,10 @@ class NewInvestmentView extends StatelessWidget {
                           onPressed: () {
                             if (_formKey.currentState.validate()) {
                               _formKey.currentState.save();
-                              return context
-                                  .bloc<NewInvestmentBloc>()
-                                  .add(ProceedToFunding());
+                              context
+                                  .bloc<AccountsCardsBloc>()
+                                  .add(GetUserBankDetails());
+                              context.navigator.pushFundInvestmentView();
                             }
                           },
                           color: ColorStyles.blue,
@@ -131,16 +132,6 @@ class NewInvestmentView extends StatelessWidget {
                     ),
                   ),
                 ),
-          listener: (context, state) => state.submitFailureOrSuccess.fold(
-            () => null,
-            (result) => result.fold(
-              (failure) => FlushbarHelper.createError(
-                message: failure.message,
-                duration: new Duration(seconds: 3),
-              ).show(context),
-              (success) => context.navigator.pushFundInvestmentView(),
-            ),
-          ),
         ),
       ),
     );

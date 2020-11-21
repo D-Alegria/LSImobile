@@ -11,6 +11,8 @@ import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/authentication/authentication_bloc.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_view/view_model/investment_view_cubit.dart'
     as ivc;
+import 'package:lsi_mobile/ui/views/main/profile/view_models/accounts_cards/accounts_cards_bloc.dart'
+    as acb;
 import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_bloc.dart';
 
 import 'const_color.dart';
@@ -788,6 +790,24 @@ class InvestmentWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ivc.InvestmentViewCubit, ivc.InvestmentViewState>(
+      builder: (context, state) => state.map(
+        initial: (e) => Container(),
+        loading: (e) => sharedLoader(),
+        loaded: (e) => loaded(e),
+        error: (e) => sharedErrorWidget(context, e.message),
+      ),
+    );
+  }
+}
+
+class AccountsCardsWrapper extends StatelessWidget {
+  final Widget Function(acb.Loaded loaded) loaded;
+
+  const AccountsCardsWrapper({Key key, this.loaded}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<acb.AccountsCardsBloc, acb.AccountsCardsState>(
       builder: (context, state) => state.map(
         initial: (e) => Container(),
         loading: (e) => sharedLoader(),

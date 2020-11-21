@@ -4,7 +4,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/repositories/bank/bank_repo.dart';
-import 'package:lsi_mobile/core/utils/config_reader_util.dart';
 import 'package:meta/meta.dart';
 
 part 'add_card_form_cubit.freezed.dart';
@@ -17,13 +16,12 @@ class AddCardFormCubit extends Cubit<AddCardFormState> {
 
   AddCardFormCubit(this._bankRepo) : super(AddCardFormState.initial());
 
-  void initCardTransaction() async {
+  void initCardTransaction(String amount) async {
     emit(state.copyWith(
         isSubmitting: true,
         userInfo: "initializing...",
         submitFailureOrSuccess: None()));
-    final init = await _bankRepo.initiateCardTransaction(
-        ConfigReader.getAppConfig().paystackTestAmount);
+    final init = await _bankRepo.initiateCardTransaction(amount);
 
     init.fold(
         (l) => emit(state.copyWith(
