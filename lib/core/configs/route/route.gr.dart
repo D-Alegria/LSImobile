@@ -35,9 +35,11 @@ import '../../../ui/views/main/profile/contact_us/contact_us_view.dart';
 import '../../../ui/views/main/profile/edit_profile/edit_profile_view.dart';
 import '../../../ui/views/main/profile/faq/faq_view.dart';
 import '../../../ui/views/main/profile/profile_view.dart';
+import '../../../ui/views/main/profile/widgets/card_payment_webview.dart';
 import '../../../ui/views/onboarding/onboarding_view.dart';
 import '../../../ui/views/start_up/start_up_view.dart';
 import '../../models/dto/investment/investment.dart';
+import '../../models/enums/card_transaction.dart';
 import '../../models/requests/user_details/user_details_request.dart';
 
 class Routes {
@@ -68,6 +70,7 @@ class Routes {
   static const String accountsCardsView = '/accounts-cards-view';
   static const String contactUsView = '/contact-us-view';
   static const String fAQView = '/f-aq-view';
+  static const String cardPaymentWebView = '/card-payment-web-view';
   static const String successView = '/success-view';
   static const all = <String>{
     startUpView,
@@ -97,6 +100,7 @@ class Routes {
     accountsCardsView,
     contactUsView,
     fAQView,
+    cardPaymentWebView,
     successView,
   };
 }
@@ -132,6 +136,7 @@ class Router extends RouterBase {
     RouteDef(Routes.accountsCardsView, page: AccountsCardsView),
     RouteDef(Routes.contactUsView, page: ContactUsView),
     RouteDef(Routes.fAQView, page: FAQView),
+    RouteDef(Routes.cardPaymentWebView, page: CardPaymentWebView),
     RouteDef(Routes.successView, page: SuccessView),
   ];
   @override
@@ -320,6 +325,19 @@ class Router extends RouterBase {
         settings: data,
       );
     },
+    CardPaymentWebView: (data) {
+      final args = data.getArgs<CardPaymentWebViewArguments>(
+        orElse: () => CardPaymentWebViewArguments(),
+      );
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => CardPaymentWebView(
+          key: args.key,
+          url: args.url,
+          transaction: args.transaction,
+        ),
+        settings: data,
+      );
+    },
     SuccessView: (data) {
       final args = data.getArgs<SuccessViewArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
@@ -443,6 +461,17 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 
   Future<dynamic> pushFAQView() => push<dynamic>(Routes.fAQView);
 
+  Future<dynamic> pushCardPaymentWebView({
+    Key key,
+    String url,
+    CardTransaction transaction,
+  }) =>
+      push<dynamic>(
+        Routes.cardPaymentWebView,
+        arguments: CardPaymentWebViewArguments(
+            key: key, url: url, transaction: transaction),
+      );
+
   Future<dynamic> pushSuccessView({
     Key key,
     @required String message,
@@ -492,6 +521,14 @@ class EditProfileViewArguments {
   final Key key;
   final UserDetailsRequest userDetails;
   EditProfileViewArguments({this.key, this.userDetails});
+}
+
+/// CardPaymentWebView arguments holder class
+class CardPaymentWebViewArguments {
+  final Key key;
+  final String url;
+  final CardTransaction transaction;
+  CardPaymentWebViewArguments({this.key, this.url, this.transaction});
 }
 
 /// SuccessView arguments holder class

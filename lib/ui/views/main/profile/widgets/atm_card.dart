@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
+import 'package:lsi_mobile/core/models/dto/card/card.dart' as mc;
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
 class ATMCard extends StatelessWidget {
   final String mCard = "assets/images/master_card.png";
+  final mc.Card card;
 
   const ATMCard({
-    Key key,
+    Key key, this.card,
   }) : super(key: key);
 
   @override
@@ -31,7 +33,7 @@ class ATMCard extends StatelessWidget {
                 Image.asset(mCard),
                 SizedBox(width: SizeConfig.yMargin(context, 1)),
                 Text(
-                  "Mastercard",
+                  card.brand,
                   style: GoogleFonts.workSans(
                     color: ColorStyles.white,
                     fontWeight: FontWeight.w500,
@@ -41,7 +43,7 @@ class ATMCard extends StatelessWidget {
               ],
             ),
             Text(
-              "**** **** **** 1234",
+              "**** **** **** ${card.lastFourDigits}",
               style: GoogleFonts.workSans(
                 color: ColorStyles.white,
                 fontWeight: FontWeight.w600,
@@ -49,7 +51,7 @@ class ATMCard extends StatelessWidget {
               ),
             ),
             Text(
-              "02/24",
+              "${card.expMonth}/${card.expYear.substring(2)}",
               style: GoogleFonts.workSans(
                 color: ColorStyles.yellow1,
                 fontWeight: FontWeight.w500,

@@ -12,7 +12,8 @@ class SaveAccountRequest extends TokenRequest {
   @JsonKey(name: "account_name")
   final String accountName;
 
-  SaveAccountRequest({this.accountNumber, this.bankId, this.accountName});
+  SaveAccountRequest({this.accountNumber, this.bankId, this.accountName, token})
+      : super(token: token);
 
   factory SaveAccountRequest.fromJson(Map<String, dynamic> json) =>
       _$SaveAccountRequestFromJson(json);

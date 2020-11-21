@@ -1,5 +1,6 @@
 import "package:auto_route/auto_route.dart";
 import 'package:dotted_border/dotted_border.dart';
+import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -547,6 +548,13 @@ Widget sharedTable({
       ),
     ),
   );
+}
+
+Future<dynamic> showErrorSnackBar(BuildContext context, String message) {
+  return FlushbarHelper.createError(
+    message: message,
+    duration: new Duration(seconds: 3),
+  ).show(context);
 }
 
 Widget sharedSmallBadge({

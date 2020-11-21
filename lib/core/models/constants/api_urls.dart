@@ -47,4 +47,7 @@ class ApiUrls {
   static final String createInvestment = "api/v3/investment/create";
   static final String customersInvestment = "api/v3/customer/investments";
   static final String investmentStatement = "api/v3/customer/investment/statement";
+  static final String initializeTransaction = "api/v3/gateway/initialize_transaction";
+  static final String addNewCard = "api/v3/customer/add/newcard";
+  static final String makeLoanPayment = "api/v3/loan/make/payment";
 }

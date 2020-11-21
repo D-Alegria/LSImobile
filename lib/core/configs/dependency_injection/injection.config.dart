@@ -10,6 +10,8 @@ import 'package:injectable/injectable.dart';
 
 import '../../../ui/views/main/loans/account_info/view_model/account_info_bloc.dart';
 import '../../../ui/views/main/profile/view_models/accounts_cards/accounts_cards_bloc.dart';
+import '../../../ui/views/main/profile/view_models/add_account_form/add_account_form_cubit.dart';
+import '../../../ui/views/main/profile/view_models/add_card_form/add_card_form_cubit.dart';
 import '../../utils/api_manager_util.dart';
 import '../../../ui/views/authentication/view_model/auth_form/auth_form_bloc.dart';
 import '../../services/auth_service/auth_service.dart';
@@ -111,6 +113,9 @@ GetIt $initGetIt(
         get<LoanRepo>(),
       ));
   gh.lazySingleton<AccountsCardsBloc>(() => AccountsCardsBloc(get<BankRepo>()));
+  gh.lazySingleton<AddAccountFormCubit>(
+      () => AddAccountFormCubit(get<UserRemoteDataSource>(), get<BankRepo>()));
+  gh.lazySingleton<AddCardFormCubit>(() => AddCardFormCubit(get<BankRepo>()));
   gh.lazySingleton<AuthFormBloc>(
       () => AuthFormBloc(get<AuthService>(), get<UserRepo>()));
   gh.lazySingleton<InvestmentProductCubit>(

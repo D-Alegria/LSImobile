@@ -25,6 +25,7 @@ import 'package:lsi_mobile/ui/views/main/profile/contact_us/contact_us_view.dart
 import 'package:lsi_mobile/ui/views/main/profile/edit_profile/edit_profile_view.dart';
 import 'package:lsi_mobile/ui/views/main/profile/faq/faq_view.dart';
 import 'package:lsi_mobile/ui/views/main/profile/profile_view.dart';
+import 'package:lsi_mobile/ui/views/main/profile/widgets/card_payment_webview.dart';
 import 'package:lsi_mobile/ui/views/onboarding/onboarding_view.dart';
 import 'package:lsi_mobile/ui/views/start_up/start_up_view.dart';
 
@@ -58,6 +59,7 @@ import 'package:lsi_mobile/ui/views/start_up/start_up_view.dart';
     AdaptiveRoute(page: AccountsCardsView),
     AdaptiveRoute(page: ContactUsView),
     AdaptiveRoute(page: FAQView),
+    AdaptiveRoute(page: CardPaymentWebView),
     AdaptiveRoute(page: SuccessView),
   ],
 )

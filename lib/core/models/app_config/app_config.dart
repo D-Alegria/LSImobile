@@ -22,6 +22,10 @@ class AppConfig {
   final List<String> bugRecipients;
   @JsonKey(name: "sentry_dsn")
   final String sentryDSN;
+  @JsonKey(name: "paystack_test_amount")
+  final String paystackTestAmount;
+  @JsonKey(name: "paystack_confirm_url")
+  final String paystackConfirmUrl;
 
   AppConfig(
     this.baseUrl,
@@ -34,6 +38,8 @@ class AppConfig {
     this.bugRecipients,
     this.developerAccountName,
     this.sentryDSN,
+    this.paystackTestAmount,
+    this.paystackConfirmUrl,
   );
 
   factory AppConfig.fromJson(Map<String, dynamic> json) =>

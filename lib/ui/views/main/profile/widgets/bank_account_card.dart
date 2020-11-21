@@ -31,32 +31,35 @@ class BankAccountCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            RichText(
-              text: TextSpan(
-                text: bankName,
-                style: GoogleFonts.workSans(
-                  fontSize: SizeConfig.textSize(context, 5),
-                  fontWeight: FontWeight.w600,
-                  color: ColorStyles.blue2,
-                  height: SizeConfig.textSize(context, 0.7),
-                ),
-                children: [
-                  TextSpan(
-                    text: "\n$accountNumber",
-                    style: GoogleFonts.workSans(
-                      fontSize: SizeConfig.textSize(context, 6),
-                      color: ColorStyles.grey2,
-                    ),
+            Flexible(
+              child: RichText(
+                overflow: TextOverflow.ellipsis,
+                text: TextSpan(
+                  text: bankName,
+                  style: GoogleFonts.workSans(
+                    fontSize: SizeConfig.textSize(context, 5),
+                    fontWeight: FontWeight.w600,
+                    color: ColorStyles.blue2,
+                    height: SizeConfig.textSize(context, 0.7),
                   ),
-                  TextSpan(
-                    text: "\n$accountName",
-                    style: GoogleFonts.workSans(
-                      fontSize: SizeConfig.textSize(context, 5),
-                      fontWeight: FontWeight.w400,
-                      color: ColorStyles.grey3,
+                  children: [
+                    TextSpan(
+                      text: "\n$accountNumber",
+                      style: GoogleFonts.workSans(
+                        fontSize: SizeConfig.textSize(context, 6),
+                        color: ColorStyles.grey2,
+                      ),
                     ),
-                  )
-                ],
+                    TextSpan(
+                      text: "\n$accountName",
+                      style: GoogleFonts.workSans(
+                        fontSize: SizeConfig.textSize(context, 5),
+                        fontWeight: FontWeight.w400,
+                        color: ColorStyles.grey3,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             sharedIconButton(

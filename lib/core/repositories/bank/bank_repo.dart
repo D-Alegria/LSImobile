@@ -5,6 +5,7 @@ import 'package:lsi_mobile/core/models/requests/initiate_bvn_validation/initiate
 import 'package:lsi_mobile/core/models/requests/resolve_account/resolve_account_request.dart';
 import 'package:lsi_mobile/core/models/requests/verify_bvn_otp/verify_bvn_otp_request.dart';
 import 'package:lsi_mobile/core/models/responses/bank_account/bank_account_response.dart';
+import 'package:lsi_mobile/core/models/responses/initialize_card_transaction/initialize_card_transaction_response.dart';
 import 'package:lsi_mobile/core/models/responses/resolve_account/resolve_account_response.dart';
 
 abstract class BankRepo {
@@ -19,4 +20,16 @@ abstract class BankRepo {
 
   Future<Either<Glitch, ResolveAccountResponse>> resolveBankAccount(
       ResolveAccountRequest request);
+
+  Future<Either<Glitch, Unit>> saveBankAccount(
+      {String accountNumber, String accountName, String bankId});
+
+  Future<Either<Glitch, CardTransactionData>> initiateCardTransaction(
+      String amount);
+
+  Future<Either<Glitch, Unit>> addNewCard(String reference);
 }
+
+// todo FIX repos responses and requests
+// todo make all request extend token request
+// todo make all response extend response

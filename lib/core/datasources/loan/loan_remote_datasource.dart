@@ -4,6 +4,7 @@ import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/constants/api_urls.dart';
 import 'package:lsi_mobile/core/models/dto/loan_product/loan_product.dart';
 import 'package:lsi_mobile/core/models/requests/loan_application/loan_request.dart';
+import 'package:lsi_mobile/core/models/requests/reference_id_request/reference_id_request.dart';
 import 'package:lsi_mobile/core/models/requests/request_id_request/request_id_request.dart';
 import 'package:lsi_mobile/core/models/requests/token_request/token_request.dart';
 import 'package:lsi_mobile/core/models/responses/current_loan/current_loan_response.dart';
@@ -30,6 +31,10 @@ abstract class LoanRemoteDataSource {
 
   Future<Either<Glitch, LoanScheduleResponse>> getLoanSchedule(
     RequestIdRequest request,
+  );
+
+  Future<Either<Glitch, LoanScheduleResponse>> makeLoanPayment(
+    ReferenceIdRequest request,
   );
 }
 
@@ -146,6 +151,29 @@ class LoanRemoteDataSourceImpl implements LoanRemoteDataSource {
         );
       },
       errorMessage: "Internal System Error Occurred:LRD-GLDs",
+    );
+  }
+
+  @override
+  Future<Either<Glitch, LoanScheduleResponse>> makeLoanPayment(
+      ReferenceIdRequest request) async {
+    return await tryMethod<LoanScheduleResponse>(
+      function: () async {
+        final response = await _apiManager.post(
+          url: ApiUrls.makeLoanPayment,
+          requestBody: request.toJson(),
+        );
+        return response.fold(
+          (failure) => left(failure),
+          (success) {
+            //todo fix response
+            final result = LoanScheduleResponse.fromJson(success);
+            if (result.status) return right(result);
+            return left(SystemGlitch(message: result.message));
+          },
+        );
+      },
+      errorMessage: "Internal System Error Occurred:LRD-MLP",
     );
   }
 }

@@ -4,10 +4,14 @@ import 'package:lsi_mobile/core/datasources/bank/bank_remote_datasource.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/dto/card/card.dart';
 import 'package:lsi_mobile/core/models/requests/initiate_bvn_validation/initiate_bvn_validation_request.dart';
+import 'package:lsi_mobile/core/models/requests/initiate_card_transaction/initiate_card_transaction_request.dart';
+import 'package:lsi_mobile/core/models/requests/reference_id_request/reference_id_request.dart';
 import 'package:lsi_mobile/core/models/requests/resolve_account/resolve_account_request.dart';
+import 'package:lsi_mobile/core/models/requests/save_account/save_account_request.dart';
 import 'package:lsi_mobile/core/models/requests/token_request/token_request.dart';
 import 'package:lsi_mobile/core/models/requests/verify_bvn_otp/verify_bvn_otp_request.dart';
 import 'package:lsi_mobile/core/models/responses/bank_account/bank_account_response.dart';
+import 'package:lsi_mobile/core/models/responses/initialize_card_transaction/initialize_card_transaction_response.dart';
 import 'package:lsi_mobile/core/models/responses/resolve_account/resolve_account_response.dart';
 import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
 import 'package:lsi_mobile/core/utils/function_util.dart';
@@ -144,6 +148,80 @@ class BankRepoImpl implements BankRepo {
             return result.fold(
               (failure) => left(failure),
               (success) => right(success),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  Future<Either<Glitch, Unit>> addNewCard(
+      String reference) async {
+    return await tryMethod<Unit>(
+      errorMessage: "Internal System Error Occurred:BARP-ANC",
+      function: () async {
+        final token = await _userRepo.userToken;
+        return token.fold(
+          (l) => left(l),
+          (success) async {
+            final result = await _bankRemoteDataSource.addNewCard(
+              ReferenceIdRequest(token: success, reference: reference),
+            );
+            return result.fold(
+              (failure) => left(failure),
+              (success) => right(unit),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  Future<Either<Glitch, CardTransactionData>> initiateCardTransaction(
+      String amount) async {
+    return await tryMethod<CardTransactionData>(
+      errorMessage: "Internal System Error Occurred:BARP-ICT",
+      function: () async {
+        final token = await _userRepo.userToken;
+        return token.fold(
+          (l) => left(l),
+          (success) async {
+            final result = await _bankRemoteDataSource.initiateCardTransaction(
+              InitiateCardTransactionRequest(token: success, amount: amount),
+            );
+            return result.fold(
+              (failure) => left(failure),
+              (success) => right(success.data),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  Future<Either<Glitch, Unit>> saveBankAccount(
+      {String accountNumber, String accountName, String bankId}) async {
+    return await tryMethod<Unit>(
+      errorMessage: "Internal System Error Occurred:BARP-SBA",
+      function: () async {
+        final token = await _userRepo.userToken;
+        return token.fold(
+          (l) => left(l),
+          (success) async {
+            final result = await _bankRemoteDataSource.saveBankAccount(
+              SaveAccountRequest(
+                token: success,
+                accountNumber: accountNumber,
+                accountName: accountName,
+                bankId: bankId,
+              ),
+            );
+            return result.fold(
+              (failure) => left(failure),
+              (success) => right(unit),
             );
           },
         );

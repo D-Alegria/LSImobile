@@ -18,6 +18,8 @@ AppConfig _$AppConfigFromJson(Map<String, dynamic> json) {
     (json['bug_recipients'] as List)?.map((e) => e as String)?.toList(),
     json['developer_account_name'] as String,
     json['sentry_dsn'] as String,
+    json['paystack_test_amount'] as String,
+    json['paystack_confirm_url'] as String,
   );
 }
 
@@ -32,4 +34,6 @@ Map<String, dynamic> _$AppConfigToJson(AppConfig instance) => <String, dynamic>{
       'developer_account_name': instance.developerAccountName,
       'bug_recipients': instance.bugRecipients,
       'sentry_dsn': instance.sentryDSN,
+      'paystack_test_amount': instance.paystackTestAmount,
+      'paystack_confirm_url': instance.paystackConfirmUrl,
     };
