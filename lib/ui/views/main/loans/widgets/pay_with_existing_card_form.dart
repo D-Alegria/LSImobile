@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/core/models/enums/card_transaction.dart';
+import 'package:lsi_mobile/core/utils/config_reader_util.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -78,7 +79,7 @@ class PayWithCardForm extends StatelessWidget {
                     itemBuilder: (context, index) => InkWell(
                       child: ATMCard(card: loaded.cards[index]),
                       onTap: () => _showForm(AddCardForm(
-                        amount: '0.01',
+                        amount: ConfigReader.getAppConfig().paystackTestAmount,
                         // todo state.amount.toString(),
                         transaction: CardTransaction.LoanPayment,
                       )),

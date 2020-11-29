@@ -5,6 +5,9 @@ import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/dto/investment/investment.dart';
 import 'package:lsi_mobile/core/models/dto/investment_product/investment_product.dart';
 import 'package:lsi_mobile/core/models/requests/create_investment/create_investment_request.dart';
+import 'package:lsi_mobile/core/models/requests/liquidate_investment/liquidate_investment_request.dart';
+import 'package:lsi_mobile/core/models/requests/rollover_investment/rollover_investment_request.dart';
+import 'package:lsi_mobile/core/models/requests/terminate_investment/terminate_investment_request.dart';
 import 'package:lsi_mobile/core/models/requests/token_request/token_request.dart';
 import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
 import 'package:lsi_mobile/core/utils/function_util.dart';
@@ -150,6 +153,92 @@ class InvestmentRepoImpl implements InvestmentRepo {
               (success) {
                 if (success.status)
                   return right(success.loans);
+                else
+                  return left(SystemGlitch(message: success.message));
+              },
+            );
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  Future<Either<Glitch, Unit>> terminateInvestment(
+      TerminatePayLoad payLoad) async {
+    return await tryMethod<Unit>(
+      errorMessage: "Internal System Error Occurred:INRP-TIs",
+      function: () async {
+        final token = await _userRepo.userToken;
+        return token.fold(
+          (l) => left(l),
+          (success) async {
+            final result =
+                await _investmentRemoteDataSource.terminateInvestment(
+              TerminateInvestmentRequest(token: success, payLoad: payLoad),
+            );
+            return result.fold(
+              (failure) => left(failure),
+              (success) {
+                if (success.status)
+                  return right(unit);
+                else
+                  return left(SystemGlitch(message: success.message));
+              },
+            );
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  Future<Either<Glitch, Unit>> liquidateInvestment(
+      LiquidatePayLoad payLoad) async {
+    return await tryMethod<Unit>(
+      errorMessage: "Internal System Error Occurred:INRP-LIs",
+      function: () async {
+        final token = await _userRepo.userToken;
+        return token.fold(
+          (l) => left(l),
+          (success) async {
+            final result =
+                await _investmentRemoteDataSource.liquidateInvestment(
+              LiquidateInvestmentRequest(token: success, payLoad: payLoad),
+            );
+            return result.fold(
+              (failure) => left(failure),
+              (success) {
+                if (success.status)
+                  return right(unit);
+                else
+                  return left(SystemGlitch(message: success.message));
+              },
+            );
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  Future<Either<Glitch, Unit>> rollOverInvestment(
+      RollOverPayLoad payLoad) async {
+    return await tryMethod<Unit>(
+      errorMessage: "Internal System Error Occurred:INRP-ROIs",
+      function: () async {
+        final token = await _userRepo.userToken;
+        return token.fold(
+          (l) => left(l),
+          (success) async {
+            final result = await _investmentRemoteDataSource.rollOverInvestment(
+              RollOverInvestmentRequest(token: success, payLoad: payLoad),
+            );
+            return result.fold(
+              (failure) => left(failure),
+              (success) {
+                if (success.status)
+                  return right(unit);
                 else
                   return left(SystemGlitch(message: success.message));
               },

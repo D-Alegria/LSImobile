@@ -8,24 +8,28 @@ class BankAccountCard extends StatelessWidget {
   final String bankName;
   final String accountNumber;
   final String accountName;
+  final Function onTap;
 
   const BankAccountCard({
     Key key,
     this.bankName,
     this.accountNumber,
     this.accountName,
+    this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: sharedContainer(
+        onTap: onTap,
         padding: EdgeInsets.symmetric(
           vertical: SizeConfig.yMargin(context, 1),
           horizontal: SizeConfig.xMargin(context, 5),
         ),
         gradient: ColorStyles.lightGradient,
         height: SizeConfig.yMargin(context, 23),
+        width: SizeConfig.xMargin(context, 75),
         alignment: Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,6 +51,7 @@ class BankAccountCard extends StatelessWidget {
                   ),
                   Text(
                     accountNumber,
+                    overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.workSans(
                       fontSize: SizeConfig.textSize(context, 6),
                       color: ColorStyles.grey2,
@@ -56,6 +61,7 @@ class BankAccountCard extends StatelessWidget {
                   ),
                   Text(
                     accountName,
+                    overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.workSans(
                       height: SizeConfig.textSize(context, 0.7),
                       fontSize: SizeConfig.textSize(context, 5),

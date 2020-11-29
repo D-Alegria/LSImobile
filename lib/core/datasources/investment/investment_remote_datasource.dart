@@ -3,12 +3,16 @@ import 'package:injectable/injectable.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/constants/api_urls.dart';
 import 'package:lsi_mobile/core/models/requests/create_investment/create_investment_request.dart';
+import 'package:lsi_mobile/core/models/requests/liquidate_investment/liquidate_investment_request.dart';
 import 'package:lsi_mobile/core/models/requests/request_id_request/request_id_request.dart';
+import 'package:lsi_mobile/core/models/requests/rollover_investment/rollover_investment_request.dart';
+import 'package:lsi_mobile/core/models/requests/terminate_investment/terminate_investment_request.dart';
 import 'package:lsi_mobile/core/models/requests/token_request/token_request.dart';
 import 'package:lsi_mobile/core/models/responses/create_investment/create_investment_response.dart';
 import 'package:lsi_mobile/core/models/responses/get_investment_product/get_investment_product_response.dart';
 import 'package:lsi_mobile/core/models/responses/investment_portfolio/investment_portfolio_response.dart';
 import 'package:lsi_mobile/core/models/responses/investment_snapshot/investment_snapshot_response.dart';
+import 'package:lsi_mobile/core/models/responses/response/response.dart';
 import 'package:lsi_mobile/core/utils/api_manager_util.dart';
 import 'package:lsi_mobile/core/utils/function_util.dart';
 
@@ -35,6 +39,18 @@ abstract class InvestmentRemoteDataSource {
 
   Future<Either<Glitch, CreateInvestmentResponse>> createInvestment(
     CreateInvestmentRequest request,
+  );
+
+  Future<Either<Glitch, Response>> liquidateInvestment(
+    LiquidateInvestmentRequest request,
+  );
+
+  Future<Either<Glitch, Response>> rollOverInvestment(
+    RollOverInvestmentRequest request,
+  );
+
+  Future<Either<Glitch, Response>> terminateInvestment(
+    TerminateInvestmentRequest request,
   );
 }
 
@@ -167,6 +183,69 @@ class InvestmentRemoteDataSourceImpl implements InvestmentRemoteDataSource {
         );
       },
       errorMessage: "Internal System Error Occurred:INRD-GIS",
+    );
+  }
+
+  @override
+  Future<Either<Glitch, Response>> terminateInvestment(
+      TerminateInvestmentRequest request) async {
+    return await tryMethod<Response>(
+      function: () async {
+        final response = await _apiManager.post(
+          url: ApiUrls.terminateInvestment,
+          requestBody: request.toJson(),
+        );
+        return response.fold(
+          (failure) => left(failure),
+          (success) {
+            final result = Response.fromJson(success);
+            return right(result);
+          },
+        );
+      },
+      errorMessage: "Internal System Error Occurred:INRD-TIs",
+    );
+  }
+
+  @override
+  Future<Either<Glitch, Response>> liquidateInvestment(
+      LiquidateInvestmentRequest request) async {
+    return await tryMethod<Response>(
+      function: () async {
+        final response = await _apiManager.post(
+          url: ApiUrls.liquidateInvestment,
+          requestBody: request.toJson(),
+        );
+        return response.fold(
+          (failure) => left(failure),
+          (success) {
+            final result = Response.fromJson(success);
+            return right(result);
+          },
+        );
+      },
+      errorMessage: "Internal System Error Occurred:INRD-LIs",
+    );
+  }
+
+  @override
+  Future<Either<Glitch, Response>> rollOverInvestment(
+      RollOverInvestmentRequest request) async {
+    return await tryMethod<Response>(
+      function: () async {
+        final response = await _apiManager.post(
+          url: ApiUrls.rollOverInvestment,
+          requestBody: request.toJson(),
+        );
+        return response.fold(
+          (failure) => left(failure),
+          (success) {
+            final result = Response.fromJson(success);
+            return right(result);
+          },
+        );
+      },
+      errorMessage: "Internal System Error Occurred:INRD-ROIs",
     );
   }
 }

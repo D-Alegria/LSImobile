@@ -1,18 +1,22 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jiffy/jiffy.dart';
+import 'package:lsi_mobile/core/configs/dependency_injection/injection.dart';
 import 'package:lsi_mobile/core/extensions/double_extension.dart';
 import 'package:lsi_mobile/core/models/dto/investment/investment.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
+import 'package:lsi_mobile/ui/views/main/investment/investment_plan/view_model/rollover_investment/rollover_form_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/investment/widgets/investment_plan_card.dart';
 import 'package:lsi_mobile/ui/views/main/investment/widgets/round_button.dart';
 import 'package:lsi_mobile/ui/views/main/investment/widgets/terminate_form.dart';
 import 'package:lsi_mobile/ui/views/main/investment/widgets/withdraw_form.dart';
+import 'package:lsi_mobile/ui/views/main/profile/view_models/accounts_cards/accounts_cards_bloc.dart';
 
 class InvestmentPlanView extends StatelessWidget {
   final String book = "assets/svgs/book.svg";
@@ -38,6 +42,80 @@ class InvestmentPlanView extends StatelessWidget {
                 bottom: MediaQuery.of(context).viewInsets.bottom,
               ),
               child: form,
+            ),
+          );
+        },
+      );
+    }
+
+    void _showConfirmForm() {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return BlocProvider(
+            create: (context) => getIt<RolloverFormCubit>(),
+            child: BlocConsumer<RolloverFormCubit, RolloverFormState>(
+              builder: (context, state) => AlertDialog(
+                title: Text(
+                  'RollOver Investment',
+                  style: TextStyle(
+                    fontSize: SizeConfig.textSize(context, 4),
+                    fontWeight: FontWeight.w400,
+                    color: ColorStyles.dark,
+                  ),
+                ),
+                content: SingleChildScrollView(
+                  child: state.isSubmitting
+                      ? sharedLoader()
+                      : ListBody(
+                          children: <Widget>[
+                            Text(
+                              'Are you sure you want to rollover this investment?',
+                              style: TextStyle(
+                                fontSize: SizeConfig.textSize(context, 4),
+                                fontWeight: FontWeight.w400,
+                                color: ColorStyles.dark,
+                              ),
+                            )
+                          ],
+                        ),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: Text(
+                      'No',
+                      style: TextStyle(
+                        fontSize: SizeConfig.textSize(context, 4),
+                        fontWeight: FontWeight.w400,
+                        color: ColorStyles.dark,
+                      ),
+                    ),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                  TextButton(
+                    child: Text(
+                      'Yes',
+                      style: TextStyle(
+                        fontSize: SizeConfig.textSize(context, 4),
+                        fontWeight: FontWeight.w400,
+                        color: ColorStyles.dark,
+                      ),
+                    ),
+                    onPressed: () => context.bloc<RolloverFormCubit>().rollover(
+                          planId: investment.investmentProductId,
+                          duration: investment.requestTenor,
+                        ),
+                  ),
+                ],
+              ),
+              listener: (context, state) => state.submitFailureOrSuccess.fold(
+                () => null,
+                (either) => either.fold(
+                  (l) => showErrorSnackBar(context, l.message),
+                  (r) => context.navigator.pop(),
+                ),
+              ),
             ),
           );
         },
@@ -74,32 +152,76 @@ class InvestmentPlanView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 RoundButton(
-                  onTap: () => _showForm(WithdrawForm()),
+                  onTap: () {
+                    if (investment.isActive != "1") {
+                      context
+                          .bloc<AccountsCardsBloc>()
+                          .add(GetUserBankDetails());
+                      _showForm(
+                        WithdrawForm(investment: investment),
+                      );
+                    } else {
+                      showInfoSnackBar(context,
+                          'You can\'t withdraw from a non Active Investment');
+                    }
+                  },
                   text: "Withdraw",
-                  background: ColorStyles.orange,
+                  background: investment.isActive == "1"
+                      ? ColorStyles.orange
+                      : ColorStyles.grey,
                   icon: SvgPicture.asset(
                     withdraw,
-                    color: ColorStyles.orange,
+                    color: investment.isActive == "1"
+                        ? ColorStyles.orange
+                        : ColorStyles.grey,
                     width: SizeConfig.textSize(context, 8),
                   ),
                 ),
                 RoundButton(
-                  onTap: () {},
+                  onTap: () {
+                    if (investment.isActive == "1") {
+                      _showConfirmForm();
+                    } else {
+                      showInfoSnackBar(context,
+                          'You can\'t rollover a non Active Investment');
+                    }
+                  },
                   text: "Rollover",
-                  background: ColorStyles.blue,
+                  background: investment.isActive == "1"
+                      ? ColorStyles.blue
+                      : ColorStyles.grey,
                   icon: SvgPicture.asset(
                     rollover,
-                    color: ColorStyles.blue,
+                    color: investment.isActive == "1"
+                        ? ColorStyles.blue
+                        : ColorStyles.grey,
                     width: SizeConfig.textSize(context, 6),
                   ),
                 ),
                 RoundButton(
-                  onTap: () => _showForm(TerminateForm()),
+                  onTap: () {
+                    if (investment.isActive == "1") {
+                      context
+                          .bloc<AccountsCardsBloc>()
+                          .add(GetUserBankDetails());
+                      _showForm(TerminateForm(
+                        planId: investment.investmentProductId,
+                        amount: investment.requestPrincipal,
+                      ));
+                    } else {
+                      showInfoSnackBar(context,
+                          'You can\'t terminate a non Active Investment');
+                    }
+                  },
                   text: "Terminate",
-                  background: ColorStyles.red,
+                  background: investment.isActive == "1"
+                      ? ColorStyles.red
+                      : ColorStyles.grey,
                   icon: Icon(
                     Icons.close,
-                    color: ColorStyles.red,
+                    color: investment.isActive == "1"
+                        ? ColorStyles.red
+                        : ColorStyles.grey,
                     size: SizeConfig.textSize(context, 9),
                   ),
                 ),

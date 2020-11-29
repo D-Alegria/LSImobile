@@ -5,6 +5,7 @@ import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/core/extensions/double_extension.dart';
 import 'package:lsi_mobile/core/models/dto/card/card.dart' as ca;
 import 'package:lsi_mobile/core/models/enums/card_transaction.dart';
+import 'package:lsi_mobile/core/utils/config_reader_util.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -151,7 +152,7 @@ class FundInvestmentView extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   var card = loaded.cards[index];
                                   return investmentCard(context, card,
-                                      '0.01' // todo state.amount.toString(),
+                                      ConfigReader.getAppConfig().paystackTestAmount // todo state.amount.toString(),
                                       );
                                 },
                                 separatorBuilder: (context, index) => SizedBox(

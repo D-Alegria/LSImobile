@@ -1,6 +1,7 @@
 import 'dart:convert' as convert;
 import 'dart:io';
 
+import 'package:catcher/catcher.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
@@ -72,14 +73,14 @@ class ApiManager {
             message:
                 "Please connect to an active internet provider and try again."));
       }
-    } on SocketException catch (e) {
-      print(e.toString());
+    } on SocketException catch (error, stackTrace) {
+      Catcher.reportCheckedError(error, stackTrace);
       return left(NetworkGlitch(message: "Unable to connect to server"));
-    } on Exception catch (e) {
-      print(e.toString());
+    } on Exception catch (error, stackTrace) {
+      Catcher.reportCheckedError(error, stackTrace);
       return left(NetworkGlitch(message: "No Connection Found"));
-    } on Error catch (e) {
-      print(e.toString());
+    } on Error catch (error, stackTrace) {
+      Catcher.reportCheckedError(error, stackTrace);
       return left(NetworkGlitch(message: "Error Occurred"));
     }
   }
