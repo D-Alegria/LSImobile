@@ -139,7 +139,7 @@ Widget detailsBox({
               children: <Widget>[
                 Text(
                   title,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: GoogleFonts.workSans(fontWeight: FontWeight.bold),
                 ),
                 isSelected
                     ? Icon(

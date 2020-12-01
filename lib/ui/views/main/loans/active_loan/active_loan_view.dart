@@ -3,6 +3,7 @@ import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/core/models/dto/loan/loan.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
@@ -40,7 +41,7 @@ class ActiveLoanView extends StatelessWidget {
           centerTitle: false,
           title: Text(
             "Active Loan",
-            style: TextStyle(
+            style: GoogleFonts.workSans(
               fontWeight: FontWeight.w600,
               fontSize: SizeConfig.textSize(context, 5),
               color: ColorStyles.dark.withOpacity(0.8),

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/models/enums/card_transaction.dart';
 import 'package:lsi_mobile/core/utils/config_reader_util.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
@@ -53,7 +54,7 @@ class PayWithCardForm extends StatelessWidget {
                 textAlign: TextAlign.left,
                 text: TextSpan(
                   text: "Pay with card",
-                  style: TextStyle(
+                  style: GoogleFonts.workSans(
                     color: ColorStyles.dark,
                     fontWeight: FontWeight.w600,
                     fontSize: SizeConfig.textSize(context, 5),
@@ -62,7 +63,7 @@ class PayWithCardForm extends StatelessWidget {
                   children: [
                     TextSpan(
                       text: "\nSelect a card below to pay with card",
-                      style: TextStyle(
+                      style: GoogleFonts.workSans(
                         fontSize: SizeConfig.textSize(context, 4),
                         fontWeight: FontWeight.w500,
                         color: ColorStyles.dark.withOpacity(0.5),

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
@@ -23,7 +24,7 @@ class NoLoanView extends StatelessWidget {
         centerTitle: false,
         title: Text(
           "Loans",
-          style: TextStyle(
+          style: GoogleFonts.workSans(
             fontWeight: FontWeight.w600,
             fontSize: SizeConfig.textSize(context, 5),
             color: ColorStyles.dark.withOpacity(0.8),

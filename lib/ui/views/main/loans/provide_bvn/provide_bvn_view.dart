@@ -2,6 +2,7 @@ import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
@@ -60,7 +61,7 @@ class ProvideBVNView extends StatelessWidget {
                         SizedBox(height: SizeConfig.yMargin(context, 2.5)),
                         Text(
                           "Please enter your BVN number to begin the loan application process",
-                          style: TextStyle(
+                          style: GoogleFonts.workSans(
                             color: ColorStyles.light,
                             fontWeight: FontWeight.w500,
                             fontSize: SizeConfig.textSize(context, 4),

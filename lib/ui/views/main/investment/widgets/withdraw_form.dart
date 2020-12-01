@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/configs/dependency_injection/injection.dart';
 import 'package:lsi_mobile/core/extensions/double_extension.dart';
 import 'package:lsi_mobile/core/models/dto/investment/investment.dart';
@@ -52,7 +53,7 @@ class WithdrawForm extends StatelessWidget {
                       RichText(
                         text: TextSpan(
                           text: "Withdraw",
-                          style: TextStyle(
+                          style: GoogleFonts.workSans(
                             color: ColorStyles.dark,
                             fontWeight: FontWeight.w600,
                             fontSize: SizeConfig.textSize(context, 5),
@@ -62,7 +63,7 @@ class WithdrawForm extends StatelessWidget {
                             TextSpan(
                               text:
                                   "\nSelect account to withdraw specified amount to",
-                              style: TextStyle(
+                              style: GoogleFonts.workSans(
                                 fontWeight: FontWeight.w500,
                                 color: ColorStyles.dark.withOpacity(0.5),
                               ),
@@ -83,7 +84,7 @@ class WithdrawForm extends StatelessWidget {
                               double.parse(investment.requestPrincipal);
                           if (double.parse(state.amount) < minAmount ||
                               double.parse(state.amount) > maxAmount)
-                            return "Amount has to be between \n${minAmount.moneyFormat} - ${maxAmount.moneyFormat}";
+                            return "Amount has to be between \n${minAmount.moneyFormat(2)} - ${maxAmount.moneyFormat(2)}";
                           return null;
                         },
                         keyboardType: TextInputType.number,

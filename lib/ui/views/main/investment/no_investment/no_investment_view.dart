@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
+import 'package:lsi_mobile/core/extensions/double_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -26,42 +27,6 @@ class _NoInvestmentViewState extends State<NoInvestmentView> {
   Widget build(BuildContext context) {
     return InvestmentWrapper(
       loaded: (loaded) => Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: ColorStyles.white,
-          centerTitle: false,
-          brightness: Brightness.light,
-          actions: [
-            sharedIconButton(
-              context: context,
-              onPressed: () {},
-              icon: Icon(
-                Icons.info_outline_rounded,
-                color: ColorStyles.light,
-                size: SizeConfig.textSize(context, 7.5),
-              ),
-            ),
-          ],
-          title: RichText(
-            text: TextSpan(
-              text: "Investments",
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: SizeConfig.textSize(context, 5),
-                color: ColorStyles.black,
-              ),
-              children: [
-                TextSpan(
-                  text: "\nN${loaded.investmentBalance}",
-                  style: TextStyle(
-                    fontSize: SizeConfig.textSize(context, 4.6),
-                    color: ColorStyles.orange,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
         body: BlocBuilder<InvestmentProductCubit, InvestmentProductState>(
           builder: (context, state) => state.map(
             initial: (e) => Container(),
@@ -72,17 +37,57 @@ class _NoInvestmentViewState extends State<NoInvestmentView> {
               ),
               child: Column(
                 children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      vertical: SizeConfig.yMargin(context, 5),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        RichText(
+                          text: TextSpan(
+                            text: "Investments",
+                            style: GoogleFonts.workSans(
+                              fontWeight: FontWeight.w600,
+                              fontSize: SizeConfig.textSize(context, 6),
+                              color: ColorStyles.black,
+                            ),
+                            children: [
+                              TextSpan(
+                                text:
+                                    "\n${double.parse(loaded.investmentBalance).moneyFormat(2)}",
+                                style: GoogleFonts.roboto(
+                                  fontSize: SizeConfig.textSize(context, 5.5),
+                                  color: ColorStyles.orange,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        sharedIconButton(
+                          context: context,
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.info_outline_rounded,
+                            color: ColorStyles.light,
+                            size: SizeConfig.textSize(context, 9),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   SizedBox(height: SizeConfig.yMargin(context, 2)),
                   Text(
                     "You currently have no investment, chose an investment plan below to get started",
                     style: GoogleFonts.workSans(
-                      height: SizeConfig.textSize(context, 0.4),
+                      height: SizeConfig.textSize(context, 0.3),
                       color: ColorStyles.light,
                       fontWeight: FontWeight.w500,
-                      fontSize: SizeConfig.textSize(context, 5),
+                      fontSize: SizeConfig.textSize(context, 4.3),
                     ),
                   ),
-                  SizedBox(height: SizeConfig.yMargin(context, 4)),
+                  SizedBox(height: SizeConfig.yMargin(context, 5)),
                   Expanded(
                     child: ListView.separated(
                       itemBuilder: (context, index) {
@@ -95,38 +100,26 @@ class _NoInvestmentViewState extends State<NoInvestmentView> {
 
                         if (index % 3 == 0) {
                           return MiniInvestmentCard(
-                            title: investment.investmentTitle,
-                            value:
-                                "N${investment.investmentAmount} - N${investment.investmentMaxAmount}",
-                            borderColor: ColorStyles.red.withOpacity(0.6),
-                            color: ColorStyles.red.withOpacity(0.1),
-                            textColor: ColorStyles.red,
+                            investment: investment,
+                            color: ColorStyles.red,
                             function: navigateToCreateInvestment,
                           );
                         } else if (index % 3 == 1) {
                           return MiniInvestmentCard(
-                            title: "${investment.investmentTitle}",
-                            value:
-                                "N${investment.investmentAmount} - N${investment.investmentMaxAmount}",
-                            borderColor: ColorStyles.primary.withOpacity(0.6),
-                            color: ColorStyles.primary.withOpacity(0.1),
-                            textColor: ColorStyles.primary,
+                            investment: investment,
+                            color: ColorStyles.primary,
                             function: navigateToCreateInvestment,
                           );
                         } else {
                           return MiniInvestmentCard(
-                            title: investment.investmentTitle,
-                            value:
-                                "N${investment.investmentAmount} - N${investment.investmentMaxAmount}",
-                            borderColor: ColorStyles.blue2.withOpacity(0.6),
-                            color: ColorStyles.blue2.withOpacity(0.1),
-                            textColor: ColorStyles.blue2,
+                            investment: investment,
+                            color: ColorStyles.blue2,
                             function: navigateToCreateInvestment,
                           );
                         }
                       },
                       separatorBuilder: (context, index) =>
-                          SizedBox(height: SizeConfig.yMargin(context, 3)),
+                          SizedBox(height: SizeConfig.yMargin(context, 2)),
                       itemCount: e.investmentProducts.length,
                     ),
                   ),

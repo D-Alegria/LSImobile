@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/core/extensions/double_extension.dart';
 import 'package:lsi_mobile/core/models/dto/card/card.dart' as ca;
@@ -51,7 +52,7 @@ class FundInvestmentView extends StatelessWidget {
         child: RichText(
           text: TextSpan(
             text: "${card.expMonth}/${card.expYear.substring(2)}",
-            style: TextStyle(
+            style: GoogleFonts.workSans(
               height: SizeConfig.textSize(context, 0.7),
               fontWeight: FontWeight.w500,
               fontSize: SizeConfig.textSize(context, 4),
@@ -60,7 +61,7 @@ class FundInvestmentView extends StatelessWidget {
             children: [
               TextSpan(
                 text: "\n**** **** **** ${card.lastFourDigits}",
-                style: TextStyle(
+                style: GoogleFonts.workSans(
                   fontWeight: FontWeight.w600,
                   fontSize: SizeConfig.textSize(context, 6),
                   color: ColorStyles.white,
@@ -68,7 +69,7 @@ class FundInvestmentView extends StatelessWidget {
               ),
               TextSpan(
                 text: "\nTap to pay with this card",
-                style: TextStyle(
+                style: GoogleFonts.workSans(
                   fontWeight: FontWeight.w400,
                   fontSize: SizeConfig.textSize(context, 4),
                   color: ColorStyles.white,
@@ -89,7 +90,7 @@ class FundInvestmentView extends StatelessWidget {
         centerTitle: false,
         title: Text(
           "Fund Investment",
-          style: TextStyle(
+          style: GoogleFonts.workSans(
             fontWeight: FontWeight.w600,
             fontSize: SizeConfig.textSize(context, 5),
             color: ColorStyles.black,
@@ -119,15 +120,15 @@ class FundInvestmentView extends StatelessWidget {
                       children: [
                         Text(
                           "Investment amount",
-                          style: TextStyle(
+                          style: GoogleFonts.workSans(
                             fontWeight: FontWeight.w600,
                             fontSize: SizeConfig.textSize(context, 5),
                             color: ColorStyles.black,
                           ),
                         ),
                         Text(
-                          state.amount.moneyFormat,
-                          style: TextStyle(
+                          state.amount.moneyFormat(2),
+                          style: GoogleFonts.roboto(
                             fontWeight: FontWeight.w600,
                             fontSize: SizeConfig.textSize(context, 5),
                             color: ColorStyles.red,
@@ -151,8 +152,11 @@ class FundInvestmentView extends StatelessWidget {
                                 scrollDirection: Axis.horizontal,
                                 itemBuilder: (context, index) {
                                   var card = loaded.cards[index];
-                                  return investmentCard(context, card,
-                                      ConfigReader.getAppConfig().paystackTestAmount // todo state.amount.toString(),
+                                  return investmentCard(
+                                      context,
+                                      card,
+                                      ConfigReader.getAppConfig()
+                                          .paystackTestAmount // todo state.amount.toString(),
                                       );
                                 },
                                 separatorBuilder: (context, index) => SizedBox(
@@ -166,7 +170,7 @@ class FundInvestmentView extends StatelessWidget {
                           Text(
                             "or",
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: GoogleFonts.workSans(
                               fontWeight: FontWeight.w600,
                               fontSize: SizeConfig.textSize(context, 5),
                               color: ColorStyles.black,
@@ -178,8 +182,8 @@ class FundInvestmentView extends StatelessWidget {
                               horizontal: SizeConfig.xMargin(context, 5),
                             ),
                             child: Text(
-                              "Make a transfer of exactly ${state.amount.moneyFormat} from your  desired bank account to the one stated below. Funds will reflect in your investment plan instantly",
-                              style: TextStyle(
+                              "Make a transfer of exactly ${state.amount.moneyFormat(2)} from your  desired bank account to the one stated below. Funds will reflect in your investment plan instantly",
+                              style: GoogleFonts.roboto(
                                 fontWeight: FontWeight.w500,
                                 fontSize: SizeConfig.textSize(context, 4.8),
                                 color: ColorStyles.light,
@@ -197,6 +201,7 @@ class FundInvestmentView extends StatelessWidget {
                                 ["Account number", "4010009063"],
                                 ["Account name", "Initiative Finance Ltd."],
                               ],
+                              red: false,
                             ),
                           ),
                           SizedBox(height: SizeConfig.yMargin(context, 2)),

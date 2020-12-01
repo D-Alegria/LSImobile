@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 PageRoute unknownRouteView(String routeName) => MaterialPageRoute(
       builder: (context) => Scaffold(
@@ -19,7 +20,7 @@ class UnknownRouteView extends StatelessWidget {
         child: Text(
           "$routeName not found",
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 16),
+          style: GoogleFonts.workSans(fontSize: 16),
         ),
       ),
     );

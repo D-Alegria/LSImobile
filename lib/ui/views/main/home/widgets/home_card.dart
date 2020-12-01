@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
@@ -94,7 +95,7 @@ class HomeCard extends StatelessWidget {
             left: SizeConfig.xMargin(context, 8),
             child: Text(
               firstText,
-              style: TextStyle(
+              style: GoogleFonts.workSans(
                 fontSize: SizeConfig.textSize(context, 4.5),
                 fontWeight: FontWeight.w700,
                 color: ColorStyles.blue.withOpacity(0.7),
@@ -106,7 +107,7 @@ class HomeCard extends StatelessWidget {
             left: SizeConfig.xMargin(context, 8),
             child: Text(
               secondText,
-              style: TextStyle(
+              style: GoogleFonts.workSans(
                 fontSize: SizeConfig.textSize(context, 5),
                 fontWeight: FontWeight.w700,
                 color: ColorStyles.grey2,
@@ -118,7 +119,7 @@ class HomeCard extends StatelessWidget {
             left: SizeConfig.xMargin(context, 8),
             child: Text(
               thirdText,
-              style: TextStyle(
+              style: GoogleFonts.workSans(
                 fontSize: SizeConfig.textSize(context, 4),
                 fontWeight: FontWeight.w700,
                 color: ColorStyles.grey,
@@ -135,7 +136,7 @@ class HomeCard extends StatelessWidget {
               color: ColorStyles.blue3.withOpacity(0.1),
               child: Text(
                 buttonText,
-                style: TextStyle(
+                style: GoogleFonts.workSans(
                   color: ColorStyles.blue.withOpacity(0.7),
                   fontWeight: FontWeight.w700,
                 ),

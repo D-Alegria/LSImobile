@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:lsi_mobile/core/extensions/double_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
@@ -23,7 +24,7 @@ class HistoryView extends StatelessWidget {
         centerTitle: false,
         title: Text(
           "Transaction History",
-          style: TextStyle(
+          style: GoogleFonts.workSans(
             fontWeight: FontWeight.w600,
             fontSize: SizeConfig.textSize(context, 5),
             color: ColorStyles.dark.withOpacity(0.8),
@@ -61,21 +62,25 @@ class HistoryView extends StatelessWidget {
       padding: EdgeInsets.symmetric(
         horizontal: SizeConfig.xMargin(context, 5),
       ),
+      margin: EdgeInsets.only(top: SizeConfig.yMargin(context, 2)),
       child: e.recentTransactions.isEmpty
           ? sharedErrorWidget(context, "No Transactions Found")
-          : ListView.builder(
+          : ListView.separated(
               itemBuilder: (context, index) {
                 var transaction = e.recentTransactions[index];
                 var time = Jiffy(transaction.transDate);
 
                 if (transaction.transType == '1') {
                   return sharedInfoListTile(
-                    icon: SvgPicture.asset(arrowUp),
+                    icon: SvgPicture.asset(
+                      arrowUp,
+                      height: SizeConfig.textSize(context, 8),
+                    ),
                     context: context,
                     title: transaction.narrationCustomer,
                     subTitle: "Debit",
                     trailingText:
-                        "${double.parse(transaction.transAmount).moneyFormat}",
+                        "${double.parse(transaction.transAmount).moneyFormat(2)}",
                     trailingSubText: time.fromNow(),
                     iconBackgroundColor: ColorStyles.red.withOpacity(0.2),
                     textColor: ColorStyles.red,
@@ -87,7 +92,7 @@ class HistoryView extends StatelessWidget {
                     title: transaction.narrationCustomer,
                     subTitle: "Credit",
                     trailingText:
-                        "₦${double.parse(transaction.transAmount).moneyFormat}",
+                        "₦${double.parse(transaction.transAmount).moneyFormat(2)}",
                     trailingSubText: time.fromNow(),
                     iconBackgroundColor: ColorStyles.green1.withOpacity(0.2),
                     textColor: ColorStyles.green1,
@@ -95,6 +100,9 @@ class HistoryView extends StatelessWidget {
                 }
               },
               itemCount: e.recentTransactions.length,
+              separatorBuilder: (BuildContext context, int index) => SizedBox(
+                height: SizeConfig.yMargin(context, 3),
+              ),
             ),
     );
   }

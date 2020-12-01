@@ -71,8 +71,8 @@ class MakePaymentView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            double.parse(state.amount).moneyFormat,
-                            style: GoogleFonts.workSans(
+                            double.parse(state.amount).moneyFormat(2),
+                            style: GoogleFonts.roboto(
                               fontWeight: FontWeight.w700,
                               fontSize: SizeConfig.textSize(context, 9),
                               color: ColorStyles.primaryBlue,

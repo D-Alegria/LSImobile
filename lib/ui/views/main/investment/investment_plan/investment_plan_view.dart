@@ -59,7 +59,7 @@ class InvestmentPlanView extends StatelessWidget {
               builder: (context, state) => AlertDialog(
                 title: Text(
                   'RollOver Investment',
-                  style: TextStyle(
+                  style: GoogleFonts.workSans(
                     fontSize: SizeConfig.textSize(context, 4),
                     fontWeight: FontWeight.w400,
                     color: ColorStyles.dark,
@@ -72,7 +72,7 @@ class InvestmentPlanView extends StatelessWidget {
                           children: <Widget>[
                             Text(
                               'Are you sure you want to rollover this investment?',
-                              style: TextStyle(
+                              style: GoogleFonts.workSans(
                                 fontSize: SizeConfig.textSize(context, 4),
                                 fontWeight: FontWeight.w400,
                                 color: ColorStyles.dark,
@@ -85,7 +85,7 @@ class InvestmentPlanView extends StatelessWidget {
                   TextButton(
                     child: Text(
                       'No',
-                      style: TextStyle(
+                      style: GoogleFonts.workSans(
                         fontSize: SizeConfig.textSize(context, 4),
                         fontWeight: FontWeight.w400,
                         color: ColorStyles.dark,
@@ -96,7 +96,7 @@ class InvestmentPlanView extends StatelessWidget {
                   TextButton(
                     child: Text(
                       'Yes',
-                      style: TextStyle(
+                      style: GoogleFonts.workSans(
                         fontSize: SizeConfig.textSize(context, 4),
                         fontWeight: FontWeight.w400,
                         color: ColorStyles.dark,
@@ -145,9 +145,9 @@ class InvestmentPlanView extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(height: SizeConfig.yMargin(context, 2)),
+            SizedBox(height: SizeConfig.yMargin(context, 3)),
             InvestmentPlanCard(investment: investment),
-            SizedBox(height: SizeConfig.yMargin(context, 3.5)),
+            SizedBox(height: SizeConfig.yMargin(context, 3)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -232,9 +232,12 @@ class InvestmentPlanView extends StatelessWidget {
               backgroundColor: ColorStyles.green2,
               text: "Download Investment Advice",
               onTap: () {},
-              image: SvgPicture.asset(download),
+              image: SvgPicture.asset(
+                download,
+                height: SizeConfig.textSize(context, 7),
+              ),
             ),
-            SizedBox(height: SizeConfig.yMargin(context, 2)),
+            SizedBox(height: SizeConfig.yMargin(context, 1.5)),
             SharedWideButton(
               backgroundColor: ColorStyles.blue,
               text: "My statement",
@@ -243,15 +246,18 @@ class InvestmentPlanView extends StatelessWidget {
                     "The statement has been sent successfully to your email",
                 duration: new Duration(seconds: 5),
               ).show(context),
-              image: SvgPicture.asset(book),
+              image: SvgPicture.asset(
+                book,
+                height: SizeConfig.textSize(context, 7),
+              ),
             ),
-            SizedBox(height: SizeConfig.yMargin(context, 3)),
+            SizedBox(height: SizeConfig.yMargin(context, 2)),
             sharedTable(
               context: context,
               list: [
                 [
                   "Investment amount",
-                  double.parse(investment.requestPrincipal).moneyFormat
+                  double.parse(investment.requestPrincipal).moneyFormat(2)
                 ],
                 [
                   "Tenure",
@@ -265,12 +271,12 @@ class InvestmentPlanView extends StatelessWidget {
                 ],
                 [
                   "Accrued Interest",
-                  double.parse(investment.totalInterests).moneyFormat
+                  double.parse(investment.totalInterests).moneyFormat(2)
                 ],
                 ["Withholding tax", "0"],
                 [
                   "Maturity Value",
-                  double.parse(investment.maturityValue).moneyFormat
+                  double.parse(investment.maturityValue).moneyFormat(2)
                 ],
               ],
             )

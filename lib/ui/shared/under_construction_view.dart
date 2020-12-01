@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
@@ -29,7 +30,7 @@ class UnderConstructionView extends StatelessWidget {
             ),
             Text(
               'Under Construction',
-              style: TextStyle(
+              style: GoogleFonts.workSans(
                 fontSize: SizeConfig.textSize(context, 7),
                 fontWeight: FontWeight.w600,
                 color: ColorStyles.dark,

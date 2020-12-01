@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
@@ -74,7 +75,7 @@ class ProfileForm extends StatelessWidget {
       ),
       child: Text(
         title,
-        style: TextStyle(
+        style: GoogleFonts.workSans(
           fontWeight: FontWeight.w600,
           fontSize: SizeConfig.textSize(context, 8),
           color: ColorStyles.white,

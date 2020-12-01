@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
@@ -30,7 +31,7 @@ class NewInvestmentView extends StatelessWidget {
         iconTheme: IconThemeData(color: ColorStyles.black),
         title: Text(
           "My Investment",
-          style: TextStyle(
+          style: GoogleFonts.workSans(
             fontWeight: FontWeight.w600,
             fontSize: SizeConfig.textSize(context, 5),
             color: ColorStyles.black,
@@ -39,8 +40,10 @@ class NewInvestmentView extends StatelessWidget {
       ),
       body: InvestmentWrapper(
         loaded: (loaded) => Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: SizeConfig.xMargin(context, 5),
+          padding: EdgeInsets.only(
+            left: SizeConfig.xMargin(context, 5),
+            right: SizeConfig.xMargin(context, 5),
+            top: SizeConfig.yMargin(context, 6),
           ),
           child: ListView.separated(
             itemCount: loaded.investments.length,

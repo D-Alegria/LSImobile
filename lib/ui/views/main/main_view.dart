@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/keep_alive_page.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -60,12 +61,12 @@ class _MainViewState extends State<MainView> {
           builder: (context, state) => Scaffold(
             backgroundColor: ColorStyles.white,
             bottomNavigationBar: BottomNavigationBar(
-              selectedLabelStyle: TextStyle(
+              selectedLabelStyle: GoogleFonts.workSans(
                 fontSize: SizeConfig.textSize(context, 3.1),
                 height: SizeConfig.textSize(context, 0.55),
                 fontWeight: FontWeight.w500,
               ),
-              unselectedLabelStyle: TextStyle(
+              unselectedLabelStyle: GoogleFonts.workSans(
                 fontSize: SizeConfig.textSize(context, 3.1),
                 height: SizeConfig.textSize(context, 0.55),
                 fontWeight: FontWeight.w500,

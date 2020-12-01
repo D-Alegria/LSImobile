@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/models/dto/loan/loan.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
@@ -36,7 +37,7 @@ class LoanHistory extends StatelessWidget {
           children: [
             Text(
               "Loan History",
-              style: TextStyle(
+              style: GoogleFonts.workSans(
                 fontWeight: FontWeight.w600,
                 color: ColorStyles.dark,
                 fontSize: SizeConfig.textSize(context, 4.7),
@@ -44,7 +45,7 @@ class LoanHistory extends StatelessWidget {
             ),
             Text(
               "See all",
-              style: TextStyle(
+              style: GoogleFonts.workSans(
                 fontWeight: FontWeight.w600,
                 color: ColorStyles.blue,
                 fontSize: SizeConfig.textSize(context, 4.7),
@@ -66,7 +67,7 @@ class LoanHistory extends StatelessWidget {
                     color: ColorStyles.red,
                   ),
                   context: context,
-                  title: double.parse(loan.requestPrincipal).moneyFormat,
+                  title: double.parse(loan.requestPrincipal).moneyFormat(2),
                   subTitle: getBadge(loan.loanStatus),
                   trailingText: "",
                   trailingSubText:
@@ -82,7 +83,7 @@ class LoanHistory extends StatelessWidget {
                     color: ColorStyles.orange,
                   ),
                   context: context,
-                  title: double.parse(loan.requestPrincipal).moneyFormat,
+                  title: double.parse(loan.requestPrincipal).moneyFormat(2),
                   subTitle: getBadge(loan.loanStatus),
                   trailingText: "",
                   trailingSubText:
@@ -98,7 +99,7 @@ class LoanHistory extends StatelessWidget {
                     color: ColorStyles.green1,
                   ),
                   context: context,
-                  title: double.parse(loan.requestPrincipal).moneyFormat,
+                  title: double.parse(loan.requestPrincipal).moneyFormat(2),
                   subTitle: getBadge(loan.loanStatus),
                   trailingText: "",
                   trailingSubText:
@@ -114,7 +115,7 @@ class LoanHistory extends StatelessWidget {
                     color: ColorStyles.blue,
                   ),
                   context: context,
-                  title: double.parse(loan.requestPrincipal).moneyFormat,
+                  title: double.parse(loan.requestPrincipal).moneyFormat(2),
                   subTitle: getBadge(loan.loanStatus),
                   trailingText: "",
                   trailingSubText:
@@ -130,7 +131,7 @@ class LoanHistory extends StatelessWidget {
                     color: ColorStyles.black,
                   ),
                   context: context,
-                  title: double.parse(loan.requestPrincipal).moneyFormat,
+                  title: double.parse(loan.requestPrincipal).moneyFormat(2),
                   subTitle: getBadge(loan.loanStatus),
                   trailingText: "",
                   trailingSubText:

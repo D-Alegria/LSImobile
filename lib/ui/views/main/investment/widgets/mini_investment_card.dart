@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lsi_mobile/core/extensions/double_extension.dart';
+import 'package:lsi_mobile/core/models/dto/investment_product/investment_product.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
 class MiniInvestmentCard extends StatelessWidget {
-  final String title;
-  final String value;
+  final InvestmentProduct investment;
   final Color color;
-  final Color borderColor;
-  final Color textColor;
   final Function function;
 
   const MiniInvestmentCard({
     Key key,
-    this.title,
-    this.value,
+    this.investment,
     this.color,
-    this.borderColor,
-    this.textColor,
     this.function,
   }) : super(key: key);
 
@@ -30,14 +27,14 @@ class MiniInvestmentCard extends StatelessWidget {
         horizontal: SizeConfig.yMargin(context, 4),
         vertical: SizeConfig.xMargin(context, 2),
       ),
-      borderColor: borderColor,
-      color: color,
-      height: SizeConfig.yMargin(context, 15),
+      borderColor: color.withOpacity(0.4),
+      color: color.withOpacity(0.1),
+      height: SizeConfig.yMargin(context, 12),
       width: SizeConfig.xMargin(context, 100),
       child: RichText(
         text: TextSpan(
-          text: title,
-          style: TextStyle(
+          text: investment.investmentTitle,
+          style: GoogleFonts.workSans(
             fontWeight: FontWeight.w600,
             fontSize: SizeConfig.textSize(context, 5),
             color: ColorStyles.black,
@@ -45,11 +42,12 @@ class MiniInvestmentCard extends StatelessWidget {
           ),
           children: [
             TextSpan(
-              text: "\n$value",
-              style: TextStyle(
+              text:
+                  "\n${double.parse(investment.investmentAmount).moneyFormat(0)} - ${double.parse(investment.investmentMaxAmount).moneyFormat(0)}",
+              style: GoogleFonts.roboto(
                 fontWeight: FontWeight.w600,
                 fontSize: SizeConfig.textSize(context, 5),
-                color: textColor,
+                color: color,
               ),
             ),
           ],

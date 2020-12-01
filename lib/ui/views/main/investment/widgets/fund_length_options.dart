@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/models/dto/investment_duration/investment_duration.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -52,7 +53,7 @@ class FundLengthOptions extends StatelessWidget {
       child: RichText(
         text: TextSpan(
           text: "$month months",
-          style: TextStyle(
+          style: GoogleFonts.workSans(
             fontWeight: FontWeight.w600,
             fontSize: SizeConfig.textSize(context, 5),
             color: selected ? ColorStyles.extraLight : ColorStyles.light,
@@ -61,7 +62,7 @@ class FundLengthOptions extends StatelessWidget {
           children: [
             TextSpan(
               text: "\n$percentage%",
-              style: TextStyle(
+              style: GoogleFonts.workSans(
                 fontWeight: FontWeight.w600,
                 fontSize: SizeConfig.textSize(context, 5),
                 color: selected ? ColorStyles.lightYellow : ColorStyles.orange,
@@ -69,7 +70,7 @@ class FundLengthOptions extends StatelessWidget {
             ),
             TextSpan(
               text: "\nper annum",
-              style: TextStyle(
+              style: GoogleFonts.workSans(
                 fontWeight: FontWeight.w600,
                 fontSize: SizeConfig.textSize(context, 5),
                 color: selected ? ColorStyles.grey5 : ColorStyles.grey3,

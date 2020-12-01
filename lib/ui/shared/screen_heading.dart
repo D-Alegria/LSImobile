@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/main_view/main_view_cubit.dart';
@@ -32,17 +33,15 @@ class ScreenHeader extends StatelessWidget {
               children: [
                 Text(
                   firstText,
-                  style: TextStyle(
+                  style: GoogleFonts.workSans(
                     fontWeight: FontWeight.w700,
                     fontSize: SizeConfig.textSize(context, 6.5),
                   ),
                 ),
-                SizedBox(
-                  height: SizeConfig.yMargin(context, 0.5),
-                ),
+                SizedBox(height: SizeConfig.yMargin(context, 0.5)),
                 Text(
                   secondText,
-                  style: TextStyle(
+                  style: GoogleFonts.workSans(
                     fontWeight: FontWeight.w400,
                     fontSize: SizeConfig.textSize(context, 4.5),
                     color: secondTextColor,
@@ -51,9 +50,7 @@ class ScreenHeader extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            width: SizeConfig.xMargin(context, 2),
-          ),
+          SizedBox(width: SizeConfig.xMargin(context, 2)),
           InkWell(
             onTap: () => investment ? print('investment') : state.changePage(4),
             child: ClipOval(

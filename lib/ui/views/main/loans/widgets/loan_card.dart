@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/models/dto/loan/loan.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
@@ -33,7 +34,7 @@ class LoanCard extends StatelessWidget {
       if (val == "0")
         return Container();
       else
-        return dueBadge(context, double.parse(val).moneyFormat); // TODO Format to money
+        return dueBadge(context, double.parse(val).moneyFormat(2));
     }
 
     return Container(
@@ -61,8 +62,8 @@ class LoanCard extends StatelessWidget {
           ),
           RichText(
             text: TextSpan(
-              text: "${double.parse(currentLoan.requestPrincipal).moneyFormat}",
-              style: TextStyle(
+              text: "${double.parse(currentLoan.requestPrincipal).moneyFormat(2)}",
+              style: GoogleFonts.roboto(
                 fontWeight: FontWeight.w700,
                 color: ColorStyles.white,
                 fontSize: SizeConfig.textSize(context, 8),
@@ -71,7 +72,7 @@ class LoanCard extends StatelessWidget {
                 TextSpan(
                   text:
                       " / ${currentLoan.requestTenor} ${currentLoan.loanDuration}",
-                  style: TextStyle(
+                  style: GoogleFonts.workSans(
                     fontWeight: FontWeight.w600,
                     color: ColorStyles.grey,
                     fontSize: SizeConfig.textSize(context, 5),
@@ -85,7 +86,7 @@ class LoanCard extends StatelessWidget {
             children: [
               Text(
                 "${currentLoan.hmp}/${currentLoan.hmr} Paid",
-                style: TextStyle(
+                style: GoogleFonts.workSans(
                   fontWeight: FontWeight.w500,
                   color: ColorStyles.yellow1,
                   fontSize: SizeConfig.textSize(context, 3.5),
@@ -93,7 +94,7 @@ class LoanCard extends StatelessWidget {
               ),
               Text(
                 currentLoan.nextPaymentDate,
-                style: TextStyle(
+                style: GoogleFonts.workSans(
                   fontWeight: FontWeight.w400,
                   color: ColorStyles.white,
                   fontSize: SizeConfig.textSize(context, 3.5),

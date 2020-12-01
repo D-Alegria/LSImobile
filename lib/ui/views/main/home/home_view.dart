@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/screen_heading.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
@@ -104,7 +105,7 @@ class HomeView extends StatelessWidget {
             ),
             child: Text(
               'Other Services',
-              style: TextStyle(
+              style: GoogleFonts.workSans(
                 fontSize: SizeConfig.textSize(context, 5),
                 fontWeight: FontWeight.bold,
               ),

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/extensions/double_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
@@ -45,7 +46,7 @@ class ChangeAmountForm extends StatelessWidget {
                   textAlign: TextAlign.left,
                   text: TextSpan(
                     text: "Enter new amount",
-                    style: TextStyle(
+                    style: GoogleFonts.workSans(
                       color: ColorStyles.dark,
                       fontWeight: FontWeight.w600,
                       fontSize: SizeConfig.textSize(context, 5),
@@ -54,8 +55,8 @@ class ChangeAmountForm extends StatelessWidget {
                     children: [
                       TextSpan(
                         text:
-                            "\nNew amount cannot be less that ${double.parse(amount).moneyFormat}",
-                        style: TextStyle(
+                            "\nNew amount cannot be less that ${double.parse(amount).moneyFormat(2)}",
+                        style: GoogleFonts.roboto(
                           fontSize: SizeConfig.textSize(context, 4),
                           fontWeight: FontWeight.w500,
                           color: ColorStyles.dark.withOpacity(0.5),
@@ -71,7 +72,7 @@ class ChangeAmountForm extends StatelessWidget {
                       context.bloc<MakePaymentCubit>().amountChanged(value),
                   validator: (value) {
                     if (double.parse(value) < double.parse(amount))
-                      return 'Amount cannot be less than ${double.parse(amount).moneyFormat}';
+                      return 'Amount cannot be less than ${double.parse(amount).moneyFormat(2)}';
                     return null;
                   },
                   keyboardType: TextInputType.number,

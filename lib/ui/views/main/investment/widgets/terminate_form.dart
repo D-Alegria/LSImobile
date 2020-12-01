@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/configs/dependency_injection/injection.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
@@ -50,7 +51,7 @@ class TerminateForm extends StatelessWidget {
                       RichText(
                         text: TextSpan(
                           text: "Terminate",
-                          style: TextStyle(
+                          style: GoogleFonts.workSans(
                             color: ColorStyles.dark,
                             fontWeight: FontWeight.w600,
                             fontSize: SizeConfig.textSize(context, 5),
@@ -60,7 +61,7 @@ class TerminateForm extends StatelessWidget {
                             TextSpan(
                               text:
                                   "\nSelect account to withdraw specified amount to",
-                              style: TextStyle(
+                              style: GoogleFonts.workSans(
                                 fontWeight: FontWeight.w500,
                                 fontSize: SizeConfig.textSize(context, 4.2),
                                 color: ColorStyles.dark.withOpacity(0.5),

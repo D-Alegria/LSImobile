@@ -237,9 +237,9 @@ class _LoanScheduleViewState extends State<LoanScheduleView> {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                double.parse(amount).moneyFormat,
+                double.parse(amount).moneyFormat(2),
                 textAlign: TextAlign.left,
-                style: GoogleFonts.workSans(
+                style: GoogleFonts.roboto(
                   textBaseline: TextBaseline.ideographic,
                   fontWeight: FontWeight.w500,
                   fontSize: SizeConfig.textSize(context, 4.5),

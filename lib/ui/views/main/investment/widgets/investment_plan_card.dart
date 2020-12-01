@@ -37,31 +37,31 @@ class InvestmentCard extends StatelessWidget {
         onTap: () =>
             context.navigator.pushInvestmentPlanView(investment: investment),
         padding: EdgeInsets.symmetric(
-          vertical: SizeConfig.yMargin(context, 3),
+          vertical: SizeConfig.yMargin(context, 2),
           horizontal: SizeConfig.xMargin(context, 5),
         ),
         gradient: ColorStyles.lightGradient,
-        height: SizeConfig.yMargin(context, 23),
+        height: SizeConfig.yMargin(context, 20),
         alignment: Alignment.centerLeft,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             RichText(
               text: TextSpan(
                 text: investment.investmentTitle,
-                style: GoogleFonts.workSans(
+                style: GoogleFonts.roboto(
                   fontSize: SizeConfig.textSize(context, 4.5),
                   fontWeight: FontWeight.w600,
                   color: ColorStyles.grey2,
-                  height: SizeConfig.textSize(context, 0.5),
+                  height: SizeConfig.textSize(context, 0.45),
                 ),
                 children: [
                   TextSpan(
                     text:
-                        "\n${double.parse(investment.requestPrincipal).moneyFormat}",
-                    style: GoogleFonts.workSans(
-                      fontSize: SizeConfig.textSize(context, 6),
+                        "\n${double.parse(investment.requestPrincipal).moneyFormat(2)}",
+                    style: GoogleFonts.roboto(
+                      fontSize: SizeConfig.textSize(context, 5.5),
                       color: ColorStyles.primaryBlue,
                     ),
                   ),
@@ -84,7 +84,7 @@ class InvestmentCard extends StatelessWidget {
                 Text(
                   date,
                   style: GoogleFonts.workSans(
-                    fontSize: SizeConfig.textSize(context, 5),
+                    fontSize: SizeConfig.textSize(context, 4),
                     fontWeight: FontWeight.w600,
                     color: ColorStyles.orange,
                   ),
@@ -122,11 +122,11 @@ class InvestmentPlanCard extends StatelessWidget {
     return Container(
       child: sharedContainer(
         padding: EdgeInsets.symmetric(
-          vertical: SizeConfig.yMargin(context, 3),
+          vertical: SizeConfig.yMargin(context, 2),
           horizontal: SizeConfig.xMargin(context, 5),
         ),
-        gradient: ColorStyles.primaryGradient,
-        height: SizeConfig.yMargin(context, 23),
+        gradient: ColorStyles.blueGradient,
+        height: SizeConfig.yMargin(context, 20),
         alignment: Alignment.centerLeft,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -143,14 +143,14 @@ class InvestmentPlanCard extends StatelessWidget {
                       fontSize: SizeConfig.textSize(context, 4.5),
                       fontWeight: FontWeight.w600,
                       color: ColorStyles.yellow,
-                      height: SizeConfig.textSize(context, 0.5),
+                      height: SizeConfig.textSize(context, 0.4),
                     ),
                     children: [
                       TextSpan(
                         text:
-                            "\n${double.parse(investment.requestPrincipal).moneyFormat}",
-                        style: GoogleFonts.workSans(
-                          fontSize: SizeConfig.textSize(context, 6),
+                            "\n${double.parse(investment.requestPrincipal).moneyFormat(2)}",
+                        style: GoogleFonts.roboto(
+                          fontSize: SizeConfig.textSize(context, 5),
                           color: ColorStyles.grey6,
                         ),
                       ),
@@ -190,15 +190,16 @@ class InvestmentPlanCard extends StatelessWidget {
       text: TextSpan(
         text: first,
         style: GoogleFonts.workSans(
-          fontSize: SizeConfig.textSize(context, 4.5),
+          fontSize: SizeConfig.textSize(context, 4),
           fontWeight: FontWeight.w600,
           color: ColorStyles.red,
-          height: SizeConfig.textSize(context, 0.4),
+          height: SizeConfig.textSize(context, 0.35),
         ),
         children: [
           TextSpan(
             text: "\n$second",
             style: GoogleFonts.workSans(
+              fontSize: SizeConfig.textSize(context, 4.5),
               color: ColorStyles.grey6,
             ),
           ),

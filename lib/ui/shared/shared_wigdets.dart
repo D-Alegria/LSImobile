@@ -35,7 +35,7 @@ Widget sharedRaisedButton({
       color: color,
       child: Text(
         text,
-        style: TextStyle(
+        style: GoogleFonts.workSans(
           color: ColorStyles.white,
           fontSize: SizeConfig.textSize(context, 5),
           fontWeight: FontWeight.w500,
@@ -73,7 +73,7 @@ Widget sharedOutlineRaisedButton({
       onPressed: onPressed,
       child: Text(
         text,
-        style: TextStyle(
+        style: GoogleFonts.workSans(
           color: color,
           fontSize: SizeConfig.textSize(context, 5),
           fontWeight: FontWeight.w500,
@@ -124,7 +124,7 @@ class SharedTextFormField extends StatelessWidget {
       obscureText: obscureText,
       validator: validator,
       onChanged: onChanged,
-      style: TextStyle(
+      style: GoogleFonts.workSans(
         height: SizeConfig.yMargin(context, 0.17),
         fontSize: SizeConfig.textSize(context, 5),
         fontWeight: FontWeight.w500,
@@ -133,7 +133,7 @@ class SharedTextFormField extends StatelessWidget {
       cursorColor: ColorStyles.dark,
       decoration: textFieldDecoration.copyWith(
         labelText: labelText,
-        labelStyle: TextStyle(
+        labelStyle: GoogleFonts.workSans(
           fontSize: SizeConfig.textSize(context, 5),
           fontWeight: FontWeight.w500,
           color: const Color(0xFF18172B).withOpacity(0.6),
@@ -159,7 +159,7 @@ Widget sharedOptionFlatButton({
       textAlign: TextAlign.center,
       text: TextSpan(
         text: "$firstText  ",
-        style: TextStyle(
+        style: GoogleFonts.workSans(
           fontSize: SizeConfig.textSize(context, 4),
           fontWeight: FontWeight.w400,
           color: ColorStyles.light,
@@ -167,7 +167,7 @@ Widget sharedOptionFlatButton({
         children: <TextSpan>[
           TextSpan(
             text: secondText,
-            style: TextStyle(
+            style: GoogleFonts.workSans(
               fontWeight: FontWeight.w400,
               color: firstText.isEmpty ? ColorStyles.red : ColorStyles.primary,
             ),
@@ -326,6 +326,7 @@ Widget sharedInfoListTile({
   return ListTile(
     contentPadding: EdgeInsets.symmetric(horizontal: 0),
     leading: CircleAvatar(
+      radius: SizeConfig.textSize(context, 7),
       backgroundColor: iconBackgroundColor,
       child: icon,
     ),
@@ -333,35 +334,36 @@ Widget sharedInfoListTile({
       title,
       softWrap: true,
       overflow: TextOverflow.ellipsis,
-      style: GoogleFonts.workSans(
+      style: GoogleFonts.roboto(
         fontWeight: FontWeight.w400,
         color: ColorStyles.black,
-        fontSize: SizeConfig.textSize(context, 4.5),
+        fontSize: SizeConfig.textSize(context, 5),
+        height: SizeConfig.textSize(context, 0.4),
       ),
     ),
     subtitle: Text(
       subTitle,
-      style: TextStyle(
+      style: GoogleFonts.workSans(
         fontWeight: FontWeight.w400,
         color: textColor,
-        fontSize: SizeConfig.textSize(context, 3.5),
+        fontSize: SizeConfig.textSize(context, 4),
       ),
     ),
     trailing: RichText(
       textAlign: TextAlign.right,
       text: TextSpan(
         text: trailingText,
-        style: TextStyle(
+        style: GoogleFonts.roboto(
           fontWeight: FontWeight.w400,
           color: ColorStyles.grey2,
-          fontSize: SizeConfig.textSize(context, 4.5),
+          fontSize: SizeConfig.textSize(context, 5),
         ),
         children: [
           TextSpan(
             text: "\n$trailingSubText",
-            style: TextStyle(
+            style: GoogleFonts.workSans(
               color: ColorStyles.black,
-              fontSize: SizeConfig.textSize(context, 3.5),
+              fontSize: SizeConfig.textSize(context, 4),
             ),
           ),
         ],
@@ -445,7 +447,7 @@ Widget sharedErrorWidget(BuildContext context, String message) {
           child: Center(
             child: Text(
               message,
-              style: TextStyle(
+              style: GoogleFonts.workSans(
                 fontSize: SizeConfig.textSize(context, 5),
                 fontWeight: FontWeight.w500,
                 color: const Color(0xFF18172B).withOpacity(0.6),
@@ -474,7 +476,7 @@ Widget sharedDropDownFormField<T>({
             child: Text(
               "$e",
               overflow: TextOverflow.visible,
-              style: TextStyle(
+              style: GoogleFonts.workSans(
                 fontSize: SizeConfig.textSize(context, 5),
                 fontWeight: FontWeight.w500,
                 color: const Color(0xFF18172B).withOpacity(0.6),
@@ -490,7 +492,7 @@ Widget sharedDropDownFormField<T>({
     onChanged: onChanged,
     decoration: textFieldDecoration.copyWith(
       labelText: labelText,
-      labelStyle: TextStyle(
+      labelStyle: GoogleFonts.workSans(
         fontSize: SizeConfig.textSize(context, 5),
         fontWeight: FontWeight.w500,
         color: const Color(0xFF18172B).withOpacity(0.6),
@@ -505,7 +507,7 @@ Widget sharedIconButton({
   @required Widget icon,
 }) {
   return ButtonTheme(
-    minWidth: SizeConfig.xMargin(context, 10),
+    minWidth: SizeConfig.xMargin(context, 12),
     child: IconButton(
       onPressed: onPressed,
       icon: icon,
@@ -516,6 +518,7 @@ Widget sharedIconButton({
 Widget sharedTable({
   @required BuildContext context,
   @required List list,
+  bool red = true,
 }) {
   return Table(
     children: List.generate(
@@ -539,8 +542,11 @@ Widget sharedTable({
             child: Text(
               list[index][1],
               textAlign: TextAlign.right,
-              style: GoogleFonts.workSans(
+              style: GoogleFonts.roboto(
                 fontWeight: FontWeight.w600,
+                color: (red && index == (list.length - 1))
+                    ? ColorStyles.red
+                    : ColorStyles.black,
                 fontSize: SizeConfig.textSize(context, 5),
                 height: SizeConfig.textSize(context, 0.5),
               ),
@@ -574,7 +580,7 @@ Widget sharedSmallBadge({
   return Container(
     child: Text(
       text,
-      style: TextStyle(
+      style: GoogleFonts.roboto(
         fontSize: SizeConfig.textSize(context, 3),
         color: ColorStyles.white,
         fontWeight: FontWeight.w500,
@@ -582,7 +588,7 @@ Widget sharedSmallBadge({
     ),
     padding: EdgeInsets.symmetric(
       horizontal: SizeConfig.xMargin(context, 3),
-      vertical: SizeConfig.yMargin(context, 1),
+      vertical: SizeConfig.yMargin(context, 0.5),
     ),
     decoration: BoxDecoration(
       color: indicatorColor,
@@ -733,7 +739,7 @@ class _SharedDateTimeFieldState extends State<SharedDateTimeField> {
         },
         controller: controller,
         focusNode: AlwaysDisabledFocusNode(),
-        style: TextStyle(
+        style: GoogleFonts.workSans(
           height: SizeConfig.yMargin(context, 0.17),
           fontSize: SizeConfig.textSize(context, 5),
           fontWeight: FontWeight.w500,
@@ -742,7 +748,7 @@ class _SharedDateTimeFieldState extends State<SharedDateTimeField> {
         cursorColor: ColorStyles.dark,
         decoration: textFieldDecoration.copyWith(
           labelText: widget.label,
-          labelStyle: TextStyle(
+          labelStyle: GoogleFonts.workSans(
             fontSize: SizeConfig.textSize(context, 5),
             fontWeight: FontWeight.w500,
             color: const Color(0xFF18172B).withOpacity(0.6),
@@ -854,7 +860,7 @@ class SharedWideButton extends StatelessWidget {
           children: [
             SizedBox(width: SizeConfig.xMargin(context, 5)),
             image,
-            SizedBox(width: SizeConfig.xMargin(context, 3)),
+            SizedBox(width: SizeConfig.xMargin(context, 2)),
             Text(
               text,
               style: GoogleFonts.workSans(

@@ -51,7 +51,7 @@ class VerifyBVNForm extends StatelessWidget {
                   child: RichText(
                     text: TextSpan(
                       text: "Verify BVN",
-                      style: TextStyle(
+                      style: GoogleFonts.workSans(
                         color: ColorStyles.dark,
                         fontWeight: FontWeight.w600,
                         fontSize: SizeConfig.textSize(context, 4),
@@ -61,7 +61,7 @@ class VerifyBVNForm extends StatelessWidget {
                         TextSpan(
                           text:
                               "\nEnter OTP sent to the number registered to your BVN",
-                          style: TextStyle(
+                          style: GoogleFonts.workSans(
                             fontWeight: FontWeight.w500,
                             color: ColorStyles.dark.withOpacity(0.5),
                           ),

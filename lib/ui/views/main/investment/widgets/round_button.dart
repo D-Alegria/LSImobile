@@ -37,7 +37,7 @@ class RoundButton extends StatelessWidget {
               shape: BoxShape.circle,
             ),
           ),
-          SizedBox(height: SizeConfig.yMargin(context, 1.5)),
+          SizedBox(height: SizeConfig.yMargin(context, 0.5)),
           Text(
             text,
             textAlign: TextAlign.center,

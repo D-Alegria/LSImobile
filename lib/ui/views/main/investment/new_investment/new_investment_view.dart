@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/core/extensions/double_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
@@ -34,7 +35,7 @@ class NewInvestmentView extends StatelessWidget {
           iconTheme: IconThemeData(color: ColorStyles.black),
           title: Text(
             "New Investment",
-            style: TextStyle(
+            style: GoogleFonts.workSans(
               fontWeight: FontWeight.w600,
               fontSize: SizeConfig.textSize(context, 5),
               color: ColorStyles.black,
@@ -74,7 +75,7 @@ class NewInvestmentView extends StatelessWidget {
                                 state.investmentProduct.investmentMaxAmount);
                             if (state.amount < minAmount ||
                                 state.amount > maxAmount)
-                              return "Amount has to be between \n${minAmount.moneyFormat} - ${maxAmount.moneyFormat}";
+                              return "Amount has to be between \n${minAmount.moneyFormat(2)} - ${maxAmount.moneyFormat(2)}";
                             return null;
                           },
                           keyboardType: TextInputType.number,
@@ -82,7 +83,7 @@ class NewInvestmentView extends StatelessWidget {
                         SizedBox(height: SizeConfig.yMargin(context, 3)),
                         Text(
                           "For how long would you like to hold your investment",
-                          style: TextStyle(
+                          style: GoogleFonts.workSans(
                             fontWeight: FontWeight.w500,
                             fontSize: SizeConfig.textSize(context, 4.3),
                             color: ColorStyles.black,
@@ -99,7 +100,7 @@ class NewInvestmentView extends StatelessWidget {
                           list: [
                             [
                               "Investment amount",
-                              "${state.amount.moneyFormat}"
+                              "${state.amount.moneyFormat(2)}"
                             ],
                             ["Tenure", "${state.tenure} months"],
                             ["Investment date", state.investmentDate],

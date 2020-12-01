@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -33,7 +34,7 @@ class MiniLoanCard extends StatelessWidget {
             SvgPicture.asset(image),
             Text(
               text,
-              style: TextStyle(
+              style: GoogleFonts.workSans(
                 fontSize: SizeConfig.textSize(context, 4),
                 color: ColorStyles.grey2,
                 fontWeight: FontWeight.w500,

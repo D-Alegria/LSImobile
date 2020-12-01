@@ -105,8 +105,8 @@ class NewInvestmentCubit extends Cubit<NewInvestmentState> {
       tenure: state.durations[state.duration].noOfMonth.toString(),
       withholdingTax: '0',
       investmentRate: state.durations[state.duration].interestRate.toString(),
-      accruedInterest: accruedInterest.moneyFormat,
-      maturityValue: (state.amount + accruedInterest).moneyFormat,
+      accruedInterest: accruedInterest.moneyFormat(2),
+      maturityValue: (state.amount + accruedInterest).moneyFormat(2),
     );
   }
 }

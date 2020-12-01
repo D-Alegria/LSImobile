@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
@@ -32,7 +33,7 @@ class _InvestmentProductsViewState extends State<InvestmentProductsView> {
         iconTheme: IconThemeData(color: ColorStyles.dark),
         title: Text(
           "Investment Products",
-          style: TextStyle(
+          style: GoogleFonts.workSans(
             fontWeight: FontWeight.w600,
             fontSize: SizeConfig.textSize(context, 5),
             color: ColorStyles.black,
@@ -43,7 +44,7 @@ class _InvestmentProductsViewState extends State<InvestmentProductsView> {
         padding: EdgeInsets.symmetric(
           horizontal: SizeConfig.xMargin(context, 5),
         ),
-        margin: EdgeInsets.only(top: SizeConfig.yMargin(context, 5)),
+        margin: EdgeInsets.only(top: SizeConfig.yMargin(context, 6)),
         child: BlocBuilder<InvestmentProductCubit, InvestmentProductState>(
           builder: (context, state) => state.map(
             initial: (e) => Container(),
@@ -60,27 +61,21 @@ class _InvestmentProductsViewState extends State<InvestmentProductsView> {
                   return ExpandedInvestmentCard(
                     angle: 0,
                     investment: investment,
-                    borderColor: ColorStyles.red.withOpacity(0.6),
-                    color: ColorStyles.red.withOpacity(0.1),
-                    textColor: ColorStyles.red,
+                    color: ColorStyles.red,
                     onTap: navigateToCreateInvestment,
                   );
                 } else if (index % 3 == 1) {
                   return ExpandedInvestmentCard(
                     angle: 51,
                     investment: investment,
-                    borderColor: ColorStyles.primary.withOpacity(0.6),
-                    color: ColorStyles.primary.withOpacity(0.1),
-                    textColor: ColorStyles.primary,
+                    color: ColorStyles.primary,
                     onTap: navigateToCreateInvestment,
                   );
                 } else {
                   return ExpandedInvestmentCard(
                     angle: -16,
                     investment: investment,
-                    borderColor: ColorStyles.blue2.withOpacity(0.6),
-                    color: ColorStyles.blue2.withOpacity(0.1),
-                    textColor: ColorStyles.blue2,
+                    color: ColorStyles.blue2,
                     onTap: navigateToCreateInvestment,
                   );
                 }

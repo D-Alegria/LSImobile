@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
@@ -56,7 +57,7 @@ class RowCard extends StatelessWidget {
             ),
             Text(
               firstText,
-              style: TextStyle(
+              style: GoogleFonts.workSans(
                 color: ColorStyles.orange,
                 fontWeight: FontWeight.w600,
                 fontSize: SizeConfig.textSize(context, 4),
@@ -67,7 +68,7 @@ class RowCard extends StatelessWidget {
             ),
             Text(
               secondText,
-              style: TextStyle(
+              style: GoogleFonts.workSans(
                 color: ColorStyles.grey2,
                 fontWeight: FontWeight.w400,
                 fontSize: SizeConfig.textSize(context, 3),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/extensions/double_extension.dart';
 import 'package:lsi_mobile/core/models/dto/investment_product/investment_product.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
@@ -9,8 +10,6 @@ import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 class ExpandedInvestmentCard extends StatelessWidget {
   final Color color;
   final InvestmentProduct investment;
-  final Color borderColor;
-  final Color textColor;
   final double angle;
   final String circlePie = "assets/svgs/circle_pie.svg";
   final Function onTap;
@@ -18,8 +17,6 @@ class ExpandedInvestmentCard extends StatelessWidget {
   const ExpandedInvestmentCard({
     Key key,
     this.color,
-    this.borderColor,
-    this.textColor,
     this.angle,
     this.onTap,
     this.investment,
@@ -34,8 +31,8 @@ class ExpandedInvestmentCard extends StatelessWidget {
         horizontal: SizeConfig.yMargin(context, 2),
         vertical: SizeConfig.xMargin(context, 4),
       ),
-      borderColor: borderColor,
-      color: color,
+      borderColor: color.withOpacity(0.4),
+      color: color.withOpacity(0.1),
       height: SizeConfig.yMargin(context, 20),
       width: SizeConfig.xMargin(context, 100),
       child: Column(
@@ -50,17 +47,17 @@ class ExpandedInvestmentCard extends StatelessWidget {
                   overflow: TextOverflow.fade,
                   text: TextSpan(
                     text: investment.investmentTitle,
-                    style: TextStyle(
+                    style: GoogleFonts.workSans(
                       fontWeight: FontWeight.w600,
                       fontSize: SizeConfig.textSize(context, 4.5),
-                      color: textColor,
+                      color: color,
                       height: SizeConfig.textSize(context, 0.42),
                     ),
                     children: [
                       TextSpan(
                         text:
-                            "\n${double.parse(investment.investmentAmount).moneyFormat} - ${double.parse(investment.investmentMaxAmount).moneyFormat}",
-                        style: TextStyle(
+                            "\n${double.parse(investment.investmentAmount).moneyFormat(0)} - ${double.parse(investment.investmentMaxAmount).moneyFormat(0)}",
+                        style: GoogleFonts.roboto(
                           fontWeight: FontWeight.w600,
                           fontSize: SizeConfig.textSize(context, 5),
                         ),
@@ -72,14 +69,15 @@ class ExpandedInvestmentCard extends StatelessWidget {
               Transform.rotate(
                 angle: angle,
                 alignment: FractionalOffset.center,
-                child: SvgPicture.asset(circlePie, color: borderColor),
+                child:
+                    SvgPicture.asset(circlePie, color: color.withOpacity(0.4)),
               )
             ],
           ),
           // Spacer(),
           Text(
-            "Earn up to ${investment.interest}% by investing in a fixed plan. Started form ${double.parse(investment.investmentAmount).moneyFormat}",
-            style: TextStyle(
+            "Earn up to ${investment.interest}% by investing in a fixed plan. Started form ${double.parse(investment.investmentAmount).moneyFormat(0)}",
+            style: GoogleFonts.roboto(
               fontWeight: FontWeight.w400,
               fontSize: SizeConfig.textSize(context, 4),
               color: ColorStyles.black,
