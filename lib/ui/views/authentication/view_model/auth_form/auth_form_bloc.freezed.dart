@@ -21,16 +21,9 @@ class _$AuthFormEventTearOff {
   }
 
 // ignore: unused_element
-  FirstNameChanged firstNameChanged(String firstName) {
-    return FirstNameChanged(
-      firstName,
-    );
-  }
-
-// ignore: unused_element
-  LastNameChanged lastNameChanged(String lastName) {
-    return LastNameChanged(
-      lastName,
+  FullNameChanged fullNameChanged(String fullName) {
+    return FullNameChanged(
+      fullName,
     );
   }
 
@@ -85,8 +78,7 @@ mixin _$AuthFormEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result emailChanged(String email),
-    @required Result firstNameChanged(String firstName),
-    @required Result lastNameChanged(String lastName),
+    @required Result fullNameChanged(String fullName),
     @required Result phoneNumberChanged(String phoneNumber),
     @required Result passwordChanged(String password),
     @required Result verificationCodeChanged(String verificationCode),
@@ -98,8 +90,7 @@ mixin _$AuthFormEvent {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result emailChanged(String email),
-    Result firstNameChanged(String firstName),
-    Result lastNameChanged(String lastName),
+    Result fullNameChanged(String fullName),
     Result phoneNumberChanged(String phoneNumber),
     Result passwordChanged(String password),
     Result verificationCodeChanged(String verificationCode),
@@ -112,8 +103,7 @@ mixin _$AuthFormEvent {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result emailChanged(EmailChanged value),
-    @required Result firstNameChanged(FirstNameChanged value),
-    @required Result lastNameChanged(LastNameChanged value),
+    @required Result fullNameChanged(FullNameChanged value),
     @required Result phoneNumberChanged(PhoneNumberChanged value),
     @required Result passwordChanged(PasswordChanged value),
     @required Result verificationCodeChanged(VerificationCodeChanged value),
@@ -125,8 +115,7 @@ mixin _$AuthFormEvent {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result emailChanged(EmailChanged value),
-    Result firstNameChanged(FirstNameChanged value),
-    Result lastNameChanged(LastNameChanged value),
+    Result fullNameChanged(FullNameChanged value),
     Result phoneNumberChanged(PhoneNumberChanged value),
     Result passwordChanged(PasswordChanged value),
     Result verificationCodeChanged(VerificationCodeChanged value),
@@ -215,8 +204,7 @@ class _$EmailChanged implements EmailChanged {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result emailChanged(String email),
-    @required Result firstNameChanged(String firstName),
-    @required Result lastNameChanged(String lastName),
+    @required Result fullNameChanged(String fullName),
     @required Result phoneNumberChanged(String phoneNumber),
     @required Result passwordChanged(String password),
     @required Result verificationCodeChanged(String verificationCode),
@@ -226,8 +214,7 @@ class _$EmailChanged implements EmailChanged {
     @required Result resendOTP(),
   }) {
     assert(emailChanged != null);
-    assert(firstNameChanged != null);
-    assert(lastNameChanged != null);
+    assert(fullNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(passwordChanged != null);
     assert(verificationCodeChanged != null);
@@ -242,8 +229,7 @@ class _$EmailChanged implements EmailChanged {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result emailChanged(String email),
-    Result firstNameChanged(String firstName),
-    Result lastNameChanged(String lastName),
+    Result fullNameChanged(String fullName),
     Result phoneNumberChanged(String phoneNumber),
     Result passwordChanged(String password),
     Result verificationCodeChanged(String verificationCode),
@@ -264,8 +250,7 @@ class _$EmailChanged implements EmailChanged {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result emailChanged(EmailChanged value),
-    @required Result firstNameChanged(FirstNameChanged value),
-    @required Result lastNameChanged(LastNameChanged value),
+    @required Result fullNameChanged(FullNameChanged value),
     @required Result phoneNumberChanged(PhoneNumberChanged value),
     @required Result passwordChanged(PasswordChanged value),
     @required Result verificationCodeChanged(VerificationCodeChanged value),
@@ -275,8 +260,7 @@ class _$EmailChanged implements EmailChanged {
     @required Result resendOTP(ResendOTP value),
   }) {
     assert(emailChanged != null);
-    assert(firstNameChanged != null);
-    assert(lastNameChanged != null);
+    assert(fullNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(passwordChanged != null);
     assert(verificationCodeChanged != null);
@@ -291,8 +275,7 @@ class _$EmailChanged implements EmailChanged {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result emailChanged(EmailChanged value),
-    Result firstNameChanged(FirstNameChanged value),
-    Result lastNameChanged(LastNameChanged value),
+    Result fullNameChanged(FullNameChanged value),
     Result phoneNumberChanged(PhoneNumberChanged value),
     Result passwordChanged(PasswordChanged value),
     Result verificationCodeChanged(VerificationCodeChanged value),
@@ -318,69 +301,68 @@ abstract class EmailChanged implements AuthFormEvent {
 }
 
 /// @nodoc
-abstract class $FirstNameChangedCopyWith<$Res> {
-  factory $FirstNameChangedCopyWith(
-          FirstNameChanged value, $Res Function(FirstNameChanged) then) =
-      _$FirstNameChangedCopyWithImpl<$Res>;
-  $Res call({String firstName});
+abstract class $FullNameChangedCopyWith<$Res> {
+  factory $FullNameChangedCopyWith(
+          FullNameChanged value, $Res Function(FullNameChanged) then) =
+      _$FullNameChangedCopyWithImpl<$Res>;
+  $Res call({String fullName});
 }
 
 /// @nodoc
-class _$FirstNameChangedCopyWithImpl<$Res>
+class _$FullNameChangedCopyWithImpl<$Res>
     extends _$AuthFormEventCopyWithImpl<$Res>
-    implements $FirstNameChangedCopyWith<$Res> {
-  _$FirstNameChangedCopyWithImpl(
-      FirstNameChanged _value, $Res Function(FirstNameChanged) _then)
-      : super(_value, (v) => _then(v as FirstNameChanged));
+    implements $FullNameChangedCopyWith<$Res> {
+  _$FullNameChangedCopyWithImpl(
+      FullNameChanged _value, $Res Function(FullNameChanged) _then)
+      : super(_value, (v) => _then(v as FullNameChanged));
 
   @override
-  FirstNameChanged get _value => super._value as FirstNameChanged;
+  FullNameChanged get _value => super._value as FullNameChanged;
 
   @override
   $Res call({
-    Object firstName = freezed,
+    Object fullName = freezed,
   }) {
-    return _then(FirstNameChanged(
-      firstName == freezed ? _value.firstName : firstName as String,
+    return _then(FullNameChanged(
+      fullName == freezed ? _value.fullName : fullName as String,
     ));
   }
 }
 
 /// @nodoc
-class _$FirstNameChanged implements FirstNameChanged {
-  _$FirstNameChanged(this.firstName) : assert(firstName != null);
+class _$FullNameChanged implements FullNameChanged {
+  _$FullNameChanged(this.fullName) : assert(fullName != null);
 
   @override
-  final String firstName;
+  final String fullName;
 
   @override
   String toString() {
-    return 'AuthFormEvent.firstNameChanged(firstName: $firstName)';
+    return 'AuthFormEvent.fullNameChanged(fullName: $fullName)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is FirstNameChanged &&
-            (identical(other.firstName, firstName) ||
+        (other is FullNameChanged &&
+            (identical(other.fullName, fullName) ||
                 const DeepCollectionEquality()
-                    .equals(other.firstName, firstName)));
+                    .equals(other.fullName, fullName)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(firstName);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(fullName);
 
   @override
-  $FirstNameChangedCopyWith<FirstNameChanged> get copyWith =>
-      _$FirstNameChangedCopyWithImpl<FirstNameChanged>(this, _$identity);
+  $FullNameChangedCopyWith<FullNameChanged> get copyWith =>
+      _$FullNameChangedCopyWithImpl<FullNameChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result emailChanged(String email),
-    @required Result firstNameChanged(String firstName),
-    @required Result lastNameChanged(String lastName),
+    @required Result fullNameChanged(String fullName),
     @required Result phoneNumberChanged(String phoneNumber),
     @required Result passwordChanged(String password),
     @required Result verificationCodeChanged(String verificationCode),
@@ -390,8 +372,7 @@ class _$FirstNameChanged implements FirstNameChanged {
     @required Result resendOTP(),
   }) {
     assert(emailChanged != null);
-    assert(firstNameChanged != null);
-    assert(lastNameChanged != null);
+    assert(fullNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(passwordChanged != null);
     assert(verificationCodeChanged != null);
@@ -399,15 +380,14 @@ class _$FirstNameChanged implements FirstNameChanged {
     assert(registerUser != null);
     assert(verifyUser != null);
     assert(resendOTP != null);
-    return firstNameChanged(firstName);
+    return fullNameChanged(fullName);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result emailChanged(String email),
-    Result firstNameChanged(String firstName),
-    Result lastNameChanged(String lastName),
+    Result fullNameChanged(String fullName),
     Result phoneNumberChanged(String phoneNumber),
     Result passwordChanged(String password),
     Result verificationCodeChanged(String verificationCode),
@@ -418,8 +398,8 @@ class _$FirstNameChanged implements FirstNameChanged {
     @required Result orElse(),
   }) {
     assert(orElse != null);
-    if (firstNameChanged != null) {
-      return firstNameChanged(firstName);
+    if (fullNameChanged != null) {
+      return fullNameChanged(fullName);
     }
     return orElse();
   }
@@ -428,8 +408,7 @@ class _$FirstNameChanged implements FirstNameChanged {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result emailChanged(EmailChanged value),
-    @required Result firstNameChanged(FirstNameChanged value),
-    @required Result lastNameChanged(LastNameChanged value),
+    @required Result fullNameChanged(FullNameChanged value),
     @required Result phoneNumberChanged(PhoneNumberChanged value),
     @required Result passwordChanged(PasswordChanged value),
     @required Result verificationCodeChanged(VerificationCodeChanged value),
@@ -439,8 +418,7 @@ class _$FirstNameChanged implements FirstNameChanged {
     @required Result resendOTP(ResendOTP value),
   }) {
     assert(emailChanged != null);
-    assert(firstNameChanged != null);
-    assert(lastNameChanged != null);
+    assert(fullNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(passwordChanged != null);
     assert(verificationCodeChanged != null);
@@ -448,15 +426,14 @@ class _$FirstNameChanged implements FirstNameChanged {
     assert(registerUser != null);
     assert(verifyUser != null);
     assert(resendOTP != null);
-    return firstNameChanged(this);
+    return fullNameChanged(this);
   }
 
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result emailChanged(EmailChanged value),
-    Result firstNameChanged(FirstNameChanged value),
-    Result lastNameChanged(LastNameChanged value),
+    Result fullNameChanged(FullNameChanged value),
     Result phoneNumberChanged(PhoneNumberChanged value),
     Result passwordChanged(PasswordChanged value),
     Result verificationCodeChanged(VerificationCodeChanged value),
@@ -467,182 +444,18 @@ class _$FirstNameChanged implements FirstNameChanged {
     @required Result orElse(),
   }) {
     assert(orElse != null);
-    if (firstNameChanged != null) {
-      return firstNameChanged(this);
+    if (fullNameChanged != null) {
+      return fullNameChanged(this);
     }
     return orElse();
   }
 }
 
-abstract class FirstNameChanged implements AuthFormEvent {
-  factory FirstNameChanged(String firstName) = _$FirstNameChanged;
+abstract class FullNameChanged implements AuthFormEvent {
+  factory FullNameChanged(String fullName) = _$FullNameChanged;
 
-  String get firstName;
-  $FirstNameChangedCopyWith<FirstNameChanged> get copyWith;
-}
-
-/// @nodoc
-abstract class $LastNameChangedCopyWith<$Res> {
-  factory $LastNameChangedCopyWith(
-          LastNameChanged value, $Res Function(LastNameChanged) then) =
-      _$LastNameChangedCopyWithImpl<$Res>;
-  $Res call({String lastName});
-}
-
-/// @nodoc
-class _$LastNameChangedCopyWithImpl<$Res>
-    extends _$AuthFormEventCopyWithImpl<$Res>
-    implements $LastNameChangedCopyWith<$Res> {
-  _$LastNameChangedCopyWithImpl(
-      LastNameChanged _value, $Res Function(LastNameChanged) _then)
-      : super(_value, (v) => _then(v as LastNameChanged));
-
-  @override
-  LastNameChanged get _value => super._value as LastNameChanged;
-
-  @override
-  $Res call({
-    Object lastName = freezed,
-  }) {
-    return _then(LastNameChanged(
-      lastName == freezed ? _value.lastName : lastName as String,
-    ));
-  }
-}
-
-/// @nodoc
-class _$LastNameChanged implements LastNameChanged {
-  _$LastNameChanged(this.lastName) : assert(lastName != null);
-
-  @override
-  final String lastName;
-
-  @override
-  String toString() {
-    return 'AuthFormEvent.lastNameChanged(lastName: $lastName)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is LastNameChanged &&
-            (identical(other.lastName, lastName) ||
-                const DeepCollectionEquality()
-                    .equals(other.lastName, lastName)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(lastName);
-
-  @override
-  $LastNameChangedCopyWith<LastNameChanged> get copyWith =>
-      _$LastNameChangedCopyWithImpl<LastNameChanged>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result emailChanged(String email),
-    @required Result firstNameChanged(String firstName),
-    @required Result lastNameChanged(String lastName),
-    @required Result phoneNumberChanged(String phoneNumber),
-    @required Result passwordChanged(String password),
-    @required Result verificationCodeChanged(String verificationCode),
-    @required Result loginUser(),
-    @required Result registerUser(),
-    @required Result verifyUser(),
-    @required Result resendOTP(),
-  }) {
-    assert(emailChanged != null);
-    assert(firstNameChanged != null);
-    assert(lastNameChanged != null);
-    assert(phoneNumberChanged != null);
-    assert(passwordChanged != null);
-    assert(verificationCodeChanged != null);
-    assert(loginUser != null);
-    assert(registerUser != null);
-    assert(verifyUser != null);
-    assert(resendOTP != null);
-    return lastNameChanged(lastName);
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result emailChanged(String email),
-    Result firstNameChanged(String firstName),
-    Result lastNameChanged(String lastName),
-    Result phoneNumberChanged(String phoneNumber),
-    Result passwordChanged(String password),
-    Result verificationCodeChanged(String verificationCode),
-    Result loginUser(),
-    Result registerUser(),
-    Result verifyUser(),
-    Result resendOTP(),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (lastNameChanged != null) {
-      return lastNameChanged(lastName);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result emailChanged(EmailChanged value),
-    @required Result firstNameChanged(FirstNameChanged value),
-    @required Result lastNameChanged(LastNameChanged value),
-    @required Result phoneNumberChanged(PhoneNumberChanged value),
-    @required Result passwordChanged(PasswordChanged value),
-    @required Result verificationCodeChanged(VerificationCodeChanged value),
-    @required Result loginUser(LoginUser value),
-    @required Result registerUser(RegisterUser value),
-    @required Result verifyUser(VerifyUser value),
-    @required Result resendOTP(ResendOTP value),
-  }) {
-    assert(emailChanged != null);
-    assert(firstNameChanged != null);
-    assert(lastNameChanged != null);
-    assert(phoneNumberChanged != null);
-    assert(passwordChanged != null);
-    assert(verificationCodeChanged != null);
-    assert(loginUser != null);
-    assert(registerUser != null);
-    assert(verifyUser != null);
-    assert(resendOTP != null);
-    return lastNameChanged(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result emailChanged(EmailChanged value),
-    Result firstNameChanged(FirstNameChanged value),
-    Result lastNameChanged(LastNameChanged value),
-    Result phoneNumberChanged(PhoneNumberChanged value),
-    Result passwordChanged(PasswordChanged value),
-    Result verificationCodeChanged(VerificationCodeChanged value),
-    Result loginUser(LoginUser value),
-    Result registerUser(RegisterUser value),
-    Result verifyUser(VerifyUser value),
-    Result resendOTP(ResendOTP value),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (lastNameChanged != null) {
-      return lastNameChanged(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LastNameChanged implements AuthFormEvent {
-  factory LastNameChanged(String lastName) = _$LastNameChanged;
-
-  String get lastName;
-  $LastNameChangedCopyWith<LastNameChanged> get copyWith;
+  String get fullName;
+  $FullNameChangedCopyWith<FullNameChanged> get copyWith;
 }
 
 /// @nodoc
@@ -707,8 +520,7 @@ class _$PhoneNumberChanged implements PhoneNumberChanged {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result emailChanged(String email),
-    @required Result firstNameChanged(String firstName),
-    @required Result lastNameChanged(String lastName),
+    @required Result fullNameChanged(String fullName),
     @required Result phoneNumberChanged(String phoneNumber),
     @required Result passwordChanged(String password),
     @required Result verificationCodeChanged(String verificationCode),
@@ -718,8 +530,7 @@ class _$PhoneNumberChanged implements PhoneNumberChanged {
     @required Result resendOTP(),
   }) {
     assert(emailChanged != null);
-    assert(firstNameChanged != null);
-    assert(lastNameChanged != null);
+    assert(fullNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(passwordChanged != null);
     assert(verificationCodeChanged != null);
@@ -734,8 +545,7 @@ class _$PhoneNumberChanged implements PhoneNumberChanged {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result emailChanged(String email),
-    Result firstNameChanged(String firstName),
-    Result lastNameChanged(String lastName),
+    Result fullNameChanged(String fullName),
     Result phoneNumberChanged(String phoneNumber),
     Result passwordChanged(String password),
     Result verificationCodeChanged(String verificationCode),
@@ -756,8 +566,7 @@ class _$PhoneNumberChanged implements PhoneNumberChanged {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result emailChanged(EmailChanged value),
-    @required Result firstNameChanged(FirstNameChanged value),
-    @required Result lastNameChanged(LastNameChanged value),
+    @required Result fullNameChanged(FullNameChanged value),
     @required Result phoneNumberChanged(PhoneNumberChanged value),
     @required Result passwordChanged(PasswordChanged value),
     @required Result verificationCodeChanged(VerificationCodeChanged value),
@@ -767,8 +576,7 @@ class _$PhoneNumberChanged implements PhoneNumberChanged {
     @required Result resendOTP(ResendOTP value),
   }) {
     assert(emailChanged != null);
-    assert(firstNameChanged != null);
-    assert(lastNameChanged != null);
+    assert(fullNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(passwordChanged != null);
     assert(verificationCodeChanged != null);
@@ -783,8 +591,7 @@ class _$PhoneNumberChanged implements PhoneNumberChanged {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result emailChanged(EmailChanged value),
-    Result firstNameChanged(FirstNameChanged value),
-    Result lastNameChanged(LastNameChanged value),
+    Result fullNameChanged(FullNameChanged value),
     Result phoneNumberChanged(PhoneNumberChanged value),
     Result passwordChanged(PasswordChanged value),
     Result verificationCodeChanged(VerificationCodeChanged value),
@@ -871,8 +678,7 @@ class _$PasswordChanged implements PasswordChanged {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result emailChanged(String email),
-    @required Result firstNameChanged(String firstName),
-    @required Result lastNameChanged(String lastName),
+    @required Result fullNameChanged(String fullName),
     @required Result phoneNumberChanged(String phoneNumber),
     @required Result passwordChanged(String password),
     @required Result verificationCodeChanged(String verificationCode),
@@ -882,8 +688,7 @@ class _$PasswordChanged implements PasswordChanged {
     @required Result resendOTP(),
   }) {
     assert(emailChanged != null);
-    assert(firstNameChanged != null);
-    assert(lastNameChanged != null);
+    assert(fullNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(passwordChanged != null);
     assert(verificationCodeChanged != null);
@@ -898,8 +703,7 @@ class _$PasswordChanged implements PasswordChanged {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result emailChanged(String email),
-    Result firstNameChanged(String firstName),
-    Result lastNameChanged(String lastName),
+    Result fullNameChanged(String fullName),
     Result phoneNumberChanged(String phoneNumber),
     Result passwordChanged(String password),
     Result verificationCodeChanged(String verificationCode),
@@ -920,8 +724,7 @@ class _$PasswordChanged implements PasswordChanged {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result emailChanged(EmailChanged value),
-    @required Result firstNameChanged(FirstNameChanged value),
-    @required Result lastNameChanged(LastNameChanged value),
+    @required Result fullNameChanged(FullNameChanged value),
     @required Result phoneNumberChanged(PhoneNumberChanged value),
     @required Result passwordChanged(PasswordChanged value),
     @required Result verificationCodeChanged(VerificationCodeChanged value),
@@ -931,8 +734,7 @@ class _$PasswordChanged implements PasswordChanged {
     @required Result resendOTP(ResendOTP value),
   }) {
     assert(emailChanged != null);
-    assert(firstNameChanged != null);
-    assert(lastNameChanged != null);
+    assert(fullNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(passwordChanged != null);
     assert(verificationCodeChanged != null);
@@ -947,8 +749,7 @@ class _$PasswordChanged implements PasswordChanged {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result emailChanged(EmailChanged value),
-    Result firstNameChanged(FirstNameChanged value),
-    Result lastNameChanged(LastNameChanged value),
+    Result fullNameChanged(FullNameChanged value),
     Result phoneNumberChanged(PhoneNumberChanged value),
     Result passwordChanged(PasswordChanged value),
     Result verificationCodeChanged(VerificationCodeChanged value),
@@ -1040,8 +841,7 @@ class _$VerificationCodeChanged implements VerificationCodeChanged {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result emailChanged(String email),
-    @required Result firstNameChanged(String firstName),
-    @required Result lastNameChanged(String lastName),
+    @required Result fullNameChanged(String fullName),
     @required Result phoneNumberChanged(String phoneNumber),
     @required Result passwordChanged(String password),
     @required Result verificationCodeChanged(String verificationCode),
@@ -1051,8 +851,7 @@ class _$VerificationCodeChanged implements VerificationCodeChanged {
     @required Result resendOTP(),
   }) {
     assert(emailChanged != null);
-    assert(firstNameChanged != null);
-    assert(lastNameChanged != null);
+    assert(fullNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(passwordChanged != null);
     assert(verificationCodeChanged != null);
@@ -1067,8 +866,7 @@ class _$VerificationCodeChanged implements VerificationCodeChanged {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result emailChanged(String email),
-    Result firstNameChanged(String firstName),
-    Result lastNameChanged(String lastName),
+    Result fullNameChanged(String fullName),
     Result phoneNumberChanged(String phoneNumber),
     Result passwordChanged(String password),
     Result verificationCodeChanged(String verificationCode),
@@ -1089,8 +887,7 @@ class _$VerificationCodeChanged implements VerificationCodeChanged {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result emailChanged(EmailChanged value),
-    @required Result firstNameChanged(FirstNameChanged value),
-    @required Result lastNameChanged(LastNameChanged value),
+    @required Result fullNameChanged(FullNameChanged value),
     @required Result phoneNumberChanged(PhoneNumberChanged value),
     @required Result passwordChanged(PasswordChanged value),
     @required Result verificationCodeChanged(VerificationCodeChanged value),
@@ -1100,8 +897,7 @@ class _$VerificationCodeChanged implements VerificationCodeChanged {
     @required Result resendOTP(ResendOTP value),
   }) {
     assert(emailChanged != null);
-    assert(firstNameChanged != null);
-    assert(lastNameChanged != null);
+    assert(fullNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(passwordChanged != null);
     assert(verificationCodeChanged != null);
@@ -1116,8 +912,7 @@ class _$VerificationCodeChanged implements VerificationCodeChanged {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result emailChanged(EmailChanged value),
-    Result firstNameChanged(FirstNameChanged value),
-    Result lastNameChanged(LastNameChanged value),
+    Result fullNameChanged(FullNameChanged value),
     Result phoneNumberChanged(PhoneNumberChanged value),
     Result passwordChanged(PasswordChanged value),
     Result verificationCodeChanged(VerificationCodeChanged value),
@@ -1180,8 +975,7 @@ class _$LoginUser implements LoginUser {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result emailChanged(String email),
-    @required Result firstNameChanged(String firstName),
-    @required Result lastNameChanged(String lastName),
+    @required Result fullNameChanged(String fullName),
     @required Result phoneNumberChanged(String phoneNumber),
     @required Result passwordChanged(String password),
     @required Result verificationCodeChanged(String verificationCode),
@@ -1191,8 +985,7 @@ class _$LoginUser implements LoginUser {
     @required Result resendOTP(),
   }) {
     assert(emailChanged != null);
-    assert(firstNameChanged != null);
-    assert(lastNameChanged != null);
+    assert(fullNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(passwordChanged != null);
     assert(verificationCodeChanged != null);
@@ -1207,8 +1000,7 @@ class _$LoginUser implements LoginUser {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result emailChanged(String email),
-    Result firstNameChanged(String firstName),
-    Result lastNameChanged(String lastName),
+    Result fullNameChanged(String fullName),
     Result phoneNumberChanged(String phoneNumber),
     Result passwordChanged(String password),
     Result verificationCodeChanged(String verificationCode),
@@ -1229,8 +1021,7 @@ class _$LoginUser implements LoginUser {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result emailChanged(EmailChanged value),
-    @required Result firstNameChanged(FirstNameChanged value),
-    @required Result lastNameChanged(LastNameChanged value),
+    @required Result fullNameChanged(FullNameChanged value),
     @required Result phoneNumberChanged(PhoneNumberChanged value),
     @required Result passwordChanged(PasswordChanged value),
     @required Result verificationCodeChanged(VerificationCodeChanged value),
@@ -1240,8 +1031,7 @@ class _$LoginUser implements LoginUser {
     @required Result resendOTP(ResendOTP value),
   }) {
     assert(emailChanged != null);
-    assert(firstNameChanged != null);
-    assert(lastNameChanged != null);
+    assert(fullNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(passwordChanged != null);
     assert(verificationCodeChanged != null);
@@ -1256,8 +1046,7 @@ class _$LoginUser implements LoginUser {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result emailChanged(EmailChanged value),
-    Result firstNameChanged(FirstNameChanged value),
-    Result lastNameChanged(LastNameChanged value),
+    Result fullNameChanged(FullNameChanged value),
     Result phoneNumberChanged(PhoneNumberChanged value),
     Result passwordChanged(PasswordChanged value),
     Result verificationCodeChanged(VerificationCodeChanged value),
@@ -1318,8 +1107,7 @@ class _$RegisterUser implements RegisterUser {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result emailChanged(String email),
-    @required Result firstNameChanged(String firstName),
-    @required Result lastNameChanged(String lastName),
+    @required Result fullNameChanged(String fullName),
     @required Result phoneNumberChanged(String phoneNumber),
     @required Result passwordChanged(String password),
     @required Result verificationCodeChanged(String verificationCode),
@@ -1329,8 +1117,7 @@ class _$RegisterUser implements RegisterUser {
     @required Result resendOTP(),
   }) {
     assert(emailChanged != null);
-    assert(firstNameChanged != null);
-    assert(lastNameChanged != null);
+    assert(fullNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(passwordChanged != null);
     assert(verificationCodeChanged != null);
@@ -1345,8 +1132,7 @@ class _$RegisterUser implements RegisterUser {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result emailChanged(String email),
-    Result firstNameChanged(String firstName),
-    Result lastNameChanged(String lastName),
+    Result fullNameChanged(String fullName),
     Result phoneNumberChanged(String phoneNumber),
     Result passwordChanged(String password),
     Result verificationCodeChanged(String verificationCode),
@@ -1367,8 +1153,7 @@ class _$RegisterUser implements RegisterUser {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result emailChanged(EmailChanged value),
-    @required Result firstNameChanged(FirstNameChanged value),
-    @required Result lastNameChanged(LastNameChanged value),
+    @required Result fullNameChanged(FullNameChanged value),
     @required Result phoneNumberChanged(PhoneNumberChanged value),
     @required Result passwordChanged(PasswordChanged value),
     @required Result verificationCodeChanged(VerificationCodeChanged value),
@@ -1378,8 +1163,7 @@ class _$RegisterUser implements RegisterUser {
     @required Result resendOTP(ResendOTP value),
   }) {
     assert(emailChanged != null);
-    assert(firstNameChanged != null);
-    assert(lastNameChanged != null);
+    assert(fullNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(passwordChanged != null);
     assert(verificationCodeChanged != null);
@@ -1394,8 +1178,7 @@ class _$RegisterUser implements RegisterUser {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result emailChanged(EmailChanged value),
-    Result firstNameChanged(FirstNameChanged value),
-    Result lastNameChanged(LastNameChanged value),
+    Result fullNameChanged(FullNameChanged value),
     Result phoneNumberChanged(PhoneNumberChanged value),
     Result passwordChanged(PasswordChanged value),
     Result verificationCodeChanged(VerificationCodeChanged value),
@@ -1455,8 +1238,7 @@ class _$VerifyUser implements VerifyUser {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result emailChanged(String email),
-    @required Result firstNameChanged(String firstName),
-    @required Result lastNameChanged(String lastName),
+    @required Result fullNameChanged(String fullName),
     @required Result phoneNumberChanged(String phoneNumber),
     @required Result passwordChanged(String password),
     @required Result verificationCodeChanged(String verificationCode),
@@ -1466,8 +1248,7 @@ class _$VerifyUser implements VerifyUser {
     @required Result resendOTP(),
   }) {
     assert(emailChanged != null);
-    assert(firstNameChanged != null);
-    assert(lastNameChanged != null);
+    assert(fullNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(passwordChanged != null);
     assert(verificationCodeChanged != null);
@@ -1482,8 +1263,7 @@ class _$VerifyUser implements VerifyUser {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result emailChanged(String email),
-    Result firstNameChanged(String firstName),
-    Result lastNameChanged(String lastName),
+    Result fullNameChanged(String fullName),
     Result phoneNumberChanged(String phoneNumber),
     Result passwordChanged(String password),
     Result verificationCodeChanged(String verificationCode),
@@ -1504,8 +1284,7 @@ class _$VerifyUser implements VerifyUser {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result emailChanged(EmailChanged value),
-    @required Result firstNameChanged(FirstNameChanged value),
-    @required Result lastNameChanged(LastNameChanged value),
+    @required Result fullNameChanged(FullNameChanged value),
     @required Result phoneNumberChanged(PhoneNumberChanged value),
     @required Result passwordChanged(PasswordChanged value),
     @required Result verificationCodeChanged(VerificationCodeChanged value),
@@ -1515,8 +1294,7 @@ class _$VerifyUser implements VerifyUser {
     @required Result resendOTP(ResendOTP value),
   }) {
     assert(emailChanged != null);
-    assert(firstNameChanged != null);
-    assert(lastNameChanged != null);
+    assert(fullNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(passwordChanged != null);
     assert(verificationCodeChanged != null);
@@ -1531,8 +1309,7 @@ class _$VerifyUser implements VerifyUser {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result emailChanged(EmailChanged value),
-    Result firstNameChanged(FirstNameChanged value),
-    Result lastNameChanged(LastNameChanged value),
+    Result fullNameChanged(FullNameChanged value),
     Result phoneNumberChanged(PhoneNumberChanged value),
     Result passwordChanged(PasswordChanged value),
     Result verificationCodeChanged(VerificationCodeChanged value),
@@ -1591,8 +1368,7 @@ class _$ResendOTP implements ResendOTP {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result emailChanged(String email),
-    @required Result firstNameChanged(String firstName),
-    @required Result lastNameChanged(String lastName),
+    @required Result fullNameChanged(String fullName),
     @required Result phoneNumberChanged(String phoneNumber),
     @required Result passwordChanged(String password),
     @required Result verificationCodeChanged(String verificationCode),
@@ -1602,8 +1378,7 @@ class _$ResendOTP implements ResendOTP {
     @required Result resendOTP(),
   }) {
     assert(emailChanged != null);
-    assert(firstNameChanged != null);
-    assert(lastNameChanged != null);
+    assert(fullNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(passwordChanged != null);
     assert(verificationCodeChanged != null);
@@ -1618,8 +1393,7 @@ class _$ResendOTP implements ResendOTP {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result emailChanged(String email),
-    Result firstNameChanged(String firstName),
-    Result lastNameChanged(String lastName),
+    Result fullNameChanged(String fullName),
     Result phoneNumberChanged(String phoneNumber),
     Result passwordChanged(String password),
     Result verificationCodeChanged(String verificationCode),
@@ -1640,8 +1414,7 @@ class _$ResendOTP implements ResendOTP {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result emailChanged(EmailChanged value),
-    @required Result firstNameChanged(FirstNameChanged value),
-    @required Result lastNameChanged(LastNameChanged value),
+    @required Result fullNameChanged(FullNameChanged value),
     @required Result phoneNumberChanged(PhoneNumberChanged value),
     @required Result passwordChanged(PasswordChanged value),
     @required Result verificationCodeChanged(VerificationCodeChanged value),
@@ -1651,8 +1424,7 @@ class _$ResendOTP implements ResendOTP {
     @required Result resendOTP(ResendOTP value),
   }) {
     assert(emailChanged != null);
-    assert(firstNameChanged != null);
-    assert(lastNameChanged != null);
+    assert(fullNameChanged != null);
     assert(phoneNumberChanged != null);
     assert(passwordChanged != null);
     assert(verificationCodeChanged != null);
@@ -1667,8 +1439,7 @@ class _$ResendOTP implements ResendOTP {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result emailChanged(EmailChanged value),
-    Result firstNameChanged(FirstNameChanged value),
-    Result lastNameChanged(LastNameChanged value),
+    Result fullNameChanged(FullNameChanged value),
     Result phoneNumberChanged(PhoneNumberChanged value),
     Result passwordChanged(PasswordChanged value),
     Result verificationCodeChanged(VerificationCodeChanged value),
@@ -1696,8 +1467,7 @@ class _$AuthFormStateTearOff {
 
 // ignore: unused_element
   _AuthFormState call(
-      {@required String firstName,
-      @required String lastName,
+      {@required String fullName,
       @required String phoneNumber,
       @required String emailAddress,
       @required String password,
@@ -1706,8 +1476,7 @@ class _$AuthFormStateTearOff {
       @required bool isSubmitting,
       @required Option<Either<Glitch, Unit>> authFailureOrSuccess}) {
     return _AuthFormState(
-      firstName: firstName,
-      lastName: lastName,
+      fullName: fullName,
       phoneNumber: phoneNumber,
       emailAddress: emailAddress,
       password: password,
@@ -1725,8 +1494,7 @@ const $AuthFormState = _$AuthFormStateTearOff();
 
 /// @nodoc
 mixin _$AuthFormState {
-  String get firstName;
-  String get lastName;
+  String get fullName;
   String get phoneNumber;
   String get emailAddress;
   String get password;
@@ -1744,8 +1512,7 @@ abstract class $AuthFormStateCopyWith<$Res> {
           AuthFormState value, $Res Function(AuthFormState) then) =
       _$AuthFormStateCopyWithImpl<$Res>;
   $Res call(
-      {String firstName,
-      String lastName,
+      {String fullName,
       String phoneNumber,
       String emailAddress,
       String password,
@@ -1766,8 +1533,7 @@ class _$AuthFormStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object firstName = freezed,
-    Object lastName = freezed,
+    Object fullName = freezed,
     Object phoneNumber = freezed,
     Object emailAddress = freezed,
     Object password = freezed,
@@ -1777,8 +1543,7 @@ class _$AuthFormStateCopyWithImpl<$Res>
     Object authFailureOrSuccess = freezed,
   }) {
     return _then(_value.copyWith(
-      firstName: firstName == freezed ? _value.firstName : firstName as String,
-      lastName: lastName == freezed ? _value.lastName : lastName as String,
+      fullName: fullName == freezed ? _value.fullName : fullName as String,
       phoneNumber:
           phoneNumber == freezed ? _value.phoneNumber : phoneNumber as String,
       emailAddress: emailAddress == freezed
@@ -1808,8 +1573,7 @@ abstract class _$AuthFormStateCopyWith<$Res>
       __$AuthFormStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String firstName,
-      String lastName,
+      {String fullName,
       String phoneNumber,
       String emailAddress,
       String password,
@@ -1832,8 +1596,7 @@ class __$AuthFormStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object firstName = freezed,
-    Object lastName = freezed,
+    Object fullName = freezed,
     Object phoneNumber = freezed,
     Object emailAddress = freezed,
     Object password = freezed,
@@ -1843,8 +1606,7 @@ class __$AuthFormStateCopyWithImpl<$Res>
     Object authFailureOrSuccess = freezed,
   }) {
     return _then(_AuthFormState(
-      firstName: firstName == freezed ? _value.firstName : firstName as String,
-      lastName: lastName == freezed ? _value.lastName : lastName as String,
+      fullName: fullName == freezed ? _value.fullName : fullName as String,
       phoneNumber:
           phoneNumber == freezed ? _value.phoneNumber : phoneNumber as String,
       emailAddress: emailAddress == freezed
@@ -1869,8 +1631,7 @@ class __$AuthFormStateCopyWithImpl<$Res>
 /// @nodoc
 class _$_AuthFormState implements _AuthFormState {
   const _$_AuthFormState(
-      {@required this.firstName,
-      @required this.lastName,
+      {@required this.fullName,
       @required this.phoneNumber,
       @required this.emailAddress,
       @required this.password,
@@ -1878,8 +1639,7 @@ class _$_AuthFormState implements _AuthFormState {
       @required this.showErrorMessages,
       @required this.isSubmitting,
       @required this.authFailureOrSuccess})
-      : assert(firstName != null),
-        assert(lastName != null),
+      : assert(fullName != null),
         assert(phoneNumber != null),
         assert(emailAddress != null),
         assert(password != null),
@@ -1889,9 +1649,7 @@ class _$_AuthFormState implements _AuthFormState {
         assert(authFailureOrSuccess != null);
 
   @override
-  final String firstName;
-  @override
-  final String lastName;
+  final String fullName;
   @override
   final String phoneNumber;
   @override
@@ -1909,19 +1667,16 @@ class _$_AuthFormState implements _AuthFormState {
 
   @override
   String toString() {
-    return 'AuthFormState(firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, emailAddress: $emailAddress, password: $password, verificationCode: $verificationCode, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccess: $authFailureOrSuccess)';
+    return 'AuthFormState(fullName: $fullName, phoneNumber: $phoneNumber, emailAddress: $emailAddress, password: $password, verificationCode: $verificationCode, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccess: $authFailureOrSuccess)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _AuthFormState &&
-            (identical(other.firstName, firstName) ||
+            (identical(other.fullName, fullName) ||
                 const DeepCollectionEquality()
-                    .equals(other.firstName, firstName)) &&
-            (identical(other.lastName, lastName) ||
-                const DeepCollectionEquality()
-                    .equals(other.lastName, lastName)) &&
+                    .equals(other.fullName, fullName)) &&
             (identical(other.phoneNumber, phoneNumber) ||
                 const DeepCollectionEquality()
                     .equals(other.phoneNumber, phoneNumber)) &&
@@ -1948,8 +1703,7 @@ class _$_AuthFormState implements _AuthFormState {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(firstName) ^
-      const DeepCollectionEquality().hash(lastName) ^
+      const DeepCollectionEquality().hash(fullName) ^
       const DeepCollectionEquality().hash(phoneNumber) ^
       const DeepCollectionEquality().hash(emailAddress) ^
       const DeepCollectionEquality().hash(password) ^
@@ -1965,8 +1719,7 @@ class _$_AuthFormState implements _AuthFormState {
 
 abstract class _AuthFormState implements AuthFormState {
   const factory _AuthFormState(
-          {@required String firstName,
-          @required String lastName,
+          {@required String fullName,
           @required String phoneNumber,
           @required String emailAddress,
           @required String password,
@@ -1977,9 +1730,7 @@ abstract class _AuthFormState implements AuthFormState {
       _$_AuthFormState;
 
   @override
-  String get firstName;
-  @override
-  String get lastName;
+  String get fullName;
   @override
   String get phoneNumber;
   @override

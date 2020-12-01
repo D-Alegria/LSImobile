@@ -4,9 +4,7 @@ part of 'auth_form_bloc.dart';
 abstract class AuthFormEvent with _$AuthFormEvent {
   factory AuthFormEvent.emailChanged(String email) = EmailChanged;
 
-  factory AuthFormEvent.firstNameChanged(String firstName) = FirstNameChanged;
-
-  factory AuthFormEvent.lastNameChanged(String lastName) = LastNameChanged;
+  factory AuthFormEvent.fullNameChanged(String fullName) = FullNameChanged;
 
   factory AuthFormEvent.phoneNumberChanged(String phoneNumber) =
       PhoneNumberChanged;

@@ -27,6 +27,7 @@ class LoginView extends StatelessWidget {
                     : AutovalidateMode.disabled,
                 child: ListView(
                   children: <Widget>[
+                    SizedBox(height: SizeConfig.yMargin(context, 2)),
                     SharedTextFormField(
                       labelText: "Email address",
                       initialValue: state.emailAddress,
@@ -38,9 +39,7 @@ class LoginView extends StatelessWidget {
                       },
                       keyboardType: TextInputType.emailAddress,
                     ),
-                    SizedBox(
-                      height: SizeConfig.yMargin(context, 3),
-                    ),
+                    SizedBox(height: SizeConfig.yMargin(context, 3)),
                     SharedTextFormField(
                       labelText: "Password",
                       initialValue: state.password,
@@ -54,9 +53,7 @@ class LoginView extends StatelessWidget {
                         return null;
                       },
                     ),
-                    SizedBox(
-                      height: SizeConfig.yMargin(context, 5),
-                    ),
+                    SizedBox(height: SizeConfig.yMargin(context, 5)),
                     sharedRaisedButton(
                       context: context,
                       onPressed: () =>
@@ -64,9 +61,7 @@ class LoginView extends StatelessWidget {
                       color: ColorStyles.blue,
                       text: "Login",
                     ),
-                    SizedBox(
-                      height: SizeConfig.yMargin(context, 2),
-                    ),
+                    SizedBox(height: SizeConfig.yMargin(context, 2)),
                     sharedOptionFlatButton(
                       context: context,
                       firstText: "Don’t have an account?",

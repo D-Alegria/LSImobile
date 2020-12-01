@@ -53,4 +53,5 @@ class ApiUrls {
   static final String liquidateInvestment = "api/v3/user/investments/liquidate";
   static final String rollOverInvestment = "api/v3/user/investments/rollover";
   static final String terminateInvestment = "api/v3/user/investments/terminate";
+  static final String customerCheck = "api/v3/customer/check";
 }

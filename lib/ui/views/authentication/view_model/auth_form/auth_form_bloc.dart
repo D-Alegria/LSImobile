@@ -6,6 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/extensions/string_extension.dart';
+import 'package:lsi_mobile/core/models/requests/check_user_exists/check_user_exists_request.dart';
 import 'package:lsi_mobile/core/models/requests/login_user/login_user_request.dart';
 import 'package:lsi_mobile/core/models/requests/register_user/profile.dart';
 import 'package:lsi_mobile/core/models/requests/register_user/register_user_request.dart';
@@ -40,21 +41,15 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
           authFailureOrSuccess: None(),
         );
       },
-      lastNameChanged: (LastNameChanged value) async* {
-        yield state.copyWith(
-          lastName: value.lastName,
-          authFailureOrSuccess: None(),
-        );
-      },
       passwordChanged: (PasswordChanged value) async* {
         yield state.copyWith(
           password: value.password,
           authFailureOrSuccess: None(),
         );
       },
-      firstNameChanged: (FirstNameChanged value) async* {
+      fullNameChanged: (FullNameChanged value) async* {
         yield state.copyWith(
-          firstName: value.firstName,
+          fullName: value.fullName,
           authFailureOrSuccess: None(),
         );
       },
@@ -126,8 +121,7 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
         );
       },
       registerUser: (value) async* {
-        final isFirstNameValid = state.firstName.isNotEmpty;
-        final isLastNameValid = state.lastName.isNotEmpty;
+        final isFullNameValid = state.fullName.isNotEmpty;
         final isPhoneNumberValid = state.phoneNumber.isNotEmpty;
         final isEmailAddressValid = state.emailAddress.isEmail;
         final isPasswordValid = state.password.isValidPassword;
@@ -135,8 +129,7 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
         Either<Glitch, Unit> failureOrSuccess;
         var v;
 
-        if (isFirstNameValid &&
-            isLastNameValid &&
+        if (isFullNameValid &&
             isPhoneNumberValid &&
             isEmailAddressValid &&
             isPasswordValid) {
@@ -145,18 +138,28 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
             authFailureOrSuccess: None(),
           );
 
-          failureOrSuccess = await _authService.sendOTP(
-            SendOTPRequest(
-              phone: state.phoneNumber.trim(),
-            ),
+          var list = await Future.wait(
+            [
+              _authService.checkUserExists(
+                  CheckUserExistsRequest(identity: state.phoneNumber.trim())),
+              _authService.checkUserExists(
+                  CheckUserExistsRequest(identity: state.emailAddress.trim())),
+            ],
           );
+          if (list.every((element) => element.isRight())) {
+            failureOrSuccess = failureOrSuccess = await _authService.sendOTP(
+              SendOTPRequest(phone: state.phoneNumber.trim()),
+            );
 
-          final local = await _userRepo.getObject("OTP");
-          local.fold((l) => v = "", (r) => v = r);
+            final local = await _userRepo.getObject("OTP");
+            local.fold((l) => v = "", (r) => v = r);
+          } else {
+            failureOrSuccess = list.firstWhere((element) => element.isLeft());
+          }
         }
 
         yield state.copyWith(
-          verificationCode: v,
+          verificationCode: v ?? "",
           isSubmitting: false,
           showErrorMessages: true,
           authFailureOrSuccess: optionOf(failureOrSuccess),
@@ -189,8 +192,7 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
                 profile: Profile(
                   password: state.password.trim(),
                   email: state.emailAddress.trim(),
-                  fullName:
-                      state.firstName.trim() + " " + state.lastName.trim(),
+                  fullName: state.fullName.trim(),
                   isIndividual: "",
                   phone: state.phoneNumber.trim(),
                 ),

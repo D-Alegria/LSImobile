@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
@@ -63,23 +64,24 @@ class AuthForm extends StatelessWidget {
     return Positioned(
       left: SizeConfig.xMargin(context, 5),
       right: SizeConfig.xMargin(context, 0),
-      bottom: SizeConfig.yMargin(context, 5),
+      top: SizeConfig.yMargin(context, 7),
       child: RichText(
         textAlign: TextAlign.left,
         text: TextSpan(
           text: title,
-          style: TextStyle(
+          style: GoogleFonts.workSans(
             fontWeight: FontWeight.w600,
-            fontSize: SizeConfig.textSize(context, 8),
+            fontSize: SizeConfig.textSize(context, 9),
             color: ColorStyles.white,
           ),
           children: <TextSpan>[
             TextSpan(
               text: "\n$subTitle",
-              style: TextStyle(
+              style: GoogleFonts.workSans(
                 fontWeight: FontWeight.w400,
-                fontSize: SizeConfig.textSize(context, 4),
+                fontSize: SizeConfig.textSize(context, 5),
                 color: ColorStyles.extraLight,
+                height: SizeConfig.textSize(context, 0.4)
               ),
             )
           ],
@@ -90,7 +92,7 @@ class AuthForm extends StatelessWidget {
 
   Widget translucentImage(BuildContext context) {
     return Positioned(
-      bottom: SizeConfig.yMargin(context, -13),
+      bottom: SizeConfig.yMargin(context, -14),
       left: SizeConfig.xMargin(context, 0),
       right: SizeConfig.xMargin(context, 0),
       child: Container(

@@ -3,8 +3,7 @@ part of 'auth_form_bloc.dart';
 @freezed
 abstract class AuthFormState with _$AuthFormState {
   const factory AuthFormState({
-    @required String firstName,
-    @required String lastName,
+    @required String fullName,
     @required String phoneNumber,
     @required String emailAddress,
     @required String password,
@@ -15,8 +14,7 @@ abstract class AuthFormState with _$AuthFormState {
   }) = _AuthFormState;
 
   factory AuthFormState.initial() => AuthFormState(
-        firstName: "",
-        lastName: "",
+        fullName: "",
         phoneNumber: "",
         emailAddress: "",
         password: "",

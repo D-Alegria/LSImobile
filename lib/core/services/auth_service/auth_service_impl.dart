@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/constants/api_urls.dart';
 import 'package:lsi_mobile/core/models/dto/user/user.dart';
+import 'package:lsi_mobile/core/models/requests/check_user_exists/check_user_exists_request.dart';
 import 'package:lsi_mobile/core/models/requests/login_user/login_user_request.dart';
 import 'package:lsi_mobile/core/models/requests/register_user/register_user_request.dart';
 import 'package:lsi_mobile/core/models/requests/reset_password/reset_password_request.dart';
@@ -10,6 +11,7 @@ import 'package:lsi_mobile/core/models/requests/send_otp/send_otp_request.dart';
 import 'package:lsi_mobile/core/models/requests/verify_otp/verify_otp_request.dart';
 import 'package:lsi_mobile/core/models/responses/login_user/login_user_response.dart';
 import 'package:lsi_mobile/core/models/responses/register_user/register_user_response.dart';
+import 'package:lsi_mobile/core/models/responses/response/response.dart';
 import 'package:lsi_mobile/core/models/responses/send_otp/send_otp_response.dart';
 import 'package:lsi_mobile/core/models/responses/verify_otp/verify_otp_response.dart';
 import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
@@ -177,6 +179,28 @@ class AuthServiceImpl implements AuthService {
       function: () async {
         final result = await _userRepo.clearUserData;
         return result.fold((l) => left(l), (r) => right(unit));
+      },
+    );
+  }
+
+  @override
+  Future<Either<Glitch, Unit>> checkUserExists(
+      CheckUserExistsRequest request) async {
+    return await tryMethod<Unit>(
+      errorMessage: "Internal System Error Occurred:AuSe-CUE",
+      function: () async {
+        final response = await _apiManager.post(
+          url: ApiUrls.customerCheck,
+          requestBody: request.toJson(),
+        );
+        return response.fold(
+          (failure) => left(failure),
+          (success) async {
+            final result = Response.fromJson(success);
+            if (!result.status) return right(unit);
+            return left(SystemGlitch(message: result.message));
+          },
+        );
       },
     );
   }

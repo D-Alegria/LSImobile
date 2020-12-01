@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
@@ -28,29 +27,16 @@ class RegisterView extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      SizedBox(height: SizeConfig.yMargin(context, 3)),
+                      SizedBox(height: SizeConfig.yMargin(context, 6)),
                       SharedTextFormField(
-                        labelText: "First name",
-                        initialValue: state.firstName,
+                        labelText: "Full name",
+                        initialValue: state.fullName,
                         onChanged: (value) => context
                             .bloc<AuthFormBloc>()
-                            .add(FirstNameChanged(value)),
+                            .add(FullNameChanged(value)),
                         validator: (value) {
-                          if (state.firstName.isEmpty)
+                          if (state.fullName.isEmpty)
                             return "Field name is required";
-                          return null;
-                        },
-                      ),
-                      SizedBox(height: SizeConfig.yMargin(context, 3)),
-                      SharedTextFormField(
-                        labelText: "Last name",
-                        initialValue: state.lastName,
-                        onChanged: (value) => context
-                            .bloc<AuthFormBloc>()
-                            .add(LastNameChanged(value)),
-                        validator: (value) {
-                          if (state.lastName.isEmpty)
-                            return "Field is required";
                           return null;
                         },
                       ),
@@ -105,9 +91,7 @@ class RegisterView extends StatelessWidget {
                         text: "Register",
                         minWidth: SizeConfig.xMargin(context, 100),
                       ),
-                      SizedBox(
-                        height: SizeConfig.yMargin(context, 2),
-                      ),
+                      SizedBox(height: SizeConfig.yMargin(context, 2)),
                       sharedOptionFlatButton(
                         context: context,
                         firstText: "Already have an account?",
@@ -123,23 +107,7 @@ class RegisterView extends StatelessWidget {
       listener: (context, state) => state.authFailureOrSuccess.fold(
         () => null,
         (either) => either.fold(
-          (failure) => failure.maybeMap(
-            orElse: () => FlushbarHelper.createError(
-              message: failure.message,
-              duration: new Duration(seconds: 3),
-            ).show(context),
-            unAuthenticatedGlitch: (e) async {
-              FlushbarHelper.createError(
-                message: e.message,
-                duration: Duration(seconds: 3),
-              ).show(context);
-              await Future.delayed(Duration(seconds: 3));
-              return context.navigator.pushAndRemoveUntil(
-                Routes.authWrapper,
-                (route) => false,
-              );
-            },
-          ),
+          (failure) => showErrorSnackBar(context, failure.message),
           (success) => context.navigator
               .pushAndRemoveUntil(Routes.verificationView, (route) => false),
         ),
