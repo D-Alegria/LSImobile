@@ -11,7 +11,7 @@ class NoLoanView extends StatelessWidget {
     Key key,
   }) : super(key: key);
 
-  final String instantMoney = "assets/images/instant_naira.png";
+  final String instantMoney = "assets/images/apply_loan.png";
   final String optionsIcon = "assets/svgs/icons/options_icon.svg";
 
   @override

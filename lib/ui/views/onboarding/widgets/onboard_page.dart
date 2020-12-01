@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
@@ -14,7 +15,7 @@ class OnBoardPage extends StatelessWidget {
     @required this.buttonText,
   }) : super(key: key);
 
-  final String image;
+  final Widget image;
   final Function onPressed;
   final String mainText;
   final String subText;
@@ -28,44 +29,54 @@ class OnBoardPage extends StatelessWidget {
       ),
       child: Column(
         children: [
-          SizedBox(
-            height: SizeConfig.yMargin(context, 3),
-          ),
-          Image.asset(image, fit: BoxFit.fitWidth),
-          SizedBox(
-            height: SizeConfig.yMargin(context, 5),
-          ),
-          RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(
-                text: mainText,
-                style: GoogleFonts.workSans(
-                  fontWeight: FontWeight.w600,
-                  fontSize: SizeConfig.textSize(context, 6),
-                  color: ColorStyles.dark,
-                ),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: "\n\n$subText",
-                    style: GoogleFonts.workSans(
-                      fontWeight: FontWeight.w400,
-                      fontSize: SizeConfig.textSize(context, 4),
-                      color: ColorStyles.light,
+          Expanded(
+            flex: 3,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: SizeConfig.yMargin(context, 3)),
+                  image,
+                  SizedBox(height: SizeConfig.yMargin(context, 5)),
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      text: mainText,
+                      style: GoogleFonts.workSans(
+                        fontWeight: FontWeight.w600,
+                        fontSize: SizeConfig.textSize(context, 6),
+                        color: ColorStyles.dark,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: mainText.isEmpty ? subText : "\n\n$subText",
+                          style: GoogleFonts.workSans(
+                            fontWeight: FontWeight.w400,
+                            fontSize: SizeConfig.textSize(context, 4),
+                            color: ColorStyles.light,
+                          ),
+                        )
+                      ],
                     ),
-                  )
-                ]),
+                  ),
+                ],
+              ),
+            ),
           ),
-          Spacer(),
-          sharedRaisedButton(
-            context: context,
-            text: buttonText,
-            onPressed: onPressed,
-            color: ColorStyles.blue,
-            minWidth: SizeConfig.xMargin(context, 30),
+          // Spacer(),
+          Expanded(
+            flex: 1,
+            child: Center(
+              child: sharedRaisedButton(
+                context: context,
+                text: buttonText,
+                onPressed: onPressed,
+                color: ColorStyles.blue,
+                minWidth: SizeConfig.xMargin(context, 30),
+              ),
+            ),
           ),
-          SizedBox(
-            height: SizeConfig.yMargin(context, 7),
-          ),
+          // SizedBox(height: SizeConfig.yMargin(context, 7)),
         ],
       ),
     );

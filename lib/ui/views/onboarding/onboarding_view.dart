@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -9,8 +10,8 @@ import 'package:lsi_mobile/ui/views/onboarding/widgets/onboard_page.dart';
 
 class OnBoardingView extends StatelessWidget {
   final String invest = "assets/images/invest.png";
-  final String instantNaira = "assets/images/instant_naira.png";
-  final String easyPayment = "assets/images/easy_payment.png";
+  final String manRelaxing = "assets/svgs/man_relaxing.svg";
+  final String easyPayment = "assets/images/stack_cards.png";
   final String logo = "assets/images/logo.png";
   final PageController _pageController = new PageController(initialPage: 0);
 
@@ -57,7 +58,7 @@ class OnBoardingView extends StatelessWidget {
                     subText:
                         "Grow your wealth today by investing in our high-interest investment plans",
                     buttonText: "Next",
-                    image: invest,
+                    image: Image.asset(invest, fit: BoxFit.fitWidth),
                     onPressed: () => changePage(context, 1),
                   ),
                   OnBoardPage(
@@ -65,7 +66,7 @@ class OnBoardingView extends StatelessWidget {
                     subText:
                         "Getting access to loans is simple with Initiative Moni. No collateral required. Instant funding on approval",
                     buttonText: "Next",
-                    image: instantNaira,
+                    image: SvgPicture.asset(manRelaxing, fit: BoxFit.fitWidth),
                     onPressed: () => changePage(context, 2),
                   ),
                   OnBoardPage(
@@ -73,15 +74,15 @@ class OnBoardingView extends StatelessWidget {
                     subText:
                         "Payment made easy through debit card, credit card",
                     buttonText: "Next",
-                    image: easyPayment,
+                    image: Image.asset(easyPayment, fit: BoxFit.fitWidth),
                     onPressed: () => changePage(context, 3),
                   ),
                   OnBoardPage(
-                    mainText:
-                        "Initiative Moni is brought to you by Intiative Finance",
-                    subText: "",
+                    mainText: "",
+                    subText:
+                        "Initiative Moni is powered by Initiative Finance Limited. A CBN regulated financial institution.",
                     buttonText: "Get started",
-                    image: logo,
+                    image: Image.asset(logo, fit: BoxFit.fitWidth),
                     onPressed: () => context.navigator.pushAndRemoveUntil(
                       Routes.authWrapper,
                       (route) => false,
