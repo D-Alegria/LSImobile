@@ -52,12 +52,14 @@ class _LoanProductViewState extends State<LoanProductView> {
           initial: (e) => Container(),
           loading: (e) => sharedLoader(),
           loaded: (e) => Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: SizeConfig.xMargin(context, 5),
+            padding: EdgeInsets.only(
+              left: SizeConfig.xMargin(context, 5),
+              right: SizeConfig.xMargin(context, 5),
+              top: SizeConfig.yMargin(context, 5),
             ),
             child: ListView.separated(
               separatorBuilder: (context, index) => SizedBox(
-                height: SizeConfig.yMargin(context, 3.5),
+                height: SizeConfig.yMargin(context, 3),
               ),
               itemBuilder: (context, index) {
                 var loan = e.loanProducts[index];
@@ -65,8 +67,7 @@ class _LoanProductViewState extends State<LoanProductView> {
                 if (index % 3 == 0) {
                   return LoanProductBox(
                     title: loan.loanTitle,
-                    subText:
-                        "₦${loan.minimumAmount} - ₦${loan.maximumAmount}",
+                    subText: "₦${loan.minimumAmount} - ₦${loan.maximumAmount}",
                     duration: loan.maxLoanDuration,
                     durationColor: ColorStyles.yellow,
                     gradient: ColorStyles.greenGradient,
@@ -78,8 +79,7 @@ class _LoanProductViewState extends State<LoanProductView> {
                 } else if (index % 3 == 1) {
                   return LoanProductBox(
                     title: loan.loanTitle,
-                    subText:
-                        "₦${loan.minimumAmount} - ₦${loan.maximumAmount}",
+                    subText: "₦${loan.minimumAmount} - ₦${loan.maximumAmount}",
                     duration: loan.maxLoanDuration,
                     durationColor: ColorStyles.yellow,
                     gradient: ColorStyles.primaryGradient,
@@ -91,8 +91,7 @@ class _LoanProductViewState extends State<LoanProductView> {
                 } else {
                   return LoanProductBox(
                     title: loan.loanTitle,
-                    subText:
-                        "₦${loan.minimumAmount} - ₦${loan.maximumAmount}",
+                    subText: "₦${loan.minimumAmount} - ₦${loan.maximumAmount}",
                     duration: loan.maxLoanDuration,
                     durationColor: ColorStyles.white,
                     gradient: ColorStyles.yellowGradient,

@@ -238,10 +238,10 @@ Widget sharedRaisedContainer({
         borderRadius: BorderRadius.all(Radius.circular(10)),
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: ColorStyles.black.withOpacity(0.5),
-            offset: Offset(3, 3),
-            blurRadius: 15,
-            spreadRadius: 1,
+            color: ColorStyles.black.withOpacity(0.3),
+            offset: Offset(0, 4),
+            blurRadius: 10,
+            spreadRadius: 0,
           ),
         ],
       ),
