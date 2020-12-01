@@ -71,7 +71,7 @@ class TerminateForm extends StatelessWidget {
                       ),
                       SizedBox(height: SizeConfig.yMargin(context, 3)),
                       Container(
-                        height: SizeConfig.yMargin(context, 22),
+                        height: SizeConfig.yMargin(context, 27),
                         padding: EdgeInsets.only(
                           left: SizeConfig.xMargin(context, 5),
                         ),

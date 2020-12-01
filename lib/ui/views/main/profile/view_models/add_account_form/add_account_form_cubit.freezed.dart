@@ -15,8 +15,7 @@ class _$AddAccountFormStateTearOff {
 
 // ignore: unused_element
   _AddAccountFormState call(
-      {@required String bankId,
-      @required String bankName,
+      {@required String bankName,
       @required List<Value> banks,
       @required String accountNumber,
       @required String accountName,
@@ -25,7 +24,6 @@ class _$AddAccountFormStateTearOff {
       @required Option<Either<Glitch, Unit>> verifyAccountInfoFailureOrSuccess,
       @required Option<Either<Glitch, Unit>> addAccountInfoFailureOrSuccess}) {
     return _AddAccountFormState(
-      bankId: bankId,
       bankName: bankName,
       banks: banks,
       accountNumber: accountNumber,
@@ -44,7 +42,6 @@ const $AddAccountFormState = _$AddAccountFormStateTearOff();
 
 /// @nodoc
 mixin _$AddAccountFormState {
-  String get bankId;
   String get bankName;
   List<Value> get banks;
   String get accountNumber;
@@ -63,8 +60,7 @@ abstract class $AddAccountFormStateCopyWith<$Res> {
           AddAccountFormState value, $Res Function(AddAccountFormState) then) =
       _$AddAccountFormStateCopyWithImpl<$Res>;
   $Res call(
-      {String bankId,
-      String bankName,
+      {String bankName,
       List<Value> banks,
       String accountNumber,
       String accountName,
@@ -85,7 +81,6 @@ class _$AddAccountFormStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object bankId = freezed,
     Object bankName = freezed,
     Object banks = freezed,
     Object accountNumber = freezed,
@@ -96,7 +91,6 @@ class _$AddAccountFormStateCopyWithImpl<$Res>
     Object addAccountInfoFailureOrSuccess = freezed,
   }) {
     return _then(_value.copyWith(
-      bankId: bankId == freezed ? _value.bankId : bankId as String,
       bankName: bankName == freezed ? _value.bankName : bankName as String,
       banks: banks == freezed ? _value.banks : banks as List<Value>,
       accountNumber: accountNumber == freezed
@@ -128,8 +122,7 @@ abstract class _$AddAccountFormStateCopyWith<$Res>
       __$AddAccountFormStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String bankId,
-      String bankName,
+      {String bankName,
       List<Value> banks,
       String accountNumber,
       String accountName,
@@ -152,7 +145,6 @@ class __$AddAccountFormStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object bankId = freezed,
     Object bankName = freezed,
     Object banks = freezed,
     Object accountNumber = freezed,
@@ -163,7 +155,6 @@ class __$AddAccountFormStateCopyWithImpl<$Res>
     Object addAccountInfoFailureOrSuccess = freezed,
   }) {
     return _then(_AddAccountFormState(
-      bankId: bankId == freezed ? _value.bankId : bankId as String,
       bankName: bankName == freezed ? _value.bankName : bankName as String,
       banks: banks == freezed ? _value.banks : banks as List<Value>,
       accountNumber: accountNumber == freezed
@@ -190,8 +181,7 @@ class __$AddAccountFormStateCopyWithImpl<$Res>
 /// @nodoc
 class _$_AddAccountFormState implements _AddAccountFormState {
   const _$_AddAccountFormState(
-      {@required this.bankId,
-      @required this.bankName,
+      {@required this.bankName,
       @required this.banks,
       @required this.accountNumber,
       @required this.accountName,
@@ -199,8 +189,7 @@ class _$_AddAccountFormState implements _AddAccountFormState {
       @required this.isSubmitting,
       @required this.verifyAccountInfoFailureOrSuccess,
       @required this.addAccountInfoFailureOrSuccess})
-      : assert(bankId != null),
-        assert(bankName != null),
+      : assert(bankName != null),
         assert(banks != null),
         assert(accountNumber != null),
         assert(accountName != null),
@@ -209,8 +198,6 @@ class _$_AddAccountFormState implements _AddAccountFormState {
         assert(verifyAccountInfoFailureOrSuccess != null),
         assert(addAccountInfoFailureOrSuccess != null);
 
-  @override
-  final String bankId;
   @override
   final String bankName;
   @override
@@ -230,15 +217,13 @@ class _$_AddAccountFormState implements _AddAccountFormState {
 
   @override
   String toString() {
-    return 'AddAccountFormState(bankId: $bankId, bankName: $bankName, banks: $banks, accountNumber: $accountNumber, accountName: $accountName, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, verifyAccountInfoFailureOrSuccess: $verifyAccountInfoFailureOrSuccess, addAccountInfoFailureOrSuccess: $addAccountInfoFailureOrSuccess)';
+    return 'AddAccountFormState(bankName: $bankName, banks: $banks, accountNumber: $accountNumber, accountName: $accountName, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, verifyAccountInfoFailureOrSuccess: $verifyAccountInfoFailureOrSuccess, addAccountInfoFailureOrSuccess: $addAccountInfoFailureOrSuccess)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _AddAccountFormState &&
-            (identical(other.bankId, bankId) ||
-                const DeepCollectionEquality().equals(other.bankId, bankId)) &&
             (identical(other.bankName, bankName) ||
                 const DeepCollectionEquality()
                     .equals(other.bankName, bankName)) &&
@@ -271,7 +256,6 @@ class _$_AddAccountFormState implements _AddAccountFormState {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(bankId) ^
       const DeepCollectionEquality().hash(bankName) ^
       const DeepCollectionEquality().hash(banks) ^
       const DeepCollectionEquality().hash(accountNumber) ^
@@ -290,8 +274,6 @@ class _$_AddAccountFormState implements _AddAccountFormState {
 abstract class _AddAccountFormState implements AddAccountFormState {
   const factory _AddAccountFormState(
           {@required
-              String bankId,
-          @required
               String bankName,
           @required
               List<Value> banks,
@@ -309,8 +291,6 @@ abstract class _AddAccountFormState implements AddAccountFormState {
               Option<Either<Glitch, Unit>> addAccountInfoFailureOrSuccess}) =
       _$_AddAccountFormState;
 
-  @override
-  String get bankId;
   @override
   String get bankName;
   @override

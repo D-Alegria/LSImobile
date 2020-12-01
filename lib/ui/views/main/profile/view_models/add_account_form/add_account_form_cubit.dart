@@ -42,10 +42,10 @@ class AddAccountFormCubit extends Cubit<AddAccountFormState> {
         ),
         (r) => emit(state.copyWith(
           banks: r,
-          bankName: r.first.bankCode,
+          bankName: r.first.id,
         )),
       );
-    } on Error catch (e) {}
+    } on Error {}
     emit(state.copyWith(
       isSubmitting: false,
     ));
@@ -89,7 +89,10 @@ class AddAccountFormCubit extends Cubit<AddAccountFormState> {
         final result = await _bankRepo.resolveBankAccount(
           ResolveAccountRequest(
             accountNumber: state.accountNumber,
-            bankCode: state.bankName,
+            bankCode: state.banks
+                .where((element) => element.id == state.bankName)
+                .first
+                .bankCode,
           ),
         );
 
@@ -101,7 +104,6 @@ class AddAccountFormCubit extends Cubit<AddAccountFormState> {
             emit(
               state.copyWith(
                 accountName: r.data.accountName,
-                bankId: r.data.bankId.toString(),
               ),
             );
           },
@@ -134,7 +136,7 @@ class AddAccountFormCubit extends Cubit<AddAccountFormState> {
         );
 
         failureOrSuccess = await _bankRepo.saveBankAccount(
-          bankId: state.bankId,
+          bankId: state.bankName,
           accountNumber: state.accountNumber,
           accountName: state.accountName,
         );

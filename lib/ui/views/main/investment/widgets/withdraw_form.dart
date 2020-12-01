@@ -90,7 +90,7 @@ class WithdrawForm extends StatelessWidget {
                       ),
                       SizedBox(height: SizeConfig.yMargin(context, 2)),
                       Container(
-                        height: SizeConfig.yMargin(context, 24),
+                        height: SizeConfig.yMargin(context, 27),
                         child: AccountsCardsWrapper(
                           loaded: (loaded) => ListView.separated(
                             scrollDirection: Axis.horizontal,

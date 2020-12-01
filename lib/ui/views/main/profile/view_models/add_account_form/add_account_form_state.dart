@@ -3,7 +3,6 @@ part of 'add_account_form_cubit.dart';
 @freezed
 abstract class AddAccountFormState with _$AddAccountFormState {
   const factory AddAccountFormState({
-    @required String bankId,
     @required String bankName,
     @required List<Value> banks,
     @required String accountNumber,
@@ -23,6 +22,5 @@ abstract class AddAccountFormState with _$AddAccountFormState {
         bankName: "",
         accountName: "",
         banks: [Value(name: "", id: "", bankCode: "")],
-        bankId: "",
       );
 }

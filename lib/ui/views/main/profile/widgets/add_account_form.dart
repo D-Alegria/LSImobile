@@ -84,8 +84,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                       SizedBox(height: SizeConfig.yMargin(context, 3)),
                       sharedDropDownFormField<String>(
                         value: state.banks
-                            .where(
-                                (element) => element.bankCode == state.bankName)
+                            .where((element) => element.id == state.bankName)
                             .first
                             .name,
                         items: state.banks.map((e) => e.name).toList(),
@@ -94,7 +93,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                         onChanged: (value) {
                           var index;
                           state.banks.map((e) {
-                            if (e.name == value) index = e.bankCode;
+                            if (e.name == value) index = e.id;
                           }).toList();
                           context
                               .bloc<AddAccountFormCubit>()

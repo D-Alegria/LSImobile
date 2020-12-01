@@ -28,7 +28,7 @@ class BankAccountCard extends StatelessWidget {
           horizontal: SizeConfig.xMargin(context, 5),
         ),
         gradient: ColorStyles.lightGradient,
-        height: SizeConfig.yMargin(context, 23),
+        height: SizeConfig.yMargin(context, 25),
         width: SizeConfig.xMargin(context, 75),
         alignment: Alignment.centerLeft,
         child: Row(
