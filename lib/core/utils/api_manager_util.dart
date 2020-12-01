@@ -73,8 +73,7 @@ class ApiManager {
             message:
                 "Please connect to an active internet provider and try again."));
       }
-    } on SocketException catch (error, stackTrace) {
-      Catcher.reportCheckedError(error, stackTrace);
+    } on SocketException {
       return left(NetworkGlitch(message: "Unable to connect to server"));
     } on Exception catch (error, stackTrace) {
       Catcher.reportCheckedError(error, stackTrace);
