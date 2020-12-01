@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:auto_route/auto_route.dart';
-import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 
 class HomeViewModel extends ChangeNotifier {
   String name = 'John Doe';
@@ -27,18 +25,6 @@ class HomeViewModel extends ChangeNotifier {
   onChanged(int index) {
     _index = index;
     notifyListeners();
-  }
-
-  navigateToProfileView(BuildContext context) {
-    context.navigator.pushMainView(pageNumber: 4);
-  }
-
-  navigateToLoanView(BuildContext context) {
-    context.navigator.pushLoanProductView();
-  }
-
-  navigateToInvestmentView(BuildContext context) {
-    context.navigator.pushMainView(pageNumber: 2);
   }
 
   @override

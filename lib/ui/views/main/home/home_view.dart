@@ -8,6 +8,8 @@ import 'package:lsi_mobile/ui/views/main/home/view_model/home_viewmodel.dart';
 import 'package:lsi_mobile/ui/views/main/home/widgets/bottom_cards.dart';
 import 'package:lsi_mobile/ui/views/main/home/widgets/home_card.dart';
 import 'package:lsi_mobile/ui/views/main/home/widgets/row_card.dart';
+import 'package:lsi_mobile/ui/views/main/investment/investment_view/view_model/investment_view_cubit.dart'
+    as ivc;
 import 'package:lsi_mobile/ui/views/main/view_model/main_view/main_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_bloc.dart';
 import 'package:provider/provider.dart';
@@ -19,18 +21,21 @@ class HomeView extends StatelessWidget {
     var mainView = BlocProvider.of<MainViewCubit>(context);
     return Scaffold(
       body: RefreshIndicator(
-        onRefresh: () async => Future.value(
-            context.bloc<UserProfileBloc>()..add(GetUserDetails())),
+        onRefresh: () async => Future.value([
+          context.bloc<UserProfileBloc>()..add(GetUserDetails()),
+          context.bloc<ivc.InvestmentViewCubit>().checkForInvestments(),
+        ]),
         child: UserDetailsWrapper(
-          loaded: (userData) =>
-              _buildHomeView(context, userData, model, mainView),
+          loaded: (userData) => InvestmentWrapper(
+              loaded: (investmentData) => _buildHomeView(
+                  context, userData, investmentData, model, mainView)),
         ),
       ),
     );
   }
 
-  Widget _buildHomeView(BuildContext context, Loaded val, HomeViewModel model,
-      MainViewCubit mainView) {
+  Widget _buildHomeView(BuildContext context, Loaded user, ivc.Loaded invest,
+      HomeViewModel model, MainViewCubit mainView) {
     return Container(
       height: SizeConfig.yMargin(context, 100),
       margin: EdgeInsets.symmetric(
@@ -44,10 +49,10 @@ class HomeView extends StatelessWidget {
               horizontal: SizeConfig.xMargin(context, 1.5),
             ),
             child: ScreenHeader(
-              firstText: val.fullName,
+              firstText: user.fullName,
               secondText: model.greeting(),
               investment: false,
-              image: val.profilePicture,
+              image: user.profilePicture,
             ),
           ),
           SizedBox(height: SizeConfig.yMargin(context, 5)),
@@ -59,14 +64,12 @@ class HomeView extends StatelessWidget {
             onPressed: () => mainView.changePage(1),
           ),
           SizedBox(height: SizeConfig.yMargin(context, 1)),
-          InvestmentWrapper(
-            loaded: (loaded) => HomeCard(
-              firstText: 'Your Investment',
-              secondText: 'N ${loaded.investmentBalance}',
-              thirdText: 'Investment balance',
-              buttonText: 'Book investment',
-              onPressed: () => mainView.changePage(2),
-            ),
+          HomeCard(
+            firstText: 'Your Investment',
+            secondText: 'N ${invest.investmentBalance}',
+            thirdText: 'Investment balance',
+            buttonText: 'Book investment',
+            onPressed: () => mainView.changePage(2),
           ),
           SizedBox(height: SizeConfig.yMargin(context, 5)),
           Row(
@@ -113,9 +116,7 @@ class HomeView extends StatelessWidget {
             child: PageView(
               scrollDirection: Axis.horizontal,
               controller: model.controller,
-              onPageChanged: (int index) {
-                model.onChanged(index);
-              },
+              onPageChanged: (int index) => model.onChanged(index),
               physics: ClampingScrollPhysics(),
               children: [
                 OtherServices(
