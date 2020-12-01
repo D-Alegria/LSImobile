@@ -24,6 +24,7 @@ class CardPaymentWebView extends StatelessWidget {
   Widget build(BuildContext context) {
     Future<bool> _pop() {
       context.bloc<AddCardFormCubit>().reset();
+      context.navigator.popUntilPath(Routes.accountsCardsView);
       return Future.value(true);
     }
 
