@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
 
-import 'config_reader_util.dart';
+import 'file_reader_util.dart';
 import 'network_util.dart';
 
 @lazySingleton
@@ -21,11 +21,11 @@ class ApiManager {
     @required String url,
   }) async {
     print(
-        "Sent [GET] Request to path: ${ConfigReader.getAppConfig().baseUrl + url}");
+        "Sent [GET] Request to path: ${FileReader.getAppConfig().baseUrl + url}");
     return await performRequest(
       http.get(
-        ConfigReader.getAppConfig().baseUrl + url,
-        headers: {"x-api-key": ConfigReader.getAppConfig().apiKey},
+        FileReader.getAppConfig().baseUrl + url,
+        headers: {"x-api-key": FileReader.getAppConfig().apiKey},
       ),
     );
   }
@@ -35,11 +35,11 @@ class ApiManager {
     Map<String, dynamic> requestBody,
   }) async {
     print(
-        "Sent [POST] Request to path: ${ConfigReader.getAppConfig().baseUrl + url} with payload $requestBody");
+        "Sent [POST] Request to path: ${FileReader.getAppConfig().baseUrl + url} with payload $requestBody");
     return await performRequest(
       http.post(
-        ConfigReader.getAppConfig().baseUrl + url,
-        headers: {"x-api-key": ConfigReader.getAppConfig().apiKey},
+        FileReader.getAppConfig().baseUrl + url,
+        headers: {"x-api-key": FileReader.getAppConfig().apiKey},
         body: convert.jsonEncode(requestBody),
       ),
     );

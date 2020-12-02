@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/core/models/enums/card_transaction.dart';
-import 'package:lsi_mobile/core/utils/config_reader_util.dart';
+import 'package:lsi_mobile/core/utils/file_reader_util.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/views/main/investment/new_investment/view_model/new_investment_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/loans/make_payment/view_model/make_payment_cubit.dart';
@@ -45,7 +45,7 @@ class CardPaymentWebView extends StatelessWidget {
             onWebViewCreated: (controller) => _controller.complete(controller),
             onPageStarted: (url) async {
               if (url
-                  .contains(ConfigReader.getAppConfig().paystackConfirmUrl)) {
+                  .contains(FileReader.getAppConfig().paystackConfirmUrl)) {
                 switch (transaction) {
                   case CardTransaction.AddNewCard:
                     await context.navigator.pop();

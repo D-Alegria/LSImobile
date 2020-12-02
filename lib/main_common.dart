@@ -10,11 +10,11 @@ import 'package:lsi_mobile/ui/lsi_app_prod.dart';
 import 'core/configs/dependency_injection/injection.dart';
 import 'core/configs/logging/catcher.dart';
 import 'core/configs/logging/cubit_observer.dart';
-import 'core/utils/config_reader_util.dart';
+import 'core/utils/file_reader_util.dart';
 
 Future<void> mainCommon(String env) async {
   WidgetsFlutterBinding.ensureInitialized();
-  await ConfigReader.initialize();
+  await FileReader.initialize();
   await configureInjection(env);
   Bloc.observer = MainCubitObserver();
 

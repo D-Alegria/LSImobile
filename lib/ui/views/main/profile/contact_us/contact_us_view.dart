@@ -2,7 +2,7 @@ import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lsi_mobile/core/utils/config_reader_util.dart';
+import 'package:lsi_mobile/core/utils/file_reader_util.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -57,7 +57,7 @@ class ContactUsView extends StatelessWidget {
               background: ColorStyles.lGrey.withOpacity(0.4),
               colorIcon: false,
               onTap: () async {
-                String link = "tel: ${ConfigReader.getAppConfig().phone}";
+                String link = "tel: ${FileReader.getAppConfig().phone}";
                 if (await canLaunch(link)) {
                   await launch(link);
                 } else {
@@ -80,7 +80,7 @@ class ContactUsView extends StatelessWidget {
               background: ColorStyles.blue.withOpacity(0.08),
               colorIcon: false,
               onTap: () async {
-                String link = "mailto:${ConfigReader.getAppConfig().email}";
+                String link = "mailto:${FileReader.getAppConfig().email}";
                 if (await canLaunch(link)) {
                   await launch(link);
                 } else {
@@ -103,7 +103,7 @@ class ContactUsView extends StatelessWidget {
               colorIcon: false,
               onTap: () async {
                 String link =
-                    "https://wa.me/${ConfigReader.getAppConfig().whatsApp}?text=Hello \nGood morning, my name is ";
+                    "https://wa.me/${FileReader.getAppConfig().whatsApp}?text=Hello \nGood morning, my name is ";
                 if (await canLaunch(link)) {
                   await launch(
                     link,
