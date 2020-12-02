@@ -8,6 +8,7 @@ class ProfileForm extends StatelessWidget {
   final Widget form;
   final TabController tabController;
   final List<String> tabs;
+  final bool isScrollable;
 
   const ProfileForm({
     Key key,
@@ -15,6 +16,7 @@ class ProfileForm extends StatelessWidget {
     @required this.form,
     @required this.tabController,
     @required this.tabs,
+    this.isScrollable = false,
   }) : super(key: key);
 
   @override
@@ -32,7 +34,7 @@ class ProfileForm extends StatelessWidget {
           children: [
             header(context, title),
             TabBar(
-              isScrollable: true,
+              isScrollable: isScrollable,
               controller: tabController,
               unselectedLabelColor: Colors.white,
               indicatorColor: ColorStyles.white,
@@ -65,32 +67,6 @@ class ProfileForm extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          // Positioned(
-          //   bottom: SizeConfig.yMargin(context, -23),
-          //   right: SizeConfig.xMargin(context, -50),
-          //   left: SizeConfig.xMargin(context, 0),
-          //   child: Container(
-          //     height: SizeConfig.yMargin(context, 40),
-          //     width: SizeConfig.xMargin(context, 40),
-          //     decoration: BoxDecoration(
-          //       shape: BoxShape.circle,
-          //       color: Color.fromARGB(51, 255, 234, 164),
-          //     ),
-          //   ),
-          // ),
-          // Positioned(
-          //   bottom: SizeConfig.yMargin(context, -20),
-          //   right: SizeConfig.xMargin(context, 0),
-          //   left: SizeConfig.xMargin(context, -50),
-          //   child: Container(
-          //     height: SizeConfig.yMargin(context, 40),
-          //     width: SizeConfig.xMargin(context, 40),
-          //     decoration: BoxDecoration(
-          //       shape: BoxShape.circle,
-          //       color: Color.fromARGB(15, 242, 74, 74),
-          //     ),
-          //   ),
-          // ),
           Positioned(
             bottom: SizeConfig.yMargin(context, -37),
             right: SizeConfig.xMargin(context, 0),
@@ -117,12 +93,7 @@ class ProfileForm extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: SizeConfig.xMargin(context, 5),
-            ),
-            child: form,
-          )
+          form
         ],
       ),
     );

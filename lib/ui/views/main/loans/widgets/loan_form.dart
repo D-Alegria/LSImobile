@@ -99,12 +99,7 @@ class LoanForm extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: SizeConfig.xMargin(context, 5),
-            ),
-            child: form,
-          )
+          form
         ],
       ),
     );

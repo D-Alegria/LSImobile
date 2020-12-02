@@ -22,127 +22,135 @@ class ResidenceForm extends StatelessWidget {
               autovalidateMode: state.showErrorMessages
                   ? AutovalidateMode.always
                   : AutovalidateMode.disabled,
-              child: ListView(
-                children: [
-                  SizedBox(height: SizeConfig.yMargin(context, 6)),
-                  sharedDropDownFormField<String>(
-                    value: state.residences
-                        .where((element) => element.id == state.typeOfResidence)
-                        .first
-                        .name,
-                    items: state.residences.map((e) => e.name).toList(),
-                    context: context,
-                    labelText: "Type of residence",
-                    onChanged: (String value) {
-                      var index;
-                      state.residences.map((e) {
-                        if (e.name == value) index = e.id;
-                      }).toList();
-                      context
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: SizeConfig.xMargin(context, 5),
+                ),
+                child: ListView(
+                  children: [
+                    SizedBox(height: SizeConfig.yMargin(context, 6)),
+                    sharedDropDownFormField<String>(
+                      value: state.residences
+                          .where(
+                              (element) => element.id == state.typeOfResidence)
+                          .first
+                          .name,
+                      items: state.residences.map((e) => e.name).toList(),
+                      context: context,
+                      labelText: "Type of residence",
+                      onChanged: (String value) {
+                        var index;
+                        state.residences.map((e) {
+                          if (e.name == value) index = e.id;
+                        }).toList();
+                        context
+                            .bloc<ResidenceFormCubit>()
+                            .typeOfResidenceChanged(index);
+                      },
+                    ),
+                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    SharedTextFormField(
+                      labelText: "Your current address",
+                      initialValue: state.currentAddress,
+                      onChanged: (value) => context
                           .bloc<ResidenceFormCubit>()
-                          .typeOfResidenceChanged(index);
-                    },
-                  ),
-                  SizedBox(height: SizeConfig.yMargin(context, 2)),
-                  SharedTextFormField(
-                    labelText: "Your current address",
-                    initialValue: state.currentAddress,
-                    onChanged: (value) => context
-                        .bloc<ResidenceFormCubit>()
-                        .currentAddressChanged(value),
-                    validator: (value) {
-                      if (state.currentAddress.isEmpty)
-                        return "Field name is required";
-                      return null;
-                    },
-                  ),
-                  SizedBox(height: SizeConfig.yMargin(context, 2)),
-                  sharedDropDownFormField<String>(
-                    value: state.states
-                        .where((element) => element.id == state.state)
-                        .first
-                        .name,
-                    items: state.states.map((e) => e.name).toList(),
-                    context: context,
-                    labelText: "State",
-                    onChanged: (String value) {
-                      var index;
-                      state.states.map((e) {
-                        if (e.name == value) index = e.id;
-                      }).toList();
-                      context.bloc<ResidenceFormCubit>().stateChanged(index);
-                    },
-                  ),
-                  SizedBox(height: SizeConfig.yMargin(context, 2)),
-                  sharedDropDownFormField<String>(
-                    value: state.lgas
-                        .where((element) => element.id == state.lga)
-                        .first
-                        .name,
-                    items: state.lgas.map((e) => e.name).toList(),
-                    context: context,
-                    labelText: "Local government area",
-                    onChanged: (String value) {
-                      var index;
-                      state.lgas.map((e) {
-                        if (e.name == value) index = e.id;
-                      }).toList();
-                      context.bloc<ResidenceFormCubit>().lgaChanged(index);
-                    },
-                  ),
-                  SizedBox(height: SizeConfig.yMargin(context, 2)),
-                  SharedTextFormField(
-                    labelText: "How long have you lived there?",
-                    initialValue: state.stayPeriod,
-                    onChanged: (value) => context
-                        .bloc<ResidenceFormCubit>()
-                        .stayPeriodChanged(value),
-                    validator: (value) {
-                      if (state.stayPeriod.isEmpty)
-                        return "Field name is required";
-                      return null;
-                    },
-                    keyboardType: TextInputType.phone,
-                  ),
-                  SizedBox(height: SizeConfig.yMargin(context, 2)),
-                  isEditProfile
-                      ? Padding(
-                          padding: EdgeInsets.only(
-                            right: SizeConfig.xMargin(context, 60),
+                          .currentAddressChanged(value),
+                      validator: (value) {
+                        if (state.currentAddress.isEmpty)
+                          return "Field name is required";
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    sharedDropDownFormField<String>(
+                      value: state.states
+                          .where((element) => element.id == state.state)
+                          .first
+                          .name,
+                      items: state.states.map((e) => e.name).toList(),
+                      context: context,
+                      labelText: "State",
+                      onChanged: (String value) {
+                        var index;
+                        state.states.map((e) {
+                          if (e.name == value) index = e.id;
+                        }).toList();
+                        context.bloc<ResidenceFormCubit>().stateChanged(index);
+                      },
+                    ),
+                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    sharedDropDownFormField<String>(
+                      value: state.lgas
+                          .where((element) => element.id == state.lga)
+                          .first
+                          .name,
+                      items: state.lgas.map((e) => e.name).toList(),
+                      context: context,
+                      labelText: "Local government area",
+                      onChanged: (String value) {
+                        var index;
+                        state.lgas.map((e) {
+                          if (e.name == value) index = e.id;
+                        }).toList();
+                        context.bloc<ResidenceFormCubit>().lgaChanged(index);
+                      },
+                    ),
+                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    SharedTextFormField(
+                      labelText: "How long have you lived there?",
+                      initialValue: state.stayPeriod,
+                      onChanged: (value) => context
+                          .bloc<ResidenceFormCubit>()
+                          .stayPeriodChanged(value),
+                      validator: (value) {
+                        if (state.stayPeriod.isEmpty)
+                          return "Field name is required";
+                        return null;
+                      },
+                      keyboardType: TextInputType.phone,
+                    ),
+                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    isEditProfile
+                        ? Padding(
+                            padding: EdgeInsets.only(
+                              right: SizeConfig.xMargin(context, 60),
+                            ),
+                            child: sharedOutlineRaisedButton(
+                              context: context,
+                              onPressed: () {
+                                if (state.isEdited) {
+                                  context
+                                      .bloc<ResidenceFormCubit>()
+                                      .submitResidenceForm(isEditProfile: true);
+                                  context
+                                      .bloc<EditProfileCubit>()
+                                      .profileSaved();
+                                } else {
+                                  showInfoSnackBar(context, "Edit a field");
+                                }
+                              },
+                              color: ColorStyles.blue,
+                              text: "Save",
+                              minWidth: SizeConfig.xMargin(context, 30),
+                            ),
+                          )
+                        : Container(
+                            margin: EdgeInsets.only(
+                              top: SizeConfig.yMargin(context, 15),
+                            ),
+                            child: sharedRaisedButton(
+                              context: context,
+                              onPressed: () => context
+                                  .bloc<ResidenceFormCubit>()
+                                  .submitResidenceForm(isEditProfile: false),
+                              color: ColorStyles.blue,
+                              text: "Submit",
+                              minWidth: SizeConfig.xMargin(context, 90),
+                            ),
                           ),
-                          child: sharedOutlineRaisedButton(
-                            context: context,
-                            onPressed: () {
-                              if (state.isEdited) {
-                                context
-                                    .bloc<ResidenceFormCubit>()
-                                    .submitResidenceForm(isEditProfile: true);
-                                context.bloc<EditProfileCubit>().profileSaved();
-                              } else {
-                                showInfoSnackBar(context, "Edit a field");
-                              }
-                            },
-                            color: ColorStyles.blue,
-                            text: "Save",
-                            minWidth: SizeConfig.xMargin(context, 30),
-                          ),
-                        )
-                      : Container(
-                          margin: EdgeInsets.only(
-                            top: SizeConfig.yMargin(context, 15),
-                          ),
-                          child: sharedRaisedButton(
-                            context: context,
-                            onPressed: () => context
-                                .bloc<ResidenceFormCubit>()
-                                .submitResidenceForm(isEditProfile: false),
-                            color: ColorStyles.blue,
-                            text: "Submit",
-                            minWidth: SizeConfig.xMargin(context, 90),
-                          ),
-                        ),
-                  SizedBox(height: SizeConfig.yMargin(context, 2.5)),
-                ],
+                    SizedBox(height: SizeConfig.yMargin(context, 2.5)),
+                  ],
+                ),
               ),
             ),
       listener: (context, state) => state.submitResidenceFailureOrSuccess.fold(

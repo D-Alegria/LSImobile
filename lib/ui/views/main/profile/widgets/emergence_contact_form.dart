@@ -23,107 +23,112 @@ class EmergenceContactForm extends StatelessWidget {
               autovalidateMode: state.showErrorMessages
                   ? AutovalidateMode.always
                   : AutovalidateMode.disabled,
-              child: ListView(
-                children: [
-                  SizedBox(height: SizeConfig.yMargin(context, 6)),
-                  SharedTextFormField(
-                    labelText: "Full name",
-                    initialValue: state.fullName,
-                    onChanged: (value) => context
-                        .bloc<EmergencyContactFormCubit>()
-                        .fullNameChanged(value),
-                    validator: (value) {
-                      if (state.fullName.isEmpty)
-                        return "Field name is required";
-                      return null;
-                    },
-                  ),
-                  SizedBox(height: SizeConfig.yMargin(context, 2)),
-                  SharedTextFormField(
-                    labelText: "Email address",
-                    initialValue: state.email,
-                    onChanged: (value) => context
-                        .bloc<EmergencyContactFormCubit>()
-                        .emailChanged(value),
-                    validator: (value) {
-                      if (!state.email.isEmail) return "Incorrect email";
-                      return null;
-                    },
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  SizedBox(height: SizeConfig.yMargin(context, 2)),
-                  SharedTextFormField(
-                    labelText: "Phone number",
-                    initialValue: state.phone,
-                    onChanged: (value) => context
-                        .bloc<EmergencyContactFormCubit>()
-                        .phoneNumberChanged(value),
-                    validator: (value) {
-                      if (state.phone.isEmpty) return "Field name is required";
-                      return null;
-                    },
-                    keyboardType: TextInputType.phone,
-                  ),
-                  SizedBox(height: SizeConfig.yMargin(context, 2)),
-                  sharedDropDownFormField<String>(
-                    value: state.relationShips
-                        .where((element) => element.id == state.relationShip)
-                        .first
-                        .name,
-                    items: state.relationShips.map((e) => e.name).toList(),
-                    context: context,
-                    labelText: "Relationship",
-                    onChanged: (String value) {
-                      var index;
-                      state.relationShips.map((e) {
-                        if (e.name == value) index = e.id;
-                      }).toList();
-                      context
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: SizeConfig.xMargin(context, 5),
+                ),
+                child: ListView(
+                  children: [
+                    SizedBox(height: SizeConfig.yMargin(context, 6)),
+                    SharedTextFormField(
+                      labelText: "Full name",
+                      initialValue: state.fullName,
+                      onChanged: (value) => context
                           .bloc<EmergencyContactFormCubit>()
-                          .relationShipChanged(index);
-                    },
-                  ),
-                  SizedBox(height: SizeConfig.yMargin(context, 2)),
-                  isEditProfile
-                      ? Padding(
-                          padding: EdgeInsets.only(
-                            right: SizeConfig.xMargin(context, 60),
+                          .fullNameChanged(value),
+                      validator: (value) {
+                        if (state.fullName.isEmpty)
+                          return "Field name is required";
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    SharedTextFormField(
+                      labelText: "Email address",
+                      initialValue: state.email,
+                      onChanged: (value) => context
+                          .bloc<EmergencyContactFormCubit>()
+                          .emailChanged(value),
+                      validator: (value) {
+                        if (!state.email.isEmail) return "Incorrect email";
+                        return null;
+                      },
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    SharedTextFormField(
+                      labelText: "Phone number",
+                      initialValue: state.phone,
+                      onChanged: (value) => context
+                          .bloc<EmergencyContactFormCubit>()
+                          .phoneNumberChanged(value),
+                      validator: (value) {
+                        if (state.phone.isEmpty) return "Field name is required";
+                        return null;
+                      },
+                      keyboardType: TextInputType.phone,
+                    ),
+                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    sharedDropDownFormField<String>(
+                      value: state.relationShips
+                          .where((element) => element.id == state.relationShip)
+                          .first
+                          .name,
+                      items: state.relationShips.map((e) => e.name).toList(),
+                      context: context,
+                      labelText: "Relationship",
+                      onChanged: (String value) {
+                        var index;
+                        state.relationShips.map((e) {
+                          if (e.name == value) index = e.id;
+                        }).toList();
+                        context
+                            .bloc<EmergencyContactFormCubit>()
+                            .relationShipChanged(index);
+                      },
+                    ),
+                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    isEditProfile
+                        ? Padding(
+                            padding: EdgeInsets.only(
+                              right: SizeConfig.xMargin(context, 60),
+                            ),
+                            child: sharedOutlineRaisedButton(
+                              context: context,
+                              onPressed: () {
+                                if (state.isEdited) {
+                                  context
+                                      .bloc<EmergencyContactFormCubit>()
+                                      .submitEmergencyContactForm(
+                                          isEditProfile: true);
+                                  context.bloc<EditProfileCubit>().profileSaved();
+                                } else {
+                                  showInfoSnackBar(context, "Edit a field");
+                                }
+                              },
+                              color: ColorStyles.blue,
+                              text: "Save",
+                              minWidth: SizeConfig.xMargin(context, 30),
+                            ),
+                          )
+                        : Container(
+                            margin: EdgeInsets.only(
+                              top: SizeConfig.yMargin(context, 17),
+                            ),
+                            child: sharedRaisedButton(
+                              context: context,
+                              onPressed: () => context
+                                  .bloc<EmergencyContactFormCubit>()
+                                  .submitEmergencyContactForm(
+                                      isEditProfile: false),
+                              color: ColorStyles.blue,
+                              text: "Submit",
+                              minWidth: SizeConfig.xMargin(context, 90),
+                            ),
                           ),
-                          child: sharedOutlineRaisedButton(
-                            context: context,
-                            onPressed: () {
-                              if (state.isEdited) {
-                                context
-                                    .bloc<EmergencyContactFormCubit>()
-                                    .submitEmergencyContactForm(
-                                        isEditProfile: true);
-                                context.bloc<EditProfileCubit>().profileSaved();
-                              } else {
-                                showInfoSnackBar(context, "Edit a field");
-                              }
-                            },
-                            color: ColorStyles.blue,
-                            text: "Save",
-                            minWidth: SizeConfig.xMargin(context, 30),
-                          ),
-                        )
-                      : Container(
-                          margin: EdgeInsets.only(
-                            top: SizeConfig.yMargin(context, 17),
-                          ),
-                          child: sharedRaisedButton(
-                            context: context,
-                            onPressed: () => context
-                                .bloc<EmergencyContactFormCubit>()
-                                .submitEmergencyContactForm(
-                                    isEditProfile: false),
-                            color: ColorStyles.blue,
-                            text: "Submit",
-                            minWidth: SizeConfig.xMargin(context, 90),
-                          ),
-                        ),
-                  SizedBox(height: SizeConfig.yMargin(context, 2.5)),
-                ],
+                    SizedBox(height: SizeConfig.yMargin(context, 2.5)),
+                  ],
+                ),
               ),
             ),
       listener: (context, state) => state.submitFailureOrSuccess.fold(

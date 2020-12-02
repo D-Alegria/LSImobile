@@ -73,6 +73,7 @@ class _EditProfileViewState extends State<EditProfileView>
             "Education and Employment",
             "Residence",
           ],
+          isScrollable: true,
           form: TabBarView(
             children: [
               PersonalInfoForm(isEditProfile: true),

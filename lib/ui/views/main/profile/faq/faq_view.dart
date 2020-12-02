@@ -11,31 +11,14 @@ class FAQView extends StatefulWidget {
 
 class _FAQViewState extends State<FAQView> {
   final String faq = "assets/images/faq.png";
-  bool show1, show2, show3;
 
   List faqs = FileReader.faq;
 
-  // [
-  //   {
-  //     'Q': "Will I be charged With Holding Tax (WHT) on my investment?",
-  //     "A": "No. All interest payable are WHT free."
-  //   },
-  //   {
-  //     "Q": "Is my deposit secured with Initiative Moni?",
-  //     "A": "Yes. It is a CBN regulated financial institution."
-  //   },
-  //   {"Q": "Can I run multiple investments on the app?", "A": "Yes"}
-  // ];
-
-  List<bool> shows;
+  List<bool> shows = List.filled(FileReader.faq.length, false);
 
   @override
   void initState() {
     super.initState();
-    show1 = false;
-    show2 = false;
-    show3 = false;
-    shows = List.filled(faqs.length, false);
   }
 
   @override
@@ -152,7 +135,7 @@ Widget detailsBox({
             ),
             isSelected
                 ? Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: SizeConfig.yMargin(context, 2)),
                       for (int i = 0; i < child.length; i++)

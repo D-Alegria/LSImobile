@@ -78,28 +78,33 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
   }
 
   Widget buildCardsView(Loaded e, BuildContext context) {
-    return ListView(
-      children: [
-        SizedBox(height: SizeConfig.yMargin(context, 4)),
-        ListView.separated(
-          shrinkWrap: true,
-          physics: ScrollPhysics(),
-          itemCount: e.cards.length,
-          itemBuilder: (context, index) {
-            var card = e.cards[index];
-            return ATMCard(card: card);
-          },
-          separatorBuilder: (context, index) =>
-              SizedBox(height: SizeConfig.yMargin(context, 4)),
-        ),
-        buildEmptyContainer(
-          context: context,
-          onTap: () => _showForm(AddCardForm(
-            amount: FileReader.getAppConfig().paystackTestAmount,
-            transaction: CardTransaction.AddNewCard,
-          )),
-        ),
-      ],
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: SizeConfig.xMargin(context, 5),
+      ),
+      child: ListView(
+        children: [
+          SizedBox(height: SizeConfig.yMargin(context, 4)),
+          ListView.separated(
+            shrinkWrap: true,
+            physics: ScrollPhysics(),
+            itemCount: e.cards.length,
+            itemBuilder: (context, index) {
+              var card = e.cards[index];
+              return ATMCard(card: card);
+            },
+            separatorBuilder: (context, index) =>
+                SizedBox(height: SizeConfig.yMargin(context, 4)),
+          ),
+          buildEmptyContainer(
+            context: context,
+            onTap: () => _showForm(AddCardForm(
+              amount: FileReader.getAppConfig().paystackTestAmount,
+              transaction: CardTransaction.AddNewCard,
+            )),
+          ),
+        ],
+      ),
     );
   }
 
@@ -122,29 +127,34 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
   }
 
   Widget buildBankAccountsView(Loaded e, BuildContext context) {
-    return ListView(
-      children: [
-        SizedBox(height: SizeConfig.yMargin(context, 4)),
-        ListView.separated(
-          itemCount: e.accounts.length,
-          shrinkWrap: true,
-          physics: ScrollPhysics(),
-          itemBuilder: (context, index) {
-            var account = e.accounts[index];
-            return BankAccountCard(
-              accountName: account.accountName,
-              accountNumber: account.accountNumber,
-              bankName: account.bankName,
-            );
-          },
-          separatorBuilder: (context, index) =>
-              SizedBox(height: SizeConfig.yMargin(context, 2)),
-        ),
-        buildEmptyContainer(
-          context: context,
-          onTap: () => _showForm(AddAccountForm()),
-        ),
-      ],
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: SizeConfig.xMargin(context, 5),
+      ),
+      child: ListView(
+        children: [
+          SizedBox(height: SizeConfig.yMargin(context, 4)),
+          ListView.separated(
+            itemCount: e.accounts.length,
+            shrinkWrap: true,
+            physics: ScrollPhysics(),
+            itemBuilder: (context, index) {
+              var account = e.accounts[index];
+              return BankAccountCard(
+                accountName: account.accountName,
+                accountNumber: account.accountNumber,
+                bankName: account.bankName,
+              );
+            },
+            separatorBuilder: (context, index) =>
+                SizedBox(height: SizeConfig.yMargin(context, 2)),
+          ),
+          buildEmptyContainer(
+            context: context,
+            onTap: () => _showForm(AddAccountForm()),
+          ),
+        ],
+      ),
     );
   }
 }
