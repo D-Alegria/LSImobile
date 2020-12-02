@@ -32,6 +32,7 @@ class ProfileForm extends StatelessWidget {
           children: [
             header(context, title),
             TabBar(
+              isScrollable: true,
               controller: tabController,
               unselectedLabelColor: Colors.white,
               indicatorColor: ColorStyles.white,
@@ -62,8 +63,68 @@ class ProfileForm extends StatelessWidget {
           topRight: Radius.circular(20),
         ),
       ),
-      padding: EdgeInsets.symmetric(horizontal: SizeConfig.xMargin(context, 5)),
-      child: form,
+      child: Stack(
+        children: [
+          // Positioned(
+          //   bottom: SizeConfig.yMargin(context, -23),
+          //   right: SizeConfig.xMargin(context, -50),
+          //   left: SizeConfig.xMargin(context, 0),
+          //   child: Container(
+          //     height: SizeConfig.yMargin(context, 40),
+          //     width: SizeConfig.xMargin(context, 40),
+          //     decoration: BoxDecoration(
+          //       shape: BoxShape.circle,
+          //       color: Color.fromARGB(51, 255, 234, 164),
+          //     ),
+          //   ),
+          // ),
+          // Positioned(
+          //   bottom: SizeConfig.yMargin(context, -20),
+          //   right: SizeConfig.xMargin(context, 0),
+          //   left: SizeConfig.xMargin(context, -50),
+          //   child: Container(
+          //     height: SizeConfig.yMargin(context, 40),
+          //     width: SizeConfig.xMargin(context, 40),
+          //     decoration: BoxDecoration(
+          //       shape: BoxShape.circle,
+          //       color: Color.fromARGB(15, 242, 74, 74),
+          //     ),
+          //   ),
+          // ),
+          Positioned(
+            bottom: SizeConfig.yMargin(context, -37),
+            right: SizeConfig.xMargin(context, 0),
+            left: SizeConfig.xMargin(context, -50),
+            child: Container(
+              height: SizeConfig.yMargin(context, 40),
+              width: SizeConfig.xMargin(context, 40),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color.fromARGB(38, 242, 74, 74),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: SizeConfig.yMargin(context, -27),
+            right: SizeConfig.xMargin(context, -80),
+            left: SizeConfig.xMargin(context, 0),
+            child: Container(
+              height: SizeConfig.yMargin(context, 40),
+              width: SizeConfig.xMargin(context, 40),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color.fromARGB(130, 168, 213, 255),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: SizeConfig.xMargin(context, 5),
+            ),
+            child: form,
+          )
+        ],
+      ),
     );
   }
 

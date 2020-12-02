@@ -21,9 +21,9 @@ import '../../datasources/bank/bank_remote_datasource.dart';
 import '../../repositories/bank/bank_repo.dart';
 import '../../repositories/bank/bank_repo_impl.dart';
 import '../logging/catcher.dart';
-import '../../../ui/views/main/profile/view_models/edit_profile/edit_profile_bloc.dart';
-import '../../../ui/views/main/loans/edu_and_employ/view_model/edu_and_employ_bloc.dart';
-import '../../../ui/views/main/loans/emergency_contact/view_model/emergency_contact_bloc.dart';
+import '../../../ui/views/main/profile/view_models/edit_profile/edit_profile_cubit.dart';
+import '../../../ui/views/main/profile/view_models/edu_and_employ_form/edu_and_employ_form_cubit.dart';
+import '../../../ui/views/main/profile/view_models/emergency_contact_form/emergency_contact_form_cubit.dart';
 import '../../../ui/views/main/investment/investment_products/view_model/investment_product_cubit.dart';
 import '../../datasources/investment/investment_remote_datasource.dart';
 import '../../repositories/investment/investment_repo.dart';
@@ -39,11 +39,11 @@ import '../../../ui/views/main/loans/loans_view/view_model/loan_view_cubit.dart'
 import '../../../ui/views/main/loans/make_payment/view_model/make_payment_cubit.dart';
 import '../../utils/network_util.dart';
 import '../../../ui/views/main/investment/new_investment/view_model/new_investment_cubit.dart';
-import '../../../ui/views/main/loans/personal_info/view_model/personal_info_bloc.dart';
+import '../../../ui/views/main/profile/view_models/personal_info_form/personal_info_form_cubit.dart';
 import '../../../ui/views/main/loans/provide_bvn/view_model/provide_bvn_bloc.dart';
 import '../../../ui/views/main/history/view_model/recent_transaction_cubit.dart';
 import 'register_modules.dart';
-import '../../../ui/views/main/loans/residence/view_model/residence_bloc.dart';
+import '../../../ui/views/main/profile/view_models/residence_form/residence_form_cubit.dart';
 import '../../../ui/views/main/investment/investment_plan/view_model/rollover_investment/rollover_form_cubit.dart';
 import '../../../ui/views/main/investment/investment_plan/view_model/terminate_investment/terminate_form_cubit.dart';
 import '../../datasources/user/user_local_datasource.dart';
@@ -66,6 +66,7 @@ GetIt $initGetIt(
   gh.lazySingleton<CatcherConfig>(() => CatcherConfig());
   gh.lazySingleton<DataConnectionChecker>(
       () => registerModule.dataConnectionChecker());
+  gh.lazySingleton<EditProfileCubit>(() => EditProfileCubit());
   gh.lazySingleton<NetworkInfo>(
       () => NetworkInfoImpl(get<DataConnectionChecker>()));
   gh.lazySingleton<UserLocalDataSource>(() => UserLocalDataSourceImpl());
@@ -85,12 +86,10 @@ GetIt $initGetIt(
   gh.factory<AuthenticationBloc>(() => AuthenticationBloc(get<AuthService>()));
   gh.lazySingleton<BankRepo>(
       () => BankRepoImpl(get<UserRepo>(), get<BankRemoteDataSource>()));
-  gh.factory<EditProfileBloc>(
-      () => EditProfileBloc(get<UserRepo>(), get<UserRemoteDataSource>()));
-  gh.lazySingleton<EduAndEmployBloc>(
-      () => EduAndEmployBloc(get<UserRepo>(), get<UserRemoteDataSource>()));
-  gh.lazySingleton<EmergencyContactBloc>(
-      () => EmergencyContactBloc(get<UserRepo>(), get<UserRemoteDataSource>()));
+  gh.lazySingleton<EduAndEmployFormCubit>(
+      () => EduAndEmployFormCubit(get<UserRepo>()));
+  gh.lazySingleton<EmergencyContactFormCubit>(
+      () => EmergencyContactFormCubit(get<UserRepo>()));
   gh.lazySingleton<InvestmentRepo>(() =>
       InvestmentRepoImpl(get<UserRepo>(), get<InvestmentRemoteDataSource>()));
   gh.lazySingleton<InvestmentViewCubit>(
@@ -104,14 +103,14 @@ GetIt $initGetIt(
   gh.lazySingleton<MakePaymentCubit>(() => MakePaymentCubit(get<LoanRepo>()));
   gh.factory<NewInvestmentCubit>(
       () => NewInvestmentCubit(get<InvestmentRepo>()));
-  gh.lazySingleton<PersonalInfoBloc>(
-      () => PersonalInfoBloc(get<UserRepo>(), get<UserRemoteDataSource>()));
+  gh.lazySingleton<PersonalInfoFormCubit>(
+      () => PersonalInfoFormCubit(get<UserRepo>()));
   gh.lazySingleton<ProvideBvnBloc>(
       () => ProvideBvnBloc(get<BankRepo>(), get<UserRepo>()));
   gh.lazySingleton<RecentTransactionCubit>(
       () => RecentTransactionCubit(get<UserRepo>()));
-  gh.lazySingleton<ResidenceBloc>(
-      () => ResidenceBloc(get<UserRepo>(), get<UserRemoteDataSource>()));
+  gh.lazySingleton<ResidenceFormCubit>(
+      () => ResidenceFormCubit(get<UserRepo>()));
   gh.factory<RolloverFormCubit>(() => RolloverFormCubit(get<InvestmentRepo>()));
   gh.factory<TerminateFormCubit>(
       () => TerminateFormCubit(get<InvestmentRepo>()));

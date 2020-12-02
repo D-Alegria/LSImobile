@@ -1,8 +1,8 @@
-part of 'edu_and_employ_bloc.dart';
+part of 'edu_and_employ_form_cubit.dart';
 
 @freezed
-abstract class EduAndEmployState with _$EduAndEmployState {
-  const factory EduAndEmployState({
+abstract class EduAndEmployFormState with _$EduAndEmployFormState {
+  const factory EduAndEmployFormState({
     UserDetailsRequest userDetails,
     @required String levelOfEducation,
     @required String employmentStatus,
@@ -15,10 +15,11 @@ abstract class EduAndEmployState with _$EduAndEmployState {
     @required List<Value> workSectors,
     @required bool showErrorMessages,
     @required bool isSubmitting,
+    @required bool isEdited,
     @required Option<Either<Glitch, Unit>> submitFailureOrSuccess,
-  }) = _EduAndEmployState;
+  }) = _EduAndEmployFormState;
 
-  factory EduAndEmployState.initial() => EduAndEmployState(
+  factory EduAndEmployFormState.initial() => EduAndEmployFormState(
         showErrorMessages: false,
         isSubmitting: false,
         submitFailureOrSuccess: None(),
@@ -31,5 +32,6 @@ abstract class EduAndEmployState with _$EduAndEmployState {
         employmentStatuses: [Value(id: '0', name: '')],
         levelsOfEducation: [Value(id: '0', name: '')],
         workSectors: [Value(id: '0', name: '')],
+        isEdited: false,
       );
 }

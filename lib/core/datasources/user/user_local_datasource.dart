@@ -86,9 +86,10 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   Future<Either<Glitch, List<Value>>> getValue(String key) async {
     return await tryMethod<List<Value>>(
       function: () async {
-        var valueBox = await Hive.openBox<List<Value>>(Constants.valueBox);
-        final List<Value> values = valueBox.get(key);
-        return values.isEmpty
+        var valueBox = await Hive.openBox<List>(Constants.valueBox);
+        var values = valueBox.get(key);
+        values = values?.cast<Value>();
+        return (values ?? []).isEmpty
             ? left(LocalCacheGlitch(message: "No Cache Found"))
             : right(values);
       },
@@ -100,7 +101,7 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
   Future<Either<Glitch, Unit>> saveValue(String key, List<Value> values) async {
     return await tryMethod<Unit>(
       function: () async {
-        var valueBox = await Hive.openBox<List<Value>>(Constants.valueBox);
+        var valueBox = await Hive.openBox<List>(Constants.valueBox);
         valueBox.put(key, values);
         return right(unit);
       },

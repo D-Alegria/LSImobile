@@ -1,11 +1,10 @@
-part of 'personal_info_bloc.dart';
+part of 'personal_info_form_cubit.dart';
 
 @freezed
-abstract class PersonalInfoState with _$PersonalInfoState {
-  const factory PersonalInfoState({
+abstract class PersonalInfoFormState with _$PersonalInfoFormState {
+  const factory PersonalInfoFormState({
     UserDetailsRequest userDetails,
-    @required String firstName,
-    @required String lastName,
+    @required String fullName,
     @required String gender,
     @required String maritalStatus,
     @required String emailAddress,
@@ -15,21 +14,22 @@ abstract class PersonalInfoState with _$PersonalInfoState {
     @required List<Value> maritalStatuses,
     @required bool showErrorMessages,
     @required bool isSubmitting,
+    @required bool isEdited,
     @required Option<Either<Glitch, Unit>> submitFailureOrSuccess,
-  }) = _PersonalInfoState;
+  }) = _PersonalInfoFormState;
 
-  factory PersonalInfoState.initial() => PersonalInfoState(
+  factory PersonalInfoFormState.initial() => PersonalInfoFormState(
         showErrorMessages: false,
         isSubmitting: false,
         submitFailureOrSuccess: None(),
         dateOfBirth: "",
-        lastName: "",
-        firstName: "",
+        fullName: "",
         maritalStatus: "",
         gender: "",
         genders: [Value(name: "", id: "")],
         emailAddress: "",
         phoneNumber: "",
         maritalStatuses: [Value(name: "", id: "")],
+        isEdited: false,
       );
 }

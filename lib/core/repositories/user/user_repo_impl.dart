@@ -5,6 +5,8 @@ import 'package:lsi_mobile/core/datasources/user/user_remote_datasource.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/dto/recent_transaction/recent_transaction.dart';
 import 'package:lsi_mobile/core/models/dto/user/user.dart';
+import 'package:lsi_mobile/core/models/dto/value/value.dart';
+import 'package:lsi_mobile/core/models/enums/drop_down_menu.dart';
 import 'package:lsi_mobile/core/models/requests/token_request/token_request.dart';
 import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
 import 'package:lsi_mobile/core/models/responses/user_details/user_details_data.dart';
@@ -194,13 +196,78 @@ class UserRepoImpl implements UserRepo {
   }
 
   Future<Either<Glitch, String>> get userToken async {
-    final result = await user;
-    return result.fold(
-      (l) => left(l),
-      (r) {
-        if ((r.token ?? "").isEmpty)
-          return left(UnAuthenticatedGlitch(message: "User Not Authenticated"));
-        return right(r.token);
+    return await tryMethod<String>(
+      errorMessage: "Internal System Error Occurred:URP-GUTo",
+      function: () async {
+        final result = await user;
+        return result.fold(
+          (l) => left(l),
+          (r) {
+            if ((r.token ?? "").isEmpty)
+              return left(
+                  UnAuthenticatedGlitch(message: "User Not Authenticated"));
+            return right(r.token);
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  Future<Either<Glitch, List<Value>>> getDropDownOptions(DropDownMenu menu,
+          {String lga}) =>
+      tryMethod<List<Value>>(
+        errorMessage: "Internal System Error Occurred:URP-GUTo",
+        function: () async {
+          String key = lga == null ? menu.toString() : menu.toString() + lga;
+          final local = await _userLocalDataSource.getValue(key);
+          return local.fold(
+            (failure) async => await getRemoteData(menu, lga: lga),
+            (success) async {
+              if (success.isEmpty)
+                return await getRemoteData(menu, lga: lga);
+              else
+                return right(success);
+            },
+          );
+        },
+      );
+
+  Future<Either<Glitch, List<Value>>> getRemoteData(DropDownMenu menu,
+      {String lga}) async {
+    Either<Glitch, List<Value>> remote;
+    switch (menu) {
+      case DropDownMenu.Gender:
+        remote = await _userRemoteDataSource.genders;
+        break;
+      case DropDownMenu.EducationSectors:
+        remote = await _userRemoteDataSource.educationSectors;
+        break;
+      case DropDownMenu.WorkSectors:
+        remote = await _userRemoteDataSource.workSectors;
+        break;
+      case DropDownMenu.Occupations:
+        remote = await _userRemoteDataSource.occupations;
+        break;
+      case DropDownMenu.MaritalStatuses:
+        remote = await _userRemoteDataSource.maritalStatus;
+        break;
+      case DropDownMenu.ResidenceTypes:
+        remote = await _userRemoteDataSource.residenceTypes;
+        break;
+      case DropDownMenu.States:
+        remote = await _userRemoteDataSource.states;
+        break;
+      case DropDownMenu.Lgas:
+        remote = await _userRemoteDataSource.getLGAS(lga);
+        break;
+    }
+    return remote.fold(
+      (failure) => left(failure),
+      (success) async {
+        String key = lga == null ? menu.toString() : menu.toString() + lga;
+        await _userLocalDataSource.saveValue(key, success);
+        return right(success);
       },
     );
   }

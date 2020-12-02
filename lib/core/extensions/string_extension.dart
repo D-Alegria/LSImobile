@@ -1,4 +1,3 @@
-
 extension StringExtension on String {
   String get capitalize {
     if (this == null || this.isEmpty) return this;
@@ -9,6 +8,12 @@ extension StringExtension on String {
     const emailRegex =
         r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
     if (RegExp(emailRegex).hasMatch(this)) return true;
+    return false;
+  }
+
+  bool get isValuePhoneNo {
+    // todo update phone no
+    if (this.length == 11) return true;
     return false;
   }
 

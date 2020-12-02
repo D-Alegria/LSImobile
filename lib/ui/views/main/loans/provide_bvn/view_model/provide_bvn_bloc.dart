@@ -44,8 +44,8 @@ class ProvideBvnBloc extends Bloc<ProvideBvnEvent, ProvideBvnState> {
           failureOrSuccess = await _bankRepo.initiateBvnValidation(
             InitiateBVNValidationRequest(
               bvn: state.bvn,
-              firstName: value.fullName.split(" ")[0],
-              lastName: value.fullName.split(" ")[1],
+              firstName: value.fullName,
+              lastName: value.fullName,
             ),
           );
 

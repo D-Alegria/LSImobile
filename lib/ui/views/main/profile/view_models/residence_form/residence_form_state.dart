@@ -1,8 +1,8 @@
-part of 'residence_bloc.dart';
+part of 'residence_form_cubit.dart';
 
 @freezed
-abstract class ResidenceState with _$ResidenceState {
-  const factory ResidenceState({
+abstract class ResidenceFormState with _$ResidenceFormState {
+  const factory ResidenceFormState({
     UserDetailsRequest userDetails,
     @required String typeOfResidence,
     @required String currentAddress,
@@ -14,10 +14,11 @@ abstract class ResidenceState with _$ResidenceState {
     @required List<Value> lgas,
     @required bool showErrorMessages,
     @required bool isSubmitting,
+    @required bool isEdited,
     @required Option<Either<Glitch, Unit>> submitResidenceFailureOrSuccess,
-  }) = _ResidenceState;
+  }) = _ResidenceFormState;
 
-  factory ResidenceState.initial() => ResidenceState(
+  factory ResidenceFormState.initial() => ResidenceFormState(
         showErrorMessages: false,
         isSubmitting: false,
         submitResidenceFailureOrSuccess: None(),
@@ -29,5 +30,6 @@ abstract class ResidenceState with _$ResidenceState {
         lgas: [Value(name: "", id: "")],
         state: "",
         typeOfResidence: "",
+        isEdited: false,
       );
 }

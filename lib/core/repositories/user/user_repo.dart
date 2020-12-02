@@ -2,6 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/dto/recent_transaction/recent_transaction.dart';
 import 'package:lsi_mobile/core/models/dto/user/user.dart';
+import 'package:lsi_mobile/core/models/dto/value/value.dart';
+import 'package:lsi_mobile/core/models/enums/drop_down_menu.dart';
 import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
 import 'package:lsi_mobile/core/models/responses/user_details/user_details_data.dart';
 
@@ -39,4 +41,7 @@ abstract class UserRepo {
   Future<Either<Glitch, Unit>> saveObject(String key, dynamic value);
 
   Future<Either<Glitch, dynamic>> getObject(String key);
+
+  Future<Either<Glitch, List<Value>>> getDropDownOptions(DropDownMenu menu,
+      {String lga});
 }
