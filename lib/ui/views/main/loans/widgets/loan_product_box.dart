@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lsi_mobile/core/extensions/double_extension.dart';
+import 'package:lsi_mobile/core/models/dto/loan_product/loan_product.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -8,9 +10,7 @@ import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 class LoanProductBox extends StatelessWidget {
   final String borderBox = "assets/svgs/border_box.svg";
   final Gradient gradient;
-  final String title;
-  final String subText;
-  final String duration;
+  final LoanProduct loanProduct;
   final Color durationColor;
   final Color borderBoxColor;
   final Function action;
@@ -18,9 +18,7 @@ class LoanProductBox extends StatelessWidget {
   const LoanProductBox({
     Key key,
     @required this.gradient,
-    @required this.title,
-    @required this.subText,
-    @required this.duration,
+    @required this.loanProduct,
     @required this.durationColor,
     @required this.borderBoxColor,
     @required this.action,
@@ -44,7 +42,7 @@ class LoanProductBox extends StatelessWidget {
                   RichText(
                     textAlign: TextAlign.left,
                     text: TextSpan(
-                      text: title,
+                      text: loanProduct.loanTitle,
                       style: GoogleFonts.workSans(
                         height: 1.5,
                         color: ColorStyles.white,
@@ -53,8 +51,9 @@ class LoanProductBox extends StatelessWidget {
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                          text: "\n$subText",
-                          style: GoogleFonts.workSans(
+                          text:
+                              "\n${double.parse(loanProduct.minimumAmount).moneyFormat(0)} - ${double.parse(loanProduct.maximumAmount).moneyFormat(0)}",
+                          style: GoogleFonts.roboto(
                             fontSize: SizeConfig.textSize(context, 5.4),
                           ),
                         )
@@ -62,7 +61,7 @@ class LoanProductBox extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Max duration: $duration months",
+                    "Max duration: ${loanProduct.maxLoanDuration} months",
                     style: GoogleFonts.workSans(
                       color: durationColor,
                       fontWeight: FontWeight.w600,

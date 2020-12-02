@@ -67,9 +67,7 @@ class _LoanProductViewState extends State<LoanProductView> {
 
                 if (index % 3 == 0) {
                   return LoanProductBox(
-                    title: loan.loanTitle,
-                    subText: "₦${loan.minimumAmount} - ₦${loan.maximumAmount}",
-                    duration: loan.maxLoanDuration,
+                    loanProduct: loan,
                     durationColor: ColorStyles.yellow,
                     gradient: ColorStyles.greenGradient,
                     borderBoxColor: ColorStyles.green3,
@@ -79,9 +77,7 @@ class _LoanProductViewState extends State<LoanProductView> {
                   );
                 } else if (index % 3 == 1) {
                   return LoanProductBox(
-                    title: loan.loanTitle,
-                    subText: "₦${loan.minimumAmount} - ₦${loan.maximumAmount}",
-                    duration: loan.maxLoanDuration,
+                    loanProduct: loan,
                     durationColor: ColorStyles.yellow,
                     gradient: ColorStyles.primaryGradient,
                     borderBoxColor: ColorStyles.blue3,
@@ -91,9 +87,7 @@ class _LoanProductViewState extends State<LoanProductView> {
                   );
                 } else {
                   return LoanProductBox(
-                    title: loan.loanTitle,
-                    subText: "₦${loan.minimumAmount} - ₦${loan.maximumAmount}",
-                    duration: loan.maxLoanDuration,
+                    loanProduct: loan,
                     durationColor: ColorStyles.white,
                     gradient: ColorStyles.yellowGradient,
                     borderBoxColor: ColorStyles.extraLight,
