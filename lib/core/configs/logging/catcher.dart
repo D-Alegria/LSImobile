@@ -8,7 +8,7 @@ class CatcherConfig {
   static final CatcherOptions debugOptions = CatcherOptions(
     SilentReportMode(),
     [
-      ConsoleHandler(),
+      ConsoleHandler(enableDeviceParameters: false),
     ],
   );
 
