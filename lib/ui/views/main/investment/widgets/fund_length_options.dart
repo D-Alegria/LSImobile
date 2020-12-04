@@ -5,6 +5,7 @@ import 'package:lsi_mobile/core/models/dto/investment_duration/investment_durati
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/investment/new_investment/view_model/new_investment_cubit.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 
 class FundLengthOptions extends StatelessWidget {
   final List<InvestmentDuration> durations;
@@ -19,7 +20,7 @@ class FundLengthOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: SizeConfig.yMargin(context, 16),
+      height: SizeConfig.yMargin(context, 80.h),
       child: ListView.separated(
         itemCount: durations.length,
         scrollDirection: Axis.horizontal,
@@ -38,7 +39,7 @@ class FundLengthOptions extends StatelessWidget {
           );
         },
         separatorBuilder: (context, index) => SizedBox(
-          width: SizeConfig.xMargin(context, 7),
+          width: SizeConfig.xMargin(context, 20.w),
         ),
       ),
     );
@@ -47,32 +48,29 @@ class FundLengthOptions extends StatelessWidget {
   Widget _buildDurationBox(
       BuildContext context, String month, String percentage, bool selected) {
     return Container(
-      width: SizeConfig.xMargin(context, 33),
+      width: SizeConfig.xMargin(context, 107.w),
       alignment: Alignment.center,
       padding: EdgeInsets.symmetric(horizontal: SizeConfig.xMargin(context, 3)),
       child: RichText(
         text: TextSpan(
           text: "$month months",
           style: GoogleFonts.workSans(
-            fontWeight: FontWeight.w600,
-            fontSize: SizeConfig.textSize(context, 5),
+            fontWeight: FontWeight.w500,
+            fontSize: SizeConfig.textSize(context, 14.tx),
             color: selected ? ColorStyles.extraLight : ColorStyles.light,
-            height: SizeConfig.textSize(context, 0.46),
+            height: SizeConfig.textSize(context, 0.35),
           ),
           children: [
             TextSpan(
               text: "\n$percentage%",
               style: GoogleFonts.workSans(
-                fontWeight: FontWeight.w600,
-                fontSize: SizeConfig.textSize(context, 5),
                 color: selected ? ColorStyles.lightYellow : ColorStyles.orange,
               ),
             ),
             TextSpan(
               text: "\nper annum",
               style: GoogleFonts.workSans(
-                fontWeight: FontWeight.w600,
-                fontSize: SizeConfig.textSize(context, 5),
+                fontSize: SizeConfig.textSize(context, 13.tx),
                 color: selected ? ColorStyles.grey5 : ColorStyles.grey3,
               ),
             ),

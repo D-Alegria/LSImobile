@@ -6,6 +6,7 @@ import 'package:lsi_mobile/core/models/dto/investment_product/investment_product
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 
 class ExpandedInvestmentCard extends StatelessWidget {
   final Color color;
@@ -28,12 +29,12 @@ class ExpandedInvestmentCard extends StatelessWidget {
       onTap: onTap,
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.symmetric(
-        horizontal: SizeConfig.yMargin(context, 2),
-        vertical: SizeConfig.xMargin(context, 4),
+        horizontal: SizeConfig.xMargin(context, 28.w),
+        vertical: SizeConfig.xMargin(context, 32.h),
       ),
       borderColor: color.withOpacity(0.4),
       color: color.withOpacity(0.1),
-      height: SizeConfig.yMargin(context, 20),
+      height: SizeConfig.yMargin(context, 164.h),
       width: SizeConfig.xMargin(context, 100),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -49,9 +50,9 @@ class ExpandedInvestmentCard extends StatelessWidget {
                     text: investment.investmentTitle,
                     style: GoogleFonts.workSans(
                       fontWeight: FontWeight.w600,
-                      fontSize: SizeConfig.textSize(context, 4.5),
+                      fontSize: SizeConfig.textSize(context, 18.tx),
                       color: color,
-                      height: SizeConfig.textSize(context, 0.42),
+                      height: SizeConfig.textSize(context, 0.35),
                     ),
                     children: [
                       TextSpan(
@@ -59,7 +60,7 @@ class ExpandedInvestmentCard extends StatelessWidget {
                             "\n${double.parse(investment.investmentAmount).moneyFormat(0)} - ${double.parse(investment.investmentMaxAmount).moneyFormat(0)}",
                         style: GoogleFonts.roboto(
                           fontWeight: FontWeight.w600,
-                          fontSize: SizeConfig.textSize(context, 5),
+                          fontSize: SizeConfig.textSize(context, 16.tx),
                         ),
                       ),
                     ],
@@ -79,7 +80,7 @@ class ExpandedInvestmentCard extends StatelessWidget {
             "Earn up to ${investment.interest}% by investing in a fixed plan. Started form ${double.parse(investment.investmentAmount).moneyFormat(0)}",
             style: GoogleFonts.roboto(
               fontWeight: FontWeight.w400,
-              fontSize: SizeConfig.textSize(context, 4),
+              fontSize: SizeConfig.textSize(context, 14.tx),
               color: ColorStyles.black,
               height: SizeConfig.textSize(context, 0.37),
             ),

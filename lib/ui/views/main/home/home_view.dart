@@ -14,6 +14,7 @@ import 'package:lsi_mobile/ui/views/main/investment/investment_view/view_model/i
 import 'package:lsi_mobile/ui/views/main/view_model/main_view/main_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 import 'package:provider/provider.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 
 class HomeView extends StatelessWidget {
   @override
@@ -38,25 +39,19 @@ class HomeView extends StatelessWidget {
   Widget _buildHomeView(BuildContext context, Loaded user, ivc.Loaded invest,
       HomeViewModel model, MainViewCubit mainView) {
     return Container(
-      height: SizeConfig.yMargin(context, 100),
       margin: EdgeInsets.symmetric(
         horizontal: SizeConfig.xMargin(context, 5),
       ),
       child: ListView(
         children: [
-          SizedBox(height: SizeConfig.yMargin(context, 5)),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: SizeConfig.xMargin(context, 1.5),
-            ),
-            child: ScreenHeader(
-              firstText: user.fullName,
-              secondText: model.greeting(),
-              profile: false,
-              image: user.profilePicture,
-            ),
+          SizedBox(height: SizeConfig.yMargin(context, 50.h)),
+          ScreenHeader(
+            firstText: user.fullName,
+            secondText: model.greeting(),
+            profile: false,
+            image: user.profilePicture,
           ),
-          SizedBox(height: SizeConfig.yMargin(context, 5)),
+          SizedBox(height: SizeConfig.yMargin(context, 49.h)),
           HomeCard(
             firstText: 'Your Loan',
             secondText: 'Need cash urgently?',
@@ -64,7 +59,7 @@ class HomeView extends StatelessWidget {
             buttonText: 'Apply for a loan',
             onPressed: () => mainView.changePage(1),
           ),
-          SizedBox(height: SizeConfig.yMargin(context, 1)),
+          SizedBox(height: SizeConfig.yMargin(context, 27.h)),
           HomeCard(
             firstText: 'Your Investment',
             secondText: 'N ${invest.investmentBalance}',
@@ -72,7 +67,7 @@ class HomeView extends StatelessWidget {
             buttonText: 'Book investment',
             onPressed: () => mainView.changePage(2),
           ),
-          SizedBox(height: SizeConfig.yMargin(context, 5)),
+          SizedBox(height: SizeConfig.yMargin(context, 39.h)),
           Row(
             children: [
               Expanded(
@@ -86,6 +81,7 @@ class HomeView extends StatelessWidget {
                   onTap: () => mainView.changePage(1),
                 ),
               ),
+              SizedBox(width: SizeConfig.xMargin(context, 13.w)),
               Expanded(
                 child: RowCard(
                   icon: 'assets/svgs/icons/invest_icon.svg',
@@ -98,7 +94,7 @@ class HomeView extends StatelessWidget {
               )
             ],
           ),
-          SizedBox(height: SizeConfig.yMargin(context, 5)),
+          SizedBox(height: SizeConfig.yMargin(context, 36.h)),
           Padding(
             padding: EdgeInsets.only(
               left: SizeConfig.xMargin(context, 1.5),
@@ -106,14 +102,14 @@ class HomeView extends StatelessWidget {
             child: Text(
               'Other Services',
               style: GoogleFonts.workSans(
-                fontSize: SizeConfig.textSize(context, 5),
-                fontWeight: FontWeight.bold,
+                fontSize: SizeConfig.textSize(context, 16.tx),
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),
-          SizedBox(height: SizeConfig.yMargin(context, 3)),
+          SizedBox(height: SizeConfig.yMargin(context, 20.h)),
           Container(
-            height: SizeConfig.yMargin(context, 20),
+            height: SizeConfig.yMargin(context, 129.h),
             child: PageView(
               scrollDirection: Axis.horizontal,
               controller: model.controller,
@@ -123,8 +119,8 @@ class HomeView extends StatelessWidget {
                 OtherServices(
                   containerColor: ColorStyles.red,
                   image: 'assets/images/assets_financing.png',
-                  topText: 'Assets',
-                  bottomText: 'financing',
+                  topText: 'Fund',
+                  bottomText: 'management',
                 ),
                 OtherServices(
                   containerColor: ColorStyles.blue,
@@ -135,20 +131,38 @@ class HomeView extends StatelessWidget {
                 OtherServices(
                   containerColor: ColorStyles.green,
                   image: 'assets/images/assets_financing.png',
-                  topText: 'Assets',
+                  topText: 'Lease',
                   bottomText: 'financing',
                 ),
                 OtherServices(
                   containerColor: ColorStyles.orange,
                   image: 'assets/images/assets_financing.png',
-                  topText: 'Assets',
-                  bottomText: 'financing',
+                  topText: 'Invoice',
+                  bottomText: 'Discounting',
                 ),
                 OtherServices(
                   containerColor: ColorStyles.black,
                   image: 'assets/images/assets_financing.png',
-                  topText: 'Assets',
-                  bottomText: 'financing',
+                  topText: 'Consumer',
+                  bottomText: 'Loans',
+                ),
+                OtherServices(
+                  containerColor: ColorStyles.yellow1,
+                  image: 'assets/images/assets_financing.png',
+                  topText: 'Deposit',
+                  bottomText: '',
+                ),
+                OtherServices(
+                  containerColor: ColorStyles.grey5,
+                  image: 'assets/images/assets_financing.png',
+                  topText: 'Lease',
+                  bottomText: '',
+                ),
+                OtherServices(
+                  containerColor: ColorStyles.dark,
+                  image: 'assets/images/assets_financing.png',
+                  topText: 'Financial',
+                  bottomText: 'consultancy',
                 )
               ],
             ),
@@ -156,7 +170,7 @@ class HomeView extends StatelessWidget {
           SizedBox(height: SizeConfig.yMargin(context, 4)),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: _buildPageIndicator(5, model.index),
+            children: _buildPageIndicator(8, model.index),
           ),
           SizedBox(height: SizeConfig.yMargin(context, 5)),
         ],

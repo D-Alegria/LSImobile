@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
+import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/main_view/main_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
@@ -33,10 +35,10 @@ class ScreenHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  firstText,
+                  firstText.capitalize,
                   style: GoogleFonts.workSans(
                     fontWeight: FontWeight.w700,
-                    fontSize: SizeConfig.textSize(context, 6.5),
+                    fontSize: SizeConfig.textSize(context, 21.tx),
                   ),
                 ),
                 SizedBox(height: SizeConfig.yMargin(context, 0.5)),
@@ -44,7 +46,7 @@ class ScreenHeader extends StatelessWidget {
                   secondText,
                   style: GoogleFonts.workSans(
                     fontWeight: FontWeight.w400,
-                    fontSize: SizeConfig.textSize(context, 4.5),
+                    fontSize: SizeConfig.textSize(context, 16.tx),
                     color: secondTextColor,
                   ),
                 ),
@@ -57,7 +59,7 @@ class ScreenHeader extends StatelessWidget {
                 ? await userProfile.updateProfilePictureImage(context)
                 : state.changePage(4),
             child: CircleAvatar(
-              radius: SizeConfig.yMargin(context, 3.7),
+              radius: SizeConfig.yMargin(context, 3),
               backgroundImage: NetworkImage(image),
             ),
           )

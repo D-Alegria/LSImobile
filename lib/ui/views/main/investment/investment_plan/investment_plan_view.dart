@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:lsi_mobile/core/configs/dependency_injection/injection.dart';
 import 'package:lsi_mobile/core/extensions/double_extension.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/core/models/dto/investment/investment.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
@@ -30,24 +31,6 @@ class InvestmentPlanView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void _showForm(Widget form) {
-      showModalBottomSheet(
-        isScrollControlled: true,
-        backgroundColor: ColorStyles.black.withOpacity(0.2),
-        context: context,
-        builder: (context) {
-          return SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom,
-              ),
-              child: form,
-            ),
-          );
-        },
-      );
-    }
-
     void _showConfirmForm() {
       showDialog(
         context: context,
@@ -141,7 +124,7 @@ class InvestmentPlanView extends StatelessWidget {
               investment.investmentTitle,
               style: GoogleFonts.workSans(
                 color: ColorStyles.black,
-                fontSize: SizeConfig.textSize(context, 5),
+                fontSize: SizeConfig.textSize(context, 18.tx),
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -149,7 +132,7 @@ class InvestmentPlanView extends StatelessWidget {
             InvestmentPlanCard(investment: investment),
             SizedBox(height: SizeConfig.yMargin(context, 3)),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 RoundButton(
                   onTap: () {
@@ -157,7 +140,8 @@ class InvestmentPlanView extends StatelessWidget {
                       context
                           .bloc<AccountsCardsBloc>()
                           .add(GetUserBankDetails());
-                      _showForm(
+                      sharedBottomSheet(
+                        context,
                         WithdrawForm(investment: investment),
                       );
                     } else {
@@ -174,7 +158,7 @@ class InvestmentPlanView extends StatelessWidget {
                     color: investment.isActive == "1"
                         ? ColorStyles.orange
                         : ColorStyles.grey,
-                    width: SizeConfig.textSize(context, 8),
+                    width: SizeConfig.textSize(context, 6),
                   ),
                 ),
                 RoundButton(
@@ -195,7 +179,7 @@ class InvestmentPlanView extends StatelessWidget {
                     color: investment.isActive == "1"
                         ? ColorStyles.blue
                         : ColorStyles.grey,
-                    width: SizeConfig.textSize(context, 6),
+                    width: SizeConfig.textSize(context, 4),
                   ),
                 ),
                 RoundButton(
@@ -204,10 +188,13 @@ class InvestmentPlanView extends StatelessWidget {
                       context
                           .bloc<AccountsCardsBloc>()
                           .add(GetUserBankDetails());
-                      _showForm(TerminateForm(
-                        planId: investment.investmentProductId,
-                        amount: investment.requestPrincipal,
-                      ));
+                      sharedBottomSheet(
+                        context,
+                        TerminateForm(
+                          planId: investment.investmentProductId,
+                          amount: investment.requestPrincipal,
+                        ),
+                      );
                     } else {
                       showInfoSnackBar(context,
                           'You can\'t terminate a non Active Investment');
@@ -222,7 +209,7 @@ class InvestmentPlanView extends StatelessWidget {
                     color: investment.isActive == "1"
                         ? ColorStyles.red
                         : ColorStyles.grey,
-                    size: SizeConfig.textSize(context, 9),
+                    size: SizeConfig.textSize(context, 6),
                   ),
                 ),
               ],
@@ -279,7 +266,8 @@ class InvestmentPlanView extends StatelessWidget {
                   double.parse(investment.maturityValue).moneyFormat(2)
                 ],
               ],
-            )
+            ),
+            SizedBox(height: SizeConfig.yMargin(context, 3)),
           ],
         ),
       ),

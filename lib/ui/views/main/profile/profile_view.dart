@@ -8,6 +8,7 @@ import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/authentication/authentication_bloc.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 
 class ProfileView extends StatelessWidget {
   @override
@@ -29,7 +30,7 @@ class ProfileView extends StatelessWidget {
         ),
         child: ListView(
           children: [
-            SizedBox(height: SizeConfig.yMargin(context, 2)),
+            SizedBox(height: SizeConfig.yMargin(context, 60.h)),
             ScreenHeader(
               firstText: "My Account",
               image: val.profilePicture,
@@ -37,7 +38,7 @@ class ProfileView extends StatelessWidget {
               profile: true,
               secondTextColor: ColorStyles.grey3,
             ),
-            SizedBox(height: SizeConfig.yMargin(context, 5.4)),
+            SizedBox(height: SizeConfig.yMargin(context, 40.h)),
             sharedInfoButton(
               onTap: () => context.navigator
                   .pushEditProfileView(userDetails: val.userData.userData.data),
@@ -45,26 +46,26 @@ class ProfileView extends StatelessWidget {
               icon: Icon(
                 Icons.person_outline_outlined,
                 color: ColorStyles.dark,
-                size: SizeConfig.textSize(context, 7),
+                size: SizeConfig.textSize(context, 6),
               ),
               text: "Edit profile",
               background: ColorStyles.lGrey.withOpacity(0.3),
               showArrow: true,
             ),
-            SizedBox(height: SizeConfig.yMargin(context, 3)),
+            SizedBox(height: SizeConfig.yMargin(context, 16.h)),
             sharedInfoButton(
               onTap: () => context.navigator.pushAccountsCardsView(),
               context: context,
               icon: Icon(
                 Icons.credit_card,
                 color: ColorStyles.dark,
-                size: SizeConfig.textSize(context, 7),
+                size: SizeConfig.textSize(context, 6),
               ),
               text: "Account and cards",
               background: ColorStyles.lGrey.withOpacity(0.3),
               showArrow: true,
             ),
-            SizedBox(height: SizeConfig.yMargin(context, 3)),
+            SizedBox(height: SizeConfig.yMargin(context, 16.h)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -75,13 +76,13 @@ class ProfileView extends StatelessWidget {
                     icon: Icon(
                       Icons.help_outline,
                       color: ColorStyles.dark,
-                      size: SizeConfig.textSize(context, 7),
+                      size: SizeConfig.textSize(context, 6),
                     ),
                     text: "Self help",
                     background: ColorStyles.lGrey.withOpacity(0.3),
                   ),
                 ),
-                SizedBox(width: SizeConfig.xMargin(context, 3)),
+                SizedBox(width: SizeConfig.xMargin(context, 9.w)),
                 Expanded(
                   child: sharedInfoButton(
                     onTap: () => context.navigator.pushContactUsView(),
@@ -89,7 +90,7 @@ class ProfileView extends StatelessWidget {
                     icon: Icon(
                       Icons.phone_in_talk_outlined,
                       color: ColorStyles.dark,
-                      size: SizeConfig.textSize(context, 7),
+                      size: SizeConfig.textSize(context, 6),
                     ),
                     text: "Contact us",
                     background: ColorStyles.lGrey.withOpacity(0.3),
@@ -97,7 +98,7 @@ class ProfileView extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(height: SizeConfig.yMargin(context, 3)),
+            SizedBox(height: SizeConfig.yMargin(context, 16.h)),
             BlocListener<AuthenticationBloc, AuthenticationState>(
               listener: (BuildContext context, state) => state.maybeMap(
                 unauthenticated: (_) => context.navigator.pushAndRemoveUntil(
@@ -110,8 +111,8 @@ class ProfileView extends StatelessWidget {
                 context: context,
                 icon: Icon(
                   Icons.power_settings_new_rounded,
-                  size: SizeConfig.textSize(context, 7),
-                  color: ColorStyles.red,
+                  size: SizeConfig.textSize(context, 6),
+                  color: ColorStyles.red2,
                 ),
                 onTap: () =>
                     context.bloc<AuthenticationBloc>().add(LogoutRequest()),

@@ -8,6 +8,7 @@ import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/edit_profile/edit_profile_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/personal_info_form/personal_info_form_cubit.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 
 class PersonalInfoForm extends StatelessWidget {
   final bool isEditProfile;
@@ -29,7 +30,7 @@ class PersonalInfoForm extends StatelessWidget {
                 ),
                 child: ListView(
                   children: [
-                    SizedBox(height: SizeConfig.yMargin(context, 6)),
+                    SizedBox(height: SizeConfig.yMargin(context, 55.h)),
                     SharedTextFormField(
                       labelText: "Full name",
                       initialValue: state.fullName,
@@ -43,7 +44,7 @@ class PersonalInfoForm extends StatelessWidget {
                       },
                       readOnly: true,
                     ),
-                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    SizedBox(height: SizeConfig.yMargin(context, 25.h)),
                     SharedTextFormField(
                       labelText: "Email address",
                       initialValue: state.emailAddress,
@@ -58,7 +59,7 @@ class PersonalInfoForm extends StatelessWidget {
                       readOnly: true,
                       keyboardType: TextInputType.emailAddress,
                     ),
-                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    SizedBox(height: SizeConfig.yMargin(context, 25.h)),
                     SharedTextFormField(
                       labelText: "Phone number",
                       initialValue: state.phoneNumber,
@@ -72,7 +73,7 @@ class PersonalInfoForm extends StatelessWidget {
                       },
                       keyboardType: TextInputType.phone,
                     ),
-                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    SizedBox(height: SizeConfig.yMargin(context, 25.h)),
                     SharedDateTimeField(
                       label: "Date of birth",
                       initialValue: state.dateOfBirth,
@@ -80,7 +81,7 @@ class PersonalInfoForm extends StatelessWidget {
                           .bloc<PersonalInfoFormCubit>()
                           .dateOfBirthChanged(value),
                     ),
-                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    SizedBox(height: SizeConfig.yMargin(context, 25.h)),
                     sharedDropDownFormField<String>(
                       value: state.genders
                           .where((element) => element.id == state.gender)
@@ -99,7 +100,7 @@ class PersonalInfoForm extends StatelessWidget {
                             .genderChanged(index);
                       },
                     ),
-                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    SizedBox(height: SizeConfig.yMargin(context, 25.h)),
                     sharedDropDownFormField<String>(
                       value: state.maritalStatuses
                           .where((element) => element.id == state.maritalStatus)
@@ -118,7 +119,7 @@ class PersonalInfoForm extends StatelessWidget {
                             .maritalStatusChanged(index);
                       },
                     ),
-                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    SizedBox(height: SizeConfig.yMargin(context, 35.h)),
                     isEditProfile
                         ? Padding(
                             padding: EdgeInsets.only(
@@ -158,7 +159,7 @@ class PersonalInfoForm extends StatelessWidget {
                               minWidth: SizeConfig.xMargin(context, 90),
                             ),
                           ),
-                    SizedBox(height: SizeConfig.yMargin(context, 2.5)),
+                    SizedBox(height: SizeConfig.yMargin(context, 25.h)),
                   ],
                 ),
               ),

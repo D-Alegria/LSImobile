@@ -26,25 +26,25 @@ class RoundButton extends StatelessWidget {
           Container(
             alignment: Alignment.center,
             padding: EdgeInsets.symmetric(
-              horizontal: SizeConfig.xMargin(context, 4),
-              vertical: SizeConfig.yMargin(context, 4),
+              horizontal: SizeConfig.xMargin(context, 2),
+              vertical: SizeConfig.yMargin(context, 2),
             ),
-            height: SizeConfig.yMargin(context, 13),
-            width: SizeConfig.xMargin(context, 22),
+            height: SizeConfig.yMargin(context, 9),
+            width: SizeConfig.xMargin(context, 17),
             child: icon,
             decoration: BoxDecoration(
               color: background.withOpacity(0.1),
               shape: BoxShape.circle,
             ),
           ),
-          SizedBox(height: SizeConfig.yMargin(context, 0.5)),
+          SizedBox(height: SizeConfig.yMargin(context, 0.4)),
           Text(
             text,
             textAlign: TextAlign.center,
             style: GoogleFonts.workSans(
               color: ColorStyles.grey2,
               fontWeight: FontWeight.w500,
-              fontSize: SizeConfig.textSize(context, 4.5),
+              fontSize: SizeConfig.textSize(context, 4),
             ),
           ),
         ],

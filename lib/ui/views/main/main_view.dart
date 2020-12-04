@@ -63,12 +63,12 @@ class _MainViewState extends State<MainView> {
             bottomNavigationBar: BottomNavigationBar(
               selectedLabelStyle: GoogleFonts.workSans(
                 fontSize: SizeConfig.textSize(context, 3.1),
-                height: SizeConfig.textSize(context, 0.55),
+                height: SizeConfig.textSize(context, 0.4),
                 fontWeight: FontWeight.w500,
               ),
               unselectedLabelStyle: GoogleFonts.workSans(
                 fontSize: SizeConfig.textSize(context, 3.1),
-                height: SizeConfig.textSize(context, 0.55),
+                height: SizeConfig.textSize(context, 0.4),
                 fontWeight: FontWeight.w500,
               ),
               backgroundColor: ColorStyles.white,

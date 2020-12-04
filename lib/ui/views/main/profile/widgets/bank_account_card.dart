@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
+import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -24,12 +26,12 @@ class BankAccountCard extends StatelessWidget {
       child: sharedContainer(
         onTap: onTap,
         padding: EdgeInsets.symmetric(
-          vertical: SizeConfig.yMargin(context, 1),
+          vertical: SizeConfig.yMargin(context, 15.h),
           horizontal: SizeConfig.xMargin(context, 5),
         ),
         gradient: ColorStyles.lightGradient,
-        height: SizeConfig.yMargin(context, 25),
-        width: SizeConfig.xMargin(context, 75),
+        height: SizeConfig.yMargin(context, 144.h),
+        width: SizeConfig.xMargin(context, 323.w),
         alignment: Alignment.centerLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -38,33 +40,31 @@ class BankAccountCard extends StatelessWidget {
             Flexible(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     bankName,
                     overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.workSans(
-                      fontSize: SizeConfig.textSize(context, 5),
+                      fontSize: SizeConfig.textSize(context, 18.tx),
                       fontWeight: FontWeight.w600,
                       color: ColorStyles.blue2,
-                      height: SizeConfig.textSize(context, 0.7),
                     ),
                   ),
                   Text(
                     accountNumber,
                     overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.workSans(
-                      fontSize: SizeConfig.textSize(context, 6),
+                      fontSize: SizeConfig.textSize(context, 22.tx),
                       color: ColorStyles.grey2,
-                      height: SizeConfig.textSize(context, 0.7),
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   Text(
-                    accountName,
+                    accountName.capitalize,
                     overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.workSans(
-                      height: SizeConfig.textSize(context, 0.7),
-                      fontSize: SizeConfig.textSize(context, 5),
+                      fontSize: SizeConfig.textSize(context, 18.tx),
                       fontWeight: FontWeight.w400,
                       color: ColorStyles.grey3,
                     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
@@ -43,7 +44,7 @@ class OtherServices extends StatelessWidget {
                 topText,
                 style: GoogleFonts.workSans(
                   color: ColorStyles.white,
-                  fontSize: SizeConfig.textSize(context, 5.5),
+                  fontSize: SizeConfig.textSize(context, 18.tx),
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -51,7 +52,7 @@ class OtherServices extends StatelessWidget {
                 bottomText,
                 style: GoogleFonts.workSans(
                   color: ColorStyles.white,
-                  fontSize: SizeConfig.textSize(context, 5.5),
+                  fontSize: SizeConfig.textSize(context, 18.tx),
                   fontWeight: FontWeight.w600,
                 ),
               ),

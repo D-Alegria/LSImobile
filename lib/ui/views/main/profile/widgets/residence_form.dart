@@ -7,6 +7,7 @@ import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/edit_profile/edit_profile_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/residence_form/residence_form_cubit.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 
 class ResidenceForm extends StatelessWidget {
   final bool isEditProfile;
@@ -28,7 +29,7 @@ class ResidenceForm extends StatelessWidget {
                 ),
                 child: ListView(
                   children: [
-                    SizedBox(height: SizeConfig.yMargin(context, 6)),
+                    SizedBox(height: SizeConfig.yMargin(context, 55.h)),
                     sharedDropDownFormField<String>(
                       value: state.residences
                           .where(
@@ -48,7 +49,7 @@ class ResidenceForm extends StatelessWidget {
                             .typeOfResidenceChanged(index);
                       },
                     ),
-                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    SizedBox(height: SizeConfig.yMargin(context, 25.h)),
                     SharedTextFormField(
                       labelText: "Your current address",
                       initialValue: state.currentAddress,
@@ -61,7 +62,7 @@ class ResidenceForm extends StatelessWidget {
                         return null;
                       },
                     ),
-                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    SizedBox(height: SizeConfig.yMargin(context, 25.h)),
                     sharedDropDownFormField<String>(
                       value: state.states
                           .where((element) => element.id == state.state)
@@ -78,7 +79,7 @@ class ResidenceForm extends StatelessWidget {
                         context.bloc<ResidenceFormCubit>().stateChanged(index);
                       },
                     ),
-                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    SizedBox(height: SizeConfig.yMargin(context, 25.h)),
                     sharedDropDownFormField<String>(
                       value: state.lgas
                           .where((element) => element.id == state.lga)
@@ -95,7 +96,7 @@ class ResidenceForm extends StatelessWidget {
                         context.bloc<ResidenceFormCubit>().lgaChanged(index);
                       },
                     ),
-                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    SizedBox(height: SizeConfig.yMargin(context, 25.h)),
                     SharedTextFormField(
                       labelText: "How long have you lived there?",
                       initialValue: state.stayPeriod,
@@ -109,7 +110,7 @@ class ResidenceForm extends StatelessWidget {
                       },
                       keyboardType: TextInputType.phone,
                     ),
-                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    SizedBox(height: SizeConfig.yMargin(context, 35.h)),
                     isEditProfile
                         ? Padding(
                             padding: EdgeInsets.only(
@@ -148,7 +149,7 @@ class ResidenceForm extends StatelessWidget {
                               minWidth: SizeConfig.xMargin(context, 90),
                             ),
                           ),
-                    SizedBox(height: SizeConfig.yMargin(context, 2.5)),
+                    SizedBox(height: SizeConfig.yMargin(context, 25.h)),
                   ],
                 ),
               ),

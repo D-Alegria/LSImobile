@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
@@ -102,14 +103,15 @@ class ProfileForm extends StatelessWidget {
   Widget header(BuildContext context, String title) {
     return Padding(
       padding: EdgeInsets.only(
-        bottom: SizeConfig.yMargin(context, 5),
+        bottom: SizeConfig.yMargin(context, 41.h),
+        top: SizeConfig.yMargin(context, 36.h),
         left: SizeConfig.xMargin(context, 5),
       ),
       child: Text(
         title,
         style: GoogleFonts.workSans(
           fontWeight: FontWeight.w600,
-          fontSize: SizeConfig.textSize(context, 8),
+          fontSize: SizeConfig.textSize(context, 24.tx),
           color: ColorStyles.white,
         ),
       ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/extensions/double_extension.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/core/models/dto/loan_product/loan_product.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
@@ -29,7 +30,7 @@ class LoanProductBox extends StatelessWidget {
     return InkWell(
         onTap: action,
         child: sharedRaisedContainer(
-          height: SizeConfig.yMargin(context, 21),
+          height: SizeConfig.yMargin(context, 144.h),
           gradient: gradient,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -47,14 +48,14 @@ class LoanProductBox extends StatelessWidget {
                         height: 1.5,
                         color: ColorStyles.white,
                         fontWeight: FontWeight.w600,
-                        fontSize: SizeConfig.textSize(context, 4),
+                        fontSize: SizeConfig.textSize(context, 15.tx),
                       ),
                       children: <TextSpan>[
                         TextSpan(
                           text:
                               "\n${double.parse(loanProduct.minimumAmount).moneyFormat(0)} - ${double.parse(loanProduct.maximumAmount).moneyFormat(0)}",
                           style: GoogleFonts.roboto(
-                            fontSize: SizeConfig.textSize(context, 5.4),
+                            fontSize: SizeConfig.textSize(context, 20.tx),
                           ),
                         )
                       ],
@@ -65,7 +66,7 @@ class LoanProductBox extends StatelessWidget {
                     style: GoogleFonts.workSans(
                       color: durationColor,
                       fontWeight: FontWeight.w600,
-                      fontSize: SizeConfig.textSize(context, 3.5),
+                      fontSize: SizeConfig.textSize(context, 14.tx),
                     ),
                   ),
                 ],

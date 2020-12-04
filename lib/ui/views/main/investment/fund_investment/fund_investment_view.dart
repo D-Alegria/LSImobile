@@ -13,6 +13,8 @@ import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/investment/new_investment/view_model/new_investment_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/widgets/add_card_form.dart';
 
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
+
 class FundInvestmentView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -62,18 +64,19 @@ class FundInvestmentView extends StatelessWidget {
           );
         },
         padding: EdgeInsets.symmetric(
-          horizontal: SizeConfig.xMargin(context, 5),
+          horizontal: SizeConfig.xMargin(context, 28.w),
         ),
         alignment: Alignment.centerLeft,
         gradient: ColorStyles.lightBlueGradient,
-        width: SizeConfig.xMargin(context, 75),
+        width: SizeConfig.xMargin(context, 260.w),
+        height: SizeConfig.yMargin(context, 170.h),
         child: RichText(
           text: TextSpan(
             text: "${card.expMonth}/${card.expYear.substring(2)}",
             style: GoogleFonts.workSans(
               height: SizeConfig.textSize(context, 0.7),
               fontWeight: FontWeight.w500,
-              fontSize: SizeConfig.textSize(context, 4),
+              fontSize: SizeConfig.textSize(context, 14.tx),
               color: ColorStyles.yellow,
             ),
             children: [
@@ -81,7 +84,7 @@ class FundInvestmentView extends StatelessWidget {
                 text: "\n**** **** **** ${card.lastFourDigits}",
                 style: GoogleFonts.workSans(
                   fontWeight: FontWeight.w600,
-                  fontSize: SizeConfig.textSize(context, 6),
+                  fontSize: SizeConfig.textSize(context, 18.tx),
                   color: ColorStyles.white,
                 ),
               ),
@@ -89,7 +92,7 @@ class FundInvestmentView extends StatelessWidget {
                 text: "\nTap to pay with this card",
                 style: GoogleFonts.workSans(
                   fontWeight: FontWeight.w400,
-                  fontSize: SizeConfig.textSize(context, 4),
+                  fontSize: SizeConfig.textSize(context, 14.tx),
                   color: ColorStyles.white,
                 ),
               )
@@ -110,7 +113,7 @@ class FundInvestmentView extends StatelessWidget {
           "Fund Investment",
           style: GoogleFonts.workSans(
             fontWeight: FontWeight.w600,
-            fontSize: SizeConfig.textSize(context, 5),
+            fontSize: SizeConfig.textSize(context, 16.tx),
             color: ColorStyles.black,
           ),
         ),
@@ -129,8 +132,8 @@ class FundInvestmentView extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: ColorStyles.grey6,
                       borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(5),
-                        bottomRight: Radius.circular(5),
+                        bottomLeft: Radius.circular(15),
+                        bottomRight: Radius.circular(15),
                       ),
                     ),
                     child: Row(
@@ -139,8 +142,8 @@ class FundInvestmentView extends StatelessWidget {
                         Text(
                           "Investment amount",
                           style: GoogleFonts.workSans(
-                            fontWeight: FontWeight.w600,
-                            fontSize: SizeConfig.textSize(context, 5),
+                            fontWeight: FontWeight.w400,
+                            fontSize: SizeConfig.textSize(context, 16.tx),
                             color: ColorStyles.black,
                           ),
                         ),
@@ -148,26 +151,28 @@ class FundInvestmentView extends StatelessWidget {
                           state.amount.moneyFormat(2),
                           style: GoogleFonts.roboto(
                             fontWeight: FontWeight.w600,
-                            fontSize: SizeConfig.textSize(context, 5),
+                            fontSize: SizeConfig.textSize(context, 16.tx),
                             color: ColorStyles.red,
                           ),
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(height: SizeConfig.yMargin(context, 4)),
+                  SizedBox(height: SizeConfig.yMargin(context, 30.h)),
                   Expanded(
                     child: Container(
                       child: ListView(
                         children: [
                           Container(
-                            height: SizeConfig.yMargin(context, 22),
+                            height: SizeConfig.yMargin(context, 170.h),
+                            width: SizeConfig.xMargin(context, 90),
                             padding: EdgeInsets.only(
                               left: SizeConfig.xMargin(context, 5),
                             ),
                             child: AccountsCardsWrapper(
                               loaded: (loaded) => ListView(
                                 scrollDirection: Axis.horizontal,
+                                shrinkWrap: true,
                                 children: [
                                   ListView.separated(
                                     shrinkWrap: true,
@@ -184,7 +189,7 @@ class FundInvestmentView extends StatelessWidget {
                                     },
                                     separatorBuilder: (context, index) =>
                                         SizedBox(
-                                      width: SizeConfig.xMargin(context, 5),
+                                      width: SizeConfig.xMargin(context, 15.w),
                                     ),
                                     itemCount: loaded.cards.length,
                                   ),
@@ -193,17 +198,17 @@ class FundInvestmentView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(height: SizeConfig.yMargin(context, 2)),
+                          SizedBox(height: SizeConfig.yMargin(context, 29.h)),
                           Text(
                             "or",
                             textAlign: TextAlign.center,
                             style: GoogleFonts.workSans(
                               fontWeight: FontWeight.w600,
-                              fontSize: SizeConfig.textSize(context, 5),
+                              fontSize: SizeConfig.textSize(context, 16.tx),
                               color: ColorStyles.black,
                             ),
                           ),
-                          SizedBox(height: SizeConfig.yMargin(context, 2)),
+                          SizedBox(height: SizeConfig.yMargin(context, 14.h)),
                           Padding(
                             padding: EdgeInsets.symmetric(
                               horizontal: SizeConfig.xMargin(context, 5),
@@ -212,15 +217,16 @@ class FundInvestmentView extends StatelessWidget {
                               "Make a transfer of exactly ${state.amount.moneyFormat(2)} from your  desired bank account to the one stated below. Funds will reflect in your investment plan instantly",
                               style: GoogleFonts.roboto(
                                 fontWeight: FontWeight.w500,
-                                fontSize: SizeConfig.textSize(context, 4.3),
+                                fontSize: SizeConfig.textSize(context, 14.tx),
                                 color: ColorStyles.light,
-                                height: SizeConfig.textSize(context, 0.35),
+                                height: SizeConfig.textSize(context, 0.4),
+                                letterSpacing: SizeConfig.textSize(context, 0.15)
                               ),
                             ),
                           ),
+                          SizedBox(height: SizeConfig.yMargin(context, 21.h)),
                           Padding(
                             padding: EdgeInsets.symmetric(
-                              vertical: SizeConfig.yMargin(context, 2),
                               horizontal: SizeConfig.xMargin(context, 5),
                             ),
                             child: sharedTable(
@@ -233,7 +239,7 @@ class FundInvestmentView extends StatelessWidget {
                               red: false,
                             ),
                           ),
-                          SizedBox(height: SizeConfig.yMargin(context, 6)),
+                          SizedBox(height: SizeConfig.yMargin(context, 66.h)),
                           Padding(
                             padding: EdgeInsets.symmetric(
                               horizontal: SizeConfig.xMargin(context, 30),

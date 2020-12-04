@@ -11,6 +11,7 @@ import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/investment/new_investment/view_model/new_investment_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/investment/widgets/fund_length_options.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/accounts_cards/accounts_cards_bloc.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 
 class NewInvestmentView extends StatelessWidget {
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -37,7 +38,7 @@ class NewInvestmentView extends StatelessWidget {
             "New Investment",
             style: GoogleFonts.workSans(
               fontWeight: FontWeight.w600,
-              fontSize: SizeConfig.textSize(context, 5),
+              fontSize: SizeConfig.textSize(context, 16.tx),
               color: ColorStyles.black,
             ),
           ),
@@ -47,6 +48,7 @@ class NewInvestmentView extends StatelessWidget {
               ? sharedLoader()
               : Container(
                   padding: EdgeInsets.symmetric(
+                    vertical: SizeConfig.yMargin(context, 45.h),
                     horizontal: SizeConfig.xMargin(context, 5),
                   ),
                   child: Form(
@@ -80,21 +82,21 @@ class NewInvestmentView extends StatelessWidget {
                           },
                           keyboardType: TextInputType.number,
                         ),
-                        SizedBox(height: SizeConfig.yMargin(context, 3)),
+                        SizedBox(height: SizeConfig.yMargin(context, 35.h)),
                         Text(
                           "For how long would you like to hold your investment",
                           style: GoogleFonts.workSans(
                             fontWeight: FontWeight.w500,
-                            fontSize: SizeConfig.textSize(context, 4.3),
+                            fontSize: SizeConfig.textSize(context, 14.tx),
                             color: ColorStyles.black,
                           ),
                         ),
-                        SizedBox(height: SizeConfig.yMargin(context, 2)),
+                        SizedBox(height: SizeConfig.yMargin(context, 16.h)),
                         FundLengthOptions(
                           durations: state.durations,
                           select: state.duration,
                         ),
-                        SizedBox(height: SizeConfig.yMargin(context, 2)),
+                        SizedBox(height: SizeConfig.yMargin(context, 45.h)),
                         sharedTable(
                           context: context,
                           list: [
@@ -114,7 +116,7 @@ class NewInvestmentView extends StatelessWidget {
                             ["Maturity Value", state.maturityValue],
                           ],
                         ),
-                        SizedBox(height: SizeConfig.yMargin(context, 3)),
+                        SizedBox(height: SizeConfig.yMargin(context, 74.h)),
                         sharedRaisedButton(
                           context: context,
                           onPressed: () {
@@ -129,7 +131,6 @@ class NewInvestmentView extends StatelessWidget {
                           color: ColorStyles.blue,
                           text: "Proceed to funding",
                         ),
-                        SizedBox(height: SizeConfig.yMargin(context, 2)),
                       ],
                     ),
                   ),

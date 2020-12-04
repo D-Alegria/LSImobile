@@ -6,7 +6,8 @@ import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/edit_profile/edit_profile_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/profile/view_models/edu_and_employ_form/edu_and_employ_form_cubit.dart';
+import 'package:lsi_mobile/ui/views/main/profile/view_models/edu_and_employ_form/edu_and_employ_form_cubit.dart';import 'package:lsi_mobile/core/extensions/num_extension.dart';
+
 
 class EduAndEmployForm extends StatelessWidget {
   final bool isEditProfile;
@@ -28,7 +29,7 @@ class EduAndEmployForm extends StatelessWidget {
                 ),
                 child: ListView(
                   children: [
-                    SizedBox(height: SizeConfig.yMargin(context, 6)),
+                    SizedBox(height: SizeConfig.yMargin(context, 55.h)),
                     isEditProfile
                         ? sharedDropDownFormField<String>(
                             value: state.levelsOfEducation
@@ -52,7 +53,7 @@ class EduAndEmployForm extends StatelessWidget {
                             },
                           )
                         : Container(),
-                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    SizedBox(height: SizeConfig.yMargin(context, 25.h)),
                     sharedDropDownFormField<String>(
                       value: state.employmentStatuses
                           .where(
@@ -72,7 +73,7 @@ class EduAndEmployForm extends StatelessWidget {
                             .employmentStatusChanged(index);
                       },
                     ),
-                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    SizedBox(height: SizeConfig.yMargin(context, 25.h)),
                     sharedDropDownFormField<String>(
                       value: state.workSectors
                           .where((element) => element.id == state.workSector)
@@ -91,7 +92,7 @@ class EduAndEmployForm extends StatelessWidget {
                             .workSectorChanged(index);
                       },
                     ),
-                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    SizedBox(height: SizeConfig.yMargin(context, 25.h)),
                     SharedTextFormField(
                       labelText: "Employer name",
                       initialValue: state.employerName,
@@ -104,7 +105,7 @@ class EduAndEmployForm extends StatelessWidget {
                         return null;
                       },
                     ),
-                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    SizedBox(height: SizeConfig.yMargin(context, 25.h)),
                     SharedDateTimeField(
                       label: "Start date",
                       initialValue: state.startDate,
@@ -112,7 +113,7 @@ class EduAndEmployForm extends StatelessWidget {
                           .bloc<EduAndEmployFormCubit>()
                           .startDateChanged(value),
                     ),
-                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    SizedBox(height: SizeConfig.yMargin(context, 25.h)),
                     SharedTextFormField(
                       labelText: "Monthly income",
                       initialValue: state.monthlyIncome,
@@ -126,7 +127,7 @@ class EduAndEmployForm extends StatelessWidget {
                       },
                       keyboardType: TextInputType.number,
                     ),
-                    SizedBox(height: SizeConfig.yMargin(context, 2)),
+                    SizedBox(height: SizeConfig.yMargin(context, 35.h)),
                     isEditProfile
                         ? Padding(
                             padding: EdgeInsets.only(
@@ -163,7 +164,7 @@ class EduAndEmployForm extends StatelessWidget {
                               minWidth: SizeConfig.xMargin(context, 90),
                             ),
                           ),
-                    SizedBox(height: SizeConfig.yMargin(context, 2.5)),
+                    SizedBox(height: SizeConfig.yMargin(context, 25.h)),
                   ],
                 ),
               ),

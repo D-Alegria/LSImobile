@@ -10,6 +10,7 @@ abstract class ColorStyles {
   static const blue = const Color(0xFF2F80ED);
   static const black = const Color(0xFF000000);
   static const red = const Color(0xFFEB5757);
+  static const red2 = const Color(0xFFE80F0F);
   static const yellow = const Color(0xFFFFE594);
   static const yellow1 = const Color(0xFFF2C94C);
   static const lightBlue = const Color(0xFF2F80ED);

@@ -9,7 +9,7 @@ import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_products/view_model/investment_product_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/investment/new_investment/view_model/new_investment_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/investment/widgets/expanded_investment_card.dart';
-
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 class InvestmentProductsView extends StatefulWidget {
   @override
   _InvestmentProductsViewState createState() => _InvestmentProductsViewState();
@@ -35,7 +35,7 @@ class _InvestmentProductsViewState extends State<InvestmentProductsView> {
           "Investment Products",
           style: GoogleFonts.workSans(
             fontWeight: FontWeight.w600,
-            fontSize: SizeConfig.textSize(context, 5),
+            fontSize: SizeConfig.textSize(context, 16.tx),
             color: ColorStyles.black,
           ),
         ),
@@ -44,7 +44,7 @@ class _InvestmentProductsViewState extends State<InvestmentProductsView> {
         padding: EdgeInsets.symmetric(
           horizontal: SizeConfig.xMargin(context, 5),
         ),
-        margin: EdgeInsets.only(top: SizeConfig.yMargin(context, 6)),
+        margin: EdgeInsets.only(top: SizeConfig.yMargin(context, 55.h)),
         child: BlocBuilder<InvestmentProductCubit, InvestmentProductState>(
           builder: (context, state) => state.map(
             initial: (e) => Container(),

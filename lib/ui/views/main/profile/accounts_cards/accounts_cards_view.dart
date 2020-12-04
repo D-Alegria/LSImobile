@@ -12,6 +12,7 @@ import 'package:lsi_mobile/ui/views/main/profile/widgets/add_card_form.dart';
 import 'package:lsi_mobile/ui/views/main/profile/widgets/atm_card.dart';
 import 'package:lsi_mobile/ui/views/main/profile/widgets/bank_account_card.dart';
 import 'package:lsi_mobile/ui/views/main/profile/widgets/profile_form.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 
 class AccountsCardsView extends StatefulWidget {
   @override
@@ -66,7 +67,7 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
       ),
       child: ListView(
         children: [
-          SizedBox(height: SizeConfig.yMargin(context, 4)),
+          SizedBox(height: SizeConfig.yMargin(context, 48.h)),
           ListView.separated(
             shrinkWrap: true,
             physics: ScrollPhysics(),
@@ -76,7 +77,7 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
               return ATMCard(card: card);
             },
             separatorBuilder: (context, index) =>
-                SizedBox(height: SizeConfig.yMargin(context, 4)),
+                SizedBox(height: SizeConfig.yMargin(context, 20.h)),
           ),
           buildEmptyContainer(
             context: context,
@@ -95,16 +96,16 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
 
   Widget buildEmptyContainer({BuildContext context, Function onTap}) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: SizeConfig.yMargin(context, 2)),
+      padding: EdgeInsets.symmetric(vertical: SizeConfig.yMargin(context, 20.h)),
       alignment: Alignment.topCenter,
       child: sharedDottedContainer(
         color: Colors.transparent,
         child: Icon(
-          Icons.add_outlined,
-          size: SizeConfig.textSize(context, 10),
+          Icons.add_rounded,
+          size: SizeConfig.textSize(context, 12),
         ),
         alignment: Alignment.center,
-        height: SizeConfig.yMargin(context, 18),
+        height: SizeConfig.yMargin(context, 144.h),
         borderColor: ColorStyles.grey5,
         onTap: onTap,
       ),
@@ -118,7 +119,7 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
       ),
       child: ListView(
         children: [
-          SizedBox(height: SizeConfig.yMargin(context, 4)),
+          SizedBox(height: SizeConfig.yMargin(context, 52.h)),
           ListView.separated(
             itemCount: e.accounts.length,
             shrinkWrap: true,
@@ -132,7 +133,7 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
               );
             },
             separatorBuilder: (context, index) =>
-                SizedBox(height: SizeConfig.yMargin(context, 2)),
+                SizedBox(height: SizeConfig.yMargin(context, 20.h)),
           ),
           buildEmptyContainer(
             context: context,

@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/core/extensions/double_extension.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/core/models/dto/investment/investment.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
@@ -37,11 +38,11 @@ class InvestmentCard extends StatelessWidget {
         onTap: () =>
             context.navigator.pushInvestmentPlanView(investment: investment),
         padding: EdgeInsets.symmetric(
-          vertical: SizeConfig.yMargin(context, 2),
-          horizontal: SizeConfig.xMargin(context, 5),
+          vertical: SizeConfig.yMargin(context, 15.h),
+          horizontal: SizeConfig.xMargin(context, 25.w),
         ),
         gradient: ColorStyles.lightGradient,
-        height: SizeConfig.yMargin(context, 20),
+        height: SizeConfig.yMargin(context, 141.h),
         alignment: Alignment.centerLeft,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -51,17 +52,17 @@ class InvestmentCard extends StatelessWidget {
               text: TextSpan(
                 text: investment.investmentTitle,
                 style: GoogleFonts.roboto(
-                  fontSize: SizeConfig.textSize(context, 4.5),
+                  fontSize: SizeConfig.textSize(context, 15.tx),
                   fontWeight: FontWeight.w600,
                   color: ColorStyles.grey2,
-                  height: SizeConfig.textSize(context, 0.45),
+                  height: SizeConfig.textSize(context, 0.4),
                 ),
                 children: [
                   TextSpan(
                     text:
                         "\n${double.parse(investment.requestPrincipal).moneyFormat(2)}",
                     style: GoogleFonts.roboto(
-                      fontSize: SizeConfig.textSize(context, 5.5),
+                      fontSize: SizeConfig.textSize(context, 20.tx),
                       color: ColorStyles.primaryBlue,
                     ),
                   ),
@@ -69,8 +70,8 @@ class InvestmentCard extends StatelessWidget {
                     text:
                         "/ ${investment.requestTenor} ${investment.loanDuration}",
                     style: GoogleFonts.workSans(
-                      fontSize: SizeConfig.textSize(context, 5),
-                      fontWeight: FontWeight.w400,
+                      fontSize: SizeConfig.textSize(context, 16.tx),
+                      fontWeight: FontWeight.w600,
                       color: ColorStyles.grey,
                     ),
                   )
@@ -84,7 +85,7 @@ class InvestmentCard extends StatelessWidget {
                 Text(
                   date,
                   style: GoogleFonts.workSans(
-                    fontSize: SizeConfig.textSize(context, 4),
+                    fontSize: SizeConfig.textSize(context, 12.tx),
                     fontWeight: FontWeight.w600,
                     color: ColorStyles.orange,
                   ),
@@ -140,7 +141,7 @@ class InvestmentPlanCard extends StatelessWidget {
                   text: TextSpan(
                     text: "Balance",
                     style: GoogleFonts.workSans(
-                      fontSize: SizeConfig.textSize(context, 4.5),
+                      fontSize: SizeConfig.textSize(context, 14.tx),
                       fontWeight: FontWeight.w600,
                       color: ColorStyles.yellow,
                       height: SizeConfig.textSize(context, 0.4),
@@ -150,7 +151,7 @@ class InvestmentPlanCard extends StatelessWidget {
                         text:
                             "\n${double.parse(investment.requestPrincipal).moneyFormat(2)}",
                         style: GoogleFonts.roboto(
-                          fontSize: SizeConfig.textSize(context, 5),
+                          fontSize: SizeConfig.textSize(context, 24.tx),
                           color: ColorStyles.grey6,
                         ),
                       ),
@@ -190,7 +191,7 @@ class InvestmentPlanCard extends StatelessWidget {
       text: TextSpan(
         text: first,
         style: GoogleFonts.workSans(
-          fontSize: SizeConfig.textSize(context, 4),
+          fontSize: SizeConfig.textSize(context, 12.tx),
           fontWeight: FontWeight.w600,
           color: ColorStyles.red,
           height: SizeConfig.textSize(context, 0.35),
@@ -199,7 +200,7 @@ class InvestmentPlanCard extends StatelessWidget {
           TextSpan(
             text: "\n$second",
             style: GoogleFonts.workSans(
-              fontSize: SizeConfig.textSize(context, 4.5),
+              fontSize: SizeConfig.textSize(context, 16.tx),
               color: ColorStyles.grey6,
             ),
           ),
