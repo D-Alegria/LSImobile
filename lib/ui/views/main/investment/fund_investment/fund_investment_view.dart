@@ -170,7 +170,7 @@ class FundInvestmentView extends StatelessWidget {
                               left: SizeConfig.xMargin(context, 5),
                             ),
                             child: AccountsCardsWrapper(
-                              loaded: (loaded) => ListView(
+                              loaded: ({accounts, cards}) => ListView(
                                 scrollDirection: Axis.horizontal,
                                 shrinkWrap: true,
                                 children: [
@@ -179,7 +179,7 @@ class FundInvestmentView extends StatelessWidget {
                                     physics: ScrollPhysics(),
                                     scrollDirection: Axis.horizontal,
                                     itemBuilder: (context, index) {
-                                      var card = loaded.cards[index];
+                                      var card = cards[index];
                                       return investmentCard(
                                           context,
                                           card,
@@ -191,7 +191,7 @@ class FundInvestmentView extends StatelessWidget {
                                         SizedBox(
                                       width: SizeConfig.xMargin(context, 15.w),
                                     ),
-                                    itemCount: loaded.cards.length,
+                                    itemCount: cards.length,
                                   ),
                                   addCard(context),
                                 ],

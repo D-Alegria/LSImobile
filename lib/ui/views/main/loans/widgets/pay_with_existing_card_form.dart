@@ -73,12 +73,12 @@ class PayWithCardForm extends StatelessWidget {
                 ),
               ),
               AccountsCardsWrapper(
-                loaded: (loaded) => Container(
+                loaded: ({accounts, cards}) => Container(
                   height: SizeConfig.yMargin(context, 22),
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) => InkWell(
-                      child: ATMCard(card: loaded.cards[index]),
+                      child: ATMCard(card: cards[index]),
                       onTap: () => _showForm(AddCardForm(
                         amount: FileReader.getAppConfig().paystackTestAmount,
                         // todo state.amount.toString(),
@@ -88,7 +88,7 @@ class PayWithCardForm extends StatelessWidget {
                     separatorBuilder: (context, index) => SizedBox(
                       width: SizeConfig.xMargin(context, 5),
                     ),
-                    itemCount: loaded.cards.length,
+                    itemCount: cards.length,
                   ),
                 ),
               ),

@@ -93,10 +93,10 @@ class WithdrawForm extends StatelessWidget {
                       Container(
                         height: SizeConfig.yMargin(context, 27),
                         child: AccountsCardsWrapper(
-                          loaded: (loaded) => ListView.separated(
+                          loaded: ({accounts, cards}) => ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              var account = loaded.accounts[index];
+                              var account = accounts[index];
                               return BankAccountCard(
                                 accountName: account.accountName,
                                 accountNumber: account.accountNumber,
@@ -112,7 +112,7 @@ class WithdrawForm extends StatelessWidget {
                             separatorBuilder: (context, index) => SizedBox(
                               width: SizeConfig.xMargin(context, 5),
                             ),
-                            itemCount: loaded.accounts.length,
+                            itemCount: accounts.length,
                           ),
                         ),
                       ),

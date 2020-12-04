@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lsi_mobile/core/configs/dependency_injection/injection.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
+import 'package:lsi_mobile/core/models/dto/account/account.dart';
+import 'package:lsi_mobile/core/models/dto/card/card.dart' as ca;
 import 'package:lsi_mobile/core/models/enums/card_transaction.dart';
 import 'package:lsi_mobile/core/utils/file_reader_util.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:lsi_mobile/ui/views/main/profile/view_models/accounts_cards/accounts_cards_bloc.dart';
 import 'package:lsi_mobile/ui/views/main/profile/widgets/add_account_form.dart';
 import 'package:lsi_mobile/ui/views/main/profile/widgets/add_card_form.dart';
 import 'package:lsi_mobile/ui/views/main/profile/widgets/atm_card.dart';
 import 'package:lsi_mobile/ui/views/main/profile/widgets/bank_account_card.dart';
 import 'package:lsi_mobile/ui/views/main/profile/widgets/profile_form.dart';
-import 'package:lsi_mobile/core/extensions/num_extension.dart';
 
 class AccountsCardsView extends StatefulWidget {
   @override
@@ -30,37 +29,23 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<AccountsCardsBloc>()
-        ..add(AccountsCardsEvent.getUserBankDetails()),
-      child: BlocConsumer<AccountsCardsBloc, AccountsCardsState>(
-        builder: (context, state) => ProfileForm(
-          tabController: _tabController,
-          title: "Account & Cards",
-          tabs: ["Bank Accounts", "Cards"],
-          form: state.map(
-            initial: (e) => Container(),
-            loading: (e) => sharedLoader(),
-            loaded: (e) => TabBarView(
-              children: [
-                buildBankAccountsView(e, context),
-                buildCardsView(e, context),
-              ],
-              controller: _tabController,
-            ),
-            error: (e) => Container(
-              child: Center(
-                child: Text(e.message),
-              ),
-            ),
-          ),
+    return AccountsCardsWrapper(
+      loaded: ({accounts, cards}) => ProfileForm(
+        tabController: _tabController,
+        title: "Account & Cards",
+        tabs: ["Bank Accounts", "Cards"],
+        form: TabBarView(
+          children: [
+            buildBankAccountsView(accounts, context),
+            buildCardsView(cards, context),
+          ],
+          controller: _tabController,
         ),
-        listener: (context, state) => null,
       ),
     );
   }
 
-  Widget buildCardsView(Loaded e, BuildContext context) {
+  Widget buildCardsView(List<ca.Card> cards, BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: SizeConfig.xMargin(context, 5),
@@ -71,9 +56,9 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
           ListView.separated(
             shrinkWrap: true,
             physics: ScrollPhysics(),
-            itemCount: e.cards.length,
+            itemCount: cards.length,
             itemBuilder: (context, index) {
-              var card = e.cards[index];
+              var card = cards[index];
               return ATMCard(card: card);
             },
             separatorBuilder: (context, index) =>
@@ -96,7 +81,8 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
 
   Widget buildEmptyContainer({BuildContext context, Function onTap}) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: SizeConfig.yMargin(context, 20.h)),
+      padding:
+          EdgeInsets.symmetric(vertical: SizeConfig.yMargin(context, 20.h)),
       alignment: Alignment.topCenter,
       child: sharedDottedContainer(
         color: Colors.transparent,
@@ -112,7 +98,7 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
     );
   }
 
-  Widget buildBankAccountsView(Loaded e, BuildContext context) {
+  Widget buildBankAccountsView(List<Account> accounts, BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: SizeConfig.xMargin(context, 5),
@@ -121,11 +107,11 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
         children: [
           SizedBox(height: SizeConfig.yMargin(context, 52.h)),
           ListView.separated(
-            itemCount: e.accounts.length,
+            itemCount: accounts.length,
             shrinkWrap: true,
             physics: ScrollPhysics(),
             itemBuilder: (context, index) {
-              var account = e.accounts[index];
+              var account = accounts[index];
               return BankAccountCard(
                 accountName: account.accountName,
                 accountNumber: account.accountNumber,

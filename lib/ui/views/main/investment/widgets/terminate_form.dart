@@ -77,10 +77,10 @@ class TerminateForm extends StatelessWidget {
                           left: SizeConfig.xMargin(context, 5),
                         ),
                         child: AccountsCardsWrapper(
-                          loaded: (loaded) => ListView.separated(
+                          loaded: ({accounts, cards}) => ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              var account = loaded.accounts[index];
+                              var account = accounts[index];
                               return BankAccountCard(
                                 accountName: account.accountName,
                                 accountNumber: account.accountNumber,
@@ -97,7 +97,7 @@ class TerminateForm extends StatelessWidget {
                             separatorBuilder: (context, index) => SizedBox(
                               width: SizeConfig.xMargin(context, 5),
                             ),
-                            itemCount: loaded.accounts.length,
+                            itemCount: accounts.length,
                           ),
                         ),
                       ),

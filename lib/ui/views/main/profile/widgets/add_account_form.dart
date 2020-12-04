@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:lsi_mobile/ui/views/main/profile/view_models/accounts_cards/accounts_cards_bloc.dart';
+import 'package:lsi_mobile/ui/views/main/profile/view_models/accounts_cards/accounts_cards_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/add_account_form/add_account_form_cubit.dart';
 
 class AddAccountForm extends StatefulWidget {
@@ -45,9 +45,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
               (l) => showErrorSnackBar(context, l.message),
               (r) async {
                 await context.bloc<AddAccountFormCubit>().reset();
-                await context
-                    .bloc<AccountsCardsBloc>()
-                    .add(GetUserBankDetails());
+                context.bloc<AccountsCardsCubit>().getBanks();
                 context.navigator.pop();
               },
             ),

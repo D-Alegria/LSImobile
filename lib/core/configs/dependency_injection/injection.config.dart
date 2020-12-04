@@ -9,7 +9,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../ui/views/main/loans/account_info/view_model/account_info_bloc.dart';
-import '../../../ui/views/main/profile/view_models/accounts_cards/accounts_cards_bloc.dart';
+import '../../../ui/views/main/profile/view_models/accounts_cards/accounts_cards_cubit.dart';
 import '../../../ui/views/main/profile/view_models/add_account_form/add_account_form_cubit.dart';
 import '../../../ui/views/main/profile/view_models/add_card_form/add_card_form_cubit.dart';
 import '../../utils/api_manager_util.dart';
@@ -121,7 +121,8 @@ GetIt $initGetIt(
         get<BankRepo>(),
         get<LoanRepo>(),
       ));
-  gh.lazySingleton<AccountsCardsBloc>(() => AccountsCardsBloc(get<BankRepo>()));
+  gh.lazySingleton<AccountsCardsCubit>(
+      () => AccountsCardsCubit(get<BankRepo>()));
   gh.lazySingleton<AddAccountFormCubit>(
       () => AddAccountFormCubit(get<UserRemoteDataSource>(), get<BankRepo>()));
   gh.lazySingleton<AddCardFormCubit>(() => AddCardFormCubit(get<BankRepo>()));

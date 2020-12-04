@@ -9,6 +9,7 @@ import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/history/view_model/recent_transaction_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_view/view_model/investment_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/loans/loans_view/view_model/loan_view_cubit.dart';
+import 'package:lsi_mobile/ui/views/main/profile/view_models/accounts_cards/accounts_cards_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/main_view/main_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 
@@ -44,6 +45,8 @@ class _MainViewState extends State<MainView> {
     context.bloc<LoanViewCubit>().checkActiveLoans();
     context.bloc<RecentTransactionCubit>().getRecentTransactions();
     context.bloc<InvestmentViewCubit>().checkForInvestments();
+    context.bloc<AccountsCardsCubit>().getCards();
+    context.bloc<AccountsCardsCubit>().getBanks();
     super.initState();
   }
 

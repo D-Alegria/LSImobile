@@ -10,7 +10,6 @@ import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/loans/make_payment/view_model/make_payment_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/loans/widgets/change_amount_form.dart';
 import 'package:lsi_mobile/ui/views/main/loans/widgets/pay_with_existing_card_form.dart';
-import 'package:lsi_mobile/ui/views/main/profile/view_models/accounts_cards/accounts_cards_bloc.dart';
 
 class MakePaymentView extends StatelessWidget {
   final String amount;
@@ -96,12 +95,7 @@ class MakePaymentView extends StatelessWidget {
                     ),
                     sharedInfoButton(
                       context: context,
-                      onTap: () {
-                        context
-                            .bloc<AccountsCardsBloc>()
-                            .add(GetUserBankDetails());
-                        _showForm(PayWithCardForm());
-                      },
+                      onTap: () => _showForm(PayWithCardForm()),
                       icon: Icon(
                         Icons.credit_card,
                         color: ColorStyles.blue,
@@ -140,14 +134,14 @@ class MakePaymentView extends StatelessWidget {
                 context.bloc<MakePaymentCubit>().reset();
                 return context.navigator.pushAndRemoveUntil(
                   Routes.successView,
-                      (routes) => false,
+                  (routes) => false,
                   arguments: SuccessViewArguments(
                     message: "You have successfully made payment",
                     buttonText: "Back to Loan",
                     onTap: () {
                       return ExtendedNavigator.root.pushAndRemoveUntil(
                         Routes.mainView,
-                            (route) => false,
+                        (route) => false,
                         arguments: MainViewArguments(pageNumber: 1),
                       );
                     },

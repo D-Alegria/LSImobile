@@ -17,7 +17,6 @@ import 'package:lsi_mobile/ui/views/main/investment/widgets/investment_plan_card
 import 'package:lsi_mobile/ui/views/main/investment/widgets/round_button.dart';
 import 'package:lsi_mobile/ui/views/main/investment/widgets/terminate_form.dart';
 import 'package:lsi_mobile/ui/views/main/investment/widgets/withdraw_form.dart';
-import 'package:lsi_mobile/ui/views/main/profile/view_models/accounts_cards/accounts_cards_bloc.dart';
 
 class InvestmentPlanView extends StatelessWidget {
   final String book = "assets/svgs/book.svg";
@@ -137,9 +136,6 @@ class InvestmentPlanView extends StatelessWidget {
                 RoundButton(
                   onTap: () {
                     if (investment.isActive != "1") {
-                      context
-                          .bloc<AccountsCardsBloc>()
-                          .add(GetUserBankDetails());
                       sharedBottomSheet(
                         context,
                         WithdrawForm(investment: investment),
@@ -185,9 +181,6 @@ class InvestmentPlanView extends StatelessWidget {
                 RoundButton(
                   onTap: () {
                     if (investment.isActive == "1") {
-                      context
-                          .bloc<AccountsCardsBloc>()
-                          .add(GetUserBankDetails());
                       sharedBottomSheet(
                         context,
                         TerminateForm(

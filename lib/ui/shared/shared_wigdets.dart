@@ -7,16 +7,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
+import 'package:lsi_mobile/core/models/dto/account/account.dart';
+import 'package:lsi_mobile/core/models/dto/card/card.dart' as ca;
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/authentication/authentication_bloc.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_view/view_model/investment_view_cubit.dart'
     as ivc;
-import 'package:lsi_mobile/ui/views/main/profile/view_models/accounts_cards/accounts_cards_bloc.dart'
+import 'package:lsi_mobile/ui/views/main/profile/view_models/accounts_cards/accounts_cards_cubit.dart'
     as acb;
 import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 
 import 'const_color.dart';
-import 'package:lsi_mobile/core/extensions/num_extension.dart';
 
 /// ////////////////////////////////////////////////////////////////////////////
 /// [sharedRaisedButton]
@@ -820,18 +822,25 @@ class InvestmentWrapper extends StatelessWidget {
 }
 
 class AccountsCardsWrapper extends StatelessWidget {
-  final Widget Function(acb.Loaded loaded) loaded;
+  final Widget Function({List<Account> accounts, List<ca.Card> cards}) loaded;
 
   const AccountsCardsWrapper({Key key, this.loaded}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<acb.AccountsCardsBloc, acb.AccountsCardsState>(
-      builder: (context, state) => state.map(
-        initial: (e) => Container(),
-        loading: (e) => sharedLoader(),
-        loaded: (e) => loaded(e),
-        error: (e) => sharedErrorWidget(context, e.message),
+    return BlocConsumer<acb.AccountsCardsCubit, acb.AccountsCardsState>(
+      builder: (context, state) {
+        if (state.isLoading)
+          return sharedLoader();
+        else
+          return loaded(accounts: state.accounts, cards: state.cards);
+      },
+      listener: (context, state) => state.failureOrSuccess.fold(
+        () => null,
+        (either) => either.fold(
+          (failure) => showErrorSnackBar(context, failure.message),
+          (success) => null,
+        ),
       ),
     );
   }

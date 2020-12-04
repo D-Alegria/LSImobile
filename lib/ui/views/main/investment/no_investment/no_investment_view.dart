@@ -10,6 +10,7 @@ import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_products/view_model/investment_product_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/investment/new_investment/view_model/new_investment_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/investment/widgets/mini_investment_card.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 
 class NoInvestmentView extends StatefulWidget {
   @override
@@ -50,7 +51,7 @@ class _NoInvestmentViewState extends State<NoInvestmentView> {
                             text: "Investments",
                             style: GoogleFonts.workSans(
                               fontWeight: FontWeight.w600,
-                              fontSize: SizeConfig.textSize(context, 6),
+                              fontSize: SizeConfig.textSize(context, 22.tx),
                               color: ColorStyles.black,
                             ),
                             children: [
@@ -58,7 +59,7 @@ class _NoInvestmentViewState extends State<NoInvestmentView> {
                                 text:
                                     "\n${double.parse(loaded.investmentBalance).moneyFormat(2)}",
                                 style: GoogleFonts.roboto(
-                                  fontSize: SizeConfig.textSize(context, 5.5),
+                                  fontSize: SizeConfig.textSize(context, 20.tx),
                                   color: ColorStyles.orange,
                                 ),
                               ),
@@ -77,17 +78,17 @@ class _NoInvestmentViewState extends State<NoInvestmentView> {
                       ],
                     ),
                   ),
-                  SizedBox(height: SizeConfig.yMargin(context, 2)),
+                  SizedBox(height: SizeConfig.yMargin(context, 48.h)),
                   Text(
                     "You currently have no investment, chose an investment plan below to get started",
                     style: GoogleFonts.workSans(
                       height: SizeConfig.textSize(context, 0.3),
                       color: ColorStyles.light,
                       fontWeight: FontWeight.w500,
-                      fontSize: SizeConfig.textSize(context, 4.3),
+                      fontSize: SizeConfig.textSize(context, 16.tx),
                     ),
                   ),
-                  SizedBox(height: SizeConfig.yMargin(context, 5)),
+                  SizedBox(height: SizeConfig.yMargin(context, 49.h)),
                   Expanded(
                     child: ListView.separated(
                       itemBuilder: (context, index) {

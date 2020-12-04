@@ -9,7 +9,7 @@ import 'package:lsi_mobile/core/utils/file_reader_util.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/views/main/investment/new_investment/view_model/new_investment_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/loans/make_payment/view_model/make_payment_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/profile/view_models/accounts_cards/accounts_cards_bloc.dart';
+import 'package:lsi_mobile/ui/views/main/profile/view_models/accounts_cards/accounts_cards_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/add_card_form/add_card_form_cubit.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -90,7 +90,7 @@ class CardPaymentWebView extends StatelessWidget {
                     break;
                   case CardTransaction.AddNewCardFundInvestment:
                     context.bloc<AddCardFormCubit>().addCard();
-                    context.bloc<AccountsCardsBloc>().add(GetUserBankDetails());
+                    context.bloc<AccountsCardsCubit>().getCards();
                     context.bloc<AddCardFormCubit>().reset();
                     await context.navigator
                         .popUntilPath(Routes.fundInvestmentView);

@@ -1,15 +1,18 @@
-part of 'accounts_cards_bloc.dart';
+part of 'accounts_cards_cubit.dart';
 
 @freezed
 abstract class AccountsCardsState with _$AccountsCardsState {
-  factory AccountsCardsState.initial() = Initial;
+  const factory AccountsCardsState({
+    @required List<Account> accounts,
+    @required List<Card> cards,
+    @required bool isLoading,
+    @required Option<Either<Glitch, Unit>> failureOrSuccess,
+  }) = _AccountsCardsState;
 
-  factory AccountsCardsState.loading() = Loading;
-
-  factory AccountsCardsState.loaded({
-    @required final List<Account> accounts,
-    @required final List<Card> cards,
-  }) = Loaded;
-
-  factory AccountsCardsState.error(String message) = Error;
+  factory AccountsCardsState.initial() => AccountsCardsState(
+        isLoading: false,
+        accounts: [],
+        cards: [],
+        failureOrSuccess: None(),
+      );
 }

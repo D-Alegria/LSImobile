@@ -6,7 +6,7 @@ import 'package:lsi_mobile/core/models/enums/card_transaction.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:lsi_mobile/ui/views/main/profile/view_models/accounts_cards/accounts_cards_bloc.dart';
+import 'package:lsi_mobile/ui/views/main/profile/view_models/accounts_cards/accounts_cards_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/add_card_form/add_card_form_cubit.dart';
 
 class AddCardForm extends StatefulWidget {
@@ -45,9 +45,7 @@ class _AddCardFormState extends State<AddCardForm> {
               (l) => showErrorSnackBar(context, l.message),
               (r) async {
                 await context.bloc<AddCardFormCubit>().reset();
-                await context
-                    .bloc<AccountsCardsBloc>()
-                    .add(GetUserBankDetails());
+                context.bloc<AccountsCardsCubit>().getCards();
                 await context.navigator.popUntilPath(Routes.accountsCardsView);
               },
             ),
