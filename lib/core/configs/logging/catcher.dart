@@ -15,17 +15,17 @@ class CatcherConfig {
   static final CatcherOptions releaseOptions = CatcherOptions(
     DialogReportMode(),
     [
-      EmailAutoHandler(
-        "smtp.gmail.com",
-        587,
-        FileReader.getAppConfig().developerAccount,
-        FileReader.getAppConfig().developerAccountName,
-        FileReader.getAppConfig().developerAccountPassword,
-        FileReader.getAppConfig().bugRecipients,
-        emailHeader: "LSI mobile Bug Report",
-        emailTitle: "LSI mobile Bug Report",
-        sendHtml: true,
-      ),
+      // EmailAutoHandler(
+      //   "smtp.gmail.com",
+      //   587,
+      //   FileReader.getAppConfig().developerAccount,
+      //   FileReader.getAppConfig().developerAccountName,
+      //   FileReader.getAppConfig().developerAccountPassword,
+      //   FileReader.getAppConfig().bugRecipients,
+      //   emailHeader: "LSI mobile Bug Report",
+      //   emailTitle: "LSI mobile Bug Report",
+      //   sendHtml: true,
+      // ),
       SentryHandler(SentryClient(dsn: FileReader.getAppConfig().sentryDSN)),
     ],
   );

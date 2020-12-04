@@ -23,7 +23,7 @@ import 'package:lsi_mobile/ui/views/main/profile/view_models/edu_and_employ_form
 import 'package:lsi_mobile/ui/views/main/profile/view_models/emergency_contact_form/emergency_contact_form_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/personal_info_form/personal_info_form_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/residence_form/residence_form_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_bloc.dart';
+import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 import 'package:lsi_mobile/ui/views/onboarding/view_model/onboard_page_cubit.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -36,7 +36,7 @@ blocs(BuildContext context) => [
       BlocProvider(create: (context) => getIt<AuthenticationBloc>()),
       BlocProvider(create: (context) => OnboardPageCubit()),
       BlocProvider(create: (context) => getIt<AuthFormBloc>()),
-      BlocProvider(create: (context) => getIt<UserProfileBloc>()),
+      BlocProvider(create: (context) => getIt<UserProfileCubit>()),
       BlocProvider(create: (context) => getIt<RecentTransactionCubit>()),
       BlocProvider(create: (context) => getIt<EditProfileCubit>()),
       BlocProvider(create: (context) => getIt<LoanViewCubit>()),

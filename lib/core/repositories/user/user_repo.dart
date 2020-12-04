@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/dto/recent_transaction/recent_transaction.dart';
@@ -44,4 +46,6 @@ abstract class UserRepo {
 
   Future<Either<Glitch, List<Value>>> getDropDownOptions(DropDownMenu menu,
       {String lga});
+
+  Future<Either<Glitch, Unit>> uploadProfilePicture(File file);
 }

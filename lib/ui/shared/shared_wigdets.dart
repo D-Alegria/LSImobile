@@ -13,7 +13,7 @@ import 'package:lsi_mobile/ui/views/main/investment/investment_view/view_model/i
     as ivc;
 import 'package:lsi_mobile/ui/views/main/profile/view_models/accounts_cards/accounts_cards_bloc.dart'
     as acb;
-import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_bloc.dart';
+import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 
 import 'const_color.dart';
 
@@ -222,6 +222,7 @@ Widget sharedRaisedContainer({
   double width,
   Widget child,
   EdgeInsets padding,
+  EdgeInsets margin,
   Function onTap,
   Gradient gradient,
 }) {
@@ -232,6 +233,7 @@ Widget sharedRaisedContainer({
       padding: padding,
       width: width,
       height: height,
+      margin: margin,
       decoration: BoxDecoration(
         gradient: gradient,
         color: color,
@@ -402,7 +404,7 @@ Widget sharedInfoButton({
             child: icon,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: colorIcon ? ColorStyles.grey7 : Colors.transparent,
+              color: colorIcon ? ColorStyles.lGrey : Colors.transparent,
             ),
           ),
           SizedBox(width: SizeConfig.xMargin(context, 1.5)),
@@ -532,7 +534,7 @@ Widget sharedTable({
               textAlign: TextAlign.left,
               style: GoogleFonts.workSans(
                 fontWeight: FontWeight.w400,
-                fontSize: SizeConfig.textSize(context, 4.5),
+                fontSize: SizeConfig.textSize(context, 4.2),
                 height: SizeConfig.textSize(context, 0.5),
               ),
             ),
@@ -547,7 +549,7 @@ Widget sharedTable({
                 color: (red && index == (list.length - 1))
                     ? ColorStyles.red
                     : ColorStyles.black,
-                fontSize: SizeConfig.textSize(context, 5),
+                fontSize: SizeConfig.textSize(context, 4.5),
                 height: SizeConfig.textSize(context, 0.5),
               ),
             ),
@@ -771,7 +773,7 @@ class UserDetailsWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<UserProfileBloc, UserProfileState>(
+    return BlocConsumer<UserProfileCubit, UserProfileState>(
       builder: (context, state) => state.map(
         initial: (e) => Container(),
         loading: (e) => sharedLoader(),
@@ -874,4 +876,22 @@ class SharedWideButton extends StatelessWidget {
       ),
     );
   }
+}
+
+void sharedBottomSheet(BuildContext context, Widget form) {
+  showModalBottomSheet(
+    isScrollControlled: true,
+    backgroundColor: ColorStyles.black.withOpacity(0.2),
+    context: context,
+    builder: (context) {
+      return SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: form,
+        ),
+      );
+    },
+  );
 }

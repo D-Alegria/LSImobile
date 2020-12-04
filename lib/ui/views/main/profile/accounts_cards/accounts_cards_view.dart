@@ -27,24 +27,6 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
     super.initState();
   }
 
-  void _showForm(Widget form) {
-    showModalBottomSheet(
-      isScrollControlled: true,
-      backgroundColor: ColorStyles.black.withOpacity(0.2),
-      context: context,
-      builder: (context) {
-        return SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-            ),
-            child: form,
-          ),
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -98,10 +80,13 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
           ),
           buildEmptyContainer(
             context: context,
-            onTap: () => _showForm(AddCardForm(
-              amount: FileReader.getAppConfig().paystackTestAmount,
-              transaction: CardTransaction.AddNewCard,
-            )),
+            onTap: () => sharedBottomSheet(
+              context,
+              AddCardForm(
+                amount: FileReader.getAppConfig().paystackTestAmount,
+                transaction: CardTransaction.AddNewCard,
+              ),
+            ),
           ),
         ],
       ),
@@ -151,7 +136,7 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
           ),
           buildEmptyContainer(
             context: context,
-            onTap: () => _showForm(AddAccountForm()),
+            onTap: () => sharedBottomSheet(context, AddAccountForm()),
           ),
         ],
       ),

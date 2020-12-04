@@ -9,6 +9,7 @@ import 'package:lsi_mobile/core/utils/file_reader_util.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/views/main/investment/new_investment/view_model/new_investment_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/loans/make_payment/view_model/make_payment_cubit.dart';
+import 'package:lsi_mobile/ui/views/main/profile/view_models/accounts_cards/accounts_cards_bloc.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/add_card_form/add_card_form_cubit.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -24,7 +25,18 @@ class CardPaymentWebView extends StatelessWidget {
   Widget build(BuildContext context) {
     Future<bool> _pop() {
       context.bloc<AddCardFormCubit>().reset();
-      context.navigator.popUntilPath(Routes.accountsCardsView);
+      switch (transaction) {
+        case CardTransaction.AddNewCard:
+          context.navigator.popUntilPath(Routes.accountsCardsView);
+          break;
+        case CardTransaction.LoanPayment:
+          context.navigator.popUntilPath(Routes.makePaymentView);
+          break;
+        case CardTransaction.AddNewCardFundInvestment:
+        case CardTransaction.InvestmentPayment:
+          context.navigator.popUntilPath(Routes.fundInvestmentView);
+          break;
+      }
       return Future.value(true);
     }
 
@@ -44,8 +56,7 @@ class CardPaymentWebView extends StatelessWidget {
             javascriptMode: JavascriptMode.unrestricted,
             onWebViewCreated: (controller) => _controller.complete(controller),
             onPageStarted: (url) async {
-              if (url
-                  .contains(FileReader.getAppConfig().paystackConfirmUrl)) {
+              if (url.contains(FileReader.getAppConfig().paystackConfirmUrl)) {
                 switch (transaction) {
                   case CardTransaction.AddNewCard:
                     await context.navigator.pop();
@@ -59,6 +70,7 @@ class CardPaymentWebView extends StatelessWidget {
                     context
                         .bloc<MakePaymentCubit>()
                         .referenceChanged(referenceId);
+                    context.bloc<AddCardFormCubit>().reset();
                     await context.navigator
                         .popUntilPath(Routes.makePaymentView);
                     context.bloc<MakePaymentCubit>().makePayment();
@@ -71,9 +83,17 @@ class CardPaymentWebView extends StatelessWidget {
                     context
                         .bloc<NewInvestmentCubit>()
                         .referenceChanged(referenceId);
+                    context.bloc<AddCardFormCubit>().reset();
                     await context.navigator
                         .popUntilPath(Routes.fundInvestmentView);
                     context.bloc<NewInvestmentCubit>().completeInvestment();
+                    break;
+                  case CardTransaction.AddNewCardFundInvestment:
+                    context.bloc<AddCardFormCubit>().addCard();
+                    context.bloc<AccountsCardsBloc>().add(GetUserBankDetails());
+                    context.bloc<AddCardFormCubit>().reset();
+                    await context.navigator
+                        .popUntilPath(Routes.fundInvestmentView);
                     break;
                 }
               }

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/personal_info_form/personal_info_form_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/widgets/personal_info_form.dart';
-import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_bloc.dart';
+import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 
 import '../widgets/loan_form.dart';
 
@@ -18,7 +18,7 @@ class _PersonalInfoFormViewState extends State<PersonalInfoFormView> {
   @override
   void initState() {
     //todo fix
-    context.bloc<UserProfileBloc>().state.maybeMap(
+    context.bloc<UserProfileCubit>().state.maybeMap(
           orElse: () => null,
           loaded: (value) => _userDetailsRequest = value.userData.userData.data,
         );

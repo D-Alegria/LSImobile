@@ -7,14 +7,14 @@ import 'package:lsi_mobile/ui/shared/screen_heading.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/authentication/authentication_bloc.dart';
-import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_bloc.dart';
+import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 
 class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () async =>
-          Future.value(context.bloc<UserProfileBloc>()..add(GetUserDetails())),
+          Future.value(context.bloc<UserProfileCubit>()..getUserDetails()),
       child: UserDetailsWrapper(
         loaded: (userData) => _buildProfileView(context, userData),
       ),
@@ -34,7 +34,7 @@ class ProfileView extends StatelessWidget {
               firstText: "My Account",
               image: val.profilePicture,
               secondText: val.fullName,
-              investment: false,
+              profile: true,
               secondTextColor: ColorStyles.grey3,
             ),
             SizedBox(height: SizeConfig.yMargin(context, 5.4)),
@@ -45,10 +45,10 @@ class ProfileView extends StatelessWidget {
               icon: Icon(
                 Icons.person_outline_outlined,
                 color: ColorStyles.dark,
-                size: SizeConfig.textSize(context, 8),
+                size: SizeConfig.textSize(context, 7),
               ),
               text: "Edit profile",
-              background: ColorStyles.lGrey.withOpacity(0.4),
+              background: ColorStyles.lGrey.withOpacity(0.3),
               showArrow: true,
             ),
             SizedBox(height: SizeConfig.yMargin(context, 3)),
@@ -58,10 +58,10 @@ class ProfileView extends StatelessWidget {
               icon: Icon(
                 Icons.credit_card,
                 color: ColorStyles.dark,
-                size: SizeConfig.textSize(context, 8),
+                size: SizeConfig.textSize(context, 7),
               ),
               text: "Account and cards",
-              background: ColorStyles.lGrey.withOpacity(0.4),
+              background: ColorStyles.lGrey.withOpacity(0.3),
               showArrow: true,
             ),
             SizedBox(height: SizeConfig.yMargin(context, 3)),
@@ -75,10 +75,10 @@ class ProfileView extends StatelessWidget {
                     icon: Icon(
                       Icons.help_outline,
                       color: ColorStyles.dark,
-                      size: SizeConfig.textSize(context, 8),
+                      size: SizeConfig.textSize(context, 7),
                     ),
                     text: "Self help",
-                    background: ColorStyles.lGrey.withOpacity(0.4),
+                    background: ColorStyles.lGrey.withOpacity(0.3),
                   ),
                 ),
                 SizedBox(width: SizeConfig.xMargin(context, 3)),
@@ -89,10 +89,10 @@ class ProfileView extends StatelessWidget {
                     icon: Icon(
                       Icons.phone_in_talk_outlined,
                       color: ColorStyles.dark,
-                      size: SizeConfig.textSize(context, 8),
+                      size: SizeConfig.textSize(context, 7),
                     ),
                     text: "Contact us",
-                    background: ColorStyles.lGrey.withOpacity(0.4),
+                    background: ColorStyles.lGrey.withOpacity(0.3),
                   ),
                 )
               ],
@@ -110,13 +110,13 @@ class ProfileView extends StatelessWidget {
                 context: context,
                 icon: Icon(
                   Icons.power_settings_new_rounded,
-                  size: SizeConfig.textSize(context, 8),
+                  size: SizeConfig.textSize(context, 7),
                   color: ColorStyles.red,
                 ),
                 onTap: () =>
                     context.bloc<AuthenticationBloc>().add(LogoutRequest()),
                 text: "Logout",
-                background: ColorStyles.red.withOpacity(0.22),
+                background: ColorStyles.red.withOpacity(0.1),
               ),
             ),
           ],

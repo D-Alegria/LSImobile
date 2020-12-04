@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
@@ -5,9 +7,12 @@ import 'package:lsi_mobile/core/models/constants/api_urls.dart';
 import 'package:lsi_mobile/core/models/dto/recent_transaction/recent_transaction.dart';
 import 'package:lsi_mobile/core/models/dto/value/value.dart';
 import 'package:lsi_mobile/core/models/requests/token_request/token_request.dart';
+import 'package:lsi_mobile/core/models/requests/update_profile_profile/update_profile_picture_request.dart';
 import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
 import 'package:lsi_mobile/core/models/responses/get_recent_transaction/get_recent_transaction_response.dart';
 import 'package:lsi_mobile/core/models/responses/get_value/get_value_response.dart';
+import 'package:lsi_mobile/core/models/responses/response/response.dart';
+import 'package:lsi_mobile/core/models/responses/upload_picture/upload_picture_response.dart';
 import 'package:lsi_mobile/core/models/responses/user_details/user_details_data.dart';
 import 'package:lsi_mobile/core/models/responses/user_details/user_details_response.dart';
 import 'package:lsi_mobile/core/utils/api_manager_util.dart';
@@ -45,6 +50,12 @@ abstract class UserRemoteDataSource {
 
   Future<Either<Glitch, Unit>> saveUserDetails(
     UserDetailsRequest request,
+  );
+
+  Future<Either<Glitch, UploadPictureResponse>> uploadPicture(File file);
+
+  Future<Either<Glitch, Response>> updateProfilePicture(
+    UpdateProfilePictureRequest request,
   );
 }
 
@@ -181,6 +192,56 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         );
       },
       errorMessage: "Internal System Error Occurred:USRD-GRT",
+    );
+  }
+
+  @override
+  Future<Either<Glitch, Response>> updateProfilePicture(
+      UpdateProfilePictureRequest request) {
+    return tryMethod<Response>(
+      function: () async {
+        final response = await _apiManager.post(
+          url: ApiUrls.updateProfileImage,
+          requestBody: request.toJson(),
+        );
+        return response.fold(
+          (failure) => left(failure),
+          (success) {
+            final result = Response.fromJson(success);
+            if (result.status) {
+              return right(result);
+            } else {
+              return left(ServerGlitch(message: result.message));
+            }
+          },
+        );
+      },
+      errorMessage: "Internal System Error Occurred:USRD-UPrPi",
+    );
+  }
+
+  @override
+  Future<Either<Glitch, UploadPictureResponse>> uploadPicture(
+      File file) {
+    return tryMethod<UploadPictureResponse>(
+      function: () async {
+        final response = await _apiManager.postFormData(
+          url: ApiUrls.uploadImage,
+          imageFile: file,
+        );
+        return response.fold(
+          (failure) => left(failure),
+          (success) {
+            final result = UploadPictureResponse.fromJson(success);
+            if (result.status) {
+              return right(result);
+            } else {
+              return left(ServerGlitch(message: result.message));
+            }
+          },
+        );
+      },
+      errorMessage: "Internal System Error Occurred:USRD-UPi",
     );
   }
 }

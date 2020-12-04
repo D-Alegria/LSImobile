@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/main_view/main_view_cubit.dart';
+import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 
 class ScreenHeader extends StatelessWidget {
   final String firstText;
   final String secondText;
   final Color secondTextColor;
-  final bool investment;
+  final bool profile;
   final String image;
 
   ScreenHeader({
     this.firstText,
     this.secondText,
     this.secondTextColor,
-    this.investment,
+    this.profile,
     this.image,
   });
 
   @override
   Widget build(BuildContext context) {
     var state = BlocProvider.of<MainViewCubit>(context);
+    var userProfile = BlocProvider.of<UserProfileCubit>(context);
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -52,22 +53,12 @@ class ScreenHeader extends StatelessWidget {
           ),
           SizedBox(width: SizeConfig.xMargin(context, 2)),
           InkWell(
-            onTap: () => investment ? print('investment') : state.changePage(4),
-            child: ClipOval(
-              child: investment
-                  ? Icon(
-                      Icons.error_outline,
-                      color: ColorStyles.light,
-                      size: SizeConfig.yMargin(context, 7),
-                    )
-                  : Image.network(
-                      image,
-                      fit: BoxFit.fill,
-                      errorBuilder: (context, error, stackTrace) => Container(
-                        color: ColorStyles.black,
-                      ),
-                      height: SizeConfig.yMargin(context, 7),
-                    ),
+            onTap: () async => profile
+                ? await userProfile.updateProfilePictureImage(context)
+                : state.changePage(4),
+            child: CircleAvatar(
+              radius: SizeConfig.yMargin(context, 3.7),
+              backgroundImage: NetworkImage(image),
             ),
           )
         ],

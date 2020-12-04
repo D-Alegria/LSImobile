@@ -16,21 +16,36 @@ import 'package:lsi_mobile/ui/views/main/profile/widgets/add_card_form.dart';
 class FundInvestmentView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    void _showForm(Widget form) {
-      showModalBottomSheet(
-        isScrollControlled: true,
-        backgroundColor: ColorStyles.black.withOpacity(0.2),
-        context: context,
-        builder: (context) {
-          return SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom,
-              ),
-              child: form,
+    Widget addCard(BuildContext context) {
+      return sharedRaisedContainer(
+        onTap: () {
+          sharedBottomSheet(
+            context,
+            AddCardForm(
+              amount: FileReader.getAppConfig().paystackTestAmount,
+              transaction: CardTransaction.AddNewCardFundInvestment,
             ),
           );
         },
+        padding: EdgeInsets.symmetric(
+          horizontal: SizeConfig.xMargin(context, 5),
+        ),
+        margin: EdgeInsets.only(
+          left: SizeConfig.xMargin(context, 5),
+        ),
+        alignment: Alignment.centerLeft,
+        color: ColorStyles.extraLight,
+        width: SizeConfig.xMargin(context, 75),
+        child: Center(
+          child: Text(
+            "Tap To Add Your Card",
+            style: GoogleFonts.workSans(
+              fontWeight: FontWeight.w600,
+              fontSize: SizeConfig.textSize(context, 5),
+              color: ColorStyles.black,
+            ),
+          ),
+        ),
       );
     }
 
@@ -38,10 +53,13 @@ class FundInvestmentView extends StatelessWidget {
       return sharedRaisedContainer(
         onTap: () {
           context.bloc<NewInvestmentCubit>().cardChanged(card.cardId);
-          _showForm(AddCardForm(
-            amount: amount,
-            transaction: CardTransaction.InvestmentPayment,
-          ));
+          sharedBottomSheet(
+            context,
+            AddCardForm(
+              amount: amount,
+              transaction: CardTransaction.InvestmentPayment,
+            ),
+          );
         },
         padding: EdgeInsets.symmetric(
           horizontal: SizeConfig.xMargin(context, 5),
@@ -148,21 +166,30 @@ class FundInvestmentView extends StatelessWidget {
                               left: SizeConfig.xMargin(context, 5),
                             ),
                             child: AccountsCardsWrapper(
-                              loaded: (loaded) => ListView.separated(
+                              loaded: (loaded) => ListView(
                                 scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) {
-                                  var card = loaded.cards[index];
-                                  return investmentCard(
-                                      context,
-                                      card,
-                                      FileReader.getAppConfig()
-                                          .paystackTestAmount // todo state.amount.toString(),
-                                      );
-                                },
-                                separatorBuilder: (context, index) => SizedBox(
-                                  width: SizeConfig.xMargin(context, 5),
-                                ),
-                                itemCount: loaded.cards.length,
+                                children: [
+                                  ListView.separated(
+                                    shrinkWrap: true,
+                                    physics: ScrollPhysics(),
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (context, index) {
+                                      var card = loaded.cards[index];
+                                      return investmentCard(
+                                          context,
+                                          card,
+                                          FileReader.getAppConfig()
+                                              .paystackTestAmount // todo state.amount.toString(),
+                                          );
+                                    },
+                                    separatorBuilder: (context, index) =>
+                                        SizedBox(
+                                      width: SizeConfig.xMargin(context, 5),
+                                    ),
+                                    itemCount: loaded.cards.length,
+                                  ),
+                                  addCard(context),
+                                ],
                               ),
                             ),
                           ),
@@ -185,13 +212,15 @@ class FundInvestmentView extends StatelessWidget {
                               "Make a transfer of exactly ${state.amount.moneyFormat(2)} from your  desired bank account to the one stated below. Funds will reflect in your investment plan instantly",
                               style: GoogleFonts.roboto(
                                 fontWeight: FontWeight.w500,
-                                fontSize: SizeConfig.textSize(context, 4.8),
+                                fontSize: SizeConfig.textSize(context, 4.3),
                                 color: ColorStyles.light,
+                                height: SizeConfig.textSize(context, 0.35),
                               ),
                             ),
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(
+                              vertical: SizeConfig.yMargin(context, 2),
                               horizontal: SizeConfig.xMargin(context, 5),
                             ),
                             child: sharedTable(
@@ -204,7 +233,7 @@ class FundInvestmentView extends StatelessWidget {
                               red: false,
                             ),
                           ),
-                          SizedBox(height: SizeConfig.yMargin(context, 2)),
+                          SizedBox(height: SizeConfig.yMargin(context, 6)),
                           Padding(
                             padding: EdgeInsets.symmetric(
                               horizontal: SizeConfig.xMargin(context, 30),

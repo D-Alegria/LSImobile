@@ -8,7 +8,7 @@ import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/loans/loan_product/loan_product/loan_product_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_bloc.dart';
+import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 
 import '../widgets/loan_product_box.dart';
 
@@ -23,7 +23,7 @@ class _LoanProductViewState extends State<LoanProductView> {
   @override
   void initState() {
     context.bloc<LoanProductCubit>().getLoanProducts();
-    context.bloc<UserProfileBloc>().state.maybeMap(
+    context.bloc<UserProfileCubit>().state.maybeMap(
           orElse: () => null,
           loaded: (value) => _userDetailsData = value.userData,
         );

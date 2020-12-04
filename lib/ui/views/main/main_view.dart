@@ -10,7 +10,7 @@ import 'package:lsi_mobile/ui/views/main/history/view_model/recent_transaction_c
 import 'package:lsi_mobile/ui/views/main/investment/investment_view/view_model/investment_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/loans/loans_view/view_model/loan_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/main_view/main_view_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_bloc.dart';
+import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 
 import 'history/history_view.dart';
 import 'home/home_view.dart';
@@ -40,7 +40,7 @@ class _MainViewState extends State<MainView> {
 
   @override
   void initState() {
-    context.bloc<UserProfileBloc>().add(GetUserDetails());
+    context.bloc<UserProfileCubit>().getUserDetails();
     context.bloc<LoanViewCubit>().checkActiveLoans();
     context.bloc<RecentTransactionCubit>().getRecentTransactions();
     context.bloc<InvestmentViewCubit>().checkForInvestments();

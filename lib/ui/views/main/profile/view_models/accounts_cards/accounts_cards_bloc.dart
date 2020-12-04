@@ -28,22 +28,22 @@ class AccountsCardsBloc extends Bloc<AccountsCardsEvent, AccountsCardsState> {
       getUserBankDetails: (_) async* {
         yield Loading();
         try {
-          final bankResult = await _bankRepo.bankAccounts;
-          final cardResult = await _bankRepo.usersCards;
+          final responses =
+              await Future.wait([_bankRepo.bankAccounts, _bankRepo.usersCards]);
           var accounts;
           var cards;
 
-          yield* bankResult.fold(
+          yield* responses[0].fold(
             (l) async* {
               print(l.message);
               yield Error(l.message);
             },
             (r) async* {
-              accounts = r.data;
+              accounts = r;
             },
           );
 
-          yield* cardResult.fold(
+          yield* responses[1].fold(
             (l) async* {
               print(l.message);
               yield Error(l.message);

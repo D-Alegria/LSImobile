@@ -47,7 +47,7 @@ import '../../../ui/views/main/profile/view_models/residence_form/residence_form
 import '../../../ui/views/main/investment/investment_plan/view_model/rollover_investment/rollover_form_cubit.dart';
 import '../../../ui/views/main/investment/investment_plan/view_model/terminate_investment/terminate_form_cubit.dart';
 import '../../datasources/user/user_local_datasource.dart';
-import '../../../ui/views/main/view_model/user_profile/user_profile_bloc.dart';
+import '../../../ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 import '../../datasources/user/user_remote_datasource.dart';
 import '../../repositories/user/user_repo.dart';
 import '../../repositories/user/user_repo_impl.dart';
@@ -114,7 +114,7 @@ GetIt $initGetIt(
   gh.factory<RolloverFormCubit>(() => RolloverFormCubit(get<InvestmentRepo>()));
   gh.factory<TerminateFormCubit>(
       () => TerminateFormCubit(get<InvestmentRepo>()));
-  gh.factory<UserProfileBloc>(() => UserProfileBloc(get<UserRepo>()));
+  gh.factory<UserProfileCubit>(() => UserProfileCubit(get<UserRepo>()));
   gh.factory<WithdrawFormCubit>(() => WithdrawFormCubit(get<InvestmentRepo>()));
   gh.lazySingleton<AccountInfoBloc>(() => AccountInfoBloc(
         get<UserRemoteDataSource>(),

@@ -12,7 +12,7 @@ import 'package:lsi_mobile/ui/views/main/home/widgets/row_card.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_view/view_model/investment_view_cubit.dart'
     as ivc;
 import 'package:lsi_mobile/ui/views/main/view_model/main_view/main_view_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_bloc.dart';
+import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
@@ -23,7 +23,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async => Future.value([
-          context.bloc<UserProfileBloc>()..add(GetUserDetails()),
+          context.bloc<UserProfileCubit>().getUserDetails(),
           context.bloc<ivc.InvestmentViewCubit>().checkForInvestments(),
         ]),
         child: UserDetailsWrapper(
@@ -52,7 +52,7 @@ class HomeView extends StatelessWidget {
             child: ScreenHeader(
               firstText: user.fullName,
               secondText: model.greeting(),
-              investment: false,
+              profile: false,
               image: user.profilePicture,
             ),
           ),

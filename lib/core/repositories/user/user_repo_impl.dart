@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:lsi_mobile/core/datasources/user/user_local_datasource.dart';
@@ -8,6 +10,7 @@ import 'package:lsi_mobile/core/models/dto/user/user.dart';
 import 'package:lsi_mobile/core/models/dto/value/value.dart';
 import 'package:lsi_mobile/core/models/enums/drop_down_menu.dart';
 import 'package:lsi_mobile/core/models/requests/token_request/token_request.dart';
+import 'package:lsi_mobile/core/models/requests/update_profile_profile/update_profile_picture_request.dart';
 import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
 import 'package:lsi_mobile/core/models/responses/user_details/user_details_data.dart';
 import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
@@ -268,6 +271,34 @@ class UserRepoImpl implements UserRepo {
         String key = lga == null ? menu.toString() : menu.toString() + lga;
         await _userLocalDataSource.saveValue(key, success);
         return right(success);
+      },
+    );
+  }
+
+  @override
+  Future<Either<Glitch, Unit>> uploadProfilePicture(File file) {
+    return tryMethod<Unit>(
+      errorMessage: "Internal System Error Occurred:URP-UPrPi",
+      function: () async {
+        final result = await userToken;
+        return result.fold(
+          (failure) => left(failure),
+          (token) async {
+            final result = await _userRemoteDataSource.uploadPicture(file);
+            return result.fold(
+              (failure) => left(failure),
+              (success) async {
+                final result = await _userRemoteDataSource.updateProfilePicture(
+                    UpdateProfilePictureRequest(
+                        filename: success.data.filename, token: token));
+                return result.fold(
+                  (failure) => left(failure),
+                  (success) => right(unit),
+                );
+              },
+            );
+          },
+        );
       },
     );
   }

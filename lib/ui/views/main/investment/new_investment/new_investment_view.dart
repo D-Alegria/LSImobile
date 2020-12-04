@@ -128,7 +128,8 @@ class NewInvestmentView extends StatelessWidget {
                           },
                           color: ColorStyles.blue,
                           text: "Proceed to funding",
-                        )
+                        ),
+                        SizedBox(height: SizeConfig.yMargin(context, 2)),
                       ],
                     ),
                   ),
