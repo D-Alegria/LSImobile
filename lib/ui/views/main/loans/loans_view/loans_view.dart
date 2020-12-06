@@ -9,20 +9,22 @@ class LoansView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: RefreshIndicator(
-        onRefresh: () async =>
-            Future.value(context.bloc<LoanViewCubit>().checkActiveLoans()),
-        child: BlocBuilder<LoanViewCubit, LoanViewState>(
-          builder: (context, state) => state.map(
-            initial: (e) => Container(),
-            loading: (e) => sharedLoader(),
-            loaded: (e) => e.isLoanAvailable
-                ? ActiveLoanView(
-                    currentLoan: e.currentLoans.first,
-                    loanHistory: e.loanHistory,
-                  )
-                : NoLoanView(),
-            error: (e) => sharedErrorWidget(context, e.message),
+      body: UserDetailsWrapper(
+        loaded: (userData) => RefreshIndicator(
+          onRefresh: () async =>
+              Future.value(context.bloc<LoanViewCubit>().checkActiveLoans()),
+          child: BlocBuilder<LoanViewCubit, LoanViewState>(
+            builder: (context, state) => state.map(
+              initial: (e) => Container(),
+              loading: (e) => sharedLoader(),
+              loaded: (e) => e.isLoanAvailable
+                  ? ActiveLoanView(
+                      currentLoan: e.currentLoans.first,
+                      loanHistory: e.loanHistory,
+                    )
+                  : NoLoanView(user: userData.userData.userData),
+              error: (e) => sharedErrorWidget(context, e.message),
+            ),
           ),
         ),
       ),

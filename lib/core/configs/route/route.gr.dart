@@ -41,6 +41,7 @@ import '../../../ui/views/start_up/start_up_view.dart';
 import '../../models/dto/investment/investment.dart';
 import '../../models/enums/card_transaction.dart';
 import '../../models/requests/user_details/user_details_request.dart';
+import '../../models/responses/user_details/user_data.dart';
 
 class Routes {
   static const String startUpView = '/';
@@ -177,8 +178,12 @@ class Router extends RouterBase {
       );
     },
     NoLoanView: (data) {
+      final args = data.getArgs<NoLoanViewArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const NoLoanView(),
+        builder: (context) => NoLoanView(
+          key: args.key,
+          user: args.user,
+        ),
         settings: data,
       );
     },
@@ -380,7 +385,14 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
         arguments: MainViewArguments(key: key, pageNumber: pageNumber),
       );
 
-  Future<dynamic> pushNoLoanView() => push<dynamic>(Routes.noLoanView);
+  Future<dynamic> pushNoLoanView({
+    Key key,
+    @required UserData user,
+  }) =>
+      push<dynamic>(
+        Routes.noLoanView,
+        arguments: NoLoanViewArguments(key: key, user: user),
+      );
 
   Future<dynamic> pushLoanProductView() =>
       push<dynamic>(Routes.loanProductView);
@@ -504,6 +516,13 @@ class MainViewArguments {
   final Key key;
   final int pageNumber;
   MainViewArguments({this.key, @required this.pageNumber});
+}
+
+/// NoLoanView arguments holder class
+class NoLoanViewArguments {
+  final Key key;
+  final UserData user;
+  NoLoanViewArguments({this.key, @required this.user});
 }
 
 /// MakePaymentView arguments holder class

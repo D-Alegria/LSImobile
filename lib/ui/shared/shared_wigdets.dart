@@ -579,6 +579,29 @@ Future<dynamic> showInfoSnackBar(BuildContext context, String message) {
   ).show(context);
 }
 
+Future<dynamic> showActionSnackBar({
+  BuildContext context,
+  String message,
+  Function onTap,
+  String buttonText,
+}) {
+  return FlushbarHelper.createAction(
+    button: FlatButton(
+      onPressed: onTap,
+      child: Text(
+        buttonText,
+        style: GoogleFonts.workSans(
+          fontWeight: FontWeight.w400,
+          fontSize: SizeConfig.textSize(context, 14.tx),
+          color: ColorStyles.yellow,
+        ),
+      ),
+    ),
+    message: message,
+    duration: new Duration(seconds: 5),
+  ).show(context);
+}
+
 Widget sharedSmallBadge({
   @required BuildContext context,
   @required String text,
