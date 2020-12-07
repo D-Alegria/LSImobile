@@ -4,7 +4,6 @@ import 'package:lsi_mobile/core/models/dto/account/account.dart';
 import 'package:lsi_mobile/core/models/dto/card/card.dart' as ca;
 import 'package:lsi_mobile/core/models/enums/card_transaction.dart';
 import 'package:lsi_mobile/core/utils/file_reader_util.dart';
-import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/profile/widgets/add_account_form.dart';
@@ -64,7 +63,8 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
             separatorBuilder: (context, index) =>
                 SizedBox(height: SizeConfig.yMargin(context, 20.h)),
           ),
-          buildEmptyContainer(
+          SizedBox(height: SizeConfig.yMargin(context, 20.h)),
+          sharedAddCardContainer(
             context: context,
             onTap: () => sharedBottomSheet(
               context,
@@ -75,25 +75,6 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget buildEmptyContainer({BuildContext context, Function onTap}) {
-    return Container(
-      padding:
-          EdgeInsets.symmetric(vertical: SizeConfig.yMargin(context, 20.h)),
-      alignment: Alignment.topCenter,
-      child: sharedDottedContainer(
-        color: Colors.transparent,
-        child: Icon(
-          Icons.add_rounded,
-          size: SizeConfig.textSize(context, 12),
-        ),
-        alignment: Alignment.center,
-        height: SizeConfig.yMargin(context, 144.h),
-        borderColor: ColorStyles.grey5,
-        onTap: onTap,
       ),
     );
   }
@@ -121,7 +102,8 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
             separatorBuilder: (context, index) =>
                 SizedBox(height: SizeConfig.yMargin(context, 20.h)),
           ),
-          buildEmptyContainer(
+          SizedBox(height: SizeConfig.yMargin(context, 20.h)),
+          sharedAddCardContainer(
             context: context,
             onTap: () => sharedBottomSheet(context, AddAccountForm()),
           ),

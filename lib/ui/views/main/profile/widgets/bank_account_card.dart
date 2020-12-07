@@ -23,6 +23,7 @@ class BankAccountCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      alignment: Alignment.center,
       child: sharedContainer(
         onTap: onTap,
         padding: EdgeInsets.symmetric(

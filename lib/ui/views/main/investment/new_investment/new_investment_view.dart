@@ -115,7 +115,7 @@ class NewInvestmentView extends StatelessWidget {
                             ["Maturity Value", state.maturityValue],
                           ],
                         ),
-                        SizedBox(height: SizeConfig.yMargin(context, 74.h)),
+                        SizedBox(height: SizeConfig.yMargin(context, 60.h)),
                         sharedRaisedButton(
                           context: context,
                           onPressed: () {

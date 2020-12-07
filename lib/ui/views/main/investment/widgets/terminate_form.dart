@@ -8,6 +8,7 @@ import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_plan/view_model/terminate_investment/terminate_form_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/widgets/bank_account_card.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 
 class TerminateForm extends StatelessWidget {
   final String planId;
@@ -38,7 +39,7 @@ class TerminateForm extends StatelessWidget {
               topRight: Radius.circular(20),
             ),
           ),
-          height: SizeConfig.yMargin(context, 50),
+          height: SizeConfig.yMargin(context, 400.h),
           padding: EdgeInsets.symmetric(
             horizontal: SizeConfig.xMargin(context, 5),
           ),
@@ -54,7 +55,7 @@ class TerminateForm extends StatelessWidget {
                           style: GoogleFonts.workSans(
                             color: ColorStyles.dark,
                             fontWeight: FontWeight.w600,
-                            fontSize: SizeConfig.textSize(context, 5),
+                            fontSize: SizeConfig.textSize(context, 20.tx),
                             height: SizeConfig.textSize(context, 0.5),
                           ),
                           children: [
@@ -63,35 +64,35 @@ class TerminateForm extends StatelessWidget {
                                   "\nSelect account to withdraw specified amount to",
                               style: GoogleFonts.workSans(
                                 fontWeight: FontWeight.w500,
-                                fontSize: SizeConfig.textSize(context, 4.2),
-                                color: ColorStyles.dark.withOpacity(0.5),
+                                fontSize: SizeConfig.textSize(context, 14.tx),
+                                color: ColorStyles.dark.withOpacity(0.4),
                               ),
                             ),
                           ],
                         ),
                       ),
-                      SizedBox(height: SizeConfig.yMargin(context, 3)),
+                      SizedBox(height: SizeConfig.yMargin(context, 32.h)),
                       Container(
-                        height: SizeConfig.yMargin(context, 27),
-                        padding: EdgeInsets.only(
-                          left: SizeConfig.xMargin(context, 5),
-                        ),
+                        height: SizeConfig.yMargin(context, 144.h),
                         child: AccountsCardsWrapper(
                           loaded: ({accounts, cards}) => ListView.separated(
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
                               var account = accounts[index];
-                              return BankAccountCard(
-                                accountName: account.accountName,
-                                accountNumber: account.accountNumber,
-                                bankName: account.bankName,
-                                onTap: () => context
-                                    .bloc<TerminateFormCubit>()
-                                    .terminate(
-                                      planId: planId,
-                                      amount: amount,
-                                      bankId: account.bankId,
-                                    ),
+                              return Container(
+                                width: SizeConfig.xMargin(context, 274.w),
+                                child: BankAccountCard(
+                                  accountName: account.accountName,
+                                  accountNumber: account.accountNumber,
+                                  bankName: account.bankName,
+                                  onTap: () => context
+                                      .bloc<TerminateFormCubit>()
+                                      .terminate(
+                                        planId: planId,
+                                        amount: amount,
+                                        bankId: account.bankId,
+                                      ),
+                                ),
                               );
                             },
                             separatorBuilder: (context, index) => SizedBox(
@@ -101,13 +102,14 @@ class TerminateForm extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: SizeConfig.yMargin(context, 2)),
+                      SizedBox(height: SizeConfig.yMargin(context, 42.h)),
                       sharedOptionFlatButton(
                         context: context,
                         action: () => context.navigator.pop(),
                         secondText: "Cancel",
                         firstText: "",
-                      )
+                      ),
+                      SizedBox(height: SizeConfig.yMargin(context, 20.h)),
                     ],
                   ),
                 ),

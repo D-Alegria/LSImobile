@@ -888,22 +888,24 @@ class SharedWideButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: SizeConfig.yMargin(context, 9),
+        height: SizeConfig.yMargin(context, 64.h),
         decoration: BoxDecoration(
           color: backgroundColor.withOpacity(0.1),
           borderRadius: BorderRadius.circular(10),
         ),
+        padding: EdgeInsets.symmetric(
+          horizontal: SizeConfig.xMargin(context, 20.w),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(width: SizeConfig.xMargin(context, 5)),
             image,
-            SizedBox(width: SizeConfig.xMargin(context, 2)),
+            SizedBox(width: SizeConfig.xMargin(context, 20.w)),
             Text(
               text,
               style: GoogleFonts.workSans(
                 color: backgroundColor,
-                fontSize: SizeConfig.textSize(context, 5),
+                fontSize: SizeConfig.textSize(context, 15.tx),
                 fontWeight: FontWeight.w600,
               ),
             )
@@ -929,5 +931,24 @@ void sharedBottomSheet(BuildContext context, Widget form) {
         ),
       );
     },
+  );
+}
+
+Widget sharedAddCardContainer({BuildContext context, Function onTap}) {
+  return Container(
+    // padding: EdgeInsets.symmetric(vertical: SizeConfig.yMargin(context, 20.h)),
+    alignment: Alignment.center,
+    child: sharedDottedContainer(
+      width: SizeConfig.xMargin(context, 323.w),
+      color: Colors.transparent,
+      child: Icon(
+        Icons.add_rounded,
+        size: SizeConfig.textSize(context, 12),
+      ),
+      alignment: Alignment.center,
+      height: SizeConfig.yMargin(context, 170.h),
+      borderColor: ColorStyles.grey5,
+      onTap: onTap,
+    ),
   );
 }

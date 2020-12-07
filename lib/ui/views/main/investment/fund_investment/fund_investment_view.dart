@@ -18,85 +18,55 @@ import 'package:lsi_mobile/core/extensions/num_extension.dart';
 class FundInvestmentView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Widget addCard(BuildContext context) {
-      return sharedRaisedContainer(
-        onTap: () {
-          sharedBottomSheet(
-            context,
-            AddCardForm(
-              amount: FileReader.getAppConfig().paystackTestAmount,
-              transaction: CardTransaction.AddNewCardFundInvestment,
-            ),
-          );
-        },
-        padding: EdgeInsets.symmetric(
-          horizontal: SizeConfig.xMargin(context, 5),
-        ),
-        margin: EdgeInsets.only(
-          left: SizeConfig.xMargin(context, 5),
-        ),
-        alignment: Alignment.centerLeft,
-        color: ColorStyles.extraLight,
-        width: SizeConfig.xMargin(context, 75),
-        child: Center(
-          child: Text(
-            "Tap To Add Your Card",
-            style: GoogleFonts.workSans(
-              fontWeight: FontWeight.w600,
-              fontSize: SizeConfig.textSize(context, 5),
-              color: ColorStyles.black,
-            ),
-          ),
-        ),
-      );
-    }
-
     Widget investmentCard(BuildContext context, ca.Card card, String amount) {
-      return sharedRaisedContainer(
-        onTap: () {
-          context.bloc<NewInvestmentCubit>().cardChanged(card.cardId);
-          sharedBottomSheet(
-            context,
-            AddCardForm(
-              amount: amount,
-              transaction: CardTransaction.InvestmentPayment,
-            ),
-          );
-        },
-        padding: EdgeInsets.symmetric(
-          horizontal: SizeConfig.xMargin(context, 28.w),
-        ),
-        alignment: Alignment.centerLeft,
-        gradient: ColorStyles.lightBlueGradient,
-        width: SizeConfig.xMargin(context, 260.w),
-        height: SizeConfig.yMargin(context, 170.h),
-        child: RichText(
-          text: TextSpan(
-            text: "${card.expMonth}/${card.expYear.substring(2)}",
-            style: GoogleFonts.workSans(
-              height: SizeConfig.textSize(context, 0.7),
-              fontWeight: FontWeight.w500,
-              fontSize: SizeConfig.textSize(context, 14.tx),
-              color: ColorStyles.yellow,
-            ),
-            children: [
-              TextSpan(
-                text: "\n**** **** **** ${card.lastFourDigits}",
-                style: GoogleFonts.workSans(
-                  fontWeight: FontWeight.w600,
-                  fontSize: SizeConfig.textSize(context, 18.tx),
-                  color: ColorStyles.white,
-                ),
+      return Container(
+        alignment: Alignment.center,
+        child: sharedRaisedContainer(
+          onTap: () {
+            context.bloc<NewInvestmentCubit>().cardChanged(card.cardId);
+            sharedBottomSheet(
+              context,
+              AddCardForm(
+                amount: amount,
+                transaction: CardTransaction.InvestmentPayment,
               ),
-              TextSpan(
-                text: "\nTap to pay with this card",
-                style: GoogleFonts.workSans(
-                  fontWeight: FontWeight.w400,
-                  fontSize: SizeConfig.textSize(context, 14.tx),
-                  color: ColorStyles.white,
+            );
+          },
+          padding: EdgeInsets.symmetric(
+            horizontal: SizeConfig.xMargin(context, 28.w),
+          ),
+          alignment: Alignment.centerLeft,
+          gradient: ColorStyles.lightBlueGradient,
+          width: SizeConfig.xMargin(context, 260.w),
+          height: SizeConfig.yMargin(context, 170.h),
+          child: RichText(
+            text: TextSpan(
+              text: "${card.expMonth}/${card.expYear.substring(2)}",
+              style: GoogleFonts.workSans(
+                height: SizeConfig.textSize(context, 0.7),
+                fontWeight: FontWeight.w500,
+                fontSize: SizeConfig.textSize(context, 14.tx),
+                color: ColorStyles.yellow,
+              ),
+              children: [
+                TextSpan(
+                  text: "\n**** **** **** ${card.lastFourDigits}",
+                  style: GoogleFonts.workSans(
+                    fontWeight: FontWeight.w600,
+                    fontSize: SizeConfig.textSize(context, 18.tx),
+                    color: ColorStyles.white,
+                  ),
                 ),
-              )
-            ],
+                TextSpan(
+                  text: "\nTap to pay with this card",
+                  style: GoogleFonts.workSans(
+                    fontWeight: FontWeight.w400,
+                    fontSize: SizeConfig.textSize(context, 14.tx),
+                    color: ColorStyles.white,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       );
@@ -164,7 +134,7 @@ class FundInvestmentView extends StatelessWidget {
                       child: ListView(
                         children: [
                           Container(
-                            height: SizeConfig.yMargin(context, 170.h),
+                            height: SizeConfig.yMargin(context, 190.h),
                             width: SizeConfig.xMargin(context, 90),
                             padding: EdgeInsets.only(
                               left: SizeConfig.xMargin(context, 5),
@@ -193,7 +163,21 @@ class FundInvestmentView extends StatelessWidget {
                                     ),
                                     itemCount: cards.length,
                                   ),
-                                  addCard(context),
+                                  SizedBox(
+                                    width: SizeConfig.xMargin(context, 15.w),
+                                  ),
+                                  sharedAddCardContainer(
+                                    context: context,
+                                    onTap: () => sharedBottomSheet(
+                                      context,
+                                      AddCardForm(
+                                        amount: FileReader.getAppConfig()
+                                            .paystackTestAmount,
+                                        transaction: CardTransaction
+                                            .AddNewCardFundInvestment,
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -216,12 +200,12 @@ class FundInvestmentView extends StatelessWidget {
                             child: Text(
                               "Make a transfer of exactly ${state.amount.moneyFormat(2)} from your  desired bank account to the one stated below. Funds will reflect in your investment plan instantly",
                               style: GoogleFonts.roboto(
-                                fontWeight: FontWeight.w500,
-                                fontSize: SizeConfig.textSize(context, 14.tx),
-                                color: ColorStyles.light,
-                                height: SizeConfig.textSize(context, 0.4),
-                                letterSpacing: SizeConfig.textSize(context, 0.15)
-                              ),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: SizeConfig.textSize(context, 14.tx),
+                                  color: ColorStyles.light,
+                                  height: SizeConfig.textSize(context, 0.4),
+                                  letterSpacing:
+                                      SizeConfig.textSize(context, 0.15)),
                             ),
                           ),
                           SizedBox(height: SizeConfig.yMargin(context, 21.h)),
