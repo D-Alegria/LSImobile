@@ -4,15 +4,16 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:lsi_mobile/core/datasources/user/user_remote_datasource.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/dto/education/education.dart';
 import 'package:lsi_mobile/core/models/dto/home_address/home_address.dart';
 import 'package:lsi_mobile/core/models/dto/next_of_kin/next_of_kin.dart';
 import 'package:lsi_mobile/core/models/dto/user_details_profile/profile.dart';
 import 'package:lsi_mobile/core/models/dto/value/value.dart';
+import 'package:lsi_mobile/core/models/enums/drop_down_menu.dart';
 import 'package:lsi_mobile/core/models/requests/loan_application/loan_request.dart';
 import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
+import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
 import 'package:meta/meta.dart';
 
 part 'loan_details_bloc.freezed.dart';
@@ -23,10 +24,9 @@ part 'loan_details_state.dart';
 
 @lazySingleton
 class LoanDetailsBloc extends Bloc<LoanDetailsEvent, LoanDetailsState> {
-  final UserRemoteDataSource _userRemoteDataSource;
+  final UserRepo _userRepo;
 
-  LoanDetailsBloc(this._userRemoteDataSource)
-      : super(LoanDetailsState.initial());
+  LoanDetailsBloc(this._userRepo) : super(LoanDetailsState.initial());
 
   @override
   Stream<LoanDetailsState> mapEventToState(
@@ -35,7 +35,6 @@ class LoanDetailsBloc extends Bloc<LoanDetailsEvent, LoanDetailsState> {
     yield* event.map(
       submitLoanDetailsForm: (value) async* {
         print('begin');
-        final isAmountValid = state.amount.isNotEmpty;
         final isTimeValid = state.time.isNotEmpty;
         final isReasonValid = state.reason.isNotEmpty;
 
@@ -43,7 +42,7 @@ class LoanDetailsBloc extends Bloc<LoanDetailsEvent, LoanDetailsState> {
             left(ServerGlitch(message: "Error validating details"));
         LoanRequest request = LoanRequest();
 
-        if (isAmountValid && isTimeValid && isReasonValid) {
+        if (isTimeValid && isReasonValid) {
           print('verified');
           yield state.copyWith(
             isSubmitting: true,
@@ -79,7 +78,7 @@ class LoanDetailsBloc extends Bloc<LoanDetailsEvent, LoanDetailsState> {
             others: state.data.education.hasOtherQualifications,
           );
 
-          Request r = Request(amount: state.amount, tenor: state.time);
+          Request r = Request(amount: state.amount.toString(), tenor: state.time);
 
           request = request.copyWith(
             profile: profile,
@@ -127,7 +126,8 @@ class LoanDetailsBloc extends Bloc<LoanDetailsEvent, LoanDetailsState> {
       },
       init: (e) async* {
         yield state.copyWith(isSubmitting: true);
-        final reasons = await _userRemoteDataSource.loanPurpose;
+        final reasons =
+            await _userRepo.getDropDownOptions(DropDownMenu.LoanPurpose);
 
         yield* reasons.fold(
           (l) async* {

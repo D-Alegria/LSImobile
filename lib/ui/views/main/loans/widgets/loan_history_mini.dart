@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lsi_mobile/core/extensions/double_extension.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/core/models/dto/loan/loan.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:lsi_mobile/core/extensions/double_extension.dart';
 
 class LoanHistory extends StatelessWidget {
   final List<Loan> loanHistory;
@@ -40,7 +41,7 @@ class LoanHistory extends StatelessWidget {
               style: GoogleFonts.workSans(
                 fontWeight: FontWeight.w600,
                 color: ColorStyles.dark,
-                fontSize: SizeConfig.textSize(context, 4.7),
+                fontSize: SizeConfig.textSize(context, 16.tx),
               ),
             ),
             Text(
@@ -48,7 +49,7 @@ class LoanHistory extends StatelessWidget {
               style: GoogleFonts.workSans(
                 fontWeight: FontWeight.w600,
                 color: ColorStyles.blue,
-                fontSize: SizeConfig.textSize(context, 4.7),
+                fontSize: SizeConfig.textSize(context, 16.tx),
               ),
             ),
           ],
@@ -70,8 +71,7 @@ class LoanHistory extends StatelessWidget {
                   title: double.parse(loan.requestPrincipal).moneyFormat(2),
                   subTitle: getBadge(loan.loanStatus),
                   trailingText: "",
-                  trailingSubText:
-                      "${loan.requestTenor} ${loan.loanDuration}",
+                  trailingSubText: "${loan.requestTenor} ${loan.loanDuration}",
                   iconBackgroundColor: ColorStyles.red.withOpacity(0.2),
                   textColor: ColorStyles.red,
                 );
@@ -86,8 +86,7 @@ class LoanHistory extends StatelessWidget {
                   title: double.parse(loan.requestPrincipal).moneyFormat(2),
                   subTitle: getBadge(loan.loanStatus),
                   trailingText: "",
-                  trailingSubText:
-                      "${loan.requestTenor} ${loan.loanDuration}",
+                  trailingSubText: "${loan.requestTenor} ${loan.loanDuration}",
                   iconBackgroundColor: ColorStyles.orange.withOpacity(0.2),
                   textColor: ColorStyles.orange,
                 );
@@ -102,8 +101,7 @@ class LoanHistory extends StatelessWidget {
                   title: double.parse(loan.requestPrincipal).moneyFormat(2),
                   subTitle: getBadge(loan.loanStatus),
                   trailingText: "",
-                  trailingSubText:
-                      "${loan.requestTenor} ${loan.loanDuration}",
+                  trailingSubText: "${loan.requestTenor} ${loan.loanDuration}",
                   iconBackgroundColor: ColorStyles.green1.withOpacity(0.2),
                   textColor: ColorStyles.green1,
                 );
@@ -118,8 +116,7 @@ class LoanHistory extends StatelessWidget {
                   title: double.parse(loan.requestPrincipal).moneyFormat(2),
                   subTitle: getBadge(loan.loanStatus),
                   trailingText: "",
-                  trailingSubText:
-                      "${loan.requestTenor} ${loan.loanDuration}",
+                  trailingSubText: "${loan.requestTenor} ${loan.loanDuration}",
                   iconBackgroundColor: ColorStyles.blue.withOpacity(0.2),
                   textColor: ColorStyles.blue,
                 );
@@ -134,8 +131,7 @@ class LoanHistory extends StatelessWidget {
                   title: double.parse(loan.requestPrincipal).moneyFormat(2),
                   subTitle: getBadge(loan.loanStatus),
                   trailingText: "",
-                  trailingSubText:
-                      "${loan.requestTenor} ${loan.loanDuration}",
+                  trailingSubText: "${loan.requestTenor} ${loan.loanDuration}",
                   iconBackgroundColor: ColorStyles.black.withOpacity(0.2),
                   textColor: ColorStyles.black,
                 );

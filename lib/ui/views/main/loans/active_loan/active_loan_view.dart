@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/core/models/dto/loan/loan.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
@@ -68,7 +69,7 @@ class ActiveLoanView extends StatelessWidget {
             child: ListView(
               children: [
                 LoanCard(currentLoan: currentLoan),
-                SizedBox(height: SizeConfig.yMargin(context, 2)),
+                SizedBox(height: SizeConfig.yMargin(context, 28.h)),
                 Row(
                   children: [
                     MiniLoanCard(
@@ -87,7 +88,7 @@ class ActiveLoanView extends StatelessWidget {
                             amount: currentLoan.nextPaymentAmount);
                       },
                     ),
-                    SizedBox(width: SizeConfig.xMargin(context, 5)),
+                    SizedBox(width: SizeConfig.xMargin(context, 12.w)),
                     MiniLoanCard(
                       color: ColorStyles.orange.withOpacity(0.1),
                       borderColor: ColorStyles.orange.withOpacity(0.3),
@@ -123,9 +124,9 @@ class ActiveLoanView extends StatelessWidget {
                     color: ColorStyles.green2,
                   ),
                 ),
-                SizedBox(height: SizeConfig.yMargin(context, 2)),
+                SizedBox(height: SizeConfig.yMargin(context, 28.h)),
                 SizedBox(
-                  height: SizeConfig.yMargin(context, 35),
+                  height: SizeConfig.yMargin(context, 342.h),
                   child: LoanHistory(loanHistory: loanHistory),
                 ),
               ],

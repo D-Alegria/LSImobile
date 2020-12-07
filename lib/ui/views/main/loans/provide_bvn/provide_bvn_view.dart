@@ -56,43 +56,48 @@ class ProvideBVNView extends StatelessWidget {
                     autovalidateMode: state.showErrorMessages
                         ? AutovalidateMode.always
                         : AutovalidateMode.disabled,
-                    child: Column(
-                      children: [
-                        SizedBox(height: SizeConfig.yMargin(context, 2.5)),
-                        Text(
-                          "Please enter your BVN number to begin the loan application process",
-                          style: GoogleFonts.workSans(
-                            color: ColorStyles.light,
-                            fontWeight: FontWeight.w500,
-                            fontSize: SizeConfig.textSize(context, 4),
-                            height: SizeConfig.textSize(context, 0.4),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: SizeConfig.xMargin(context, 5),
+                      ),
+                      child: Column(
+                        children: [
+                          SizedBox(height: SizeConfig.yMargin(context, 2.5)),
+                          Text(
+                            "Please enter your BVN number to begin the loan application process",
+                            style: GoogleFonts.workSans(
+                              color: ColorStyles.light,
+                              fontWeight: FontWeight.w500,
+                              fontSize: SizeConfig.textSize(context, 4),
+                              height: SizeConfig.textSize(context, 0.4),
+                            ),
                           ),
-                        ),
-                        SizedBox(height: SizeConfig.yMargin(context, 5)),
-                        SharedTextFormField(
-                          labelText: "Bank Verification Number (BVN)",
-                          onChanged: (value) => context
-                              .bloc<ProvideBvnBloc>()
-                              .add(BvnChanged(value)),
-                          validator: (value) {
-                            if (!state.bvn.isBvn) return "BVN has 11 digits";
-                            return null;
-                          },
-                          initialValue: state.bvn,
-                          keyboardType: TextInputType.number,
-                        ),
-                        Spacer(),
-                        sharedRaisedButton(
-                          context: context,
-                          onPressed: () => context
-                              .bloc<ProvideBvnBloc>()
-                              .add(CheckBVN(l.fullName)),
-                          color: ColorStyles.blue,
-                          text: "Check BVN",
-                          minWidth: SizeConfig.xMargin(context, 90),
-                        ),
-                        SizedBox(height: SizeConfig.yMargin(context, 2.5)),
-                      ],
+                          SizedBox(height: SizeConfig.yMargin(context, 5)),
+                          SharedTextFormField(
+                            labelText: "Bank Verification Number (BVN)",
+                            onChanged: (value) => context
+                                .bloc<ProvideBvnBloc>()
+                                .add(BvnChanged(value)),
+                            validator: (value) {
+                              if (!state.bvn.isBvn) return "BVN has 11 digits";
+                              return null;
+                            },
+                            initialValue: state.bvn,
+                            keyboardType: TextInputType.number,
+                          ),
+                          Spacer(),
+                          sharedRaisedButton(
+                            context: context,
+                            onPressed: () => context
+                                .bloc<ProvideBvnBloc>()
+                                .add(CheckBVN(l.fullName)),
+                            color: ColorStyles.blue,
+                            text: "Check BVN",
+                            minWidth: SizeConfig.xMargin(context, 90),
+                          ),
+                          SizedBox(height: SizeConfig.yMargin(context, 2.5)),
+                        ],
+                      ),
                     ),
                   ),
           );

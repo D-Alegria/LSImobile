@@ -19,7 +19,7 @@ class _$LoanDetailsEventTearOff {
   }
 
 // ignore: unused_element
-  AmountChanged amountChanged(String amount) {
+  AmountChanged amountChanged(double amount) {
     return AmountChanged(
       amount,
     );
@@ -56,7 +56,7 @@ mixin _$LoanDetailsEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result submitLoanDetailsForm(),
-    @required Result amountChanged(String amount),
+    @required Result amountChanged(double amount),
     @required Result timeChanged(String time),
     @required Result reasonChanged(String reason),
     @required Result init(UserDetailsRequest data),
@@ -64,7 +64,7 @@ mixin _$LoanDetailsEvent {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result submitLoanDetailsForm(),
-    Result amountChanged(String amount),
+    Result amountChanged(double amount),
     Result timeChanged(String time),
     Result reasonChanged(String reason),
     Result init(UserDetailsRequest data),
@@ -146,7 +146,7 @@ class _$SubmitLoanDetailsForm implements SubmitLoanDetailsForm {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result submitLoanDetailsForm(),
-    @required Result amountChanged(String amount),
+    @required Result amountChanged(double amount),
     @required Result timeChanged(String time),
     @required Result reasonChanged(String reason),
     @required Result init(UserDetailsRequest data),
@@ -163,7 +163,7 @@ class _$SubmitLoanDetailsForm implements SubmitLoanDetailsForm {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result submitLoanDetailsForm(),
-    Result amountChanged(String amount),
+    Result amountChanged(double amount),
     Result timeChanged(String time),
     Result reasonChanged(String reason),
     Result init(UserDetailsRequest data),
@@ -220,7 +220,7 @@ abstract class $AmountChangedCopyWith<$Res> {
   factory $AmountChangedCopyWith(
           AmountChanged value, $Res Function(AmountChanged) then) =
       _$AmountChangedCopyWithImpl<$Res>;
-  $Res call({String amount});
+  $Res call({double amount});
 }
 
 /// @nodoc
@@ -239,7 +239,7 @@ class _$AmountChangedCopyWithImpl<$Res>
     Object amount = freezed,
   }) {
     return _then(AmountChanged(
-      amount == freezed ? _value.amount : amount as String,
+      amount == freezed ? _value.amount : amount as double,
     ));
   }
 }
@@ -249,7 +249,7 @@ class _$AmountChanged implements AmountChanged {
   const _$AmountChanged(this.amount) : assert(amount != null);
 
   @override
-  final String amount;
+  final double amount;
 
   @override
   String toString() {
@@ -276,7 +276,7 @@ class _$AmountChanged implements AmountChanged {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result submitLoanDetailsForm(),
-    @required Result amountChanged(String amount),
+    @required Result amountChanged(double amount),
     @required Result timeChanged(String time),
     @required Result reasonChanged(String reason),
     @required Result init(UserDetailsRequest data),
@@ -293,7 +293,7 @@ class _$AmountChanged implements AmountChanged {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result submitLoanDetailsForm(),
-    Result amountChanged(String amount),
+    Result amountChanged(double amount),
     Result timeChanged(String time),
     Result reasonChanged(String reason),
     Result init(UserDetailsRequest data),
@@ -342,9 +342,9 @@ class _$AmountChanged implements AmountChanged {
 }
 
 abstract class AmountChanged implements LoanDetailsEvent {
-  const factory AmountChanged(String amount) = _$AmountChanged;
+  const factory AmountChanged(double amount) = _$AmountChanged;
 
-  String get amount;
+  double get amount;
   $AmountChangedCopyWith<AmountChanged> get copyWith;
 }
 
@@ -409,7 +409,7 @@ class _$TimeChanged implements TimeChanged {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result submitLoanDetailsForm(),
-    @required Result amountChanged(String amount),
+    @required Result amountChanged(double amount),
     @required Result timeChanged(String time),
     @required Result reasonChanged(String reason),
     @required Result init(UserDetailsRequest data),
@@ -426,7 +426,7 @@ class _$TimeChanged implements TimeChanged {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result submitLoanDetailsForm(),
-    Result amountChanged(String amount),
+    Result amountChanged(double amount),
     Result timeChanged(String time),
     Result reasonChanged(String reason),
     Result init(UserDetailsRequest data),
@@ -542,7 +542,7 @@ class _$ReasonChanged implements ReasonChanged {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result submitLoanDetailsForm(),
-    @required Result amountChanged(String amount),
+    @required Result amountChanged(double amount),
     @required Result timeChanged(String time),
     @required Result reasonChanged(String reason),
     @required Result init(UserDetailsRequest data),
@@ -559,7 +559,7 @@ class _$ReasonChanged implements ReasonChanged {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result submitLoanDetailsForm(),
-    Result amountChanged(String amount),
+    Result amountChanged(double amount),
     Result timeChanged(String time),
     Result reasonChanged(String reason),
     Result init(UserDetailsRequest data),
@@ -684,7 +684,7 @@ class _$Init implements Init {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result submitLoanDetailsForm(),
-    @required Result amountChanged(String amount),
+    @required Result amountChanged(double amount),
     @required Result timeChanged(String time),
     @required Result reasonChanged(String reason),
     @required Result init(UserDetailsRequest data),
@@ -701,7 +701,7 @@ class _$Init implements Init {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result submitLoanDetailsForm(),
-    Result amountChanged(String amount),
+    Result amountChanged(double amount),
     Result timeChanged(String time),
     Result reasonChanged(String reason),
     Result init(UserDetailsRequest data),
@@ -765,7 +765,7 @@ class _$LoanDetailsStateTearOff {
       {UserDetailsRequest data,
       LoanRequest loanRequest,
       @required
-          String amount,
+          double amount,
       @required
           String time,
       @required
@@ -800,7 +800,7 @@ const $LoanDetailsState = _$LoanDetailsStateTearOff();
 mixin _$LoanDetailsState {
   UserDetailsRequest get data;
   LoanRequest get loanRequest;
-  String get amount;
+  double get amount;
   String get time;
   String get reason;
   List<Value> get reasons;
@@ -819,7 +819,7 @@ abstract class $LoanDetailsStateCopyWith<$Res> {
   $Res call(
       {UserDetailsRequest data,
       LoanRequest loanRequest,
-      String amount,
+      double amount,
       String time,
       String reason,
       List<Value> reasons,
@@ -857,7 +857,7 @@ class _$LoanDetailsStateCopyWithImpl<$Res>
       loanRequest: loanRequest == freezed
           ? _value.loanRequest
           : loanRequest as LoanRequest,
-      amount: amount == freezed ? _value.amount : amount as String,
+      amount: amount == freezed ? _value.amount : amount as double,
       time: time == freezed ? _value.time : time as String,
       reason: reason == freezed ? _value.reason : reason as String,
       reasons: reasons == freezed ? _value.reasons : reasons as List<Value>,
@@ -904,7 +904,7 @@ abstract class _$LoanDetailsStateCopyWith<$Res>
   $Res call(
       {UserDetailsRequest data,
       LoanRequest loanRequest,
-      String amount,
+      double amount,
       String time,
       String reason,
       List<Value> reasons,
@@ -946,7 +946,7 @@ class __$LoanDetailsStateCopyWithImpl<$Res>
       loanRequest: loanRequest == freezed
           ? _value.loanRequest
           : loanRequest as LoanRequest,
-      amount: amount == freezed ? _value.amount : amount as String,
+      amount: amount == freezed ? _value.amount : amount as double,
       time: time == freezed ? _value.time : time as String,
       reason: reason == freezed ? _value.reason : reason as String,
       reasons: reasons == freezed ? _value.reasons : reasons as List<Value>,
@@ -988,7 +988,7 @@ class _$_LoanDetailsState implements _LoanDetailsState {
   @override
   final LoanRequest loanRequest;
   @override
-  final String amount;
+  final double amount;
   @override
   final String time;
   @override
@@ -1061,7 +1061,7 @@ abstract class _LoanDetailsState implements LoanDetailsState {
           {UserDetailsRequest data,
           LoanRequest loanRequest,
           @required
-              String amount,
+              double amount,
           @required
               String time,
           @required
@@ -1081,7 +1081,7 @@ abstract class _LoanDetailsState implements LoanDetailsState {
   @override
   LoanRequest get loanRequest;
   @override
-  String get amount;
+  double get amount;
   @override
   String get time;
   @override

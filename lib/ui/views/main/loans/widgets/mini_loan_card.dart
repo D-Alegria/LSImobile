@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -27,7 +28,7 @@ class MiniLoanCard extends StatelessWidget {
         onTap: onTap,
         color: color,
         borderColor: borderColor,
-        height: SizeConfig.yMargin(context, 13),
+        height: SizeConfig.yMargin(context, 99.h),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -35,7 +36,7 @@ class MiniLoanCard extends StatelessWidget {
             Text(
               text,
               style: GoogleFonts.workSans(
-                fontSize: SizeConfig.textSize(context, 4),
+                fontSize: SizeConfig.textSize(context, 15.tx),
                 color: ColorStyles.grey2,
                 fontWeight: FontWeight.w500,
               ),

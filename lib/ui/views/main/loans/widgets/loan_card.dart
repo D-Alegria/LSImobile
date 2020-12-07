@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lsi_mobile/core/extensions/double_extension.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/core/models/dto/loan/loan.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:lsi_mobile/core/extensions/double_extension.dart';
 
 class LoanCard extends StatelessWidget {
   final Loan currentLoan;
@@ -39,19 +40,16 @@ class LoanCard extends StatelessWidget {
 
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: SizeConfig.xMargin(context, 4),
-        vertical: SizeConfig.yMargin(context, 3),
+        horizontal: SizeConfig.xMargin(context, 23.w),
+        vertical: SizeConfig.yMargin(context, 18.h),
       ),
-      height: SizeConfig.yMargin(context, 24),
+      height: SizeConfig.yMargin(context, 194.h),
       decoration: BoxDecoration(
         gradient: ColorStyles.blueGradient,
-        borderRadius: BorderRadius.all(
-          Radius.circular(10),
-        ),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,13 +58,15 @@ class LoanCard extends StatelessWidget {
               checkIfDue(currentLoan.nextPaymentAmount),
             ],
           ),
+          SizedBox(height: SizeConfig.yMargin(context, 33.h),),
           RichText(
             text: TextSpan(
-              text: "${double.parse(currentLoan.requestPrincipal).moneyFormat(2)}",
+              text:
+                  "${double.parse(currentLoan.requestPrincipal).moneyFormat(2)}",
               style: GoogleFonts.roboto(
                 fontWeight: FontWeight.w700,
                 color: ColorStyles.white,
-                fontSize: SizeConfig.textSize(context, 8),
+                fontSize: SizeConfig.textSize(context, 30.tx),
               ),
               children: [
                 TextSpan(
@@ -75,12 +75,13 @@ class LoanCard extends StatelessWidget {
                   style: GoogleFonts.workSans(
                     fontWeight: FontWeight.w600,
                     color: ColorStyles.grey,
-                    fontSize: SizeConfig.textSize(context, 5),
+                    fontSize: SizeConfig.textSize(context, 16.tx),
                   ),
                 ),
               ],
             ),
           ),
+          Spacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -89,7 +90,7 @@ class LoanCard extends StatelessWidget {
                 style: GoogleFonts.workSans(
                   fontWeight: FontWeight.w500,
                   color: ColorStyles.yellow1,
-                  fontSize: SizeConfig.textSize(context, 3.5),
+                  fontSize: SizeConfig.textSize(context, 12.tx),
                 ),
               ),
               Text(
@@ -97,7 +98,7 @@ class LoanCard extends StatelessWidget {
                 style: GoogleFonts.workSans(
                   fontWeight: FontWeight.w400,
                   color: ColorStyles.white,
-                  fontSize: SizeConfig.textSize(context, 3.5),
+                  fontSize: SizeConfig.textSize(context, 12.tx),
                 ),
               ),
             ],

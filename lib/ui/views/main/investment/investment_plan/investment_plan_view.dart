@@ -135,7 +135,7 @@ class InvestmentPlanView extends StatelessWidget {
               children: [
                 RoundButton(
                   onTap: () {
-                    if (investment.isActive != "1") {
+                    if (investment.isActive == "1") {
                       sharedBottomSheet(
                         context,
                         WithdrawForm(investment: investment),

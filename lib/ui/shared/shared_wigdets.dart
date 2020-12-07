@@ -342,7 +342,7 @@ Widget sharedInfoListTile({
       style: GoogleFonts.roboto(
         fontWeight: FontWeight.w400,
         color: ColorStyles.black,
-        fontSize: SizeConfig.textSize(context, 5),
+        fontSize: SizeConfig.textSize(context, 16.tx),
         height: SizeConfig.textSize(context, 0.4),
       ),
     ),
@@ -351,7 +351,7 @@ Widget sharedInfoListTile({
       style: GoogleFonts.workSans(
         fontWeight: FontWeight.w400,
         color: textColor,
-        fontSize: SizeConfig.textSize(context, 4),
+        fontSize: SizeConfig.textSize(context, 13.tx),
       ),
     ),
     trailing: RichText(
@@ -361,14 +361,14 @@ Widget sharedInfoListTile({
         style: GoogleFonts.roboto(
           fontWeight: FontWeight.w400,
           color: ColorStyles.grey2,
-          fontSize: SizeConfig.textSize(context, 5),
+          fontSize: SizeConfig.textSize(context, 16.tx),
         ),
         children: [
           TextSpan(
             text: "\n$trailingSubText",
             style: GoogleFonts.workSans(
               color: ColorStyles.black,
-              fontSize: SizeConfig.textSize(context, 4),
+              fontSize: SizeConfig.textSize(context, 12.tx),
             ),
           ),
         ],

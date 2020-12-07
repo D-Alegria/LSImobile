@@ -5,7 +5,7 @@ abstract class LoanDetailsState with _$LoanDetailsState {
   const factory LoanDetailsState({
     UserDetailsRequest data,
     LoanRequest loanRequest,
-    @required String amount,
+    @required double amount,
     @required String time,
     @required String reason,
     @required List<Value> reasons,
@@ -19,7 +19,7 @@ abstract class LoanDetailsState with _$LoanDetailsState {
         isSubmitting: false,
         submitLoanDetailsFailureOrSuccess: None(),
         reason: "",
-        amount: "",
+        amount: 0,
         time: "",
         reasons: [Value(name: "", id: "")],
       );

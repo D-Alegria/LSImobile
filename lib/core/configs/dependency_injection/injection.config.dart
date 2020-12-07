@@ -94,8 +94,7 @@ GetIt $initGetIt(
       InvestmentRepoImpl(get<UserRepo>(), get<InvestmentRemoteDataSource>()));
   gh.lazySingleton<InvestmentViewCubit>(
       () => InvestmentViewCubit(get<InvestmentRepo>()));
-  gh.lazySingleton<LoanDetailsBloc>(
-      () => LoanDetailsBloc(get<UserRemoteDataSource>()));
+  gh.lazySingleton<LoanDetailsBloc>(() => LoanDetailsBloc(get<UserRepo>()));
   gh.lazySingleton<LoanRepo>(
       () => LoanRepoImpl(get<UserRepo>(), get<LoanRemoteDataSource>()));
   gh.lazySingleton<LoanScheduleCubit>(() => LoanScheduleCubit(get<LoanRepo>()));

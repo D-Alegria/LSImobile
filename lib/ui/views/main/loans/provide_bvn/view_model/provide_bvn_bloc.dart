@@ -33,7 +33,7 @@ class ProvideBvnBloc extends Bloc<ProvideBvnEvent, ProvideBvnState> {
         final isBvnValid = state.bvn.isBvn;
 
         Either<Glitch, Unit> failureOrSuccess;
-        var otp;
+        // var otp;
 
         if (isBvnValid) {
           yield state.copyWith(
@@ -49,12 +49,12 @@ class ProvideBvnBloc extends Bloc<ProvideBvnEvent, ProvideBvnState> {
             ),
           );
 
-          final local = await _userRepo.getObject("OTP");
-          local.fold((l) => otp = "", (r) => otp = r);
+          // final local = await _userRepo.getObject("OTP");
+          // local.fold((l) => otp = "", (r) => otp = r);
         }
 
         yield state.copyWith(
-          otp: otp ?? "",
+          // otp: otp ?? "",
           isSubmitting: false,
           showErrorMessages: true,
           submitFailureOrSuccess: optionOf(failureOrSuccess),

@@ -264,6 +264,9 @@ class UserRepoImpl implements UserRepo {
       case DropDownMenu.Lgas:
         remote = await _userRemoteDataSource.getLGAS(lga);
         break;
+      case DropDownMenu.LoanPurpose:
+        remote = await _userRemoteDataSource.loanPurpose;
+        break;
     }
     return remote.fold(
       (failure) => left(failure),

@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:lsi_mobile/core/extensions/double_extension.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -26,7 +27,7 @@ class HistoryView extends StatelessWidget {
           "Transaction History",
           style: GoogleFonts.workSans(
             fontWeight: FontWeight.w600,
-            fontSize: SizeConfig.textSize(context, 5),
+            fontSize: SizeConfig.textSize(context, 16.tx),
             color: ColorStyles.dark.withOpacity(0.8),
           ),
         ),
@@ -35,9 +36,7 @@ class HistoryView extends StatelessWidget {
             minWidth: SizeConfig.xMargin(context, 10),
             child: IconButton(
               onPressed: () {},
-              icon: SvgPicture.asset(
-                optionsIcon,
-              ),
+              icon: SvgPicture.asset(optionsIcon),
             ),
           )
         ],

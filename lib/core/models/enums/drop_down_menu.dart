@@ -7,4 +7,5 @@ enum DropDownMenu {
   ResidenceTypes,
   States,
   Lgas,
+  LoanPurpose,
 }
