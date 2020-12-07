@@ -13,7 +13,7 @@ class CatcherConfig {
   );
 
   static final CatcherOptions releaseOptions = CatcherOptions(
-    DialogReportMode(),
+    SilentReportMode(),
     [
       // EmailAutoHandler(
       //   "smtp.gmail.com",
