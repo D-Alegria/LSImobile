@@ -12,7 +12,6 @@ import 'package:lsi_mobile/core/models/requests/register_user/profile.dart';
 import 'package:lsi_mobile/core/models/requests/register_user/register_user_request.dart';
 import 'package:lsi_mobile/core/models/requests/send_otp/send_otp_request.dart';
 import 'package:lsi_mobile/core/models/requests/verify_otp/verify_otp_request.dart';
-import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
 import 'package:lsi_mobile/core/services/auth_service/auth_service.dart';
 import 'package:meta/meta.dart';
 
@@ -25,10 +24,8 @@ part 'auth_form_state.dart';
 @lazySingleton
 class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
   final AuthService _authService;
-  final UserRepo _userRepo;
 
-  AuthFormBloc(this._authService, this._userRepo)
-      : super(AuthFormState.initial());
+  AuthFormBloc(this._authService) : super(AuthFormState.initial());
 
   @override
   Stream<AuthFormState> mapEventToState(
@@ -77,12 +74,7 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
           ),
         );
 
-        final v = await _userRepo.getObject("OTP");
-        var verificationCode;
-        v.fold((l) => verificationCode = "", (r) => verificationCode = r);
-
         yield state.copyWith(
-          verificationCode: verificationCode,
           isSubmitting: false,
           authFailureOrSuccess: None(),
         );
@@ -127,7 +119,6 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
         final isPasswordValid = state.password.isValidPassword;
 
         Either<Glitch, Unit> failureOrSuccess;
-        var v;
 
         if (isFullNameValid &&
             isPhoneNumberValid &&
@@ -150,16 +141,12 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
             failureOrSuccess = failureOrSuccess = await _authService.sendOTP(
               SendOTPRequest(phone: state.phoneNumber.trim()),
             );
-
-            final local = await _userRepo.getObject("OTP");
-            local.fold((l) => v = "", (r) => v = r);
           } else {
             failureOrSuccess = list.firstWhere((element) => element.isLeft());
           }
         }
 
         yield state.copyWith(
-          verificationCode: v ?? "",
           isSubmitting: false,
           showErrorMessages: true,
           authFailureOrSuccess: optionOf(failureOrSuccess),

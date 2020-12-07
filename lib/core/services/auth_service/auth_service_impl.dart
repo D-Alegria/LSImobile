@@ -116,12 +116,10 @@ class AuthServiceImpl implements AuthService {
           (failure) => left(failure),
           (success) async {
             final result = SendOTPResponse.fromJson(success);
-            if (result.status) {
-              await _userRepo.saveObject("OTP", result.otp);
+            if (result.status)
               return right(unit);
-            } else {
+            else
               return left(SystemGlitch(message: result.message));
-            }
           },
         );
       },

@@ -126,8 +126,7 @@ GetIt $initGetIt(
   gh.lazySingleton<AddAccountFormCubit>(
       () => AddAccountFormCubit(get<UserRemoteDataSource>(), get<BankRepo>()));
   gh.lazySingleton<AddCardFormCubit>(() => AddCardFormCubit(get<BankRepo>()));
-  gh.lazySingleton<AuthFormBloc>(
-      () => AuthFormBloc(get<AuthService>(), get<UserRepo>()));
+  gh.lazySingleton<AuthFormBloc>(() => AuthFormBloc(get<AuthService>()));
   gh.lazySingleton<InvestmentProductCubit>(
       () => InvestmentProductCubit(get<InvestmentRepo>()));
   gh.lazySingleton<LoanProductCubit>(
