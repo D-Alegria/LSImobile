@@ -17,10 +17,7 @@ class _ResidenceFormViewState extends State<ResidenceFormView> {
 
   @override
   void initState() {
-    context.bloc<UserProfileCubit>().state.maybeMap(
-          orElse: () => null,
-          loaded: (value) => _userDetailsRequest = value.userData.userData.data,
-        );
+    _userDetailsRequest =  context.bloc<UserProfileCubit>().state.userData.userData.data;
     context.bloc<ResidenceFormCubit>().init(_userDetailsRequest);
     super.initState();
   }

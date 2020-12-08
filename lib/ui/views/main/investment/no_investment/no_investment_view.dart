@@ -102,7 +102,8 @@ class _NoInvestmentViewState extends State<NoInvestmentView> {
                           void navigateToCreateInvestment() {
                             String defaultImage =
                                 "https://res.cloudinary.com/africacodes-concepts-limited/image/upload/v1507561173/avatar-mini.jpg?q=auto";
-                            if (userData.profilePicture == defaultImage) {
+                            if (userData.userData.data.profile.fileName ==
+                                defaultImage) {
                               showActionSnackBar(
                                 context: context,
                                 message:

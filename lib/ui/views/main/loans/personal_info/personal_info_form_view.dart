@@ -17,11 +17,7 @@ class _PersonalInfoFormViewState extends State<PersonalInfoFormView> {
 
   @override
   void initState() {
-    //todo fix
-    context.bloc<UserProfileCubit>().state.maybeMap(
-          orElse: () => null,
-          loaded: (value) => _userDetailsRequest = value.userData.userData.data,
-        );
+    _userDetailsRequest =  context.bloc<UserProfileCubit>().state.userData.userData.data;
     context.bloc<PersonalInfoFormCubit>().init(_userDetailsRequest);
     super.initState();
   }

@@ -23,32 +23,36 @@ class UserProfileCubit extends Cubit<UserProfileState> {
   UserProfileCubit(this._userRepo) : super(UserProfileState.initial());
 
   void getUserDetails() async {
-    emit(UserProfileState.loading());
+    emit(state.copyWith(isLoading: true, glitch: null));
 
     try {
       final result = await _userRepo.userDataRemote;
       result.fold(
-        (l) => emit(UserProfileState.error(l)),
-        (r) => emit(UserProfileState.loaded(
-          userData: r,
-          fullName: r.userData.data.profile.legalName ?? "",
-          profilePicture: r.userData.data.profile.fileName ?? "",
-        )),
+        (l) => emit(state.copyWith(isLoading: false, glitch: l)),
+        (r) => emit(state.copyWith(isLoading: false, userData: r)),
       );
     } on Error {
-      emit(UserProfileState.error(
-          SystemGlitch(message: "Error occurred in Bloc")));
+      emit(
+        state.copyWith(
+          isLoading: false,
+          glitch: SystemGlitch(message: "Error occurred in Bloc"),
+        ),
+      );
     }
   }
 
   Future<void> updateProfilePictureImage(BuildContext context) async {
+    emit(state.copyWith(isLoading: true, glitch: null));
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       final path = await pickedFile.path;
       final result = await _userRepo.uploadProfilePicture(File(path));
       result.fold(
-        (failure) => showErrorSnackBar(context, failure.message),
+        (failure) {
+          emit(state.copyWith(isLoading: false, glitch: null));
+          showErrorSnackBar(context, failure.message);
+        },
         (success) => getUserDetails(),
       );
     }

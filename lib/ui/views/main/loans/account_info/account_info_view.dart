@@ -118,8 +118,8 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                                 context: context,
                                 onPressed: () => context
                                     .bloc<AccountInfoBloc>()
-                                    .add(ApplyForLoan(userData
-                                        .userData.userData.data.bvn.bvn)),
+                                    .add(ApplyForLoan(
+                                        userData.userData.data.bvn.bvn)),
                                 color: ColorStyles.orange,
                                 text: "Continue",
                                 minWidth: SizeConfig.xMargin(context, 90),

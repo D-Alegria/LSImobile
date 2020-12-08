@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
+import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/screen_heading.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
@@ -14,7 +16,6 @@ import 'package:lsi_mobile/ui/views/main/investment/investment_view/view_model/i
 import 'package:lsi_mobile/ui/views/main/view_model/main_view/main_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 import 'package:provider/provider.dart';
-import 'package:lsi_mobile/core/extensions/num_extension.dart';
 
 class HomeView extends StatelessWidget {
   @override
@@ -30,14 +31,14 @@ class HomeView extends StatelessWidget {
         child: UserDetailsWrapper(
           loaded: (userData) => InvestmentWrapper(
               loaded: (investmentData) => _buildHomeView(
-                  context, userData, investmentData, model, mainView)),
+                  context, userData.userData.data, investmentData, model, mainView)),
         ),
       ),
     );
   }
 
-  Widget _buildHomeView(BuildContext context, Loaded user, ivc.Loaded invest,
-      HomeViewModel model, MainViewCubit mainView) {
+  Widget _buildHomeView(BuildContext context, UserDetailsRequest user,
+      ivc.Loaded invest, HomeViewModel model, MainViewCubit mainView) {
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: SizeConfig.xMargin(context, 5),
@@ -46,10 +47,10 @@ class HomeView extends StatelessWidget {
         children: [
           SizedBox(height: SizeConfig.yMargin(context, 50.h)),
           ScreenHeader(
-            firstText: user.fullName,
+            firstText: user.profile.legalName ?? "",
             secondText: model.greeting(),
             profile: false,
-            image: user.profilePicture,
+            image: user.profile.fileName ?? "",
           ),
           SizedBox(height: SizeConfig.yMargin(context, 49.h)),
           HomeCard(

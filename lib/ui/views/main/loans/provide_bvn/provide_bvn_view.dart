@@ -26,7 +26,8 @@ class ProvideBVNView extends StatelessWidget {
               padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom),
               child: UserDetailsWrapper(
-                loaded: (l) => VerifyBVNForm(fullName: l.fullName),
+                loaded: (user) => VerifyBVNForm(
+                    fullName: user.userData.data.profile.legalName ?? ""),
               ),
             ),
           );
@@ -35,7 +36,7 @@ class ProvideBVNView extends StatelessWidget {
     }
 
     return UserDetailsWrapper(
-      loaded: (l) => BlocConsumer<ProvideBvnBloc, ProvideBvnState>(
+      loaded: (user) => BlocConsumer<ProvideBvnBloc, ProvideBvnState>(
         listener: (context, state) {
           state.submitFailureOrSuccess.fold(
             () => null,
@@ -88,9 +89,8 @@ class ProvideBVNView extends StatelessWidget {
                           Spacer(),
                           sharedRaisedButton(
                             context: context,
-                            onPressed: () => context
-                                .bloc<ProvideBvnBloc>()
-                                .add(CheckBVN(l.fullName)),
+                            onPressed: () => context.bloc<ProvideBvnBloc>().add(
+                                CheckBVN(user.userData.data.profile.legalName)),
                             color: ColorStyles.blue,
                             text: "Check BVN",
                             minWidth: SizeConfig.xMargin(context, 90),

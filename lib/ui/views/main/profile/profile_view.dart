@@ -2,13 +2,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
+import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/screen_heading.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/authentication/authentication_bloc.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
-import 'package:lsi_mobile/core/extensions/num_extension.dart';
 
 class ProfileView extends StatelessWidget {
   @override
@@ -17,12 +18,13 @@ class ProfileView extends StatelessWidget {
       onRefresh: () async =>
           Future.value(context.bloc<UserProfileCubit>()..getUserDetails()),
       child: UserDetailsWrapper(
-        loaded: (userData) => _buildProfileView(context, userData),
+        loaded: (userData) =>
+            _buildProfileView(context, userData.userData.data),
       ),
     );
   }
 
-  Widget _buildProfileView(BuildContext context, Loaded val) {
+  Widget _buildProfileView(BuildContext context, UserDetailsRequest user) {
     return Scaffold(
       body: Container(
         padding: EdgeInsets.symmetric(
@@ -33,15 +35,15 @@ class ProfileView extends StatelessWidget {
             SizedBox(height: SizeConfig.yMargin(context, 60.h)),
             ScreenHeader(
               firstText: "My Account",
-              image: val.profilePicture,
-              secondText: val.fullName,
+              image: user.profile.fileName,
+              secondText: user.profile.legalName,
               profile: true,
               secondTextColor: ColorStyles.grey3,
             ),
             SizedBox(height: SizeConfig.yMargin(context, 40.h)),
             sharedInfoButton(
-              onTap: () => context.navigator
-                  .pushEditProfileView(userDetails: val.userData.userData.data),
+              onTap: () =>
+                  context.navigator.pushEditProfileView(userDetails: user),
               context: context,
               icon: Icon(
                 Icons.person_outline_outlined,

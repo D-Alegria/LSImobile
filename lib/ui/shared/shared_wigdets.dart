@@ -10,6 +10,7 @@ import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/core/models/dto/account/account.dart';
 import 'package:lsi_mobile/core/models/dto/card/card.dart' as ca;
+import 'package:lsi_mobile/core/models/responses/user_details/user_details_data.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/authentication/authentication_bloc.dart';
 import 'package:lsi_mobile/ui/views/main/investment/investment_view/view_model/investment_view_cubit.dart'
@@ -796,32 +797,36 @@ class AlwaysDisabledFocusNode extends FocusNode {
 }
 
 class UserDetailsWrapper extends StatelessWidget {
-  final Widget Function(Loaded userData) loaded;
+  final Widget Function(UserDetailsData userData) loaded;
 
   const UserDetailsWrapper({Key key, this.loaded}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserProfileCubit, UserProfileState>(
-      builder: (context, state) => state.map(
-        initial: (e) => Container(),
-        loading: (e) => sharedLoader(),
-        loaded: (e) => loaded(e),
-        error: (e) => sharedErrorWidget(context, e.glitch.message),
-      ),
-      listener: (context, state) => state.maybeMap(
-        error: (value) => value.glitch.maybeMap(
-          orElse: () => null,
-          unAuthenticatedGlitch: (e) {
-            context.bloc<AuthenticationBloc>().add(LogoutRequest());
-            return context.navigator.pushAndRemoveUntil(
-              Routes.authWrapper,
-              (route) => false,
-            );
-          },
-        ),
-        orElse: () => null,
-      ),
+      builder: (context, state) {
+        if (state.glitch == null) {
+          if (state.isLoading)
+            return sharedLoader();
+          else
+            return loaded(state.userData);
+        } else
+          return sharedErrorWidget(context, state.glitch.message);
+      },
+      listener: (context, state) {
+        if (state.glitch != null) {
+          state.glitch.maybeMap(
+            orElse: () => null,
+            unAuthenticatedGlitch: (e) {
+              context.bloc<AuthenticationBloc>().add(LogoutRequest());
+              return context.navigator.pushAndRemoveUntil(
+                Routes.authWrapper,
+                (route) => false,
+              );
+            },
+          );
+        }
+      },
     );
   }
 }

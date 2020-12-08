@@ -22,7 +22,7 @@ class LoansView extends StatelessWidget {
                       currentLoan: e.currentLoans.first,
                       loanHistory: e.loanHistory,
                     )
-                  : NoLoanView(user: userData.userData.userData),
+                  : NoLoanView(user: userData.userData),
               error: (e) => sharedErrorWidget(context, e.message),
             ),
           ),

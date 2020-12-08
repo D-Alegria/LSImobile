@@ -24,10 +24,7 @@ class _LoanProductViewState extends State<LoanProductView> {
   @override
   void initState() {
     context.bloc<LoanProductCubit>().getLoanProducts();
-    context.bloc<UserProfileCubit>().state.maybeMap(
-          orElse: () => null,
-          loaded: (value) => _userDetailsData = value.userData,
-        );
+    _userDetailsData = context.bloc<UserProfileCubit>().state.userData;
     super.initState();
   }
 
