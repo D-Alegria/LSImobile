@@ -67,7 +67,7 @@ class HistoryView extends StatelessWidget {
           : ListView.separated(
               itemBuilder: (context, index) {
                 var transaction = e.recentTransactions[index];
-                var time = Jiffy(transaction.transDate);
+                var time = Jiffy(transaction.transDate)..startOf(Units.HOUR);
 
                 if (transaction.transType == '1') {
                   return sharedInfoListTile(
@@ -86,12 +86,15 @@ class HistoryView extends StatelessWidget {
                   );
                 } else {
                   return sharedInfoListTile(
-                    icon: SvgPicture.asset(arrowDown),
+                    icon: SvgPicture.asset(
+                      arrowDown,
+                      height: SizeConfig.textSize(context, 8),
+                    ),
                     context: context,
                     title: transaction.narrationCustomer,
                     subTitle: "Credit",
                     trailingText:
-                        "₦${double.parse(transaction.transAmount).moneyFormat(2)}",
+                        "${double.parse(transaction.transAmount).moneyFormat(2)}",
                     trailingSubText: time.fromNow(),
                     iconBackgroundColor: ColorStyles.green1.withOpacity(0.2),
                     textColor: ColorStyles.green1,
