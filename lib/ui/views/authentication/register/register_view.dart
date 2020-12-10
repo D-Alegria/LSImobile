@@ -35,8 +35,11 @@ class RegisterView extends StatelessWidget {
                             .bloc<AuthFormBloc>()
                             .add(FullNameChanged(value)),
                         validator: (value) {
-                          if (state.fullName.isEmpty)
-                            return "Field name is required";
+                          if (context
+                              .bloc<AuthFormBloc>()
+                              .state
+                              .fullName
+                              .isEmpty) return "Field name is required";
                           return null;
                         },
                       ),
@@ -48,8 +51,11 @@ class RegisterView extends StatelessWidget {
                             .bloc<AuthFormBloc>()
                             .add(PhoneNumberChanged(value)),
                         validator: (value) {
-                          if (state.phoneNumber.isEmpty)
-                            return "Field is required";
+                          if (!context
+                              .bloc<AuthFormBloc>()
+                              .state
+                              .phoneNumber
+                              .isPhoneNo) return "Invalid Phone Number";
                           return null;
                         },
                         keyboardType: TextInputType.phone,
@@ -62,8 +68,11 @@ class RegisterView extends StatelessWidget {
                             .bloc<AuthFormBloc>()
                             .add(EmailChanged(value)),
                         validator: (value) {
-                          if (!state.emailAddress.isEmail)
-                            return "Invalid Email";
+                          if (!context
+                              .bloc<AuthFormBloc>()
+                              .state
+                              .emailAddress
+                              .isEmail) return "Invalid Email";
                           return null;
                         },
                         keyboardType: TextInputType.emailAddress,
@@ -77,7 +86,11 @@ class RegisterView extends StatelessWidget {
                             .bloc<AuthFormBloc>()
                             .add(PasswordChanged(value)),
                         validator: (value) {
-                          if (!state.password.isValidPassword)
+                          if (!context
+                              .bloc<AuthFormBloc>()
+                              .state
+                              .password
+                              .isValidPassword)
                             return "Password must be at least 6 characters";
                           return null;
                         },

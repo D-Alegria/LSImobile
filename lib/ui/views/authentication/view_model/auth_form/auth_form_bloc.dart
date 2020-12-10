@@ -98,16 +98,16 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
             ),
           );
 
-          yield* failureOrSuccess.fold((l) async* {
-            yield state.copyWith(
-              showErrorMessages: true,
-            );
-          }, (r) async* {
-            yield AuthFormState.initial();
-          });
+          yield* failureOrSuccess.fold(
+            (l) async* {},
+            (r) async* {
+              yield AuthFormState.initial();
+            },
+          );
         }
 
         yield state.copyWith(
+          showErrorMessages: true,
           isSubmitting: false,
           authFailureOrSuccess: optionOf(failureOrSuccess),
         );

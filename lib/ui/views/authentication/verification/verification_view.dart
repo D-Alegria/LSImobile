@@ -14,24 +14,6 @@ import 'package:lsi_mobile/ui/views/authentication/widgets/change_phone_form.dar
 class VerificationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    void _showChangePhoneForm() {
-      showModalBottomSheet(
-        isScrollControlled: true,
-        backgroundColor: ColorStyles.black.withOpacity(0.2),
-        context: context,
-        builder: (context) {
-          return SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom,
-              ),
-              child: ChangePhoneForm(),
-            ),
-          );
-        },
-      );
-    }
-
     return Scaffold(
       body: BlocConsumer<AuthFormBloc, AuthFormState>(
         builder: (context, state) {
@@ -80,8 +62,11 @@ class VerificationView extends StatelessWidget {
                               .bloc<AuthFormBloc>()
                               .add(VerificationCodeChanged(value)),
                           validator: (value) {
-                            if (state.verificationCode.isEmpty)
-                              return "Field is required";
+                            if (context
+                                .bloc<AuthFormBloc>()
+                                .state
+                                .verificationCode
+                                .isEmpty) return "Field is required";
                             return null;
                           },
                           keyboardType: TextInputType.phone,
@@ -112,7 +97,10 @@ class VerificationView extends StatelessWidget {
                           context: context,
                           firstText: "Not your phone?",
                           secondText: "Change phone number",
-                          action: () => _showChangePhoneForm(),
+                          action: () => sharedBottomSheet(
+                            context,
+                            ChangePhoneForm(),
+                          ),
                         ),
                       ],
                     ),

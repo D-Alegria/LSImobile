@@ -15,9 +15,15 @@ extension StringExtension on String {
     return false;
   }
 
-  bool get isValuePhoneNo {
-    // todo update phone no
-    if (this.length == 11) return true;
+  bool get isPhoneNo {
+    final phoneNumberRegex = RegExp(r'^(\+)?([2][3][4]|[0])\d{10}$');
+    if (phoneNumberRegex.hasMatch(this)) return true;
+    return false;
+  }
+
+  bool get isDigit {
+    final isDigitRegex = RegExp(r'^[0-9]*$');
+    if (isDigitRegex.hasMatch(this)) return true;
     return false;
   }
 

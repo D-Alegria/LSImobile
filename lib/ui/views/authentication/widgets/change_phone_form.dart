@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -24,6 +25,7 @@ class ChangePhoneForm extends StatelessWidget {
           horizontal: SizeConfig.xMargin(context, 5),
         ),
         child: Form(
+          autovalidateMode: AutovalidateMode.always,
           child: ListView(
             children: <Widget>[
               SizedBox(height: SizeConfig.yMargin(context, 3)),
@@ -59,7 +61,8 @@ class ChangePhoneForm extends StatelessWidget {
                 onChanged: (value) =>
                     context.bloc<AuthFormBloc>().add(PhoneNumberChanged(value)),
                 validator: (value) {
-                  if (state.phoneNumber.isEmpty) return "Field is required";
+                  if (!context.bloc<AuthFormBloc>().state.phoneNumber.isPhoneNo)
+                    return "Invalid Phone Number";
                   return null;
                 },
                 keyboardType: TextInputType.phone,
@@ -68,8 +71,14 @@ class ChangePhoneForm extends StatelessWidget {
               sharedRaisedButton(
                 context: context,
                 onPressed: () {
-                  context.bloc<AuthFormBloc>().add(ResendOTP());
-                  return context.navigator.pop();
+                  if (context
+                      .bloc<AuthFormBloc>()
+                      .state
+                      .phoneNumber
+                      .isPhoneNo) {
+                    context.bloc<AuthFormBloc>().add(ResendOTP());
+                    return context.navigator.pop();
+                  }
                 },
                 color: ColorStyles.blue,
                 text: "Change",
@@ -81,7 +90,10 @@ class ChangePhoneForm extends StatelessWidget {
                 context: context,
                 firstText: "",
                 secondText: "Cancel",
-                action: () => context.navigator.pop(),
+                action: () =>
+                    context.bloc<AuthFormBloc>().state.phoneNumber.isPhoneNo
+                        ? context.navigator.pop()
+                        : null,
               ),
             ],
           ),

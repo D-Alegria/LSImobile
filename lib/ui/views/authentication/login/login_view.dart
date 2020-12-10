@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
@@ -34,7 +33,11 @@ class LoginView extends StatelessWidget {
                       onChanged: (value) =>
                           context.bloc<AuthFormBloc>().add(EmailChanged(value)),
                       validator: (value) {
-                        if (!state.emailAddress.isEmail) return "Invalid Email";
+                        if (!context
+                            .bloc<AuthFormBloc>()
+                            .state
+                            .emailAddress
+                            .isEmail) return "Invalid Email";
                         return null;
                       },
                       keyboardType: TextInputType.emailAddress,
@@ -48,7 +51,11 @@ class LoginView extends StatelessWidget {
                           .bloc<AuthFormBloc>()
                           .add(PasswordChanged(value)),
                       validator: (value) {
-                        if (!state.password.isValidPassword)
+                        if (!context
+                            .bloc<AuthFormBloc>()
+                            .state
+                            .password
+                            .isValidPassword)
                           return "Password must be at least 6 characters";
                         return null;
                       },
@@ -76,23 +83,7 @@ class LoginView extends StatelessWidget {
       listener: (context, state) => state.authFailureOrSuccess.fold(
         () => null,
         (either) => either.fold(
-          (failure) => failure.maybeMap(
-            orElse: () => FlushbarHelper.createError(
-              message: failure.message,
-              duration: new Duration(seconds: 3),
-            ).show(context),
-            unAuthenticatedGlitch: (e) async {
-              FlushbarHelper.createError(
-                message: e.message,
-                duration: Duration(seconds: 3),
-              ).show(context);
-              await Future.delayed(Duration(seconds: 3));
-              return context.navigator.pushAndRemoveUntil(
-                Routes.authWrapper,
-                (route) => false,
-              );
-            },
-          ),
+          (failure) => showErrorSnackBar(context, failure.message),
           (success) => context.navigator.pushAndRemoveUntil(
             Routes.mainView,
             (route) => false,
