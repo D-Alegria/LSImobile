@@ -141,6 +141,8 @@ class PersonalInfoFormCubit extends Cubit<PersonalInfoFormState> {
         maritalStatus: state.maritalStatus.trim(),
       );
 
+      emit(state.copyWith(userDetails: request));
+
       failureOrSuccess = await _userRepo.saveUserDataRemote(request);
       if (!isEditProfile) {
         await failureOrSuccess.fold(
@@ -154,7 +156,7 @@ class PersonalInfoFormCubit extends Cubit<PersonalInfoFormState> {
     emit(state.copyWith(
       isSubmitting: false,
       showErrorMessages: true,
-      isEdited:false,
+      isEdited: false,
       submitFailureOrSuccess: optionOf(failureOrSuccess),
     ));
   }

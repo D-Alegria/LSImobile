@@ -54,7 +54,10 @@ class AccountInfoBloc extends Bloc<AccountInfoEvent, AccountInfoState> {
           final result = await _bankRepo.resolveBankAccount(
             ResolveAccountRequest(
               accountNumber: state.accountNumber,
-              bankCode: state.bankName,
+              bankCode: state.banks
+                  .where((element) => element.id == state.bankName)
+                  .first
+                  .bankCode,
             ),
           );
 
@@ -65,7 +68,6 @@ class AccountInfoBloc extends Bloc<AccountInfoEvent, AccountInfoState> {
             (r) async* {
               yield state.copyWith(
                 accountName: r.data.accountName,
-                bankId: r.data.bankId.toString(),
               );
             },
           );
@@ -111,7 +113,7 @@ class AccountInfoBloc extends Bloc<AccountInfoEvent, AccountInfoState> {
         );
 
         yield state.copyWith(
-          bankName: state.banks.first.bankCode,
+          bankName: state.banks.first.id,
           isSubmitting: false,
         );
       },
@@ -133,7 +135,7 @@ class AccountInfoBloc extends Bloc<AccountInfoEvent, AccountInfoState> {
           print('sending');
 
           Account account = Account(
-            id: state.bankId,
+            id: state.bankName,
             accountNo: state.accountNumber,
             accountName: state.accountName,
             bvn: e.bvn,

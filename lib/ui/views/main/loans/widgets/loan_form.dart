@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 
@@ -107,7 +108,7 @@ class LoanForm extends StatelessWidget {
 
   Widget header(BuildContext context, String title) {
     return Padding(
-      padding: EdgeInsets.all(SizeConfig.xMargin(context, 5)),
+      padding: EdgeInsets.all(SizeConfig.xMargin(context, 24.tx)),
       child: Text(
         title,
         style: GoogleFonts.workSans(

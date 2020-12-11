@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/core/models/dto/account/account.dart';
@@ -162,9 +163,9 @@ Widget sharedOptionFlatButton({
     child: RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        text: "$firstText  ",
+        text: "$firstText ",
         style: GoogleFonts.workSans(
-          fontSize: SizeConfig.textSize(context, 4),
+          fontSize: SizeConfig.textSize(context, 14.tx),
           fontWeight: FontWeight.w400,
           color: ColorStyles.light,
         ),
@@ -566,6 +567,13 @@ Widget sharedTable({
   );
 }
 
+Future<dynamic> showSuccessSnackBar(BuildContext context, String message) {
+  return FlushbarHelper.createSuccess(
+    message: message,
+    duration: new Duration(seconds: 3),
+  ).show(context);
+}
+
 Future<dynamic> showErrorSnackBar(BuildContext context, String message) {
   return FlushbarHelper.createError(
     message: message,
@@ -705,12 +713,14 @@ class SharedDateTimeField extends StatefulWidget {
   final Function(String value) onChange;
   final String label;
   final String initialValue;
+  final String pattern;
 
   SharedDateTimeField({
     Key key,
-    this.onChange,
-    this.label,
-    this.initialValue,
+    @required this.onChange,
+    @required this.label,
+    @required this.initialValue,
+    @required this.pattern,
   }) : super(key: key);
 
   @override
@@ -735,11 +745,7 @@ class _SharedDateTimeFieldState extends State<SharedDateTimeField> {
             context: context,
             initialDate: widget.initialValue.isEmpty
                 ? DateTime.now()
-                : DateTime(
-                    int.parse(widget.initialValue.split('-')[0]),
-                    int.parse(widget.initialValue.split('-')[1]),
-                    int.parse(widget.initialValue.split('-')[2]),
-                  ),
+                : Jiffy(widget.initialValue, widget.pattern).dateTime,
             firstDate: DateTime(1970),
             lastDate: DateTime(2300),
             builder: (BuildContext context, Widget child) {
@@ -760,7 +766,7 @@ class _SharedDateTimeFieldState extends State<SharedDateTimeField> {
           );
           if (picked != null) {
             initializeDateFormatting();
-            DateFormat dateFormat = DateFormat("yyyy-MM-dd", 'en');
+            DateFormat dateFormat = DateFormat(widget.pattern, 'en');
             controller
               ..text = dateFormat.format(picked)
               ..selection = TextSelection.fromPosition(TextPosition(
@@ -921,9 +927,15 @@ class SharedWideButton extends StatelessWidget {
   }
 }
 
-void sharedBottomSheet(BuildContext context, Widget form) {
+void sharedBottomSheet({
+  @required BuildContext context,
+  @required Widget form,
+  bool isDismissible = false,
+  @required double height,
+}) {
   showModalBottomSheet(
     isScrollControlled: true,
+    isDismissible: isDismissible,
     backgroundColor: ColorStyles.black.withOpacity(0.2),
     context: context,
     builder: (context) {
@@ -932,7 +944,20 @@ void sharedBottomSheet(BuildContext context, Widget form) {
           padding: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
-          child: form,
+          child: Container(
+            decoration: BoxDecoration(
+              color: ColorStyles.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+            ),
+            height: SizeConfig.yMargin(context, height),
+            padding: EdgeInsets.symmetric(
+              horizontal: SizeConfig.xMargin(context, 5),
+            ),
+            child: form,
+          ),
         ),
       );
     },

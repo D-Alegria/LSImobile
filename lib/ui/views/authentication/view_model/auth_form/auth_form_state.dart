@@ -11,6 +11,7 @@ abstract class AuthFormState with _$AuthFormState {
     @required bool showErrorMessages,
     @required bool isSubmitting,
     @required Option<Either<Glitch, Unit>> authFailureOrSuccess,
+    @required Option<Either<Glitch, Unit>> verifyFailureOrSuccess,
   }) = _AuthFormState;
 
   factory AuthFormState.initial() => AuthFormState(
@@ -22,5 +23,6 @@ abstract class AuthFormState with _$AuthFormState {
         showErrorMessages: false,
         isSubmitting: false,
         authFailureOrSuccess: None(),
+        verifyFailureOrSuccess: None(),
       );
 }

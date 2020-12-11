@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -102,7 +101,8 @@ class ActiveLoanView extends StatelessWidget {
                 SizedBox(height: SizeConfig.yMargin(context, 2)),
                 SharedWideButton(
                   onTap: () async {
-                    if (await canLaunch(currentLoan.offerLink)) {
+                    if (currentLoan.loanStatus == '3' &&
+                        await canLaunch(currentLoan.offerLink)) {
                       await launch(
                         currentLoan.offerLink,
                         forceSafariVC: true,
@@ -110,18 +110,19 @@ class ActiveLoanView extends StatelessWidget {
                         enableJavaScript: true,
                       );
                     } else {
-                      FlushbarHelper.createError(
-                        message: "Could not launch ${currentLoan.offerLink}",
-                        duration: Duration(seconds: 3),
-                      ).show(context);
+                      showErrorSnackBar(context, "Loan isn't active");
                     }
                   },
-                  backgroundColor: ColorStyles.green2,
+                  backgroundColor: currentLoan.loanStatus == '3'
+                      ? ColorStyles.green2
+                      : ColorStyles.grey,
                   text: "View Contract",
                   image: Icon(
                     Icons.last_page,
                     size: SizeConfig.textSize(context, 8),
-                    color: ColorStyles.green2,
+                    color: currentLoan.loanStatus == '3'
+                        ? ColorStyles.green2
+                        : ColorStyles.grey,
                   ),
                 ),
                 SizedBox(height: SizeConfig.yMargin(context, 28.h)),

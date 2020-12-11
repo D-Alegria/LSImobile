@@ -783,7 +783,6 @@ class _$AccountInfoStateTearOff {
   _AccountInfoState call(
       {LoanRequest loanRequest,
       LoanProduct loanProduct,
-      @required String bankId,
       @required String bankName,
       @required List<Value> banks,
       @required String accountNumber,
@@ -795,7 +794,6 @@ class _$AccountInfoStateTearOff {
     return _AccountInfoState(
       loanRequest: loanRequest,
       loanProduct: loanProduct,
-      bankId: bankId,
       bankName: bankName,
       banks: banks,
       accountNumber: accountNumber,
@@ -816,7 +814,6 @@ const $AccountInfoState = _$AccountInfoStateTearOff();
 mixin _$AccountInfoState {
   LoanRequest get loanRequest;
   LoanProduct get loanProduct;
-  String get bankId;
   String get bankName;
   List<Value> get banks;
   String get accountNumber;
@@ -837,7 +834,6 @@ abstract class $AccountInfoStateCopyWith<$Res> {
   $Res call(
       {LoanRequest loanRequest,
       LoanProduct loanProduct,
-      String bankId,
       String bankName,
       List<Value> banks,
       String accountNumber,
@@ -863,7 +859,6 @@ class _$AccountInfoStateCopyWithImpl<$Res>
   $Res call({
     Object loanRequest = freezed,
     Object loanProduct = freezed,
-    Object bankId = freezed,
     Object bankName = freezed,
     Object banks = freezed,
     Object accountNumber = freezed,
@@ -880,7 +875,6 @@ class _$AccountInfoStateCopyWithImpl<$Res>
       loanProduct: loanProduct == freezed
           ? _value.loanProduct
           : loanProduct as LoanProduct,
-      bankId: bankId == freezed ? _value.bankId : bankId as String,
       bankName: bankName == freezed ? _value.bankName : bankName as String,
       banks: banks == freezed ? _value.banks : banks as List<Value>,
       accountNumber: accountNumber == freezed
@@ -924,7 +918,6 @@ abstract class _$AccountInfoStateCopyWith<$Res>
   $Res call(
       {LoanRequest loanRequest,
       LoanProduct loanProduct,
-      String bankId,
       String bankName,
       List<Value> banks,
       String accountNumber,
@@ -953,7 +946,6 @@ class __$AccountInfoStateCopyWithImpl<$Res>
   $Res call({
     Object loanRequest = freezed,
     Object loanProduct = freezed,
-    Object bankId = freezed,
     Object bankName = freezed,
     Object banks = freezed,
     Object accountNumber = freezed,
@@ -970,7 +962,6 @@ class __$AccountInfoStateCopyWithImpl<$Res>
       loanProduct: loanProduct == freezed
           ? _value.loanProduct
           : loanProduct as LoanProduct,
-      bankId: bankId == freezed ? _value.bankId : bankId as String,
       bankName: bankName == freezed ? _value.bankName : bankName as String,
       banks: banks == freezed ? _value.banks : banks as List<Value>,
       accountNumber: accountNumber == freezed
@@ -999,7 +990,6 @@ class _$_AccountInfoState implements _AccountInfoState {
   const _$_AccountInfoState(
       {this.loanRequest,
       this.loanProduct,
-      @required this.bankId,
       @required this.bankName,
       @required this.banks,
       @required this.accountNumber,
@@ -1008,8 +998,7 @@ class _$_AccountInfoState implements _AccountInfoState {
       @required this.isSubmitting,
       @required this.submitAccountInfoFailureOrSuccess,
       @required this.applyForLoanFailureOrSuccess})
-      : assert(bankId != null),
-        assert(bankName != null),
+      : assert(bankName != null),
         assert(banks != null),
         assert(accountNumber != null),
         assert(accountName != null),
@@ -1022,8 +1011,6 @@ class _$_AccountInfoState implements _AccountInfoState {
   final LoanRequest loanRequest;
   @override
   final LoanProduct loanProduct;
-  @override
-  final String bankId;
   @override
   final String bankName;
   @override
@@ -1043,7 +1030,7 @@ class _$_AccountInfoState implements _AccountInfoState {
 
   @override
   String toString() {
-    return 'AccountInfoState(loanRequest: $loanRequest, loanProduct: $loanProduct, bankId: $bankId, bankName: $bankName, banks: $banks, accountNumber: $accountNumber, accountName: $accountName, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, submitAccountInfoFailureOrSuccess: $submitAccountInfoFailureOrSuccess, applyForLoanFailureOrSuccess: $applyForLoanFailureOrSuccess)';
+    return 'AccountInfoState(loanRequest: $loanRequest, loanProduct: $loanProduct, bankName: $bankName, banks: $banks, accountNumber: $accountNumber, accountName: $accountName, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, submitAccountInfoFailureOrSuccess: $submitAccountInfoFailureOrSuccess, applyForLoanFailureOrSuccess: $applyForLoanFailureOrSuccess)';
   }
 
   @override
@@ -1056,8 +1043,6 @@ class _$_AccountInfoState implements _AccountInfoState {
             (identical(other.loanProduct, loanProduct) ||
                 const DeepCollectionEquality()
                     .equals(other.loanProduct, loanProduct)) &&
-            (identical(other.bankId, bankId) ||
-                const DeepCollectionEquality().equals(other.bankId, bankId)) &&
             (identical(other.bankName, bankName) ||
                 const DeepCollectionEquality()
                     .equals(other.bankName, bankName)) &&
@@ -1092,7 +1077,6 @@ class _$_AccountInfoState implements _AccountInfoState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(loanRequest) ^
       const DeepCollectionEquality().hash(loanProduct) ^
-      const DeepCollectionEquality().hash(bankId) ^
       const DeepCollectionEquality().hash(bankName) ^
       const DeepCollectionEquality().hash(banks) ^
       const DeepCollectionEquality().hash(accountNumber) ^
@@ -1111,8 +1095,6 @@ abstract class _AccountInfoState implements AccountInfoState {
   const factory _AccountInfoState(
           {LoanRequest loanRequest,
           LoanProduct loanProduct,
-          @required
-              String bankId,
           @required
               String bankName,
           @required
@@ -1135,8 +1117,6 @@ abstract class _AccountInfoState implements AccountInfoState {
   LoanRequest get loanRequest;
   @override
   LoanProduct get loanProduct;
-  @override
-  String get bankId;
   @override
   String get bankName;
   @override

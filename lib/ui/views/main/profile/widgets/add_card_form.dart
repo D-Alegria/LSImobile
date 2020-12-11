@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/core/models/enums/card_transaction.dart';
-import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
-import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/accounts_cards/accounts_cards_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/add_card_form/add_card_form_cubit.dart';
 
@@ -59,17 +57,6 @@ class _AddCardFormState extends State<AddCardForm> {
           }
         },
         builder: (context, state) => Container(
-          decoration: BoxDecoration(
-            color: ColorStyles.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-          ),
-          height: SizeConfig.yMargin(context, 50),
-          padding: EdgeInsets.symmetric(
-            horizontal: SizeConfig.xMargin(context, 5),
-          ),
           child: state.isSubmitting
               ? sharedLoader()
               : Form(

@@ -14,24 +14,6 @@ import 'package:lsi_mobile/ui/views/main/profile/widgets/atm_card.dart';
 class PayWithCardForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    void _showForm(Widget form) {
-      showModalBottomSheet(
-        isScrollControlled: true,
-        backgroundColor: ColorStyles.black.withOpacity(0.2),
-        context: context,
-        builder: (context) {
-          return SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom,
-              ),
-              child: form,
-            ),
-          );
-        },
-      );
-    }
-
     return BlocBuilder<MakePaymentCubit, MakePaymentState>(
       builder: (context, state) => Container(
         decoration: BoxDecoration(
@@ -79,11 +61,16 @@ class PayWithCardForm extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) => InkWell(
                       child: ATMCard(card: cards[index]),
-                      onTap: () => _showForm(AddCardForm(
-                        amount: FileReader.getAppConfig().paystackTestAmount,
-                        // todo state.amount.toString(),
-                        transaction: CardTransaction.LoanPayment,
-                      )),
+                      onTap: () => sharedBottomSheet(
+                        context: context,
+                        form: AddCardForm(
+                          amount: FileReader.getAppConfig().paystackTestAmount,
+                          // todo state.amount.toString(),
+                          transaction: CardTransaction.LoanPayment,
+                        ),
+                        height: 50,
+                        isDismissible: true,
+                      ),
                     ),
                     separatorBuilder: (context, index) => SizedBox(
                       width: SizeConfig.xMargin(context, 5),

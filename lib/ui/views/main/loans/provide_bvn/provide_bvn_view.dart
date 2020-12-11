@@ -1,8 +1,8 @@
-import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
@@ -15,36 +15,19 @@ import 'view_model/provide_bvn_bloc.dart';
 class ProvideBVNView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    void _showVerifyBVNForm() {
-      showModalBottomSheet(
-        isScrollControlled: true,
-        backgroundColor: ColorStyles.black.withOpacity(0.2),
-        context: context,
-        builder: (context) {
-          return SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: UserDetailsWrapper(
-                loaded: (user) => VerifyBVNForm(
-                    fullName: user.userData.data.profile.legalName ?? ""),
-              ),
-            ),
-          );
-        },
-      );
-    }
-
     return UserDetailsWrapper(
       loaded: (user) => BlocConsumer<ProvideBvnBloc, ProvideBvnState>(
         listener: (context, state) {
           state.submitFailureOrSuccess.fold(
             () => null,
             (either) => either.fold(
-              (l) => FlushbarHelper.createError(
-                      message: l.message, duration: new Duration(seconds: 3))
-                  .show(context),
-              (r) => _showVerifyBVNForm(),
+              (l) => showErrorSnackBar(context, l.message),
+              (r) => sharedBottomSheet(
+                context: context,
+                form: VerifyBVNForm(),
+                height: 53,
+                isDismissible: true,
+              ),
             ),
           );
         },
@@ -63,24 +46,28 @@ class ProvideBVNView extends StatelessWidget {
                       ),
                       child: Column(
                         children: [
-                          SizedBox(height: SizeConfig.yMargin(context, 2.5)),
+                          SizedBox(height: SizeConfig.yMargin(context, 105.h)),
                           Text(
                             "Please enter your BVN number to begin the loan application process",
                             style: GoogleFonts.workSans(
                               color: ColorStyles.light,
                               fontWeight: FontWeight.w500,
-                              fontSize: SizeConfig.textSize(context, 4),
+                              fontSize: SizeConfig.textSize(context, 14.tx),
                               height: SizeConfig.textSize(context, 0.4),
                             ),
                           ),
-                          SizedBox(height: SizeConfig.yMargin(context, 5)),
+                          SizedBox(height: SizeConfig.yMargin(context, 27.h)),
                           SharedTextFormField(
                             labelText: "Bank Verification Number (BVN)",
                             onChanged: (value) => context
                                 .bloc<ProvideBvnBloc>()
                                 .add(BvnChanged(value)),
                             validator: (value) {
-                              if (!state.bvn.isBvn) return "BVN has 11 digits";
+                              if (!context
+                                  .bloc<ProvideBvnBloc>()
+                                  .state
+                                  .bvn
+                                  .isBvn) return "BVN has 11 digits";
                               return null;
                             },
                             initialValue: state.bvn,
@@ -95,7 +82,7 @@ class ProvideBVNView extends StatelessWidget {
                             text: "Check BVN",
                             minWidth: SizeConfig.xMargin(context, 90),
                           ),
-                          SizedBox(height: SizeConfig.yMargin(context, 2.5)),
+                          SizedBox(height: SizeConfig.yMargin(context, 5)),
                         ],
                       ),
                     ),

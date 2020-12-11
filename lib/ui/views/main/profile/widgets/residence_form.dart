@@ -2,12 +2,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
+import 'package:lsi_mobile/ui/views/main/loans/loan_details/view_model/loan_details_bloc.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/edit_profile/edit_profile_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/residence_form/residence_form_cubit.dart';
-import 'package:lsi_mobile/core/extensions/num_extension.dart';
+import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 
 class ResidenceForm extends StatelessWidget {
   final bool isEditProfile;
@@ -57,8 +59,11 @@ class ResidenceForm extends StatelessWidget {
                           .bloc<ResidenceFormCubit>()
                           .currentAddressChanged(value),
                       validator: (value) {
-                        if (state.currentAddress.isEmpty)
-                          return "Field name is required";
+                        if (context
+                            .bloc<ResidenceFormCubit>()
+                            .state
+                            .currentAddress
+                            .isEmpty) return "Field name is required";
                         return null;
                       },
                     ),
@@ -104,8 +109,11 @@ class ResidenceForm extends StatelessWidget {
                           .bloc<ResidenceFormCubit>()
                           .stayPeriodChanged(value),
                       validator: (value) {
-                        if (state.stayPeriod.isEmpty)
-                          return "Field name is required";
+                        if (context
+                            .bloc<ResidenceFormCubit>()
+                            .state
+                            .stayPeriod
+                            .isEmpty) return "Field name is required";
                         return null;
                       },
                       keyboardType: TextInputType.phone,
@@ -137,13 +145,18 @@ class ResidenceForm extends StatelessWidget {
                           )
                         : Container(
                             margin: EdgeInsets.only(
-                              top: SizeConfig.yMargin(context, 15),
+                              top: SizeConfig.yMargin(context, 110.h),
                             ),
                             child: sharedRaisedButton(
                               context: context,
-                              onPressed: () => context
-                                  .bloc<ResidenceFormCubit>()
-                                  .submitResidenceForm(isEditProfile: false),
+                              onPressed: () async {
+                                await context
+                                    .bloc<ResidenceFormCubit>()
+                                    .submitResidenceForm(isEditProfile: false);
+                                context
+                                    .bloc<UserProfileCubit>()
+                                    .getUserDetails();
+                              },
                               color: ColorStyles.blue,
                               text: "Submit",
                               minWidth: SizeConfig.xMargin(context, 90),
@@ -159,7 +172,10 @@ class ResidenceForm extends StatelessWidget {
         (either) => either.fold(
           (failure) => sharedErrorWidget(context, failure.message),
           (success) {
-            if (!isEditProfile) return context.navigator.pushLoanDetailsView();
+            if (!isEditProfile) {
+              context.bloc<LoanDetailsBloc>().add(Init(state.userDetails));
+              return context.navigator.pushLoanDetailsView();
+            }
           },
         ),
       ),

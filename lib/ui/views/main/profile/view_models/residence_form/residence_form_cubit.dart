@@ -157,6 +157,8 @@ class ResidenceFormCubit extends Cubit<ResidenceFormState> {
         residentYears: state.stayPeriod.trim(),
       );
 
+      emit(state.copyWith(userDetails: request));
+
       failureOrSuccess = await _userRepo.saveUserDataRemote(request);
       if (!isEditProfile) {
         await failureOrSuccess.fold(

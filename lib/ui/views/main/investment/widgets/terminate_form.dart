@@ -31,89 +31,76 @@ class TerminateForm extends StatelessWidget {
             ),
           );
         },
-        builder: (context, state) => Container(
-          decoration: BoxDecoration(
-            color: ColorStyles.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-          ),
-          height: SizeConfig.yMargin(context, 400.h),
-          padding: EdgeInsets.symmetric(
-            horizontal: SizeConfig.xMargin(context, 5),
-          ),
-          child: state.isSubmitting
-              ? sharedLoader()
-              : Form(
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(height: SizeConfig.yMargin(context, 4)),
-                      RichText(
-                        text: TextSpan(
-                          text: "Terminate",
-                          style: GoogleFonts.workSans(
-                            color: ColorStyles.dark,
-                            fontWeight: FontWeight.w600,
-                            fontSize: SizeConfig.textSize(context, 20.tx),
-                            height: SizeConfig.textSize(context, 0.5),
+        builder: (context, state) => state.isSubmitting
+            ? sharedLoader()
+            : Form(
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(height: SizeConfig.yMargin(context, 4)),
+                    RichText(
+                      text: TextSpan(
+                        text: "Terminate",
+                        style: GoogleFonts.workSans(
+                          color: ColorStyles.dark,
+                          fontWeight: FontWeight.w600,
+                          fontSize: SizeConfig.textSize(context, 20.tx),
+                          height: SizeConfig.textSize(context, 0.5),
+                        ),
+                        children: [
+                          TextSpan(
+                            text:
+                                "\nSelect account to withdraw specified amount to",
+                            style: GoogleFonts.workSans(
+                              fontWeight: FontWeight.w500,
+                              fontSize: SizeConfig.textSize(context, 14.tx),
+                              color: ColorStyles.dark.withOpacity(0.4),
+                            ),
                           ),
-                          children: [
-                            TextSpan(
-                              text:
-                                  "\nSelect account to withdraw specified amount to",
-                              style: GoogleFonts.workSans(
-                                fontWeight: FontWeight.w500,
-                                fontSize: SizeConfig.textSize(context, 14.tx),
-                                color: ColorStyles.dark.withOpacity(0.4),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: SizeConfig.yMargin(context, 32.h)),
+                    Container(
+                      height: SizeConfig.yMargin(context, 144.h),
+                      child: AccountsCardsWrapper(
+                        loaded: ({accounts, cards}) => ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            var account = accounts[index];
+                            return Container(
+                              width: SizeConfig.xMargin(context, 274.w),
+                              child: BankAccountCard(
+                                accountName: account.accountName,
+                                accountNumber: account.accountNumber,
+                                bankName: account.bankName,
+                                onTap: () => context
+                                    .bloc<TerminateFormCubit>()
+                                    .terminate(
+                                      planId: planId,
+                                      amount: amount,
+                                      bankId: account.bankId,
+                                    ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: SizeConfig.yMargin(context, 32.h)),
-                      Container(
-                        height: SizeConfig.yMargin(context, 144.h),
-                        child: AccountsCardsWrapper(
-                          loaded: ({accounts, cards}) => ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              var account = accounts[index];
-                              return Container(
-                                width: SizeConfig.xMargin(context, 274.w),
-                                child: BankAccountCard(
-                                  accountName: account.accountName,
-                                  accountNumber: account.accountNumber,
-                                  bankName: account.bankName,
-                                  onTap: () => context
-                                      .bloc<TerminateFormCubit>()
-                                      .terminate(
-                                        planId: planId,
-                                        amount: amount,
-                                        bankId: account.bankId,
-                                      ),
-                                ),
-                              );
-                            },
-                            separatorBuilder: (context, index) => SizedBox(
-                              width: SizeConfig.xMargin(context, 5),
-                            ),
-                            itemCount: accounts.length,
+                            );
+                          },
+                          separatorBuilder: (context, index) => SizedBox(
+                            width: SizeConfig.xMargin(context, 5),
                           ),
+                          itemCount: accounts.length,
                         ),
                       ),
-                      SizedBox(height: SizeConfig.yMargin(context, 42.h)),
-                      sharedOptionFlatButton(
-                        context: context,
-                        action: () => context.navigator.pop(),
-                        secondText: "Cancel",
-                        firstText: "",
-                      ),
-                      SizedBox(height: SizeConfig.yMargin(context, 20.h)),
-                    ],
-                  ),
+                    ),
+                    SizedBox(height: SizeConfig.yMargin(context, 42.h)),
+                    sharedOptionFlatButton(
+                      context: context,
+                      action: () => context.navigator.pop(),
+                      secondText: "Cancel",
+                      firstText: "",
+                    ),
+                    SizedBox(height: SizeConfig.yMargin(context, 20.h)),
+                  ],
                 ),
-        ),
+              ),
       ),
     );
   }

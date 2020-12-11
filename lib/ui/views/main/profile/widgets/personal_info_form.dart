@@ -2,13 +2,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/edit_profile/edit_profile_cubit.dart';
+import 'package:lsi_mobile/ui/views/main/profile/view_models/emergency_contact_form/emergency_contact_form_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/personal_info_form/personal_info_form_cubit.dart';
-import 'package:lsi_mobile/core/extensions/num_extension.dart';
+import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 
 class PersonalInfoForm extends StatelessWidget {
   final bool isEditProfile;
@@ -38,8 +40,11 @@ class PersonalInfoForm extends StatelessWidget {
                           .bloc<PersonalInfoFormCubit>()
                           .fullNameChanged(value),
                       validator: (value) {
-                        if (state.fullName.isEmpty)
-                          return "Field name is required";
+                        if (context
+                            .bloc<PersonalInfoFormCubit>()
+                            .state
+                            .fullName
+                            .isEmpty) return "Field name is required";
                         return null;
                       },
                       readOnly: true,
@@ -52,8 +57,11 @@ class PersonalInfoForm extends StatelessWidget {
                           .bloc<PersonalInfoFormCubit>()
                           .emailChanged(value),
                       validator: (value) {
-                        if (!state.emailAddress.isEmail)
-                          return "Incorrect email";
+                        if (!context
+                            .bloc<PersonalInfoFormCubit>()
+                            .state
+                            .emailAddress
+                            .isEmail) return "Incorrect email";
                         return null;
                       },
                       readOnly: true,
@@ -67,14 +75,18 @@ class PersonalInfoForm extends StatelessWidget {
                           .bloc<PersonalInfoFormCubit>()
                           .phoneNumberChanged(value),
                       validator: (value) {
-                        if (state.phoneNumber.isEmpty)
-                          return "Field name is required";
+                        if (!context
+                            .bloc<PersonalInfoFormCubit>()
+                            .state
+                            .phoneNumber
+                            .isPhoneNo) return "Invalid Phone Number";
                         return null;
                       },
                       keyboardType: TextInputType.phone,
                     ),
                     SizedBox(height: SizeConfig.yMargin(context, 25.h)),
                     SharedDateTimeField(
+                      pattern: "yyyy-MM-dd",
                       label: "Date of birth",
                       initialValue: state.dateOfBirth,
                       onChange: (value) => context
@@ -151,9 +163,15 @@ class PersonalInfoForm extends StatelessWidget {
                             ),
                             child: sharedRaisedButton(
                               context: context,
-                              onPressed: () => context
-                                  .bloc<PersonalInfoFormCubit>()
-                                  .submitPersonalInfoForm(isEditProfile: false),
+                              onPressed: () async {
+                                await context
+                                    .bloc<PersonalInfoFormCubit>()
+                                    .submitPersonalInfoForm(
+                                        isEditProfile: false);
+                                context
+                                    .bloc<UserProfileCubit>()
+                                    .getUserDetails();
+                              },
                               color: ColorStyles.blue,
                               text: "Submit",
                               minWidth: SizeConfig.xMargin(context, 90),
@@ -169,8 +187,10 @@ class PersonalInfoForm extends StatelessWidget {
         (either) => either.fold(
           (failure) => sharedErrorWidget(context, failure.message),
           (success) {
-            if (!isEditProfile)
+            if (!isEditProfile) {
+              context.bloc<EmergencyContactFormCubit>().init(state.userDetails);
               return context.navigator.pushEmergencyContactFormView();
+            }
           },
         ),
       ),

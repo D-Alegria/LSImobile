@@ -36,7 +36,8 @@ class EduAndEmployFormCubit extends Cubit<EduAndEmployFormState> {
     emit(state.copyWith(
       userDetails: user,
       employerName: user.work.employer ?? '',
-      startDate: user.work.workStartDate ?? '',
+      startDate:
+          "${(user.work.startYear ?? "").isEmpty ? '2000' : user.work.startYear}/${(user.work.startMonth ?? "").isEmpty ? '01' : user.work.startMonth}",
       monthlyIncome: user.work.netMonthlyIncome ?? '',
     ));
 
@@ -121,7 +122,7 @@ class EduAndEmployFormCubit extends Cubit<EduAndEmployFormState> {
     final isEmploymentStatusValid = state.employmentStatus.isNotEmpty;
     final isWorkSectorValid = state.workSector.isNotEmpty;
     final isEmployerNameValid = state.employerName.isNotEmpty;
-    // final isStartDateValid = state.startDate.isNotEmpty;
+    final isStartDateValid = state.startDate.isNotEmpty;
     final isMonthlyIncomeValid = state.monthlyIncome.isNotEmpty;
 
     Either<Glitch, Unit> failureOrSuccess;
@@ -129,7 +130,7 @@ class EduAndEmployFormCubit extends Cubit<EduAndEmployFormState> {
         isEmploymentStatusValid &&
         isWorkSectorValid &&
         isEmployerNameValid &&
-        // isStartDateValid &&
+        isStartDateValid &&
         isMonthlyIncomeValid) {
       emit(state.copyWith(
         isSubmitting: true,
@@ -150,13 +151,16 @@ class EduAndEmployFormCubit extends Cubit<EduAndEmployFormState> {
             .first
             .name,
         workSector: state.workSector.trim(),
-        workStartDate: state.startDate.trim(),
+        startMonth: state.startDate.trim().split('/')[1],
+        startYear: state.startDate.trim().split('/')[0],
         educationQualification: state.levelOfEducation.trim(),
       );
 
       request = request.copyWith.education(
         educationalQualification: state.levelOfEducation.trim(),
       );
+
+      emit(state.copyWith(userDetails: request));
 
       failureOrSuccess = await _userRepo.saveUserDataRemote(request);
     }
@@ -172,14 +176,14 @@ class EduAndEmployFormCubit extends Cubit<EduAndEmployFormState> {
     final isEmploymentStatusValid = state.employmentStatus.isNotEmpty;
     final isWorkSectorValid = state.workSector.isNotEmpty;
     final isEmployerNameValid = state.employerName.isNotEmpty;
-    // final isStartDateValid = state.startDate.isNotEmpty;
+    final isStartDateValid = state.startDate.isNotEmpty;
     final isMonthlyIncomeValid = state.monthlyIncome.isNotEmpty;
 
     Either<Glitch, Unit> failureOrSuccess;
     if (isEmploymentStatusValid &&
         isWorkSectorValid &&
         isEmployerNameValid &&
-        // isStartDateValid &&
+        isStartDateValid &&
         isMonthlyIncomeValid) {
       emit(state.copyWith(
         isSubmitting: true,
@@ -201,8 +205,12 @@ class EduAndEmployFormCubit extends Cubit<EduAndEmployFormState> {
             .name,
         workSector: state.workSector.trim(),
         workStartDate: state.startDate.trim(),
+        startMonth: state.startDate.trim().split('/')[1],
+        startYear: state.startDate.trim().split('/')[0],
         educationQualification: state.levelOfEducation.trim(),
       );
+
+      emit(state.copyWith(userDetails: request));
 
       failureOrSuccess = await _userRepo.saveUserDataRemote(request);
       await failureOrSuccess.fold(

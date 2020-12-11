@@ -54,6 +54,12 @@ class _$WorkTearOff {
       @JsonKey(name: 'work_start_date')
           String workStartDate,
       @nullable
+      @JsonKey(name: 'start_month')
+          String startMonth,
+      @nullable
+      @JsonKey(name: 'start_year')
+          String startYear,
+      @nullable
       @JsonKey(name: 'work_end_date')
           String workEndDate,
       @nullable
@@ -126,6 +132,8 @@ class _$WorkTearOff {
       workStateId: workStateId,
       workAddress: workAddress,
       workStartDate: workStartDate,
+      startMonth: startMonth,
+      startYear: startYear,
       workEndDate: workEndDate,
       workDesignation: workDesignation,
       designationId: designationId,
@@ -196,6 +204,12 @@ mixin _$Work {
   @nullable
   @JsonKey(name: 'work_start_date')
   String get workStartDate;
+  @nullable
+  @JsonKey(name: 'start_month')
+  String get startMonth;
+  @nullable
+  @JsonKey(name: 'start_year')
+  String get startYear;
   @nullable
   @JsonKey(name: 'work_end_date')
   String get workEndDate;
@@ -302,6 +316,12 @@ abstract class $WorkCopyWith<$Res> {
       @JsonKey(name: 'work_start_date')
           String workStartDate,
       @nullable
+      @JsonKey(name: 'start_month')
+          String startMonth,
+      @nullable
+      @JsonKey(name: 'start_year')
+          String startYear,
+      @nullable
       @JsonKey(name: 'work_end_date')
           String workEndDate,
       @nullable
@@ -385,6 +405,8 @@ class _$WorkCopyWithImpl<$Res> implements $WorkCopyWith<$Res> {
     Object workStateId = freezed,
     Object workAddress = freezed,
     Object workStartDate = freezed,
+    Object startMonth = freezed,
+    Object startYear = freezed,
     Object workEndDate = freezed,
     Object workDesignation = freezed,
     Object designationId = freezed,
@@ -434,6 +456,9 @@ class _$WorkCopyWithImpl<$Res> implements $WorkCopyWith<$Res> {
       workStartDate: workStartDate == freezed
           ? _value.workStartDate
           : workStartDate as String,
+      startMonth:
+          startMonth == freezed ? _value.startMonth : startMonth as String,
+      startYear: startYear == freezed ? _value.startYear : startYear as String,
       workEndDate:
           workEndDate == freezed ? _value.workEndDate : workEndDate as String,
       workDesignation: workDesignation == freezed
@@ -534,6 +559,12 @@ abstract class _$WorkCopyWith<$Res> implements $WorkCopyWith<$Res> {
       @JsonKey(name: 'work_start_date')
           String workStartDate,
       @nullable
+      @JsonKey(name: 'start_month')
+          String startMonth,
+      @nullable
+      @JsonKey(name: 'start_year')
+          String startYear,
+      @nullable
       @JsonKey(name: 'work_end_date')
           String workEndDate,
       @nullable
@@ -618,6 +649,8 @@ class __$WorkCopyWithImpl<$Res> extends _$WorkCopyWithImpl<$Res>
     Object workStateId = freezed,
     Object workAddress = freezed,
     Object workStartDate = freezed,
+    Object startMonth = freezed,
+    Object startYear = freezed,
     Object workEndDate = freezed,
     Object workDesignation = freezed,
     Object designationId = freezed,
@@ -667,6 +700,9 @@ class __$WorkCopyWithImpl<$Res> extends _$WorkCopyWithImpl<$Res>
       workStartDate: workStartDate == freezed
           ? _value.workStartDate
           : workStartDate as String,
+      startMonth:
+          startMonth == freezed ? _value.startMonth : startMonth as String,
+      startYear: startYear == freezed ? _value.startYear : startYear as String,
       workEndDate:
           workEndDate == freezed ? _value.workEndDate : workEndDate as String,
       workDesignation: workDesignation == freezed
@@ -765,6 +801,12 @@ class _$_Work implements _Work {
       @nullable
       @JsonKey(name: 'work_start_date')
           this.workStartDate,
+      @nullable
+      @JsonKey(name: 'start_month')
+          this.startMonth,
+      @nullable
+      @JsonKey(name: 'start_year')
+          this.startYear,
       @nullable
       @JsonKey(name: 'work_end_date')
           this.workEndDate,
@@ -878,6 +920,14 @@ class _$_Work implements _Work {
   final String workStartDate;
   @override
   @nullable
+  @JsonKey(name: 'start_month')
+  final String startMonth;
+  @override
+  @nullable
+  @JsonKey(name: 'start_year')
+  final String startYear;
+  @override
+  @nullable
   @JsonKey(name: 'work_end_date')
   final String workEndDate;
   @override
@@ -959,7 +1009,7 @@ class _$_Work implements _Work {
 
   @override
   String toString() {
-    return 'Work(eduSector: $eduSector, occupationId: $occupationId, workSector: $workSector, netMonthlyIncome: $netMonthlyIncome, grossAnnual: $grossAnnual, employer: $employer, companyName: $companyName, institutionId: $institutionId, workCountryId: $workCountryId, workStateId: $workStateId, workAddress: $workAddress, workStartDate: $workStartDate, workEndDate: $workEndDate, workDesignation: $workDesignation, designationId: $designationId, workRetiredDate: $workRetiredDate, yearsOfService: $yearsOfService, officialPayDay: $officialPayDay, workEmail: $workEmail, officialEmail: $officialEmail, staffNumber: $staffNumber, pensionNumber: $pensionNumber, taxNumber: $taxNumber, workEmailVerified: $workEmailVerified, workCountryName: $workCountryName, workStateName: $workStateName, occupationText: $occupationText, workSectorText: $workSectorText, eduSectorText: $eduSectorText, designationText: $designationText, companyPhone: $companyPhone, educationQualification: $educationQualification)';
+    return 'Work(eduSector: $eduSector, occupationId: $occupationId, workSector: $workSector, netMonthlyIncome: $netMonthlyIncome, grossAnnual: $grossAnnual, employer: $employer, companyName: $companyName, institutionId: $institutionId, workCountryId: $workCountryId, workStateId: $workStateId, workAddress: $workAddress, workStartDate: $workStartDate, startMonth: $startMonth, startYear: $startYear, workEndDate: $workEndDate, workDesignation: $workDesignation, designationId: $designationId, workRetiredDate: $workRetiredDate, yearsOfService: $yearsOfService, officialPayDay: $officialPayDay, workEmail: $workEmail, officialEmail: $officialEmail, staffNumber: $staffNumber, pensionNumber: $pensionNumber, taxNumber: $taxNumber, workEmailVerified: $workEmailVerified, workCountryName: $workCountryName, workStateName: $workStateName, occupationText: $occupationText, workSectorText: $workSectorText, eduSectorText: $eduSectorText, designationText: $designationText, companyPhone: $companyPhone, educationQualification: $educationQualification)';
   }
 
   @override
@@ -1002,6 +1052,12 @@ class _$_Work implements _Work {
             (identical(other.workStartDate, workStartDate) ||
                 const DeepCollectionEquality()
                     .equals(other.workStartDate, workStartDate)) &&
+            (identical(other.startMonth, startMonth) ||
+                const DeepCollectionEquality()
+                    .equals(other.startMonth, startMonth)) &&
+            (identical(other.startYear, startYear) ||
+                const DeepCollectionEquality()
+                    .equals(other.startYear, startYear)) &&
             (identical(other.workEndDate, workEndDate) ||
                 const DeepCollectionEquality()
                     .equals(other.workEndDate, workEndDate)) &&
@@ -1024,13 +1080,9 @@ class _$_Work implements _Work {
                 const DeepCollectionEquality()
                     .equals(other.workEmail, workEmail)) &&
             (identical(other.officialEmail, officialEmail) ||
-                const DeepCollectionEquality()
-                    .equals(other.officialEmail, officialEmail)) &&
-            (identical(other.staffNumber, staffNumber) ||
-                const DeepCollectionEquality()
-                    .equals(other.staffNumber, staffNumber)) &&
-            (identical(other.pensionNumber, pensionNumber) ||
-                const DeepCollectionEquality().equals(other.pensionNumber, pensionNumber)) &&
+                const DeepCollectionEquality().equals(other.officialEmail, officialEmail)) &&
+            (identical(other.staffNumber, staffNumber) || const DeepCollectionEquality().equals(other.staffNumber, staffNumber)) &&
+            (identical(other.pensionNumber, pensionNumber) || const DeepCollectionEquality().equals(other.pensionNumber, pensionNumber)) &&
             (identical(other.taxNumber, taxNumber) || const DeepCollectionEquality().equals(other.taxNumber, taxNumber)) &&
             (identical(other.workEmailVerified, workEmailVerified) || const DeepCollectionEquality().equals(other.workEmailVerified, workEmailVerified)) &&
             (identical(other.workCountryName, workCountryName) || const DeepCollectionEquality().equals(other.workCountryName, workCountryName)) &&
@@ -1058,6 +1110,8 @@ class _$_Work implements _Work {
       const DeepCollectionEquality().hash(workStateId) ^
       const DeepCollectionEquality().hash(workAddress) ^
       const DeepCollectionEquality().hash(workStartDate) ^
+      const DeepCollectionEquality().hash(startMonth) ^
+      const DeepCollectionEquality().hash(startYear) ^
       const DeepCollectionEquality().hash(workEndDate) ^
       const DeepCollectionEquality().hash(workDesignation) ^
       const DeepCollectionEquality().hash(designationId) ^
@@ -1126,6 +1180,12 @@ abstract class _Work implements Work {
       @nullable
       @JsonKey(name: 'work_start_date')
           String workStartDate,
+      @nullable
+      @JsonKey(name: 'start_month')
+          String startMonth,
+      @nullable
+      @JsonKey(name: 'start_year')
+          String startYear,
       @nullable
       @JsonKey(name: 'work_end_date')
           String workEndDate,
@@ -1236,6 +1296,14 @@ abstract class _Work implements Work {
   @nullable
   @JsonKey(name: 'work_start_date')
   String get workStartDate;
+  @override
+  @nullable
+  @JsonKey(name: 'start_month')
+  String get startMonth;
+  @override
+  @nullable
+  @JsonKey(name: 'start_year')
+  String get startYear;
   @override
   @nullable
   @JsonKey(name: 'work_end_date')

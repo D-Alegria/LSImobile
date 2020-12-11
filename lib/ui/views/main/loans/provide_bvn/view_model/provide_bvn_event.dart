@@ -8,7 +8,7 @@ abstract class ProvideBvnEvent with _$ProvideBvnEvent {
 
   const factory ProvideBvnEvent.checkBVN(String fullName) = CheckBVN;
 
-  const factory ProvideBvnEvent.resendOtp() = ResendOtp;
+  const factory ProvideBvnEvent.resendOtp(String fullName) = ResendOtp;
 
   const factory ProvideBvnEvent.verifyBVN() = VerifyBVN;
 }

@@ -33,7 +33,6 @@ class ProvideBvnBloc extends Bloc<ProvideBvnEvent, ProvideBvnState> {
         final isBvnValid = state.bvn.isBvn;
 
         Either<Glitch, Unit> failureOrSuccess;
-        // var otp;
 
         if (isBvnValid) {
           yield state.copyWith(
@@ -48,13 +47,9 @@ class ProvideBvnBloc extends Bloc<ProvideBvnEvent, ProvideBvnState> {
               lastName: value.fullName,
             ),
           );
-
-          // final local = await _userRepo.getObject("OTP");
-          // local.fold((l) => otp = "", (r) => otp = r);
         }
 
         yield state.copyWith(
-          // otp: otp ?? "",
           isSubmitting: false,
           showErrorMessages: true,
           submitFailureOrSuccess: optionOf(failureOrSuccess),
@@ -97,7 +92,25 @@ class ProvideBvnBloc extends Bloc<ProvideBvnEvent, ProvideBvnState> {
           submitFailureOrSuccess: None(),
         );
       },
-      resendOtp: (ResendOtp value) async* {},
+      resendOtp: (ResendOtp value) async* {
+        yield state.copyWith(
+          isSubmitting: true,
+          submitFailureOrSuccess: None(),
+        );
+
+        await _bankRepo.initiateBvnValidation(
+          InitiateBVNValidationRequest(
+            bvn: state.bvn,
+            firstName: value.fullName,
+            lastName: value.fullName,
+          ),
+        );
+
+        yield state.copyWith(
+          isSubmitting: false,
+          submitFailureOrSuccess: None(),
+        );
+      },
       otpChanged: (OtpChanged value) async* {
         yield state.copyWith(
           otp: value.otp,

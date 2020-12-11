@@ -2,13 +2,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/edit_profile/edit_profile_cubit.dart';
+import 'package:lsi_mobile/ui/views/main/profile/view_models/edu_and_employ_form/edu_and_employ_form_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/emergency_contact_form/emergency_contact_form_cubit.dart';
-import 'package:lsi_mobile/core/extensions/num_extension.dart';
+import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 
 class EmergenceContactForm extends StatelessWidget {
   final bool isEditProfile;
@@ -38,8 +40,11 @@ class EmergenceContactForm extends StatelessWidget {
                           .bloc<EmergencyContactFormCubit>()
                           .fullNameChanged(value),
                       validator: (value) {
-                        if (state.fullName.isEmpty)
-                          return "Field name is required";
+                        if (context
+                            .bloc<EmergencyContactFormCubit>()
+                            .state
+                            .fullName
+                            .isEmpty) return "Field name is required";
                         return null;
                       },
                     ),
@@ -51,7 +56,11 @@ class EmergenceContactForm extends StatelessWidget {
                           .bloc<EmergencyContactFormCubit>()
                           .emailChanged(value),
                       validator: (value) {
-                        if (!state.email.isEmail) return "Incorrect email";
+                        if (!context
+                            .bloc<EmergencyContactFormCubit>()
+                            .state
+                            .email
+                            .isEmail) return "Incorrect email";
                         return null;
                       },
                       keyboardType: TextInputType.emailAddress,
@@ -64,7 +73,11 @@ class EmergenceContactForm extends StatelessWidget {
                           .bloc<EmergencyContactFormCubit>()
                           .phoneNumberChanged(value),
                       validator: (value) {
-                        if (state.phone.isEmpty) return "Field name is required";
+                        if (!context
+                            .bloc<EmergencyContactFormCubit>()
+                            .state
+                            .phone
+                            .isPhoneNo) return "Invalid Phone Number";
                         return null;
                       },
                       keyboardType: TextInputType.phone,
@@ -102,7 +115,9 @@ class EmergenceContactForm extends StatelessWidget {
                                       .bloc<EmergencyContactFormCubit>()
                                       .submitEmergencyContactForm(
                                           isEditProfile: true);
-                                  context.bloc<EditProfileCubit>().profileSaved();
+                                  context
+                                      .bloc<EditProfileCubit>()
+                                      .profileSaved();
                                 } else {
                                   showInfoSnackBar(context, "Edit a field");
                                 }
@@ -118,10 +133,15 @@ class EmergenceContactForm extends StatelessWidget {
                             ),
                             child: sharedRaisedButton(
                               context: context,
-                              onPressed: () => context
-                                  .bloc<EmergencyContactFormCubit>()
-                                  .submitEmergencyContactForm(
-                                      isEditProfile: false),
+                              onPressed: () async {
+                                await context
+                                    .bloc<EmergencyContactFormCubit>()
+                                    .submitEmergencyContactForm(
+                                        isEditProfile: false);
+                                context
+                                    .bloc<UserProfileCubit>()
+                                    .getUserDetails();
+                              },
                               color: ColorStyles.blue,
                               text: "Submit",
                               minWidth: SizeConfig.xMargin(context, 90),
@@ -137,8 +157,10 @@ class EmergenceContactForm extends StatelessWidget {
         (either) => either.fold(
           (failure) => sharedErrorWidget(context, failure.message),
           (success) {
-            if (!isEditProfile)
+            if (!isEditProfile) {
+              context.bloc<EduAndEmployFormCubit>().init(state.userDetails);
               return context.navigator.pushEduAndEmployFormView();
+            }
           },
         ),
       ),

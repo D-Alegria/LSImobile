@@ -5,7 +5,6 @@ abstract class AccountInfoState with _$AccountInfoState {
   const factory AccountInfoState({
     LoanRequest loanRequest,
     LoanProduct loanProduct,
-    @required String bankId,
     @required String bankName,
     @required List<Value> banks,
     @required String accountNumber,
@@ -25,6 +24,5 @@ abstract class AccountInfoState with _$AccountInfoState {
         bankName: "",
         accountName: "",
         banks: [Value(name: "", id: "", bankCode: "")],
-        bankId: "",
       );
 }

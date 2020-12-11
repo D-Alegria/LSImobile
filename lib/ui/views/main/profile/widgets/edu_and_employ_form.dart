@@ -2,12 +2,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/edit_profile/edit_profile_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/profile/view_models/edu_and_employ_form/edu_and_employ_form_cubit.dart';import 'package:lsi_mobile/core/extensions/num_extension.dart';
-
+import 'package:lsi_mobile/ui/views/main/profile/view_models/edu_and_employ_form/edu_and_employ_form_cubit.dart';
+import 'package:lsi_mobile/ui/views/main/profile/view_models/residence_form/residence_form_cubit.dart';
+import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 
 class EduAndEmployForm extends StatelessWidget {
   final bool isEditProfile;
@@ -60,7 +62,8 @@ class EduAndEmployForm extends StatelessWidget {
                               (element) => element.id == state.employmentStatus)
                           .first
                           .name,
-                      items: state.employmentStatuses.map((e) => e.name).toList(),
+                      items:
+                          state.employmentStatuses.map((e) => e.name).toList(),
                       context: context,
                       labelText: "Employment status",
                       onChanged: (String value) {
@@ -100,8 +103,11 @@ class EduAndEmployForm extends StatelessWidget {
                           .bloc<EduAndEmployFormCubit>()
                           .employerNameChanged(value),
                       validator: (value) {
-                        if (state.employerName.isEmpty)
-                          return "Field name is required";
+                        if (context
+                            .bloc<EduAndEmployFormCubit>()
+                            .state
+                            .employerName
+                            .isEmpty) return "Field name is required";
                         return null;
                       },
                     ),
@@ -112,6 +118,7 @@ class EduAndEmployForm extends StatelessWidget {
                       onChange: (value) => context
                           .bloc<EduAndEmployFormCubit>()
                           .startDateChanged(value),
+                      pattern: "yyyy/MM",
                     ),
                     SizedBox(height: SizeConfig.yMargin(context, 25.h)),
                     SharedTextFormField(
@@ -121,8 +128,11 @@ class EduAndEmployForm extends StatelessWidget {
                           .bloc<EduAndEmployFormCubit>()
                           .monthlyIncomeChanged(value),
                       validator: (value) {
-                        if (state.monthlyIncome.isEmpty)
-                          return "Field name is required";
+                        if (context
+                            .bloc<EduAndEmployFormCubit>()
+                            .state
+                            .monthlyIncome
+                            .isEmpty) return "Field name is required";
                         return null;
                       },
                       keyboardType: TextInputType.number,
@@ -140,7 +150,9 @@ class EduAndEmployForm extends StatelessWidget {
                                   context
                                       .bloc<EduAndEmployFormCubit>()
                                       .submitEduAndEmploy();
-                                  context.bloc<EditProfileCubit>().profileSaved();
+                                  context
+                                      .bloc<EditProfileCubit>()
+                                      .profileSaved();
                                 } else {
                                   showInfoSnackBar(context, "Edit a field");
                                 }
@@ -156,9 +168,14 @@ class EduAndEmployForm extends StatelessWidget {
                             ),
                             child: sharedRaisedButton(
                               context: context,
-                              onPressed: () => context
-                                  .bloc<EduAndEmployFormCubit>()
-                                  .submitEmploymentForm(),
+                              onPressed: () {
+                                context
+                                    .bloc<EduAndEmployFormCubit>()
+                                    .submitEmploymentForm();
+                                context
+                                    .bloc<UserProfileCubit>()
+                                    .getUserDetails();
+                              },
                               color: ColorStyles.blue,
                               text: "Submit",
                               minWidth: SizeConfig.xMargin(context, 90),
@@ -174,8 +191,10 @@ class EduAndEmployForm extends StatelessWidget {
         (either) => either.fold(
           (failure) => sharedErrorWidget(context, failure.message),
           (success) {
-            if (!isEditProfile)
+            if (!isEditProfile) {
+              context.bloc<ResidenceFormCubit>().init(state.userDetails);
               return context.navigator.pushResidenceFormView();
+            }
           },
         ),
       ),

@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -86,6 +86,7 @@ class VerificationView extends StatelessWidget {
                             ),
                           ),
                         ),
+                        SizedBox(height: SizeConfig.yMargin(context, 23.h)),
                         sharedRaisedButton(
                           context: context,
                           onPressed: () =>
@@ -93,13 +94,15 @@ class VerificationView extends StatelessWidget {
                           color: ColorStyles.blue,
                           text: "Verify",
                         ),
+                        SizedBox(height: SizeConfig.yMargin(context, 22.h)),
                         sharedOptionFlatButton(
                           context: context,
                           firstText: "Not your phone?",
                           secondText: "Change phone number",
                           action: () => sharedBottomSheet(
-                            context,
-                            ChangePhoneForm(),
+                            context: context,
+                            form: ChangePhoneForm(),
+                            height: 42,
                           ),
                         ),
                       ],
@@ -107,33 +110,27 @@ class VerificationView extends StatelessWidget {
                   ),
           );
         },
-        listener: (context, state) => state.authFailureOrSuccess.fold(
-          () => null,
-          (either) => either.fold(
-            (failure) => failure.maybeMap(
-              orElse: () => FlushbarHelper.createError(
-                message: failure.message,
-                duration: new Duration(seconds: 3),
-              ).show(context),
-              unAuthenticatedGlitch: (e) async {
-                FlushbarHelper.createError(
-                  message: failure.message,
-                  duration: Duration(seconds: 3),
-                ).show(context);
-                await Future.delayed(Duration(seconds: 3));
-                return context.navigator.pushAndRemoveUntil(
-                  Routes.authWrapper,
-                  (route) => false,
-                );
-              },
+        listener: (context, state) {
+          state.authFailureOrSuccess.fold(
+            () => null,
+            (either) => either.fold(
+              (failure) => showErrorSnackBar(context, failure.message),
+              (success) =>
+                  showSuccessSnackBar(context, "OTP sent successfully"),
             ),
-            (success) => context.navigator.pushAndRemoveUntil(
-              Routes.mainView,
-              (route) => false,
-              arguments: MainViewArguments(pageNumber: 0),
+          );
+          state.verifyFailureOrSuccess.fold(
+            () => null,
+            (either) => either.fold(
+              (failure) => showErrorSnackBar(context, failure.message),
+              (success) => context.navigator.pushAndRemoveUntil(
+                Routes.mainView,
+                (route) => false,
+                arguments: MainViewArguments(pageNumber: 0),
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

@@ -67,11 +67,13 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
           sharedAddCardContainer(
             context: context,
             onTap: () => sharedBottomSheet(
-              context,
-              AddCardForm(
+              context: context,
+              form: AddCardForm(
                 amount: FileReader.getAppConfig().paystackTestAmount,
                 transaction: CardTransaction.AddNewCard,
               ),
+              isDismissible: true,
+              height: 50,
             ),
           ),
         ],
@@ -105,7 +107,12 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
           SizedBox(height: SizeConfig.yMargin(context, 20.h)),
           sharedAddCardContainer(
             context: context,
-            onTap: () => sharedBottomSheet(context, AddAccountForm()),
+            onTap: () => sharedBottomSheet(
+              context: context,
+              form: AddAccountForm(),
+              isDismissible: true,
+              height: 60,
+            ),
           ),
         ],
       ),

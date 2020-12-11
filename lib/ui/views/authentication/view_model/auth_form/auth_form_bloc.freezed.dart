@@ -1474,7 +1474,8 @@ class _$AuthFormStateTearOff {
       @required String verificationCode,
       @required bool showErrorMessages,
       @required bool isSubmitting,
-      @required Option<Either<Glitch, Unit>> authFailureOrSuccess}) {
+      @required Option<Either<Glitch, Unit>> authFailureOrSuccess,
+      @required Option<Either<Glitch, Unit>> verifyFailureOrSuccess}) {
     return _AuthFormState(
       fullName: fullName,
       phoneNumber: phoneNumber,
@@ -1484,6 +1485,7 @@ class _$AuthFormStateTearOff {
       showErrorMessages: showErrorMessages,
       isSubmitting: isSubmitting,
       authFailureOrSuccess: authFailureOrSuccess,
+      verifyFailureOrSuccess: verifyFailureOrSuccess,
     );
   }
 }
@@ -1502,6 +1504,7 @@ mixin _$AuthFormState {
   bool get showErrorMessages;
   bool get isSubmitting;
   Option<Either<Glitch, Unit>> get authFailureOrSuccess;
+  Option<Either<Glitch, Unit>> get verifyFailureOrSuccess;
 
   $AuthFormStateCopyWith<AuthFormState> get copyWith;
 }
@@ -1519,7 +1522,8 @@ abstract class $AuthFormStateCopyWith<$Res> {
       String verificationCode,
       bool showErrorMessages,
       bool isSubmitting,
-      Option<Either<Glitch, Unit>> authFailureOrSuccess});
+      Option<Either<Glitch, Unit>> authFailureOrSuccess,
+      Option<Either<Glitch, Unit>> verifyFailureOrSuccess});
 }
 
 /// @nodoc
@@ -1541,6 +1545,7 @@ class _$AuthFormStateCopyWithImpl<$Res>
     Object showErrorMessages = freezed,
     Object isSubmitting = freezed,
     Object authFailureOrSuccess = freezed,
+    Object verifyFailureOrSuccess = freezed,
   }) {
     return _then(_value.copyWith(
       fullName: fullName == freezed ? _value.fullName : fullName as String,
@@ -1561,6 +1566,9 @@ class _$AuthFormStateCopyWithImpl<$Res>
       authFailureOrSuccess: authFailureOrSuccess == freezed
           ? _value.authFailureOrSuccess
           : authFailureOrSuccess as Option<Either<Glitch, Unit>>,
+      verifyFailureOrSuccess: verifyFailureOrSuccess == freezed
+          ? _value.verifyFailureOrSuccess
+          : verifyFailureOrSuccess as Option<Either<Glitch, Unit>>,
     ));
   }
 }
@@ -1580,7 +1588,8 @@ abstract class _$AuthFormStateCopyWith<$Res>
       String verificationCode,
       bool showErrorMessages,
       bool isSubmitting,
-      Option<Either<Glitch, Unit>> authFailureOrSuccess});
+      Option<Either<Glitch, Unit>> authFailureOrSuccess,
+      Option<Either<Glitch, Unit>> verifyFailureOrSuccess});
 }
 
 /// @nodoc
@@ -1604,6 +1613,7 @@ class __$AuthFormStateCopyWithImpl<$Res>
     Object showErrorMessages = freezed,
     Object isSubmitting = freezed,
     Object authFailureOrSuccess = freezed,
+    Object verifyFailureOrSuccess = freezed,
   }) {
     return _then(_AuthFormState(
       fullName: fullName == freezed ? _value.fullName : fullName as String,
@@ -1624,6 +1634,9 @@ class __$AuthFormStateCopyWithImpl<$Res>
       authFailureOrSuccess: authFailureOrSuccess == freezed
           ? _value.authFailureOrSuccess
           : authFailureOrSuccess as Option<Either<Glitch, Unit>>,
+      verifyFailureOrSuccess: verifyFailureOrSuccess == freezed
+          ? _value.verifyFailureOrSuccess
+          : verifyFailureOrSuccess as Option<Either<Glitch, Unit>>,
     ));
   }
 }
@@ -1638,7 +1651,8 @@ class _$_AuthFormState implements _AuthFormState {
       @required this.verificationCode,
       @required this.showErrorMessages,
       @required this.isSubmitting,
-      @required this.authFailureOrSuccess})
+      @required this.authFailureOrSuccess,
+      @required this.verifyFailureOrSuccess})
       : assert(fullName != null),
         assert(phoneNumber != null),
         assert(emailAddress != null),
@@ -1646,7 +1660,8 @@ class _$_AuthFormState implements _AuthFormState {
         assert(verificationCode != null),
         assert(showErrorMessages != null),
         assert(isSubmitting != null),
-        assert(authFailureOrSuccess != null);
+        assert(authFailureOrSuccess != null),
+        assert(verifyFailureOrSuccess != null);
 
   @override
   final String fullName;
@@ -1664,10 +1679,12 @@ class _$_AuthFormState implements _AuthFormState {
   final bool isSubmitting;
   @override
   final Option<Either<Glitch, Unit>> authFailureOrSuccess;
+  @override
+  final Option<Either<Glitch, Unit>> verifyFailureOrSuccess;
 
   @override
   String toString() {
-    return 'AuthFormState(fullName: $fullName, phoneNumber: $phoneNumber, emailAddress: $emailAddress, password: $password, verificationCode: $verificationCode, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccess: $authFailureOrSuccess)';
+    return 'AuthFormState(fullName: $fullName, phoneNumber: $phoneNumber, emailAddress: $emailAddress, password: $password, verificationCode: $verificationCode, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccess: $authFailureOrSuccess, verifyFailureOrSuccess: $verifyFailureOrSuccess)';
   }
 
   @override
@@ -1696,8 +1713,11 @@ class _$_AuthFormState implements _AuthFormState {
                 const DeepCollectionEquality()
                     .equals(other.isSubmitting, isSubmitting)) &&
             (identical(other.authFailureOrSuccess, authFailureOrSuccess) ||
-                const DeepCollectionEquality()
-                    .equals(other.authFailureOrSuccess, authFailureOrSuccess)));
+                const DeepCollectionEquality().equals(
+                    other.authFailureOrSuccess, authFailureOrSuccess)) &&
+            (identical(other.verifyFailureOrSuccess, verifyFailureOrSuccess) ||
+                const DeepCollectionEquality().equals(
+                    other.verifyFailureOrSuccess, verifyFailureOrSuccess)));
   }
 
   @override
@@ -1710,7 +1730,8 @@ class _$_AuthFormState implements _AuthFormState {
       const DeepCollectionEquality().hash(verificationCode) ^
       const DeepCollectionEquality().hash(showErrorMessages) ^
       const DeepCollectionEquality().hash(isSubmitting) ^
-      const DeepCollectionEquality().hash(authFailureOrSuccess);
+      const DeepCollectionEquality().hash(authFailureOrSuccess) ^
+      const DeepCollectionEquality().hash(verifyFailureOrSuccess);
 
   @override
   _$AuthFormStateCopyWith<_AuthFormState> get copyWith =>
@@ -1726,7 +1747,8 @@ abstract class _AuthFormState implements AuthFormState {
           @required String verificationCode,
           @required bool showErrorMessages,
           @required bool isSubmitting,
-          @required Option<Either<Glitch, Unit>> authFailureOrSuccess}) =
+          @required Option<Either<Glitch, Unit>> authFailureOrSuccess,
+          @required Option<Either<Glitch, Unit>> verifyFailureOrSuccess}) =
       _$_AuthFormState;
 
   @override
@@ -1745,6 +1767,8 @@ abstract class _AuthFormState implements AuthFormState {
   bool get isSubmitting;
   @override
   Option<Either<Glitch, Unit>> get authFailureOrSuccess;
+  @override
+  Option<Either<Glitch, Unit>> get verifyFailureOrSuccess;
   @override
   _$AuthFormStateCopyWith<_AuthFormState> get copyWith;
 }

@@ -137,8 +137,9 @@ class InvestmentPlanView extends StatelessWidget {
                   onTap: () {
                     if (investment.isActive == "1") {
                       sharedBottomSheet(
-                        context,
-                        WithdrawForm(investment: investment),
+                        context: context,
+                        form: WithdrawForm(investment: investment),
+                        height: 470.h,
                       );
                     } else {
                       showInfoSnackBar(context,
@@ -182,11 +183,12 @@ class InvestmentPlanView extends StatelessWidget {
                   onTap: () {
                     if (investment.isActive == "1") {
                       sharedBottomSheet(
-                        context,
-                        TerminateForm(
+                        context: context,
+                        form: TerminateForm(
                           planId: investment.investmentProductId,
                           amount: investment.requestPrincipal,
                         ),
+                        height: 400.h,
                       );
                     } else {
                       showInfoSnackBar(context,

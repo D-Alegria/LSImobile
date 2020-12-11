@@ -1,8 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'work.g.dart';
 part 'work.freezed.dart';
+
+part 'work.g.dart';
 
 @freezed
 abstract class Work with _$Work {
@@ -20,6 +21,8 @@ abstract class Work with _$Work {
     @nullable @JsonKey(name: "work_state_id") String workStateId,
     @nullable @JsonKey(name: "work_address") String workAddress,
     @nullable @JsonKey(name: "work_start_date") String workStartDate,
+    @nullable @JsonKey(name: "start_month") String startMonth,
+    @nullable @JsonKey(name: "start_year") String startYear,
     @nullable @JsonKey(name: "work_end_date") String workEndDate,
     @nullable @JsonKey(name: "work_designation") String workDesignation,
     @nullable @JsonKey(name: "designation_id") String designationId,
@@ -39,42 +42,47 @@ abstract class Work with _$Work {
     @nullable @JsonKey(name: "edu_sector_text") String eduSectorText,
     @nullable @JsonKey(name: "designation_text") String designationText,
     @nullable @JsonKey(name: "company_phone") String companyPhone,
-    @nullable @JsonKey(name: "education_qualification") String educationQualification,
+    @nullable
+    @JsonKey(name: "education_qualification")
+        String educationQualification,
   }) = _Work;
 
-  factory Work.initial()=> Work(
-   eduSector: "",
-   occupationId: "",
-   workSector: "",
-   netMonthlyIncome: "",
-   grossAnnual: "",
-   employer: "",
-   companyName: "",
-   institutionId: "",
-   workCountryId: "",
-   workStateId: "",
-   workAddress: "",
-   workStartDate: "",
-   workEndDate: "",
-   workDesignation: "",
-   designationId: "",
-   workRetiredDate: "",
-   yearsOfService: "",
-   officialPayDay: "",
-   workEmail: "",
-   officialEmail: "",
-   staffNumber: "",
-   pensionNumber: "",
-   taxNumber: "",
-   workEmailVerified: "",
-   workCountryName: "",
-   workStateName: "",
-   occupationText: "",
-   workSectorText: "",
-   eduSectorText: "",
-   designationText: "",
-   companyPhone: "",
-   educationQualification: "",
-  );
+  factory Work.initial() => Work(
+        eduSector: "",
+        occupationId: "",
+        workSector: "",
+        netMonthlyIncome: "",
+        grossAnnual: "",
+        employer: "",
+        companyName: "",
+        institutionId: "",
+        workCountryId: "",
+        workStateId: "",
+        workAddress: "",
+        workStartDate: "",
+        workEndDate: "",
+        workDesignation: "",
+        designationId: "",
+        workRetiredDate: "",
+        yearsOfService: "",
+        officialPayDay: "",
+        workEmail: "",
+        officialEmail: "",
+        staffNumber: "",
+        pensionNumber: "",
+        taxNumber: "",
+        workEmailVerified: "",
+        workCountryName: "",
+        workStateName: "",
+        occupationText: "",
+        workSectorText: "",
+        eduSectorText: "",
+        designationText: "",
+        companyPhone: "",
+        educationQualification: "",
+        startMonth: "",
+        startYear: "",
+      );
+
   factory Work.fromJson(Map<String, dynamic> json) => _$WorkFromJson(json);
 }

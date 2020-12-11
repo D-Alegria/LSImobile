@@ -36,39 +36,45 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
         yield state.copyWith(
           emailAddress: value.email,
           authFailureOrSuccess: None(),
+          verifyFailureOrSuccess: None(),
         );
       },
       passwordChanged: (PasswordChanged value) async* {
         yield state.copyWith(
           password: value.password,
           authFailureOrSuccess: None(),
+          verifyFailureOrSuccess: None(),
         );
       },
       fullNameChanged: (FullNameChanged value) async* {
         yield state.copyWith(
           fullName: value.fullName,
           authFailureOrSuccess: None(),
+          verifyFailureOrSuccess: None(),
         );
       },
       phoneNumberChanged: (PhoneNumberChanged value) async* {
         yield state.copyWith(
           phoneNumber: value.phoneNumber,
           authFailureOrSuccess: None(),
+          verifyFailureOrSuccess: None(),
         );
       },
       verificationCodeChanged: (VerificationCodeChanged value) async* {
         yield state.copyWith(
           verificationCode: value.verificationCode,
           authFailureOrSuccess: None(),
+          verifyFailureOrSuccess: None(),
         );
       },
       resendOTP: (_) async* {
         yield state.copyWith(
           isSubmitting: true,
           authFailureOrSuccess: None(),
+          verifyFailureOrSuccess: None(),
         );
 
-        await _authService.sendOTP(
+        final result = await _authService.sendOTP(
           SendOTPRequest(
             phone: state.phoneNumber.trim(),
           ),
@@ -76,7 +82,8 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
 
         yield state.copyWith(
           isSubmitting: false,
-          authFailureOrSuccess: None(),
+          authFailureOrSuccess: optionOf(result),
+          verifyFailureOrSuccess: None(),
         );
       },
       loginUser: (value) async* {
@@ -89,6 +96,7 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
           yield state.copyWith(
             isSubmitting: true,
             authFailureOrSuccess: None(),
+            verifyFailureOrSuccess: None(),
           );
 
           failureOrSuccess = await _authService.login(
@@ -110,6 +118,7 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
           showErrorMessages: true,
           isSubmitting: false,
           authFailureOrSuccess: optionOf(failureOrSuccess),
+          verifyFailureOrSuccess: None(),
         );
       },
       registerUser: (value) async* {
@@ -127,6 +136,7 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
           yield state.copyWith(
             isSubmitting: true,
             authFailureOrSuccess: None(),
+            verifyFailureOrSuccess: None(),
           );
 
           var list = await Future.wait(
@@ -138,7 +148,7 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
             ],
           );
           if (list.every((element) => element.isRight())) {
-            failureOrSuccess = failureOrSuccess = await _authService.sendOTP(
+            failureOrSuccess = await _authService.sendOTP(
               SendOTPRequest(phone: state.phoneNumber.trim()),
             );
           } else {
@@ -150,18 +160,19 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
           isSubmitting: false,
           showErrorMessages: true,
           authFailureOrSuccess: optionOf(failureOrSuccess),
+          verifyFailureOrSuccess: None(),
         );
       },
       verifyUser: (value) async* {
         Either<Glitch, Unit> failureOrSuccess;
 
-        //TODO validate Verification Code
         final isVerificationCodeValid = state.verificationCode.isValidPassword;
 
         if (isVerificationCodeValid) {
           yield state.copyWith(
             isSubmitting: true,
             authFailureOrSuccess: None(),
+            verifyFailureOrSuccess: None(),
           );
 
           var result = await _authService.verifyOTP(
@@ -198,7 +209,8 @@ class AuthFormBloc extends Bloc<AuthFormEvent, AuthFormState> {
 
         yield state.copyWith(
           isSubmitting: false,
-          authFailureOrSuccess: optionOf(failureOrSuccess),
+          authFailureOrSuccess: None(),
+          verifyFailureOrSuccess: optionOf(failureOrSuccess),
         );
       },
     );

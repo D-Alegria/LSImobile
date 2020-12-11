@@ -57,8 +57,7 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                         SizedBox(height: SizeConfig.yMargin(context, 3)),
                         sharedDropDownFormField<String>(
                           value: state.banks
-                              .where((element) =>
-                                  element.bankCode == state.bankName)
+                              .where((element) => element.id == state.bankName)
                               .first
                               .name,
                           items: state.banks.map((e) => e.name).toList(),
@@ -67,7 +66,7 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                           onChanged: (value) {
                             var index;
                             state.banks.map((e) {
-                              if (e.name == value) index = e.bankCode;
+                              if (e.name == value) index = e.id;
                             }).toList();
                             context
                                 .bloc<AccountInfoBloc>()
@@ -82,8 +81,11 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                               .bloc<AccountInfoBloc>()
                               .add(AccountNumberChanged(value)),
                           validator: (value) {
-                            if (state.accountNumber.isEmpty)
-                              return "Field Required";
+                            if (context
+                                .bloc<AccountInfoBloc>()
+                                .state
+                                .accountNumber
+                                .isEmpty) return "Field Required";
                             return null;
                           },
                           keyboardType: TextInputType.number,
@@ -107,7 +109,7 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                           onPressed: () => context
                               .bloc<AccountInfoBloc>()
                               .add(SubmitAccountInfoForm()),
-                          color: ColorStyles.blue,
+                          color: ColorStyles.orange,
                           text: "Submit",
                           minWidth: SizeConfig.xMargin(context, 90),
                         ),
@@ -120,7 +122,7 @@ class _AccountInfoViewState extends State<AccountInfoView> {
                                     .bloc<AccountInfoBloc>()
                                     .add(ApplyForLoan(
                                         userData.userData.data.bvn.bvn)),
-                                color: ColorStyles.orange,
+                                color: ColorStyles.blue,
                                 text: "Continue",
                                 minWidth: SizeConfig.xMargin(context, 90),
                               ),

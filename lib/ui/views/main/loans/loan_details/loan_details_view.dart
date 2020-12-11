@@ -4,13 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/core/extensions/double_extension.dart';
 import 'package:lsi_mobile/core/models/dto/loan_product/loan_product.dart';
-import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/loans/loan_details/view_model/loan_details_bloc.dart';
 import 'package:lsi_mobile/ui/views/main/loans/loan_product/loan_product/loan_product_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 
 import '../widgets/loan_form.dart';
 
@@ -21,16 +19,13 @@ class LoanDetailsView extends StatefulWidget {
 
 class _LoanDetailsViewState extends State<LoanDetailsView> {
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  UserDetailsRequest _userDetailsRequest;
   LoanProduct _loanProduct;
 
   @override
   void initState() {
-    _userDetailsRequest = context.bloc<UserProfileCubit>().state.userData.userData.data;
     context.bloc<LoanProductCubit>().state.maybeMap(
         orElse: () => null,
         loaded: (e) => _loanProduct = e.loanProducts[e.selected]);
-    context.bloc<LoanDetailsBloc>().add(Init(_userDetailsRequest));
     super.initState();
   }
 
@@ -53,7 +48,8 @@ class _LoanDetailsViewState extends State<LoanDetailsView> {
                       SizedBox(height: SizeConfig.yMargin(context, 3)),
                       SharedTextFormField(
                         labelText: "How much do you want",
-                        initialValue: state.amount == 0 ? "" : state.amount.toString(),
+                        initialValue:
+                            state.amount == 0 ? "" : state.amount.toString(),
                         onChanged: (value) => context
                             .bloc<LoanDetailsBloc>()
                             .add(AmountChanged(double.parse(value))),
@@ -62,8 +58,10 @@ class _LoanDetailsViewState extends State<LoanDetailsView> {
                               double.parse(_loanProduct.minimumAmount);
                           double maxAmount =
                               double.parse(_loanProduct.maximumAmount);
-                          if (state.amount < minAmount ||
-                              state.amount > maxAmount)
+                          if (context.bloc<LoanDetailsBloc>().state.amount <
+                                  minAmount ||
+                              context.bloc<LoanDetailsBloc>().state.amount >
+                                  maxAmount)
                             return "Amount has to be between \n${minAmount.moneyFormat(2)} - ${maxAmount.moneyFormat(2)}";
                           return null;
                         },
@@ -77,8 +75,11 @@ class _LoanDetailsViewState extends State<LoanDetailsView> {
                             .bloc<LoanDetailsBloc>()
                             .add(TimeChanged(value)),
                         validator: (value) {
-                          if (state.time.isEmpty)
-                            return "Field name is required";
+                          if (context
+                              .bloc<LoanDetailsBloc>()
+                              .state
+                              .time
+                              .isEmpty) return "Field name is required";
                           return null;
                         },
                         keyboardType: TextInputType.number,

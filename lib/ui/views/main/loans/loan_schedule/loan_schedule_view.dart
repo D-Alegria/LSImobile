@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/extensions/double_extension.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -39,7 +40,7 @@ class _LoanScheduleViewState extends State<LoanScheduleView> {
           "Loan Schedule",
           style: GoogleFonts.workSans(
             fontWeight: FontWeight.w600,
-            fontSize: SizeConfig.textSize(context, 5),
+            fontSize: SizeConfig.textSize(context, 16.tx),
             color: ColorStyles.black,
           ),
         ),
@@ -52,6 +53,7 @@ class _LoanScheduleViewState extends State<LoanScheduleView> {
             padding: EdgeInsets.symmetric(
               horizontal: SizeConfig.xMargin(context, 5),
             ),
+            margin: EdgeInsets.only(top: SizeConfig.yMargin(context, 60.h)),
             child: Column(
               children: [
                 Table(
@@ -93,7 +95,7 @@ class _LoanScheduleViewState extends State<LoanScheduleView> {
                               textAlign: TextAlign.left,
                               style: GoogleFonts.workSans(
                                 fontWeight: FontWeight.w500,
-                                fontSize: SizeConfig.textSize(context, 4.5),
+                                fontSize: SizeConfig.textSize(context, 16.tx),
                                 color: ColorStyles.blue,
                               ),
                             ),
@@ -107,7 +109,7 @@ class _LoanScheduleViewState extends State<LoanScheduleView> {
                               textAlign: TextAlign.center,
                               style: GoogleFonts.workSans(
                                 fontWeight: FontWeight.w500,
-                                fontSize: SizeConfig.textSize(context, 4.5),
+                                fontSize: SizeConfig.textSize(context, 16.tx),
                                 color: ColorStyles.blue,
                               ),
                             ),
@@ -121,7 +123,7 @@ class _LoanScheduleViewState extends State<LoanScheduleView> {
                               textAlign: TextAlign.center,
                               style: GoogleFonts.workSans(
                                 fontWeight: FontWeight.w500,
-                                fontSize: SizeConfig.textSize(context, 4.5),
+                                fontSize: SizeConfig.textSize(context, 16.tx),
                                 color: ColorStyles.blue,
                               ),
                             ),
@@ -140,7 +142,7 @@ class _LoanScheduleViewState extends State<LoanScheduleView> {
                               style: GoogleFonts.workSans(
                                 fontWeight: FontWeight.w500,
                                 color: ColorStyles.black,
-                                fontSize: SizeConfig.textSize(context, 4.3),
+                                fontSize: SizeConfig.textSize(context, 17.tx),
                               ),
                             ),
                           ),
@@ -224,7 +226,7 @@ class _LoanScheduleViewState extends State<LoanScheduleView> {
                 textAlign: TextAlign.left,
                 style: GoogleFonts.workSans(
                   fontWeight: FontWeight.w500,
-                  fontSize: SizeConfig.textSize(context, 4.5),
+                  fontSize: SizeConfig.textSize(context, 16.tx),
                   color: ColorStyles.black,
                 ),
               ),
@@ -242,7 +244,7 @@ class _LoanScheduleViewState extends State<LoanScheduleView> {
                 style: GoogleFonts.roboto(
                   textBaseline: TextBaseline.ideographic,
                   fontWeight: FontWeight.w500,
-                  fontSize: SizeConfig.textSize(context, 4.5),
+                  fontSize: SizeConfig.textSize(context, 16.tx),
                   color: ColorStyles.black,
                 ),
               ),
@@ -266,7 +268,7 @@ class _LoanScheduleViewState extends State<LoanScheduleView> {
                 textAlign: TextAlign.center,
                 style: GoogleFonts.workSans(
                   fontWeight: FontWeight.w500,
-                  fontSize: SizeConfig.textSize(context, 4.5),
+                  fontSize: SizeConfig.textSize(context, 16.tx),
                   color: ColorStyles.black,
                 ),
               ),

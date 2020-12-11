@@ -74,8 +74,16 @@ class NewInvestmentView extends StatelessWidget {
                                 state.investmentProduct.investmentAmount);
                             double maxAmount = double.parse(
                                 state.investmentProduct.investmentMaxAmount);
-                            if (state.amount < minAmount ||
-                                state.amount > maxAmount)
+                            if (context
+                                        .bloc<NewInvestmentCubit>()
+                                        .state
+                                        .amount <
+                                    minAmount ||
+                                context
+                                        .bloc<NewInvestmentCubit>()
+                                        .state
+                                        .amount >
+                                    maxAmount)
                               return "Amount has to be between \n${minAmount.moneyFormat(2)} - ${maxAmount.moneyFormat(2)}";
                             return null;
                           },

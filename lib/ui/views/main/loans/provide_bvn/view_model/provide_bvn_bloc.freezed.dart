@@ -35,8 +35,10 @@ class _$ProvideBvnEventTearOff {
   }
 
 // ignore: unused_element
-  ResendOtp resendOtp() {
-    return const ResendOtp();
+  ResendOtp resendOtp(String fullName) {
+    return ResendOtp(
+      fullName,
+    );
   }
 
 // ignore: unused_element
@@ -56,7 +58,7 @@ mixin _$ProvideBvnEvent {
     @required Result bvnChanged(String bvn),
     @required Result otpChanged(String otp),
     @required Result checkBVN(String fullName),
-    @required Result resendOtp(),
+    @required Result resendOtp(String fullName),
     @required Result verifyBVN(),
   });
   @optionalTypeArgs
@@ -64,7 +66,7 @@ mixin _$ProvideBvnEvent {
     Result bvnChanged(String bvn),
     Result otpChanged(String otp),
     Result checkBVN(String fullName),
-    Result resendOtp(),
+    Result resendOtp(String fullName),
     Result verifyBVN(),
     @required Result orElse(),
   });
@@ -165,7 +167,7 @@ class _$BvnChanged implements BvnChanged {
     @required Result bvnChanged(String bvn),
     @required Result otpChanged(String otp),
     @required Result checkBVN(String fullName),
-    @required Result resendOtp(),
+    @required Result resendOtp(String fullName),
     @required Result verifyBVN(),
   }) {
     assert(bvnChanged != null);
@@ -182,7 +184,7 @@ class _$BvnChanged implements BvnChanged {
     Result bvnChanged(String bvn),
     Result otpChanged(String otp),
     Result checkBVN(String fullName),
-    Result resendOtp(),
+    Result resendOtp(String fullName),
     Result verifyBVN(),
     @required Result orElse(),
   }) {
@@ -296,7 +298,7 @@ class _$OtpChanged implements OtpChanged {
     @required Result bvnChanged(String bvn),
     @required Result otpChanged(String otp),
     @required Result checkBVN(String fullName),
-    @required Result resendOtp(),
+    @required Result resendOtp(String fullName),
     @required Result verifyBVN(),
   }) {
     assert(bvnChanged != null);
@@ -313,7 +315,7 @@ class _$OtpChanged implements OtpChanged {
     Result bvnChanged(String bvn),
     Result otpChanged(String otp),
     Result checkBVN(String fullName),
-    Result resendOtp(),
+    Result resendOtp(String fullName),
     Result verifyBVN(),
     @required Result orElse(),
   }) {
@@ -427,7 +429,7 @@ class _$CheckBVN implements CheckBVN {
     @required Result bvnChanged(String bvn),
     @required Result otpChanged(String otp),
     @required Result checkBVN(String fullName),
-    @required Result resendOtp(),
+    @required Result resendOtp(String fullName),
     @required Result verifyBVN(),
   }) {
     assert(bvnChanged != null);
@@ -444,7 +446,7 @@ class _$CheckBVN implements CheckBVN {
     Result bvnChanged(String bvn),
     Result otpChanged(String otp),
     Result checkBVN(String fullName),
-    Result resendOtp(),
+    Result resendOtp(String fullName),
     Result verifyBVN(),
     @required Result orElse(),
   }) {
@@ -501,6 +503,7 @@ abstract class CheckBVN implements ProvideBvnEvent {
 abstract class $ResendOtpCopyWith<$Res> {
   factory $ResendOtpCopyWith(ResendOtp value, $Res Function(ResendOtp) then) =
       _$ResendOtpCopyWithImpl<$Res>;
+  $Res call({String fullName});
 }
 
 /// @nodoc
@@ -511,24 +514,45 @@ class _$ResendOtpCopyWithImpl<$Res> extends _$ProvideBvnEventCopyWithImpl<$Res>
 
   @override
   ResendOtp get _value => super._value as ResendOtp;
+
+  @override
+  $Res call({
+    Object fullName = freezed,
+  }) {
+    return _then(ResendOtp(
+      fullName == freezed ? _value.fullName : fullName as String,
+    ));
+  }
 }
 
 /// @nodoc
 class _$ResendOtp implements ResendOtp {
-  const _$ResendOtp();
+  const _$ResendOtp(this.fullName) : assert(fullName != null);
+
+  @override
+  final String fullName;
 
   @override
   String toString() {
-    return 'ProvideBvnEvent.resendOtp()';
+    return 'ProvideBvnEvent.resendOtp(fullName: $fullName)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is ResendOtp);
+    return identical(this, other) ||
+        (other is ResendOtp &&
+            (identical(other.fullName, fullName) ||
+                const DeepCollectionEquality()
+                    .equals(other.fullName, fullName)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(fullName);
+
+  @override
+  $ResendOtpCopyWith<ResendOtp> get copyWith =>
+      _$ResendOtpCopyWithImpl<ResendOtp>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -536,7 +560,7 @@ class _$ResendOtp implements ResendOtp {
     @required Result bvnChanged(String bvn),
     @required Result otpChanged(String otp),
     @required Result checkBVN(String fullName),
-    @required Result resendOtp(),
+    @required Result resendOtp(String fullName),
     @required Result verifyBVN(),
   }) {
     assert(bvnChanged != null);
@@ -544,7 +568,7 @@ class _$ResendOtp implements ResendOtp {
     assert(checkBVN != null);
     assert(resendOtp != null);
     assert(verifyBVN != null);
-    return resendOtp();
+    return resendOtp(fullName);
   }
 
   @override
@@ -553,13 +577,13 @@ class _$ResendOtp implements ResendOtp {
     Result bvnChanged(String bvn),
     Result otpChanged(String otp),
     Result checkBVN(String fullName),
-    Result resendOtp(),
+    Result resendOtp(String fullName),
     Result verifyBVN(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (resendOtp != null) {
-      return resendOtp();
+      return resendOtp(fullName);
     }
     return orElse();
   }
@@ -600,7 +624,10 @@ class _$ResendOtp implements ResendOtp {
 }
 
 abstract class ResendOtp implements ProvideBvnEvent {
-  const factory ResendOtp() = _$ResendOtp;
+  const factory ResendOtp(String fullName) = _$ResendOtp;
+
+  String get fullName;
+  $ResendOtpCopyWith<ResendOtp> get copyWith;
 }
 
 /// @nodoc
@@ -642,7 +669,7 @@ class _$VerifyBVN implements VerifyBVN {
     @required Result bvnChanged(String bvn),
     @required Result otpChanged(String otp),
     @required Result checkBVN(String fullName),
-    @required Result resendOtp(),
+    @required Result resendOtp(String fullName),
     @required Result verifyBVN(),
   }) {
     assert(bvnChanged != null);
@@ -659,7 +686,7 @@ class _$VerifyBVN implements VerifyBVN {
     Result bvnChanged(String bvn),
     Result otpChanged(String otp),
     Result checkBVN(String fullName),
-    Result resendOtp(),
+    Result resendOtp(String fullName),
     Result verifyBVN(),
     @required Result orElse(),
   }) {

@@ -101,6 +101,8 @@ class EmergencyContactFormCubit extends Cubit<EmergencyContactFormState> {
         nokRelationship: state.relationShip.trim(),
       );
 
+      emit(state.copyWith(userDetails: request));
+
       failureOrSuccess = await _userRepo.saveUserDataRemote(request);
       if (!isEditProfile) {
         await failureOrSuccess.fold(
@@ -115,7 +117,7 @@ class EmergencyContactFormCubit extends Cubit<EmergencyContactFormState> {
     emit(state.copyWith(
       isSubmitting: false,
       showErrorMessages: true,
-      isEdited:false,
+      isEdited: false,
       submitFailureOrSuccess: optionOf(failureOrSuccess),
     ));
   }
