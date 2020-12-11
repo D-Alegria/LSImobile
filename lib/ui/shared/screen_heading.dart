@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/core/extensions/string_extension.dart';
+import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
+import 'package:lsi_mobile/ui/views/main/profile/widgets/image_options.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/main_view/main_view_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 
 class ScreenHeader extends StatelessWidget {
   final String firstText;
@@ -25,7 +26,6 @@ class ScreenHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var state = BlocProvider.of<MainViewCubit>(context);
-    var userProfile = BlocProvider.of<UserProfileCubit>(context);
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -56,7 +56,12 @@ class ScreenHeader extends StatelessWidget {
           SizedBox(width: SizeConfig.xMargin(context, 2)),
           InkWell(
             onTap: () async => profile
-                ? await userProfile.updateProfilePictureImage(context)
+                ? sharedBottomSheet(
+                    context: context,
+                    form: ImageOptions(),
+                    height: 25,
+                    isDismissible: true,
+                  )
                 : state.changePage(4),
             child: CircleAvatar(
               radius: SizeConfig.yMargin(context, 3),

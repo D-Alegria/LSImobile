@@ -883,15 +883,17 @@ class AccountsCardsWrapper extends StatelessWidget {
 class SharedWideButton extends StatelessWidget {
   final Widget image;
   final Color backgroundColor;
+  final Color textColor;
   final String text;
   final Function onTap;
 
   const SharedWideButton({
     Key key,
-    this.image,
-    this.backgroundColor,
-    this.text,
-    this.onTap,
+    @required this.image,
+    @required this.backgroundColor,
+    @required this.textColor,
+    @required this.text,
+    @required this.onTap,
   }) : super(key: key);
 
   @override
@@ -901,7 +903,7 @@ class SharedWideButton extends StatelessWidget {
       child: Container(
         height: SizeConfig.yMargin(context, 64.h),
         decoration: BoxDecoration(
-          color: backgroundColor.withOpacity(0.1),
+          color: backgroundColor,
           borderRadius: BorderRadius.circular(10),
         ),
         padding: EdgeInsets.symmetric(
@@ -915,7 +917,7 @@ class SharedWideButton extends StatelessWidget {
             Text(
               text,
               style: GoogleFonts.workSans(
-                color: backgroundColor,
+                color: textColor,
                 fontSize: SizeConfig.textSize(context, 15.tx),
                 fontWeight: FontWeight.w600,
               ),

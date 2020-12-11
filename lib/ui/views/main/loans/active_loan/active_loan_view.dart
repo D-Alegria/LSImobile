@@ -114,6 +114,9 @@ class ActiveLoanView extends StatelessWidget {
                     }
                   },
                   backgroundColor: currentLoan.loanStatus == '3'
+                      ? ColorStyles.green2.withOpacity(0.1)
+                      : ColorStyles.grey.withOpacity(0.1),
+                  textColor: currentLoan.loanStatus == '3'
                       ? ColorStyles.green2
                       : ColorStyles.grey,
                   text: "View Contract",

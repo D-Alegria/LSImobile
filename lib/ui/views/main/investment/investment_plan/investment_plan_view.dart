@@ -211,7 +211,8 @@ class InvestmentPlanView extends StatelessWidget {
             ),
             SizedBox(height: SizeConfig.yMargin(context, 3)),
             SharedWideButton(
-              backgroundColor: ColorStyles.green2,
+              backgroundColor: ColorStyles.green2.withOpacity(0.1),
+              textColor: ColorStyles.green2,
               text: "Download Investment Advice",
               onTap: () {},
               image: SvgPicture.asset(
@@ -221,7 +222,8 @@ class InvestmentPlanView extends StatelessWidget {
             ),
             SizedBox(height: SizeConfig.yMargin(context, 1.5)),
             SharedWideButton(
-              backgroundColor: ColorStyles.blue,
+              backgroundColor: ColorStyles.blue.withOpacity(0.1),
+              textColor: ColorStyles.blue,
               text: "My statement",
               onTap: () => FlushbarHelper.createInformation(
                 message:

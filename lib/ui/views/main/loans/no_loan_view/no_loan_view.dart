@@ -9,8 +9,8 @@ import 'package:lsi_mobile/core/models/responses/user_details/user_data.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
+import 'package:lsi_mobile/ui/views/main/profile/widgets/image_options.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/main_view/main_view_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 
 class NoLoanView extends StatelessWidget {
   final UserData user;
@@ -74,9 +74,12 @@ class NoLoanView extends StatelessWidget {
                         "Please you need to update your profile picture to apply for loans",
                     onTap: () {
                       mainView.changePage(4);
-                      return context
-                          .bloc<UserProfileCubit>()
-                          .updateProfilePictureImage(context);
+                      sharedBottomSheet(
+                        context: context,
+                        form: ImageOptions(),
+                        height: 25,
+                        isDismissible: true,
+                      );
                     },
                     buttonText: "Click here to update",
                   );
