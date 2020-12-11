@@ -145,7 +145,7 @@ class ResidenceForm extends StatelessWidget {
                           )
                         : Container(
                             margin: EdgeInsets.only(
-                              top: SizeConfig.yMargin(context, 110.h),
+                              top: SizeConfig.yMargin(context, 100.h),
                             ),
                             child: sharedRaisedButton(
                               context: context,
