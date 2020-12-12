@@ -50,10 +50,10 @@ class UserProfileCubit extends Cubit<UserProfileState> {
   }
 
   Future _updatePic(ImageSource source, BuildContext context) async {
-    emit(state.copyWith(isLoading: true, glitch: null));
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: source);
     if (pickedFile != null) {
+      emit(state.copyWith(isLoading: true, glitch: null));
       final path = await pickedFile.path;
       final result = await _userRepo.uploadProfilePicture(File(path));
       result.fold(
