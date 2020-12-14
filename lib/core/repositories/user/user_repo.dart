@@ -10,13 +10,13 @@ import 'package:lsi_mobile/core/models/requests/user_details/user_details_reques
 import 'package:lsi_mobile/core/models/responses/user_details/user_details_data.dart';
 
 abstract class UserRepo {
-  Future<Either<Glitch, UserDetailsData>> get userDataRemote;
+  Future<Either<Glitch, UserDetailsData>> userData({bool remote = false});
 
   Future<Either<Glitch, List<RecentTransaction>>> get recentTransactions;
 
   Future<Either<Glitch, Unit>> saveUserDataLocal(User user);
 
-  Future<Either<Glitch, Unit>> saveUserDataRemote(UserDetailsRequest user);
+  Future<Either<Glitch, Unit>> saveUserData(UserDetailsRequest user);
 
   Future<Either<Glitch, Unit>> updateUserDataLocal({
     String id,

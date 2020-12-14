@@ -18,8 +18,9 @@ class ContactUsView extends StatelessWidget {
       backgroundColor: ColorStyles.grey8,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: ColorStyles.white,
+        backgroundColor: ColorStyles.grey8,
         centerTitle: false,
+        brightness: Brightness.light,
         iconTheme: IconThemeData(color: ColorStyles.black),
         title: Text(
           "Contact Us",

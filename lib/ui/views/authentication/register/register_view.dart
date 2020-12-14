@@ -6,14 +6,14 @@ import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:lsi_mobile/ui/views/authentication/view_model/auth_form/auth_form_bloc.dart';
+import 'package:lsi_mobile/ui/views/authentication/view_model/auth_form/auth_form_cubit.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/auth_view/auth_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/authentication/widgets/auth_form.dart';
 
 class RegisterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthFormBloc, AuthFormState>(
+    return BlocConsumer<AuthFormCubit, AuthFormState>(
       builder: (context, state) => AuthForm(
         title: "Register",
         subTitle: "Create a free account",
@@ -32,11 +32,11 @@ class RegisterView extends StatelessWidget {
                         labelText: "Full name",
                         initialValue: state.fullName,
                         onChanged: (value) => context
-                            .bloc<AuthFormBloc>()
-                            .add(FullNameChanged(value)),
+                            .bloc<AuthFormCubit>()
+                            .fullNameChanged(value),
                         validator: (value) {
                           if (context
-                              .bloc<AuthFormBloc>()
+                              .bloc<AuthFormCubit>()
                               .state
                               .fullName
                               .isEmpty) return "Field name is required";
@@ -48,11 +48,11 @@ class RegisterView extends StatelessWidget {
                         labelText: "Phone number",
                         initialValue: state.phoneNumber,
                         onChanged: (value) => context
-                            .bloc<AuthFormBloc>()
-                            .add(PhoneNumberChanged(value)),
+                            .bloc<AuthFormCubit>()
+                            .phoneNumberChanged(value),
                         validator: (value) {
                           if (!context
-                              .bloc<AuthFormBloc>()
+                              .bloc<AuthFormCubit>()
                               .state
                               .phoneNumber
                               .isPhoneNo) return "Invalid Phone Number";
@@ -64,12 +64,11 @@ class RegisterView extends StatelessWidget {
                       SharedTextFormField(
                         labelText: "Email address",
                         initialValue: state.emailAddress,
-                        onChanged: (value) => context
-                            .bloc<AuthFormBloc>()
-                            .add(EmailChanged(value)),
+                        onChanged: (value) =>
+                            context.bloc<AuthFormCubit>().emailChanged(value),
                         validator: (value) {
                           if (!context
-                              .bloc<AuthFormBloc>()
+                              .bloc<AuthFormCubit>()
                               .state
                               .emailAddress
                               .isEmail) return "Invalid Email";
@@ -83,11 +82,11 @@ class RegisterView extends StatelessWidget {
                         initialValue: state.password,
                         obscureText: true,
                         onChanged: (value) => context
-                            .bloc<AuthFormBloc>()
-                            .add(PasswordChanged(value)),
+                            .bloc<AuthFormCubit>()
+                            .passwordChanged(value),
                         validator: (value) {
                           if (!context
-                              .bloc<AuthFormBloc>()
+                              .bloc<AuthFormCubit>()
                               .state
                               .password
                               .isValidPassword)
@@ -99,7 +98,7 @@ class RegisterView extends StatelessWidget {
                       sharedRaisedButton(
                         context: context,
                         onPressed: () =>
-                            context.bloc<AuthFormBloc>().add(RegisterUser()),
+                            context.bloc<AuthFormCubit>().registerUser(),
                         color: ColorStyles.blue,
                         text: "Register",
                         minWidth: SizeConfig.xMargin(context, 100),

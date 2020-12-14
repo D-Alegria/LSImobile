@@ -6,8 +6,8 @@ part of 'timeline.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Timeline _$TimelineFromJson(Map<String, dynamic> json) {
-  return Timeline(
+_$_Timeline _$_$_TimelineFromJson(Map<String, dynamic> json) {
+  return _$_Timeline(
     timelineId: json['TIMELINE_ID'] as String,
     timelineActivity: json['TIMELINE_ACTIVITY'] as String,
     executorId: json['EXECUTOR_ID'],
@@ -25,7 +25,8 @@ Timeline _$TimelineFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$TimelineToJson(Timeline instance) => <String, dynamic>{
+Map<String, dynamic> _$_$_TimelineToJson(_$_Timeline instance) =>
+    <String, dynamic>{
       'TIMELINE_ID': instance.timelineId,
       'TIMELINE_ACTIVITY': instance.timelineActivity,
       'EXECUTOR_ID': instance.executorId,

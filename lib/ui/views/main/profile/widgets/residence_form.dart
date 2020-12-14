@@ -6,15 +6,23 @@ import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:lsi_mobile/ui/views/main/loans/loan_details/view_model/loan_details_bloc.dart';
-import 'package:lsi_mobile/ui/views/main/profile/view_models/edit_profile/edit_profile_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/residence_form/residence_form_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 
-class ResidenceForm extends StatelessWidget {
+class ResidenceForm extends StatefulWidget {
   final bool isEditProfile;
 
   const ResidenceForm({Key key, this.isEditProfile}) : super(key: key);
+
+  @override
+  _ResidenceFormState createState() => _ResidenceFormState();
+}
+
+class _ResidenceFormState extends State<ResidenceForm> {
+  @override
+  void initState() {
+    context.bloc<ResidenceFormCubit>().init();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +127,7 @@ class ResidenceForm extends StatelessWidget {
                       keyboardType: TextInputType.phone,
                     ),
                     SizedBox(height: SizeConfig.yMargin(context, 35.h)),
-                    isEditProfile
+                    widget.isEditProfile
                         ? Padding(
                             padding: EdgeInsets.only(
                               right: SizeConfig.xMargin(context, 60),
@@ -131,15 +139,12 @@ class ResidenceForm extends StatelessWidget {
                                   context
                                       .bloc<ResidenceFormCubit>()
                                       .submitResidenceForm(isEditProfile: true);
-                                  context
-                                      .bloc<EditProfileCubit>()
-                                      .profileSaved();
                                 } else {
                                   showInfoSnackBar(context, "Edit a field");
                                 }
                               },
                               color: ColorStyles.blue,
-                              text: "Save",
+                              text: "Submit",
                               minWidth: SizeConfig.xMargin(context, 30),
                             ),
                           )
@@ -150,12 +155,9 @@ class ResidenceForm extends StatelessWidget {
                             child: sharedRaisedButton(
                               context: context,
                               onPressed: () async {
-                                await context
+                                context
                                     .bloc<ResidenceFormCubit>()
                                     .submitResidenceForm(isEditProfile: false);
-                                context
-                                    .bloc<UserProfileCubit>()
-                                    .getUserDetails();
                               },
                               color: ColorStyles.blue,
                               text: "Submit",
@@ -172,9 +174,9 @@ class ResidenceForm extends StatelessWidget {
         (either) => either.fold(
           (failure) => sharedErrorWidget(context, failure.message),
           (success) {
-            if (!isEditProfile) {
-              context.bloc<LoanDetailsBloc>().add(Init(state.userDetails));
-              return context.navigator.pushLoanDetailsView();
+            if (!widget.isEditProfile) {
+              return context.navigator
+                  .pushAndRemoveUntil(Routes.loanDetailsView, (route) => false);
             }
           },
         ),

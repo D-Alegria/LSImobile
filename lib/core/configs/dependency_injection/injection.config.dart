@@ -13,7 +13,7 @@ import '../../../ui/views/main/profile/view_models/accounts_cards/accounts_cards
 import '../../../ui/views/main/profile/view_models/add_account_form/add_account_form_cubit.dart';
 import '../../../ui/views/main/profile/view_models/add_card_form/add_card_form_cubit.dart';
 import '../../utils/api_manager_util.dart';
-import '../../../ui/views/authentication/view_model/auth_form/auth_form_bloc.dart';
+import '../../../ui/views/authentication/view_model/auth_form/auth_form_cubit.dart';
 import '../../services/auth_service/auth_service.dart';
 import '../../services/auth_service/auth_service_impl.dart';
 import '../../../ui/views/authentication/view_model/authentication/authentication_bloc.dart';
@@ -21,7 +21,6 @@ import '../../datasources/bank/bank_remote_datasource.dart';
 import '../../repositories/bank/bank_repo.dart';
 import '../../repositories/bank/bank_repo_impl.dart';
 import '../logging/catcher.dart';
-import '../../../ui/views/main/profile/view_models/edit_profile/edit_profile_cubit.dart';
 import '../../../ui/views/main/profile/view_models/edu_and_employ_form/edu_and_employ_form_cubit.dart';
 import '../../../ui/views/main/profile/view_models/emergency_contact_form/emergency_contact_form_cubit.dart';
 import '../../../ui/views/main/investment/investment_products/view_model/investment_product_cubit.dart';
@@ -29,7 +28,7 @@ import '../../datasources/investment/investment_remote_datasource.dart';
 import '../../repositories/investment/investment_repo.dart';
 import '../../repositories/investment/investment_repo_impl.dart';
 import '../../../ui/views/main/investment/investment_view/view_model/investment_view_cubit.dart';
-import '../../../ui/views/main/loans/loan_details/view_model/loan_details_bloc.dart';
+import '../../../ui/views/main/loans/loan_details/view_model/loan_details_cubit.dart';
 import '../../../ui/views/main/loans/loan_product/loan_product/loan_product_cubit.dart';
 import '../../datasources/loan/loan_remote_datasource.dart';
 import '../../repositories/loan/loan_repo.dart';
@@ -66,7 +65,6 @@ GetIt $initGetIt(
   gh.lazySingleton<CatcherConfig>(() => CatcherConfig());
   gh.lazySingleton<DataConnectionChecker>(
       () => registerModule.dataConnectionChecker());
-  gh.lazySingleton<EditProfileCubit>(() => EditProfileCubit());
   gh.lazySingleton<NetworkInfo>(
       () => NetworkInfoImpl(get<DataConnectionChecker>()));
   gh.lazySingleton<UserLocalDataSource>(() => UserLocalDataSourceImpl());
@@ -94,7 +92,7 @@ GetIt $initGetIt(
       InvestmentRepoImpl(get<UserRepo>(), get<InvestmentRemoteDataSource>()));
   gh.lazySingleton<InvestmentViewCubit>(
       () => InvestmentViewCubit(get<InvestmentRepo>()));
-  gh.lazySingleton<LoanDetailsBloc>(() => LoanDetailsBloc(get<UserRepo>()));
+  gh.lazySingleton<LoanDetailsCubit>(() => LoanDetailsCubit(get<UserRepo>()));
   gh.lazySingleton<LoanRepo>(
       () => LoanRepoImpl(get<UserRepo>(), get<LoanRemoteDataSource>()));
   gh.lazySingleton<LoanScheduleCubit>(() => LoanScheduleCubit(get<LoanRepo>()));
@@ -116,16 +114,16 @@ GetIt $initGetIt(
   gh.factory<UserProfileCubit>(() => UserProfileCubit(get<UserRepo>()));
   gh.factory<WithdrawFormCubit>(() => WithdrawFormCubit(get<InvestmentRepo>()));
   gh.lazySingleton<AccountInfoBloc>(() => AccountInfoBloc(
-        get<UserRemoteDataSource>(),
+        get<UserRepo>(),
         get<BankRepo>(),
         get<LoanRepo>(),
       ));
   gh.lazySingleton<AccountsCardsCubit>(
       () => AccountsCardsCubit(get<BankRepo>()));
   gh.lazySingleton<AddAccountFormCubit>(
-      () => AddAccountFormCubit(get<UserRemoteDataSource>(), get<BankRepo>()));
+      () => AddAccountFormCubit(get<UserRepo>(), get<BankRepo>()));
   gh.lazySingleton<AddCardFormCubit>(() => AddCardFormCubit(get<BankRepo>()));
-  gh.lazySingleton<AuthFormBloc>(() => AuthFormBloc(get<AuthService>()));
+  gh.lazySingleton<AuthFormCubit>(() => AuthFormCubit(get<AuthService>()));
   gh.lazySingleton<InvestmentProductCubit>(
       () => InvestmentProductCubit(get<InvestmentRepo>()));
   gh.lazySingleton<LoanProductCubit>(

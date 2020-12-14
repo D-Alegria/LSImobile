@@ -8,14 +8,23 @@ import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/edit_profile/edit_profile_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/profile/view_models/emergency_contact_form/emergency_contact_form_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/personal_info_form/personal_info_form_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 
-class PersonalInfoForm extends StatelessWidget {
+class PersonalInfoForm extends StatefulWidget {
   final bool isEditProfile;
 
   const PersonalInfoForm({Key key, this.isEditProfile}) : super(key: key);
+
+  @override
+  _PersonalInfoFormState createState() => _PersonalInfoFormState();
+}
+
+class _PersonalInfoFormState extends State<PersonalInfoForm> {
+  @override
+  void initState() {
+    context.bloc<PersonalInfoFormCubit>().init();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +141,7 @@ class PersonalInfoForm extends StatelessWidget {
                       },
                     ),
                     SizedBox(height: SizeConfig.yMargin(context, 35.h)),
-                    isEditProfile
+                    widget.isEditProfile
                         ? Padding(
                             padding: EdgeInsets.only(
                               right: SizeConfig.xMargin(context, 60),
@@ -145,15 +154,12 @@ class PersonalInfoForm extends StatelessWidget {
                                       .bloc<PersonalInfoFormCubit>()
                                       .submitPersonalInfoForm(
                                           isEditProfile: true);
-                                  context
-                                      .bloc<EditProfileCubit>()
-                                      .profileSaved();
                                 } else {
                                   showInfoSnackBar(context, "Edit a field");
                                 }
                               },
                               color: ColorStyles.blue,
-                              text: "Save",
+                              text: "Submit",
                               minWidth: SizeConfig.xMargin(context, 30),
                             ),
                           )
@@ -163,14 +169,11 @@ class PersonalInfoForm extends StatelessWidget {
                             ),
                             child: sharedRaisedButton(
                               context: context,
-                              onPressed: () async {
-                                await context
+                              onPressed: () {
+                                context
                                     .bloc<PersonalInfoFormCubit>()
                                     .submitPersonalInfoForm(
                                         isEditProfile: false);
-                                context
-                                    .bloc<UserProfileCubit>()
-                                    .getUserDetails();
                               },
                               color: ColorStyles.blue,
                               text: "Submit",
@@ -187,9 +190,11 @@ class PersonalInfoForm extends StatelessWidget {
         (either) => either.fold(
           (failure) => sharedErrorWidget(context, failure.message),
           (success) {
-            if (!isEditProfile) {
-              context.bloc<EmergencyContactFormCubit>().init(state.userDetails);
-              return context.navigator.pushEmergencyContactFormView();
+            if (!widget.isEditProfile) {
+              return context.navigator.pushAndRemoveUntil(
+                  Routes.emergencyContactFormView, (route) => false);
+            } else {
+              context.bloc<EditProfileCubit>().changeForm(1);
             }
           },
         ),

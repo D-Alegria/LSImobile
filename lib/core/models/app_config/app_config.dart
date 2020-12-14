@@ -26,6 +26,8 @@ class AppConfig {
   final String paystackTestAmount;
   @JsonKey(name: "paystack_confirm_url")
   final String paystackConfirmUrl;
+  @JsonKey(name: "app_timeout_duration_in_sec")
+  final int appTimeOutDurationInSec;
 
   AppConfig(
     this.baseUrl,
@@ -40,6 +42,7 @@ class AppConfig {
     this.sentryDSN,
     this.paystackTestAmount,
     this.paystackConfirmUrl,
+    this.appTimeOutDurationInSec,
   );
 
   factory AppConfig.fromJson(Map<String, dynamic> json) =>

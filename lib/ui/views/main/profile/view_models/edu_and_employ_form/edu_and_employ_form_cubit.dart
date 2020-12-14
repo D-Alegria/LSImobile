@@ -21,11 +21,18 @@ class EduAndEmployFormCubit extends Cubit<EduAndEmployFormState> {
   EduAndEmployFormCubit(this._userRepo)
       : super(EduAndEmployFormState.initial());
 
-  Future<void> init(UserDetailsRequest user) async {
+  Future<void> init() async {
     emit(state.copyWith(
       isSubmitting: true,
       submitFailureOrSuccess: None(),
     ));
+    UserDetailsRequest user;
+    await _userRepo.userData().then(
+          (value) => value.fold(
+            (l) => null,
+            (r) => user = r.userData.data,
+          ),
+        );
 
     List<Either<Glitch, List<Value>>> responses = await Future.wait([
       _userRepo.getDropDownOptions(DropDownMenu.EducationSectors),
@@ -160,9 +167,7 @@ class EduAndEmployFormCubit extends Cubit<EduAndEmployFormState> {
         educationalQualification: state.levelOfEducation.trim(),
       );
 
-      emit(state.copyWith(userDetails: request));
-
-      failureOrSuccess = await _userRepo.saveUserDataRemote(request);
+      failureOrSuccess = await _userRepo.saveUserData(request);
     }
 
     emit(state.copyWith(
@@ -210,9 +215,7 @@ class EduAndEmployFormCubit extends Cubit<EduAndEmployFormState> {
         educationQualification: state.levelOfEducation.trim(),
       );
 
-      emit(state.copyWith(userDetails: request));
-
-      failureOrSuccess = await _userRepo.saveUserDataRemote(request);
+      failureOrSuccess = await _userRepo.saveUserData(request);
       await failureOrSuccess.fold(
         (l) => null,
         (r) async =>

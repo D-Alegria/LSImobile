@@ -1,26 +1,29 @@
 import 'package:dartz/dartz.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
-import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/constants/constants.dart';
 import 'package:lsi_mobile/core/models/dto/user/user.dart';
 import 'package:lsi_mobile/core/models/dto/value/value.dart';
 import 'package:lsi_mobile/core/utils/function_util.dart';
 
 abstract class UserLocalDataSource {
-  Future<Either<Glitch, User>> get user;
+  Future<void> get init;
 
-  Future<Either<Glitch, List<Value>>> getValue(String key);
+  User get user;
 
-  Future<Either<Glitch, Unit>> saveValue(String key, List<Value> values);
+  List<Value> getValue(String key);
 
-  Future<Either<Glitch, Unit>> saveObject(String key, dynamic value);
+  Unit saveValue(String key, List<Value> values);
 
-  Future<Either<Glitch, dynamic>> getObject(String key);
+  Unit saveObject(String key, dynamic value);
 
-  Future<Either<Glitch, Unit>> saveUser({User user});
+  Unit deleteObject(String key);
 
-  Future<Either<Glitch, Unit>> updateUser({
+  dynamic getObject(String key);
+
+  Unit saveUser({User user});
+
+  Unit updateUser({
     String id,
     String fullName,
     String phoneNumber,
@@ -36,93 +39,86 @@ abstract class UserLocalDataSource {
     String token,
   });
 
-  Future<Either<Glitch, Unit>> deleteUser();
+  Unit deleteUser();
 }
 
 @LazySingleton(as: UserLocalDataSource)
 class UserLocalDataSourceImpl implements UserLocalDataSource {
+  Box _userBox;
+  Box _valueBox;
+  Box _localBox;
+  Box _encryptionBox;
+
   UserLocalDataSourceImpl();
 
+  Future<void> get init async {
+    _encryptionBox = await Hive.openBox(Constants.encryptionBox);
+    var key = await encryptedKey;
+    _userBox = await Hive.openBox(Constants.userBox, encryptionKey: key);
+    _valueBox = await Hive.openBox<List>(Constants.valueBox);
+    _localBox = await Hive.openBox(Constants.localBox);
+  }
+
   @override
-  Future<Either<Glitch, Unit>> deleteUser() async {
-    return await tryMethod<Unit>(
-      function: () async {
-        var key = await encryptedKey;
-        var userBox = await Hive.openBox(Constants.userBox, encryptionKey: key);
-        userBox.delete(Constants.userKey);
-        return right(unit);
+  Unit deleteUser() {
+    return tryLocalMethod<Unit>(function: () {
+      _userBox.delete(Constants.userKey);
+      return unit;
+    });
+  }
+
+  @override
+  Unit saveUser({User user}) {
+    return tryLocalMethod<Unit>(
+      function: () {
+        // current user
+        _userBox.put(user.id, user);
+        saveObject(Constants.userKey, user.id);
+        return unit;
       },
-      errorMessage: "Cache Malfunction: DU",
     );
   }
 
   @override
-  Future<Either<Glitch, Unit>> saveUser({User user}) async {
-    return await tryMethod<Unit>(
-      function: () async {
-        var key = await encryptedKey;
-        var userBox = await Hive.openBox(Constants.userBox, encryptionKey: key);
-        userBox.put(Constants.userKey, user);
-        return right(unit);
+  User get user {
+    return tryLocalMethod<User>(
+      function: () {
+        String currentUser = getObject(Constants.userKey);
+        return currentUser == null ? null : _userBox.get(currentUser) as User;
       },
-      errorMessage: "Cache Malfunction: SU",
     );
   }
 
   @override
-  Future<Either<Glitch, User>> get user async {
-    return await tryMethod<User>(
-      function: () async {
-        var key = await encryptedKey;
-        var userBox = await Hive.openBox(Constants.userBox, encryptionKey: key);
-        User user = userBox.get(Constants.userKey);
-        return right(user);
-      },
-      errorMessage: "Cache Malfunction: Gu",
-    );
+  List<Value> getValue(String key) {
+    return tryLocalMethod<List<Value>>(function: () {
+      var values = _valueBox.get(key);
+      values = values?.cast<Value>();
+      return (values ?? []).isEmpty ? [] : values;
+    });
   }
 
   @override
-  Future<Either<Glitch, List<Value>>> getValue(String key) async {
-    return await tryMethod<List<Value>>(
-      function: () async {
-        var valueBox = await Hive.openBox<List>(Constants.valueBox);
-        var values = valueBox.get(key);
-        values = values?.cast<Value>();
-        return (values ?? []).isEmpty
-            ? left(LocalCacheGlitch(message: "No Cache Found"))
-            : right(values);
-      },
-      errorMessage: "Cache Malfunction",
-    );
+  Unit saveValue(String key, List<Value> values) {
+    return tryLocalMethod<Unit>(function: () {
+      _valueBox.put(key, values);
+      return unit;
+    });
   }
 
-  @override
-  Future<Either<Glitch, Unit>> saveValue(String key, List<Value> values) async {
-    return await tryMethod<Unit>(
-      function: () async {
-        var valueBox = await Hive.openBox<List>(Constants.valueBox);
-        valueBox.put(key, values);
-        return right(unit);
-      },
-      errorMessage: "Cache Malfunction",
-    );
-  }
-
-  Future<List<int>> get encryptedKey async {
-    var encryptionBox = await Hive.openBox(Constants.encryptionBox);
+  List<int> get encryptedKey {
     var key;
-    if (encryptionBox.containsKey(Constants.userEncryptionKey)) {
-      key = encryptionBox.get(Constants.userEncryptionKey);
+    if (_encryptionBox.containsKey(Constants.userEncryptionKey)) {
+      key = _encryptionBox.get(Constants.userEncryptionKey);
     } else {
       key = Hive.generateSecureKey();
-      encryptionBox.put(Constants.userEncryptionKey, key);
+      _encryptionBox.put(Constants.userEncryptionKey, key);
     }
     return key;
   }
 
   @override
-  Future<Either<Glitch, Unit>> updateUser({
+  Unit updateUser({
     String id,
     String fullName,
     String phoneNumber,
@@ -136,12 +132,11 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
     bool isPersonalInfoFilled,
     bool isResidenceFilled,
     String token,
-  }) async {
-    return await tryMethod<Unit>(
-      function: () async {
-        var key = await encryptedKey;
-        var userBox = await Hive.openBox(Constants.userBox, encryptionKey: key);
-        User oldUser = userBox.get(Constants.userKey);
+  }) {
+    return tryLocalMethod<Unit>(
+      function: () {
+        String currentUser = getObject(Constants.userKey);
+        User oldUser = _userBox.get(currentUser);
         User newUser;
         if (user != null) {
           newUser = User(
@@ -179,33 +174,34 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
             token: token,
           );
         }
-        userBox.put(Constants.userKey, newUser);
-        return right(unit);
+        _userBox.put(currentUser, newUser);
+        return unit;
       },
-      errorMessage: "Cache Malfunction",
     );
   }
 
   @override
-  Future<Either<Glitch, dynamic>> getObject(String key) async {
-    return await tryMethod<dynamic>(
-      function: () async {
-        var localBox = await Hive.openBox(Constants.localBox);
-        return right(localBox.get(key));
-      },
-      errorMessage: "Cache Malfunction",
+  dynamic getObject(String key) {
+    return tryLocalMethod<dynamic>(
+      function: () => _localBox.get(key),
     );
   }
 
   @override
-  Future<Either<Glitch, Unit>> saveObject(String key, value) async {
-    return await tryMethod<Unit>(
-      function: () async {
-        var localBox = await Hive.openBox(Constants.localBox);
-        localBox.put(key, value);
-        return right(unit);
+  Unit saveObject(String key, value) {
+    return tryLocalMethod<Unit>(
+      function: () {
+        _localBox.put(key, value);
+        return unit;
       },
-      errorMessage: "Cache Malfunction",
     );
   }
+
+  @override
+  Unit deleteObject(String key) => tryLocalMethod<Unit>(
+        function: () {
+          _localBox.delete(key);
+          return unit;
+        },
+      );
 }

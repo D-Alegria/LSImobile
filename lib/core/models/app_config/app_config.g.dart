@@ -20,6 +20,7 @@ AppConfig _$AppConfigFromJson(Map<String, dynamic> json) {
     json['sentry_dsn'] as String,
     json['paystack_test_amount'] as String,
     json['paystack_confirm_url'] as String,
+    json['app_timeout_duration_in_sec'] as int,
   );
 }
 
@@ -36,4 +37,5 @@ Map<String, dynamic> _$AppConfigToJson(AppConfig instance) => <String, dynamic>{
       'sentry_dsn': instance.sentryDSN,
       'paystack_test_amount': instance.paystackTestAmount,
       'paystack_confirm_url': instance.paystackConfirmUrl,
+      'app_timeout_duration_in_sec': instance.appTimeOutDurationInSec,
     };

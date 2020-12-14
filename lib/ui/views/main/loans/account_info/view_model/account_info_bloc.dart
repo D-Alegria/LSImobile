@@ -4,14 +4,15 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:lsi_mobile/core/datasources/user/user_remote_datasource.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/dto/loan_product/loan_product.dart';
 import 'package:lsi_mobile/core/models/dto/value/value.dart';
+import 'package:lsi_mobile/core/models/enums/drop_down_menu.dart';
 import 'package:lsi_mobile/core/models/requests/loan_application/loan_request.dart';
 import 'package:lsi_mobile/core/models/requests/resolve_account/resolve_account_request.dart';
 import 'package:lsi_mobile/core/repositories/bank/bank_repo.dart';
 import 'package:lsi_mobile/core/repositories/loan/loan_repo.dart';
+import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
 import 'package:meta/meta.dart';
 
 part 'account_info_bloc.freezed.dart';
@@ -22,11 +23,11 @@ part 'account_info_state.dart';
 
 @lazySingleton
 class AccountInfoBloc extends Bloc<AccountInfoEvent, AccountInfoState> {
-  final UserRemoteDataSource _userRemoteDataSource;
+  final UserRepo _userRepo;
   final BankRepo _bankRepo;
   final LoanRepo _loanRepo;
 
-  AccountInfoBloc(this._userRemoteDataSource, this._bankRepo, this._loanRepo)
+  AccountInfoBloc(this._userRepo, this._bankRepo, this._loanRepo)
       : super(AccountInfoState.initial());
 
   @override
@@ -101,7 +102,7 @@ class AccountInfoBloc extends Bloc<AccountInfoEvent, AccountInfoState> {
           loanRequest: e.request,
           loanProduct: e.loanProduct,
         );
-        final banks = await _userRemoteDataSource.banks;
+        final banks = await _userRepo.getDropDownOptions(DropDownMenu.Banks);
 
         yield* banks.fold(
           (l) async* {

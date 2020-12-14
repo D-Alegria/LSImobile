@@ -42,8 +42,7 @@ class ProfileView extends StatelessWidget {
             ),
             SizedBox(height: SizeConfig.yMargin(context, 40.h)),
             sharedInfoButton(
-              onTap: () =>
-                  context.navigator.pushEditProfileView(userDetails: user),
+              onTap: () => context.navigator.pushEditProfileView(),
               context: context,
               icon: Icon(
                 Icons.person_outline_outlined,

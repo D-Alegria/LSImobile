@@ -29,14 +29,14 @@ class AuthenticationBloc
         final result = await _authService.currentUser;
         yield* result.fold(
           (l) async* {
-            if (l is UnAuthenticatedGlitch) yield Unauthenticated();
+            if (l is UnAuthenticatedGlitch) yield NewUser();
             yield Error(l.message);
           },
           (r) async* {
-            if (!r.isAuthenticated) {
-              yield Unauthenticated();
-            } else {
+            if (r.isAuthenticated) {
               yield Authenticated();
+            } else {
+              yield Unauthenticated();
             }
           },
         );

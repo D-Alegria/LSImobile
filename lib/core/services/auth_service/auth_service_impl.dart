@@ -175,7 +175,8 @@ class AuthServiceImpl implements AuthService {
     return await tryMethod<Unit>(
       errorMessage: "Internal System Error Occurred:AuSe-LO",
       function: () async {
-        final result = await _userRepo.clearUserData;
+        final result =
+            await _userRepo.updateUserDataLocal(isAuthenticated: false);
         return result.fold((l) => left(l), (r) => right(unit));
       },
     );

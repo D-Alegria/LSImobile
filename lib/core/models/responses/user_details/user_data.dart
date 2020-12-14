@@ -1,20 +1,20 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
+
+part 'user_data.freezed.dart';
 
 part 'user_data.g.dart';
 
-@JsonSerializable()
-class UserData {
-  final bool status;
-  final String message;
-  final UserDetailsRequest data;
-  @JsonKey(name: "is_individual")
-  final bool isIndividual;
-
-  UserData({this.status, this.message, this.data, this.isIndividual});
+@freezed
+abstract class UserData with _$UserData {
+  @JsonSerializable(explicitToJson: true)
+  factory UserData({
+    @nullable bool status,
+    @nullable String message,
+    @nullable UserDetailsRequest data,
+    @nullable @JsonKey(name: "is_individual") bool isIndividual,
+  }) = _UserData;
 
   factory UserData.fromJson(Map<String, dynamic> json) =>
       _$UserDataFromJson(json);
-
-  Map<String, dynamic> toJson() => _$UserDataToJson(this);
 }

@@ -273,6 +273,11 @@ class _$AuthenticationStateTearOff {
   }
 
 // ignore: unused_element
+  NewUser newUser() {
+    return NewUser();
+  }
+
+// ignore: unused_element
   Error error(String message) {
     return Error(
       message,
@@ -291,6 +296,7 @@ mixin _$AuthenticationState {
     @required Result initial(),
     @required Result unauthenticated(),
     @required Result authenticated(),
+    @required Result newUser(),
     @required Result error(String message),
   });
   @optionalTypeArgs
@@ -298,6 +304,7 @@ mixin _$AuthenticationState {
     Result initial(),
     Result unauthenticated(),
     Result authenticated(),
+    Result newUser(),
     Result error(String message),
     @required Result orElse(),
   });
@@ -306,6 +313,7 @@ mixin _$AuthenticationState {
     @required Result initial(Initial value),
     @required Result unauthenticated(Unauthenticated value),
     @required Result authenticated(Authenticated value),
+    @required Result newUser(NewUser value),
     @required Result error(Error value),
   });
   @optionalTypeArgs
@@ -313,6 +321,7 @@ mixin _$AuthenticationState {
     Result initial(Initial value),
     Result unauthenticated(Unauthenticated value),
     Result authenticated(Authenticated value),
+    Result newUser(NewUser value),
     Result error(Error value),
     @required Result orElse(),
   });
@@ -375,11 +384,13 @@ class _$Initial implements Initial {
     @required Result initial(),
     @required Result unauthenticated(),
     @required Result authenticated(),
+    @required Result newUser(),
     @required Result error(String message),
   }) {
     assert(initial != null);
     assert(unauthenticated != null);
     assert(authenticated != null);
+    assert(newUser != null);
     assert(error != null);
     return initial();
   }
@@ -390,6 +401,7 @@ class _$Initial implements Initial {
     Result initial(),
     Result unauthenticated(),
     Result authenticated(),
+    Result newUser(),
     Result error(String message),
     @required Result orElse(),
   }) {
@@ -406,11 +418,13 @@ class _$Initial implements Initial {
     @required Result initial(Initial value),
     @required Result unauthenticated(Unauthenticated value),
     @required Result authenticated(Authenticated value),
+    @required Result newUser(NewUser value),
     @required Result error(Error value),
   }) {
     assert(initial != null);
     assert(unauthenticated != null);
     assert(authenticated != null);
+    assert(newUser != null);
     assert(error != null);
     return initial(this);
   }
@@ -421,6 +435,7 @@ class _$Initial implements Initial {
     Result initial(Initial value),
     Result unauthenticated(Unauthenticated value),
     Result authenticated(Authenticated value),
+    Result newUser(NewUser value),
     Result error(Error value),
     @required Result orElse(),
   }) {
@@ -478,11 +493,13 @@ class _$Unauthenticated implements Unauthenticated {
     @required Result initial(),
     @required Result unauthenticated(),
     @required Result authenticated(),
+    @required Result newUser(),
     @required Result error(String message),
   }) {
     assert(initial != null);
     assert(unauthenticated != null);
     assert(authenticated != null);
+    assert(newUser != null);
     assert(error != null);
     return unauthenticated();
   }
@@ -493,6 +510,7 @@ class _$Unauthenticated implements Unauthenticated {
     Result initial(),
     Result unauthenticated(),
     Result authenticated(),
+    Result newUser(),
     Result error(String message),
     @required Result orElse(),
   }) {
@@ -509,11 +527,13 @@ class _$Unauthenticated implements Unauthenticated {
     @required Result initial(Initial value),
     @required Result unauthenticated(Unauthenticated value),
     @required Result authenticated(Authenticated value),
+    @required Result newUser(NewUser value),
     @required Result error(Error value),
   }) {
     assert(initial != null);
     assert(unauthenticated != null);
     assert(authenticated != null);
+    assert(newUser != null);
     assert(error != null);
     return unauthenticated(this);
   }
@@ -524,6 +544,7 @@ class _$Unauthenticated implements Unauthenticated {
     Result initial(Initial value),
     Result unauthenticated(Unauthenticated value),
     Result authenticated(Authenticated value),
+    Result newUser(NewUser value),
     Result error(Error value),
     @required Result orElse(),
   }) {
@@ -581,11 +602,13 @@ class _$Authenticated implements Authenticated {
     @required Result initial(),
     @required Result unauthenticated(),
     @required Result authenticated(),
+    @required Result newUser(),
     @required Result error(String message),
   }) {
     assert(initial != null);
     assert(unauthenticated != null);
     assert(authenticated != null);
+    assert(newUser != null);
     assert(error != null);
     return authenticated();
   }
@@ -596,6 +619,7 @@ class _$Authenticated implements Authenticated {
     Result initial(),
     Result unauthenticated(),
     Result authenticated(),
+    Result newUser(),
     Result error(String message),
     @required Result orElse(),
   }) {
@@ -612,11 +636,13 @@ class _$Authenticated implements Authenticated {
     @required Result initial(Initial value),
     @required Result unauthenticated(Unauthenticated value),
     @required Result authenticated(Authenticated value),
+    @required Result newUser(NewUser value),
     @required Result error(Error value),
   }) {
     assert(initial != null);
     assert(unauthenticated != null);
     assert(authenticated != null);
+    assert(newUser != null);
     assert(error != null);
     return authenticated(this);
   }
@@ -627,6 +653,7 @@ class _$Authenticated implements Authenticated {
     Result initial(Initial value),
     Result unauthenticated(Unauthenticated value),
     Result authenticated(Authenticated value),
+    Result newUser(NewUser value),
     Result error(Error value),
     @required Result orElse(),
   }) {
@@ -640,6 +667,113 @@ class _$Authenticated implements Authenticated {
 
 abstract class Authenticated implements AuthenticationState {
   factory Authenticated() = _$Authenticated;
+}
+
+/// @nodoc
+abstract class $NewUserCopyWith<$Res> {
+  factory $NewUserCopyWith(NewUser value, $Res Function(NewUser) then) =
+      _$NewUserCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$NewUserCopyWithImpl<$Res>
+    extends _$AuthenticationStateCopyWithImpl<$Res>
+    implements $NewUserCopyWith<$Res> {
+  _$NewUserCopyWithImpl(NewUser _value, $Res Function(NewUser) _then)
+      : super(_value, (v) => _then(v as NewUser));
+
+  @override
+  NewUser get _value => super._value as NewUser;
+}
+
+/// @nodoc
+class _$NewUser implements NewUser {
+  _$NewUser();
+
+  @override
+  String toString() {
+    return 'AuthenticationState.newUser()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is NewUser);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result initial(),
+    @required Result unauthenticated(),
+    @required Result authenticated(),
+    @required Result newUser(),
+    @required Result error(String message),
+  }) {
+    assert(initial != null);
+    assert(unauthenticated != null);
+    assert(authenticated != null);
+    assert(newUser != null);
+    assert(error != null);
+    return newUser();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result initial(),
+    Result unauthenticated(),
+    Result authenticated(),
+    Result newUser(),
+    Result error(String message),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (newUser != null) {
+      return newUser();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result initial(Initial value),
+    @required Result unauthenticated(Unauthenticated value),
+    @required Result authenticated(Authenticated value),
+    @required Result newUser(NewUser value),
+    @required Result error(Error value),
+  }) {
+    assert(initial != null);
+    assert(unauthenticated != null);
+    assert(authenticated != null);
+    assert(newUser != null);
+    assert(error != null);
+    return newUser(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result initial(Initial value),
+    Result unauthenticated(Unauthenticated value),
+    Result authenticated(Authenticated value),
+    Result newUser(NewUser value),
+    Result error(Error value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (newUser != null) {
+      return newUser(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NewUser implements AuthenticationState {
+  factory NewUser() = _$NewUser;
 }
 
 /// @nodoc
@@ -702,11 +836,13 @@ class _$Error implements Error {
     @required Result initial(),
     @required Result unauthenticated(),
     @required Result authenticated(),
+    @required Result newUser(),
     @required Result error(String message),
   }) {
     assert(initial != null);
     assert(unauthenticated != null);
     assert(authenticated != null);
+    assert(newUser != null);
     assert(error != null);
     return error(message);
   }
@@ -717,6 +853,7 @@ class _$Error implements Error {
     Result initial(),
     Result unauthenticated(),
     Result authenticated(),
+    Result newUser(),
     Result error(String message),
     @required Result orElse(),
   }) {
@@ -733,11 +870,13 @@ class _$Error implements Error {
     @required Result initial(Initial value),
     @required Result unauthenticated(Unauthenticated value),
     @required Result authenticated(Authenticated value),
+    @required Result newUser(NewUser value),
     @required Result error(Error value),
   }) {
     assert(initial != null);
     assert(unauthenticated != null);
     assert(authenticated != null);
+    assert(newUser != null);
     assert(error != null);
     return error(this);
   }
@@ -748,6 +887,7 @@ class _$Error implements Error {
     Result initial(Initial value),
     Result unauthenticated(Unauthenticated value),
     Result authenticated(Authenticated value),
+    Result newUser(NewUser value),
     Result error(Error value),
     @required Result orElse(),
   }) {

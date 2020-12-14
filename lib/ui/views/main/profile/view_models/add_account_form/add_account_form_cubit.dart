@@ -2,11 +2,12 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:lsi_mobile/core/datasources/user/user_remote_datasource.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/models/dto/value/value.dart';
+import 'package:lsi_mobile/core/models/enums/drop_down_menu.dart';
 import 'package:lsi_mobile/core/models/requests/resolve_account/resolve_account_request.dart';
 import 'package:lsi_mobile/core/repositories/bank/bank_repo.dart';
+import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/authentication/authentication_bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -16,10 +17,10 @@ part 'add_account_form_state.dart';
 
 @lazySingleton
 class AddAccountFormCubit extends Cubit<AddAccountFormState> {
-  final UserRemoteDataSource _userRemoteDataSource;
+  final UserRepo _userRepo;
   final BankRepo _bankRepo;
 
-  AddAccountFormCubit(this._userRemoteDataSource, this._bankRepo)
+  AddAccountFormCubit(this._userRepo, this._bankRepo)
       : super(AddAccountFormState.initial());
 
   Future<void> init() async {
@@ -32,7 +33,7 @@ class AddAccountFormCubit extends Cubit<AddAccountFormState> {
     );
 
     try {
-      final banks = await _userRemoteDataSource.banks;
+      final banks = await _userRepo.getDropDownOptions(DropDownMenu.Banks);
       banks.fold(
         (l) => emit(
           state.copyWith(

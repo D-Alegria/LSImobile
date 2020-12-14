@@ -1,4 +1,4 @@
-part of 'loan_details_bloc.dart';
+part of 'loan_details_cubit.dart';
 
 @freezed
 abstract class LoanDetailsState with _$LoanDetailsState {

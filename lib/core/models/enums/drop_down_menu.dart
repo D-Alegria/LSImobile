@@ -8,4 +8,7 @@ enum DropDownMenu {
   States,
   Lgas,
   LoanPurpose,
+  Countries,
+  Designations,
+  Banks,
 }

@@ -8,14 +8,23 @@ import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/edit_profile/edit_profile_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/profile/view_models/edu_and_employ_form/edu_and_employ_form_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/emergency_contact_form/emergency_contact_form_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 
-class EmergenceContactForm extends StatelessWidget {
+class EmergenceContactForm extends StatefulWidget {
   final bool isEditProfile;
 
   const EmergenceContactForm({Key key, this.isEditProfile}) : super(key: key);
+
+  @override
+  _EmergenceContactFormState createState() => _EmergenceContactFormState();
+}
+
+class _EmergenceContactFormState extends State<EmergenceContactForm> {
+  @override
+  void initState() {
+    context.bloc<EmergencyContactFormCubit>().init();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +111,7 @@ class EmergenceContactForm extends StatelessWidget {
                       },
                     ),
                     SizedBox(height: SizeConfig.yMargin(context, 35.h)),
-                    isEditProfile
+                    widget.isEditProfile
                         ? Padding(
                             padding: EdgeInsets.only(
                               right: SizeConfig.xMargin(context, 60),
@@ -115,15 +124,12 @@ class EmergenceContactForm extends StatelessWidget {
                                       .bloc<EmergencyContactFormCubit>()
                                       .submitEmergencyContactForm(
                                           isEditProfile: true);
-                                  context
-                                      .bloc<EditProfileCubit>()
-                                      .profileSaved();
                                 } else {
                                   showInfoSnackBar(context, "Edit a field");
                                 }
                               },
                               color: ColorStyles.blue,
-                              text: "Save",
+                              text: "Submit",
                               minWidth: SizeConfig.xMargin(context, 30),
                             ),
                           )
@@ -133,14 +139,11 @@ class EmergenceContactForm extends StatelessWidget {
                             ),
                             child: sharedRaisedButton(
                               context: context,
-                              onPressed: () async {
-                                await context
+                              onPressed: () {
+                                context
                                     .bloc<EmergencyContactFormCubit>()
                                     .submitEmergencyContactForm(
                                         isEditProfile: false);
-                                context
-                                    .bloc<UserProfileCubit>()
-                                    .getUserDetails();
                               },
                               color: ColorStyles.blue,
                               text: "Submit",
@@ -157,9 +160,11 @@ class EmergenceContactForm extends StatelessWidget {
         (either) => either.fold(
           (failure) => sharedErrorWidget(context, failure.message),
           (success) {
-            if (!isEditProfile) {
-              context.bloc<EduAndEmployFormCubit>().init(state.userDetails);
-              return context.navigator.pushEduAndEmployFormView();
+            if (!widget.isEditProfile) {
+              return context.navigator.pushAndRemoveUntil(
+                  Routes.eduAndEmployFormView, (route) => false);
+            } else {
+              context.bloc<EditProfileCubit>().changeForm(2);
             }
           },
         ),

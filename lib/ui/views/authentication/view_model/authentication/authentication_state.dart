@@ -8,5 +8,7 @@ abstract class AuthenticationState with _$AuthenticationState {
 
   factory AuthenticationState.authenticated() = Authenticated;
 
+  factory AuthenticationState.newUser() = NewUser;
+
   factory AuthenticationState.error(String message) = Error;
 }

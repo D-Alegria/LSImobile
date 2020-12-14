@@ -8,13 +8,22 @@ import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/edit_profile/edit_profile_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/profile/view_models/edu_and_employ_form/edu_and_employ_form_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/profile/view_models/residence_form/residence_form_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 
-class EduAndEmployForm extends StatelessWidget {
+class EduAndEmployForm extends StatefulWidget {
   final bool isEditProfile;
 
   const EduAndEmployForm({Key key, this.isEditProfile}) : super(key: key);
+
+  @override
+  _EduAndEmployFormState createState() => _EduAndEmployFormState();
+}
+
+class _EduAndEmployFormState extends State<EduAndEmployForm> {
+  @override
+  void initState() {
+    context.bloc<EduAndEmployFormCubit>().init();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +41,7 @@ class EduAndEmployForm extends StatelessWidget {
                 child: ListView(
                   children: [
                     SizedBox(height: SizeConfig.yMargin(context, 55.h)),
-                    isEditProfile
+                    widget.isEditProfile
                         ? sharedDropDownFormField<String>(
                             value: state.levelsOfEducation
                                 .where((element) =>
@@ -138,7 +147,7 @@ class EduAndEmployForm extends StatelessWidget {
                       keyboardType: TextInputType.number,
                     ),
                     SizedBox(height: SizeConfig.yMargin(context, 35.h)),
-                    isEditProfile
+                    widget.isEditProfile
                         ? Padding(
                             padding: EdgeInsets.only(
                               right: SizeConfig.xMargin(context, 60),
@@ -150,15 +159,12 @@ class EduAndEmployForm extends StatelessWidget {
                                   context
                                       .bloc<EduAndEmployFormCubit>()
                                       .submitEduAndEmploy();
-                                  context
-                                      .bloc<EditProfileCubit>()
-                                      .profileSaved();
                                 } else {
                                   showInfoSnackBar(context, "Edit a field");
                                 }
                               },
                               color: ColorStyles.blue,
-                              text: "Save",
+                              text: "Submit",
                               minWidth: SizeConfig.xMargin(context, 30),
                             ),
                           )
@@ -172,9 +178,6 @@ class EduAndEmployForm extends StatelessWidget {
                                 context
                                     .bloc<EduAndEmployFormCubit>()
                                     .submitEmploymentForm();
-                                context
-                                    .bloc<UserProfileCubit>()
-                                    .getUserDetails();
                               },
                               color: ColorStyles.blue,
                               text: "Submit",
@@ -191,9 +194,11 @@ class EduAndEmployForm extends StatelessWidget {
         (either) => either.fold(
           (failure) => sharedErrorWidget(context, failure.message),
           (success) {
-            if (!isEditProfile) {
-              context.bloc<ResidenceFormCubit>().init(state.userDetails);
-              return context.navigator.pushResidenceFormView();
+            if (!widget.isEditProfile) {
+              return context.navigator.pushAndRemoveUntil(
+                  Routes.residenceFormView, (route) => false);
+            } else {
+              context.bloc<EditProfileCubit>().changeForm(3);
             }
           },
         ),

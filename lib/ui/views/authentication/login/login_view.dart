@@ -6,14 +6,14 @@ import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:lsi_mobile/ui/views/authentication/view_model/auth_form/auth_form_bloc.dart';
+import 'package:lsi_mobile/ui/views/authentication/view_model/auth_form/auth_form_cubit.dart';
 import 'package:lsi_mobile/ui/views/authentication/view_model/auth_view/auth_view_cubit.dart';
 import 'package:lsi_mobile/ui/views/authentication/widgets/auth_form.dart';
 
 class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthFormBloc, AuthFormState>(
+    return BlocConsumer<AuthFormCubit, AuthFormState>(
       builder: (context, state) => AuthForm(
         title: "Login",
         subTitle: "Secure login to your account",
@@ -31,10 +31,10 @@ class LoginView extends StatelessWidget {
                       labelText: "Email address",
                       initialValue: state.emailAddress,
                       onChanged: (value) =>
-                          context.bloc<AuthFormBloc>().add(EmailChanged(value)),
+                          context.bloc<AuthFormCubit>().emailChanged(value),
                       validator: (value) {
                         if (!context
-                            .bloc<AuthFormBloc>()
+                            .bloc<AuthFormCubit>()
                             .state
                             .emailAddress
                             .isEmail) return "Invalid Email";
@@ -47,12 +47,11 @@ class LoginView extends StatelessWidget {
                       labelText: "Password",
                       initialValue: state.password,
                       obscureText: true,
-                      onChanged: (value) => context
-                          .bloc<AuthFormBloc>()
-                          .add(PasswordChanged(value)),
+                      onChanged: (value) =>
+                          context.bloc<AuthFormCubit>().passwordChanged(value),
                       validator: (value) {
                         if (!context
-                            .bloc<AuthFormBloc>()
+                            .bloc<AuthFormCubit>()
                             .state
                             .password
                             .isValidPassword)
@@ -64,7 +63,7 @@ class LoginView extends StatelessWidget {
                     sharedRaisedButton(
                       context: context,
                       onPressed: () =>
-                          context.bloc<AuthFormBloc>().add(LoginUser()),
+                          context.bloc<AuthFormCubit>().loginUser(),
                       color: ColorStyles.blue,
                       text: "Login",
                     ),

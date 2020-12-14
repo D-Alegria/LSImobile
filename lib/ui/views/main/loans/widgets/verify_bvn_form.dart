@@ -9,7 +9,6 @@ import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/loans/provide_bvn/view_model/provide_bvn_bloc.dart';
 import 'package:lsi_mobile/ui/views/main/loans/widgets/change_bvn_form.dart';
-import 'package:lsi_mobile/ui/views/main/profile/view_models/personal_info_form/personal_info_form_cubit.dart';
 
 class VerifyBVNForm extends StatelessWidget {
   const VerifyBVNForm({Key key}) : super(key: key);
@@ -24,8 +23,8 @@ class VerifyBVNForm extends StatelessWidget {
             (either) => either.fold(
               (l) => showErrorSnackBar(context, l.message),
               (r) {
-                context.bloc<PersonalInfoFormCubit>().init(user.userData.data);
-                return context.navigator.pushPersonalInfoFormView();
+                return context.navigator.pushAndRemoveUntil(
+                    Routes.personalInfoFormView, (route) => false);
               },
             ),
           );

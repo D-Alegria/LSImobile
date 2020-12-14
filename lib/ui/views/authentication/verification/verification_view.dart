@@ -7,7 +7,7 @@ import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:lsi_mobile/ui/views/authentication/view_model/auth_form/auth_form_bloc.dart';
+import 'package:lsi_mobile/ui/views/authentication/view_model/auth_form/auth_form_cubit.dart';
 import 'package:lsi_mobile/ui/views/authentication/widgets/auth_form.dart';
 import 'package:lsi_mobile/ui/views/authentication/widgets/change_phone_form.dart';
 
@@ -15,7 +15,7 @@ class VerificationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<AuthFormBloc, AuthFormState>(
+      body: BlocConsumer<AuthFormCubit, AuthFormState>(
         builder: (context, state) {
           return AuthForm(
             title: "Verify phone",
@@ -59,11 +59,11 @@ class VerificationView extends StatelessWidget {
                           initialValue: state.verificationCode,
                           labelText: "Verification Code",
                           onChanged: (value) => context
-                              .bloc<AuthFormBloc>()
-                              .add(VerificationCodeChanged(value)),
+                              .bloc<AuthFormCubit>()
+                              .verificationCodeChanged(value),
                           validator: (value) {
                             if (context
-                                .bloc<AuthFormBloc>()
+                                .bloc<AuthFormCubit>()
                                 .state
                                 .verificationCode
                                 .isEmpty) return "Field is required";
@@ -75,7 +75,7 @@ class VerificationView extends StatelessWidget {
                           alignment: Alignment.topRight,
                           child: FlatButton(
                             onPressed: () =>
-                                context.bloc<AuthFormBloc>().add(ResendOTP()),
+                                context.bloc<AuthFormCubit>().resendOTP(),
                             child: Text(
                               "Resend OTP",
                               style: GoogleFonts.poppins(
@@ -90,7 +90,7 @@ class VerificationView extends StatelessWidget {
                         sharedRaisedButton(
                           context: context,
                           onPressed: () =>
-                              context.bloc<AuthFormBloc>().add(VerifyUser()),
+                              context.bloc<AuthFormCubit>().verifyUser(),
                           color: ColorStyles.blue,
                           text: "Verify",
                         ),

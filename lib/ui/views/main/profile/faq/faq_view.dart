@@ -28,6 +28,7 @@ class _FAQViewState extends State<FAQView> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: ColorStyles.grey8,
+        brightness: Brightness.light,
         centerTitle: false,
         iconTheme: IconThemeData(color: ColorStyles.black),
         title: Text(

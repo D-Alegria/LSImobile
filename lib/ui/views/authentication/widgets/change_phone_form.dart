@@ -7,12 +7,12 @@ import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:lsi_mobile/ui/views/authentication/view_model/auth_form/auth_form_bloc.dart';
+import 'package:lsi_mobile/ui/views/authentication/view_model/auth_form/auth_form_cubit.dart';
 
 class ChangePhoneForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthFormBloc, AuthFormState>(
+    return BlocConsumer<AuthFormCubit, AuthFormState>(
       builder: (context, state) => state.isSubmitting
           ? sharedLoader()
           : Form(
@@ -49,12 +49,11 @@ class ChangePhoneForm extends StatelessWidget {
                   SharedTextFormField(
                     labelText: "Phone number",
                     initialValue: state.phoneNumber,
-                    onChanged: (value) => context
-                        .bloc<AuthFormBloc>()
-                        .add(PhoneNumberChanged(value)),
+                    onChanged: (value) =>
+                        context.bloc<AuthFormCubit>().phoneNumberChanged(value),
                     validator: (value) {
                       if (!context
-                          .bloc<AuthFormBloc>()
+                          .bloc<AuthFormCubit>()
                           .state
                           .phoneNumber
                           .isPhoneNo) return "Invalid Phone Number";
@@ -67,11 +66,11 @@ class ChangePhoneForm extends StatelessWidget {
                     context: context,
                     onPressed: () {
                       if (context
-                          .bloc<AuthFormBloc>()
+                          .bloc<AuthFormCubit>()
                           .state
                           .phoneNumber
                           .isPhoneNo) {
-                        context.bloc<AuthFormBloc>().add(RegisterUser());
+                        context.bloc<AuthFormCubit>().registerUser();
                         return;
                       }
                     },
@@ -83,10 +82,13 @@ class ChangePhoneForm extends StatelessWidget {
                     context: context,
                     firstText: "",
                     secondText: "Cancel",
-                    action: () =>
-                        context.bloc<AuthFormBloc>().state.phoneNumber.isPhoneNo
-                            ? context.navigator.pop()
-                            : null,
+                    action: () => context
+                            .bloc<AuthFormCubit>()
+                            .state
+                            .phoneNumber
+                            .isPhoneNo
+                        ? context.navigator.pop()
+                        : null,
                   ),
                 ],
               ),

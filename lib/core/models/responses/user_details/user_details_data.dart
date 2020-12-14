@@ -1,4 +1,4 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:lsi_mobile/core/models/dto/dashboard/dashboard.dart';
 import 'package:lsi_mobile/core/models/dto/loan_history/loan_history.dart';
 import 'package:lsi_mobile/core/models/dto/timeline/timeline.dart';
@@ -7,35 +7,23 @@ import 'package:lsi_mobile/core/models/responses/user_details/user_data.dart';
 
 part 'user_details_data.g.dart';
 
-@JsonSerializable()
-class UserDetailsData {
-  final Validations validations;
-  final UserData userData;
-  final LoanHistory loanHistory;
-  @JsonKey(name: "total_loans")
-  final int totalLoans;
-  @JsonKey(name: "total_investments")
-  final int totalInvestments;
-  final dynamic checklist;
-  final Dashboard dashboard;
-  @JsonKey(name: "people_id")
-  final String peopleId;
-  final List<Timeline> timeline;
+part 'user_details_data.freezed.dart';
 
+@freezed
+abstract class UserDetailsData with _$UserDetailsData {
+  @JsonSerializable(explicitToJson: true)
+  factory UserDetailsData({
+    @nullable Validations validations,
+    @nullable UserData userData,
+    @nullable LoanHistory loanHistory,
+    @nullable @JsonKey(name: "total_loans") int totalLoans,
+    @nullable @JsonKey(name: "total_investments") int totalInvestments,
+    @nullable dynamic checklist,
+    @nullable Dashboard dashboard,
+    @nullable @JsonKey(name: "people_id") String peopleId,
+    @nullable List<Timeline> timeline,
+  }) = _UserDetailsData;
 
-  UserDetailsData({
-    this.validations,
-    this.userData,
-    this.loanHistory,
-    this.totalLoans,
-    this.totalInvestments,
-    this.checklist,
-    this.dashboard,
-    this.peopleId,
-    this.timeline,
-  });
-
-  factory UserDetailsData.fromJson(Map<String, dynamic> json) => _$UserDetailsDataFromJson(json);
-
-  Map<String, dynamic> toJson() => _$UserDetailsDataToJson(this);
+  factory UserDetailsData.fromJson(Map<String, dynamic> json) =>
+      _$UserDetailsDataFromJson(json);
 }

@@ -26,7 +26,7 @@ class UserProfileCubit extends Cubit<UserProfileState> {
     emit(state.copyWith(isLoading: true, glitch: null));
 
     try {
-      final result = await _userRepo.userDataRemote;
+      final result = await _userRepo.userData();
       result.fold(
         (l) => emit(state.copyWith(isLoading: false, glitch: l)),
         (r) => emit(state.copyWith(isLoading: false, userData: r)),

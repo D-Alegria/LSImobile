@@ -7,7 +7,7 @@ import 'package:lsi_mobile/core/models/dto/loan_product/loan_product.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:lsi_mobile/ui/views/main/loans/loan_details/view_model/loan_details_bloc.dart';
+import 'package:lsi_mobile/ui/views/main/loans/loan_details/view_model/loan_details_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/loans/loan_product/loan_product/loan_product_cubit.dart';
 
 import '../widgets/loan_form.dart';
@@ -23,6 +23,7 @@ class _LoanDetailsViewState extends State<LoanDetailsView> {
 
   @override
   void initState() {
+    context.bloc<LoanDetailsCubit>().init();
     context.bloc<LoanProductCubit>().state.maybeMap(
         orElse: () => null,
         loaded: (e) => _loanProduct = e.loanProducts[e.selected]);
@@ -31,7 +32,7 @@ class _LoanDetailsViewState extends State<LoanDetailsView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoanDetailsBloc, LoanDetailsState>(
+    return BlocConsumer<LoanDetailsCubit, LoanDetailsState>(
       builder: (context, state) => LoanForm(
         title: "Loan Details",
         form: state.isSubmitting
@@ -51,16 +52,16 @@ class _LoanDetailsViewState extends State<LoanDetailsView> {
                         initialValue:
                             state.amount == 0 ? "" : state.amount.toString(),
                         onChanged: (value) => context
-                            .bloc<LoanDetailsBloc>()
-                            .add(AmountChanged(double.parse(value))),
+                            .bloc<LoanDetailsCubit>()
+                            .amountChanged(double.parse(value)),
                         validator: (value) {
                           double minAmount =
                               double.parse(_loanProduct.minimumAmount);
                           double maxAmount =
                               double.parse(_loanProduct.maximumAmount);
-                          if (context.bloc<LoanDetailsBloc>().state.amount <
+                          if (context.bloc<LoanDetailsCubit>().state.amount <
                                   minAmount ||
-                              context.bloc<LoanDetailsBloc>().state.amount >
+                              context.bloc<LoanDetailsCubit>().state.amount >
                                   maxAmount)
                             return "Amount has to be between \n${minAmount.moneyFormat(2)} - ${maxAmount.moneyFormat(2)}";
                           return null;
@@ -71,12 +72,11 @@ class _LoanDetailsViewState extends State<LoanDetailsView> {
                       SharedTextFormField(
                         labelText: "For how long?",
                         initialValue: state.time,
-                        onChanged: (value) => context
-                            .bloc<LoanDetailsBloc>()
-                            .add(TimeChanged(value)),
+                        onChanged: (value) =>
+                            context.bloc<LoanDetailsCubit>().timeChanged(value),
                         validator: (value) {
                           if (context
-                              .bloc<LoanDetailsBloc>()
+                              .bloc<LoanDetailsCubit>()
                               .state
                               .time
                               .isEmpty) return "Field name is required";
@@ -98,9 +98,7 @@ class _LoanDetailsViewState extends State<LoanDetailsView> {
                           state.reasons.map((e) {
                             if (e.name == value) index = e.id;
                           }).toList();
-                          context
-                              .bloc<LoanDetailsBloc>()
-                              .add(ReasonChanged(index));
+                          context.bloc<LoanDetailsCubit>().reasonChanged(index);
                         },
                       ),
                       SizedBox(height: SizeConfig.yMargin(context, 28)),
@@ -110,8 +108,8 @@ class _LoanDetailsViewState extends State<LoanDetailsView> {
                           if (_formKey.currentState.validate()) {
                             _formKey.currentState.save();
                             context
-                                .bloc<LoanDetailsBloc>()
-                                .add(SubmitLoanDetailsForm());
+                                .bloc<LoanDetailsCubit>()
+                                .submitLoanDetailsForm();
                           }
                         },
                         color: ColorStyles.blue,

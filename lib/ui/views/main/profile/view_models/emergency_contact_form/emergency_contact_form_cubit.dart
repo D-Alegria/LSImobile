@@ -21,7 +21,12 @@ class EmergencyContactFormCubit extends Cubit<EmergencyContactFormState> {
   EmergencyContactFormCubit(this._userRepo)
       : super(EmergencyContactFormState.initial());
 
-  void init(UserDetailsRequest user) {
+  Future<void> init() async {
+    emit(state.copyWith(
+      isSubmitting: true,
+      submitFailureOrSuccess: None(),
+    ));
+
     List<Value> relationShips = [
       Value(id: "0", name: "Father"),
       Value(id: "1", name: "Mother"),
@@ -31,6 +36,14 @@ class EmergencyContactFormCubit extends Cubit<EmergencyContactFormState> {
       Value(id: "5", name: "Nephew"),
       Value(id: "6", name: "Niece"),
     ];
+
+    UserDetailsRequest user;
+    await _userRepo.userData().then(
+          (value) => value.fold(
+            (l) => null,
+            (r) => user = r.userData.data,
+          ),
+        );
 
     emit(state.copyWith(
       submitFailureOrSuccess: None(),
@@ -42,6 +55,7 @@ class EmergencyContactFormCubit extends Cubit<EmergencyContactFormState> {
       relationShip:
           nullCheck(user.nextOfKin.nokRelationship, state.relationShips) ??
               state.relationShips.first.id,
+      isSubmitting: false,
     ));
   }
 
@@ -101,9 +115,7 @@ class EmergencyContactFormCubit extends Cubit<EmergencyContactFormState> {
         nokRelationship: state.relationShip.trim(),
       );
 
-      emit(state.copyWith(userDetails: request));
-
-      failureOrSuccess = await _userRepo.saveUserDataRemote(request);
+      failureOrSuccess = await _userRepo.saveUserData(request);
       if (!isEditProfile) {
         await failureOrSuccess.fold(
           (l) => null,

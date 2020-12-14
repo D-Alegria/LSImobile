@@ -22,6 +22,22 @@ Future<Either<Glitch, T>> tryMethod<T>({
   }
 }
 
+T tryLocalMethod<T>({T Function() function}) {
+  try {
+    return function();
+  } on Exception catch (error, stackTrace) {
+    print(error);
+    print(stackTrace);
+    Catcher.reportCheckedError(error, stackTrace);
+    return null;
+  } on Error catch (error, stackTrace) {
+    print(error);
+    print(stackTrace);
+    Catcher.reportCheckedError(error, stackTrace);
+    return null;
+  }
+}
+
 String nullCheck(String value, List<Value> list) {
   if (value == null) return null;
   if (list.where((e) => e.id == value).isEmpty) return null;

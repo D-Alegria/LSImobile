@@ -1,20 +1,19 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+part 'dashboard.freezed.dart';
 
 part 'dashboard.g.dart';
 
-@JsonSerializable()
-class Dashboard {
-  @JsonKey(name: "total_loans")
-  final String totalLoans;
-  @JsonKey(name: "active_loans")
-  final String activeLoans;
-  @JsonKey(name: "pending_payments")
-  final dynamic pendingPayments;
-
-  Dashboard({this.totalLoans, this.activeLoans, this.pendingPayments});
+@freezed
+abstract class Dashboard with _$Dashboard {
+  @JsonSerializable(explicitToJson: true)
+  factory Dashboard({
+    @nullable @JsonKey(name: "total_loans") String totalLoans,
+    @nullable @JsonKey(name: "active_loans") String activeLoans,
+    @nullable @JsonKey(name: "pending_payments") dynamic pendingPayments,
+  }) = _Dashboard;
 
   factory Dashboard.fromJson(Map<String, dynamic> json) =>
       _$DashboardFromJson(json);
-
-  Map<String, dynamic> toJson() => _$DashboardToJson(this);
 }

@@ -54,6 +54,5 @@ class ApiUrls {
   static final String rollOverInvestment = "api/v3/user/investments/rollover";
   static final String terminateInvestment = "api/v3/user/investments/terminate";
   static final String customerCheck = "api/v3/customer/check";
-  static final String uploadImage = "webapi/v1/upload/image";
-  static final String updateProfileImage = "api/v3/customer/update/picture";
+  static final String updateProfileImage = "api/v3/customer/upload/picture";
 }

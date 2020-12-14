@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
@@ -10,7 +12,6 @@ import 'package:lsi_mobile/core/models/dto/user/user.dart';
 import 'package:lsi_mobile/core/models/dto/value/value.dart';
 import 'package:lsi_mobile/core/models/enums/drop_down_menu.dart';
 import 'package:lsi_mobile/core/models/requests/token_request/token_request.dart';
-import 'package:lsi_mobile/core/models/requests/update_profile_profile/update_profile_picture_request.dart';
 import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
 import 'package:lsi_mobile/core/models/responses/user_details/user_details_data.dart';
 import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
@@ -24,49 +25,58 @@ class UserRepoImpl implements UserRepo {
   UserRepoImpl(this._userLocalDataSource, this._userRemoteDataSource);
 
   @override
-  Future<Either<Glitch, UserDetailsData>> get userDataRemote async {
-    return await tryMethod<UserDetailsData>(
+  Future<Either<Glitch, UserDetailsData>> userData({bool remote = false}) {
+    return tryMethod<UserDetailsData>(
       errorMessage: "Internal System Error Occurred:URP-UDR",
       function: () async {
-        final token = await userToken;
-        return token.fold((l) => left(l), (r) async {
-          final result = await _userRemoteDataSource.getUserDetails(
-            TokenRequest(token: r),
-          );
-          return result.fold(
-            (failure) => left(ServerGlitch(message: failure.message)),
-            (success) => right(success),
-          );
-        });
+        if (remote) {
+          return await getRemoteUserData();
+        } else {
+          final userLocal = await getObject(_userLocalDataSource.user.id);
+          return userLocal.fold((l) => left(l), (r) async {
+            if (r == null) {
+              return await getRemoteUserData();
+            } else {
+              Map<String, dynamic> map = jsonDecode(r);
+              return right(UserDetailsData.fromJson(map));
+            }
+          });
+        }
       },
     );
+  }
+
+  Future<FutureOr<Either<Glitch, UserDetailsData>>> getRemoteUserData() async {
+    final token = await userToken;
+    return token.fold((l) => left(l), (r) async {
+      final result = await _userRemoteDataSource.getUserDetails(
+        TokenRequest(token: r),
+      );
+      return result.fold(
+        (failure) => left(ServerGlitch(message: failure.message)),
+        (success) async {
+          await saveObject(
+              _userLocalDataSource.user.id, jsonEncode(success.toJson()));
+          return right(success);
+        },
+      );
+    });
   }
 
   @override
   Future<Either<Glitch, Unit>> saveUserDataLocal(User user) async {
     return await tryMethod<Unit>(
       errorMessage: "Internal System Error Occurred:URP-SUDL",
-      function: () async {
-        final result = await _userLocalDataSource.saveUser(user: user);
-        return result.fold(
-          (failure) => left(failure),
-          (success) => right(success),
-        );
-      },
+      function: () async => right(_userLocalDataSource.saveUser(user: user)),
     );
   }
 
   @override
   Future<Either<Glitch, User>> get user async {
-    final result = await _userLocalDataSource.user;
-    return result.fold(
-      (l) => left(l),
-      (r) {
-        if (r == null)
-          return left(UnAuthenticatedGlitch(message: "No User Found"));
-        return right(r);
-      },
-    );
+    final result = _userLocalDataSource.user;
+    if (result == null)
+      return left(UnAuthenticatedGlitch(message: "No User Found"));
+    return right(result);
   }
 
   @override
@@ -88,7 +98,7 @@ class UserRepoImpl implements UserRepo {
     return await tryMethod<Unit>(
       errorMessage: "Internal System Error Occurred:URP-UUDL",
       function: () async {
-        final result = await _userLocalDataSource.updateUser(
+        final result = _userLocalDataSource.updateUser(
           token: token,
           profilePicture: profilePicture,
           phoneNumber: phoneNumber,
@@ -103,10 +113,7 @@ class UserRepoImpl implements UserRepo {
           isPersonalInfoFilled: isPersonalInfoFilled,
           isResidenceFilled: isResidenceFilled,
         );
-        return result.fold(
-          (failure) => left(ServerGlitch(message: failure.message)),
-          (success) => right(unit),
-        );
+        return right(result);
       },
     );
   }
@@ -115,19 +122,12 @@ class UserRepoImpl implements UserRepo {
   Future<Either<Glitch, Unit>> get clearUserData async {
     return await tryMethod<Unit>(
       errorMessage: "Internal System Error Occurred:URP-CUD",
-      function: () async {
-        final result = await _userLocalDataSource.deleteUser();
-        return result.fold(
-          (failure) => left(ServerGlitch(message: failure.message)),
-          (success) => right(success),
-        );
-      },
+      function: () async => right(_userLocalDataSource.deleteUser()),
     );
   }
 
   @override
-  Future<Either<Glitch, Unit>> saveUserDataRemote(
-      UserDetailsRequest request) async {
+  Future<Either<Glitch, Unit>> saveUserData(UserDetailsRequest request) async {
     return await tryMethod<Unit>(
       errorMessage: "Internal System Error Occurred:URP-SUDR",
       function: () async {
@@ -140,7 +140,10 @@ class UserRepoImpl implements UserRepo {
                 await _userRemoteDataSource.saveUserDetails(requestWithToken);
             return result.fold(
               (failure) => left(ServerGlitch(message: failure.message)),
-              (success) => right(unit),
+              (success) async {
+                await userData(remote: true);
+                return right(unit);
+              },
             );
           },
         );
@@ -174,13 +177,7 @@ class UserRepoImpl implements UserRepo {
   Future<Either<Glitch, dynamic>> getObject(String key) async {
     return await tryMethod<dynamic>(
       errorMessage: "Internal System Error Occurred:URP-GOt",
-      function: () async {
-        final object = await _userLocalDataSource.getObject(key);
-        return object.fold(
-          (failure) => left(LocalCacheGlitch(message: failure.message)),
-          (success) => right(success),
-        );
-      },
+      function: () async => right(_userLocalDataSource.getObject(key)),
     );
   }
 
@@ -188,13 +185,7 @@ class UserRepoImpl implements UserRepo {
   Future<Either<Glitch, Unit>> saveObject(String key, value) async {
     return await tryMethod<Unit>(
       errorMessage: "Internal System Error Occurred:URP-SOt",
-      function: () async {
-        final object = await _userLocalDataSource.saveObject(key, value);
-        return object.fold(
-          (failure) => left(LocalCacheGlitch(message: failure.message)),
-          (success) => right(success),
-        );
-      },
+      function: () async => right(_userLocalDataSource.saveObject(key, value)),
     );
   }
 
@@ -223,16 +214,11 @@ class UserRepoImpl implements UserRepo {
         errorMessage: "Internal System Error Occurred:URP-GUTo",
         function: () async {
           String key = lga == null ? menu.toString() : menu.toString() + lga;
-          final local = await _userLocalDataSource.getValue(key);
-          return local.fold(
-            (failure) async => await getRemoteData(menu, lga: lga),
-            (success) async {
-              if (success.isEmpty)
-                return await getRemoteData(menu, lga: lga);
-              else
-                return right(success);
-            },
-          );
+          final local = _userLocalDataSource.getValue(key);
+          if (local.isEmpty)
+            return await getRemoteData(menu, lga: lga);
+          else
+            return right(local);
         },
       );
 
@@ -267,6 +253,15 @@ class UserRepoImpl implements UserRepo {
       case DropDownMenu.LoanPurpose:
         remote = await _userRemoteDataSource.loanPurpose;
         break;
+      case DropDownMenu.Countries:
+        remote = await _userRemoteDataSource.countries;
+        break;
+      case DropDownMenu.Designations:
+        remote = await _userRemoteDataSource.designations;
+        break;
+      case DropDownMenu.Banks:
+        remote = await _userRemoteDataSource.banks;
+        break;
     }
     return remote.fold(
       (failure) => left(failure),
@@ -287,17 +282,15 @@ class UserRepoImpl implements UserRepo {
         return result.fold(
           (failure) => left(failure),
           (token) async {
-            final result = await _userRemoteDataSource.uploadPicture(file);
+            final result = await _userRemoteDataSource.updateProfilePicture(
+              file,
+              TokenRequest(token: token),
+            );
             return result.fold(
               (failure) => left(failure),
               (success) async {
-                final result = await _userRemoteDataSource.updateProfilePicture(
-                    UpdateProfilePictureRequest(
-                        filename: success.data.filename, token: token));
-                return result.fold(
-                  (failure) => left(failure),
-                  (success) => right(unit),
-                );
+                await userData(remote: true);
+                return right(unit);
               },
             );
           },

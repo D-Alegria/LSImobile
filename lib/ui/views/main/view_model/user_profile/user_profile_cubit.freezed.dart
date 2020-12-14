@@ -51,6 +51,7 @@ abstract class $UserProfileStateCopyWith<$Res> {
       bool isLoading,
       @nullable Glitch glitch});
 
+  $UserDetailsDataCopyWith<$Res> get userData;
   $GlitchCopyWith<$Res> get glitch;
 }
 
@@ -78,6 +79,16 @@ class _$UserProfileStateCopyWithImpl<$Res>
   }
 
   @override
+  $UserDetailsDataCopyWith<$Res> get userData {
+    if (_value.userData == null) {
+      return null;
+    }
+    return $UserDetailsDataCopyWith<$Res>(_value.userData, (value) {
+      return _then(_value.copyWith(userData: value));
+    });
+  }
+
+  @override
   $GlitchCopyWith<$Res> get glitch {
     if (_value.glitch == null) {
       return null;
@@ -100,6 +111,8 @@ abstract class _$UserProfileStateCopyWith<$Res>
       bool isLoading,
       @nullable Glitch glitch});
 
+  @override
+  $UserDetailsDataCopyWith<$Res> get userData;
   @override
   $GlitchCopyWith<$Res> get glitch;
 }

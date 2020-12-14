@@ -22,11 +22,19 @@ class PersonalInfoFormCubit extends Cubit<PersonalInfoFormState> {
   PersonalInfoFormCubit(this._userRepo)
       : super(PersonalInfoFormState.initial());
 
-  Future<void> init(UserDetailsRequest user) async {
+  Future<void> init() async {
     emit(state.copyWith(
       isSubmitting: true,
       submitFailureOrSuccess: None(),
     ));
+
+    UserDetailsRequest user;
+    await _userRepo.userData().then(
+          (value) => value.fold(
+            (l) => null,
+            (r) => user = r.userData.data,
+          ),
+        );
 
     List<Either<Glitch, List<Value>>> responses = await Future.wait([
       _userRepo.getDropDownOptions(DropDownMenu.Gender),
@@ -143,7 +151,7 @@ class PersonalInfoFormCubit extends Cubit<PersonalInfoFormState> {
 
       emit(state.copyWith(userDetails: request));
 
-      failureOrSuccess = await _userRepo.saveUserDataRemote(request);
+      failureOrSuccess = await _userRepo.saveUserData(request);
       if (!isEditProfile) {
         await failureOrSuccess.fold(
           (l) => null,

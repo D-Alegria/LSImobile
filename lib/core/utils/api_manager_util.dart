@@ -49,29 +49,37 @@ class ApiManager {
   Future<Either<Glitch, Map<String, dynamic>>> postFormData({
     @required String url,
     File imageFile,
+    Map<String, String> fields,
   }) async {
-    // open a byteStream
-    var stream = new http.ByteStream(imageFile.openRead());
-    // add headers
-    Map<String, String> headers = {
-      "x-api-key": FileReader.getAppConfig().apiKey,
-    };
-    // get file length
-    var length = await imageFile.length();
-    // string to uri
-    var uri = Uri.parse(FileReader.getAppConfig().baseUrl + url);
-    // create multipart request
-    var request = new http.MultipartRequest("POST", uri);
-    // multipart that takes file
-    var multipartFile = new http.MultipartFile('file', stream.cast(), length,
-        filename: basename(imageFile.path));
-    //add headers
-    request.headers.addAll(headers);
-    // add file to multipart
-    request.files.add(multipartFile);
-    print(
-        "Sent [POST] Request to path: ${FileReader.getAppConfig().baseUrl + url} with payload");
-    return await _performRequest(request2: request.send());
+    try {
+      // open a byteStream
+      var stream = new http.ByteStream(imageFile.openRead());
+      // add headers
+      Map<String, String> headers = {
+        "x-api-key": FileReader.getAppConfig().apiKey,
+      };
+      // get file length
+      var length = await imageFile.length();
+      // string to uri
+      var uri = Uri.parse(FileReader.getAppConfig().baseUrl + url);
+      // create multipart request
+      var request = new http.MultipartRequest("POST", uri);
+      // multipart that takes file
+      var multipartFile = new http.MultipartFile('file', stream.cast(), length,
+          filename: basename(imageFile.path));
+      //add headers
+      request.headers.addAll(headers);
+      // add file to multipart
+      request.files.add(multipartFile);
+      // add body
+      request.fields.addAll(fields);
+      print(
+          "Sent [POST] Request to path: ${FileReader.getAppConfig().baseUrl + url} with payload");
+      return await _performRequest(request2: request.send());
+    } on Error catch (error, stackTrace) {
+      Catcher.reportCheckedError(error, stackTrace);
+      return left(SystemGlitch(message: "Error occurred during image upload"));
+    }
   }
 
   Future<Either<Glitch, Map<String, dynamic>>> _performRequest(

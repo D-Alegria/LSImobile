@@ -8,12 +8,7 @@ import 'package:lsi_mobile/core/models/responses/user_details/user_details_data.
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:lsi_mobile/ui/views/main/loans/loan_details/view_model/loan_details_bloc.dart';
 import 'package:lsi_mobile/ui/views/main/loans/loan_product/loan_product/loan_product_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/profile/view_models/edu_and_employ_form/edu_and_employ_form_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/profile/view_models/emergency_contact_form/emergency_contact_form_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/profile/view_models/personal_info_form/personal_info_form_cubit.dart';
-import 'package:lsi_mobile/ui/views/main/profile/view_models/residence_form/residence_form_cubit.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 
 import '../widgets/loan_product_box.dart';
@@ -114,33 +109,18 @@ class _LoanProductViewState extends State<LoanProductView> {
                 return context.navigator.pushProvideBVNView();
                 break;
               case NextForm.personalInfo:
-                context
-                    .bloc<PersonalInfoFormCubit>()
-                    .init(_userDetailsData.userData.data);
                 return context.navigator.pushPersonalInfoFormView();
                 break;
               case NextForm.emergencyContact:
-                context
-                    .bloc<EmergencyContactFormCubit>()
-                    .init(_userDetailsData.userData.data);
                 context.navigator.pushEmergencyContactFormView();
                 break;
               case NextForm.eduAndEmploy:
-                context
-                    .bloc<EduAndEmployFormCubit>()
-                    .init(_userDetailsData.userData.data);
                 context.navigator.pushEduAndEmployFormView();
                 break;
               case NextForm.residence:
-                context
-                    .bloc<ResidenceFormCubit>()
-                    .init(_userDetailsData.userData.data);
                 context.navigator.pushResidenceFormView();
                 break;
               case NextForm.loanDetails:
-                context
-                    .bloc<LoanDetailsBloc>()
-                    .add(Init(_userDetailsData.userData.data));
                 context.navigator.pushLoanDetailsView();
                 break;
             }

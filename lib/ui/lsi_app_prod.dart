@@ -7,6 +7,8 @@ import 'package:lsi_mobile/core/providers/providers.dart';
 import 'package:lsi_mobile/ui/shared/unknown_route_view.dart';
 import 'package:provider/provider.dart';
 
+import 'shared/app_cycle.dart';
+
 class LSIAppProd extends StatelessWidget {
   const LSIAppProd({Key key}) : super(key: key);
 
@@ -16,12 +18,14 @@ class LSIAppProd extends StatelessWidget {
       providers: blocs(context),
       child: MultiProvider(
         providers: providers,
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          builder: ExtendedNavigator.builder<lsi_r.Router>(
-            router: lsi_r.Router(),
-            navigatorKey: Catcher.navigatorKey,
-            onUnknownRoute: (settings) => unknownRouteView(settings.name),
+        child: AppCycle(
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            builder: ExtendedNavigator.builder<lsi_r.Router>(
+              router: lsi_r.Router(),
+              navigatorKey: Catcher.navigatorKey,
+              onUnknownRoute: (settings) => unknownRouteView(settings.name),
+            ),
           ),
         ),
       ),

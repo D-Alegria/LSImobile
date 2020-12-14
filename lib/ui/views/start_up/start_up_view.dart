@@ -24,13 +24,17 @@ class StartUpView extends StatelessWidget {
           state.map(
             initial: (_) => null,
             unauthenticated: (_) => context.navigator.pushAndRemoveUntil(
-              Routes.onBoardingView,
+              Routes.authWrapper,
               (route) => false,
             ),
             authenticated: (_) => context.navigator.pushAndRemoveUntil(
               Routes.mainView,
               (route) => false,
               arguments: MainViewArguments(pageNumber: 0),
+            ),
+            newUser: (_) => context.navigator.pushAndRemoveUntil(
+              Routes.onBoardingView,
+              (route) => false,
             ),
             error: (value) => null,
           );
