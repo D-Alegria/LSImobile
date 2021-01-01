@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/core/extensions/num_extension.dart';
+import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -24,6 +25,9 @@ class VerificationView extends StatelessWidget {
             form: state.isSubmitting
                 ? sharedLoader()
                 : Form(
+                    autovalidateMode: state.showErrorMessages
+                        ? AutovalidateMode.always
+                        : AutovalidateMode.disabled,
                     child: ListView(
                       children: <Widget>[
                         Padding(
@@ -62,11 +66,11 @@ class VerificationView extends StatelessWidget {
                               .bloc<AuthFormCubit>()
                               .verificationCodeChanged(value),
                           validator: (value) {
-                            if (context
+                            if (!context
                                 .bloc<AuthFormCubit>()
                                 .state
                                 .verificationCode
-                                .isEmpty) return "Field is required";
+                                .isValidPassword) return "Field is required";
                             return null;
                           },
                           keyboardType: TextInputType.phone,
