@@ -12,7 +12,7 @@ import 'core/utils/file_reader_util.dart';
 
 Future<void> mainCommon(String env) async {
   WidgetsFlutterBinding.ensureInitialized();
-  Future.delayed(Duration(seconds: 3));
+  await Future.delayed(Duration(seconds: 3));
   await FileReader.initialize();
   await configureInjection(env);
   Bloc.observer = MainCubitObserver();
