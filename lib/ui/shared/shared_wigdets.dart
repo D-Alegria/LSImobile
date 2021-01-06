@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/core/extensions/num_extension.dart';
+import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/core/models/dto/account/account.dart';
 import 'package:lsi_mobile/core/models/dto/card/card.dart' as ca;
 import 'package:lsi_mobile/core/models/responses/user_details/user_details_data.dart';
@@ -301,10 +302,9 @@ Widget sharedDottedContainer({
       borderType: BorderType.RRect,
       strokeCap: StrokeCap.round,
       color: borderColor,
-      dashPattern: [8, 4],
+      dashPattern: [12, 12],
       strokeWidth: 2,
       radius: Radius.circular(10),
-      padding: EdgeInsets.all(4),
       child: Container(
         alignment: alignment,
         padding: padding,
@@ -312,6 +312,7 @@ Widget sharedDottedContainer({
         height: height,
         decoration: BoxDecoration(
           color: color,
+          gradient: gradient,
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
         child: child,
@@ -968,7 +969,6 @@ void sharedBottomSheet({
 
 Widget sharedAddCardContainer({BuildContext context, Function onTap}) {
   return Container(
-    // padding: EdgeInsets.symmetric(vertical: SizeConfig.yMargin(context, 20.h)),
     alignment: Alignment.center,
     child: sharedDottedContainer(
       width: SizeConfig.xMargin(context, 323.w),
@@ -981,6 +981,63 @@ Widget sharedAddCardContainer({BuildContext context, Function onTap}) {
       height: SizeConfig.yMargin(context, 170.h),
       borderColor: ColorStyles.grey5,
       onTap: onTap,
+    ),
+  );
+}
+
+Widget sharedTapToAddCard({
+  BuildContext context,
+  ca.Card card,
+  Gradient gradient,
+  Function onTap,
+}) {
+  return Container(
+    alignment: Alignment.center,
+    child: sharedDottedContainer(
+      onTap: onTap,
+      padding: EdgeInsets.symmetric(
+        horizontal: SizeConfig.xMargin(context, 28.w),
+      ),
+      alignment: Alignment.centerLeft,
+      gradient: gradient,
+      width: SizeConfig.xMargin(context, 323.w),
+      height: SizeConfig.yMargin(context, 170.h),
+      child: RichText(
+        text: TextSpan(
+          text: "${card.expMonth}/${card.expYear.substring(2)}",
+          style: GoogleFonts.workSans(
+            height: SizeConfig.textSize(context, 0.7),
+            fontWeight: FontWeight.w500,
+            fontSize: SizeConfig.textSize(context, 14.tx),
+            color:
+                card.expMonth.isDigit ? ColorStyles.yellow : ColorStyles.dark,
+          ),
+          children: [
+            TextSpan(
+              text: "\n**** **** **** ${card.lastFourDigits}",
+              style: GoogleFonts.workSans(
+                fontWeight: FontWeight.w600,
+                fontSize: SizeConfig.textSize(context, 18.tx),
+                color: card.expMonth.isDigit
+                    ? ColorStyles.white
+                    : ColorStyles.dark,
+              ),
+            ),
+            TextSpan(
+              text:
+                  "\nTap to pay with ${card.expMonth.isDigit ? "this" : "a "} card",
+              style: GoogleFonts.workSans(
+                fontWeight: FontWeight.w400,
+                fontSize: SizeConfig.textSize(context, 14.tx),
+                color: card.expMonth.isDigit
+                    ? ColorStyles.white
+                    : ColorStyles.dark,
+              ),
+            )
+          ],
+        ),
+      ),
+      borderColor: ColorStyles.grey5,
     ),
   );
 }

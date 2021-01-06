@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/core/extensions/double_extension.dart';
 import 'package:lsi_mobile/core/extensions/num_extension.dart';
-import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/core/models/dto/card/card.dart' as ca;
 import 'package:lsi_mobile/core/models/enums/card_transaction.dart';
 import 'package:lsi_mobile/core/utils/file_reader_util.dart';
@@ -21,23 +20,12 @@ class FundInvestmentView extends StatelessWidget {
     Widget investmentCard(
         {BuildContext context,
         ca.Card card,
-        String amount,
+        Function onTap,
         Gradient gradient}) {
       return Container(
         alignment: Alignment.center,
         child: sharedRaisedContainer(
-          onTap: () {
-            context.bloc<NewInvestmentCubit>().cardChanged(card.cardId);
-            sharedBottomSheet(
-              context: context,
-              form: AddCardForm(
-                amount: amount,
-                transaction: CardTransaction.InvestmentPayment,
-              ),
-              isDismissible: true,
-              height: 50,
-            );
-          },
+          onTap: onTap,
           padding: EdgeInsets.symmetric(
             horizontal: SizeConfig.xMargin(context, 28.w),
           ),
@@ -52,9 +40,7 @@ class FundInvestmentView extends StatelessWidget {
                 height: SizeConfig.textSize(context, 0.7),
                 fontWeight: FontWeight.w500,
                 fontSize: SizeConfig.textSize(context, 14.tx),
-                color: card.expMonth.isDigit
-                    ? ColorStyles.yellow
-                    : ColorStyles.dark,
+                color: ColorStyles.yellow,
               ),
               children: [
                 TextSpan(
@@ -62,20 +48,15 @@ class FundInvestmentView extends StatelessWidget {
                   style: GoogleFonts.workSans(
                     fontWeight: FontWeight.w600,
                     fontSize: SizeConfig.textSize(context, 18.tx),
-                    color: card.expMonth.isDigit
-                        ? ColorStyles.white
-                        : ColorStyles.dark,
+                    color: ColorStyles.white,
                   ),
                 ),
                 TextSpan(
-                  text:
-                      "\nTap to pay with ${card.expMonth.isDigit ? "this" : "a "} card",
+                  text: "\nTap to pay with this card",
                   style: GoogleFonts.workSans(
                     fontWeight: FontWeight.w400,
                     fontSize: SizeConfig.textSize(context, 14.tx),
-                    color: card.expMonth.isDigit
-                        ? ColorStyles.white
-                        : ColorStyles.dark,
+                    color: ColorStyles.white,
                   ),
                 )
               ],
@@ -156,6 +137,7 @@ class FundInvestmentView extends StatelessWidget {
                               loaded: ({accounts, cards}) => ListView(
                                 scrollDirection: Axis.horizontal,
                                 shrinkWrap: true,
+                                physics: BouncingScrollPhysics(),
                                 children: [
                                   ListView.separated(
                                     shrinkWrap: true,
@@ -166,10 +148,24 @@ class FundInvestmentView extends StatelessWidget {
                                       return investmentCard(
                                         context: context,
                                         card: card,
-                                        amount: FileReader.getAppConfig()
-                                            .paystackTestAmount,
-                                        // todo state.amount.toString(),
                                         gradient: ColorStyles.lightBlueGradient,
+                                        onTap: () {
+                                          context
+                                              .bloc<NewInvestmentCubit>()
+                                              .cardChanged(card.cardId);
+                                          sharedBottomSheet(
+                                            context: context,
+                                            form: AddCardForm(
+                                              amount: FileReader.getAppConfig()
+                                                  .paystackTestAmount,
+                                              // todo state.amount.toString(),
+                                              transaction: CardTransaction
+                                                  .InvestmentPayment,
+                                            ),
+                                            isDismissible: true,
+                                            height: 50,
+                                          );
+                                        },
                                       );
                                     },
                                     separatorBuilder: (context, index) =>
@@ -181,17 +177,28 @@ class FundInvestmentView extends StatelessWidget {
                                   SizedBox(
                                     width: SizeConfig.xMargin(context, 15.w),
                                   ),
-                                  investmentCard(
+                                  sharedTapToAddCard(
                                     context: context,
                                     card: ca.Card(
                                       expMonth: "**",
                                       expYear: "****",
                                       lastFourDigits: "****",
                                     ),
-                                    amount: FileReader.getAppConfig()
-                                        .paystackTestAmount,
-                                    // todo state.amount.toString(),
                                     gradient: ColorStyles.lightGradient,
+                                    onTap: () {
+                                      sharedBottomSheet(
+                                        context: context,
+                                        form: AddCardForm(
+                                          amount: FileReader.getAppConfig()
+                                              .paystackTestAmount,
+                                          // todo state.amount.toString(),
+                                          transaction:
+                                              CardTransaction.InvestmentPayment,
+                                        ),
+                                        isDismissible: true,
+                                        height: 50,
+                                      );
+                                    },
                                   ),
                                 ],
                               ),

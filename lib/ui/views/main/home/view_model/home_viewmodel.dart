@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
 class HomeViewModel extends ChangeNotifier {
-  String name = 'John Doe';
-  String image = 'assets/images/testImage.png';
-
   int _index = 0;
   num investment = 0.00;
 

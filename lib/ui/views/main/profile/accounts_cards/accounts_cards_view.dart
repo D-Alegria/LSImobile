@@ -4,6 +4,7 @@ import 'package:lsi_mobile/core/models/dto/account/account.dart';
 import 'package:lsi_mobile/core/models/dto/card/card.dart' as ca;
 import 'package:lsi_mobile/core/models/enums/card_transaction.dart';
 import 'package:lsi_mobile/core/utils/file_reader_util.dart';
+import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/profile/widgets/add_account_form.dart';
@@ -52,20 +53,28 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
       child: ListView(
         children: [
           SizedBox(height: SizeConfig.yMargin(context, 48.h)),
-          ListView.separated(
+          ListView.builder(
             shrinkWrap: true,
             physics: ScrollPhysics(),
             itemCount: cards.length,
             itemBuilder: (context, index) {
               var card = cards[index];
-              return ATMCard(card: card);
+              return Padding(
+                padding: EdgeInsets.only(
+                  bottom: SizeConfig.yMargin(context, 20.h),
+                ),
+                child: ATMCard(card: card),
+              );
             },
-            separatorBuilder: (context, index) =>
-                SizedBox(height: SizeConfig.yMargin(context, 20.h)),
           ),
-          SizedBox(height: SizeConfig.yMargin(context, 20.h)),
-          sharedAddCardContainer(
+          sharedTapToAddCard(
             context: context,
+            card: ca.Card(
+              expMonth: "**",
+              expYear: "****",
+              lastFourDigits: "****",
+            ),
+            gradient: ColorStyles.lightGradient,
             onTap: () => sharedBottomSheet(
               context: context,
               form: AddCardForm(
@@ -76,6 +85,7 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
               height: 50,
             ),
           ),
+          SizedBox(height: SizeConfig.yMargin(context, 30.h)),
         ],
       ),
     );
@@ -89,22 +99,24 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
       child: ListView(
         children: [
           SizedBox(height: SizeConfig.yMargin(context, 52.h)),
-          ListView.separated(
+          ListView.builder(
             itemCount: accounts.length,
             shrinkWrap: true,
             physics: ScrollPhysics(),
             itemBuilder: (context, index) {
               var account = accounts[index];
-              return BankAccountCard(
-                accountName: account.accountName,
-                accountNumber: account.accountNumber,
-                bankName: account.bankName,
+              return Padding(
+                padding: EdgeInsets.only(
+                  bottom: SizeConfig.yMargin(context, 20.h),
+                ),
+                child: BankAccountCard(
+                  accountName: account.accountName,
+                  accountNumber: account.accountNumber,
+                  bankName: account.bankName,
+                ),
               );
             },
-            separatorBuilder: (context, index) =>
-                SizedBox(height: SizeConfig.yMargin(context, 20.h)),
           ),
-          SizedBox(height: SizeConfig.yMargin(context, 20.h)),
           sharedAddCardContainer(
             context: context,
             onTap: () => sharedBottomSheet(
@@ -114,6 +126,7 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
               height: 60,
             ),
           ),
+          SizedBox(height: SizeConfig.yMargin(context, 30.h)),
         ],
       ),
     );

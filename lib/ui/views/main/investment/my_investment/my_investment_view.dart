@@ -49,6 +49,7 @@ class NewInvestmentView extends StatelessWidget {
           ),
           child: ListView.separated(
             itemCount: loaded.investments.length,
+            physics: BouncingScrollPhysics(),
             separatorBuilder: (context, index) =>
                 SizedBox(height: SizeConfig.yMargin(context, 17.h)),
             itemBuilder: (context, index) {
