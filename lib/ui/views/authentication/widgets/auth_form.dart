@@ -96,7 +96,7 @@ class AuthForm extends StatelessWidget {
       left: SizeConfig.xMargin(context, 0),
       right: SizeConfig.xMargin(context, 0),
       child: Container(
-        height: SizeConfig.yMargin(context, 40),
+        height: SizeConfig.yMargin(context, 45),
         width: SizeConfig.xMargin(context, 100),
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
@@ -106,7 +106,7 @@ class AuthForm extends StatelessWidget {
               Colors.white.withOpacity(0.5),
               BlendMode.modulate,
             ),
-            image: AssetImage("assets/images/logo.png"),
+            image: AssetImage("assets/images/app_logo.png"),
             fit: BoxFit.fitHeight,
           ),
         ),
