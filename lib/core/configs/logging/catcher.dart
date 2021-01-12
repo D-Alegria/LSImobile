@@ -14,8 +14,13 @@ class CatcherConfig {
 
   static final CatcherOptions releaseOptions = CatcherOptions(
     SilentReportMode(),
-    [
-      EmailAutoHandler(
+    handlers,
+  );
+
+  static List<ReportHandler> get handlers {
+    List<ReportHandler> reporters = [];
+    if (FileReader.getAppConfig().developerAccountPassword.isNotEmpty) {
+      reporters.add(EmailAutoHandler(
         "smtp.gmail.com",
         587,
         FileReader.getAppConfig().developerAccount,
@@ -25,8 +30,13 @@ class CatcherConfig {
         emailHeader: "LSI mobile Bug Report",
         emailTitle: "LSI mobile Bug Report",
         sendHtml: true,
-      ),
-      SentryHandler(SentryClient(dsn: FileReader.getAppConfig().sentryDSN)),
-    ],
-  );
+      ));
+    }
+
+    if (FileReader.getAppConfig().sentryDSN.isNotEmpty) {
+      reporters.add(SentryHandler(
+          SentryClient(dsn: FileReader.getAppConfig().sentryDSN)));
+    }
+    return reporters;
+  }
 }
