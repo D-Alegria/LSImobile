@@ -92,11 +92,11 @@ class AuthForm extends StatelessWidget {
 
   Widget translucentImage(BuildContext context) {
     return Positioned(
-      bottom: SizeConfig.yMargin(context, -14),
+      bottom: SizeConfig.yMargin(context, -5),
       left: SizeConfig.xMargin(context, 0),
       right: SizeConfig.xMargin(context, 0),
       child: Container(
-        height: SizeConfig.yMargin(context, 45),
+        height: SizeConfig.yMargin(context, 40),
         width: SizeConfig.xMargin(context, 100),
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,

@@ -150,20 +150,14 @@ class HomeView extends StatelessWidget {
                 OtherServices(
                   containerColor: ColorStyles.yellow1,
                   image: 'assets/images/assets_financing.png',
-                  topText: 'Deposit',
-                  bottomText: '',
-                ),
-                OtherServices(
-                  containerColor: ColorStyles.grey5,
-                  image: 'assets/images/assets_financing.png',
-                  topText: 'Lease',
-                  bottomText: '',
+                  topText: 'LPO',
+                  bottomText: 'Financing',
                 ),
                 OtherServices(
                   containerColor: ColorStyles.dark,
                   image: 'assets/images/assets_financing.png',
                   topText: 'Financial',
-                  bottomText: 'consultancy',
+                  bottomText: 'Consultancy',
                 )
               ],
             ),

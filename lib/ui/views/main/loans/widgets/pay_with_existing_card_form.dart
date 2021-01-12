@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/models/enums/card_transaction.dart';
-import 'package:lsi_mobile/core/utils/file_reader_util.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -64,8 +63,7 @@ class PayWithCardForm extends StatelessWidget {
                       onTap: () => sharedBottomSheet(
                         context: context,
                         form: AddCardForm(
-                          amount: FileReader.getAppConfig().paystackTestAmount,
-                          // todo state.amount.toString(),
+                          amount: state.amount.toString(),
                           transaction: CardTransaction.LoanPayment,
                         ),
                         height: 50,

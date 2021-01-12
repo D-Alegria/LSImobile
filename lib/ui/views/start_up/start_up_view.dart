@@ -20,7 +20,8 @@ class StartUpView extends StatelessWidget {
         statusBarIconBrightness: Brightness.dark,
       ),
       child: BlocListener<AuthenticationBloc, AuthenticationState>(
-        listener: (context, state) {
+        listener: (context, state) async {
+          await Future.delayed(Duration(seconds: 3));
           state.map(
             initial: (_) => null,
             unauthenticated: (_) => context.navigator.pushAndRemoveUntil(

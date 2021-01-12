@@ -7,7 +7,6 @@ import 'package:lsi_mobile/core/extensions/double_extension.dart';
 import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/core/models/dto/card/card.dart' as ca;
 import 'package:lsi_mobile/core/models/enums/card_transaction.dart';
-import 'package:lsi_mobile/core/utils/file_reader_util.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
@@ -156,9 +155,7 @@ class FundInvestmentView extends StatelessWidget {
                                           sharedBottomSheet(
                                             context: context,
                                             form: AddCardForm(
-                                              amount: FileReader.getAppConfig()
-                                                  .paystackTestAmount,
-                                              // todo state.amount.toString(),
+                                              amount: state.amount.toString(),
                                               transaction: CardTransaction
                                                   .InvestmentPayment,
                                             ),
@@ -189,9 +186,7 @@ class FundInvestmentView extends StatelessWidget {
                                       sharedBottomSheet(
                                         context: context,
                                         form: AddCardForm(
-                                          amount: FileReader.getAppConfig()
-                                              .paystackTestAmount,
-                                          // todo state.amount.toString(),
+                                          amount: state.amount.toString(),
                                           transaction:
                                               CardTransaction.InvestmentPayment,
                                         ),
