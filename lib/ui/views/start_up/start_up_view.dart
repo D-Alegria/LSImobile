@@ -60,7 +60,7 @@ class StartUpView extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.rectangle,
                           image: DecorationImage(
-                            image: AssetImage("assets/images/start_logo.png"),
+                            image: AssetImage("assets/images/app_logo.png"),
                             fit: BoxFit.fitHeight,
                           ),
                         ),
