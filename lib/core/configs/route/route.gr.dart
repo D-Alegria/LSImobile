@@ -10,6 +10,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../../ui/shared/success_view.dart';
+import '../../../ui/views/authentication/forgot_password/forgot_password_view.dart';
 import '../../../ui/views/authentication/verification/verification_view.dart';
 import '../../../ui/views/authentication/widgets/auth_wrapper.dart';
 import '../../../ui/views/main/investment/fund_investment/fund_investment_view.dart';
@@ -47,6 +48,7 @@ class Routes {
   static const String onBoardingView = '/on-boarding-view';
   static const String authWrapper = '/auth-wrapper';
   static const String verificationView = '/verification-view';
+  static const String forgotPasswordView = '/forgot-password-view';
   static const String mainView = '/main-view';
   static const String noLoanView = '/no-loan-view';
   static const String loanProductView = '/loan-product-view';
@@ -77,6 +79,7 @@ class Routes {
     onBoardingView,
     authWrapper,
     verificationView,
+    forgotPasswordView,
     mainView,
     noLoanView,
     loanProductView,
@@ -113,6 +116,7 @@ class Router extends RouterBase {
     RouteDef(Routes.onBoardingView, page: OnBoardingView),
     RouteDef(Routes.authWrapper, page: AuthWrapper),
     RouteDef(Routes.verificationView, page: VerificationView),
+    RouteDef(Routes.forgotPasswordView, page: ForgotPasswordView),
     RouteDef(Routes.mainView, page: MainView),
     RouteDef(Routes.noLoanView, page: NoLoanView),
     RouteDef(Routes.loanProductView, page: LoanProductView),
@@ -163,6 +167,12 @@ class Router extends RouterBase {
     VerificationView: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => VerificationView(),
+        settings: data,
+      );
+    },
+    ForgotPasswordView: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => ForgotPasswordView(),
         settings: data,
       );
     },
@@ -368,6 +378,9 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 
   Future<dynamic> pushVerificationView() =>
       push<dynamic>(Routes.verificationView);
+
+  Future<dynamic> pushForgotPasswordView() =>
+      push<dynamic>(Routes.forgotPasswordView);
 
   Future<dynamic> pushMainView({
     Key key,

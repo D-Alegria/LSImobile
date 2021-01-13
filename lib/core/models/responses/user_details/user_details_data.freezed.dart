@@ -93,6 +93,10 @@ abstract class $UserDetailsDataCopyWith<$Res> {
       @nullable Dashboard dashboard,
       @nullable @JsonKey(name: 'people_id') String peopleId,
       @nullable List<Timeline> timeline});
+
+  $ValidationsCopyWith<$Res> get validations;
+  $UserDataCopyWith<$Res> get userData;
+  $DashboardCopyWith<$Res> get dashboard;
 }
 
 /// @nodoc
@@ -136,6 +140,36 @@ class _$UserDetailsDataCopyWithImpl<$Res>
           timeline == freezed ? _value.timeline : timeline as List<Timeline>,
     ));
   }
+
+  @override
+  $ValidationsCopyWith<$Res> get validations {
+    if (_value.validations == null) {
+      return null;
+    }
+    return $ValidationsCopyWith<$Res>(_value.validations, (value) {
+      return _then(_value.copyWith(validations: value));
+    });
+  }
+
+  @override
+  $UserDataCopyWith<$Res> get userData {
+    if (_value.userData == null) {
+      return null;
+    }
+    return $UserDataCopyWith<$Res>(_value.userData, (value) {
+      return _then(_value.copyWith(userData: value));
+    });
+  }
+
+  @override
+  $DashboardCopyWith<$Res> get dashboard {
+    if (_value.dashboard == null) {
+      return null;
+    }
+    return $DashboardCopyWith<$Res>(_value.dashboard, (value) {
+      return _then(_value.copyWith(dashboard: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -155,6 +189,13 @@ abstract class _$UserDetailsDataCopyWith<$Res>
       @nullable Dashboard dashboard,
       @nullable @JsonKey(name: 'people_id') String peopleId,
       @nullable List<Timeline> timeline});
+
+  @override
+  $ValidationsCopyWith<$Res> get validations;
+  @override
+  $UserDataCopyWith<$Res> get userData;
+  @override
+  $DashboardCopyWith<$Res> get dashboard;
 }
 
 /// @nodoc

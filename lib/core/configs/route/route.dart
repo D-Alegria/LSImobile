@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route_annotations.dart';
 import 'package:lsi_mobile/ui/shared/success_view.dart';
+import 'package:lsi_mobile/ui/views/authentication/forgot_password/forgot_password_view.dart';
 import 'package:lsi_mobile/ui/views/authentication/verification/verification_view.dart';
 import 'package:lsi_mobile/ui/views/authentication/widgets/auth_wrapper.dart';
 import 'package:lsi_mobile/ui/views/main/investment/fund_investment/fund_investment_view.dart';
@@ -36,6 +37,7 @@ import 'package:lsi_mobile/ui/views/start_up/start_up_view.dart';
     AdaptiveRoute(page: OnBoardingView),
     AdaptiveRoute(page: AuthWrapper),
     AdaptiveRoute(page: VerificationView),
+    AdaptiveRoute(page: ForgotPasswordView),
     AdaptiveRoute(page: MainView),
     AdaptiveRoute(page: NoLoanView),
     AdaptiveRoute(page: LoanProductView),

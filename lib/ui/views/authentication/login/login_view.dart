@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
@@ -67,6 +69,23 @@ class LoginView extends StatelessWidget {
                       color: ColorStyles.blue,
                       text: "Login",
                     ),
+                    SizedBox(height: SizeConfig.yMargin(context, 1)),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: FlatButton(
+                        onPressed: () =>
+                            context.navigator.pushForgotPasswordView(),
+                        child: Text(
+                          "Forgot password?",
+                          style: GoogleFonts.poppins(
+                            fontSize: SizeConfig.textSize(context, 4.5),
+                            fontWeight: FontWeight.w400,
+                            color: ColorStyles.light,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: SizeConfig.yMargin(context, 23.h)),
                     SizedBox(height: SizeConfig.yMargin(context, 2)),
                     sharedOptionFlatButton(
                       context: context,

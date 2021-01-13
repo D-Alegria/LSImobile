@@ -8,6 +8,7 @@ import 'package:lsi_mobile/core/models/requests/check_user_exists/check_user_exi
 import 'package:lsi_mobile/core/models/requests/login_user/login_user_request.dart';
 import 'package:lsi_mobile/core/models/requests/register_user/profile.dart';
 import 'package:lsi_mobile/core/models/requests/register_user/register_user_request.dart';
+import 'package:lsi_mobile/core/models/requests/reset_password/reset_password_request.dart';
 import 'package:lsi_mobile/core/models/requests/send_otp/send_otp_request.dart';
 import 'package:lsi_mobile/core/models/requests/verify_otp/verify_otp_request.dart';
 import 'package:lsi_mobile/core/services/auth_service/auth_service.dart';
@@ -82,15 +83,31 @@ class AuthFormCubit extends Cubit<AuthFormState> {
     ));
 
     final result = await _authService.sendOTP(
-      SendOTPRequest(
-        phone: state.phoneNumber.trim(),
-      ),
+      SendOTPRequest(phone: state.phoneNumber.trim()),
     );
 
     emit(state.copyWith(
       isSubmitting: false,
       authFailureOrSuccess: optionOf(result),
       verifyFailureOrSuccess: None(),
+    ));
+  }
+
+  Future<void> resetPassword() async {
+    emit(state.copyWith(
+      isSubmitting: true,
+      authFailureOrSuccess: None(),
+      verifyFailureOrSuccess: None(),
+    ));
+
+    final result = await _authService.resetPassword(
+      ResetPasswordRequest(email: state.emailAddress.trim()),
+    );
+
+    emit(state.copyWith(
+      isSubmitting: false,
+      authFailureOrSuccess: None(),
+      verifyFailureOrSuccess: optionOf(result),
     ));
   }
 

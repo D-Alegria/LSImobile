@@ -11,6 +11,7 @@ import 'package:lsi_mobile/core/models/requests/send_otp/send_otp_request.dart';
 import 'package:lsi_mobile/core/models/requests/verify_otp/verify_otp_request.dart';
 import 'package:lsi_mobile/core/models/responses/login_user/login_user_response.dart';
 import 'package:lsi_mobile/core/models/responses/register_user/register_user_response.dart';
+import 'package:lsi_mobile/core/models/responses/reset_password/reset_password_response.dart';
 import 'package:lsi_mobile/core/models/responses/response/response.dart';
 import 'package:lsi_mobile/core/models/responses/send_otp/send_otp_response.dart';
 import 'package:lsi_mobile/core/models/responses/verify_otp/verify_otp_response.dart';
@@ -160,8 +161,7 @@ class AuthServiceImpl implements AuthService {
         return response.fold(
           (failure) => left(failure),
           (success) async {
-            // TODO fix Reset password Response
-            final result = VerifyOTPResponse.fromJson(success);
+            final result = ResetPasswordResponse.fromJson(success);
             if (result.status) return right(unit);
             return left(SystemGlitch(message: result.message));
           },
