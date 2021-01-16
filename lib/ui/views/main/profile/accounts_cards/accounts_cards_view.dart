@@ -117,8 +117,9 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
               );
             },
           ),
-          sharedAddCardContainer(
+          sharedTapToAddAccount(
             context: context,
+            gradient: ColorStyles.lightGradient,
             onTap: () => sharedBottomSheet(
               context: context,
               form: AddAccountForm(),

@@ -1,5 +1,4 @@
 import "package:auto_route/auto_route.dart";
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -281,42 +280,6 @@ Widget sharedContainer({
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: child,
-    ),
-  );
-}
-
-Widget sharedDottedContainer({
-  Alignment alignment,
-  EdgeInsets padding,
-  double width,
-  double height,
-  Gradient gradient,
-  Color color,
-  Color borderColor,
-  Widget child,
-  Function onTap,
-}) {
-  return GestureDetector(
-    onTap: onTap,
-    child: DottedBorder(
-      borderType: BorderType.RRect,
-      strokeCap: StrokeCap.round,
-      color: borderColor,
-      dashPattern: [12, 12],
-      strokeWidth: 2,
-      radius: Radius.circular(10),
-      child: Container(
-        alignment: alignment,
-        padding: padding,
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-          color: color,
-          gradient: gradient,
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-        ),
-        child: child,
-      ),
     ),
   );
 }
@@ -967,21 +930,21 @@ void sharedBottomSheet({
   );
 }
 
-Widget sharedAddCardContainer({BuildContext context, Function onTap}) {
-  return Container(
-    alignment: Alignment.center,
-    child: sharedDottedContainer(
-      width: SizeConfig.xMargin(context, 323.w),
-      color: Colors.transparent,
-      child: Icon(
-        Icons.add_rounded,
-        size: SizeConfig.textSize(context, 12),
-      ),
-      alignment: Alignment.center,
-      height: SizeConfig.yMargin(context, 170.h),
-      borderColor: ColorStyles.grey5,
-      onTap: onTap,
-    ),
+Widget sharedTapToAddAccount({
+  BuildContext context,
+  Gradient gradient,
+  Function onTap,
+}) {
+  return sharedTapToAdd(
+    context: context,
+    gradient: gradient,
+    topText: "",
+    topTextColor: ColorStyles.dark,
+    midText: "\n1234567890",
+    midTextColor: ColorStyles.dark,
+    bottomText: "\nTap to add an account",
+    bottomTextColor: ColorStyles.dark,
+    onTap: onTap,
   );
 }
 
@@ -991,53 +954,77 @@ Widget sharedTapToAddCard({
   Gradient gradient,
   Function onTap,
 }) {
-  return Container(
-    alignment: Alignment.center,
-    child: sharedDottedContainer(
-      onTap: onTap,
-      padding: EdgeInsets.symmetric(
-        horizontal: SizeConfig.xMargin(context, 28.w),
-      ),
-      alignment: Alignment.centerLeft,
-      gradient: gradient,
-      width: SizeConfig.xMargin(context, 323.w),
-      height: SizeConfig.yMargin(context, 170.h),
-      child: RichText(
-        text: TextSpan(
-          text: "${card.expMonth}/${card.expYear.substring(2)}",
-          style: GoogleFonts.workSans(
-            height: SizeConfig.textSize(context, 0.7),
-            fontWeight: FontWeight.w500,
-            fontSize: SizeConfig.textSize(context, 14.tx),
-            color:
-                card.expMonth.isDigit ? ColorStyles.yellow : ColorStyles.dark,
-          ),
-          children: [
-            TextSpan(
-              text: "\n**** **** **** ${card.lastFourDigits}",
-              style: GoogleFonts.workSans(
-                fontWeight: FontWeight.w600,
-                fontSize: SizeConfig.textSize(context, 18.tx),
-                color: card.expMonth.isDigit
-                    ? ColorStyles.white
-                    : ColorStyles.dark,
-              ),
+  return sharedTapToAdd(
+    context: context,
+    gradient: gradient,
+    topText: "${card.expMonth}/${card.expYear.substring(2)}",
+    topTextColor: card.expMonth.isDigit ? ColorStyles.yellow : ColorStyles.dark,
+    midText: "\n**** **** **** ${card.lastFourDigits}",
+    midTextColor: card.expMonth.isDigit ? ColorStyles.white : ColorStyles.dark,
+    bottomText:
+        "\nTap to pay with ${card.expMonth.isDigit ? "this" : "a "} card",
+    bottomTextColor:
+        card.expMonth.isDigit ? ColorStyles.white : ColorStyles.dark,
+    onTap: onTap,
+  );
+}
+
+Widget sharedTapToAdd({
+  BuildContext context,
+  Gradient gradient,
+  String topText,
+  Color topTextColor,
+  String midText,
+  Color midTextColor,
+  String bottomText,
+  Color bottomTextColor,
+  Function onTap,
+}) {
+  return InkWell(
+    onTap: onTap,
+    child: Container(
+      alignment: Alignment.center,
+      child: Container(
+        alignment: Alignment.centerLeft,
+        padding: EdgeInsets.symmetric(
+          horizontal: SizeConfig.xMargin(context, 28.w),
+        ),
+        width: SizeConfig.xMargin(context, 323.w),
+        height: SizeConfig.yMargin(context, 170.h),
+        decoration: BoxDecoration(
+          gradient: gradient,
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+        child: RichText(
+          text: TextSpan(
+            text: topText,
+            style: GoogleFonts.workSans(
+              height: SizeConfig.textSize(context, 0.7),
+              fontWeight: FontWeight.w500,
+              fontSize: SizeConfig.textSize(context, 14.tx),
+              color: topTextColor,
             ),
-            TextSpan(
-              text:
-                  "\nTap to pay with ${card.expMonth.isDigit ? "this" : "a "} card",
-              style: GoogleFonts.workSans(
-                fontWeight: FontWeight.w400,
-                fontSize: SizeConfig.textSize(context, 14.tx),
-                color: card.expMonth.isDigit
-                    ? ColorStyles.white
-                    : ColorStyles.dark,
+            children: [
+              TextSpan(
+                text: midText,
+                style: GoogleFonts.workSans(
+                  fontWeight: FontWeight.w600,
+                  fontSize: SizeConfig.textSize(context, 18.tx),
+                  color: midTextColor,
+                ),
               ),
-            )
-          ],
+              TextSpan(
+                text: bottomText,
+                style: GoogleFonts.workSans(
+                  fontWeight: FontWeight.w400,
+                  fontSize: SizeConfig.textSize(context, 14.tx),
+                  color: bottomTextColor,
+                ),
+              )
+            ],
+          ),
         ),
       ),
-      borderColor: ColorStyles.grey5,
     ),
   );
 }
