@@ -4,7 +4,6 @@ import 'package:lsi_mobile/core/models/dto/account/account.dart';
 import 'package:lsi_mobile/core/models/dto/card/card.dart' as ca;
 import 'package:lsi_mobile/core/models/enums/card_transaction.dart';
 import 'package:lsi_mobile/core/utils/file_reader_util.dart';
-import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/profile/widgets/add_account_form.dart';
@@ -74,7 +73,6 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
               expYear: "****",
               lastFourDigits: "****",
             ),
-            gradient: ColorStyles.lightGradient,
             onTap: () => sharedBottomSheet(
               context: context,
               form: AddCardForm(
@@ -119,7 +117,6 @@ class _AccountsCardsViewState extends State<AccountsCardsView>
           ),
           sharedTapToAddAccount(
             context: context,
-            gradient: ColorStyles.lightGradient,
             onTap: () => sharedBottomSheet(
               context: context,
               form: AddAccountForm(),

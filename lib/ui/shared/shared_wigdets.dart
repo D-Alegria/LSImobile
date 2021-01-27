@@ -18,6 +18,7 @@ import 'package:lsi_mobile/ui/views/main/investment/investment_view/view_model/i
     as ivc;
 import 'package:lsi_mobile/ui/views/main/profile/view_models/accounts_cards/accounts_cards_cubit.dart'
     as acb;
+import 'package:lsi_mobile/ui/views/main/profile/widgets/atm_card.dart';
 import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 
 import 'const_color.dart';
@@ -932,97 +933,81 @@ void sharedBottomSheet({
 
 Widget sharedTapToAddAccount({
   BuildContext context,
-  Gradient gradient,
   Function onTap,
+  double width,
 }) {
   return sharedTapToAdd(
     context: context,
-    gradient: gradient,
     topText: "",
-    topTextColor: ColorStyles.dark,
     midText: "\n1234567890",
-    midTextColor: ColorStyles.dark,
     bottomText: "\nTap to add an account",
-    bottomTextColor: ColorStyles.dark,
     onTap: onTap,
+    width: width,
   );
 }
 
 Widget sharedTapToAddCard({
   BuildContext context,
   ca.Card card,
-  Gradient gradient,
   Function onTap,
+  double width,
 }) {
   return sharedTapToAdd(
     context: context,
-    gradient: gradient,
     topText: "${card.expMonth}/${card.expYear.substring(2)}",
-    topTextColor: card.expMonth.isDigit ? ColorStyles.yellow : ColorStyles.dark,
     midText: "\n**** **** **** ${card.lastFourDigits}",
-    midTextColor: card.expMonth.isDigit ? ColorStyles.white : ColorStyles.dark,
     bottomText:
         "\nTap to pay with ${card.expMonth.isDigit ? "this" : "a "} card",
-    bottomTextColor:
-        card.expMonth.isDigit ? ColorStyles.white : ColorStyles.dark,
     onTap: onTap,
+    width: width,
   );
 }
 
 Widget sharedTapToAdd({
   BuildContext context,
-  Gradient gradient,
   String topText,
-  Color topTextColor,
   String midText,
-  Color midTextColor,
   String bottomText,
-  Color bottomTextColor,
   Function onTap,
+  double width,
 }) {
   return InkWell(
     onTap: onTap,
     child: Container(
-      alignment: Alignment.center,
-      child: Container(
-        alignment: Alignment.centerLeft,
-        padding: EdgeInsets.symmetric(
-          horizontal: SizeConfig.xMargin(context, 28.w),
-        ),
-        width: SizeConfig.xMargin(context, 323.w),
+      alignment: Alignment.centerLeft,
+      child: SharedCardBackground(
+        width: width,
         height: SizeConfig.yMargin(context, 170.h),
-        decoration: BoxDecoration(
-          gradient: gradient,
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-        ),
-        child: RichText(
-          text: TextSpan(
-            text: topText,
-            style: GoogleFonts.workSans(
-              height: SizeConfig.textSize(context, 0.7),
-              fontWeight: FontWeight.w500,
-              fontSize: SizeConfig.textSize(context, 14.tx),
-              color: topTextColor,
-            ),
-            children: [
-              TextSpan(
-                text: midText,
-                style: GoogleFonts.workSans(
-                  fontWeight: FontWeight.w600,
-                  fontSize: SizeConfig.textSize(context, 18.tx),
-                  color: midTextColor,
-                ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              topText,
+              style: GoogleFonts.workSans(
+                // height: SizeConfig.textSize(context, 0.7),
+                fontWeight: FontWeight.w500,
+                fontSize: SizeConfig.textSize(context, 14.tx),
+                color: ColorStyles.yellow,
               ),
-              TextSpan(
-                text: bottomText,
-                style: GoogleFonts.workSans(
-                  fontWeight: FontWeight.w400,
-                  fontSize: SizeConfig.textSize(context, 14.tx),
-                  color: bottomTextColor,
-                ),
-              )
-            ],
-          ),
+            ),
+            Text(
+              midText,
+              style: GoogleFonts.workSans(
+                fontWeight: FontWeight.w600,
+                fontSize: SizeConfig.textSize(context, 18.tx),
+                color: ColorStyles.white,
+              ),
+            ),
+            Text(
+              bottomText,
+              style: GoogleFonts.workSans(
+                fontWeight: FontWeight.w400,
+                fontSize: SizeConfig.textSize(context, 14.tx),
+                color: ColorStyles.white,
+              ),
+            ),
+          ],
         ),
       ),
     ),

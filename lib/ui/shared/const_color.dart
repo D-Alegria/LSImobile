@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 abstract class ColorStyles {
   static const dark = const Color(0xFF18172B);
+  static const neutralBlack = const Color(0xFF151522);
   static const light = const Color(0xFF6E80B0);
   static const primary = const Color(0xFF6D61F2);
   static const extraLight = const Color(0xFFF8F8FA);
@@ -25,6 +26,7 @@ abstract class ColorStyles {
   static const grey = const Color(0xFF8F92A1);
   static const grey2 = const Color(0xFF4F4F4F);
   static const grey3 = const Color(0xFF828282);
+  static const grey4 = const Color(0xFF999999);
   static const grey6 = const Color(0xFFF2F2F2);
   static const grey5 = const Color(0xFFE0E0E0);
   static const lGrey = const Color(0xFFE4E4E7);

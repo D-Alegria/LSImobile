@@ -5,6 +5,7 @@ import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
+import 'package:lsi_mobile/ui/views/main/profile/widgets/atm_card.dart';
 
 class BankAccountCard extends StatelessWidget {
   final String bankName;
@@ -22,63 +23,58 @@ class BankAccountCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: sharedContainer(
-        onTap: onTap,
-        padding: EdgeInsets.symmetric(
-          vertical: SizeConfig.yMargin(context, 15.h),
-          horizontal: SizeConfig.xMargin(context, 5),
-        ),
-        gradient: ColorStyles.lightGradient,
-        height: SizeConfig.yMargin(context, 144.h),
-        width: SizeConfig.xMargin(context, 323.w),
-        alignment: Alignment.centerLeft,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Flexible(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    bankName,
-                    overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.workSans(
-                      fontSize: SizeConfig.textSize(context, 18.tx),
-                      fontWeight: FontWeight.w600,
-                      color: ColorStyles.blue2,
+    return SharedCardBackground(
+      child: Container(
+        alignment: Alignment.center,
+        child: sharedContainer(
+          onTap: onTap,
+          alignment: Alignment.centerLeft,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      bankName,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.workSans(
+                        fontSize: SizeConfig.textSize(context, 18.tx),
+                        fontWeight: FontWeight.w600,
+                        color: ColorStyles.blue2,
+                      ),
                     ),
-                  ),
-                  Text(
-                    accountNumber,
-                    overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.workSans(
-                      fontSize: SizeConfig.textSize(context, 22.tx),
-                      color: ColorStyles.grey2,
-                      fontWeight: FontWeight.w600,
+                    Text(
+                      accountNumber,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.workSans(
+                        fontSize: SizeConfig.textSize(context, 22.tx),
+                        color: ColorStyles.white,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  Text(
-                    accountName.capitalize,
-                    overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.workSans(
-                      fontSize: SizeConfig.textSize(context, 18.tx),
-                      fontWeight: FontWeight.w400,
-                      color: ColorStyles.grey3,
+                    Text(
+                      accountName.capitalize,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.workSans(
+                        fontSize: SizeConfig.textSize(context, 18.tx),
+                        fontWeight: FontWeight.w400,
+                        color: ColorStyles.white,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            sharedIconButton(
-              context: context,
-              onPressed: () {},
-              icon: Icon(Icons.more_vert_rounded),
-            )
-          ],
+              // sharedIconButton(
+              //   context: context,
+              //   onPressed: () {},
+              //   icon: Icon(Icons.more_vert_rounded),
+              // )
+            ],
+          ),
         ),
       ),
     );

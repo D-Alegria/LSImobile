@@ -17,53 +17,13 @@ class FundInvestmentView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget investmentCard(
-        {BuildContext context,
-        ca.Card card,
-        Function onTap,
-        Gradient gradient}) {
-      return Container(
-        alignment: Alignment.center,
-        child: sharedRaisedContainer(
+            {BuildContext context, ca.Card card, Function onTap}) =>
+        sharedTapToAddCard(
+          context: context,
           onTap: onTap,
-          padding: EdgeInsets.symmetric(
-            horizontal: SizeConfig.xMargin(context, 28.w),
-          ),
-          alignment: Alignment.centerLeft,
-          gradient: gradient,
+          card: card,
           width: SizeConfig.xMargin(context, 260.w),
-          height: SizeConfig.yMargin(context, 170.h),
-          child: RichText(
-            text: TextSpan(
-              text: "${card.expMonth}/${card.expYear.substring(2)}",
-              style: GoogleFonts.workSans(
-                height: SizeConfig.textSize(context, 0.7),
-                fontWeight: FontWeight.w500,
-                fontSize: SizeConfig.textSize(context, 14.tx),
-                color: ColorStyles.yellow,
-              ),
-              children: [
-                TextSpan(
-                  text: "\n**** **** **** ${card.lastFourDigits}",
-                  style: GoogleFonts.workSans(
-                    fontWeight: FontWeight.w600,
-                    fontSize: SizeConfig.textSize(context, 18.tx),
-                    color: ColorStyles.white,
-                  ),
-                ),
-                TextSpan(
-                  text: "\nTap to pay with this card",
-                  style: GoogleFonts.workSans(
-                    fontWeight: FontWeight.w400,
-                    fontSize: SizeConfig.textSize(context, 14.tx),
-                    color: ColorStyles.white,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-      );
-    }
+        );
 
     return Scaffold(
       appBar: AppBar(
@@ -147,7 +107,6 @@ class FundInvestmentView extends StatelessWidget {
                                       return investmentCard(
                                         context: context,
                                         card: card,
-                                        gradient: ColorStyles.lightBlueGradient,
                                         onTap: () {
                                           context
                                               .bloc<NewInvestmentCubit>()
@@ -175,13 +134,13 @@ class FundInvestmentView extends StatelessWidget {
                                     width: SizeConfig.xMargin(context, 15.w),
                                   ),
                                   sharedTapToAddCard(
+                                    width: SizeConfig.xMargin(context, 260.w),
                                     context: context,
                                     card: ca.Card(
                                       expMonth: "**",
                                       expYear: "****",
                                       lastFourDigits: "****",
                                     ),
-                                    gradient: ColorStyles.lightGradient,
                                     onTap: () {
                                       sharedBottomSheet(
                                         context: context,
@@ -194,6 +153,9 @@ class FundInvestmentView extends StatelessWidget {
                                         height: 50,
                                       );
                                     },
+                                  ),
+                                  SizedBox(
+                                    width: SizeConfig.xMargin(context, 15.w),
                                   ),
                                 ],
                               ),
