@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="24.828" viewBox="0 0 20 24.828">
+    <g id="Group_16" transform="translate(0 0.414)">
+        <path id="Path_50" d="M15,1l4,4L15,9" fill="none" stroke="#707070" stroke-linecap="round"
+            stroke-linejoin="round" stroke-width="2" />
+        <path id="Path_51" d="M1,11V9A4,4,0,0,1,5,5H19" fill="none" stroke="#707070"
+            stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+        <path id="Path_52" d="M5,23,1,19l4-4" fill="none" stroke="#707070" stroke-linecap="round"
+            stroke-linejoin="round" stroke-width="2" />
+        <path id="Path_53" d="M19,13v2a4,4,0,0,1-4,4H1" fill="none" stroke="#707070"
+            stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+    </g>
+</svg>
