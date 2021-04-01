@@ -711,7 +711,7 @@ class _SharedDateTimeFieldState extends State<SharedDateTimeField> {
             initialDate: widget.initialValue.isEmpty
                 ? DateTime.now()
                 : Jiffy(widget.initialValue, widget.pattern).dateTime,
-            firstDate: DateTime(1970),
+            firstDate: DateTime(1900),
             lastDate: DateTime(2300),
             builder: (BuildContext context, Widget child) {
               return Theme(
