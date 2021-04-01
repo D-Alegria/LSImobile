@@ -68,11 +68,6 @@ class BankAccountCard extends StatelessWidget {
                   ],
                 ),
               ),
-              // sharedIconButton(
-              //   context: context,
-              //   onPressed: () {},
-              //   icon: Icon(Icons.more_vert_rounded),
-              // )
             ],
           ),
         ),
