@@ -20,7 +20,7 @@ class _$LoanDetailsStateTearOff {
       @required
           double amount,
       @required
-          String time,
+          int time,
       @required
           String reason,
       @required
@@ -54,7 +54,7 @@ mixin _$LoanDetailsState {
   UserDetailsRequest get data;
   LoanRequest get loanRequest;
   double get amount;
-  String get time;
+  int get time;
   String get reason;
   List<Value> get reasons;
   bool get showErrorMessages;
@@ -73,7 +73,7 @@ abstract class $LoanDetailsStateCopyWith<$Res> {
       {UserDetailsRequest data,
       LoanRequest loanRequest,
       double amount,
-      String time,
+      int time,
       String reason,
       List<Value> reasons,
       bool showErrorMessages,
@@ -111,7 +111,7 @@ class _$LoanDetailsStateCopyWithImpl<$Res>
           ? _value.loanRequest
           : loanRequest as LoanRequest,
       amount: amount == freezed ? _value.amount : amount as double,
-      time: time == freezed ? _value.time : time as String,
+      time: time == freezed ? _value.time : time as int,
       reason: reason == freezed ? _value.reason : reason as String,
       reasons: reasons == freezed ? _value.reasons : reasons as List<Value>,
       showErrorMessages: showErrorMessages == freezed
@@ -158,7 +158,7 @@ abstract class _$LoanDetailsStateCopyWith<$Res>
       {UserDetailsRequest data,
       LoanRequest loanRequest,
       double amount,
-      String time,
+      int time,
       String reason,
       List<Value> reasons,
       bool showErrorMessages,
@@ -200,7 +200,7 @@ class __$LoanDetailsStateCopyWithImpl<$Res>
           ? _value.loanRequest
           : loanRequest as LoanRequest,
       amount: amount == freezed ? _value.amount : amount as double,
-      time: time == freezed ? _value.time : time as String,
+      time: time == freezed ? _value.time : time as int,
       reason: reason == freezed ? _value.reason : reason as String,
       reasons: reasons == freezed ? _value.reasons : reasons as List<Value>,
       showErrorMessages: showErrorMessages == freezed
@@ -243,7 +243,7 @@ class _$_LoanDetailsState implements _LoanDetailsState {
   @override
   final double amount;
   @override
-  final String time;
+  final int time;
   @override
   final String reason;
   @override
@@ -316,7 +316,7 @@ abstract class _LoanDetailsState implements LoanDetailsState {
           @required
               double amount,
           @required
-              String time,
+              int time,
           @required
               String reason,
           @required
@@ -336,7 +336,7 @@ abstract class _LoanDetailsState implements LoanDetailsState {
   @override
   double get amount;
   @override
-  String get time;
+  int get time;
   @override
   String get reason;
   @override

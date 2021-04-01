@@ -71,15 +71,18 @@ class _LoanDetailsViewState extends State<LoanDetailsView> {
                       SizedBox(height: SizeConfig.yMargin(context, 3)),
                       SharedTextFormField(
                         labelText: "For how long?",
-                        initialValue: state.time,
+                        initialValue: state.time.toString(),
                         onChanged: (value) =>
-                            context.bloc<LoanDetailsCubit>().timeChanged(value),
+                            context.bloc<LoanDetailsCubit>().timeChanged(int.parse(value)),
                         validator: (value) {
-                          if (context
-                              .bloc<LoanDetailsCubit>()
-                              .state
-                              .time
-                              .isEmpty) return "Field name is required";
+                          int minDuration = 1;
+                          int maxDuration =
+                              int.parse(_loanProduct.maxLoanDuration);
+                          if (context.bloc<LoanDetailsCubit>().state.amount <
+                                  minDuration ||
+                              context.bloc<LoanDetailsCubit>().state.amount >
+                                  maxDuration)
+                            return "Duration must be between \n$minDuration - $maxDuration";
                           return null;
                         },
                         keyboardType: TextInputType.number,
