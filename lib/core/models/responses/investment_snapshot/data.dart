@@ -8,7 +8,7 @@ class InvestmentSnapshotData {
   final String savings;
   final String investments;
   @JsonKey(name: "investment_balance")
-  final double investmentBalance;
+  final String investmentBalance;
 
   InvestmentSnapshotData({
     this.today,
