@@ -77,10 +77,9 @@ class RegisterView extends StatelessWidget {
                         keyboardType: TextInputType.emailAddress,
                       ),
                       SizedBox(height: SizeConfig.yMargin(context, 3)),
-                      SharedTextFormField(
+                      SharedPassWordFormField(
                         labelText: "Password",
                         initialValue: state.password,
-                        obscureText: true,
                         onChanged: (value) => context
                             .bloc<AuthFormCubit>()
                             .passwordChanged(value),

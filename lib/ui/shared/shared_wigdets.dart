@@ -102,7 +102,6 @@ class SharedTextFormField extends StatelessWidget {
   final String labelText;
   final Function(String value) onChanged;
   final Function(String value) validator;
-  final bool obscureText;
   final TextInputAction textInputAction;
   final TextInputType keyboardType;
   final String initialValue;
@@ -113,7 +112,6 @@ class SharedTextFormField extends StatelessWidget {
     @required this.labelText,
     this.onChanged,
     this.validator,
-    this.obscureText = false,
     this.textInputAction,
     this.keyboardType,
     this.initialValue,
@@ -127,7 +125,6 @@ class SharedTextFormField extends StatelessWidget {
       initialValue: initialValue,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
-      obscureText: obscureText,
       validator: validator,
       onChanged: onChanged,
       style: GoogleFonts.workSans(
@@ -143,6 +140,76 @@ class SharedTextFormField extends StatelessWidget {
           fontSize: SizeConfig.textSize(context, 14.tx),
           fontWeight: FontWeight.w500,
           color: const Color(0xFF18172B).withOpacity(0.6),
+        ),
+      ),
+    );
+  }
+}
+
+/// ////////////////////////////////////////////////////////////////////////////
+/// [SharedPassWordFormField]
+/// ////////////////////////////////////////////////////////////////////////////
+class SharedPassWordFormField extends StatefulWidget {
+  final String labelText;
+  final Function(String value) onChanged;
+  final Function(String value) validator;
+  final TextInputAction textInputAction;
+  final TextInputType keyboardType;
+  final String initialValue;
+  final bool readOnly;
+
+  const SharedPassWordFormField({
+    Key key,
+    @required this.labelText,
+    this.onChanged,
+    this.validator,
+    this.textInputAction,
+    this.keyboardType,
+    this.initialValue,
+    this.readOnly = false,
+  }) : super(key: key);
+
+  @override
+  _SharedPassWordFormFieldState createState() =>
+      _SharedPassWordFormFieldState();
+}
+
+class _SharedPassWordFormFieldState extends State<SharedPassWordFormField> {
+  var obscureText = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      readOnly: widget.readOnly,
+      initialValue: widget.initialValue,
+      keyboardType: widget.keyboardType,
+      textInputAction: widget.textInputAction,
+      obscureText: obscureText,
+      validator: widget.validator,
+      onChanged: widget.onChanged,
+      style: GoogleFonts.workSans(
+        height: SizeConfig.yMargin(context, 0.17),
+        fontSize: SizeConfig.textSize(context, 16.tx),
+        fontWeight: FontWeight.w500,
+        color: ColorStyles.dark,
+      ),
+      cursorColor: ColorStyles.dark,
+      decoration: textFieldDecoration.copyWith(
+        labelText: widget.labelText,
+        labelStyle: GoogleFonts.workSans(
+          fontSize: SizeConfig.textSize(context, 14.tx),
+          fontWeight: FontWeight.w500,
+          color: const Color(0xFF18172B).withOpacity(0.6),
+        ),
+        suffixIcon: InkWell(
+          onTap: () => setState(() => obscureText = !obscureText),
+          child: Icon(
+            obscureText
+                ? Icons.visibility_off_rounded
+                : Icons.visibility_rounded,
+            size: SizeConfig.textSize(context, 6),
+            color: Colors.black,
+          ),
         ),
       ),
     );
