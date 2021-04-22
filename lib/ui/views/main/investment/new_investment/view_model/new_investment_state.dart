@@ -15,7 +15,7 @@ abstract class NewInvestmentState with _$NewInvestmentState {
     @required String accruedInterest,
     @required String withholdingTax,
     @required String maturityValue,
-    @required List<InvestmentDuration> durations,
+    @required List<TenorRate> durations,
     @required bool showErrorMessages,
     @required bool isSubmitting,
     @required Option<Either<Glitch, Unit>> submitFailureOrSuccess,
@@ -24,11 +24,7 @@ abstract class NewInvestmentState with _$NewInvestmentState {
   factory NewInvestmentState.initial() => NewInvestmentState(
         amount: 0,
         duration: 1,
-        durations: [
-          InvestmentDuration(3, 14),
-          InvestmentDuration(6, 15),
-          InvestmentDuration(9, 16),
-        ],
+        durations: [],
         isSubmitting: false,
         showErrorMessages: false,
         submitFailureOrSuccess: None(),

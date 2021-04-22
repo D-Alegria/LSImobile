@@ -27,7 +27,7 @@ class _$NewInvestmentStateTearOff {
       @required String accruedInterest,
       @required String withholdingTax,
       @required String maturityValue,
-      @required List<InvestmentDuration> durations,
+      @required List<TenorRate> durations,
       @required bool showErrorMessages,
       @required bool isSubmitting,
       @required Option<Either<Glitch, Unit>> submitFailureOrSuccess}) {
@@ -70,7 +70,7 @@ mixin _$NewInvestmentState {
   String get accruedInterest;
   String get withholdingTax;
   String get maturityValue;
-  List<InvestmentDuration> get durations;
+  List<TenorRate> get durations;
   bool get showErrorMessages;
   bool get isSubmitting;
   Option<Either<Glitch, Unit>> get submitFailureOrSuccess;
@@ -96,7 +96,7 @@ abstract class $NewInvestmentStateCopyWith<$Res> {
       String accruedInterest,
       String withholdingTax,
       String maturityValue,
-      List<InvestmentDuration> durations,
+      List<TenorRate> durations,
       bool showErrorMessages,
       bool isSubmitting,
       Option<Either<Glitch, Unit>> submitFailureOrSuccess});
@@ -163,7 +163,7 @@ class _$NewInvestmentStateCopyWithImpl<$Res>
           : maturityValue as String,
       durations: durations == freezed
           ? _value.durations
-          : durations as List<InvestmentDuration>,
+          : durations as List<TenorRate>,
       showErrorMessages: showErrorMessages == freezed
           ? _value.showErrorMessages
           : showErrorMessages as bool,
@@ -196,7 +196,7 @@ abstract class _$NewInvestmentStateCopyWith<$Res>
       String accruedInterest,
       String withholdingTax,
       String maturityValue,
-      List<InvestmentDuration> durations,
+      List<TenorRate> durations,
       bool showErrorMessages,
       bool isSubmitting,
       Option<Either<Glitch, Unit>> submitFailureOrSuccess});
@@ -265,7 +265,7 @@ class __$NewInvestmentStateCopyWithImpl<$Res>
           : maturityValue as String,
       durations: durations == freezed
           ? _value.durations
-          : durations as List<InvestmentDuration>,
+          : durations as List<TenorRate>,
       showErrorMessages: showErrorMessages == freezed
           ? _value.showErrorMessages
           : showErrorMessages as bool,
@@ -338,7 +338,7 @@ class _$_NewInvestmentState implements _NewInvestmentState {
   @override
   final String maturityValue;
   @override
-  final List<InvestmentDuration> durations;
+  final List<TenorRate> durations;
   @override
   final bool showErrorMessages;
   @override
@@ -442,7 +442,7 @@ abstract class _NewInvestmentState implements NewInvestmentState {
           @required String accruedInterest,
           @required String withholdingTax,
           @required String maturityValue,
-          @required List<InvestmentDuration> durations,
+          @required List<TenorRate> durations,
           @required bool showErrorMessages,
           @required bool isSubmitting,
           @required Option<Either<Glitch, Unit>> submitFailureOrSuccess}) =
@@ -473,7 +473,7 @@ abstract class _NewInvestmentState implements NewInvestmentState {
   @override
   String get maturityValue;
   @override
-  List<InvestmentDuration> get durations;
+  List<TenorRate> get durations;
   @override
   bool get showErrorMessages;
   @override

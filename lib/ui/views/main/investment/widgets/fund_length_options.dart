@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lsi_mobile/core/models/dto/investment_duration/investment_duration.dart';
+import 'package:lsi_mobile/core/models/dto/tenor_rate/tenor_rate.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/investment/new_investment/view_model/new_investment_cubit.dart';
 import 'package:lsi_mobile/core/extensions/num_extension.dart';
 
 class FundLengthOptions extends StatelessWidget {
-  final List<InvestmentDuration> durations;
+  final List<TenorRate> durations;
   final int select;
 
   const FundLengthOptions({
@@ -32,8 +32,8 @@ class FundLengthOptions extends StatelessWidget {
                 .durationChanged(index),
             child: _buildDurationBox(
               context,
-              duration.noOfMonth.toString(),
-              duration.interestRate.toString(),
+              duration.duration.toString(),
+              duration.rate.toString(),
               selected,
             ),
           );
