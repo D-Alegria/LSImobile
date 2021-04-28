@@ -6,10 +6,10 @@ import 'package:jiffy/jiffy.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/extensions/double_extension.dart';
 import 'package:lsi_mobile/core/models/dto/card/card.dart';
-import 'package:lsi_mobile/core/models/dto/investment_duration/investment_duration.dart';
 import 'package:lsi_mobile/core/models/dto/investment_product/investment_product.dart';
 import 'package:lsi_mobile/core/models/dto/paystack/paystack.dart';
 import 'package:lsi_mobile/core/models/dto/plan/plan.dart';
+import 'package:lsi_mobile/core/models/dto/tenor_rate/tenor_rate.dart';
 import 'package:lsi_mobile/core/models/requests/create_investment/create_investment_request.dart';
 import 'package:lsi_mobile/core/repositories/investment/investment_repo.dart';
 import 'package:meta/meta.dart';
@@ -29,6 +29,7 @@ class NewInvestmentCubit extends Cubit<NewInvestmentState> {
     emit(state.copyWith(
       investmentProduct: product,
       submitFailureOrSuccess: None(),
+      durations: product.tenorRate,
     ));
     emit(updateForm());
   }
@@ -39,7 +40,7 @@ class NewInvestmentCubit extends Cubit<NewInvestmentState> {
     final result = await _investmentRepo.createInvestment(
       CreateInvestmentRequest(
         plan: Plan(
-          duration: state.durations[state.duration].noOfMonth.toString(),
+          duration: state.durations[state.duration].duration.toString(),
           amount: state.amount.toString(),
           productId: state.investmentProduct.investmentProductId,
         ),
@@ -93,18 +94,18 @@ class NewInvestmentCubit extends Cubit<NewInvestmentState> {
   NewInvestmentState updateForm() {
     var investmentDate = Jiffy().yMMMd;
     var maturityDate = Jiffy()
-      ..add(months: state.durations[state.duration].noOfMonth);
-    double totalInterest = state.durations[state.duration].interestRate / 12;
+      ..add(months: state.durations[state.duration].duration);
+    double totalInterest = state.durations[state.duration].rate/ 12;
     double accruedInterest = (totalInterest / 100) *
         state.amount *
-        state.durations[state.duration].noOfMonth;
+        state.durations[state.duration].duration;
 
     return state.copyWith(
       investmentDate: investmentDate,
       maturityDate: maturityDate.yMMMd,
-      tenure: state.durations[state.duration].noOfMonth.toString(),
+      tenure: state.durations[state.duration].duration.toString(),
       withholdingTax: '0',
-      investmentRate: state.durations[state.duration].interestRate.toString(),
+      investmentRate: state.durations[state.duration].rate.toString(),
       accruedInterest: accruedInterest.moneyFormat(2),
       maturityValue: (state.amount + accruedInterest).moneyFormat(2),
     );

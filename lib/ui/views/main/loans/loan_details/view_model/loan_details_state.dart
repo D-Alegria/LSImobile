@@ -6,7 +6,7 @@ abstract class LoanDetailsState with _$LoanDetailsState {
     UserDetailsRequest data,
     LoanRequest loanRequest,
     @required double amount,
-    @required String time,
+    @required int time,
     @required String reason,
     @required List<Value> reasons,
     @required bool showErrorMessages,
@@ -20,7 +20,7 @@ abstract class LoanDetailsState with _$LoanDetailsState {
         submitLoanDetailsFailureOrSuccess: None(),
         reason: "",
         amount: 0,
-        time: "",
+        time: 1,
         reasons: [Value(name: "", id: "")],
       );
 }

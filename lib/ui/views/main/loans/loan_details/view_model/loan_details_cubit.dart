@@ -60,14 +60,14 @@ class LoanDetailsCubit extends Cubit<LoanDetailsState> {
         submitLoanDetailsFailureOrSuccess: None(),
       ));
 
-  void timeChanged(String time) => emit(state.copyWith(
+  void timeChanged(int time) => emit(state.copyWith(
         time: time,
         submitLoanDetailsFailureOrSuccess: None(),
       ));
 
   void submitLoanDetailsForm() {
     print('begin');
-    final isTimeValid = state.time.isNotEmpty;
+    final isTimeValid = state.time > 0;
     final isReasonValid = state.reason.isNotEmpty;
 
     Either<Glitch, Unit> failureOrSuccess =
@@ -110,7 +110,10 @@ class LoanDetailsCubit extends Cubit<LoanDetailsState> {
         others: state.data.education.hasOtherQualifications,
       );
 
-      Request r = Request(amount: state.amount.toString(), tenor: state.time);
+      Request r = Request(
+        amount: state.amount.toString(),
+        tenor: state.time.toString(),
+      );
 
       request = request.copyWith(
         profile: profile,

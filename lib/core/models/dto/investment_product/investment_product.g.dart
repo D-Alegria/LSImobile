@@ -155,6 +155,10 @@ InvestmentProduct _$InvestmentProductFromJson(Map<String, dynamic> json) {
     adjectival: json['ADJECTIVAL'] as String,
     legalName: json['LEGAL_NAME'] as String,
     abbr: json['ABBREV'] as String,
+    tenorRate: (json['tenor_rate'] as List)
+        ?.map((e) =>
+            e == null ? null : TenorRate.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 
@@ -170,6 +174,7 @@ Map<String, dynamic> _$InvestmentProductToJson(InvestmentProduct instance) =>
       'STARTING_AMOUNT': instance.startingAmount,
       'INVESTMENT_AMOUNT': instance.investmentAmount,
       'TENOR': instance.tenor,
+      'tenor_rate': instance.tenorRate,
       'INVESTMENT_PERIODIC_ID': instance.investmentPeriodicId,
       'INVESTMENT_CURRENCY_ID': instance.investmentCurrencyId,
       'PERIODIC_CONTRIBUTION': instance.periodicContribution,

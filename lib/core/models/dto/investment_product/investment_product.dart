@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:lsi_mobile/core/models/dto/tenor_rate/tenor_rate.dart';
 
 part 'investment_product.g.dart';
 
@@ -24,6 +25,8 @@ class InvestmentProduct {
   final String investmentAmount;
   @JsonKey(name: "TENOR")
   final String tenor;
+  @JsonKey(name: "tenor_rate")
+  final List<TenorRate> tenorRate;
   @JsonKey(name: "INVESTMENT_PERIODIC_ID")
   final String investmentPeriodicId;
   @JsonKey(name: "INVESTMENT_CURRENCY_ID")
@@ -441,6 +444,7 @@ class InvestmentProduct {
     this.adjectival,
     this.legalName,
     this.abbr,
+    this.tenorRate,
   });
 
   factory InvestmentProduct.initial() => InvestmentProduct(

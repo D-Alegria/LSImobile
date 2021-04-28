@@ -1,4 +1,5 @@
 import 'dart:convert' as convert;
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:catcher/catcher.dart';
@@ -140,7 +141,7 @@ class ApiManager {
     response = await request;
     print(response.statusCode);
     var start = response.body.indexOf('{');
-    print(response.body);
+    log(response.body);
     var body = response.body.substring(start);
     var jsonResponse = convert.jsonDecode(body);
     if (response.statusCode == 200 || response.statusCode == 201) {

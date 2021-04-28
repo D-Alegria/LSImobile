@@ -12,7 +12,7 @@ InvestmentSnapshotData _$InvestmentSnapshotDataFromJson(
     today: json['today'] as String,
     savings: json['savings'] as String,
     investments: json['investments'] as String,
-    investmentBalance: (json['investment_balance'] as num)?.toDouble(),
+    investmentBalance: json['investment_balance'] as String,
   );
 }
 
