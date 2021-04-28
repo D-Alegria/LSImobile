@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/extensions/double_extension.dart';
+import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/core/models/dto/investment_product/investment_product.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:lsi_mobile/core/extensions/num_extension.dart';
 
 class ExpandedInvestmentCard extends StatelessWidget {
   final Color color;
@@ -77,7 +77,7 @@ class ExpandedInvestmentCard extends StatelessWidget {
           ),
           // Spacer(),
           Text(
-            "Earn up to ${investment.interest}% by investing in a fixed plan. Started form ${double.parse(investment.investmentAmount).moneyFormat(0)}",
+            "Earn between ${investment.tenorRate[0].rate}% - ${investment.tenorRate[investment.tenorRate.length - 1].rate}% per annum when you invest starting form ${double.parse(investment.investmentAmount).moneyFormat(0)}",
             style: GoogleFonts.roboto(
               fontWeight: FontWeight.w400,
               fontSize: SizeConfig.textSize(context, 14.tx),
