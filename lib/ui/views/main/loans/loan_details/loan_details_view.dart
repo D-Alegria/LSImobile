@@ -78,9 +78,9 @@ class _LoanDetailsViewState extends State<LoanDetailsView> {
                           int minDuration = 1;
                           int maxDuration =
                               int.parse(_loanProduct.maxLoanDuration);
-                          if (context.bloc<LoanDetailsCubit>().state.amount <
+                          if (context.bloc<LoanDetailsCubit>().state.time <
                                   minDuration ||
-                              context.bloc<LoanDetailsCubit>().state.amount >
+                              context.bloc<LoanDetailsCubit>().state.time >
                                   maxDuration)
                             return "Duration must be between \n$minDuration - $maxDuration";
                           return null;
