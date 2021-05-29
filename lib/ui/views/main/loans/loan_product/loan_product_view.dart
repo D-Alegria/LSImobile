@@ -4,10 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/core/extensions/num_extension.dart';
+import 'package:lsi_mobile/core/models/responses/user_details/user_details_data.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
 import 'package:lsi_mobile/ui/views/main/loans/loan_product/loan_product/loan_product_cubit.dart';
+import 'package:lsi_mobile/ui/views/main/view_model/user_profile/user_profile_cubit.dart';
 
 import '../widgets/loan_product_box.dart';
 
@@ -17,9 +19,12 @@ class LoanProductView extends StatefulWidget {
 }
 
 class _LoanProductViewState extends State<LoanProductView> {
+  UserDetailsData _userDetailsData;
+
   @override
   void initState() {
     context.bloc<LoanProductCubit>().getLoanProducts();
+    _userDetailsData = context.bloc<UserProfileCubit>().state.userData;
     super.initState();
   }
 
@@ -66,7 +71,7 @@ class _LoanProductViewState extends State<LoanProductView> {
                     borderBoxColor: ColorStyles.green3,
                     action: () => context
                         .bloc<LoanProductCubit>()
-                        .navigateToForm(context, index),
+                        .navigateToForm(context, _userDetailsData, index),
                   );
                 } else if (index % 3 == 1) {
                   return LoanProductBox(
@@ -76,7 +81,7 @@ class _LoanProductViewState extends State<LoanProductView> {
                     borderBoxColor: ColorStyles.blue3,
                     action: () => context
                         .bloc<LoanProductCubit>()
-                        .navigateToForm(context, index),
+                        .navigateToForm(context, _userDetailsData, index),
                   );
                 } else {
                   return LoanProductBox(
@@ -86,7 +91,7 @@ class _LoanProductViewState extends State<LoanProductView> {
                     borderBoxColor: ColorStyles.extraLight,
                     action: () => context
                         .bloc<LoanProductCubit>()
-                        .navigateToForm(context, index),
+                        .navigateToForm(context, _userDetailsData, index),
                   );
                 }
               },
@@ -100,6 +105,9 @@ class _LoanProductViewState extends State<LoanProductView> {
           loading: (e) => null,
           loaded: (e) {
             switch (e.nextForm) {
+              case NextForm.bvn:
+                return context.navigator.pushProvideBVNView();
+                break;
               case NextForm.personalInfo:
                 return context.navigator.pushPersonalInfoFormView();
                 break;

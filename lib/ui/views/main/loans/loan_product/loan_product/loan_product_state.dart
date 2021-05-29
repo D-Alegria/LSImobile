@@ -16,6 +16,7 @@ abstract class LoanProductState with _$LoanProductState {
 }
 
 enum NextForm {
+  bvn,
   personalInfo,
   emergencyContact,
   eduAndEmploy,

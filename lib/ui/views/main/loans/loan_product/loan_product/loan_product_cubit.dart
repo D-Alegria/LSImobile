@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:lsi_mobile/core/models/dto/loan_product/loan_product.dart';
+import 'package:lsi_mobile/core/models/responses/user_details/user_details_data.dart';
 import 'package:lsi_mobile/core/repositories/loan/loan_repo.dart';
 import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
 import 'package:meta/meta.dart';
@@ -31,7 +32,8 @@ class LoanProductCubit extends Cubit<LoanProductState> {
     });
   }
 
-  Future<void> navigateToForm(BuildContext context, int selected) async {
+  Future<void> navigateToForm(
+      BuildContext context, UserDetailsData data, int selected) async {
     emit(Loading());
 
     final result = await _userRepo.user;
@@ -39,7 +41,13 @@ class LoanProductCubit extends Cubit<LoanProductState> {
     return result.fold(
       (l) => emit(Error(l.message)),
       (user) {
-        if (!(user.isPersonalInfoFilled ?? false)) {
+        if (!data.validations.bvn) {
+          return emit(Loaded(
+            loanProducts: loanProducts,
+            nextForm: NextForm.bvn,
+            selected: selected,
+          ));
+        } else if (!(user.isPersonalInfoFilled ?? false)) {
           return emit(Loaded(
             loanProducts: loanProducts,
             nextForm: NextForm.personalInfo,
