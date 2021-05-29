@@ -5,7 +5,9 @@ import 'package:injectable/injectable.dart';
 import 'package:lsi_mobile/core/exceptions/glitch.dart';
 import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/core/models/requests/initiate_bvn_validation/initiate_bvn_validation_request.dart';
+import 'package:lsi_mobile/core/models/requests/user_details/user_details_request.dart';
 import 'package:lsi_mobile/core/models/requests/verify_bvn_otp/verify_bvn_otp_request.dart';
+import 'package:lsi_mobile/core/models/responses/user_details/user_details_data.dart';
 import 'package:lsi_mobile/core/repositories/bank/bank_repo.dart';
 import 'package:lsi_mobile/core/repositories/user/user_repo.dart';
 import 'package:meta/meta.dart';
@@ -40,13 +42,14 @@ class ProvideBvnBloc extends Bloc<ProvideBvnEvent, ProvideBvnState> {
             submitFailureOrSuccess: None(),
           );
 
-          failureOrSuccess = await _bankRepo.initiateBvnValidation(
-            InitiateBVNValidationRequest(
-              bvn: state.bvn,
-              firstName: value.fullName,
-              lastName: value.fullName,
-            ),
-          );
+          Either<Glitch, UserDetailsData> userResponse =
+              await _userRepo.userData();
+
+          await userResponse.fold((l) => null, (r) async {
+            UserDetailsRequest data =
+                r.userData.data.copyWith.profile(bvn: state.bvn);
+            failureOrSuccess = await _userRepo.saveUserData(data);
+          });
         }
 
         yield state.copyWith(
