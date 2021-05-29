@@ -89,7 +89,6 @@ class BankRepoImpl implements BankRepo {
           (failure) => left(failure),
           (success) async {
             if (success.data.status) {
-              // await _userRepo.saveObject("OTP", success.data.otp.toString());
               await _userRepo.saveObject("TNX", success.data.txnRef);
               return right(unit);
             } else {
