@@ -1,13 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lsi_mobile/core/configs/route/route.gr.dart';
 import 'package:lsi_mobile/core/extensions/num_extension.dart';
 import 'package:lsi_mobile/core/extensions/string_extension.dart';
 import 'package:lsi_mobile/ui/shared/const_color.dart';
 import 'package:lsi_mobile/ui/shared/shared_wigdets.dart';
 import 'package:lsi_mobile/ui/shared/size_config/size_config.dart';
-import 'package:lsi_mobile/ui/views/main/loans/widgets/verify_bvn_form.dart';
 
 import '../widgets/loan_form.dart';
 import 'view_model/provide_bvn_bloc.dart';
@@ -22,12 +23,8 @@ class ProvideBVNView extends StatelessWidget {
             () => null,
             (either) => either.fold(
               (l) => showErrorSnackBar(context, l.message),
-              (r) => sharedBottomSheet(
-                context: context,
-                form: VerifyBVNForm(),
-                height: 53,
-                isDismissible: true,
-              ),
+              (r) => context.navigator.pushAndRemoveUntil(
+                  Routes.personalInfoFormView, (route) => false),
             ),
           );
         },
